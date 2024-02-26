@@ -63,8 +63,22 @@ namespace dae
             throw std::runtime_error(std::string("SDL_Init Error: ") + SDL_GetError());
         }
 
+        std::string title = "Programming 4 assignment - ";
+
+#ifdef _DEBUG
+        title += "Debug";
+#else
+        title += "Release";
+#endif
+
+#ifdef _WIN64
+        title += " | x64";
+#elif _WIN32
+        title += " | x86";
+#endif
+
         g_window = SDL_CreateWindow(
-            "Programming 4 assignment",
+            title.c_str(),
             SDL_WINDOWPOS_CENTERED,
             SDL_WINDOWPOS_CENTERED,
             640,

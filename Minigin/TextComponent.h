@@ -3,7 +3,6 @@
 // Project includes
 #include "BaseComponent.h"
 #include "GameObject.h"
-#include "Transform.h"
 
 // Standard includes
 #include <memory>
