@@ -1,8 +1,7 @@
 #include "GameObject.h"
 
 // Project includes
-#include "Renderer.h"
-#include "ResourceManager.h"
+#include "BaseComponent.h"
 
 namespace dae
 {
@@ -10,19 +9,25 @@ namespace dae
 
     void GameObject::Update()
     {
+        for (const auto& component : m_components)
+        {
+            component->Update();
+        }
     }
 
     void GameObject::Render() const
     {
-        const auto& pos = m_transform.GetPosition();
-        Renderer::GetInstance().RenderTexture(*m_texture, pos.x, pos.y);
+        for (const auto& component : m_components)
+        {
+            component->Render();
+        }
     }
 
-    void GameObject::SetTexture(const std::string& filename)
+    void GameObject::AddComponent(std::shared_ptr<BaseComponent> component)
     {
-        m_texture = ResourceManager::GetInstance().LoadTexture(filename);
+        m_components.emplace_back(std::move(component));
     }
-
+    
     void GameObject::SetPosition(float x, float y)
     {
         m_transform.SetPosition(x, y, 0.0f);

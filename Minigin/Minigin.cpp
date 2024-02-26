@@ -118,7 +118,7 @@ namespace dae
                 sceneManager.FixedUpdate();
                 lag -= Time::msPerFrame;
             }
-            std::cout << "FPS: " << 1.0f / Time::deltaTime << "\n";
+            // std::cout << "FPS: " << 1.0f / Time::deltaTime << "\n";
             sceneManager.Update();
             renderer.Render();
 

@@ -1,4 +1,4 @@
-#include "TextObject.h"
+#include "TextComponent.h"
 
 // Project includes
 #include "Renderer.h"
@@ -13,12 +13,12 @@
 
 namespace dae
 {
-    TextObject::TextObject(const std::string& text, std::shared_ptr<Font> font)
-        : m_needsUpdate(true), m_text(text), m_font(std::move(font)), m_textTexture(nullptr)
+    TextComponent::TextComponent(std::string text, std::shared_ptr<Font> font)
+        : m_needsUpdate(true), m_text(std::move(text)), m_font(std::move(font)), m_textTexture(nullptr)
     {
     }
 
-    void TextObject::Update()
+    void TextComponent::Update()
     {
         if (m_needsUpdate)
         {
@@ -41,7 +41,7 @@ namespace dae
         }
     }
 
-    void TextObject::Render() const
+    void TextComponent::Render() const
     {
         if (m_textTexture != nullptr)
         {
@@ -51,14 +51,9 @@ namespace dae
     }
 
     // This implementation uses the "dirty flag" pattern
-    void TextObject::SetText(const std::string& text)
+    void TextComponent::SetText(const std::string& text)
     {
         m_text = text;
         m_needsUpdate = true;
-    }
-
-    void TextObject::SetPosition(const float x, const float y)
-    {
-        m_transform.SetPosition(x, y, 0.0f);
     }
 }
