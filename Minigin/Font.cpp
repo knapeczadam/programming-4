@@ -6,21 +6,24 @@
 // Standard includes
 #include <stdexcept>
 
-TTF_Font* dae::Font::GetFont() const
+namespace dae
 {
-    return m_font;
-}
-
-dae::Font::Font(const std::string& fullPath, unsigned int size) : m_font(nullptr)
-{
-    m_font = TTF_OpenFont(fullPath.c_str(), size);
-    if (m_font == nullptr)
+    TTF_Font* Font::GetFont() const
     {
-        throw std::runtime_error(std::string("Failed to load font: ") + SDL_GetError());
+        return m_font;
     }
-}
 
-dae::Font::~Font()
-{
-    TTF_CloseFont(m_font);
+    Font::Font(const std::string& fullPath, unsigned int size) : m_font(nullptr)
+    {
+        m_font = TTF_OpenFont(fullPath.c_str(), size);
+        if (m_font == nullptr)
+        {
+            throw std::runtime_error(std::string("Failed to load font: ") + SDL_GetError());
+        }
+    }
+
+    Font::~Font()
+    {
+        TTF_CloseFont(m_font);
+    }
 }

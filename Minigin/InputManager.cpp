@@ -3,23 +3,26 @@
 // SDL includes
 #include <SDL.h>
 
-bool dae::InputManager::ProcessInput()
+namespace dae
 {
-    SDL_Event e;
-    while (SDL_PollEvent(&e))
+    bool InputManager::ProcessInput()
     {
-        if (e.type == SDL_QUIT)
+        SDL_Event e;
+        while (SDL_PollEvent(&e))
         {
-            return false;
+            if (e.type == SDL_QUIT)
+            {
+                return false;
+            }
+            if (e.type == SDL_KEYDOWN)
+            {
+            }
+            if (e.type == SDL_MOUSEBUTTONDOWN)
+            {
+            }
+            // etc...
         }
-        if (e.type == SDL_KEYDOWN)
-        {
-        }
-        if (e.type == SDL_MOUSEBUTTONDOWN)
-        {
-        }
-        // etc...
-    }
 
-    return true;
+        return true;
+    }
 }

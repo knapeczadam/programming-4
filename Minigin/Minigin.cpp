@@ -48,55 +48,58 @@ void PrintSDLVersion()
            version.major, version.minor, version.patch);
 }
 
-dae::Minigin::Minigin(const std::string& dataPath)
+namespace dae
 {
-    PrintSDLVersion();
-
-    if (SDL_Init(SDL_INIT_VIDEO) != 0)
+    Minigin::Minigin(const std::string& dataPath)
     {
-        throw std::runtime_error(std::string("SDL_Init Error: ") + SDL_GetError());
+        PrintSDLVersion();
+
+        if (SDL_Init(SDL_INIT_VIDEO) != 0)
+        {
+            throw std::runtime_error(std::string("SDL_Init Error: ") + SDL_GetError());
+        }
+
+        g_window = SDL_CreateWindow(
+            "Programming 4 assignment",
+            SDL_WINDOWPOS_CENTERED,
+            SDL_WINDOWPOS_CENTERED,
+            640,
+            480,
+            SDL_WINDOW_OPENGL
+        );
+        if (g_window == nullptr)
+        {
+            throw std::runtime_error(std::string("SDL_CreateWindow Error: ") + SDL_GetError());
+        }
+
+        Renderer::GetInstance().Init(g_window);
+
+        ResourceManager::GetInstance().Init(dataPath);
     }
 
-    g_window = SDL_CreateWindow(
-        "Programming 4 assignment",
-        SDL_WINDOWPOS_CENTERED,
-        SDL_WINDOWPOS_CENTERED,
-        640,
-        480,
-        SDL_WINDOW_OPENGL
-    );
-    if (g_window == nullptr)
+    Minigin::~Minigin()
     {
-        throw std::runtime_error(std::string("SDL_CreateWindow Error: ") + SDL_GetError());
+        Renderer::GetInstance().Destroy();
+        SDL_DestroyWindow(g_window);
+        g_window = nullptr;
+        SDL_Quit();
     }
 
-    Renderer::GetInstance().Init(g_window);
-
-    ResourceManager::GetInstance().Init(dataPath);
-}
-
-dae::Minigin::~Minigin()
-{
-    Renderer::GetInstance().Destroy();
-    SDL_DestroyWindow(g_window);
-    g_window = nullptr;
-    SDL_Quit();
-}
-
-void dae::Minigin::Run(const std::function<void()>& load)
-{
-    load();
-
-    const auto& renderer = Renderer::GetInstance();
-    auto& sceneManager   = SceneManager::GetInstance();
-    auto& input          = InputManager::GetInstance();
-
-    // todo: this update loop could use some work.
-    bool doContinue = true;
-    while (doContinue)
+    void Minigin::Run(const std::function<void()>& load)
     {
-        doContinue = input.ProcessInput();
-        sceneManager.Update();
-        renderer.Render();
+        load();
+
+        const auto& renderer = Renderer::GetInstance();
+        auto& sceneManager   = SceneManager::GetInstance();
+        auto& input          = InputManager::GetInstance();
+
+        // todo: this update loop could use some work.
+        bool doContinue = true;
+        while (doContinue)
+        {
+            doContinue = input.ProcessInput();
+            sceneManager.Update();
+            renderer.Render();
+        }
     }
 }
