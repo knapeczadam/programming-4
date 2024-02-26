@@ -1,11 +1,16 @@
 #pragma once
-#include <vector>
-#include <string>
-#include <memory>
+
+// Project includes
 #include "Singleton.h"
+
+// Standard includes
+#include <memory>
+#include <string>
+#include <vector>
 
 namespace dae
 {
+    // Forward declarations
     class Scene;
 
     class SceneManager final : public Singleton<SceneManager>

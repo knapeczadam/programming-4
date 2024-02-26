@@ -1,9 +1,15 @@
-#include <stdexcept>
-#include <SDL_ttf.h>
 #include "TextObject.h"
+
+// Project includes
 #include "Renderer.h"
 #include "Font.h"
 #include "Texture2D.h"
+
+// SDL includes
+#include <SDL_ttf.h>
+
+// Standard includes
+#include <stdexcept>
 
 dae::TextObject::TextObject(const std::string& text, std::shared_ptr<Font> font)
     : m_needsUpdate(true), m_text(text), m_font(std::move(font)), m_textTexture(nullptr)
@@ -20,11 +26,13 @@ void dae::TextObject::Update()
         {
             throw std::runtime_error(std::string("Render text failed: ") + SDL_GetError());
         }
+        
         auto texture = SDL_CreateTextureFromSurface(Renderer::GetInstance().GetSDLRenderer(), surf);
         if (texture == nullptr)
         {
             throw std::runtime_error(std::string("Create text texture from surface failed: ") + SDL_GetError());
         }
+        
         SDL_FreeSurface(surf);
         m_textTexture = std::make_shared<Texture2D>(texture);
         m_needsUpdate = false;

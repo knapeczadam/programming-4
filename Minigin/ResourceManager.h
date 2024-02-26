@@ -1,10 +1,15 @@
 #pragma once
-#include <string>
-#include <memory>
+
+// Project includes
 #include "Singleton.h"
+
+// Standard includes
+#include <memory>
+#include <string>
 
 namespace dae
 {
+    // Forward declarations
     class Texture2D;
     class Font;
 

@@ -1,7 +1,11 @@
-#include <stdexcept>
 #include "Renderer.h"
+
+// Project includes
 #include "SceneManager.h"
 #include "Texture2D.h"
+
+// Standard includes
+#include <stdexcept>
 
 int GetOpenGLDriverIndex()
 {
@@ -19,7 +23,7 @@ int GetOpenGLDriverIndex()
 
 void dae::Renderer::Init(SDL_Window* window)
 {
-    m_window = window;
+    m_window   = window;
     m_renderer = SDL_CreateRenderer(window, GetOpenGLDriverIndex(), SDL_RENDERER_ACCELERATED);
     if (m_renderer == nullptr)
     {

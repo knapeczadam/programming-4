@@ -1,10 +1,16 @@
-#include <stdexcept>
-#include <SDL_image.h>
-#include <SDL_ttf.h>
 #include "ResourceManager.h"
+
+// Project includes
 #include "Renderer.h"
 #include "Texture2D.h"
 #include "Font.h"
+
+// SDL includes
+#include <SDL_image.h>
+#include <SDL_ttf.h>
+
+// Standard includes
+#include <stdexcept>
 
 void dae::ResourceManager::Init(const std::string& dataPath)
 {

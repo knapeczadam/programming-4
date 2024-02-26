@@ -1,4 +1,6 @@
 #include "SceneManager.h"
+
+// Project includes
 #include "Scene.h"
 
 void dae::SceneManager::Update()

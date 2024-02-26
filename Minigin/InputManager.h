@@ -1,4 +1,6 @@
 #pragma once
+
+// Project includes
 #include "Singleton.h"
 
 namespace dae

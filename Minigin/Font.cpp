@@ -1,6 +1,10 @@
-#include <stdexcept>
-#include <SDL_ttf.h>
 #include "Font.h"
+
+// SDL includes
+#include <SDL_ttf.h>
+
+// Standard includes
+#include <stdexcept>
 
 TTF_Font* dae::Font::GetFont() const
 {

@@ -1,5 +1,7 @@
-#include <SDL.h>
 #include "Texture2D.h"
+
+// SDL includes
+#include <SDL.h>
 
 dae::Texture2D::~Texture2D()
 {

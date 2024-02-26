@@ -1,7 +1,8 @@
-#include <string>
 #include "GameObject.h"
-#include "ResourceManager.h"
+
+// Project includes
 #include "Renderer.h"
+#include "ResourceManager.h"
 
 dae::GameObject::~GameObject() = default;
 

@@ -1,29 +1,35 @@
 #pragma once
-#include <string>
-#include <memory>
+
+// Project includes
 #include "GameObject.h"
 #include "Transform.h"
 
+// Standard includes
+#include <memory>
+#include <string>
+
 namespace dae
 {
+    // Forward declarations
     class Font;
     class Texture2D;
 
     class TextObject final : public GameObject
     {
     public:
+        TextObject(const std::string& text, std::shared_ptr<Font> font);
+        ~TextObject() override = default;
+        
+        TextObject(const TextObject& other)            = delete;
+        TextObject(TextObject&& other)                 = delete;
+        TextObject& operator=(const TextObject& other) = delete;
+        TextObject& operator=(TextObject&& other)      = delete;
+        
         void Update() override;
         void Render() const override;
 
         void SetText(const std::string& text);
         void SetPosition(float x, float y);
-
-        TextObject(const std::string& text, std::shared_ptr<Font> font);
-        ~TextObject() override = default;
-        TextObject(const TextObject& other) = delete;
-        TextObject(TextObject&& other) = delete;
-        TextObject& operator=(const TextObject& other) = delete;
-        TextObject& operator=(TextObject&& other) = delete;
 
     private:
         bool m_needsUpdate;

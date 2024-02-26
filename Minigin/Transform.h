@@ -1,4 +1,6 @@
 #pragma once
+
+// GLM includes
 #include <glm/glm.hpp>
 
 namespace dae

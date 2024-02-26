@@ -1,6 +1,9 @@
 #include "Scene.h"
+
+// Project includes
 #include "GameObject.h"
 
+// Standard includes
 #include <algorithm>
 
 using namespace dae;

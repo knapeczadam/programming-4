@@ -1,6 +1,10 @@
 #pragma once
-#include <SDL.h>
+
+// Project includes
 #include "Singleton.h"
+
+// SDL includes
+#include <SDL.h>
 
 namespace dae
 {
