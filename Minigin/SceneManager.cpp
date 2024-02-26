@@ -13,6 +13,11 @@ namespace dae
         }
     }
 
+    void SceneManager::FixedUpdate()
+    {
+        
+    }
+
     void SceneManager::Render()
     {
         for (const auto& scene : m_scenes)

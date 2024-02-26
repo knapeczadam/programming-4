@@ -9,6 +9,7 @@
 #include "Renderer.h"
 #include "ResourceManager.h"
 #include "SceneManager.h"
+#include "Time.h"
 
 // SDL includes
 #include <SDL.h>
@@ -16,7 +17,10 @@
 #include <SDL_ttf.h>
 
 // Standard includes
+#include <chrono>
+#include <iostream>
 #include <stdexcept>
+#include <thread>
 
 SDL_Window* g_window{};
 
@@ -87,19 +91,40 @@ namespace dae
 
     void Minigin::Run(const std::function<void()>& load)
     {
+        using namespace std::chrono;
+        using namespace std::chrono_literals;
+        
         load();
 
         const auto& renderer = Renderer::GetInstance();
         auto& sceneManager   = SceneManager::GetInstance();
         auto& input          = InputManager::GetInstance();
 
-        // todo: this update loop could use some work.
         bool doContinue = true;
+        auto lastTime = high_resolution_clock::now();
+        float lag = 0.0f;
+        
         while (doContinue)
         {
+            const auto currentTime = high_resolution_clock::now();
+            Time::deltaTime = duration<float>(currentTime - lastTime).count();
+            
+            lastTime = currentTime;
+            lag += Time::deltaTime;
+            
             doContinue = input.ProcessInput();
+            while (lag >= Time::msPerFrame)
+            {
+                sceneManager.FixedUpdate();
+                lag -= Time::msPerFrame;
+            }
+            std::cout << "FPS: " << 1.0f / Time::deltaTime << "\n";
             sceneManager.Update();
             renderer.Render();
+
+            const auto sleepTime = currentTime + milliseconds(static_cast<long long>(Time::msPerFrame)) - high_resolution_clock::now();
+
+            std::this_thread::sleep_for(sleepTime);
         }
     }
 }
