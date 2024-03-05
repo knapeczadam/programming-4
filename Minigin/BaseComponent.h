@@ -22,6 +22,7 @@ namespace dae
         virtual void SetPosition(float x, float y) final;
 
     protected:
+        // TODO: remove transform, only gameobjects should have a transform
         Transform m_transform{};
     };
 }

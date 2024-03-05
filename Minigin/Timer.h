@@ -2,9 +2,8 @@
 
 namespace dae
 {
-    class Time
+    struct Timer
     {
-    public:
         static float deltaTime;
         
         static const float fixedTimeStep;

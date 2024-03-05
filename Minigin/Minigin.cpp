@@ -9,7 +9,7 @@
 #include "Renderer.h"
 #include "ResourceManager.h"
 #include "SceneManager.h"
-#include "Time.h"
+#include "Timer.h"
 
 // SDL includes
 #include <SDL.h>
@@ -121,22 +121,24 @@ namespace dae
         while (doContinue)
         {
             const auto currentTime = high_resolution_clock::now();
-            Time::deltaTime = duration<float>(currentTime - lastTime).count();
+            Timer::deltaTime = duration<float>(currentTime - lastTime).count();
             
             lastTime = currentTime;
-            lag += Time::deltaTime;
+            lag += Timer::deltaTime;
             
             doContinue = input.ProcessInput();
-            while (lag >= Time::msPerFrame)
+            // TODO: do not use fixed update if it is not used, unnecessary calculations
+            while (lag >= Timer::msPerFrame)
             {
                 sceneManager.FixedUpdate();
-                lag -= Time::msPerFrame;
+                lag -= Timer::msPerFrame;
             }
             // std::cout << "FPS: " << 1.0f / Time::deltaTime << "\n";
             sceneManager.Update();
+            // TODO: LateUpdate can be called before rendering
             renderer.Render();
 
-            const auto sleepTime = currentTime + milliseconds(static_cast<long long>(Time::msPerFrame)) - high_resolution_clock::now();
+            const auto sleepTime = currentTime + milliseconds(static_cast<long long>(Timer::msPerFrame)) - high_resolution_clock::now();
 
             std::this_thread::sleep_for(sleepTime);
         }
