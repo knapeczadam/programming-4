@@ -99,7 +99,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Component;$(ProjectDir)Core;$(ProjectDir)Engine;$(ProjectDir)Game;$(ProjectDir)Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -117,7 +117,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Component;$(ProjectDir)Core;$(ProjectDir)Engine;$(ProjectDir)Game;$(ProjectDir)Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -137,7 +137,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Component;$(ProjectDir)Core;$(ProjectDir)Engine;$(ProjectDir)Game;$(ProjectDir)Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -159,7 +159,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Component;$(ProjectDir)Core;$(ProjectDir)Engine;$(ProjectDir)Game;$(ProjectDir)Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -173,40 +173,40 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="BaseComponent.h" />
-    <ClInclude Include="Components\FPSComponent.h" />
-    <ClInclude Include="Components\TextComponent.h" />
-    <ClInclude Include="Components\TextureComponent.h" />
-    <ClInclude Include="Font.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="InputManager.h" />
-    <ClInclude Include="Minigin.h" />
-    <ClInclude Include="Renderer.h" />
-    <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="Scene.h" />
-    <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="Singleton.h" />
-    <ClInclude Include="Texture2D.h" />
-    <ClInclude Include="Timer.h" />
-    <ClInclude Include="Transform.h" />
+    <ClInclude Include="Component\FPSComponent.h" />
+    <ClInclude Include="Component\TextComponent.h" />
+    <ClInclude Include="Component\TextureComponent.h" />
+    <ClInclude Include="Core\BaseComponent.h" />
+    <ClInclude Include="Core\GameObject.h" />
+    <ClInclude Include="Engine\InputManager.h" />
+    <ClInclude Include="Engine\Minigin.h" />
+    <ClInclude Include="Engine\Renderer.h" />
+    <ClInclude Include="Engine\ResourceManager.h" />
+    <ClInclude Include="Engine\Scene.h" />
+    <ClInclude Include="Engine\SceneManager.h" />
+    <ClInclude Include="Engine\Timer.h" />
+    <ClInclude Include="Utility\Font.h" />
+    <ClInclude Include="Utility\Singleton.h" />
+    <ClInclude Include="Utility\Texture2D.h" />
+    <ClInclude Include="Utility\Transform.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BaseComponent.cpp" />
-    <ClCompile Include="Components\FPSComponent.cpp" />
-    <ClCompile Include="Components\TextComponent.cpp" />
-    <ClCompile Include="Components\TextureComponent.cpp" />
-    <ClCompile Include="Font.cpp" />
-    <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Component\FPSComponent.cpp" />
+    <ClCompile Include="Component\TextComponent.cpp" />
+    <ClCompile Include="Component\TextureComponent.cpp" />
+    <ClCompile Include="Core\BaseComponent.cpp" />
+    <ClCompile Include="Core\GameObject.cpp" />
+    <ClCompile Include="Engine\InputManager.cpp" />
+    <ClCompile Include="Engine\Minigin.cpp" />
+    <ClCompile Include="Engine\Renderer.cpp" />
+    <ClCompile Include="Engine\ResourceManager.cpp" />
+    <ClCompile Include="Engine\Scene.cpp" />
+    <ClCompile Include="Engine\SceneManager.cpp" />
+    <ClCompile Include="Engine\Timer.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Minigin.cpp" />
-    <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="ResourceManager.cpp" />
-    <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="Texture2D.cpp" />
-    <ClCompile Include="Time.cpp" />
-    <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="Utility\Font.cpp" />
+    <ClCompile Include="Utility\Texture2D.cpp" />
+    <ClCompile Include="Utility\Transform.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
