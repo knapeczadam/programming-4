@@ -7,6 +7,11 @@
 // Standard includes
 #include <stdexcept>
 
+// ImGui includes
+#include "imgui.h"
+#include "backends/imgui_impl_opengl3.h"
+#include "backends/imgui_impl_sdl2.h"
+
 int GetOpenGLDriverIndex()
 {
     auto openglIndex = -1;
@@ -25,14 +30,19 @@ namespace dae
 {
     void Renderer::Init(SDL_Window* window)
     {
-        m_window   = window;
+        m_window = window;
         m_renderer = SDL_CreateRenderer(window, GetOpenGLDriverIndex(), SDL_RENDERER_ACCELERATED);
         if (m_renderer == nullptr)
         {
             throw std::runtime_error(std::string("SDL_CreateRenderer Error: ") + SDL_GetError());
         }
-    }
 
+        IMGUI_CHECKVERSION();
+        ImGui::CreateContext();
+        ImGui_ImplSDL2_InitForOpenGL(window, SDL_GL_GetCurrentContext());
+        ImGui_ImplOpenGL3_Init();
+    }
+    
     void Renderer::Render() const
     {
         const auto& color = GetBackgroundColor();
@@ -40,12 +50,17 @@ namespace dae
         SDL_RenderClear(m_renderer);
 
         SceneManager::GetInstance().Render();
+        SceneManager::GetInstance().RenderUI();
 
         SDL_RenderPresent(m_renderer);
     }
 
     void Renderer::Destroy()
     {
+        ImGui_ImplOpenGL3_Shutdown();
+        ImGui_ImplSDL2_Shutdown();
+        ImGui::DestroyContext();
+
         if (m_renderer != nullptr)
         {
             SDL_DestroyRenderer(m_renderer);
@@ -63,7 +78,7 @@ namespace dae
     }
 
     void Renderer::RenderTexture(const Texture2D& texture, const float x, const float y, const float width,
-                                      const float height) const
+                                 const float height) const
     {
         SDL_Rect dst{};
         dst.x = static_cast<int>(x);

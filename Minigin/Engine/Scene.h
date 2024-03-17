@@ -2,11 +2,12 @@
 
 // Project includes
 #include "SceneManager.h"
+#include "GameObject.h"
 
 namespace dae
 {
     // Forward declarations
-    class GameObject;
+    // class GameObject;
 
     class Scene final
     {
@@ -26,6 +27,7 @@ namespace dae
 
         void Update();
         void Render() const;
+        void RenderUI() const;
 
     private:
         explicit Scene(const std::string& name);

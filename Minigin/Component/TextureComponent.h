@@ -2,6 +2,7 @@
 
 // Project includes
 #include "BaseComponent.h"
+#include "RenderComponent.h"
 
 // Standard includes
 #include <memory>
@@ -12,7 +13,7 @@ namespace dae
     // Forward declaration
     class Texture2D;
     
-    class TextureComponent : public BaseComponent
+    class TextureComponent : public RenderComponent
     {
     public:
         TextureComponent() = default;
@@ -23,10 +24,9 @@ namespace dae
         TextureComponent(TextureComponent&& other)                 = delete;
         TextureComponent& operator=(const TextureComponent& other) = delete;
         TextureComponent& operator=(TextureComponent&& other)      = delete;
-        
-        void Update() override;
+
         void Render() const override;
-        
+        ComponentType GetType() const override { return ComponentType::Texture; }
         void SetTexture(const std::string& filename);
         
     private:

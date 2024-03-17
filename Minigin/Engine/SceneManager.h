@@ -19,8 +19,8 @@ namespace dae
         Scene& CreateScene(const std::string& name);
 
         void Update();
-        void FixedUpdate();
         void Render();
+        void RenderUI();
 
     private:
         friend class Singleton<SceneManager>;

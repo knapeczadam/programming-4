@@ -127,12 +127,6 @@ namespace dae
             lag += Timer::deltaTime;
             
             doContinue = input.ProcessInput();
-            // TODO: do not use fixed update if it is not used, unnecessary calculations
-            while (lag >= Timer::msPerFrame)
-            {
-                sceneManager.FixedUpdate();
-                lag -= Timer::msPerFrame;
-            }
             // std::cout << "FPS: " << 1.0f / Time::deltaTime << "\n";
             sceneManager.Update();
             // TODO: LateUpdate can be called before rendering

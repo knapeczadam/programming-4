@@ -8,6 +8,8 @@
 #include <memory>
 #include <string>
 
+#include "RenderComponent.h"
+
 
 namespace dae
 {
@@ -15,7 +17,7 @@ namespace dae
     class Font;
     class Texture2D;
 
-    class TextComponent : public BaseComponent
+    class TextComponent : public RenderComponent
     {
     public:
         TextComponent(std::string text, std::shared_ptr<Font> font);
@@ -28,6 +30,8 @@ namespace dae
         
         void Update() override;
         void Render() const override;
+
+        ComponentType GetType() const override { return ComponentType::Text; }
 
         void SetText(const std::string& text);
 

@@ -45,7 +45,7 @@ namespace dae
     {
         if (m_textTexture != nullptr)
         {
-            const auto& pos = m_transform.GetPosition();
+            const auto& pos = GetOwner()->GetPosition();
             Renderer::GetInstance().RenderTexture(*m_textTexture, pos.x, pos.y);
         }
     }

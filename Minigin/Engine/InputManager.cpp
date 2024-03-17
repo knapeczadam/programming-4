@@ -3,6 +3,10 @@
 // SDL includes
 #include <SDL.h>
 
+// ImGui includes
+#include <SDL_syswm.h>
+#include <backends/imgui_impl_sdl2.h>
+
 namespace dae
 {
     bool InputManager::ProcessInput()
@@ -10,6 +14,7 @@ namespace dae
         SDL_Event e;
         while (SDL_PollEvent(&e))
         {
+            ImGui_ImplSDL2_ProcessEvent(&e);
             if (e.type == SDL_QUIT)
             {
                 return false;

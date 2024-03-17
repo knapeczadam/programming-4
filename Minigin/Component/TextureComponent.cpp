@@ -1,6 +1,7 @@
 ﻿#include "TextureComponent.h"
 
 // Project includes
+#include "GameObject.h"
 #include "Renderer.h"
 #include "ResourceManager.h"
 
@@ -11,13 +12,9 @@ namespace dae
         m_texture = ResourceManager::GetInstance().LoadTexture(filename);
     }
 
-    void TextureComponent::Update()
-    {
-    }
-
     void TextureComponent::Render() const
     {
-        const auto& pos = m_transform.GetPosition();
+        const auto& pos = GetOwner()->GetPosition();
         Renderer::GetInstance().RenderTexture(*m_texture, pos.x, pos.y);
     }
 

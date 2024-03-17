@@ -3,33 +3,72 @@
 // Project includes
 #include "BaseComponent.h"
 
+// Standard includes
+#include <ranges>
+
 namespace dae
 {
-    GameObject::~GameObject() = default;
-
     void GameObject::Update()
     {
-        for (const auto& component : m_components)
+        for (const auto& pComponent : m_componentMap | std::views::values)
         {
-            component->Update();
+            pComponent->Update();
         }
     }
 
-    void GameObject::Render() const
+    void GameObject::AddComponent(std::unique_ptr<BaseComponent> componentPtr)
     {
-        for (const auto& component : m_components)
-        {
-            component->Render();
-        }
+        m_componentMap[componentPtr->GetType()] = std::move(componentPtr);
     }
 
-    void GameObject::AddComponent(std::shared_ptr<BaseComponent> component)
+    bool GameObject::RemoveComponent(const ComponentType type)
     {
-        m_components.emplace_back(std::move(component));
+        if (m_componentMap.contains(type))
+        {
+            m_componentMap.erase(type);
+            return true;
+        }
+        return false;
     }
-    
-    void GameObject::SetPosition(float x, float y)
+
+    std::optional<BaseComponent*> GameObject::GetComponent(const ComponentFamily type) const
+    {
+        for (const auto& value : m_componentMap | std::views::values)
+        {
+            if (value->GetFamily() == type)
+            {
+                return value.get();
+            }
+        }
+        return std::nullopt;
+    }
+
+    std::optional<BaseComponent*> GameObject::GetComponent(const ComponentType type) const
+    {
+        if (m_componentMap.contains(type))
+        {
+            return m_componentMap.at(type).get();
+        }
+        return std::nullopt;
+    }
+
+    std::unordered_map<ComponentType, BaseComponent*> GameObject::GetComponents() const
+    {
+        std::unordered_map<ComponentType, BaseComponent*> components{};
+        for (const auto& [key, value] : m_componentMap)
+        {
+            components[key] = value.get();
+        }
+        return components;
+    }
+
+    void GameObject::SetPosition(const float x, const float y)
     {
         m_transform.SetPosition(x, y, 0.0f);
+    }
+
+    void GameObject::SetPosition(const float x, const float y, const float z)
+    {
+        m_transform.SetPosition(x, y, z); 
     }
 }

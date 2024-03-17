@@ -12,17 +12,20 @@ namespace dae
             scene->Update();
         }
     }
-
-    void SceneManager::FixedUpdate()
-    {
-        
-    }
-
+    
     void SceneManager::Render()
     {
         for (const auto& scene : m_scenes)
         {
             scene->Render();
+        }
+    }
+
+    void SceneManager::RenderUI()
+    {
+        for (const auto& scene : m_scenes)
+        {
+            scene->RenderUI();
         }
     }
 
