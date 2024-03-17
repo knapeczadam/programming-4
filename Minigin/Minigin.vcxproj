@@ -60,19 +60,23 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\sdl.props" />
     <Import Project="..\vld.props" />
+    <Import Project="..\imgui.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\sdl.props" />
+    <Import Project="..\imgui.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\sdl.props" />
     <Import Project="..\vld.props" />
+    <Import Project="..\imgui.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\sdl.props" />
+    <Import Project="..\imgui.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -191,6 +195,14 @@
     <ClInclude Include="Utility\Transform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\3rdParty\imgui\backends\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="..\3rdParty\imgui\backends\imgui_impl_sdl2.cpp" />
+    <ClCompile Include="..\3rdParty\imgui\imgui.cpp" />
+    <ClCompile Include="..\3rdParty\imgui\imgui_demo.cpp" />
+    <ClCompile Include="..\3rdParty\imgui\imgui_draw.cpp" />
+    <ClCompile Include="..\3rdParty\imgui\imgui_plot.cpp" />
+    <ClCompile Include="..\3rdParty\imgui\imgui_tables.cpp" />
+    <ClCompile Include="..\3rdParty\imgui\imgui_widgets.cpp" />
     <ClCompile Include="Component\FPSComponent.cpp" />
     <ClCompile Include="Component\TextComponent.cpp" />
     <ClCompile Include="Component\TextureComponent.cpp" />
