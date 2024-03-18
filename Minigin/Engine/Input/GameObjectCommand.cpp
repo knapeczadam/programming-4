@@ -1,60 +1,13 @@
 ﻿#include "GameObjectCommand.h"
 
-#include "BaseComponent.h"
 #include "GameObject.h"
-#include "MovementComponent.h"
+#include "Timer.h"
 
 namespace dae
 {
-    void MoveLeftCommand::Execute()
+    void MoveCommand::Execute()
     {
-        if (GetGameObject()->HasComponent(ComponentType::Movement))
-        {
-            const auto movementComponent = GetGameObject()->GetComponent(ComponentType::Movement);
-            if (movementComponent.has_value())
-            {
-                const auto move = static_cast<MovementComponent*>(movementComponent.value());
-                move->MoveLeft();
-            }
-        }
-    }
-
-    void MoveRightCommand::Execute()
-    {
-        if (GetGameObject()->HasComponent(ComponentType::Movement))
-        {
-            const auto movementComponent = GetGameObject()->GetComponent(ComponentType::Movement);
-            if (movementComponent.has_value())
-            {
-                const auto move = static_cast<MovementComponent*>(movementComponent.value());
-                move->MoveRight();
-            }
-        }
-    }
-
-    void MoveUpCommand::Execute()
-    {
-        if (GetGameObject()->HasComponent(ComponentType::Movement))
-        {
-            const auto movementComponent = GetGameObject()->GetComponent(ComponentType::Movement);
-            if (movementComponent.has_value())
-            {
-                const auto move = static_cast<MovementComponent*>(movementComponent.value());
-                move->MoveUp();
-            }
-        }
-    }
-
-    void MoveDownCommand::Execute()
-    {
-        if (GetGameObject()->HasComponent(ComponentType::Movement))
-        {
-            const auto movementComponent = GetGameObject()->GetComponent(ComponentType::Movement);
-            if (movementComponent.has_value())
-            {
-                const auto move = static_cast<MovementComponent*>(movementComponent.value());
-                move->MoveDown();
-            }
-        }
+        const auto newPos = GetGameObject()->GetPosition() + m_Direction * m_Speed;
+        GetGameObject()->SetPosition(newPos);
     }
 }

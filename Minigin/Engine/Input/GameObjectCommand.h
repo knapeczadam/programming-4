@@ -1,6 +1,9 @@
 ﻿#pragma once
 #include "Command.h"
 
+// GLM includes
+#include <glm/glm.hpp>
+
 namespace dae
 {
     // Forward declaration
@@ -30,46 +33,25 @@ namespace dae
         GameObject* m_GameObjectPtr = nullptr;
     };
 
-    //---------------------------------------------------------------------------------
-    // GameObject commands
-    //---------------------------------------------------------------------------------
-    class MoveLeftCommand final : public GameObjectCommand
+    class MoveCommand final : public GameObjectCommand
     {
     public:
-        MoveLeftCommand(GameObject* gameObjectPtr) : GameObjectCommand(gameObjectPtr)
+        MoveCommand(GameObject* gameObjectPtr, const glm::vec3& direction)
+            : GameObjectCommand(gameObjectPtr)
+            , m_Direction(direction)
         {
         }
-
-        virtual void Execute() override;
-    };
-
-    class MoveRightCommand final : public GameObjectCommand
-    {
-    public:
-        MoveRightCommand(GameObject* gameObjectPtr) : GameObjectCommand(gameObjectPtr)
+        
+        MoveCommand(GameObject* gameObjectPtr, const glm::vec2& direction)
+            : GameObjectCommand(gameObjectPtr)
+            , m_Direction(glm::vec3(direction, 0.0f))
         {
         }
-
+        
         virtual void Execute() override;
-    };
 
-    class MoveUpCommand final : public GameObjectCommand
-    {
-    public:
-        MoveUpCommand(GameObject* gameObjectPtr) : GameObjectCommand(gameObjectPtr)
-        {
-        }
-
-        virtual void Execute() override;
-    };
-
-    class MoveDownCommand final : public GameObjectCommand
-    {
-    public:
-        MoveDownCommand(GameObject* gameObjectPtr) : GameObjectCommand(gameObjectPtr)
-        {
-        }
-
-        virtual void Execute() override;
+    private:
+        glm::vec3 m_Direction {1.0f, 0.0f, 0.0f};
+        float m_Speed{ 1.0f };
     };
 }

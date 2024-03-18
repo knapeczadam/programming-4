@@ -56,6 +56,7 @@ namespace dae
     public:
         bool ProcessInput();
         void BindCommand(InputType inputType, InputState inputState, int input, std::unique_ptr<GameObjectCommand> command);
+        bool UnbindCommand(InputType inputType, InputState inputState, int input);
         
     private:
         friend class Singleton<InputManager>;

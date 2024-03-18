@@ -182,7 +182,6 @@
     <ClInclude Include="Component\Core\RenderComponent.h" />
     <ClInclude Include="Component\Core\UIComponent.h" />
     <ClInclude Include="Component\FPSComponent.h" />
-    <ClInclude Include="Component\MovementComponent.h" />
     <ClInclude Include="Component\TextComponent.h" />
     <ClInclude Include="Component\TextureComponent.h" />
     <ClInclude Include="Component\TrashTheCacheComponent.h" />
@@ -212,7 +211,6 @@
     <ClCompile Include="..\3rdParty\imgui\imgui_tables.cpp" />
     <ClCompile Include="..\3rdParty\imgui\imgui_widgets.cpp" />
     <ClCompile Include="Component\FPSComponent.cpp" />
-    <ClCompile Include="Component\MovementComponent.cpp" />
     <ClCompile Include="Component\TextComponent.cpp" />
     <ClCompile Include="Component\TextureComponent.cpp" />
     <ClCompile Include="Component\TrashTheCacheComponent.cpp" />

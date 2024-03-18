@@ -18,7 +18,7 @@ namespace dae
         TextComponent::Update();
 
         // TODO: calculate fps on average 
-        std::string fps = std::to_string(1.0f / Timer::deltaTime);
+        std::string fps = std::to_string(1.0f / Timer::GetInstance().deltaTime);
         fps = fps.substr(0, fps.find('.') + 2);
         fps += " fps";
         

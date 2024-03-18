@@ -142,4 +142,18 @@ namespace dae
     {
         m_Commands.emplace(inputType, std::make_tuple(inputState, input, std::move(command)));
     }
+
+    bool InputManager::UnbindCommand(InputType inputType, InputState inputState, int input)
+    {
+        auto range = m_Commands.equal_range(inputType);
+        for (auto it = range.first; it != range.second; ++it)
+        {
+            if (std::get<0>(it->second) == inputState and std::get<1>(it->second) == input)
+            {
+                m_Commands.erase(it);
+                return true;
+            }
+        }
+        return false;
+    }
 }

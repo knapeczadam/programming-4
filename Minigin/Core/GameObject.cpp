@@ -67,9 +67,19 @@ namespace dae
         return components;
     }
 
+    void GameObject::SetPosition(const glm::vec2& position)
+    {
+        m_transform.SetPosition(position);
+    }
+
+    void GameObject::SetPosition(const glm::vec3& position)
+    {
+        m_transform.SetPosition(position);
+    }
+
     void GameObject::SetPosition(const float x, const float y)
     {
-        m_transform.SetPosition(x, y, 0.0f);
+        m_transform.SetPosition(x, y);
     }
 
     void GameObject::SetPosition(const float x, const float y, const float z)

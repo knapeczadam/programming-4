@@ -121,10 +121,10 @@ namespace dae
         while (doContinue)
         {
             const auto currentTime = high_resolution_clock::now();
-            Timer::deltaTime = duration<float>(currentTime - lastTime).count();
+            Timer::GetInstance().deltaTime = duration<float>(currentTime - lastTime).count();
             
             lastTime = currentTime;
-            lag += Timer::deltaTime;
+            lag += Timer::GetInstance().deltaTime;
             
             doContinue = input.ProcessInput();
             // std::cout << "FPS: " << 1.0f / Time::deltaTime << "\n";
@@ -132,7 +132,7 @@ namespace dae
             // TODO: LateUpdate can be called before rendering
             renderer.Render();
 
-            const auto sleepTime = currentTime + milliseconds(static_cast<long long>(Timer::msPerFrame)) - high_resolution_clock::now();
+            const auto sleepTime = currentTime + milliseconds(static_cast<long long>(Timer::GetInstance().msPerFrame)) - high_resolution_clock::now();
 
             std::this_thread::sleep_for(sleepTime);
         }
