@@ -31,6 +31,11 @@ namespace dae
         return false;
     }
 
+    bool GameObject::HasComponent(ComponentType type) const
+    {
+        return m_componentMap.contains(type);
+    }
+
     std::optional<BaseComponent*> GameObject::GetComponent(const ComponentFamily type) const
     {
         for (const auto& value : m_componentMap | std::views::values)

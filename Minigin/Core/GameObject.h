@@ -30,6 +30,8 @@ namespace dae
 
         void AddComponent(std::unique_ptr<BaseComponent> componentPtr);
         bool RemoveComponent(ComponentType type);
+        bool HasComponent(ComponentType type) const;
+        
         std::optional<BaseComponent*> GetComponent(ComponentFamily type) const;
         std::optional<BaseComponent*> GetComponent(ComponentType type) const;
         std::unordered_map<ComponentType, BaseComponent*> GetComponents() const;

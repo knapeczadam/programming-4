@@ -20,7 +20,8 @@ namespace dae
         FPS,
         Text,
         Texture,
-        TrashTheCache
+        TrashTheCache,
+        Movement
     };
     
     class BaseComponent
