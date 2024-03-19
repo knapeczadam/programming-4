@@ -9,18 +9,18 @@
 #include "Renderer.h"
 #include "ResourceManager.h"
 #include "SceneManager.h"
-#include "Timer.h"
-
-// SDL includes
-#include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_ttf.h>
+#include "TimeManager.h"
 
 // Standard includes
 #include <chrono>
 #include <iostream>
 #include <stdexcept>
 #include <thread>
+
+// SDL includes
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
 
 SDL_Window* g_window{};
 
@@ -121,10 +121,10 @@ namespace dae
         while (doContinue)
         {
             const auto currentTime = high_resolution_clock::now();
-            Timer::GetInstance().deltaTime = duration<float>(currentTime - lastTime).count();
+            TimeManager::GetInstance().deltaTime = duration<float>(currentTime - lastTime).count();
             
             lastTime = currentTime;
-            lag += Timer::GetInstance().deltaTime;
+            lag += TimeManager::GetInstance().deltaTime;
             
             doContinue = input.ProcessInput();
             // std::cout << "FPS: " << 1.0f / Time::deltaTime << "\n";
@@ -132,7 +132,7 @@ namespace dae
             // TODO: LateUpdate can be called before rendering
             renderer.Render();
 
-            const auto sleepTime = currentTime + milliseconds(static_cast<long long>(Timer::GetInstance().msPerFrame)) - high_resolution_clock::now();
+            const auto sleepTime = currentTime + milliseconds(static_cast<long long>(TimeManager::GetInstance().msPerFrame)) - high_resolution_clock::now();
 
             std::this_thread::sleep_for(sleepTime);
         }

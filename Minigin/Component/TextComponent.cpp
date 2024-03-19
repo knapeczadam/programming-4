@@ -1,15 +1,17 @@
 #include "TextComponent.h"
 
 // Project includes
+#include "GameObject.h"
 #include "Renderer.h"
 #include "Font.h"
 #include "Texture2D.h"
 
-// SDL includes
-#include <SDL_ttf.h>
-
 // Standard includes
 #include <stdexcept>
+#include <utility>
+
+// SDL includes
+#include <SDL_ttf.h>
 
 namespace dae
 {
@@ -54,6 +56,12 @@ namespace dae
     void TextComponent::SetText(const std::string& text)
     {
         m_text = text;
+        m_needsUpdate = true;
+    }
+
+    void TextComponent::SetFont(std::shared_ptr<Font> font)
+    {
+        m_font = std::move(font);
         m_needsUpdate = true;
     }
 }

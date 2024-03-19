@@ -1,10 +1,10 @@
 ﻿#include "FPSComponent.h"
 
-#include <utility>
-
-#include "Timer.h"
-
 // Project includes
+#include "TimeManager.h"
+
+// Standard includes
+#include <utility>
 
 namespace dae
 {
@@ -18,7 +18,7 @@ namespace dae
         TextComponent::Update();
 
         // TODO: calculate fps on average 
-        std::string fps = std::to_string(1.0f / Timer::GetInstance().deltaTime);
+        std::string fps = std::to_string(1.0f / TimeManager::GetInstance().deltaTime);
         fps = fps.substr(0, fps.find('.') + 2);
         fps += " fps";
         

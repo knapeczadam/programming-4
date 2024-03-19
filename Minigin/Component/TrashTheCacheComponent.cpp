@@ -1,9 +1,11 @@
 ﻿#include "TrashTheCacheComponent.h"
 
+// Project includes
+#include "TrashTheCacheManager.h"
+
 // ImGui includes
 #include "imgui.h"
 #include "imgui_plot.h"
-#include "TrashTheCacheManager.h"
 
 namespace dae
 {

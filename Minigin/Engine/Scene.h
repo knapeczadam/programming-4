@@ -6,9 +6,6 @@
 
 namespace dae
 {
-    // Forward declarations
-    // class GameObject;
-
     class Scene final
     {
         friend Scene& SceneManager::CreateScene(const std::string& name);

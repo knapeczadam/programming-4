@@ -103,7 +103,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Component;$(ProjectDir)Component\Core;$(ProjectDir)Core;$(ProjectDir)Engine;$(ProjectDir)Engine\Input;$(ProjectDir)Game;$(ProjectDir)Misc;$(ProjectDir)Script;$(ProjectDir)Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Component;$(ProjectDir)Component\Core;$(ProjectDir)Component\Family;$(ProjectDir)Component\Implementation;$(ProjectDir)Core;$(ProjectDir)Engine;$(ProjectDir)Engine\Input;$(ProjectDir)Game;$(ProjectDir)Misc;$(ProjectDir)Script;$(ProjectDir)Test;$(ProjectDir)Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -121,7 +121,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Component;$(ProjectDir)Component\Core;$(ProjectDir)Core;$(ProjectDir)Engine;$(ProjectDir)Engine\Input;$(ProjectDir)Game;$(ProjectDir)Misc;$(ProjectDir)Script;$(ProjectDir)Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Component;$(ProjectDir)Component\Core;$(ProjectDir)Component\Family;$(ProjectDir)Component\Implementation;$(ProjectDir)Core;$(ProjectDir)Engine;$(ProjectDir)Engine\Input;$(ProjectDir)Game;$(ProjectDir)Misc;$(ProjectDir)Script;$(ProjectDir)Test;$(ProjectDir)Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -141,7 +141,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Component;$(ProjectDir)Component\Core;$(ProjectDir)Core;$(ProjectDir)Engine;$(ProjectDir)Engine\Input;$(ProjectDir)Game;$(ProjectDir)Misc;$(ProjectDir)Script;$(ProjectDir)Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Component;$(ProjectDir)Component\Core;$(ProjectDir)Component\Family;$(ProjectDir)Component\Implementation;$(ProjectDir)Core;$(ProjectDir)Engine;$(ProjectDir)Engine\Input;$(ProjectDir)Game;$(ProjectDir)Misc;$(ProjectDir)Script;$(ProjectDir)Test;$(ProjectDir)Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -163,7 +163,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Component;$(ProjectDir)Component\Core;$(ProjectDir)Core;$(ProjectDir)Engine;$(ProjectDir)Engine\Input;$(ProjectDir)Game;$(ProjectDir)Misc;$(ProjectDir)Script;$(ProjectDir)Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Component;$(ProjectDir)Component\Core;$(ProjectDir)Component\Family;$(ProjectDir)Component\Implementation;$(ProjectDir)Core;$(ProjectDir)Engine;$(ProjectDir)Engine\Input;$(ProjectDir)Game;$(ProjectDir)Misc;$(ProjectDir)Script;$(ProjectDir)Test;$(ProjectDir)Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -186,6 +186,7 @@
     <ClInclude Include="Component\TextureComponent.h" />
     <ClInclude Include="Component\TrashTheCacheComponent.h" />
     <ClInclude Include="Core\GameObject.h" />
+    <ClInclude Include="Core\GameObject.hpp" />
     <ClInclude Include="Engine\Input\Command.h" />
     <ClInclude Include="Engine\Input\GameObjectCommand.h" />
     <ClInclude Include="Engine\Input\InputManager.h" />
@@ -194,7 +195,7 @@
     <ClInclude Include="Engine\ResourceManager.h" />
     <ClInclude Include="Engine\Scene.h" />
     <ClInclude Include="Engine\SceneManager.h" />
-    <ClInclude Include="Engine\Timer.h" />
+    <ClInclude Include="Engine\TimeManager.h" />
     <ClInclude Include="Script\TrashTheCacheManager.h" />
     <ClInclude Include="Utility\Font.h" />
     <ClInclude Include="Utility\Singleton.h" />
@@ -210,6 +211,7 @@
     <ClCompile Include="..\3rdParty\imgui\imgui_plot.cpp" />
     <ClCompile Include="..\3rdParty\imgui\imgui_tables.cpp" />
     <ClCompile Include="..\3rdParty\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Component\Core\BaseComponent.cpp" />
     <ClCompile Include="Component\FPSComponent.cpp" />
     <ClCompile Include="Component\TextComponent.cpp" />
     <ClCompile Include="Component\TextureComponent.cpp" />
@@ -296,7 +298,6 @@
     <ClCompile Include="Engine\ResourceManager.cpp" />
     <ClCompile Include="Engine\Scene.cpp" />
     <ClCompile Include="Engine\SceneManager.cpp" />
-    <ClCompile Include="Engine\Timer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Misc\TestXInput.cpp" />
     <ClCompile Include="Script\TrashTheCacheManager.cpp">
@@ -374,9 +375,14 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="Test\TestComponent.h" />
     <ClCompile Include="Utility\Font.cpp" />
     <ClCompile Include="Utility\Texture2D.cpp" />
     <ClCompile Include="Utility\Transform.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Component\Family\" />
+    <Folder Include="Component\Implementation\" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

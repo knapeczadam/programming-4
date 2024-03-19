@@ -1,10 +1,11 @@
 #include "Font.h"
 
+// Standard includes
+#include <stdexcept>
+
 // SDL includes
 #include <SDL_ttf.h>
 
-// Standard includes
-#include <stdexcept>
 
 namespace dae
 {

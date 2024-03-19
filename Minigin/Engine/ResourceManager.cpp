@@ -5,12 +5,12 @@
 #include "Texture2D.h"
 #include "Font.h"
 
+// Standard includes
+#include <stdexcept>
+
 // SDL includes
 #include <SDL_image.h>
 #include <SDL_ttf.h>
-
-// Standard includes
-#include <stdexcept>
 
 namespace dae
 {

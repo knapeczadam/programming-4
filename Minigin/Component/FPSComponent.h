@@ -1,4 +1,6 @@
 ﻿#pragma once
+
+// Project includes
 #include "TextComponent.h"
 
 namespace dae
@@ -6,8 +8,9 @@ namespace dae
     class FPSComponent final : public TextComponent
     {
     public:
+        FPSComponent() = default;
         FPSComponent(std::shared_ptr<Font> font);
-        ~FPSComponent() override = default;
+        virtual ~FPSComponent() override = default;
 
         FPSComponent(const FPSComponent& other)            = delete;
         FPSComponent(FPSComponent&& other)                 = delete;
@@ -16,6 +19,6 @@ namespace dae
 
         void Update() override;
         
-        ComponentType GetType() const override { return ComponentType::FPS; }
+        virtual ComponentType GetType() const override { return ComponentType::FPS; }
     };
 }

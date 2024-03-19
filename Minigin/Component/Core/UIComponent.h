@@ -1,4 +1,6 @@
 ﻿#pragma once
+
+// Project includes
 #include "BaseComponent.h"
 
 namespace dae

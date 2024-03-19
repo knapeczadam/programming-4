@@ -5,7 +5,7 @@
 
 namespace dae
 {
-    class Timer final : public Singleton<Timer>
+    class TimeManager final : public Singleton<TimeManager>
     {
     public:
         float deltaTime = 0.0f;
@@ -13,7 +13,7 @@ namespace dae
         const float fixedTimeStep = 0.02f;
         const float msPerFrame = 16.666666666666668f;
     private:
-        friend class Singleton<Timer>;
-        Timer() = default;
+        friend class Singleton<TimeManager>;
+        TimeManager() = default;
     };
 }

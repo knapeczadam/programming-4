@@ -2,13 +2,13 @@
 
 // Project includes
 #include "BaseComponent.h"
-#include "GameObject.h"
 #include "RenderComponent.h"
 #include "UIComponent.h"
 
 // Standard includes
 #include <algorithm>
 #include <iostream>
+#include <ranges>
 
 // ImGui includes
 #include "backends/imgui_impl_opengl3.h"
@@ -51,11 +51,29 @@ namespace dae
     {
         for (const auto& object : m_objects)
         {
-            auto comp = object->GetComponent(ComponentFamily::Render);
-            if (comp.has_value())
+            // TODO: measure performance!
+            // const auto renderers = object->GetComponents(ComponentFamily::Render);
+            // for (const auto& value : renderers | std::views::values)
+            // {
+            //     static_cast<RenderComponent*>(value)->Render();
+            // }
+            
+            // if (not object->HasComponent(ComponentFamily::Render)) continue;
+            // for (auto [compType, comp] : object->GetComponents<RenderComponent>())
+            // {
+            //     comp->Render();
+            // }
+
+            // const auto renderers = object->GetComponentsInChildren(ComponentFamily::Render);
+            // for (const auto& comp : renderers | std::views::values)
+            // {
+            //     static_cast<RenderComponent*>(comp)->Render();
+            // }
+            
+            auto renderers = object->GetComponentsInChildren<RenderComponent>();
+            for (const auto& comp : renderers | std::views::values)
             {
-                const auto renderComp = static_cast<RenderComponent*>(comp.value());
-                renderComp->Render();
+                comp->Render();
             }
         }
     }
@@ -64,14 +82,14 @@ namespace dae
     {
         for (const auto& object : m_objects)
         {
-            auto comp = object->GetComponent(ComponentFamily::UI);
-            if (comp.has_value())
+            const auto renderers = object->GetComponents(ComponentFamily::UI);
+            for (const auto& comp : renderers | std::views::values)
             {
                 ImGui_ImplOpenGL3_NewFrame();
                 ImGui_ImplSDL2_NewFrame();
                 ImGui::NewFrame();
-
-                const auto renderComp = static_cast<UIComponent*>(comp.value());
+            
+                const auto renderComp = static_cast<UIComponent*>(comp);
                 renderComp->RenderUI();
                 
                 ImGui::Render();

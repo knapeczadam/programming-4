@@ -1,4 +1,6 @@
 ﻿#pragma once
+
+// Project includes
 #include "Command.h"
 
 // GLM includes
@@ -6,12 +8,9 @@
 
 namespace dae
 {
-    // Forward declaration
+    // Forward declarations
     class GameObject;
 
-    //---------------------------------------------------------------------------------
-    // Base GameObjectCommand
-    //---------------------------------------------------------------------------------
     class GameObjectCommand : public Command
     {
     public:

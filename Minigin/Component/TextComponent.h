@@ -1,15 +1,11 @@
 #pragma once
 
 // Project includes
-#include "BaseComponent.h"
-#include "GameObject.h"
+#include "RenderComponent.h"
 
 // Standard includes
 #include <memory>
 #include <string>
-
-#include "RenderComponent.h"
-
 
 namespace dae
 {
@@ -20,8 +16,9 @@ namespace dae
     class TextComponent : public RenderComponent
     {
     public:
+        TextComponent() = default;
         TextComponent(std::string text, std::shared_ptr<Font> font);
-        ~TextComponent() override = default;
+        virtual ~TextComponent() override = default;
         
         TextComponent(const TextComponent& other)            = delete;
         TextComponent(TextComponent&& other)                 = delete;
@@ -31,14 +28,15 @@ namespace dae
         void Update() override;
         void Render() const override;
 
-        ComponentType GetType() const override { return ComponentType::Text; }
+        virtual ComponentType GetType() const override { return ComponentType::Text; }
 
         void SetText(const std::string& text);
+        void SetFont(std::shared_ptr<Font> font);
 
     private:
-        bool m_needsUpdate;
+        bool m_needsUpdate = true;
         std::string m_text;
-        std::shared_ptr<Font> m_font;
-        std::shared_ptr<Texture2D> m_textTexture;
+        std::shared_ptr<Font> m_font = nullptr;
+        std::shared_ptr<Texture2D> m_textTexture = nullptr;
     };
 }

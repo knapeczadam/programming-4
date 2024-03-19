@@ -12,7 +12,8 @@ namespace dae
         Physics,
         Render,
         Script,
-        UI
+        UI,
+        Test
     };
 
     enum class ComponentType
@@ -21,14 +22,17 @@ namespace dae
         Text,
         Texture,
         TrashTheCache,
-        Movement
+        Movement,
+        Test
     };
     
     class BaseComponent
     {
+        friend class GameObject;
+        
     public:
         BaseComponent() = default;
-        virtual ~BaseComponent() = 0 { }
+        virtual ~BaseComponent() = default;
 
         BaseComponent(const BaseComponent& other)            = delete;
         BaseComponent(BaseComponent&& other)                 = delete;
@@ -39,12 +43,13 @@ namespace dae
 
         virtual ComponentFamily GetFamily() const = 0;
         virtual ComponentType GetType() const = 0;
-
         
-        GameObject* GetOwner() const { return m_gameObjectPtr; }
-        void SetOwner(GameObject* owner) { m_gameObjectPtr = owner; }
+        GameObject* GetOwner() const { return m_ownerPtr; }
         
     private:
-        GameObject* m_gameObjectPtr = nullptr;
+        void SetOwner(GameObject* ownerPtr);
+        
+    private:
+        GameObject* m_ownerPtr = nullptr;
     };
 }

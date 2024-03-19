@@ -1,7 +1,7 @@
 ﻿#include "GameObjectCommand.h"
 
+// Project includes
 #include "GameObject.h"
-#include "Timer.h"
 
 namespace dae
 {
