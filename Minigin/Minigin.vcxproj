@@ -178,13 +178,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Component\Core\BaseComponent.h" />
-    <ClInclude Include="Component\Core\PhysicsComponent.h" />
-    <ClInclude Include="Component\Core\RenderComponent.h" />
-    <ClInclude Include="Component\Core\UIComponent.h" />
-    <ClInclude Include="Component\FPSComponent.h" />
-    <ClInclude Include="Component\TextComponent.h" />
-    <ClInclude Include="Component\TextureComponent.h" />
-    <ClInclude Include="Component\TrashTheCacheComponent.h" />
+    <ClInclude Include="Component\Family\PhysicsComponent.h" />
+    <ClInclude Include="Component\Family\RenderComponent.h" />
+    <ClInclude Include="Component\Family\UIComponent.h" />
+    <ClInclude Include="Component\Implementation\FPSComponent.h" />
+    <ClInclude Include="Component\Implementation\TextComponent.h" />
+    <ClInclude Include="Component\Implementation\TextureComponent.h" />
+    <ClInclude Include="Component\Implementation\TrashTheCacheComponent.h" />
     <ClInclude Include="Core\GameObject.h" />
     <ClInclude Include="Core\GameObject.hpp" />
     <ClInclude Include="Engine\Input\Command.h" />
@@ -212,10 +212,306 @@
     <ClCompile Include="..\3rdParty\imgui\imgui_tables.cpp" />
     <ClCompile Include="..\3rdParty\imgui\imgui_widgets.cpp" />
     <ClCompile Include="Component\Core\BaseComponent.cpp" />
-    <ClCompile Include="Component\FPSComponent.cpp" />
-    <ClCompile Include="Component\TextComponent.cpp" />
-    <ClCompile Include="Component\TextureComponent.cpp" />
-    <ClCompile Include="Component\TrashTheCacheComponent.cpp" />
+    <ClCompile Include="Component\Implementation\FPSComponent.cpp">
+      <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <Optimization>Disabled</Optimization>
+      <SupportJustMyCode>true</SupportJustMyCode>
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>x64\Debug\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>x64\Debug\</BrowseInformationFile>
+      <CompileAs>Default</CompileAs>
+      <ConformanceMode>true</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFuzzer>false</EnableFuzzer>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>x64\Debug\</ModuleDependenciesFile>
+      <ModuleOutputFile>x64\Debug\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <ObjectFileName>x64\Debug\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>x64\Debug\vc143.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>x64\Debug\Minigin.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>x64\Debug\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TrackerLogDirectory>x64\Debug\Minigin.tlog\</TrackerLogDirectory>
+      <TranslateIncludes>false</TranslateIncludes>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <XMLDocumentationFileName>x64\Debug\</XMLDocumentationFileName>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <BuildStlModules>false</BuildStlModules>
+      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>InheritWarningLevel</ExternalWarningLevel>
+      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
+      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_MBCS;</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Component;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Component\Core;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Component\Family;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Component\Implementation;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Core;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Engine;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Engine\Input;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Game;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Misc;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Script;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Test;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Utility;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\imgui\;C:\Program Files (x86)\Visual Leak Detector\include;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\SDL2_ttf\include;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\SDL2_image\include;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\glm;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\SDL2\include;C:\Program Files (x86)\Visual Leak Detector\include;</AdditionalIncludeDirectories>
+      <SDLCheck>true</SDLCheck>
+      <LinkCompiled>true</LinkCompiled>
+    </ClCompile>
+    <ClCompile Include="Component\Implementation\TextComponent.cpp">
+      <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <Optimization>Disabled</Optimization>
+      <SupportJustMyCode>true</SupportJustMyCode>
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>x64\Debug\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>x64\Debug\</BrowseInformationFile>
+      <CompileAs>Default</CompileAs>
+      <ConformanceMode>true</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFuzzer>false</EnableFuzzer>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>x64\Debug\</ModuleDependenciesFile>
+      <ModuleOutputFile>x64\Debug\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <ObjectFileName>x64\Debug\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>x64\Debug\vc143.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>x64\Debug\Minigin.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>x64\Debug\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TrackerLogDirectory>x64\Debug\Minigin.tlog\</TrackerLogDirectory>
+      <TranslateIncludes>false</TranslateIncludes>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <XMLDocumentationFileName>x64\Debug\</XMLDocumentationFileName>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <BuildStlModules>false</BuildStlModules>
+      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>InheritWarningLevel</ExternalWarningLevel>
+      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
+      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_MBCS;</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Component;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Component\Core;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Component\Family;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Component\Implementation;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Core;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Engine;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Engine\Input;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Game;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Misc;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Script;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Test;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Utility;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\imgui\;C:\Program Files (x86)\Visual Leak Detector\include;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\SDL2_ttf\include;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\SDL2_image\include;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\glm;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\SDL2\include;C:\Program Files (x86)\Visual Leak Detector\include;</AdditionalIncludeDirectories>
+      <SDLCheck>true</SDLCheck>
+      <LinkCompiled>true</LinkCompiled>
+    </ClCompile>
+    <ClCompile Include="Component\Implementation\TextureComponent.cpp">
+      <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <Optimization>Disabled</Optimization>
+      <SupportJustMyCode>true</SupportJustMyCode>
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>x64\Debug\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>x64\Debug\</BrowseInformationFile>
+      <CompileAs>Default</CompileAs>
+      <ConformanceMode>true</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFuzzer>false</EnableFuzzer>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>x64\Debug\</ModuleDependenciesFile>
+      <ModuleOutputFile>x64\Debug\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <ObjectFileName>x64\Debug\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>x64\Debug\vc143.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>x64\Debug\Minigin.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>x64\Debug\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TrackerLogDirectory>x64\Debug\Minigin.tlog\</TrackerLogDirectory>
+      <TranslateIncludes>false</TranslateIncludes>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <XMLDocumentationFileName>x64\Debug\</XMLDocumentationFileName>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <BuildStlModules>false</BuildStlModules>
+      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>InheritWarningLevel</ExternalWarningLevel>
+      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
+      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_MBCS;</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Component;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Component\Core;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Component\Family;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Component\Implementation;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Core;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Engine;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Engine\Input;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Game;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Misc;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Script;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Test;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Utility;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\imgui\;C:\Program Files (x86)\Visual Leak Detector\include;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\SDL2_ttf\include;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\SDL2_image\include;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\glm;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\SDL2\include;C:\Program Files (x86)\Visual Leak Detector\include;</AdditionalIncludeDirectories>
+      <SDLCheck>true</SDLCheck>
+      <LinkCompiled>true</LinkCompiled>
+    </ClCompile>
+    <ClCompile Include="Component\Implementation\TrashTheCacheComponent.cpp">
+      <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <Optimization>Disabled</Optimization>
+      <SupportJustMyCode>true</SupportJustMyCode>
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>x64\Debug\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>x64\Debug\</BrowseInformationFile>
+      <CompileAs>Default</CompileAs>
+      <ConformanceMode>true</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFuzzer>false</EnableFuzzer>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>x64\Debug\</ModuleDependenciesFile>
+      <ModuleOutputFile>x64\Debug\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <ObjectFileName>x64\Debug\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>x64\Debug\vc143.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>x64\Debug\Minigin.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>x64\Debug\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TrackerLogDirectory>x64\Debug\Minigin.tlog\</TrackerLogDirectory>
+      <TranslateIncludes>false</TranslateIncludes>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <XMLDocumentationFileName>x64\Debug\</XMLDocumentationFileName>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <BuildStlModules>false</BuildStlModules>
+      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>InheritWarningLevel</ExternalWarningLevel>
+      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
+      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_MBCS;</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Component;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Component\Core;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Component\Family;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Component\Implementation;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Core;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Engine;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Engine\Input;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Game;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Misc;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Script;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Test;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Utility;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\imgui\;C:\Program Files (x86)\Visual Leak Detector\include;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\SDL2_ttf\include;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\SDL2_image\include;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\glm;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\SDL2\include;C:\Program Files (x86)\Visual Leak Detector\include;</AdditionalIncludeDirectories>
+      <SDLCheck>true</SDLCheck>
+      <LinkCompiled>true</LinkCompiled>
+    </ClCompile>
     <ClCompile Include="Core\GameObject.cpp" />
     <ClCompile Include="Engine\Input\GameObjectCommand.cpp" />
     <ClCompile Include="Engine\Input\InputManager.cpp">
@@ -299,7 +595,6 @@
     <ClCompile Include="Engine\Scene.cpp" />
     <ClCompile Include="Engine\SceneManager.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Misc\TestXInput.cpp" />
     <ClCompile Include="Script\TrashTheCacheManager.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -376,13 +671,87 @@
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
     <ClCompile Include="Test\TestComponent.h" />
+    <ClCompile Include="Test\TestXInput.cpp">
+      <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <Optimization>Disabled</Optimization>
+      <SupportJustMyCode>true</SupportJustMyCode>
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>x64\Debug\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>x64\Debug\</BrowseInformationFile>
+      <CompileAs>Default</CompileAs>
+      <ConformanceMode>true</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFuzzer>false</EnableFuzzer>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>x64\Debug\</ModuleDependenciesFile>
+      <ModuleOutputFile>x64\Debug\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <ObjectFileName>x64\Debug\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>x64\Debug\vc143.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>x64\Debug\Minigin.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>x64\Debug\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TrackerLogDirectory>x64\Debug\Minigin.tlog\</TrackerLogDirectory>
+      <TranslateIncludes>false</TranslateIncludes>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <XMLDocumentationFileName>x64\Debug\</XMLDocumentationFileName>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <BuildStlModules>false</BuildStlModules>
+      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>InheritWarningLevel</ExternalWarningLevel>
+      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
+      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_MBCS;</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Component;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Component\Core;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Component\Family;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Component\Implementation;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Core;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Engine;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Engine\Input;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Game;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Misc;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Script;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Test;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\Utility;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\imgui\;C:\Program Files (x86)\Visual Leak Detector\include;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\SDL2_ttf\include;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\SDL2_image\include;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\glm;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\SDL2\include;C:\Program Files (x86)\Visual Leak Detector\include;</AdditionalIncludeDirectories>
+      <SDLCheck>true</SDLCheck>
+      <LinkCompiled>true</LinkCompiled>
+    </ClCompile>
     <ClCompile Include="Utility\Font.cpp" />
     <ClCompile Include="Utility\Texture2D.cpp" />
     <ClCompile Include="Utility\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Component\Family\" />
-    <Folder Include="Component\Implementation\" />
+    <Folder Include="Misc\" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
