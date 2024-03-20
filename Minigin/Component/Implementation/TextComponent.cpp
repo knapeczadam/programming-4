@@ -41,9 +41,9 @@ namespace dae
         }
     }
 
-    void TextComponent::Render() const
+    void TextComponent::RenderUI() const
     {
-        if (m_textTexture != nullptr)
+        if (m_textTexture)
         {
             const auto& pos = GetOwner()->GetPosition();
             Renderer::GetInstance().RenderTexture(*m_textTexture, pos.x, pos.y);

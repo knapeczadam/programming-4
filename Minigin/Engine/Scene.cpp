@@ -2,7 +2,7 @@
 
 // Project includes
 #include "BaseComponent.h"
-#include "RenderComponent.h"
+#include "RenderingComponent.h"
 #include "UIComponent.h"
 
 // Standard includes
@@ -18,17 +18,17 @@ namespace dae
 {
     unsigned int Scene::m_idCounter = 0;
 
-    Scene::Scene(const std::string& name) : m_name(name)
+    Scene::Scene(std::string name) : m_name(std::move(name))
     {
     }
 
-    GameObject* Scene::AddGameObject()
+    GameObject* Scene::AddEmptyObject()
     {
         m_objects.emplace_back(std::make_unique<GameObject>());
         return m_objects.back().get();
     }
 
-    void Scene::Remove(GameObject* object)
+    void Scene::RemoveObject(GameObject* object)
     {
         std::erase_if(m_objects, [object](const auto& obj)
         {
@@ -39,6 +39,11 @@ namespace dae
     void Scene::RemoveAll()
     {
         m_objects.clear();
+    }
+
+    int Scene::GetObjectCount() const
+    {
+        return static_cast<int>(m_objects.size());
     }
 
     void Scene::Update()
@@ -54,29 +59,17 @@ namespace dae
         for (const auto& object : m_objects)
         {
             // TODO: measure performance!
-            // const auto renderers = object->GetComponents(ComponentFamily::Render);
-            // for (const auto& value : renderers | std::views::values)
-            // {
-            //     static_cast<RenderComponent*>(value)->Render();
-            // }
+            const auto renderers = object->GetComponentsInChildren(ComponentFamily::Rendering);
+            for (const auto& comp : renderers | std::views::values)
+            {
+                static_cast<RenderingComponent*>(comp)->Render();
+            }
             
-            // if (not object->HasComponent(ComponentFamily::Render)) continue;
-            // for (auto [compType, comp] : object->GetComponents<RenderComponent>())
+            // auto renderers = object->GetComponentsInChildren<RenderingComponent>();
+            // for (const auto& comp : renderers | std::views::values)
             // {
             //     comp->Render();
             // }
-
-            // const auto renderers = object->GetComponentsInChildren(ComponentFamily::Render);
-            // for (const auto& comp : renderers | std::views::values)
-            // {
-            //     static_cast<RenderComponent*>(comp)->Render();
-            // }
-            
-            auto renderers = object->GetComponentsInChildren<RenderComponent>();
-            for (const auto& comp : renderers | std::views::values)
-            {
-                comp->Render();
-            }
         }
     }
 

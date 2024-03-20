@@ -34,26 +34,27 @@ namespace dae
 
         int GetChildCount() const;
         GameObject* GetChildAt(int index) const;
-        void RemoveChild(GameObject* childPtr);
 
-        std::optional<std::unique_ptr<BaseComponent>> RemoveComponent(ComponentType componentType);
+        bool RemoveComponent(ComponentType componentType);
+        bool RemoveComponent(const BaseComponent* componentPtr);
+        int RemoveComponents(ComponentFamily familyType);
+        
         bool HasComponent(ComponentFamily familyType) const;
         bool HasComponent(ComponentType componentType) const;
 
         BaseComponent* GetComponent(ComponentType componentType) const;
         std::unordered_map<ComponentType, BaseComponent*> GetComponents(ComponentFamily familyType) const;
-        std::unordered_map<ComponentType, BaseComponent*> GetComponents(ComponentType componentType) const;
         std::unordered_map<ComponentType, BaseComponent*> GetComponents() const;
 
         BaseComponent* GetComponentInChildren(ComponentType componentType) const;
-        std::unordered_map<ComponentType, BaseComponent*> GetComponentsInChildren(ComponentFamily familyType) const;
-        std::unordered_map<ComponentType, BaseComponent*> GetComponentsInChildren(ComponentType componentType) const;
-        std::unordered_map<ComponentType, BaseComponent*> GetComponentsInChildren() const;
+        std::unordered_multimap<ComponentType, BaseComponent*> GetComponentsInChildren(ComponentFamily familyType) const;
+        std::unordered_multimap<ComponentType, BaseComponent*> GetComponentsInChildren(ComponentType componentType) const;
+        std::unordered_multimap<ComponentType, BaseComponent*> GetComponentsInChildren() const;
 
         BaseComponent* GetComponentInParent(ComponentType componentType) const;
         std::unordered_map<ComponentType, BaseComponent*> GetComponentsInParent(ComponentFamily familyType) const;
-        std::unordered_map<ComponentType, BaseComponent*> GetComponentsInParent(ComponentType componentType) const;
-        std::unordered_map<ComponentType, BaseComponent*> GetComponentsInParent() const;
+        std::unordered_multimap<ComponentType, BaseComponent*> GetComponentsInParent(ComponentType componentType) const;
+        std::unordered_multimap<ComponentType, BaseComponent*> GetComponentsInParent() const;
 
         template <typename T>
         T* AddComponent();
@@ -62,19 +63,16 @@ namespace dae
         T* GetComponent() const;
 
         template <typename T>
-        std::unordered_map<ComponentType, T*> GetComponents() const;
-
-        template <typename T>
         T* GetComponentInChildren() const;
 
         template <typename T>
-        std::unordered_map<ComponentType, T*> GetComponentsInChildren() const;
+        std::unordered_multimap<ComponentType, T*> GetComponentsInChildren() const;
 
         template <typename T>
         T* GetComponentInParent() const;
 
         template <typename T>
-        std::unordered_map<ComponentType, T*> GetComponentsInParent() const;
+        std::unordered_multimap<ComponentType, T*> GetComponentsInParent() const;
 
         const glm::vec3& GetPosition() const { return m_transform.GetPosition(); }
 
@@ -84,13 +82,16 @@ namespace dae
         void SetPosition(float x, float y, float z);
 
     private:
-        Transform m_transform{};
+        void RemoveChild(GameObject* childPtr);
+
+    private:
+        Transform m_transform = {};
 
         // TODO: switch to map?
-        std::unordered_map<ComponentType, std::unique_ptr<BaseComponent>> m_componentMap{};
+        std::unordered_map<ComponentType, std::unique_ptr<BaseComponent>> m_componentMap = {};
 
-        GameObject* m_parentPtr{};
-        std::vector<GameObject*> m_children{};
+        GameObject* m_parentPtr = nullptr;
+        std::vector<GameObject*> m_children = {};
     };
 }
 

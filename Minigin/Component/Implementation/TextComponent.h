@@ -1,11 +1,12 @@
 #pragma once
 
 // Project includes
-#include "RenderComponent.h"
+#include "UIComponent.h"
 
 // Standard includes
 #include <memory>
 #include <string>
+
 
 namespace dae
 {
@@ -13,7 +14,7 @@ namespace dae
     class Font;
     class Texture2D;
 
-    class TextComponent : public RenderComponent
+    class TextComponent : public UIComponent
     {
     public:
         TextComponent() = default;
@@ -24,8 +25,8 @@ namespace dae
         TextComponent& operator=(const TextComponent& other) = delete;
         TextComponent& operator=(TextComponent&& other)      = delete;
         
-        void Update() override;
-        void Render() const override;
+        virtual void Update() override;
+        virtual void RenderUI() const override;
 
         virtual ComponentType GetType() const override { return ComponentType::Text; }
 

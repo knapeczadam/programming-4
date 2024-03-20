@@ -14,9 +14,10 @@
 #include "ResourceManager.h"
 #include "Scene.h"
 #include "SceneManager.h"
-#include "TestComponent.h"
+#include "TestManager.h"
 #include "TextComponent.h"
 #include "TextureComponent.h"
+#include "TrashTheCacheComponent.h"
 
 // Standard includes
 #include <cassert>
@@ -24,59 +25,41 @@
 // SDL includes
 #include <SDL.h>
 
-#include "TrashTheCacheComponent.h"
-
-void test()
-{
-    using namespace dae;
-
-    {
-        GameObject go;
-        go.AddComponent<TestComponent>();
-        assert(go.GetComponents().size() == 1);
-        assert(go.HasComponent(ComponentType::Test));
-    }
-    {
-        GameObject go;
-        assert(not go.SetParent(&go));
-        assert(go.GetParent() == nullptr);
-    }
-    {
-        GameObject go1;
-        GameObject go2;
-        assert(go1.SetParent(&go2));
-        assert(go2.HasChild(&go1));
-        assert(go2.GetChildCount() == 1);
-        assert(go2.GetChildAt(0) == &go1);
-        assert(go1.GetParent() == &go2);
-    }
-    {
-        GameObject go1;
-        GameObject go2;
-        assert(go1.SetParent(&go2));
-        assert(go1.SetParent(nullptr));
-        assert(go1.GetParent() == nullptr);
-    }
-    {
-        GameObject go1;
-        GameObject go2;
-        GameObject go3;
-        assert(go3.SetParent(&go2));
-        assert(go2.SetParent(&go1));
-        assert(not go1.SetParent(&go3));
-    }
-}
-
 void load()
 {
     using namespace dae;
     
     auto scene = SceneManager::GetInstance().CreateScene("Demo");
 
+    // Background
+    auto go = scene->AddEmptyObject();
+    const auto textureComp3 = go->AddComponent<TextureComponent>();
+    textureComp3->SetTexture("background.tga");
+
+    // Text
+    go = scene->AddEmptyObject();
+    go->SetPosition(80.0f, 20.0f);
+    const auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
+    const auto textComp = go->AddComponent<TextComponent>();
+    textComp->SetFont(font);
+    textComp->SetText("Programming 4 Assignment");
+
+    // FPS
+    go = scene->AddEmptyObject();
+    go->SetPosition(20.0f, 60.0f);
+    const auto fpsComp = go->AddComponent<FPSComponent>();
+    fpsComp->SetFont(font);
+    fpsComp->SetText("FPS: ");
+
+    // Trash the cache
+    go = scene->AddEmptyObject();
+    go->SetPosition(50.0f, 100.0f);
+    go->AddComponent<TrashTheCacheComponent>();
+    
     //---------------------------------------------------------------------------------
     // PACMAN
     //---------------------------------------------------------------------------------
-    auto go = scene->AddGameObject();
+    go = scene->AddEmptyObject();
     go->SetPosition(216.0f, 180.0f);
 
     const auto textureComp1 = go->AddComponent<TextureComponent>();
@@ -107,7 +90,7 @@ void load()
     //---------------------------------------------------------------------------------
     // GHOST
     //---------------------------------------------------------------------------------
-    go = scene->AddGameObject();
+    go = scene->AddEmptyObject();
     go->SetPosition(100.0f, 100.0f);
 
     const auto textureComp2 = go->AddComponent<TextureComponent>();
@@ -123,29 +106,6 @@ void load()
     InputManager::GetInstance().BindCommand(InputType::Controller, InputState::Down, Input::C_RIGHT, std::move(moveRightCommand3));
     InputManager::GetInstance().BindCommand(InputType::Controller, InputState::Down, Input::C_UP, std::move(moveUpCommand3));
     InputManager::GetInstance().BindCommand(InputType::Controller, InputState::Down, Input::C_DOWN, std::move(moveDownCommand3));
-
-    /*
-    go = scene->AddGameObject();
-    const auto textureComp3 = go->AddComponent<TextureComponent>();
-    textureComp3->SetTexture("background.tga");
-    
-    go = scene->AddGameObject();
-    go->SetPosition(80.0f, 20.0f);
-    const auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
-    const auto textComp = go->AddComponent<TextComponent>();
-    textComp->SetFont(font);
-    textComp->SetText("Programming 4 Assignment");
-    
-    go = scene->AddGameObject();
-    go->SetPosition(20.0f, 60.0f);
-    const auto fpsComp = go->AddComponent<FPSComponent>();
-    fpsComp->SetFont(font);
-    fpsComp->SetText("FPS: ");
-    
-    go = scene->AddGameObject();
-    go->SetPosition(50.0f, 100.0f);
-    go->AddComponent<TrashTheCacheComponent>();
-    */
 }
 
 int main(int, char*[])
@@ -153,7 +113,7 @@ int main(int, char*[])
     using namespace dae;
     
     Minigin engine("../Data/");
-    test();
+    TestManager::GetInstance().RunAllTests();
     engine.Run(load);
     return 0;
 }

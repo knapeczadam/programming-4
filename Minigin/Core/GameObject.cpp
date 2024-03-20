@@ -52,11 +52,16 @@ namespace dae
         return std::ranges::any_of(m_children, [childPtr](const auto& child) { return child == childPtr || child->HasChild(childPtr); });
     }
 
+    /// \brief The number of children the parent Transform has.
+    /// \return 
     int GameObject::GetChildCount() const
     {
         return static_cast<int>(m_children.size());
     }
 
+    /// \brief Returns the child GameObject at the specified index.
+    /// \param index 
+    /// \return 
     GameObject* GameObject::GetChildAt(int index) const
     {
         if (index < 0 || index >= static_cast<int>(m_children.size()))
@@ -71,16 +76,46 @@ namespace dae
         m_children.erase(std::ranges::remove(m_children, childPtr).begin(), m_children.end());
     }
 
-    std::optional<std::unique_ptr<BaseComponent>> GameObject::RemoveComponent(const ComponentType componentType)
+    bool GameObject::RemoveComponent(const ComponentType componentType)
     {
         if (m_componentMap.contains(componentType))
         {
-            std::unique_ptr<BaseComponent> componentPtr = std::move(m_componentMap.at(componentType));
             m_componentMap.erase(componentType);
-            return componentPtr;
+            return true;
         }
-        return std::nullopt;
+        return false;
     }
+
+    bool GameObject::RemoveComponent(const BaseComponent* componentPtr)
+    {
+        for (auto it = m_componentMap.begin(); it != m_componentMap.end(); ++it)
+        {
+            if (it->second.get() == componentPtr)
+            {
+                m_componentMap.erase(it);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    int GameObject::RemoveComponents(ComponentFamily familyType)
+{
+    int count = 0;
+    for (auto it = m_componentMap.begin(); it != m_componentMap.end();)
+    {
+        if (it->second->GetFamily() == familyType)
+        {
+            it = m_componentMap.erase(it);
+            ++count;
+        }
+        else
+        {
+            ++it;
+        }
+    }
+    return count;
+}
 
     bool GameObject::HasComponent(ComponentFamily familyType) const
     {
@@ -121,19 +156,6 @@ namespace dae
     }
 
     /// \brief Gets references to all components of type T on the same GameObject as the component specified.
-    /// \param componentType 
-    /// \return 
-    std::unordered_map<ComponentType, BaseComponent*> GameObject::GetComponents(ComponentType componentType) const
-    {
-        std::unordered_map<ComponentType, BaseComponent*> components{};
-        if (m_componentMap.contains(componentType))
-        {
-            components[componentType] = m_componentMap.at(componentType).get();
-        }
-        return components;
-    }
-
-    /// \brief Gets references to all components of type T on the same GameObject as the component specified.
     /// \return 
     std::unordered_map<ComponentType, BaseComponent*> GameObject::GetComponents() const
     {
@@ -167,14 +189,22 @@ namespace dae
     /// \brief Gets references to all components of type T on the same GameObject as the component specified, and any child of the GameObject.
     /// \param familyType 
     /// \return 
-    std::unordered_map<ComponentType, BaseComponent*> GameObject::GetComponentsInChildren(ComponentFamily familyType) const
+    std::unordered_multimap<ComponentType, BaseComponent*> GameObject::GetComponentsInChildren(
+        ComponentFamily familyType) const
     {
-        std::unordered_map<ComponentType, BaseComponent*> components = GetComponents(familyType);
+        std::unordered_multimap<ComponentType, BaseComponent*> components{};
+        for (const auto& [key, value] : m_componentMap)
+        {
+            if (value->GetFamily() == familyType)
+            {
+                components.emplace(key, value.get());
+            }
+        }
         for (const auto& child : m_children)
         {
             for (const auto& [key, value] : child->GetComponentsInChildren(familyType))
             {
-                components[key] = value;
+                components.emplace(key, value);
             }
         }
         return components;
@@ -183,14 +213,19 @@ namespace dae
     /// \brief Gets references to all components of type T on the same GameObject as the component specified, and any child of the GameObject.
     /// \param componentType 
     /// \return 
-    std::unordered_map<ComponentType, BaseComponent*> GameObject::GetComponentsInChildren(ComponentType componentType) const
+    std::unordered_multimap<ComponentType, BaseComponent*> GameObject::GetComponentsInChildren(
+        ComponentType componentType) const
     {
-        std::unordered_map<ComponentType, BaseComponent*> components = GetComponents(componentType);
+        std::unordered_multimap<ComponentType, BaseComponent*> components{};
+        if (m_componentMap.contains(componentType))
+        {
+            components.emplace(componentType, m_componentMap.at(componentType).get());
+        }
         for (const auto& child : m_children)
         {
             for (const auto& [key, value] : child->GetComponentsInChildren(componentType))
             {
-                components[key] = value;
+                components.emplace(key, value);
             }
         }
         return components;
@@ -199,14 +234,18 @@ namespace dae
 
     /// \brief Gets references to all components of type T on the same GameObject as the component specified, and any child of the GameObject.
     /// \return
-    std::unordered_map<ComponentType, BaseComponent*> GameObject::GetComponentsInChildren() const
+    std::unordered_multimap<ComponentType, BaseComponent*> GameObject::GetComponentsInChildren() const
     {
-        std::unordered_map<ComponentType, BaseComponent*> components = GetComponents();
+        std::unordered_multimap<ComponentType, BaseComponent*> components{};
+        for (const auto& [key, value] : m_componentMap)
+        {
+            components.emplace(key, value.get());
+        }
         for (const auto& child : m_children)
         {
             for (const auto& [key, value] : child->GetComponentsInChildren())
             {
-                components[key] = value;
+                components.emplace(key, value);
             }
         }
         return components;
@@ -247,14 +286,19 @@ namespace dae
     /// \brief Gets references to all components of type T on the same GameObject as the component specified, and any parent of the GameObject.
     /// \param componentType 
     /// \return 
-    std::unordered_map<ComponentType, BaseComponent*> GameObject::GetComponentsInParent(ComponentType componentType) const
+    std::unordered_multimap<ComponentType, BaseComponent*> GameObject::GetComponentsInParent(
+        ComponentType componentType) const
     {
-        std::unordered_map<ComponentType, BaseComponent*> components = GetComponents(componentType);
+        std::unordered_multimap<ComponentType, BaseComponent*> components{};
+        if (HasComponent(componentType))
+        {
+            components.emplace(componentType, GetComponent(componentType));
+        }
         if (m_parentPtr)
         {
             for (const auto& [key, value] : m_parentPtr->GetComponentsInParent(componentType))
             {
-                components[key] = value;
+                components.emplace(key, value);
             }
         }
         return components;
@@ -262,14 +306,18 @@ namespace dae
 
     /// \brief Gets references to all components of type T on the same GameObject as the component specified, and any parent of the GameObject.
     /// \return 
-    std::unordered_map<ComponentType, BaseComponent*> GameObject::GetComponentsInParent() const
+    std::unordered_multimap<ComponentType, BaseComponent*> GameObject::GetComponentsInParent() const
     {
-        std::unordered_map<ComponentType, BaseComponent*> components = GetComponents();
+        std::unordered_multimap<ComponentType, BaseComponent*> components{};
+        for (const auto& [key, value] : m_componentMap)
+        {
+            components.emplace(key, value.get());
+        }
         if (m_parentPtr)
         {
             for (const auto& [key, value] : m_parentPtr->GetComponentsInParent())
             {
-                components[key] = value;
+                components.emplace(key, value);
             }
         }
         return components;

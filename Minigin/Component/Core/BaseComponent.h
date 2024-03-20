@@ -8,10 +8,8 @@ namespace dae
     enum class ComponentFamily
     {
         Audio,
-        Effect,
         Physics,
-        Render,
-        Script,
+        Rendering,
         UI,
         Test
     };
@@ -23,7 +21,8 @@ namespace dae
         Texture,
         TrashTheCache,
         Movement,
-        Test
+        Test1,
+        Test2,
     };
     
     class BaseComponent

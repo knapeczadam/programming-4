@@ -22,23 +22,6 @@ namespace dae
         return nullptr;
     }
 
-    /// \brief Gets references to all components of type T on the same GameObject as the component specified.
-    /// \tparam T 
-    /// \return 
-    template <typename T>
-    std::unordered_map<ComponentType, T*> GameObject::GetComponents() const
-    {
-        std::unordered_map<ComponentType, T*> components{};
-        for (const auto& [key, value] : m_componentMap)
-        {
-            if (auto componentPtr = dynamic_cast<T*>(value.get()))
-            {
-                components[key] = componentPtr;
-            }
-        }
-        return components;
-    }
-
     /// \brief Gets a reference to a component of type T on the same GameObject as the component specified, or any child of the GameObject.
     /// \tparam T 
     /// \return 
@@ -63,14 +46,18 @@ namespace dae
     /// \tparam T 
     /// \return 
     template <typename T>
-    std::unordered_map<ComponentType, T*> GameObject::GetComponentsInChildren() const
+    std::unordered_multimap<ComponentType, T*> GameObject::GetComponentsInChildren() const
     {
-        std::unordered_map<ComponentType, T*> components = GetComponents<T>();
+        std::unordered_multimap<ComponentType, T*> components;
+        if (auto component = GetComponent<T>())
+        {
+            components.emplace(component->GetType(), component);
+        }
         for (const auto& child : m_children)
         {
             for (const auto& [key, value] : child->GetComponentsInChildren<T>())
             {
-                components[key] = value;
+                components.emplace(key, value);
             }
         }
         return components;
@@ -97,14 +84,18 @@ namespace dae
     /// \tparam T 
     /// \return 
     template <typename T>
-    std::unordered_map<ComponentType, T*> GameObject::GetComponentsInParent() const
+    std::unordered_multimap<ComponentType, T*> GameObject::GetComponentsInParent() const
     {
-        std::unordered_map<ComponentType, T*> components = GetComponents<T>();
+        std::unordered_multimap<ComponentType, T*> components;
+        if (auto component = GetComponent<T>())
+        {
+            components.emplace(component->GetType(), component);
+        }
         if (m_parentPtr)
         {
             for (const auto& [key, value] : m_parentPtr->GetComponentsInParent<T>())
             {
-                components[key] = value;
+                components.emplace(key, value);
             }
         }
         return components;
