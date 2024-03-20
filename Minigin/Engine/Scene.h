@@ -1,25 +1,27 @@
 #pragma once
 
 // Project includes
-#include "SceneManager.h"
 #include "GameObject.h"
 
 namespace dae
 {
+    // Forward declarations
+    class SceneManager;
+    
     class Scene final
     {
-        friend Scene& SceneManager::CreateScene(const std::string& name);
+        friend class SceneManager;
 
     public:
-        ~Scene();
+        ~Scene() = default;
         
         Scene(const Scene& other)            = delete;
         Scene(Scene&& other)                 = delete;
         Scene& operator=(const Scene& other) = delete;
         Scene& operator=(Scene&& other)      = delete;
 
-        void Add(std::shared_ptr<GameObject> object);
-        void Remove(std::shared_ptr<GameObject> object);
+        GameObject* AddGameObject();
+        void Remove(GameObject* object);
         void RemoveAll();
 
         void Update();
@@ -30,7 +32,7 @@ namespace dae
         explicit Scene(const std::string& name);
 
         std::string m_name;
-        std::vector<std::shared_ptr<GameObject>> m_objects{};
+        std::vector<std::unique_ptr<GameObject>> m_objects{};
 
         static unsigned int m_idCounter;
     };

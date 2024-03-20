@@ -22,16 +22,18 @@ namespace dae
     {
     }
 
-    Scene::~Scene() = default;
-
-    void Scene::Add(std::shared_ptr<GameObject> object)
+    GameObject* Scene::AddGameObject()
     {
-        m_objects.emplace_back(std::move(object));
+        m_objects.emplace_back(std::make_unique<GameObject>());
+        return m_objects.back().get();
     }
 
-    void Scene::Remove(std::shared_ptr<GameObject> object)
+    void Scene::Remove(GameObject* object)
     {
-        std::erase(m_objects, object);
+        std::erase_if(m_objects, [object](const auto& obj)
+        {
+            return obj.get() == object;
+        });
     }
 
     void Scene::RemoveAll()

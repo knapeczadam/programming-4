@@ -9,16 +9,6 @@
 
 namespace dae
 {
-    GameObject::GameObject(const glm::vec2& position)
-    {
-        m_transform.SetPosition(position);
-    }
-
-    GameObject::GameObject(float x, float y)
-    {
-        m_transform.SetPosition(x, y);
-    }
-
     void GameObject::Update()
     {
         for (const auto& pComponent : m_componentMap | std::views::values)

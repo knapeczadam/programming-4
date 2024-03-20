@@ -7,11 +7,6 @@
 
 namespace dae
 {
-    TextureComponent::TextureComponent(const std::string& filename)
-    {
-        m_texture = ResourceManager::GetInstance().LoadTexture(filename);
-    }
-
     void TextureComponent::Render() const
     {
         const auto& pos = GetOwner()->GetPosition();

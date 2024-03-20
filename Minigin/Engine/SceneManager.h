@@ -1,6 +1,7 @@
 #pragma once
 
 // Project includes
+#include "Scene.h"
 #include "Singleton.h"
 
 // Standard includes
@@ -10,13 +11,10 @@
 
 namespace dae
 {
-    // Forward declarations
-    class Scene;
-
     class SceneManager final : public Singleton<SceneManager>
     {
     public:
-        Scene& CreateScene(const std::string& name);
+        Scene* CreateScene(const std::string& name);
 
         void Update();
         void Render();
@@ -25,6 +23,7 @@ namespace dae
     private:
         friend class Singleton<SceneManager>;
         SceneManager() = default;
-        std::vector<std::shared_ptr<Scene>> m_scenes;
+        
+        std::vector<std::unique_ptr<Scene>> m_scenes;
     };
 }

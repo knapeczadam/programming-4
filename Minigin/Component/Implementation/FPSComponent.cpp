@@ -8,11 +8,6 @@
 
 namespace dae
 {
-    FPSComponent::FPSComponent(std::shared_ptr<Font> font)
-        : TextComponent("FPS: ", std::move(font))
-    {
-    }
-
     void FPSComponent::Update()
     {
         TextComponent::Update();

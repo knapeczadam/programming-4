@@ -9,7 +9,6 @@ namespace dae
     {
     public:
         FPSComponent() = default;
-        FPSComponent(std::shared_ptr<Font> font);
         virtual ~FPSComponent() override = default;
 
         FPSComponent(const FPSComponent& other)            = delete;

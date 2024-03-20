@@ -103,7 +103,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Component;$(ProjectDir)Component\Core;$(ProjectDir)Component\Family;$(ProjectDir)Component\Implementation;$(ProjectDir)Core;$(ProjectDir)Engine;$(ProjectDir)Engine\Input;$(ProjectDir)Game;$(ProjectDir)Misc;$(ProjectDir)Script;$(ProjectDir)Test;$(ProjectDir)Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Component;$(ProjectDir)Component\Core;$(ProjectDir)Component\Family;$(ProjectDir)Component\Implementation;$(ProjectDir)Core;$(ProjectDir)Engine;$(ProjectDir)Engine\Input;$(ProjectDir)Game;$(ProjectDir)Misc;$(ProjectDir)Test;$(ProjectDir)Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -121,7 +121,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Component;$(ProjectDir)Component\Core;$(ProjectDir)Component\Family;$(ProjectDir)Component\Implementation;$(ProjectDir)Core;$(ProjectDir)Engine;$(ProjectDir)Engine\Input;$(ProjectDir)Game;$(ProjectDir)Misc;$(ProjectDir)Script;$(ProjectDir)Test;$(ProjectDir)Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Component;$(ProjectDir)Component\Core;$(ProjectDir)Component\Family;$(ProjectDir)Component\Implementation;$(ProjectDir)Core;$(ProjectDir)Engine;$(ProjectDir)Engine\Input;$(ProjectDir)Game;$(ProjectDir)Misc;$(ProjectDir)Test;$(ProjectDir)Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -141,7 +141,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Component;$(ProjectDir)Component\Core;$(ProjectDir)Component\Family;$(ProjectDir)Component\Implementation;$(ProjectDir)Core;$(ProjectDir)Engine;$(ProjectDir)Engine\Input;$(ProjectDir)Game;$(ProjectDir)Misc;$(ProjectDir)Script;$(ProjectDir)Test;$(ProjectDir)Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Component;$(ProjectDir)Component\Core;$(ProjectDir)Component\Family;$(ProjectDir)Component\Implementation;$(ProjectDir)Core;$(ProjectDir)Engine;$(ProjectDir)Engine\Input;$(ProjectDir)Game;$(ProjectDir)Misc;$(ProjectDir)Test;$(ProjectDir)Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -163,7 +163,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Component;$(ProjectDir)Component\Core;$(ProjectDir)Component\Family;$(ProjectDir)Component\Implementation;$(ProjectDir)Core;$(ProjectDir)Engine;$(ProjectDir)Engine\Input;$(ProjectDir)Game;$(ProjectDir)Misc;$(ProjectDir)Script;$(ProjectDir)Test;$(ProjectDir)Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Component;$(ProjectDir)Component\Core;$(ProjectDir)Component\Family;$(ProjectDir)Component\Implementation;$(ProjectDir)Core;$(ProjectDir)Engine;$(ProjectDir)Engine\Input;$(ProjectDir)Game;$(ProjectDir)Misc;$(ProjectDir)Test;$(ProjectDir)Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -196,7 +196,7 @@
     <ClInclude Include="Engine\Scene.h" />
     <ClInclude Include="Engine\SceneManager.h" />
     <ClInclude Include="Engine\TimeManager.h" />
-    <ClInclude Include="Script\TrashTheCacheManager.h" />
+    <ClInclude Include="Misc\TrashTheCacheManager.h" />
     <ClInclude Include="Utility\Font.h" />
     <ClInclude Include="Utility\Singleton.h" />
     <ClInclude Include="Utility\Texture2D.h" />
@@ -594,8 +594,7 @@
     <ClCompile Include="Engine\ResourceManager.cpp" />
     <ClCompile Include="Engine\Scene.cpp" />
     <ClCompile Include="Engine\SceneManager.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Script\TrashTheCacheManager.cpp">
+    <ClCompile Include="Misc\TrashTheCacheManager.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <Optimization>Disabled</Optimization>
@@ -749,9 +748,7 @@
     <ClCompile Include="Utility\Font.cpp" />
     <ClCompile Include="Utility\Texture2D.cpp" />
     <ClCompile Include="Utility\Transform.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Misc\" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

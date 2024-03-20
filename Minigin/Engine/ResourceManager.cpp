@@ -24,19 +24,40 @@ namespace dae
         }
     }
 
-    std::shared_ptr<Texture2D> ResourceManager::LoadTexture(const std::string& file) const
+    Texture2D* ResourceManager::LoadTexture(const std::string& file)
     {
+        // Check if texture is already present
         const auto fullPath = m_dataPath + file;
+        const auto it = m_textures.find(fullPath);
+        if (it != m_textures.cend())
+        {
+            return it->second.get();
+        }
+        
         auto texture = IMG_LoadTexture(Renderer::GetInstance().GetSDLRenderer(), fullPath.c_str());
         if (texture == nullptr)
         {
             throw std::runtime_error(std::string("Failed to load texture: ") + SDL_GetError());
         }
-        return std::make_shared<Texture2D>(texture);
+
+        // Cache the texture
+        m_textures[fullPath] = std::make_unique<Texture2D>(texture);
+        return m_textures[fullPath].get();
     }
 
-    std::shared_ptr<Font> ResourceManager::LoadFont(const std::string& file, unsigned int size) const
+    Font* ResourceManager::LoadFont(const std::string& file, unsigned int size)
     {
-        return std::make_shared<Font>(m_dataPath + file, size);
+        // Check if font is already present
+        const auto fullPath = m_dataPath + file;
+        const auto it = m_fonts.find(fullPath);
+        if (it != m_fonts.cend() && it->second.first == size)
+        {
+            return it->second.second.get();
+        }
+
+        // Load the font and cache it
+        auto font = std::make_unique<Font>(fullPath, size);
+        m_fonts.emplace(fullPath, std::make_pair(size, std::move(font)));
+        return m_fonts[fullPath].second.get();
     }
 }

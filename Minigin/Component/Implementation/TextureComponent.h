@@ -16,7 +16,6 @@ namespace dae
     {
     public:
         TextureComponent() = default;
-        TextureComponent(const std::string& filename);
         virtual ~TextureComponent() override = default;
 
         TextureComponent(const TextureComponent& other)            = delete;
@@ -29,6 +28,6 @@ namespace dae
         void SetTexture(const std::string& filename);
         
     private:
-        std::shared_ptr<Texture2D> m_texture{};
+        Texture2D* m_texture{};
     };
 }
