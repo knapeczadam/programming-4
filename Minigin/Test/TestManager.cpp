@@ -20,7 +20,7 @@ namespace dae
     void TestManager::TestComponents()
     {
         {
-            // Test Description: Add a component to a game object.
+            // Test Description: Add a component (Test1) to a game object.
             // Assert 1: The game object has the component family.
             // Assert 2: The game object has the component type.
             GameObject go;
@@ -29,6 +29,11 @@ namespace dae
             assert(go.HasComponent(ComponentType::Test1));
         }
         {
+            // Test Description: Add a component (Test1) to a game object.
+            // Assert 1: The game object has the Test1Component - template version.
+            // Assert 2: The game object has the Test1Component - type version.
+            // Assert 3: The game object has 1 component.
+            // Assert 4: The game object has 1 component in the Test family.
             GameObject go;
             go.AddComponent<Test1Component>();
             assert(go.GetComponent<Test1Component>() != nullptr);
@@ -37,6 +42,9 @@ namespace dae
             assert(go.GetComponents(ComponentFamily::Test).size() == 1);
         }
         {
+            // Test Description: Add 2 components (Test1, Test2) to a game object.
+            // Assert 1: The game object has 2 components.
+            // Assert 2: The game object has 2 components in the Test family.
             GameObject go;
             go.AddComponent<Test1Component>();
             go.AddComponent<Test2Component>();
@@ -44,6 +52,11 @@ namespace dae
             assert(go.GetComponents(ComponentFamily::Test).size() == 2);
         }
         {
+            // Test Description: Add 1 component (Test1) to game object 1 and 2 and set game object 2 as a child of game object 1.
+            // Assert 1: Game object 1 has 2 components - generic version.
+            // Assert 2: Game object 1 has 2 components - template version.
+            // Assert 3: Game object 1 has 2 components in the Test family.
+            // Assert 4: Game object 1 has 2 components of type Test1 - type version.
             GameObject go1;
             GameObject go2;
             go1.AddComponent<Test1Component>();
@@ -55,6 +68,13 @@ namespace dae
             assert(go1.GetComponentsInChildren(ComponentType::Test1).size() == 2);
         }
         {
+            // Test Description: Add 1 component (Test1) to game object 1 and 1 component (Test2) to game object 2 and set game object 2 as a child of game object 1.
+            // Assert 1: Game object 1 has 2 components - generic version.
+            // Assert 2: Game object 1 has 1 component of type Test1 - template version.
+            // Assert 3: Game object 1 has 1 component of type Test2 - template version.
+            // Assert 4: Game object 1 has 2 components in the Test family.
+            // Assert 5: Game object 1 has 1 component of type Test1 - type version.
+            // Assert 6: Game object 1 has 1 component of type Test2 - type version.
             GameObject go1;
             GameObject go2;
             go1.AddComponent<Test1Component>();
@@ -68,6 +88,13 @@ namespace dae
             assert(go1.GetComponentsInChildren(ComponentType::Test2).size() == 1);
         }
         {
+            // Test Description: Add 2 components (Test1, Test2) to game object 2 and set game object 2 as a child of game object 1.
+            // Assert 1: Game object 1 has 2 components - generic version.
+            // Assert 2: Game object 1 has 1 component of type Test1 - template version.
+            // Assert 3: Game object 1 has 1 component of type Test2 - template version.
+            // Assert 4: Game object 1 has 2 components in the Test family.
+            // Assert 5: Game object 1 has 1 component of type Test1 - type version.
+            // Assert 6: Game object 1 has 1 component of type Test2 - type version.
             GameObject go1;
             GameObject go2;
             go2.AddComponent<Test1Component>();
@@ -81,6 +108,11 @@ namespace dae
             assert(go1.GetComponentsInChildren(ComponentType::Test2).size() == 1);
         }
         {
+            // Test Description: Empty game object.
+            // Assert 1: The game object has no component in parent - template version.
+            // Assert 2: The game object has no component in parent - type version.
+            // Assert 3: The game object has no component in children - template version.
+            // Assert 4: The game object has no component in children - type version.
             GameObject go;
             assert(go.GetComponentInParent<Test1Component>() == nullptr);
             assert(go.GetComponentInParent(ComponentType::Test1) == nullptr);
@@ -88,6 +120,15 @@ namespace dae
             assert(go.GetComponentInChildren(ComponentType::Test1) == nullptr);
         }
         {
+            // Test Description: Empty game object.
+            // Assert 1: The game object has no components in parent - generic version.
+            // Assert 2: The game object has no components in parent - template version.
+            // Assert 3: The game object has no components in parent in the Test family.
+            // Assert 4: The game object has no components in parent - type version.
+            // Assert 5: The game object has no components in children - generic version.
+            // Assert 6: The game object has no components in children - template version.
+            // Assert 7: The game object has no components in children in the Test family.
+            // Assert 8: The game object has no components in children - type version.
             GameObject go;
             assert(go.GetComponentsInParent().empty());
             assert(go.GetComponentsInParent<Test1Component>().empty());
@@ -99,12 +140,16 @@ namespace dae
             assert(go.GetComponentsInChildren(ComponentType::Test1).empty());
         }
         {
+            // Test Description: Add the same component twice to a game object.
+            // Assert 1: The game object has 1 component.
             GameObject go;
             go.AddComponent<Test1Component>();
             go.AddComponent<Test1Component>();
             assert(go.GetComponents().size() == 1);
         }
         {
+            // Test Description: Add 2 components (Test1, Test2) to a game object and remove 1 component (Test1).
+            // Assert 1: The game object has 1 component.
             GameObject go;
             go.AddComponent<Test1Component>();
             go.AddComponent<Test2Component>();
@@ -112,16 +157,32 @@ namespace dae
             assert(go.GetComponents().size() == 1);
         }
         {
+            // Test Component: Add 1 component (Test1) to a game object and remove it.
+            // Assert 1: The game object has no components.
             GameObject go;
             const auto component = go.AddComponent<Test1Component>();
             go.RemoveComponent(component);
             assert(go.GetComponents().empty());
         }
         {
+            // Test Description: Add 2 components (Test1, Test2) to a game object and remove both components.
+            // Assert 1: The game object has no components.
+            // Assert 2: The game object has removed 2 components.
             GameObject go;
             go.AddComponent<Test1Component>();
             go.AddComponent<Test2Component>();
-            assert(go.RemoveComponents(ComponentFamily::Test) == 2);
+            const int count = go.RemoveComponents(ComponentFamily::Test);
+            assert(go.GetComponents().empty());
+            assert(count == 2);
+        }
+        {
+            // Test Description: Add 1 component (Test1) to game object 1 and remove it from game object 2.
+            // Assert 1: The game object has no components.
+            GameObject go1;
+            GameObject go2;
+            const auto comp = go1.AddComponent<Test1Component>();
+            const int count = go2.RemoveComponent(comp);
+            assert(count == 0);
         }
     }
 
