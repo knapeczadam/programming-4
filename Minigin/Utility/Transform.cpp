@@ -2,27 +2,43 @@
 
 namespace dae
 {
-    void Transform::SetPosition(float x, float y)
+    void Transform::SetWorldPosition(const float x, const float y)
     {
-        m_position.x = x;
-        m_position.y = y;
+        SetWorldPosition(glm::vec3{ x, y, m_worldPosition.z });
     }
 
-    void Transform::SetPosition(const float x, const float y, const float z)
+    void Transform::SetWorldPosition(const float x, const float y, const float z)
     {
-        m_position.x = x;
-        m_position.y = y;
-        m_position.z = z;
+        SetWorldPosition(glm::vec3{ x, y, z });
     }
 
-    void Transform::SetPosition(const glm::vec2& position)
+    void Transform::SetWorldPosition(const glm::vec2& position)
     {
-        m_position.x = position.x;
-        m_position.y = position.y;
+        SetWorldPosition(glm::vec3{ position, m_worldPosition.z });
     }
 
-    void Transform::SetPosition(const glm::vec3& position)
+    void Transform::SetWorldPosition(const glm::vec3& position)
     {
-        m_position = position;
+        m_worldPosition = position;
+    }
+
+    void Transform::SetLocalPosition(const float x, const float y)
+    {
+        SetLocalPosition(glm::vec3{ x, y, m_localPosition.z });
+    }
+
+    void Transform::SetLocalPosition(const float x, const float y, const float z)
+    {
+        SetLocalPosition(glm::vec3{ x, y, z });
+    }
+
+    void Transform::SetLocalPosition(const glm::vec2& position)
+    {
+        SetLocalPosition(glm::vec3{ position, m_localPosition.z });
+    }
+
+    void Transform::SetLocalPosition(const glm::vec3& position)
+    {
+        m_localPosition = position;
     }
 }

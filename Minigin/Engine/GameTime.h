@@ -5,7 +5,7 @@
 
 namespace dae
 {
-    class TimeManager final : public Singleton<TimeManager>
+    class GameTime final : public Singleton<GameTime>
     {
     public:
         float deltaTime = 0.0f;
@@ -13,7 +13,7 @@ namespace dae
         const float fixedTimeStep = 0.02f;
         const float msPerFrame = 16.666666666666668f;
     private:
-        friend class Singleton<TimeManager>;
-        TimeManager() = default;
+        friend class Singleton<GameTime>;
+        GameTime() = default;
     };
 }

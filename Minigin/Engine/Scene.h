@@ -3,6 +3,10 @@
 // Project includes
 #include "GameObject.h"
 
+// Standard includes
+#include <memory>
+#include <string>
+
 namespace dae
 {
     // Forward declarations
@@ -20,12 +24,14 @@ namespace dae
         Scene& operator=(const Scene& other) = delete;
         Scene& operator=(Scene&& other)      = delete;
 
-        GameObject* AddEmptyObject();
-        void RemoveObject(GameObject* object);
+        GameObject* AddGameObject(const std::string& name = "New Game Object");
+        void RemoveGameObject(GameObject* object);
         void RemoveAll();
-        int GetObjectCount() const;
+        int GetGameObjectCount() const;
+        GameObject* FindGameObject(const std::string& name) const;
 
         void Update();
+        void LateUpdate();
         void Render() const;
         void RenderUI() const;
 

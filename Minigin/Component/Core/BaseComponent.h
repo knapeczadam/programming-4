@@ -17,6 +17,7 @@ namespace dae
     enum class ComponentType
     {
         FPS,
+        Rotator,
         Text,
         Texture,
         TrashTheCache,

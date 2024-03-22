@@ -6,7 +6,7 @@
 
 // Standard includes
 #include <memory>
-#include <optional>
+#include <string>
 #include <unordered_map>
 
 namespace dae
@@ -19,17 +19,22 @@ namespace dae
     {
     public:
         GameObject() = default;
+        explicit GameObject(std::string name);
         ~GameObject() = default;
 
-        GameObject(const GameObject& other) = delete;
-        GameObject(GameObject&& other) = delete;
+        GameObject(const GameObject& other)            = delete;
+        GameObject(GameObject&& other)                 = delete;
         GameObject& operator=(const GameObject& other) = delete;
-        GameObject& operator=(GameObject&& other) = delete;
+        GameObject& operator=(GameObject&& other)      = delete;
+
+        std::string GetName() const { return m_name; }
 
         void Update();
+        void UpdateWorldPosition();
+        void LateUpdate();
 
         GameObject* GetParent() const { return m_parentPtr; }
-        bool SetParent(GameObject* parentPtr);
+        bool SetParent(GameObject* parentPtr, bool keepWorldPosition = true);
         bool HasChild(GameObject* childPtr) const;
 
         int GetChildCount() const;
@@ -56,8 +61,8 @@ namespace dae
         std::unordered_multimap<ComponentType, BaseComponent*> GetComponentsInParent(ComponentType componentType) const;
         std::unordered_multimap<ComponentType, BaseComponent*> GetComponentsInParent() const;
 
-        template <typename T>
-        T* AddComponent();
+        template <typename T, typename... Args>
+        T* AddComponent(Args&&... args);
 
         template <typename T>
         T* GetComponent() const;
@@ -74,18 +79,22 @@ namespace dae
         template <typename T>
         std::unordered_multimap<ComponentType, T*> GetComponentsInParent() const;
 
-        const glm::vec3& GetPosition() const { return m_transform.GetPosition(); }
+        const glm::vec3& GetWorldPosition();
+        [[nodiscard]] const glm::vec3& GetLocalPosition() const;
 
-        void SetPosition(const glm::vec2& position);
-        void SetPosition(const glm::vec3& position);
-        void SetPosition(float x, float y);
-        void SetPosition(float x, float y, float z);
+        void SetLocalPosition(float x, float y);
+        void SetLocalPosition(float x, float y, float z);
+        void SetLocalPosition(const glm::vec2& position);
+        void SetLocalPosition(const glm::vec3& position);
 
     private:
+        void AddChild(GameObject* childPtr);
         void RemoveChild(GameObject* childPtr);
 
     private:
+        std::string m_name    = {};
         Transform m_transform = {};
+        bool m_positionDirty  = false;
 
         // TODO: switch to map?
         std::unordered_map<ComponentType, std::unique_ptr<BaseComponent>> m_componentMap = {};

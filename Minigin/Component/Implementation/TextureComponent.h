@@ -12,10 +12,11 @@ namespace dae
     // Forward declarations
     class Texture2D;
     
-    class TextureComponent : public RenderingComponent
+    class TextureComponent final : public RenderingComponent
     {
     public:
         TextureComponent() = default;
+        TextureComponent(const std::string& filename);
         virtual ~TextureComponent() override = default;
 
         TextureComponent(const TextureComponent& other)            = delete;

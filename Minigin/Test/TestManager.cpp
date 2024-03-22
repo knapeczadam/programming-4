@@ -7,6 +7,7 @@
 
 // Standard includes
 #include <cassert>
+#include <backends/imgui_impl_opengl3.h>
 
 namespace dae
 {
@@ -15,6 +16,7 @@ namespace dae
         TestComponents();
         TestParentChildRelationship();
         TestScene();
+        TestPosition();
     }
 
     void TestManager::TestComponents()
@@ -38,7 +40,7 @@ namespace dae
             go.AddComponent<Test1Component>();
             assert(go.GetComponent<Test1Component>() != nullptr);
             assert(go.GetComponent(ComponentType::Test1) != nullptr);
-            assert(go.GetComponents().size() == 1);
+            assert(go.GetComponents().size()                      == 1);
             assert(go.GetComponents(ComponentFamily::Test).size() == 1);
         }
         {
@@ -48,7 +50,7 @@ namespace dae
             GameObject go;
             go.AddComponent<Test1Component>();
             go.AddComponent<Test2Component>();
-            assert(go.GetComponents().size() == 2);
+            assert(go.GetComponents().size()                      == 2);
             assert(go.GetComponents(ComponentFamily::Test).size() == 2);
         }
         {
@@ -62,10 +64,10 @@ namespace dae
             go1.AddComponent<Test1Component>();
             go2.AddComponent<Test1Component>();
             go2.SetParent(&go1);
-            assert(go1.GetComponentsInChildren().size() == 2);
-            assert(go1.GetComponentsInChildren<Test1Component>().size() == 2);
+            assert(go1.GetComponentsInChildren().size()                      == 2);
+            assert(go1.GetComponentsInChildren<Test1Component>().size()      == 2);
             assert(go1.GetComponentsInChildren(ComponentFamily::Test).size() == 2);
-            assert(go1.GetComponentsInChildren(ComponentType::Test1).size() == 2);
+            assert(go1.GetComponentsInChildren(ComponentType::Test1).size()  == 2);
         }
         {
             // Test Description: Add 1 component (Test1) to game object 1 and 1 component (Test2) to game object 2 and set game object 2 as a child of game object 1.
@@ -80,12 +82,12 @@ namespace dae
             go1.AddComponent<Test1Component>();
             go2.AddComponent<Test2Component>();
             go2.SetParent(&go1);
-            assert(go1.GetComponentsInChildren().size() == 2);
-            assert(go1.GetComponentsInChildren<Test1Component>().size() == 1);
-            assert(go1.GetComponentsInChildren<Test2Component>().size() == 1);
+            assert(go1.GetComponentsInChildren().size()                      == 2);
+            assert(go1.GetComponentsInChildren<Test1Component>().size()      == 1);
+            assert(go1.GetComponentsInChildren<Test2Component>().size()      == 1);
             assert(go1.GetComponentsInChildren(ComponentFamily::Test).size() == 2);
-            assert(go1.GetComponentsInChildren(ComponentType::Test1).size() == 1);
-            assert(go1.GetComponentsInChildren(ComponentType::Test2).size() == 1);
+            assert(go1.GetComponentsInChildren(ComponentType::Test1).size()  == 1);
+            assert(go1.GetComponentsInChildren(ComponentType::Test2).size()  == 1);
         }
         {
             // Test Description: Add 2 components (Test1, Test2) to game object 2 and set game object 2 as a child of game object 1.
@@ -101,11 +103,11 @@ namespace dae
             go2.AddComponent<Test2Component>();
             go2.SetParent(&go1);
             assert(go1.GetComponentsInChildren().size() == 2);
-            assert(go1.GetComponentsInChildren<Test1Component>().size() == 1);
-            assert(go1.GetComponentsInChildren<Test2Component>().size() == 1);
+            assert(go1.GetComponentsInChildren<Test1Component>().size()      == 1);
+            assert(go1.GetComponentsInChildren<Test2Component>().size()      == 1);
             assert(go1.GetComponentsInChildren(ComponentFamily::Test).size() == 2);
-            assert(go1.GetComponentsInChildren(ComponentType::Test1).size() == 1);
-            assert(go1.GetComponentsInChildren(ComponentType::Test2).size() == 1);
+            assert(go1.GetComponentsInChildren(ComponentType::Test1).size()  == 1);
+            assert(go1.GetComponentsInChildren(ComponentType::Test2).size()  == 1);
         }
         {
             // Test Description: Empty game object.
@@ -208,8 +210,8 @@ namespace dae
             assert(go1.SetParent(&go2));
             assert(go2.HasChild(&go1));
             assert(go2.GetChildCount() == 1);
-            assert(go2.GetChildAt(0) == &go1);
-            assert(go1.GetParent() == &go2);
+            assert(go2.GetChildAt(0)   == &go1);
+            assert(go1.GetParent()     == &go2);
         }
         {
             // Test Description: Set a game object as a child of another game object and then remove the parent.
@@ -234,6 +236,20 @@ namespace dae
             assert(go2.SetParent(&go1));
             assert(not go1.SetParent(&go3));
         }
+        {
+            // Test Description:
+            // Assert 1:
+            // Assert 2:
+            GameObject go1;
+            GameObject go2;
+            GameObject go3;
+            GameObject go4;
+            go2.SetParent(&go1);
+            go4.SetParent(&go3);
+            go4.SetParent(&go2);
+            assert(go2.HasChild(&go4));
+            assert(go3.GetChildCount() == 0);
+        }
     }
 
     void TestManager::TestScene()
@@ -242,27 +258,89 @@ namespace dae
             // Test Description: Create a scene and add a game object to it.
             // Assert 1: The scene has 1 game object.
             const auto scene = SceneManager::GetInstance().CreateScene("Test");
-            scene->AddEmptyObject();
-            assert(scene->GetObjectCount() == 1);
+            scene->AddGameObject();
+            assert(scene->GetGameObjectCount() == 1);
         }
         {
             // Test Description: Create a scene and add a game object to it and then remove the game object.
             // Assert 1: The scene has no game objects.
             const auto scene = SceneManager::GetInstance().CreateScene("Test");
-            const auto go = scene->AddEmptyObject();
-            scene->RemoveObject(go);
-            assert(scene->GetObjectCount() == 0);
+            const auto go = scene->AddGameObject();
+            scene->RemoveGameObject(go);
+            assert(scene->GetGameObjectCount() == 0);
         }
         {
             // Test Description: Create a scene and add 2 game objects to it and then remove all game objects.
             // Assert 1: The scene has 2 game objects.
             // Assert 2: The scene has no game objects.
             const auto scene = SceneManager::GetInstance().CreateScene("Test");
-            scene->AddEmptyObject();
-            scene->AddEmptyObject();
-            assert(scene->GetObjectCount() == 2);
+            scene->AddGameObject();
+            scene->AddGameObject();
+            assert(scene->GetGameObjectCount() == 2);
             scene->RemoveAll();
-            assert(scene->GetObjectCount() == 0);
+            assert(scene->GetGameObjectCount() == 0);
+        }
+    }
+
+    void TestManager::TestPosition()
+    {
+        constexpr glm::vec3 pos1 = {10.0f, 10.0f, 10.0f };
+        constexpr glm::vec3 pos2 = {20.0f, 20.0f, 20.0f };
+        {
+            // Test Description: Set the local position of a game object and update the world position.
+            // Assert 1: World position is equal to local position.
+            GameObject go;
+            go.SetLocalPosition(pos1);
+            go.UpdateWorldPosition();
+            assert(go.GetWorldPosition() == pos1);
+        }
+        {
+            // Test Description: 
+            // Assert 1: World position is equal to local position.
+            // Assert 2: World position is equal to the child's world position.
+            GameObject go1;
+            GameObject go2;
+            go1.SetLocalPosition(pos1);
+            go2.SetLocalPosition(pos2);
+            go2.SetParent(&go1);
+            go1.UpdateWorldPosition();
+            go2.UpdateWorldPosition();
+            assert(go1.GetWorldPosition() == pos1);
+            assert(go2.GetWorldPosition() == pos2);
+        }
+        {
+            // Test Description: 
+            // Assert 1: World position is equal to local position.
+            // Assert 2: 
+            GameObject go1;
+            GameObject go2;
+            go1.SetLocalPosition(pos1);
+            go2.SetLocalPosition(pos2);
+            go2.SetParent(&go1, false);
+            go1.UpdateWorldPosition();
+            go2.UpdateWorldPosition();
+            assert(go1.GetWorldPosition() == pos1);
+            assert(go2.GetWorldPosition() == pos1 + pos2);
+        }
+        {
+            // Test Description:
+            // Assert 1: World position is equal to local position.
+            // Assert 2:
+            // Assert 3:
+            GameObject go1;
+            GameObject go2;
+            GameObject go3;
+            go1.SetLocalPosition(pos1);
+            go2.SetLocalPosition(pos2);
+            go3.SetLocalPosition(pos2);
+            go2.SetParent(&go1, false);
+            go3.SetParent(&go2, false);
+            go1.UpdateWorldPosition();
+            go2.UpdateWorldPosition();
+            go3.UpdateWorldPosition();
+            assert(go1.GetWorldPosition() == pos1);
+            assert(go2.GetWorldPosition() == pos1 + pos2);
+            assert(go3.GetWorldPosition() == pos1 + pos2 + pos2);
         }
     }
 }

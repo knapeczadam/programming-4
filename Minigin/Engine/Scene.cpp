@@ -22,13 +22,13 @@ namespace dae
     {
     }
 
-    GameObject* Scene::AddEmptyObject()
+    GameObject* Scene::AddGameObject(const std::string& name)
     {
-        m_objects.emplace_back(std::make_unique<GameObject>());
+        m_objects.emplace_back(std::make_unique<GameObject>(name));
         return m_objects.back().get();
     }
 
-    void Scene::RemoveObject(GameObject* object)
+    void Scene::RemoveGameObject(GameObject* object)
     {
         std::erase_if(m_objects, [object](const auto& obj)
         {
@@ -41,16 +41,34 @@ namespace dae
         m_objects.clear();
     }
 
-    int Scene::GetObjectCount() const
+    int Scene::GetGameObjectCount() const
     {
         return static_cast<int>(m_objects.size());
     }
 
+    GameObject* Scene::FindGameObject(const std::string& name) const
+    {
+        const auto it = std::ranges::find_if(m_objects, [&name](const auto& obj)
+        {
+            return obj->GetName() == name;
+        });
+
+        return it != m_objects.end() ? it->get() : nullptr;
+    }
+
     void Scene::Update()
     {
-        for (auto& object : m_objects)
+        for (const auto& object : m_objects)
         {
             object->Update();
+        }
+    }
+
+    void Scene::LateUpdate()
+    {
+        for (const auto& object : m_objects)
+        {
+            object->LateUpdate();
         }
     }
 

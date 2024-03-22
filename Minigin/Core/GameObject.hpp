@@ -104,10 +104,10 @@ namespace dae
     /// \brief Adds a component class of type componentType to the GameObject. 
     /// \tparam T 
     /// \return 
-    template <typename T>
-    T* GameObject::AddComponent()
+    template <typename T, typename... Args>
+    T* GameObject::AddComponent(Args&&... args)
     {
-        auto componentPtr = std::make_unique<T>();
+        auto componentPtr = std::make_unique<T>(std::forward<Args>(args)...);
         componentPtr->SetOwner(this);
         auto copyPtr = componentPtr.get();
         m_componentMap[componentPtr->GetType()] = std::move(componentPtr);

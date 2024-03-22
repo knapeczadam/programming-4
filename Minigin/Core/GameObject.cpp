@@ -4,11 +4,19 @@
 #include "BaseComponent.h"
 
 // Standard includes
+#include "GameObject.h"
+#include "GameObject.h"
+
 #include <algorithm>
 #include <ranges>
 
 namespace dae
 {
+    GameObject::GameObject(std::string name)
+        : m_name(std::move(name))
+    {
+    }
+
     void GameObject::Update()
     {
         for (const auto& pComponent : m_componentMap | std::views::values)
@@ -17,7 +25,41 @@ namespace dae
         }
     }
 
-    bool GameObject::SetParent(GameObject* parentPtr)
+    void GameObject::AddChild(GameObject* childPtr)
+    {
+        m_children.push_back(childPtr);
+    }
+
+    void GameObject::UpdateWorldPosition()
+    {
+        if (m_positionDirty)
+        {
+            if (m_parentPtr)
+            {
+                const auto newPos = m_parentPtr->GetWorldPosition() + m_transform.GetLocalPosition();
+                m_transform.SetWorldPosition(newPos);
+            }
+            else
+            {
+                m_transform.SetWorldPosition(m_transform.GetLocalPosition());
+            }
+        }
+        m_positionDirty = false;
+    }
+
+    void GameObject::LateUpdate()
+    {
+        if (m_positionDirty)
+        {
+            for (const auto& child : m_children)
+            {
+                child->m_positionDirty = true;
+            }
+        }
+        UpdateWorldPosition();
+    }
+
+    bool GameObject::SetParent(GameObject* parentPtr, bool keepWorldPosition)
     {
         // SetParent has to do five things:
         // 1. Check if the new parent is valid (not itself or one of its children)
@@ -25,24 +67,32 @@ namespace dae
         // 3. Set the given parent on itself.
         // 4. Add itself as a child to the given parent.
         // 5. Update position, rotation and scale
-        
-        if (parentPtr == this)
+
+        if (parentPtr == this or m_parentPtr == parentPtr or HasChild(parentPtr))
         {
             return false;
         }
-        if (HasChild(parentPtr))
+        if (parentPtr == nullptr)
         {
-            return false;
+            SetLocalPosition(GetWorldPosition());
+        }
+        else
+        {
+            if (keepWorldPosition)
+            {
+                const auto newPos = GetWorldPosition() - parentPtr->GetWorldPosition();
+                m_transform.SetLocalPosition(newPos);
+            }
+            m_positionDirty = true;
         }
         if (m_parentPtr)
         {
             m_parentPtr->RemoveChild(this);
-            m_parentPtr = nullptr;
         }
         m_parentPtr = parentPtr;
         if (m_parentPtr)
         {
-            m_parentPtr->m_children.push_back(this);
+            m_parentPtr->AddChild(this);
         }
         return true;
     }
@@ -323,23 +373,38 @@ namespace dae
         return components;
     }
 
-    void GameObject::SetPosition(const glm::vec2& position)
+    const glm::vec3& GameObject::GetWorldPosition()
     {
-        m_transform.SetPosition(position);
+        if (m_positionDirty)
+        {
+            UpdateWorldPosition();
+        }
+        return m_transform.GetWorldPosition();
     }
 
-    void GameObject::SetPosition(const glm::vec3& position)
+    const glm::vec3& GameObject::GetLocalPosition() const
     {
-        m_transform.SetPosition(position);
+        return m_transform.GetLocalPosition();
     }
 
-    void GameObject::SetPosition(const float x, const float y)
+    void GameObject::SetLocalPosition(float x, float y)
     {
-        m_transform.SetPosition(x, y);
+        SetLocalPosition(glm::vec3{x, y, m_transform.GetLocalPosition().z});
     }
 
-    void GameObject::SetPosition(const float x, const float y, const float z)
+    void GameObject::SetLocalPosition(float x, float y, float z)
     {
-        m_transform.SetPosition(x, y, z); 
+        SetLocalPosition(glm::vec3{x, y, z});
+    }
+
+    void GameObject::SetLocalPosition(const glm::vec2& position)
+    {
+        SetLocalPosition(glm::vec3{position, m_transform.GetLocalPosition().z});
+    }
+
+    void GameObject::SetLocalPosition(const glm::vec3& position)
+    {
+        m_transform.SetLocalPosition(position);
+        m_positionDirty = true;
     }
 }

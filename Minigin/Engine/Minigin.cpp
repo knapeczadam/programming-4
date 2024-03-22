@@ -9,7 +9,7 @@
 #include "Renderer.h"
 #include "ResourceManager.h"
 #include "SceneManager.h"
-#include "TimeManager.h"
+#include "GameTime.h"
 
 // Standard includes
 #include <chrono>
@@ -121,18 +121,18 @@ namespace dae
         while (doContinue)
         {
             const auto currentTime = high_resolution_clock::now();
-            TimeManager::GetInstance().deltaTime = duration<float>(currentTime - lastTime).count();
+            GameTime::GetInstance().deltaTime = duration<float>(currentTime - lastTime).count();
             
             lastTime = currentTime;
-            lag += TimeManager::GetInstance().deltaTime;
+            lag += GameTime::GetInstance().deltaTime;
             
             doContinue = input.ProcessInput();
             // std::cout << "FPS: " << 1.0f / Time::deltaTime << "\n";
             sceneManager.Update();
-            // TODO: LateUpdate can be called before rendering
+            sceneManager.LateUpdate();
             renderer.Render();
 
-            const auto sleepTime = currentTime + milliseconds(static_cast<long long>(TimeManager::GetInstance().msPerFrame)) - high_resolution_clock::now();
+            const auto sleepTime = currentTime + milliseconds(static_cast<long long>(GameTime::GetInstance().msPerFrame)) - high_resolution_clock::now();
 
             std::this_thread::sleep_for(sleepTime);
         }

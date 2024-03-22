@@ -182,6 +182,7 @@
     <ClInclude Include="Component\Family\RenderingComponent.h" />
     <ClInclude Include="Component\Family\UIComponent.h" />
     <ClInclude Include="Component\Implementation\FPSComponent.h" />
+    <ClInclude Include="Component\Implementation\RotatorComponent.h" />
     <ClInclude Include="Component\Implementation\TextComponent.h" />
     <ClInclude Include="Component\Implementation\TextureComponent.h" />
     <ClInclude Include="Component\Implementation\TrashTheCacheComponent.h" />
@@ -195,7 +196,7 @@
     <ClInclude Include="Engine\ResourceManager.h" />
     <ClInclude Include="Engine\Scene.h" />
     <ClInclude Include="Engine\SceneManager.h" />
-    <ClInclude Include="Engine\TimeManager.h" />
+    <ClInclude Include="Engine\GameTime.h" />
     <ClInclude Include="Misc\TrashTheCacheManager.h" />
     <ClInclude Include="Test\Test2Component.h" />
     <ClInclude Include="Test\TestManager.h" />
@@ -289,6 +290,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="Component\Implementation\RotatorComponent.cpp" />
     <ClCompile Include="Component\Implementation\TextComponent.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>

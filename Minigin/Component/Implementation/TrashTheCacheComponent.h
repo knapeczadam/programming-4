@@ -5,7 +5,7 @@
 
 namespace dae
 {
-    class TrashTheCacheComponent : public UIComponent
+    class TrashTheCacheComponent final : public UIComponent
     {
     public:
         TrashTheCacheComponent() = default;

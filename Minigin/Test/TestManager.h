@@ -17,6 +17,7 @@ namespace dae
         void TestComponents();
         void TestParentChildRelationship();
         void TestScene();
+        void TestPosition();
         
     };
 }

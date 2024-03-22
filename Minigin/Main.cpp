@@ -25,45 +25,49 @@
 // SDL includes
 #include <SDL.h>
 
+#include "RotatorComponent.h"
+
 void load()
 {
     using namespace dae;
-    
-    auto scene = SceneManager::GetInstance().CreateScene("Demo");
+
+    const auto scene = SceneManager::GetInstance().CreateScene("Demo");
 
     // Background
-    auto go = scene->AddEmptyObject();
-    const auto textureComp3 = go->AddComponent<TextureComponent>();
-    textureComp3->SetTexture("background.tga");
+    auto go = scene->AddGameObject();
+    go->AddComponent<TextureComponent>("background.tga");
 
     // Text
-    go = scene->AddEmptyObject();
-    go->SetPosition(80.0f, 20.0f);
+    go = scene->AddGameObject();
+    go->SetLocalPosition(80.0f, 20.0f);
     const auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
     const auto textComp = go->AddComponent<TextComponent>();
     textComp->SetFont(font);
     textComp->SetText("Programming 4 Assignment");
 
     // FPS
-    go = scene->AddEmptyObject();
-    go->SetPosition(20.0f, 60.0f);
+    go = scene->AddGameObject();
+    go->SetLocalPosition(20.0f, 60.0f);
     const auto fpsComp = go->AddComponent<FPSComponent>();
     fpsComp->SetFont(font);
     fpsComp->SetText("FPS: ");
 
     // Trash the cache
-    go = scene->AddEmptyObject();
-    go->SetPosition(50.0f, 100.0f);
+    go = scene->AddGameObject();
+    go->SetLocalPosition(50.0f, 100.0f);
     go->AddComponent<TrashTheCacheComponent>();
-    
+
+    // Root
+    go = scene->AddGameObject("root");
+    go->SetLocalPosition(320.0f, 240.0f);
     //---------------------------------------------------------------------------------
     // PACMAN
     //---------------------------------------------------------------------------------
-    go = scene->AddEmptyObject();
-    go->SetPosition(216.0f, 180.0f);
-
-    const auto textureComp1 = go->AddComponent<TextureComponent>();
-    textureComp1->SetTexture("pacman.tga");
+    go = scene->AddGameObject("pacman");
+    go->SetLocalPosition(50.0f, 0.0f);
+    go->AddComponent<RotatorComponent>();
+    go->AddComponent<TextureComponent>("pacman.tga");
+    go->SetParent(scene->FindGameObject("root"), false);
 
     // Arrow keys
     auto moveLeftCommand1  = std::make_unique<MoveCommand>(go, glm::vec2{-1, 0});
@@ -76,6 +80,16 @@ void load()
     InputManager::GetInstance().BindCommand(InputType::Keyboard, InputState::Down, Input::K_UP, std::move(moveUpCommand1));
     InputManager::GetInstance().BindCommand(InputType::Keyboard, InputState::Down, Input::K_DOWN, std::move(moveDownCommand1));
 
+
+    //---------------------------------------------------------------------------------
+    // GHOST
+    //---------------------------------------------------------------------------------
+    go = scene->AddGameObject("ghost1");
+    go->SetLocalPosition(0.0f, 50.0f);
+    go->AddComponent<TextureComponent>("ghost.tga");
+    go->AddComponent<RotatorComponent>();
+    go->SetParent(scene->FindGameObject("pacman"), false);
+    
     // WASD
     auto moveLeftCommand2  = std::make_unique<MoveCommand>(go, glm::vec2{-1, 0});
     auto moveRightCommand2 = std::make_unique<MoveCommand>(go, glm::vec2{1, 0});
@@ -87,15 +101,6 @@ void load()
     InputManager::GetInstance().BindCommand(InputType::Keyboard, InputState::Down, Input::K_w, std::move(moveUpCommand2));
     InputManager::GetInstance().BindCommand(InputType::Keyboard, InputState::Down, Input::K_s, std::move(moveDownCommand2));
 
-    //---------------------------------------------------------------------------------
-    // GHOST
-    //---------------------------------------------------------------------------------
-    go = scene->AddEmptyObject();
-    go->SetPosition(100.0f, 100.0f);
-
-    const auto textureComp2 = go->AddComponent<TextureComponent>();
-    textureComp2->SetTexture("ghost.tga");
-
     // Controller
     auto moveLeftCommand3  = std::make_unique<MoveCommand>(go, glm::vec2{-1, 0});
     auto moveRightCommand3 = std::make_unique<MoveCommand>(go, glm::vec2{1, 0});
@@ -106,6 +111,11 @@ void load()
     InputManager::GetInstance().BindCommand(InputType::Controller, InputState::Down, Input::C_RIGHT, std::move(moveRightCommand3));
     InputManager::GetInstance().BindCommand(InputType::Controller, InputState::Down, Input::C_UP, std::move(moveUpCommand3));
     InputManager::GetInstance().BindCommand(InputType::Controller, InputState::Down, Input::C_DOWN, std::move(moveDownCommand3));
+    
+    go = scene->AddGameObject("ghost2");
+    go->SetLocalPosition(-50.0f, -50.0f);
+    go->AddComponent<TextureComponent>("ghost.tga");
+    go->SetParent(scene->FindGameObject("ghost1"), false);
 }
 
 int main(int, char*[])
