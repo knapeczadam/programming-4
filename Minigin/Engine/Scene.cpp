@@ -68,7 +68,14 @@ namespace dae
     {
         for (const auto& object : m_objects)
         {
-            object->LateUpdate();
+            if (object->IsAlive())
+            {
+                object->LateUpdate();
+            }
+            else
+            {
+                RemoveGameObject(object.get());
+            }
         }
     }
 

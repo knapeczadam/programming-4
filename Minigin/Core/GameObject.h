@@ -15,6 +15,14 @@ namespace dae
     enum class ComponentType;
     enum class ComponentFamily;
 
+    // Concepts
+    template <typename T>
+    concept IsComponentImpl = std::is_base_of_v<BaseComponent, T> and std::is_constructible_v<T>;
+
+    // Type aliases
+    using ComponentMap = std::unordered_map<ComponentType, BaseComponent*>;
+    using ComponentMultimap = std::unordered_multimap<ComponentType, BaseComponent*>;
+
     class GameObject final
     {
     public:
@@ -33,6 +41,9 @@ namespace dae
         void UpdateWorldPosition();
         void LateUpdate();
 
+        bool IsAlive() const { return m_alive; }
+        void Destroy() { m_alive = false; }
+
         GameObject* GetParent() const { return m_parentPtr; }
         bool SetParent(GameObject* parentPtr, bool keepWorldPosition = true);
         bool HasChild(GameObject* childPtr) const;
@@ -48,35 +59,35 @@ namespace dae
         bool HasComponent(ComponentType componentType) const;
 
         BaseComponent* GetComponent(ComponentType componentType) const;
-        std::unordered_map<ComponentType, BaseComponent*> GetComponents(ComponentFamily familyType) const;
-        std::unordered_map<ComponentType, BaseComponent*> GetComponents() const;
+        ComponentMap GetComponents(ComponentFamily familyType) const;
+        ComponentMap GetComponents() const;
 
         BaseComponent* GetComponentInChildren(ComponentType componentType) const;
-        std::unordered_multimap<ComponentType, BaseComponent*> GetComponentsInChildren(ComponentFamily familyType) const;
-        std::unordered_multimap<ComponentType, BaseComponent*> GetComponentsInChildren(ComponentType componentType) const;
-        std::unordered_multimap<ComponentType, BaseComponent*> GetComponentsInChildren() const;
+        ComponentMultimap GetComponentsInChildren(ComponentFamily familyType) const;
+        ComponentMultimap GetComponentsInChildren(ComponentType componentType) const;
+        ComponentMultimap GetComponentsInChildren() const;
 
         BaseComponent* GetComponentInParent(ComponentType componentType) const;
-        std::unordered_map<ComponentType, BaseComponent*> GetComponentsInParent(ComponentFamily familyType) const;
-        std::unordered_multimap<ComponentType, BaseComponent*> GetComponentsInParent(ComponentType componentType) const;
-        std::unordered_multimap<ComponentType, BaseComponent*> GetComponentsInParent() const;
+        ComponentMultimap GetComponentsInParent(ComponentFamily familyType) const;
+        ComponentMultimap GetComponentsInParent(ComponentType componentType) const;
+        ComponentMultimap GetComponentsInParent() const;
 
-        template <typename T, typename... Args>
+        template <typename T, typename... Args> requires IsComponentImpl<T>
         T* AddComponent(Args&&... args);
 
-        template <typename T>
+        template <typename T> requires IsComponentImpl<T>
         T* GetComponent() const;
 
-        template <typename T>
+        template <typename T> requires IsComponentImpl<T>
         T* GetComponentInChildren() const;
 
-        template <typename T>
+        template <typename T> requires IsComponentImpl<T>
         std::unordered_multimap<ComponentType, T*> GetComponentsInChildren() const;
 
-        template <typename T>
+        template <typename T> requires IsComponentImpl<T>
         T* GetComponentInParent() const;
 
-        template <typename T>
+        template <typename T> requires IsComponentImpl<T>
         std::unordered_multimap<ComponentType, T*> GetComponentsInParent() const;
 
         const glm::vec3& GetWorldPosition();
@@ -95,6 +106,7 @@ namespace dae
         std::string m_name    = {};
         Transform m_transform = {};
         bool m_positionDirty  = false;
+        bool m_alive          = true;
 
         // TODO: switch to map?
         std::unordered_map<ComponentType, std::unique_ptr<BaseComponent>> m_componentMap = {};

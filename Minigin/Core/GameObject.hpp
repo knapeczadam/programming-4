@@ -9,7 +9,7 @@ namespace dae
     /// \brief Gets a reference to a component of type T on the same GameObject as the component specified.
     /// \tparam T 
     /// \return 
-    template <typename T>
+    template <typename T> requires IsComponentImpl<T>
     T* GameObject::GetComponent() const
     {
         for (const auto& val : m_componentMap | std::views::values)
@@ -25,7 +25,7 @@ namespace dae
     /// \brief Gets a reference to a component of type T on the same GameObject as the component specified, or any child of the GameObject.
     /// \tparam T 
     /// \return 
-    template <typename T>
+    template <typename T> requires IsComponentImpl<T>
     T* GameObject::GetComponentInChildren() const
     {
         if (auto componentPtr = GetComponent<T>())
@@ -45,7 +45,7 @@ namespace dae
     /// \brief Gets references to all components of type T on the same GameObject as the component specified, and any child of the GameObject.
     /// \tparam T 
     /// \return 
-    template <typename T>
+    template <typename T> requires IsComponentImpl<T>
     std::unordered_multimap<ComponentType, T*> GameObject::GetComponentsInChildren() const
     {
         std::unordered_multimap<ComponentType, T*> components;
@@ -66,7 +66,7 @@ namespace dae
     /// \brief Gets a reference to a component of type T on the same GameObject as the component specified, or any parent of the GameObject.
     /// \tparam T 
     /// \return 
-    template <typename T>
+    template <typename T> requires IsComponentImpl<T>
     T* GameObject::GetComponentInParent() const
     {
         if (auto componentPtr = GetComponent<T>())
@@ -83,7 +83,7 @@ namespace dae
     /// \brief Gets references to all components of type T on the same GameObject as the component specified, and any parent of the GameObject.
     /// \tparam T 
     /// \return 
-    template <typename T>
+    template <typename T> requires IsComponentImpl<T>
     std::unordered_multimap<ComponentType, T*> GameObject::GetComponentsInParent() const
     {
         std::unordered_multimap<ComponentType, T*> components;
@@ -104,7 +104,7 @@ namespace dae
     /// \brief Adds a component class of type componentType to the GameObject. 
     /// \tparam T 
     /// \return 
-    template <typename T, typename... Args>
+    template <typename T, typename... Args> requires IsComponentImpl<T>
     T* GameObject::AddComponent(Args&&... args)
     {
         auto componentPtr = std::make_unique<T>(std::forward<Args>(args)...);
