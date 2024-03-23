@@ -61,6 +61,7 @@ namespace dae
         auto GetChildAt(int index) const -> GameObject*;
 
         auto RemoveComponent(const BaseComponent* componentPtr) -> bool;
+        int RemoveComponents(ComponentFamily familyType);
         
         auto HasComponent(ComponentFamily familyType) const -> bool;
 

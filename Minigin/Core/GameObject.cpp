@@ -137,7 +137,7 @@ namespace dae
     }
 
     int GameObject::RemoveComponents(ComponentFamily familyType)
-{
+    {
     int count = 0;
     for (auto it = m_componentMap.begin(); it != m_componentMap.end();)
     {
@@ -152,7 +152,7 @@ namespace dae
         }
     }
     return count;
-}
+    }
 
     bool GameObject::HasComponent(ComponentFamily familyType) const
     {
