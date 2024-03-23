@@ -1,11 +1,11 @@
 #pragma once
 
 // Project includes
-#include "BaseComponent.h"
+#include "TestComponent.h"
 
 namespace dae
 {
-    class Test1Component : public BaseComponent
+    class Test1Component : public TestComponent
     {
     public:
         Test1Component() = default;
@@ -16,7 +16,6 @@ namespace dae
         Test1Component& operator=(const Test1Component& other) = delete;
         Test1Component& operator=(Test1Component&& other)      = delete;
 
-        virtual ComponentFamily GetFamily() const override { return ComponentFamily::Test; }
-        virtual ComponentType GetType() const override { return ComponentType::Test1; }
+        void Test() const override { }
     };
 }

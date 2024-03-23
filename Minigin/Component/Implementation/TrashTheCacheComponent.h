@@ -16,7 +16,6 @@ namespace dae
         TrashTheCacheComponent& operator=(const TrashTheCacheComponent& other) = delete;
         TrashTheCacheComponent& operator=(TrashTheCacheComponent&& other)      = delete;
 
-        virtual ComponentType GetType() const override { return ComponentType::TrashTheCache; }
         virtual void RenderUI() const override;
     };
 }

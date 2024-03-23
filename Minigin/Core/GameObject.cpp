@@ -122,17 +122,7 @@ namespace dae
     {
         m_children.erase(std::ranges::remove(m_children, childPtr).begin(), m_children.end());
     }
-
-    bool GameObject::RemoveComponent(const ComponentType componentType)
-    {
-        if (m_componentMap.contains(componentType))
-        {
-            m_componentMap.erase(componentType);
-            return true;
-        }
-        return false;
-    }
-
+    
     bool GameObject::RemoveComponent(const BaseComponent* componentPtr)
     {
         for (auto it = m_componentMap.begin(); it != m_componentMap.end(); ++it)
@@ -169,23 +159,6 @@ namespace dae
         return std::ranges::any_of(m_componentMap | std::views::values, [familyType](const auto& value) { return value->GetFamily() == familyType; });
     }
 
-    bool GameObject::HasComponent(ComponentType componentType) const
-    {
-        return m_componentMap.contains(componentType);
-    }
-
-    /// \brief Gets a reference to a component of type T on the same GameObject as the component specified.
-    /// \param componentType 
-    /// \return 
-    BaseComponent* GameObject::GetComponent(ComponentType componentType) const
-    {
-        if (m_componentMap.contains(componentType))
-        {
-            return m_componentMap.at(componentType).get();
-        }
-        return nullptr;
-    }
-
     /// \brief Gets references to all components of type T on the same GameObject as the component specified.
     /// \param familyType 
     /// \return 
@@ -214,25 +187,6 @@ namespace dae
         return components;
     }
 
-    /// \brief Gets a reference to a component of type T on the same GameObject as the component specified, or any child of the GameObject.
-    /// \param componentType 
-    /// \return 
-    BaseComponent* GameObject::GetComponentInChildren(ComponentType componentType) const
-    {
-        if (HasComponent(componentType))
-        {
-            return GetComponent(componentType);
-        }
-        for (const auto& child : m_children)
-        {
-            if (const auto componentPtr = child->GetComponentInChildren(componentType))
-            {
-                return componentPtr;
-            }
-        }
-        return nullptr;
-    }
-
     /// \brief Gets references to all components of type T on the same GameObject as the component specified, and any child of the GameObject.
     /// \param familyType 
     /// \return 
@@ -257,27 +211,6 @@ namespace dae
         return components;
     }
 
-    /// \brief Gets references to all components of type T on the same GameObject as the component specified, and any child of the GameObject.
-    /// \param componentType 
-    /// \return 
-    ComponentMultimap GameObject::GetComponentsInChildren(
-        ComponentType componentType) const
-    {
-        ComponentMultimap components{};
-        if (m_componentMap.contains(componentType))
-        {
-            components.emplace(componentType, m_componentMap.at(componentType).get());
-        }
-        for (const auto& child : m_children)
-        {
-            for (const auto& [key, value] : child->GetComponentsInChildren(componentType))
-            {
-                components.emplace(key, value);
-            }
-        }
-        return components;
-        
-    }
 
     /// \brief Gets references to all components of type T on the same GameObject as the component specified, and any child of the GameObject.
     /// \return
@@ -298,22 +231,6 @@ namespace dae
         return components;
     }
 
-    /// \brief Gets a reference to a component of type T on the same GameObject as the component specified, or any parent of the GameObject.
-    /// \param componentType 
-    /// \return 
-    BaseComponent* GameObject::GetComponentInParent(ComponentType componentType) const
-    {
-        if (HasComponent(componentType))
-        {
-            return GetComponent(componentType);
-        }
-        if (m_parentPtr)
-        {
-            return m_parentPtr->GetComponentInParent(componentType);
-        }
-        return nullptr;
-    }
-
     /// \brief Gets references to all components of type T on the same GameObject as the component specified, and any parent of the GameObject.
     /// \param familyType 
     /// \return 
@@ -331,27 +248,6 @@ namespace dae
         if (m_parentPtr)
         {
             for (const auto& [key, value] : m_parentPtr->GetComponentsInParent(familyType))
-            {
-                components.emplace(key, value);
-            }
-        }
-        return components;
-    }
-
-    /// \brief Gets references to all components of type T on the same GameObject as the component specified, and any parent of the GameObject.
-    /// \param componentType 
-    /// \return 
-    ComponentMultimap GameObject::GetComponentsInParent(
-        ComponentType componentType) const
-    {
-        ComponentMultimap components{};
-        if (HasComponent(componentType))
-        {
-            components.emplace(componentType, GetComponent(componentType));
-        }
-        if (m_parentPtr)
-        {
-            for (const auto& [key, value] : m_parentPtr->GetComponentsInParent(componentType))
             {
                 components.emplace(key, value);
             }

@@ -13,18 +13,6 @@ namespace dae
         UI,
         Test
     };
-
-    enum class ComponentType
-    {
-        FPS,
-        Rotator,
-        Text,
-        Texture,
-        TrashTheCache,
-        Movement,
-        Test1,
-        Test2,
-    };
     
     class BaseComponent
     {
@@ -42,7 +30,6 @@ namespace dae
         virtual void Update() { }
 
         virtual ComponentFamily GetFamily() const = 0;
-        virtual ComponentType GetType() const = 0;
         
         GameObject* GetOwner() const { return m_ownerPtr; }
         

@@ -28,7 +28,7 @@ namespace dae
             GameObject go;
             go.AddComponent<Test1Component>();
             assert(go.HasComponent(ComponentFamily::Test));
-            assert(go.HasComponent(ComponentType::Test1));
+            assert(go.HasComponent<Test1Component>());
         }
         {
             // Test Description: Add a component (Test1) to a game object.
@@ -39,7 +39,6 @@ namespace dae
             GameObject go;
             go.AddComponent<Test1Component>();
             assert(go.GetComponent<Test1Component>() != nullptr);
-            assert(go.GetComponent(ComponentType::Test1) != nullptr);
             assert(go.GetComponents().size()                      == 1);
             assert(go.GetComponents(ComponentFamily::Test).size() == 1);
         }
@@ -67,7 +66,6 @@ namespace dae
             assert(go1.GetComponentsInChildren().size()                      == 2);
             assert(go1.GetComponentsInChildren<Test1Component>().size()      == 2);
             assert(go1.GetComponentsInChildren(ComponentFamily::Test).size() == 2);
-            assert(go1.GetComponentsInChildren(ComponentType::Test1).size()  == 2);
         }
         {
             // Test Description: Add 1 component (Test1) to game object 1 and 1 component (Test2) to game object 2 and set game object 2 as a child of game object 1.
@@ -86,8 +84,8 @@ namespace dae
             assert(go1.GetComponentsInChildren<Test1Component>().size()      == 1);
             assert(go1.GetComponentsInChildren<Test2Component>().size()      == 1);
             assert(go1.GetComponentsInChildren(ComponentFamily::Test).size() == 2);
-            assert(go1.GetComponentsInChildren(ComponentType::Test1).size()  == 1);
-            assert(go1.GetComponentsInChildren(ComponentType::Test2).size()  == 1);
+            assert(go1.GetComponentsInChildren<Test1Component>().size()      == 1);
+            assert(go1.GetComponentsInChildren<Test2Component>().size()      == 1);
         }
         {
             // Test Description: Add 2 components (Test1, Test2) to game object 2 and set game object 2 as a child of game object 1.
@@ -106,8 +104,8 @@ namespace dae
             assert(go1.GetComponentsInChildren<Test1Component>().size()      == 1);
             assert(go1.GetComponentsInChildren<Test2Component>().size()      == 1);
             assert(go1.GetComponentsInChildren(ComponentFamily::Test).size() == 2);
-            assert(go1.GetComponentsInChildren(ComponentType::Test1).size()  == 1);
-            assert(go1.GetComponentsInChildren(ComponentType::Test2).size()  == 1);
+            assert(go1.GetComponentsInChildren<Test1Component>().size()      == 1);
+            assert(go1.GetComponentsInChildren<Test2Component>().size()      == 1);
         }
         {
             // Test Description: Empty game object.
@@ -116,10 +114,8 @@ namespace dae
             // Assert 3: The game object has no component in children - template version.
             // Assert 4: The game object has no component in children - type version.
             GameObject go;
-            assert(go.GetComponentInParent<Test1Component>() == nullptr);
-            assert(go.GetComponentInParent(ComponentType::Test1) == nullptr);
+            assert(go.GetComponentInParent<Test1Component>()   == nullptr);
             assert(go.GetComponentInChildren<Test1Component>() == nullptr);
-            assert(go.GetComponentInChildren(ComponentType::Test1) == nullptr);
         }
         {
             // Test Description: Empty game object.
@@ -135,11 +131,9 @@ namespace dae
             assert(go.GetComponentsInParent().empty());
             assert(go.GetComponentsInParent<Test1Component>().empty());
             assert(go.GetComponentsInParent(ComponentFamily::Test).empty());
-            assert(go.GetComponentsInParent(ComponentType::Test1).empty());
             assert(go.GetComponentsInChildren().empty());
             assert(go.GetComponentsInChildren<Test1Component>().empty());
             assert(go.GetComponentsInChildren(ComponentFamily::Test).empty());
-            assert(go.GetComponentsInChildren(ComponentType::Test1).empty());
         }
         {
             // Test Description: Add the same component twice to a game object.
@@ -155,7 +149,7 @@ namespace dae
             GameObject go;
             go.AddComponent<Test1Component>();
             go.AddComponent<Test2Component>();
-            go.RemoveComponent(ComponentType::Test1);
+            go.RemoveComponent<Test1Component>();
             assert(go.GetComponents().size() == 1);
         }
         {
@@ -173,7 +167,8 @@ namespace dae
             GameObject go;
             go.AddComponent<Test1Component>();
             go.AddComponent<Test2Component>();
-            const int count = go.RemoveComponents(ComponentFamily::Test);
+            // const int count = go.RemoveComponents(ComponentFamily::Test);
+            const int count = go.RemoveComponents<BaseComponent>();
             assert(go.GetComponents().empty());
             assert(count == 2);
         }
@@ -278,6 +273,13 @@ namespace dae
             scene->AddGameObject();
             assert(scene->GetGameObjectCount() == 2);
             scene->RemoveAll();
+            assert(scene->GetGameObjectCount() == 0);
+        }
+        {
+            const auto scene = SceneManager::GetInstance().CreateScene("Test");
+            const auto go = scene->AddGameObject();
+            go->Destroy();
+            scene->LateUpdate();
             assert(scene->GetGameObjectCount() == 0);
         }
     }

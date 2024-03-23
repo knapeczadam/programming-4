@@ -17,7 +17,5 @@ namespace dae
         FPSComponent& operator=(FPSComponent&& other)      = delete;
 
         virtual void Update() override;
-        
-        virtual ComponentType GetType() const override { return ComponentType::FPS; }
     };
 }

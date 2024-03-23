@@ -16,8 +16,6 @@ namespace dae
         RotatorComponent& operator=(const RotatorComponent& other) = delete;
         RotatorComponent& operator=(RotatorComponent&& other) = delete;
 
-        ComponentType GetType() const override { return ComponentType::Rotator; }
-
         void Update() override;
 
     private:

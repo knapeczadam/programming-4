@@ -199,6 +199,7 @@
     <ClInclude Include="Engine\GameTime.h" />
     <ClInclude Include="Misc\TrashTheCacheManager.h" />
     <ClInclude Include="Test\Test2Component.h" />
+    <ClInclude Include="Test\TestComponent.h" />
     <ClInclude Include="Test\TestManager.h" />
     <ClInclude Include="Utility\Font.h" />
     <ClInclude Include="Utility\Singleton.h" />

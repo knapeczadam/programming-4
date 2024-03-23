@@ -25,7 +25,6 @@ namespace dae
         TextureComponent& operator=(TextureComponent&& other)      = delete;
 
         virtual void Render() const override;
-        virtual ComponentType GetType() const override { return ComponentType::Texture; }
         
         void SetTexture(const std::string& filename);
         

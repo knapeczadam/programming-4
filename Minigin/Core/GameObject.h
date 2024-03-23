@@ -5,8 +5,11 @@
 #include "Transform.h"
 
 // Standard includes
+#include <algorithm>
 #include <memory>
+#include <ranges>
 #include <string>
+#include <typeindex>
 #include <unordered_map>
 
 namespace dae
@@ -16,12 +19,18 @@ namespace dae
     enum class ComponentFamily;
 
     // Concepts
-    template <typename T>
-    concept IsComponentImpl = std::is_base_of_v<BaseComponent, T> and std::is_constructible_v<T>;
+    template <class T>
+    concept IsComponentType = std::is_base_of_v<BaseComponent, T> and std::is_constructible_v<T>;
+
+    template <class T>
+    concept IsComponentFamilyType = std::is_base_of_v<BaseComponent, T> and std::is_abstract_v<T>;
 
     // Type aliases
-    using ComponentMap = std::unordered_map<ComponentType, BaseComponent*>;
-    using ComponentMultimap = std::unordered_multimap<ComponentType, BaseComponent*>;
+    using ComponentMap = std::unordered_map<std::type_index, BaseComponent*>;
+    using ComponentMultimap = std::unordered_multimap<std::type_index, BaseComponent*>;
+    
+    template <class T>
+    using T_ComponentMultimap = std::unordered_multimap<std::type_index, T*>;
 
     class GameObject final
     {
@@ -35,63 +44,76 @@ namespace dae
         GameObject& operator=(const GameObject& other) = delete;
         GameObject& operator=(GameObject&& other)      = delete;
 
-        std::string GetName() const { return m_name; }
+        auto GetName() const -> std::string { return m_name; }
 
         void Update();
         void UpdateWorldPosition();
         void LateUpdate();
 
-        bool IsAlive() const { return m_alive; }
+        auto IsAlive() const -> bool { return m_alive; }
         void Destroy() { m_alive = false; }
 
-        GameObject* GetParent() const { return m_parentPtr; }
-        bool SetParent(GameObject* parentPtr, bool keepWorldPosition = true);
-        bool HasChild(GameObject* childPtr) const;
+        auto GetParent() const -> GameObject* { return m_parentPtr; }
+        auto SetParent(GameObject* parentPtr, bool keepWorldPosition = true) -> bool;
+        auto HasChild(GameObject* childPtr) const -> bool;
 
-        int GetChildCount() const;
-        GameObject* GetChildAt(int index) const;
+        auto GetChildCount() const -> int;
+        auto GetChildAt(int index) const -> GameObject*;
 
-        bool RemoveComponent(ComponentType componentType);
-        bool RemoveComponent(const BaseComponent* componentPtr);
-        int RemoveComponents(ComponentFamily familyType);
+        auto RemoveComponent(const BaseComponent* componentPtr) -> bool;
         
-        bool HasComponent(ComponentFamily familyType) const;
-        bool HasComponent(ComponentType componentType) const;
+        auto HasComponent(ComponentFamily familyType) const -> bool;
 
-        BaseComponent* GetComponent(ComponentType componentType) const;
-        ComponentMap GetComponents(ComponentFamily familyType) const;
-        ComponentMap GetComponents() const;
+        auto GetComponents(ComponentFamily familyType) const -> ComponentMap;
+        auto GetComponents() const -> ComponentMap;
 
-        BaseComponent* GetComponentInChildren(ComponentType componentType) const;
-        ComponentMultimap GetComponentsInChildren(ComponentFamily familyType) const;
-        ComponentMultimap GetComponentsInChildren(ComponentType componentType) const;
-        ComponentMultimap GetComponentsInChildren() const;
+        auto GetComponentsInChildren(ComponentFamily familyType) const -> ComponentMultimap;
+        auto GetComponentsInChildren() const -> ComponentMultimap;
 
-        BaseComponent* GetComponentInParent(ComponentType componentType) const;
-        ComponentMultimap GetComponentsInParent(ComponentFamily familyType) const;
-        ComponentMultimap GetComponentsInParent(ComponentType componentType) const;
-        ComponentMultimap GetComponentsInParent() const;
+        auto GetComponentsInParent(ComponentFamily familyType) const -> ComponentMultimap;
+        auto GetComponentsInParent() const -> ComponentMultimap;
 
-        template <typename T, typename... Args> requires IsComponentImpl<T>
-        T* AddComponent(Args&&... args);
+        template <class T, typename... Args> requires IsComponentType<T>
+        auto AddComponent(Args&&... args) -> T*;
 
-        template <typename T> requires IsComponentImpl<T>
-        T* GetComponent() const;
+        template <class T> requires IsComponentType<T>
+        auto GetComponent() const -> T*;
 
-        template <typename T> requires IsComponentImpl<T>
-        T* GetComponentInChildren() const;
+        template <class T> requires IsComponentFamilyType<T>
+        auto GetComponents() const -> T_ComponentMultimap<T>;
 
-        template <typename T> requires IsComponentImpl<T>
-        std::unordered_multimap<ComponentType, T*> GetComponentsInChildren() const;
+        template <class T> requires IsComponentType<T>
+        auto GetComponentInChildren() const -> T*;
 
-        template <typename T> requires IsComponentImpl<T>
-        T* GetComponentInParent() const;
+        template <class T> requires IsComponentType<T>
+        auto GetComponentsInChildren() const -> T_ComponentMultimap<T>;
 
-        template <typename T> requires IsComponentImpl<T>
-        std::unordered_multimap<ComponentType, T*> GetComponentsInParent() const;
+        template <class T> requires IsComponentFamilyType<T>
+        auto GetComponentsInChildren() const -> T_ComponentMultimap<T>;
+
+        template <class T> requires IsComponentType<T>
+        auto GetComponentInParent() const -> T*;
+
+        template <class T> requires IsComponentType<T>
+        auto GetComponentsInParent() const -> T_ComponentMultimap<T>;
+
+        template <class T> requires IsComponentFamilyType<T>
+        auto GetComponentsInParent() const -> T_ComponentMultimap<T>;
+
+        template <class T> requires IsComponentType<T>
+        auto RemoveComponent() -> bool;
+
+        template <class T> requires IsComponentFamilyType<T>
+        auto RemoveComponents() -> int;
+
+        template <class T> requires IsComponentType<T>
+        auto HasComponent() const -> bool;
+
+        template <class T> requires IsComponentFamilyType<T>
+        auto HasComponent() const -> bool;
 
         const glm::vec3& GetWorldPosition();
-        [[nodiscard]] const glm::vec3& GetLocalPosition() const;
+        const glm::vec3& GetLocalPosition() const;
 
         void SetLocalPosition(float x, float y);
         void SetLocalPosition(float x, float y, float z);
@@ -109,7 +131,7 @@ namespace dae
         bool m_alive          = true;
 
         // TODO: switch to map?
-        std::unordered_map<ComponentType, std::unique_ptr<BaseComponent>> m_componentMap = {};
+        std::unordered_map<std::type_index, std::unique_ptr<BaseComponent>> m_componentMap = {};
 
         GameObject* m_parentPtr = nullptr;
         std::vector<GameObject*> m_children = {};
