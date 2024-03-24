@@ -32,6 +32,7 @@ namespace dae
         GameObject* m_GameObjectPtr = nullptr;
     };
 
+    // MoveCommand
     class MoveCommand final : public GameObjectCommand
     {
     public:
@@ -52,5 +53,36 @@ namespace dae
     private:
         glm::vec3 m_Direction {1.0f, 0.0f, 0.0f};
         float m_Speed{ 1.0f };
+    };
+
+    // HealthCommand
+    class DamageCommand final : public GameObjectCommand
+    {
+    public:
+        DamageCommand(GameObject* gameObjectPtr, int damage = 1)
+            : GameObjectCommand(gameObjectPtr)
+            , m_Damage(damage)
+        {
+        }
+        void Execute() override;
+
+    private:
+        int m_Damage = 1;
+    };
+
+    // ScoreCommand
+    class ScoreCommand final : public GameObjectCommand
+    {
+    public:
+        ScoreCommand(GameObject* gameObjectPtr, int score)
+            : GameObjectCommand(gameObjectPtr)
+            , m_Score(score)
+        {
+        }
+
+        void Execute() override;
+
+    private:
+        int m_Score = 0;
     };
 }

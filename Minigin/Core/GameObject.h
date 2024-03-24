@@ -15,7 +15,6 @@
 namespace dae
 {
     // Forward declarations
-    enum class ComponentType;
     enum class ComponentFamily;
 
     // Concepts
@@ -61,7 +60,7 @@ namespace dae
         auto GetChildAt(int index) const -> GameObject*;
 
         auto RemoveComponent(const BaseComponent* componentPtr) -> bool;
-        int RemoveComponents(ComponentFamily familyType);
+        auto RemoveComponents(ComponentFamily familyType) -> int;
         
         auto HasComponent(ComponentFamily familyType) const -> bool;
 

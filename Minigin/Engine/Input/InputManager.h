@@ -42,10 +42,19 @@ namespace dae
         K_w = SDLK_w,
         K_s = SDLK_s,
 
+        K_c = SDLK_c,
+        K_z = SDLK_z,
+        K_x = SDLK_x,
+
         C_LEFT = XINPUT_GAMEPAD_DPAD_LEFT,
         C_RIGHT = XINPUT_GAMEPAD_DPAD_RIGHT,
         C_UP = XINPUT_GAMEPAD_DPAD_UP,
-        C_DOWN = XINPUT_GAMEPAD_DPAD_DOWN
+        C_DOWN = XINPUT_GAMEPAD_DPAD_DOWN,
+
+        C_A = XINPUT_GAMEPAD_A,
+        C_B = XINPUT_GAMEPAD_B,
+        C_X = XINPUT_GAMEPAD_X,
+        C_Y = XINPUT_GAMEPAD_Y
     };
     
     // Forward declarations

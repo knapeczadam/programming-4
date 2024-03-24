@@ -28,6 +28,7 @@ namespace dae
         virtual void Update() override;
         virtual void RenderUI() const override;
 
+        auto GetText() const -> const std::string& { return m_text; }
         void SetText(const std::string& text);
         void SetFont(Font* font);
         void SetFont(const std::string& font, unsigned int size);

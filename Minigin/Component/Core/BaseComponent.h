@@ -8,6 +8,7 @@ namespace dae
     enum class ComponentFamily
     {
         Audio,
+        Custom,
         Physics,
         Rendering,
         UI,

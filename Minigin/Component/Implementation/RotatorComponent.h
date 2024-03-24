@@ -1,11 +1,11 @@
 ﻿#pragma once
 
 // Project includes
-#include "PhysicsComponent.h"
+#include "CustomComponent.h"
 
 namespace dae
 {
-    class RotatorComponent final : public PhysicsComponent
+    class RotatorComponent final : public CustomComponent
     {
     public:
         RotatorComponent() = default;
