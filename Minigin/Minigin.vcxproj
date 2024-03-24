@@ -58,25 +58,35 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\sdl.props" />
-    <Import Project="..\vld.props" />
-    <Import Project="..\imgui.props" />
+    <Import Project="..\Props\sdl.props" />
+    <Import Project="..\Props\vld.props" />
+    <Import Project="..\Props\imgui.props" />
+    <Import Project="..\Props\steam.props" />
+    <Import Project="..\Props\include_dirs.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\sdl.props" />
-    <Import Project="..\imgui.props" />
+    <Import Project="..\Props\sdl.props" />
+    <Import Project="..\Props\vld.props" />
+    <Import Project="..\Props\imgui.props" />
+    <Import Project="..\Props\steam.props" />
+    <Import Project="..\Props\include_dirs.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\sdl.props" />
-    <Import Project="..\vld.props" />
-    <Import Project="..\imgui.props" />
+    <Import Project="..\Props\sdl.props" />
+    <Import Project="..\Props\vld.props" />
+    <Import Project="..\Props\imgui.props" />
+    <Import Project="..\Props\steam.props" />
+    <Import Project="..\Props\include_dirs.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\sdl.props" />
-    <Import Project="..\imgui.props" />
+    <Import Project="..\Props\sdl.props" />
+    <Import Project="..\Props\vld.props" />
+    <Import Project="..\Props\imgui.props" />
+    <Import Project="..\Props\steam.props" />
+    <Import Project="..\Props\include_dirs.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -103,7 +113,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Component;$(ProjectDir)Component\Core;$(ProjectDir)Component\Family;$(ProjectDir)Component\Implementation;$(ProjectDir)Core;$(ProjectDir)Engine;$(ProjectDir)Engine\Input;$(ProjectDir)Game;$(ProjectDir)Misc;$(ProjectDir)Test;$(ProjectDir)Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -121,7 +131,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Component;$(ProjectDir)Component\Core;$(ProjectDir)Component\Family;$(ProjectDir)Component\Implementation;$(ProjectDir)Core;$(ProjectDir)Engine;$(ProjectDir)Engine\Input;$(ProjectDir)Game;$(ProjectDir)Misc;$(ProjectDir)Test;$(ProjectDir)Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -141,7 +151,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Component;$(ProjectDir)Component\Core;$(ProjectDir)Component\Family;$(ProjectDir)Component\Implementation;$(ProjectDir)Core;$(ProjectDir)Engine;$(ProjectDir)Engine\Input;$(ProjectDir)Game;$(ProjectDir)Misc;$(ProjectDir)Test;$(ProjectDir)Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -163,7 +173,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Component;$(ProjectDir)Component\Core;$(ProjectDir)Component\Family;$(ProjectDir)Component\Implementation;$(ProjectDir)Core;$(ProjectDir)Engine;$(ProjectDir)Engine\Input;$(ProjectDir)Game;$(ProjectDir)Misc;$(ProjectDir)Test;$(ProjectDir)Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
