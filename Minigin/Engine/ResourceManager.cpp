@@ -49,15 +49,28 @@ namespace dae
     {
         // Check if font is already present
         const auto fullPath = m_dataPath + file;
-        const auto it = m_fonts.find(fullPath);
-        if (it != m_fonts.cend() && it->second.first == size)
+        const auto range = m_fonts.equal_range(fullPath);
+        for (auto it = range.first; it != range.second; ++it)
         {
-            return it->second.second.get();
+            if (it->second.first == size)
+            {
+                return it->second.second.get();
+            }
         }
 
         // Load the font and cache it
         auto font = std::make_unique<Font>(fullPath, size);
         m_fonts.emplace(fullPath, std::make_pair(size, std::move(font)));
-        return m_fonts[fullPath].second.get();
+
+        // Return the newly loaded font
+        const auto rangeNew = m_fonts.equal_range(fullPath);
+        for (auto it = rangeNew.first; it != rangeNew.second; ++it)
+        {
+            if (it->second.first == size)
+            {
+                return it->second.second.get();
+            }
+        }
+        return nullptr;
     }
 }

@@ -29,6 +29,6 @@ namespace dae
         std::string m_dataPath;
 
         std::unordered_map<std::string, std::unique_ptr<Texture2D>> m_textures{};
-        std::unordered_map<std::string, std::pair<unsigned int, std::unique_ptr<Font>>> m_fonts{};
+        std::unordered_multimap<std::string, std::pair<unsigned int, std::unique_ptr<Font>>> m_fonts{};
     };
 }
