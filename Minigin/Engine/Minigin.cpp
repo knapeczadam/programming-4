@@ -22,6 +22,9 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 
+// Steam includes
+#include <steam_api_common.h>
+
 SDL_Window* g_window{};
 
 void PrintSDLVersion()
@@ -131,6 +134,8 @@ namespace dae
             sceneManager.Update();
             sceneManager.LateUpdate();
             renderer.Render();
+
+            SteamAPI_RunCallbacks(); 
 
             const auto sleepTime = currentTime + milliseconds(static_cast<long long>(GameTime::GetInstance().msPerFrame)) - high_resolution_clock::now();
 

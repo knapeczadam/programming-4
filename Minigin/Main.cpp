@@ -7,8 +7,9 @@
 #endif
 
 // Project includes
+#include "Achievement.h"
 #include "FPSComponent.h"
-#include "GameObjectCommand.h"
+#include "GameActorCommand.h"
 #include "HealthComponent.h"
 #include "HealthTextComponent.h"
 #include "InputManager.h"
@@ -24,11 +25,17 @@
 
 // Standard includes
 #include <cassert>
+#include <iostream>
 #include <sstream>
 
 // SDL includes
 #include <SDL.h>
 
+// Steam includes
+#pragma warning (push)
+#pragma warning (disable: 4996)
+#include "steam_api.h"
+#pragma warning (pop)
 
 void load()
 {
@@ -132,12 +139,12 @@ void load()
     InputManager::GetInstance().BindCommand(InputType::Controller, InputState::Down, Input::C_DOWN, std::move(moveDownCommand3));
     
     // Damage
-    auto damageCommand1 = std::make_unique<DamageCommand>(go);
+    auto damageCommand1 = std::make_unique<DamageCommand>(healthComp);
     InputManager::GetInstance().BindCommand(InputType::Controller, InputState::Down, Input::C_X, std::move(damageCommand1));
     
     // Scores
-    auto scoreCommand1 = std::make_unique<ScoreCommand>(go, 10);
-    auto scoreCommand2 = std::make_unique<ScoreCommand>(go, 100);
+    auto scoreCommand1 = std::make_unique<ScoreCommand>(scoreComp, 10);
+    auto scoreCommand2 = std::make_unique<ScoreCommand>(scoreComp, 100);
     
     InputManager::GetInstance().BindCommand(InputType::Controller, InputState::Down, Input::C_A, std::move(scoreCommand1));
     InputManager::GetInstance().BindCommand(InputType::Controller, InputState::Down, Input::C_B, std::move(scoreCommand2));
@@ -165,23 +172,49 @@ void load()
     InputManager::GetInstance().BindCommand(InputType::Keyboard, InputState::Down, Input::K_s, std::move(moveDownCommand2));
 
     // Damage
-    auto damageCommand2 = std::make_unique<DamageCommand>(go);
+    auto damageCommand2 = std::make_unique<DamageCommand>(healthComp);
     InputManager::GetInstance().BindCommand(InputType::Keyboard, InputState::Down, Input::K_c, std::move(damageCommand2));
 
     // Scores
-    auto scoreCommand3 = std::make_unique<ScoreCommand>(go, 10);
-    auto scoreCommand4 = std::make_unique<ScoreCommand>(go, 100);
+    auto scoreCommand3 = std::make_unique<ScoreCommand>(scoreComp, 10);
+    auto scoreCommand4 = std::make_unique<ScoreCommand>(scoreComp, 100);
     
     InputManager::GetInstance().BindCommand(InputType::Keyboard, InputState::Down, Input::K_z, std::move(scoreCommand3));
     InputManager::GetInstance().BindCommand(InputType::Keyboard, InputState::Down, Input::K_x, std::move(scoreCommand4));
+
+	// Reset Achievements
+	auto resetAchievementsCommand = std::make_unique<ResetAchievementsCommand>(g_SteamAchievements);
+	InputManager::GetInstance().BindCommand(InputType::Keyboard, InputState::Down, Input::K_r, std::move(resetAchievementsCommand));
 }
 
 int main(int, char*[])
 {
     using namespace dae;
-    
+
+	// ------------------------
+	// Steam - Initialize
+	// ------------------------
+	if (!SteamAPI_Init())
+	{
+		std::cerr << "Fatal Error - Steam must be running to play this game (SteamAPI_Init() failed)." << std::endl;
+		return 1;
+	}
+	std::cout << "Successfully initialized steam." << '\n';
+	g_SteamAchievements = new CSteamAchievements(g_Achievements, 1);
+
+	// ------------------------
+	// Minigin
+	// ------------------------
     Minigin engine("../Data/");
     TestManager::GetInstance().RunAllTests();
     engine.Run(load);
+
+	// ------------------------
+	// Steam - Cleanup
+	// ------------------------
+    SteamAPI_Shutdown();
+    // Delete the SteamAchievements object
+	delete g_SteamAchievements;
+	
     return 0;
 }

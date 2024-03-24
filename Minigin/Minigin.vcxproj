@@ -201,11 +201,12 @@
     <ClInclude Include="Component\Implementation\TextComponent.h" />
     <ClInclude Include="Component\Implementation\TextureComponent.h" />
     <ClInclude Include="Component\Implementation\TrashTheCacheComponent.h" />
+    <ClInclude Include="Core\GameActor.h" />
     <ClInclude Include="Core\GameObject.h" />
     <ClInclude Include="Core\GameObject.hpp" />
     <ClInclude Include="Core\Observer.h" />
     <ClInclude Include="Engine\Input\Command.h" />
-    <ClInclude Include="Engine\Input\GameObjectCommand.h" />
+    <ClInclude Include="Engine\Input\GameActorCommand.h" />
     <ClInclude Include="Engine\Input\InputManager.h" />
     <ClInclude Include="Engine\Minigin.h" />
     <ClInclude Include="Engine\Renderer.h" />
@@ -214,6 +215,7 @@
     <ClInclude Include="Engine\SceneManager.h" />
     <ClInclude Include="Engine\GameTime.h" />
     <ClInclude Include="Misc\TrashTheCacheManager.h" />
+    <ClInclude Include="Steam\Achievement.h" />
     <ClInclude Include="Test\Test2Component.h" />
     <ClInclude Include="Test\TestComponent.h" />
     <ClInclude Include="Test\TestManager.h" />
@@ -613,7 +615,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
-    <ClCompile Include="Engine\Input\GameObjectCommand.cpp" />
+    <ClCompile Include="Engine\Input\GameActorCommand.cpp" />
     <ClCompile Include="Engine\Input\InputManager.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -769,6 +771,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="Steam\Achievement.cpp" />
     <ClCompile Include="Test\TestManager.cpp" />
     <ClCompile Include="Test\Test1Component.h" />
     <ClCompile Include="Test\TestXInput.cpp">

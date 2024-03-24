@@ -1,7 +1,7 @@
 #pragma once
 
 // Project includes
-#include "GameObjectCommand.h"
+#include "GameActorCommand.h"
 #include "Singleton.h"
 
 // Standard includes
@@ -42,6 +42,7 @@ namespace dae
         K_w = SDLK_w,
         K_s = SDLK_s,
 
+        K_r = SDLK_r,
         K_c = SDLK_c,
         K_z = SDLK_z,
         K_x = SDLK_x,
@@ -58,19 +59,19 @@ namespace dae
     };
     
     // Forward declarations
-    class GameObjectCommand;
+    class GameActorCommand;
     
     class InputManager final : public Singleton<InputManager>
     {
     public:
         bool ProcessInput();
-        void BindCommand(InputType inputType, InputState inputState, int input, std::unique_ptr<GameObjectCommand> command);
+        void BindCommand(InputType inputType, InputState inputState, int input, std::unique_ptr<GameActorCommand> command);
         bool UnbindCommand(InputType inputType, InputState inputState, int input);
         
     private:
         friend class Singleton<InputManager>;
         InputManager() = default;
         
-        std::unordered_multimap<InputType, std::tuple<InputState, int, std::unique_ptr<GameObjectCommand>>> m_Commands;
+        std::unordered_multimap<InputType, std::tuple<InputState, int, std::unique_ptr<GameActorCommand>>> m_Commands;
     };
 }

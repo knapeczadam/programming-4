@@ -12,8 +12,10 @@ namespace dae
     {
         if (event == "HealthChanged")
         {
+            const auto healthComp = static_cast<HealthComponent*>(subject);
+            
             std::stringstream ss;
-            ss << "# lives: " << static_cast<HealthComponent*>(subject)->GetHealth();
+            ss << "# lives: " << healthComp->GetHealth();
             SetText(ss.str());
         }
     }

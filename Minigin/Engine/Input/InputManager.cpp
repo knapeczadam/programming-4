@@ -30,6 +30,7 @@ namespace dae
         ZeroMemory(&currentState, sizeof(XINPUT_STATE));
         XInputGetState(controllerIndex, &currentState);
 
+        // TODO: Implement a better way to handle controller input
         const auto buttonChanges = currentState.Gamepad.wButtons ^ previousState.Gamepad.wButtons;
         const auto buttonsPressedThisFrame = buttonChanges & currentState.Gamepad.wButtons;
         const auto buttonsReleasedThisFrame = buttonChanges & (~currentState.Gamepad.wButtons);
@@ -138,7 +139,7 @@ namespace dae
         return true;
     }
 
-    void InputManager::BindCommand(InputType inputType, InputState inputState, int input, std::unique_ptr<GameObjectCommand> command)
+    void InputManager::BindCommand(InputType inputType, InputState inputState, int input, std::unique_ptr<GameActorCommand> command)
     {
         m_Commands.emplace(inputType, std::make_tuple(inputState, input, std::move(command)));
     }
