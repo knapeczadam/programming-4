@@ -54,9 +54,6 @@
     <ClInclude Include="Engine\Input\Command.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Input\GameObjectCommand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Input\InputManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -123,6 +120,12 @@
     <ClInclude Include="Test\TestManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Input\GameActorCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Steam\Achievement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -179,9 +182,6 @@
     <ClCompile Include="..\3rdParty\imgui\backends\imgui_impl_sdl2.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Input\GameObjectCommand.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Input\InputManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -229,6 +229,12 @@
     </ClCompile>
     <ClCompile Include="Test\Test1Component.h">
       <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Input\GameActorCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Steam\Achievement.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

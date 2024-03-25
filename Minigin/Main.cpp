@@ -206,7 +206,11 @@ int main(int, char*[])
 	// Minigin
 	// ------------------------
     Minigin engine("../Data/");
+	
+#if defined(_DAE_DEBUG)
     TestManager::GetInstance().RunAllTests();
+#endif
+	
     engine.Run(load);
 
 	// ------------------------

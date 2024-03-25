@@ -168,18 +168,15 @@ namespace dae
             go.AddComponent<Test1Component>();
             go.AddComponent<Test2Component>();
             // const int count = go.RemoveComponents(ComponentFamily::Test);
-            const int count = go.RemoveComponents<BaseComponent>();
+            assert(go.RemoveComponents<BaseComponent>() == 2);
             assert(go.GetComponents().empty());
-            assert(count == 2);
         }
         {
             // Test Description: Add 1 component (Test1) to game object 1 and remove it from game object 2.
             // Assert 1: The game object has no components.
             GameObject go1;
             GameObject go2;
-            const auto comp = go1.AddComponent<Test1Component>();
-            const int count = go2.RemoveComponent(comp);
-            assert(count == 0);
+            assert(go2.RemoveComponent(go1.AddComponent<Test1Component>()) == 0);
         }
     }
 

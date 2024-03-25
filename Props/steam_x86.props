@@ -8,11 +8,11 @@
       <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\steamworks\public\steam;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)3rdParty\steamworks\redistributable_bin\win$(PlatformArchitecture);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>steam_api$(PlatformArchitecture).lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)3rdParty\steamworks\redistributable_bin\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>steam_api.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(SolutionDir)3rdParty\steamworks\redistributable_bin\win$(PlatformArchitecture)\*.dll" "$(OutputPath)"  /R /Y</Command>
+      <Command>xcopy "$(SolutionDir)3rdParty\steamworks\redistributable_bin\steam_api.dll" "$(OutputPath)" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup />
