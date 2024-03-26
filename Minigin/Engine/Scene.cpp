@@ -2,6 +2,7 @@
 
 // Project includes
 #include "BaseComponent.h"
+#include "GameObject.h"
 #include "RenderingComponent.h"
 #include "UIComponent.h"
 
@@ -21,6 +22,8 @@ namespace dae
     Scene::Scene(std::string name) : m_name(std::move(name))
     {
     }
+
+    Scene::~Scene() = default;
 
     GameObject* Scene::AddGameObject(const std::string& name)
     {

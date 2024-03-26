@@ -2,11 +2,11 @@
 
 // Project includes
 #include "CustomComponent.h"
-#include "Observer.h"
+#include "IObserver.h"
 
 namespace dae
 {
-    class HealthComponent : public CustomComponent, public Subject
+    class HealthComponent final : public CustomComponent, public Subject
     {
     public:
         HealthComponent() = default;

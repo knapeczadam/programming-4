@@ -2,11 +2,11 @@
 
 // Project includes
 #include "CustomComponent.h"
-#include "Observer.h"
+#include "IObserver.h"
 
 namespace dae
 {
-    class ScoreComponent : public CustomComponent, public Subject
+    class ScoreComponent final : public CustomComponent, public Subject
     {
     public:
         ScoreComponent() = default;

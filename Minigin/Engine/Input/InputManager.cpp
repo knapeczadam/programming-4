@@ -1,160 +1,73 @@
 #include "InputManager.h"
 
-#define WIN32_LEAN_AND_MEAN
+// Project includes
+#include "GameActorCommand.h"
+#include "IInputImpl.h"
+#include "SDLInputImpl.h"
+#include "XInputImpl.h"
 
 // Standard includes
 #include <iostream>
-#include <thread>
-
-// SDL includes
-#include <SDL.h>
-#include <SDL_syswm.h>
-
-// ImGui includes
-#include <backends/imgui_impl_sdl2.h>
-
-#pragma comment(lib, "xinput.lib")
 
 namespace dae
 {
+    class InputManager::InputManagerImpl
+    {
+    public:
+        InputManagerImpl()
+        {
+            m_InputImpls.push_back(std::make_unique<SDLInputImpl>());
+            m_InputImpls.push_back(std::make_unique<XInputImpl>());
+        }
+        
+        bool DoProcessInput(std::vector<GameInputCommand> commands)
+        {
+            for (auto& inputImpl : m_InputImpls)
+            {
+                if (not inputImpl->DoProcessInput(commands))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        
+    public:
+        std::vector<std::unique_ptr<IInputImpl>> m_InputImpls;
+        
+        std::vector<GameInputCommand> m_Commands;
+        std::vector<std::unique_ptr<GameActorCommand>> m_GameActorCommands;
+    };
+
+    InputManager::InputManager()
+        : m_implPtr(std::make_unique<InputManagerImpl>())
+    {
+    }
+
+    InputManager::~InputManager() = default;
+
     bool InputManager::ProcessInput()
     {
-        //---------------------------------------------------------------------------------
-        // XInput
-        //---------------------------------------------------------------------------------
-        XINPUT_STATE previousState{};
-        XINPUT_STATE currentState{};
-        int controllerIndex {};
-        
-        CopyMemory(&previousState, &currentState, sizeof(XINPUT_STATE));
-        ZeroMemory(&currentState, sizeof(XINPUT_STATE));
-        XInputGetState(controllerIndex, &currentState);
-
-        // TODO: Implement a better way to handle controller input
-        const auto buttonChanges = currentState.Gamepad.wButtons ^ previousState.Gamepad.wButtons;
-        const auto buttonsPressedThisFrame = buttonChanges & currentState.Gamepad.wButtons;
-        const auto buttonsReleasedThisFrame = buttonChanges & (~currentState.Gamepad.wButtons);
-
-        static auto isDownThisFrame = [&](int button) -> bool
-        {
-            return buttonsPressedThisFrame & button;
-        };
-
-        static auto isUpThisFrame = [&](int button) -> bool
-        {
-            return buttonsReleasedThisFrame & button;
-        };
-
-        static auto isPressed = [&](int button) -> bool
-        {
-            return currentState.Gamepad.wButtons & button;
-        };
-        
-        if (m_Commands.contains(InputType::Controller))
-        {
-            auto range = m_Commands.equal_range(InputType::Controller);
-            for (auto it = range.first; it != range.second; ++it)
-            {
-                const auto inputState = std::get<0>(it->second);
-                if (inputState == InputState::Down)
-                {
-                    const auto input = std::get<1>(it->second);
-                    if (isDownThisFrame(input))
-                    {
-                        std::get<2>(it->second)->Execute();
-                    }
-                }
-                if (inputState == InputState::Up)
-                {
-                    const auto input = std::get<1>(it->second);
-                    if (isUpThisFrame(input))
-                    {
-                        std::get<2>(it->second)->Execute();
-                    }
-                }
-                if (inputState == InputState::Pressed)
-                {
-                    const auto input = std::get<1>(it->second);
-                    if (isPressed(input))
-                    {
-                        std::get<2>(it->second)->Execute();
-                    }
-                }
-            }
-        }
-
-        //---------------------------------------------------------------------------------
-        // SDL
-        //---------------------------------------------------------------------------------
-        SDL_Event e;
-        while (SDL_PollEvent(&e))
-        {
-            ImGui_ImplSDL2_ProcessEvent(&e);
-            if (e.type == SDL_QUIT)
-            {
-                return false;
-            }
-            if (e.type == SDL_KEYDOWN)
-            {
-                if (m_Commands.contains(InputType::Keyboard))
-                {
-                    auto range = m_Commands.equal_range(InputType::Keyboard);
-                    for (auto it = range.first; it != range.second; ++it)
-                    {
-                        const auto inputState = std::get<0>(it->second);
-                        if (inputState == InputState::Down)
-                        {
-                            const auto input = std::get<1>(it->second);
-                            if (input == e.key.keysym.sym)
-                            {
-                                std::get<2>(it->second)->Execute();
-                            }
-                        }
-                    }
-                }
-                if (e.type == SDL_KEYUP)
-                {
-                    if (m_Commands.contains(InputType::Keyboard))
-                    {
-                        auto range = m_Commands.equal_range(InputType::Keyboard);
-                        for (auto it = range.first; it != range.second; ++it)
-                        {
-                            const auto inputState = std::get<0>(it->second);
-                            if (inputState == InputState::Up)
-                            {
-                                const auto input = std::get<1>(it->second);
-                                if (input == e.key.keysym.sym)
-                                {
-                                    std::get<2>(it->second)->Execute();
-                                }
-                            }
-                        }
-                    }
-                }
-                if (e.type == SDL_MOUSEBUTTONDOWN)
-                {
-                }
-            }
-        }
-        return true;
+        return m_implPtr->DoProcessInput(m_implPtr->m_Commands);
     }
 
     void InputManager::BindCommand(InputType inputType, InputState inputState, int input, std::unique_ptr<GameActorCommand> command)
     {
-        m_Commands.emplace(inputType, std::make_tuple(inputState, input, std::move(command)));
+        m_implPtr->m_GameActorCommands.emplace_back(std::move(command));
+        m_implPtr->m_Commands.push_back({inputType, inputState, input, m_implPtr->m_GameActorCommands.back().get()});   
     }
 
     bool InputManager::UnbindCommand(InputType inputType, InputState inputState, int input)
     {
-        auto range = m_Commands.equal_range(inputType);
-        for (auto it = range.first; it != range.second; ++it)
+        for (auto it = m_implPtr->m_Commands.begin(); it != m_implPtr->m_Commands.end(); ++it)
         {
-            if (std::get<0>(it->second) == inputState and std::get<1>(it->second) == input)
+            if (it->inputType == inputType and it->inputState == inputState and it->input == input)
             {
-                m_Commands.erase(it);
+                m_implPtr->m_Commands.erase(it);
                 return true;
             }
         }
         return false;
     }
+        
 }

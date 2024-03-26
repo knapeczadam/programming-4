@@ -1,23 +1,25 @@
 #pragma once
 
-// Project includes
-#include "GameObject.h"
-
 // Standard includes
 #include <memory>
 #include <string>
+#include <vector>
 
 namespace dae
 {
     // Forward declarations
+    class GameObject;
     class SceneManager;
+
+    // Type aliases
+    using GameObjectPtr = std::unique_ptr<GameObject>;
     
     class Scene final
     {
         friend class SceneManager;
 
     public:
-        ~Scene() = default;
+        ~Scene();
         
         Scene(const Scene& other)            = delete;
         Scene(Scene&& other)                 = delete;
@@ -39,7 +41,7 @@ namespace dae
         explicit Scene(std::string name);
 
         std::string m_name;
-        std::vector<std::unique_ptr<GameObject>> m_objects{};
+        std::vector<GameObjectPtr> m_objects{};
 
         static unsigned int m_idCounter;
     };

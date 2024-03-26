@@ -1,10 +1,10 @@
 ﻿#pragma once
-#include "Observer.h"
+#include "IObserver.h"
 #include "TextComponent.h"
 
 namespace dae
 {
-    class HealthTextComponent : public TextComponent, public Observer
+    class HealthTextComponent final : public TextComponent, public IObserver
     {
     public:
         HealthTextComponent() = default;

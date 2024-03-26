@@ -1,12 +1,12 @@
 ﻿#pragma once
 
 // Project includes
-#include "Observer.h"
+#include "IObserver.h"
 #include "TextComponent.h"
 
 namespace dae
 {
-    class ScoreTextComponent : public TextComponent, public Observer
+    class ScoreTextComponent final : public TextComponent, public IObserver
     {
     public:
         ScoreTextComponent() = default;

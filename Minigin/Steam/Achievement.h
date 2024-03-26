@@ -1,8 +1,5 @@
 ﻿#pragma once
 
-// Project includes
-#include "GameActor.h"
-
 // Steam includes
 #pragma warning (push)
 #pragma warning (disable: 4996)

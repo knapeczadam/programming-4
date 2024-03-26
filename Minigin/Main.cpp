@@ -9,6 +9,7 @@
 // Project includes
 #include "Achievement.h"
 #include "FPSComponent.h"
+#include "GameObject.h"
 #include "GameActorCommand.h"
 #include "HealthComponent.h"
 #include "HealthTextComponent.h"
@@ -133,10 +134,10 @@ void load()
     auto moveUpCommand3    = std::make_unique<MoveCommand>(go, glm::vec2{0, -1});
     auto moveDownCommand3  = std::make_unique<MoveCommand>(go, glm::vec2{0, 1});
     
-    InputManager::GetInstance().BindCommand(InputType::Controller, InputState::Down, Input::C_LEFT, std::move(moveLeftCommand3));
-    InputManager::GetInstance().BindCommand(InputType::Controller, InputState::Down, Input::C_RIGHT, std::move(moveRightCommand3));
-    InputManager::GetInstance().BindCommand(InputType::Controller, InputState::Down, Input::C_UP, std::move(moveUpCommand3));
-    InputManager::GetInstance().BindCommand(InputType::Controller, InputState::Down, Input::C_DOWN, std::move(moveDownCommand3));
+    InputManager::GetInstance().BindCommand(InputType::Controller, InputState::Pressed, Input::C_LEFT, std::move(moveLeftCommand3));
+    InputManager::GetInstance().BindCommand(InputType::Controller, InputState::Pressed, Input::C_RIGHT, std::move(moveRightCommand3));
+    InputManager::GetInstance().BindCommand(InputType::Controller, InputState::Pressed, Input::C_UP, std::move(moveUpCommand3));
+    InputManager::GetInstance().BindCommand(InputType::Controller, InputState::Pressed, Input::C_DOWN, std::move(moveDownCommand3));
     
     // Damage
     auto damageCommand1 = std::make_unique<DamageCommand>(healthComp);

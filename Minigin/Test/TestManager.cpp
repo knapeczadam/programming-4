@@ -1,6 +1,8 @@
 #include "TestManager.h"
 
 // Project includes
+#include "GameObject.h"
+#include "Scene.h"
 #include "SceneManager.h"
 #include "Test1Component.h"
 #include "Test2Component.h"

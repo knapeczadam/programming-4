@@ -1,7 +1,6 @@
 #pragma once
 
 // Project includes
-#include "BaseComponent.h"
 #include "Transform.h"
 
 // Standard includes
@@ -16,6 +15,7 @@ namespace dae
 {
     // Forward declarations
     enum class ComponentFamily;
+    class BaseComponent;
 
     // Concepts
     template <class T>
@@ -36,7 +36,7 @@ namespace dae
     public:
         GameObject() = default;
         explicit GameObject(std::string name);
-        ~GameObject() = default;
+        ~GameObject();
 
         GameObject(const GameObject& other)            = delete;
         GameObject(GameObject&& other)                 = delete;

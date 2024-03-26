@@ -2,6 +2,7 @@
 
 // Project includes
 #include "Scene.h"
+#include "GameObject.h"
 
 namespace dae
 {
@@ -36,6 +37,10 @@ namespace dae
             scene->RenderUI();
         }
     }
+
+    SceneManager::SceneManager() = default;
+
+    SceneManager::~SceneManager() = default;
 
     Scene* SceneManager::CreateScene(const std::string& name)
     {

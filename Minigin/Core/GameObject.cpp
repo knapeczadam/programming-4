@@ -14,6 +14,8 @@ namespace dae
     {
     }
 
+    GameObject::~GameObject() = default;
+
     void GameObject::Update()
     {
         for (const auto& pComponent : m_componentMap | std::views::values)

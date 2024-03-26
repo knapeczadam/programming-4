@@ -1,12 +1,11 @@
 #pragma once
 
 // Project includes
-#include "GameActorCommand.h"
 #include "Singleton.h"
 
 // Standard includes
 #include <memory>
-#include <unordered_map>
+#include <vector>
 
 // SDL includes
 #include <SDL.h>
@@ -61,17 +60,28 @@ namespace dae
     // Forward declarations
     class GameActorCommand;
     
+    struct GameInputCommand
+    {
+        InputType inputType;
+        InputState inputState;
+        int input;
+        GameActorCommand* command = nullptr;
+    };
+    
     class InputManager final : public Singleton<InputManager>
     {
     public:
+        ~InputManager() override;
+        
         bool ProcessInput();
         void BindCommand(InputType inputType, InputState inputState, int input, std::unique_ptr<GameActorCommand> command);
         bool UnbindCommand(InputType inputType, InputState inputState, int input);
         
     private:
         friend class Singleton<InputManager>;
-        InputManager() = default;
-        
-        std::unordered_multimap<InputType, std::tuple<InputState, int, std::unique_ptr<GameActorCommand>>> m_Commands;
+        InputManager();
+
+        class InputManagerImpl;
+        std::unique_ptr<InputManagerImpl> m_implPtr;
     };
 }
