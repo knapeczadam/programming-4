@@ -3,23 +3,23 @@
 namespace dae
 {
     template <typename T>
-    class Singleton
+    class singleton
     {
     public:
-        static T& GetInstance()
+        static T& get_instance()
         {
             static T instance{};
             return instance;
         }
 
-        virtual ~Singleton() = default;
+        virtual ~singleton() = default;
         
-        Singleton(const Singleton& other)            = delete;
-        Singleton(Singleton&& other)                 = delete;
-        Singleton& operator=(const Singleton& other) = delete;
-        Singleton& operator=(Singleton&& other)      = delete;
+        singleton(const singleton& other)            = delete;
+        singleton(singleton&& other)                 = delete;
+        singleton& operator=(const singleton& other) = delete;
+        singleton& operator=(singleton&& other)      = delete;
 
     protected:
-        Singleton() = default;
+        singleton() = default;
     };
 }

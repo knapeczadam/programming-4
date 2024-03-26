@@ -6,45 +6,45 @@
 
 namespace dae
 {
-    void SceneManager::Update()
+    void scene_manager::update()
     {
-        for (const auto& scene : m_scenes)
+        for (const auto& scene : scenes_)
         {
-            scene->Update();
+            scene->update();
         }
     }
 
-    void SceneManager::LateUpdate()
+    void scene_manager::late_update()
     {
-        for (const auto& scene : m_scenes)
+        for (const auto& scene : scenes_)
         {
-            scene->LateUpdate();
+            scene->late_update();
         }
     }
 
-    void SceneManager::Render()
+    void scene_manager::render()
     {
-        for (const auto& scene : m_scenes)
+        for (const auto& scene : scenes_)
         {
-            scene->Render();
+            scene->render();
         }
     }
 
-    void SceneManager::RenderUI()
+    void scene_manager::render_ui()
     {
-        for (const auto& scene : m_scenes)
+        for (const auto& scene : scenes_)
         {
-            scene->RenderUI();
+            scene->render_ui();
         }
     }
 
-    SceneManager::SceneManager() = default;
+    scene_manager::scene_manager() = default;
 
-    SceneManager::~SceneManager() = default;
+    scene_manager::~scene_manager() = default;
 
-    Scene* SceneManager::CreateScene(const std::string& name)
+    auto scene_manager::create_scene(const std::string& name) -> scene*
     {
-        m_scenes.emplace_back(std::unique_ptr<Scene>(new Scene(name)));
-        return m_scenes.back().get();
+        scenes_.emplace_back(std::unique_ptr<scene>(new scene(name)));
+        return scenes_.back().get();
     }
 }

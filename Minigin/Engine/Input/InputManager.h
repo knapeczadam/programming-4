@@ -16,72 +16,79 @@
 
 namespace dae
 {
-    enum class InputType
+    enum class input_type
     {
-        Keyboard,
-        Mouse,
-        Controller
+        keyboard,
+        mouse,
+        controller
     };
-    enum class InputState
+    enum class input_state
     {
-        Down,
-        Up,
-        Pressed
+        down,
+        up,
+        pressed
     };
 
-    enum Input
+    enum input
     {
-        K_LEFT = SDLK_LEFT,
-        K_RIGHT = SDLK_RIGHT,
-        K_UP = SDLK_UP,
-        K_DOWN = SDLK_DOWN,
+        k_left = SDLK_LEFT,
+        k_right = SDLK_RIGHT,
+        k_up = SDLK_UP,
+        k_down = SDLK_DOWN,
 
-        K_a = SDLK_a,
-        K_d = SDLK_d,
-        K_w = SDLK_w,
-        K_s = SDLK_s,
+        k_a = SDLK_a,
+        k_d = SDLK_d,
+        k_w = SDLK_w,
+        k_s = SDLK_s,
 
-        K_r = SDLK_r,
-        K_c = SDLK_c,
-        K_z = SDLK_z,
-        K_x = SDLK_x,
+        k_r = SDLK_r,
+        k_c = SDLK_c,
+        k_z = SDLK_z,
+        k_x = SDLK_x,
 
-        C_LEFT = XINPUT_GAMEPAD_DPAD_LEFT,
-        C_RIGHT = XINPUT_GAMEPAD_DPAD_RIGHT,
-        C_UP = XINPUT_GAMEPAD_DPAD_UP,
-        C_DOWN = XINPUT_GAMEPAD_DPAD_DOWN,
+        c_left = XINPUT_GAMEPAD_DPAD_LEFT,
+        c_right = XINPUT_GAMEPAD_DPAD_RIGHT,
+        c_up = XINPUT_GAMEPAD_DPAD_UP,
+        c_down = XINPUT_GAMEPAD_DPAD_DOWN,
 
-        C_A = XINPUT_GAMEPAD_A,
-        C_B = XINPUT_GAMEPAD_B,
-        C_X = XINPUT_GAMEPAD_X,
-        C_Y = XINPUT_GAMEPAD_Y
+        c_a = XINPUT_GAMEPAD_A,
+        c_b = XINPUT_GAMEPAD_B,
+        c_x = XINPUT_GAMEPAD_X,
+        c_y = XINPUT_GAMEPAD_Y
     };
     
     // Forward declarations
-    class GameActorCommand;
+    class game_command;
+    class game_object_command;
     
-    struct GameInputCommand
+    struct game_input_command
     {
-        InputType inputType;
-        InputState inputState;
+        input_type input_type;
+        input_state input_state;
         int input;
-        GameActorCommand* command = nullptr;
+        game_command* command = nullptr;
     };
     
-    class InputManager final : public Singleton<InputManager>
+    class input_manager final : public singleton<input_manager>
     {
     public:
-        ~InputManager() override;
+        ~input_manager() override;
+
+        input_manager(const input_manager& other)            = delete;
+        input_manager(input_manager&& other)                 = delete;
+        input_manager& operator=(const input_manager& other) = delete;
+        input_manager& operator=(input_manager&& other)      = delete;
+
+        [[nodiscard]] auto process_input() const -> bool;
         
-        bool ProcessInput();
-        void BindCommand(InputType inputType, InputState inputState, int input, std::unique_ptr<GameActorCommand> command);
-        bool UnbindCommand(InputType inputType, InputState inputState, int input);
+        void bind_command(input_type input_type, input_state input_state, int input, std::unique_ptr<game_command> command) const;
+        [[nodiscard]] auto unbind_command(input_type input_type, input_state input_state, int input) const -> bool;
         
     private:
-        friend class Singleton<InputManager>;
-        InputManager();
+        friend class singleton<input_manager>;
+        input_manager();
 
-        class InputManagerImpl;
-        std::unique_ptr<InputManagerImpl> m_implPtr;
+        class input_manager_impl;
+        std::unique_ptr<input_manager_impl> impl_ptr_;
     };
 }

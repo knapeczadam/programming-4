@@ -9,21 +9,21 @@
 
 namespace dae
 {
-    class XInputImpl final : public IInputImpl
+    class x_input_impl final : public i_input_impl
     {
     public:
-        auto DoProcessInput(std::vector<GameInputCommand> commands) -> bool override;
+        auto do_process_input(std::vector<game_input_command> commands) -> bool override;
 
     private:
-        auto IsDownThisFrame(int button) const -> bool;
-        auto IsUpThisFrame(int button) const -> bool;
-        auto IsPressed(int button) const -> bool;
+        auto is_down_this_frame(int button) const -> bool;
+        auto is_up_this_frame(int button) const -> bool;
+        auto is_pressed(int button) const -> bool;
 
     private:
-        XINPUT_STATE m_previousState = {};
-        XINPUT_STATE m_currentState = {};
-        int controllerIndex = 0;
-        int buttonsPressedThisFrame = 0;
-        int buttonsReleasedThisFrame = 0;
+        XINPUT_STATE previous_state_              = {};
+        XINPUT_STATE current_state_               = {};
+        int          controller_index_            = 0;
+        int          buttons_pressed_this_frame_  = 0;
+        int          buttons_released_this_frame_ = 0;
     };
 }

@@ -15,60 +15,60 @@
 
 namespace dae
 {
-    auto XInputImpl::DoProcessInput(std::vector<GameInputCommand> commands) -> bool
+    auto x_input_impl::do_process_input(std::vector<game_input_command> commands) -> bool
     {
-        CopyMemory(&m_previousState, &m_currentState, sizeof(XINPUT_STATE));
-        ZeroMemory(&m_currentState, sizeof(XINPUT_STATE));
-        XInputGetState(controllerIndex, &m_currentState);
+        CopyMemory(&previous_state_, &current_state_, sizeof(XINPUT_STATE));
+        ZeroMemory(&current_state_, sizeof(XINPUT_STATE));
+        XInputGetState(controller_index_, &current_state_);
 
-        const auto buttonChanges = m_currentState.Gamepad.wButtons ^ m_previousState.Gamepad.wButtons;
-        buttonsPressedThisFrame = buttonChanges & m_currentState.Gamepad.wButtons;
-        buttonsReleasedThisFrame = buttonChanges & (~m_currentState.Gamepad.wButtons);
+        const auto buttonChanges = current_state_.Gamepad.wButtons ^ previous_state_.Gamepad.wButtons;
+        buttons_pressed_this_frame_ = buttonChanges & current_state_.Gamepad.wButtons;
+        buttons_released_this_frame_ = buttonChanges & (~current_state_.Gamepad.wButtons);
 
-        auto controllerCommands = commands | std::views::filter([](const GameInputCommand& command) { return command.inputType == InputType::Controller; });
-        for (const auto& gameCommand : controllerCommands)
+        auto controller_commands = commands | std::views::filter([](const game_input_command& command) { return command.input_type == input_type::controller; });
+        for (const auto& game_command : controller_commands)
         {
-            const auto inputState = gameCommand.inputState;
-            if (inputState == InputState::Down)
+            const auto input_state = game_command.input_state;
+            if (input_state == input_state::down)
             {
-                const auto input = gameCommand.input;
-                if (IsDownThisFrame(input))
+                const auto input = game_command.input;
+                if (is_down_this_frame(input))
                 {
-                    gameCommand.command->Execute();
+                    game_command.command->execute();
                 }
             }
-            if (inputState == InputState::Up)
+            if (input_state == input_state::up)
             {
-                const auto input = gameCommand.input;
-                if (IsUpThisFrame(input))
+                const auto input = game_command.input;
+                if (is_up_this_frame(input))
                 {
-                    gameCommand.command->Execute();
+                    game_command.command->execute();
                 }
             }
-            if (inputState == InputState::Pressed)
+            if (input_state == input_state::pressed)
             {
-                const auto input = gameCommand.input;
-                if (IsPressed(input))
+                const auto input = game_command.input;
+                if (is_pressed(input))
                 {
-                    gameCommand.command->Execute();
+                    game_command.command->execute();
                 }
             }
         }
         return true;
     }
 
-    auto XInputImpl::IsDownThisFrame(int button) const -> bool
+    auto x_input_impl::is_down_this_frame(int button) const -> bool
     {
-        return buttonsPressedThisFrame & button;
+        return buttons_pressed_this_frame_ & button;
     }
 
-    auto XInputImpl::IsUpThisFrame(int button) const -> bool
+    auto x_input_impl::is_up_this_frame(int button) const -> bool
     {
-        return buttonsReleasedThisFrame & button;
+        return buttons_released_this_frame_ & button;
     }
 
-    auto XInputImpl::IsPressed(int button) const -> bool
+    auto x_input_impl::is_pressed(int button) const -> bool
     {
-        return m_currentState.Gamepad.wButtons & button;
+        return current_state_.Gamepad.wButtons & button;
     }
 }

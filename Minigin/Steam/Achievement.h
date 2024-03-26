@@ -60,5 +60,5 @@ namespace dae
     };
 
     // Global access to Achievements object
-    inline CSteamAchievements* g_SteamAchievements = NULL;
+    inline CSteamAchievements* g_steam_achievements = NULL;
 }

@@ -5,17 +5,17 @@
 
 namespace dae
 {
-    class TrashTheCacheComponent final : public UIComponent
+    class trash_the_cache_component final : public ui_component
     {
     public:
-        TrashTheCacheComponent() = default;
-        virtual ~TrashTheCacheComponent() override = default;
+        trash_the_cache_component() = default;
+        ~trash_the_cache_component() override = default;
 
-        TrashTheCacheComponent(const TrashTheCacheComponent& other)            = delete;
-        TrashTheCacheComponent(TrashTheCacheComponent&& other)                 = delete;
-        TrashTheCacheComponent& operator=(const TrashTheCacheComponent& other) = delete;
-        TrashTheCacheComponent& operator=(TrashTheCacheComponent&& other)      = delete;
+        trash_the_cache_component(const trash_the_cache_component& other)            = delete;
+        trash_the_cache_component(trash_the_cache_component&& other)                 = delete;
+        trash_the_cache_component& operator=(const trash_the_cache_component& other) = delete;
+        trash_the_cache_component& operator=(trash_the_cache_component&& other)      = delete;
 
-        virtual void RenderUI() const override;
+        void render_ui() const override;
     };
 }

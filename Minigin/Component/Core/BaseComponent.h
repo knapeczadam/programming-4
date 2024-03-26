@@ -3,41 +3,41 @@
 namespace dae
 {
     // Forward declarations
-    class GameObject;
+    class game_object;
 
-    enum class ComponentFamily
+    enum class component_family
     {
-        Audio,
-        Custom,
-        Physics,
-        Rendering,
-        UI,
-        Test
+        audio,
+        custom,
+        physics,
+        rendering,
+        ui,
+        test
     };
     
-    class BaseComponent
+    class base_component
     {
-        friend class GameObject;
+        friend class game_object;
         
     public:
-        BaseComponent() = default;
-        virtual ~BaseComponent() = default;
+        base_component() = default;
+        virtual ~base_component() = default;
 
-        BaseComponent(const BaseComponent& other)            = delete;
-        BaseComponent(BaseComponent&& other)                 = delete;
-        BaseComponent& operator=(const BaseComponent& other) = delete;
-        BaseComponent& operator=(BaseComponent&& other)      = delete;
+        base_component(const base_component& other)            = delete;
+        base_component(base_component&& other)                 = delete;
+        base_component& operator=(const base_component& other) = delete;
+        base_component& operator=(base_component&& other)      = delete;
 
-        virtual void Update() { }
+        virtual void update() { }
 
-        virtual ComponentFamily GetFamily() const = 0;
-        
-        GameObject* GetOwner() const { return m_ownerPtr; }
-        
-    private:
-        void SetOwner(GameObject* ownerPtr);
+        [[nodiscard]] virtual auto get_family() const -> component_family = 0;
+
+        [[nodiscard]] auto get_owner() const -> game_object* { return owner_ptr_; }
         
     private:
-        GameObject* m_ownerPtr = nullptr;
+        void set_owner(game_object* owner_ptr);
+        
+    private:
+        game_object* owner_ptr_ = nullptr;
     };
 }

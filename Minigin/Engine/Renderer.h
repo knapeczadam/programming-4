@@ -8,27 +8,27 @@
 
 namespace dae
 {
-    class Texture2D;
+    class texture_2d;
     /**
      * Simple RAII wrapper for the SDL renderer
      */
-    class Renderer final : public Singleton<Renderer>
+    class renderer final : public singleton<renderer>
     {
-        SDL_Renderer* m_renderer{};
-        SDL_Window* m_window{};
-        SDL_Color m_clearColor{};
+        SDL_Renderer* renderer_{};
+        SDL_Window* window_{};
+        SDL_Color clear_color_{};
 
     public:
-        void Init(SDL_Window* window);
-        void Render() const;
-        void Destroy();
+        void init(SDL_Window* window);
+        void render() const;
+        void destroy();
 
-        void RenderTexture(const Texture2D& texture, float x, float y) const;
-        void RenderTexture(const Texture2D& texture, float x, float y, float width, float height) const;
+        void render_texture(const texture_2d& texture, float x, float y) const;
+        void render_texture(const texture_2d& texture, float x, float y, float width, float height) const;
 
-        SDL_Renderer* GetSDLRenderer() const;
+        [[nodiscard]] auto get_sdl_renderer() const -> SDL_Renderer*;
 
-        const SDL_Color& GetBackgroundColor() const { return m_clearColor; }
-        void SetBackgroundColor(const SDL_Color& color) { m_clearColor = color; }
+        [[nodiscard]] auto get_background_color() const -> const SDL_Color& { return clear_color_; }
+        void set_background_color(const SDL_Color& color) { clear_color_ = color; }
     };
 }

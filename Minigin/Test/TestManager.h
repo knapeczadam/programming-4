@@ -5,19 +5,19 @@
 
 namespace dae
 {
-    class TestManager final : public Singleton<TestManager>
+    class test_manager final : public singleton<test_manager>
     {
     public:
-        void RunAllTests();
+        void run_all_tests();
 
     private:
-        friend class Singleton<TestManager>;
-        TestManager() = default;
+        friend class singleton<test_manager>;
+        test_manager() = default;
 
-        void TestComponents();
-        void TestParentChildRelationship();
-        void TestScene();
-        void TestPosition();
+        void test_components();
+        void test_parent_child_relationship();
+        void test_scene();
+        void test_position();
         
     };
 }

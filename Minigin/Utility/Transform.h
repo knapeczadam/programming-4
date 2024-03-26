@@ -5,24 +5,24 @@
 
 namespace dae
 {
-    class Transform final
+    class transform final
     {
     public:
-        const glm::vec3& GetWorldPosition() const { return m_worldPosition; }
-        const glm::vec3& GetLocalPosition() const { return m_localPosition; }
+        auto get_world_position() const -> const glm::vec3& { return world_position_; }
+        auto get_local_position() const -> const glm::vec3& { return local_position_; }
         
-        void SetWorldPosition(float x, float y);
-        void SetWorldPosition(float x, float y, float z);
-        void SetWorldPosition(const glm::vec2& position);
-        void SetWorldPosition(const glm::vec3& position);
+        void set_world_position(float x, float y);
+        void set_world_position(float x, float y, float z);
+        void set_world_position(const glm::vec2& position);
+        void set_world_position(const glm::vec3& position);
 
-        void SetLocalPosition(float x, float y);
-        void SetLocalPosition(float x, float y, float z);
-        void SetLocalPosition(const glm::vec2& position);
-        void SetLocalPosition(const glm::vec3& position);
+        void set_local_position(float x, float y);
+        void set_local_position(float x, float y, float z);
+        void set_local_position(const glm::vec2& position);
+        void set_local_position(const glm::vec3& position);
 
     private:
-        glm::vec3 m_worldPosition = {};
-        glm::vec3 m_localPosition = {};
+        glm::vec3 world_position_ = {};
+        glm::vec3 local_position_ = {};
     };
 }

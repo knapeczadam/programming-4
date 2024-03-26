@@ -7,28 +7,40 @@
 namespace dae
 {
     // Forward declaration
-    class Subject;
+    class subject;
     
-    class IObserver
+    class i_observer
     {
     public:
-        virtual ~IObserver() = default;
+        i_observer() = default;
+        virtual ~i_observer() = default;
 
-        virtual void Notify(const std::string& event, Subject* subject) = 0;
+        i_observer(const i_observer& other)            = delete;
+        i_observer(i_observer&& other)                 = delete;
+        i_observer& operator=(const i_observer& other) = delete;
+        i_observer& operator=(i_observer&& other)      = delete;
+
+        virtual void notify(const std::string& event, subject* subject) = 0;
     };
 
-    class Subject 
+    class subject 
     {
     public:
-        virtual ~Subject() = default;
+        subject() = default;
+        virtual ~subject() = default;
 
-        void AddObserver(IObserver* observer);
-        void RemoveObserver(IObserver* observer);
+        subject(const subject& other)            = delete;
+        subject(subject&& other)                 = delete;
+        subject& operator=(const subject& other) = delete;
+        subject& operator=(subject&& other)      = delete;
+
+        void add_observer(i_observer* observer);
+        void remove_observer(i_observer* observer);
 
     protected:
-        void NotifyObservers(const std::string& event);
+        void notify_observers(const std::string& event);
 
     private:
-        std::vector<IObserver*> m_Observers{};
+        std::vector<i_observer*> observers_{};
     };
 }

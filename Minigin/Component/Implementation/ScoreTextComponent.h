@@ -6,17 +6,17 @@
 
 namespace dae
 {
-    class ScoreTextComponent final : public TextComponent, public IObserver
+    class score_text_component final : public text_component, public i_observer
     {
     public:
-        ScoreTextComponent() = default;
-        virtual ~ScoreTextComponent() override = default;
+        score_text_component() = default;
+        ~score_text_component() override = default;
 
-        ScoreTextComponent(const ScoreTextComponent& other)            = delete;
-        ScoreTextComponent(ScoreTextComponent&& other)                 = delete;
-        ScoreTextComponent& operator=(const ScoreTextComponent& other) = delete;
-        ScoreTextComponent& operator=(ScoreTextComponent&& other)      = delete;
+        score_text_component(const score_text_component& other)            = delete;
+        score_text_component(score_text_component&& other)                 = delete;
+        score_text_component& operator=(const score_text_component& other) = delete;
+        score_text_component& operator=(score_text_component&& other)      = delete;
 
-        void Notify(const std::string& event, Subject* subject) override;
+        void notify(const std::string& event, subject* subject) override;
     };
 }

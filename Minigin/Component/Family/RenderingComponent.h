@@ -5,19 +5,19 @@
 
 namespace dae
 {
-    class RenderingComponent : public BaseComponent
+    class rendering_component : public base_component
     {
     public:
-        RenderingComponent() = default;
-        virtual ~RenderingComponent() override = default;
+        rendering_component() = default;
+        ~rendering_component() override = default;
 
-        RenderingComponent(const RenderingComponent& other)            = delete;
-        RenderingComponent(RenderingComponent&& other)                 = delete;
-        RenderingComponent& operator=(const RenderingComponent& other) = delete;
-        RenderingComponent& operator=(RenderingComponent&& other)      = delete;
-        
-        virtual ComponentFamily GetFamily() const override { return ComponentFamily::Rendering; }
+        rendering_component(const rendering_component& other)            = delete;
+        rendering_component(rendering_component&& other)                 = delete;
+        rendering_component& operator=(const rendering_component& other) = delete;
+        rendering_component& operator=(rendering_component&& other)      = delete;
 
-        virtual void Render() const = 0;
+        [[nodiscard]] auto get_family() const -> component_family override { return component_family::rendering; }
+
+        virtual void render() const = 0;
     };
 }

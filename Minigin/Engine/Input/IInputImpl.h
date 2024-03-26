@@ -6,24 +6,24 @@
 namespace dae
 {
     // Forward declarations
-    class GameActorCommand;
-    enum class InputState;
-    enum class InputType;
+    class game_object_command;
+    enum class input_state;
+    enum class input_type;
     
     // Forward declarations
-    struct GameInputCommand;
+    struct game_input_command;
     
-    class IInputImpl
+    class i_input_impl
     {
     public:
-        IInputImpl() = default;
-        virtual ~IInputImpl() = default;
+        i_input_impl() = default;
+        virtual ~i_input_impl() = default;
 
-        IInputImpl(const IInputImpl& other)            = delete;
-        IInputImpl(IInputImpl&& other)                 = delete;
-        IInputImpl& operator=(const IInputImpl& other) = delete;
-        IInputImpl& operator=(IInputImpl&& other)      = delete;
+        i_input_impl(const i_input_impl& other)            = delete;
+        i_input_impl(i_input_impl&& other)                 = delete;
+        i_input_impl& operator=(const i_input_impl& other) = delete;
+        i_input_impl& operator=(i_input_impl&& other)      = delete;
         
-        virtual auto DoProcessInput(std::vector<GameInputCommand> commands) -> bool = 0;
+        virtual auto do_process_input(std::vector<game_input_command> commands) -> bool = 0;
     };
 }

@@ -1,7 +1,7 @@
 #include "InputManager.h"
 
 // Project includes
-#include "GameActorCommand.h"
+#include "game_command.h"
 #include "IInputImpl.h"
 #include "SDLInputImpl.h"
 #include "XInputImpl.h"
@@ -11,20 +11,20 @@
 
 namespace dae
 {
-    class InputManager::InputManagerImpl
+    class input_manager::input_manager_impl
     {
     public:
-        InputManagerImpl()
+        input_manager_impl()
         {
-            m_InputImpls.push_back(std::make_unique<SDLInputImpl>());
-            m_InputImpls.push_back(std::make_unique<XInputImpl>());
+            input_impls.push_back(std::make_unique<sdl_input_impl>());
+            input_impls.push_back(std::make_unique<x_input_impl>());
         }
         
-        bool DoProcessInput(std::vector<GameInputCommand> commands)
+        bool do_process_input(std::vector<game_input_command> commands) const
         {
-            for (auto& inputImpl : m_InputImpls)
+            for (auto& input_impl : input_impls)
             {
-                if (not inputImpl->DoProcessInput(commands))
+                if (not input_impl->do_process_input(commands))
                 {
                     return false;
                 }
@@ -33,37 +33,37 @@ namespace dae
         }
         
     public:
-        std::vector<std::unique_ptr<IInputImpl>> m_InputImpls;
+        std::vector<std::unique_ptr<i_input_impl>> input_impls;
         
-        std::vector<GameInputCommand> m_Commands;
-        std::vector<std::unique_ptr<GameActorCommand>> m_GameActorCommands;
+        std::vector<game_input_command> commands_;
+        std::vector<std::unique_ptr<game_command>> game_actor_commands_;
     };
 
-    InputManager::InputManager()
-        : m_implPtr(std::make_unique<InputManagerImpl>())
+    input_manager::input_manager()
+        : impl_ptr_(std::make_unique<input_manager_impl>())
     {
     }
 
-    InputManager::~InputManager() = default;
+    input_manager::~input_manager() = default;
 
-    bool InputManager::ProcessInput()
+    auto input_manager::process_input() const -> bool
     {
-        return m_implPtr->DoProcessInput(m_implPtr->m_Commands);
+        return impl_ptr_->do_process_input(impl_ptr_->commands_);
     }
 
-    void InputManager::BindCommand(InputType inputType, InputState inputState, int input, std::unique_ptr<GameActorCommand> command)
+    void input_manager::bind_command(input_type input_type, input_state input_state, int input, std::unique_ptr<game_command> command) const
     {
-        m_implPtr->m_GameActorCommands.emplace_back(std::move(command));
-        m_implPtr->m_Commands.push_back({inputType, inputState, input, m_implPtr->m_GameActorCommands.back().get()});   
+        impl_ptr_->game_actor_commands_.emplace_back(std::move(command));
+        impl_ptr_->commands_.push_back({input_type, input_state, input, impl_ptr_->game_actor_commands_.back().get()});   
     }
 
-    bool InputManager::UnbindCommand(InputType inputType, InputState inputState, int input)
+    auto input_manager::unbind_command(input_type input_type, input_state input_state, int input) const -> bool
     {
-        for (auto it = m_implPtr->m_Commands.begin(); it != m_implPtr->m_Commands.end(); ++it)
+        for (auto it = impl_ptr_->commands_.begin(); it != impl_ptr_->commands_.end(); ++it)
         {
-            if (it->inputType == inputType and it->inputState == inputState and it->input == input)
+            if (it->input_type == input_type and it->input_state == input_state and it->input == input)
             {
-                m_implPtr->m_Commands.erase(it);
+                impl_ptr_->commands_.erase(it);
                 return true;
             }
         }

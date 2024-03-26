@@ -6,23 +6,23 @@
 
 namespace dae
 {
-    class ScoreComponent final : public CustomComponent, public Subject
+    class score_component final : public custom_component, public subject
     {
     public:
-        ScoreComponent() = default;
-        virtual ~ScoreComponent() override = default;
+        score_component() = default;
+        ~score_component() override = default;
 
-        ScoreComponent(const ScoreComponent& other)            = delete;
-        ScoreComponent(ScoreComponent&& other)                 = delete;
-        ScoreComponent& operator=(const ScoreComponent& other) = delete;
-        ScoreComponent& operator=(ScoreComponent&& other)      = delete;
+        score_component(const score_component& other)            = delete;
+        score_component(score_component&& other)                 = delete;
+        score_component& operator=(const score_component& other) = delete;
+        score_component& operator=(score_component&& other)      = delete;
 
-        void AddScore(int score);
-        auto GetScore() const -> int { return m_Score; }
+        void add_score(int score);
+        auto get_score() const -> int { return score_; }
 
-        static auto GetInitialScore() -> int { return 0; }
+        static auto get_initial_score() -> int { return 0; }
 
     private:
-        int m_Score = GetInitialScore();
+        int score_ = get_initial_score();
     };
 }

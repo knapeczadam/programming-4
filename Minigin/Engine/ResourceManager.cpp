@@ -3,7 +3,7 @@
 // Project includes
 #include "Renderer.h"
 #include "Texture2D.h"
-#include "Font.h"
+#include "game_font.h"
 
 // Standard includes
 #include <stdexcept>
@@ -14,9 +14,9 @@
 
 namespace dae
 {
-    void ResourceManager::Init(const std::string& dataPath)
+    void resource_manager::init(const std::string& data_path)
     {
-        m_dataPath = dataPath;
+        data_path_ = data_path;
 
         if (TTF_Init() != 0)
         {
@@ -24,32 +24,32 @@ namespace dae
         }
     }
 
-    Texture2D* ResourceManager::LoadTexture(const std::string& file)
+    auto resource_manager::load_texture(const std::string& file) -> texture_2d*
     {
         // Check if texture is already present
-        const auto fullPath = m_dataPath + file;
-        const auto it = m_textures.find(fullPath);
-        if (it != m_textures.cend())
+        const auto full_path = data_path_ + file;
+        const auto it = textures_.find(full_path);
+        if (it != textures_.cend())
         {
             return it->second.get();
         }
         
-        auto texture = IMG_LoadTexture(Renderer::GetInstance().GetSDLRenderer(), fullPath.c_str());
+        auto texture = IMG_LoadTexture(renderer::get_instance().get_sdl_renderer(), full_path.c_str());
         if (texture == nullptr)
         {
             throw std::runtime_error(std::string("Failed to load texture: ") + SDL_GetError());
         }
 
         // Cache the texture
-        m_textures[fullPath] = std::make_unique<Texture2D>(texture);
-        return m_textures[fullPath].get();
+        textures_[full_path] = std::make_unique<texture_2d>(texture);
+        return textures_[full_path].get();
     }
 
-    Font* ResourceManager::LoadFont(const std::string& file, unsigned int size)
+    auto resource_manager::load_font(const std::string& file, unsigned int size) -> game_font*
     {
         // Check if font is already present
-        const auto fullPath = m_dataPath + file;
-        const auto range = m_fonts.equal_range(fullPath);
+        const auto full_path = data_path_ + file;
+        const auto range = fonts_.equal_range(full_path);
         for (auto it = range.first; it != range.second; ++it)
         {
             if (it->second.first == size)
@@ -59,12 +59,12 @@ namespace dae
         }
 
         // Load the font and cache it
-        auto font = std::make_unique<Font>(fullPath, size);
-        m_fonts.emplace(fullPath, std::make_pair(size, std::move(font)));
+        auto font = std::make_unique<game_font>(full_path, size);
+        fonts_.emplace(full_path, std::make_pair(size, std::move(font)));
 
         // Return the newly loaded font
-        const auto rangeNew = m_fonts.equal_range(fullPath);
-        for (auto it = rangeNew.first; it != rangeNew.second; ++it)
+        const auto [fst, snd] = fonts_.equal_range(full_path);
+        for (auto it = fst; it != snd; ++it)
         {
             if (it->second.first == size)
             {

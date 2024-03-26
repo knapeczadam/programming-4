@@ -5,19 +5,19 @@
 
 namespace dae
 {
-   class TestComponent : public BaseComponent
+   class test_component : public base_component
    {
    public:
-      TestComponent() = default;
-      virtual ~TestComponent() override = default;
+      test_component() = default;
+      ~test_component() override = default;
 
-      TestComponent(const TestComponent& other)            = delete;
-      TestComponent(TestComponent&& other)                 = delete;
-      TestComponent& operator=(const TestComponent& other) = delete;
-      TestComponent& operator=(TestComponent&& other)      = delete;
+      test_component(const test_component& other)            = delete;
+      test_component(test_component&& other)                 = delete;
+      test_component& operator=(const test_component& other) = delete;
+      test_component& operator=(test_component&& other)      = delete;
 
-       virtual ComponentFamily GetFamily() const override { return ComponentFamily::Test; }
+       auto get_family() const -> component_family override { return component_family::test; }
 
-      virtual void Test() const = 0;
+      virtual void test() const = 0;
    };
 }

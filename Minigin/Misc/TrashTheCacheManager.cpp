@@ -7,9 +7,9 @@
 
 namespace dae
 {
-    void TrashTheCacheManager::CalculateData()
+    void trash_the_cache_manager::calculate_data()
     {
-        std::vector<GameObject3D> buffer(m_sample);
+        std::vector<game_object_3d> buffer(sample_);
         int stepSize = 1;
 
         // vector for storing time
@@ -24,7 +24,7 @@ namespace dae
                 auto start = std::chrono::high_resolution_clock::now();
                 for (size_t j = 0; j < buffer.size(); j += stepSize)
                 {
-                    buffer[j].ID *= 2;
+                    buffer[j].id *= 2;
                 }
                 auto end = std::chrono::high_resolution_clock::now();
                 // store the time difference between start and end
@@ -51,12 +51,12 @@ namespace dae
             }
             times.push_back(static_cast<float>(sum) / static_cast<float>(tempTimes.size()));
         }
-        m_Data = times;
+        data_ = times;
     }
 
-    void TrashTheCacheManager::CalculateDataAlt()
+    void trash_the_cache_manager::calculate_data_alt()
     {
-        std::vector<GameObject3DAlt> buffer(m_sample);
+        std::vector<game_object_3d_alt> buffer(sample_);
         int stepSize = 1;
 
         // vector for storing time
@@ -71,7 +71,7 @@ namespace dae
                 auto start = std::chrono::high_resolution_clock::now();
                 for (size_t j = 0; j < buffer.size(); j += stepSize)
                 {
-                    buffer[j].ID *= 2;
+                    buffer[j].id *= 2;
                 }
                 auto end = std::chrono::high_resolution_clock::now();
                 // store the time difference between start and end
@@ -91,6 +91,6 @@ namespace dae
             }
             times.push_back(static_cast<float>(sum) / static_cast<float>(tempTimes.size()));
         }
-        m_DataAlt = times;
+        data_alt_ = times;
     }
 }

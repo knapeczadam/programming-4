@@ -5,19 +5,19 @@
 
 namespace dae
 {
-    class UIComponent : public BaseComponent
+    class ui_component : public base_component
     {
     public:
-        UIComponent() = default;
-        virtual ~UIComponent() override = default;
+        ui_component() = default;
+        ~ui_component() override = default;
 
-        UIComponent(const UIComponent& other)            = delete;
-        UIComponent(UIComponent&& other)                 = delete;
-        UIComponent& operator=(const UIComponent& other) = delete;
-        UIComponent& operator=(UIComponent&& other)      = delete;
-        
-        virtual ComponentFamily GetFamily() const override { return ComponentFamily::UI; }
+        ui_component(const ui_component& other)            = delete;
+        ui_component(ui_component&& other)                 = delete;
+        ui_component& operator=(const ui_component& other) = delete;
+        ui_component& operator=(ui_component&& other)      = delete;
 
-        virtual void RenderUI() const = 0;
+        [[nodiscard]] auto get_family() const -> component_family override { return component_family::ui; }
+
+        virtual void render_ui() const = 0;
     };
 }

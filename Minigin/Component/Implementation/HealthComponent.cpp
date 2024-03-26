@@ -2,11 +2,11 @@
 
 namespace dae
 {
-    void HealthComponent::TakeDamage(int damage)
+    void health_component::take_damage(const int damage)
     {
-        if (m_Health <= 0)
+        if (health_ <= 0)
             return;
-        m_Health -= damage;
-        NotifyObservers("HealthChanged");
+        health_ -= damage;
+        notify_observers("HealthChanged");
     }
 }

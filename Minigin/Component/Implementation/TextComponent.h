@@ -11,32 +11,32 @@
 namespace dae
 {
     // Forward declarations
-    class Font;
-    class Texture2D;
+    class game_font;
+    class texture_2d;
 
-    class TextComponent : public UIComponent
+    class text_component : public ui_component
     {
     public:
-        TextComponent() = default;
-        virtual ~TextComponent() override = default;
+        text_component() = default;
+        ~text_component() override = default;
         
-        TextComponent(const TextComponent& other)            = delete;
-        TextComponent(TextComponent&& other)                 = delete;
-        TextComponent& operator=(const TextComponent& other) = delete;
-        TextComponent& operator=(TextComponent&& other)      = delete;
+        text_component(const text_component& other)            = delete;
+        text_component(text_component&& other)                 = delete;
+        text_component& operator=(const text_component& other) = delete;
+        text_component& operator=(text_component&& other)      = delete;
         
-        virtual void Update() override;
-        virtual void RenderUI() const override;
+        void update() override;
+        void render_ui() const override;
 
-        auto GetText() const -> const std::string& { return m_text; }
-        void SetText(const std::string& text);
-        void SetFont(Font* font);
-        void SetFont(const std::string& font, unsigned int size);
+        [[nodiscard]] auto get_text() const -> const std::string& { return text_; }
+        void set_text(const std::string& text);
+        void set_font(game_font* font);
+        void set_font(const std::string& font, unsigned int size);
 
     private:
-        bool m_needsUpdate = true;
-        std::string m_text;
-        Font* m_font = nullptr;
-        std::unique_ptr<Texture2D> m_textTexture = nullptr;
+        bool needs_update_ = true;
+        std::string text_;
+        game_font* font_ = nullptr;
+        std::unique_ptr<texture_2d> text_texture_ = nullptr;
     };
 }

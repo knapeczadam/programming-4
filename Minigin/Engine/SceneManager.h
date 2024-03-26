@@ -11,26 +11,32 @@
 namespace dae
 {
     // Forward declarations
-    class Scene;
+    class scene;
 
     // Type aliases
-    using ScenePtr = std::unique_ptr<Scene>;
+    using scene_ptr = std::unique_ptr<scene>;
     
-    class SceneManager final : public Singleton<SceneManager>
+    class scene_manager final : public singleton<scene_manager>
     {
     public:
-        ~SceneManager() override;
-        Scene* CreateScene(const std::string& name);
+        ~scene_manager() override;
 
-        void Update();
-        void LateUpdate();
-        void Render();
-        void RenderUI();
+        scene_manager(const scene_manager& other)            = delete;
+        scene_manager(scene_manager&& other)                 = delete;
+        scene_manager& operator=(const scene_manager& other) = delete;
+        scene_manager& operator=(scene_manager&& other)      = delete;
+        
+        auto create_scene(const std::string& name) -> scene*;
+
+        void update();
+        void late_update();
+        void render();
+        void render_ui();
 
     private:
-        friend class Singleton<SceneManager>;
-        SceneManager();
+        friend class singleton<scene_manager>;
+        scene_manager();
         
-        std::vector<ScenePtr> m_scenes;
+        std::vector<scene_ptr> scenes_;
     };
 }

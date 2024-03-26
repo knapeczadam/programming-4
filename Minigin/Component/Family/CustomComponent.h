@@ -5,17 +5,17 @@
 
 namespace dae
 {
-    class CustomComponent : public BaseComponent
+    class custom_component : public base_component
     {
     public:
-        CustomComponent() = default;
-        virtual ~CustomComponent() override = default;
+        custom_component() = default;
+        ~custom_component() override = default;
 
-        CustomComponent(const CustomComponent& other)            = delete;
-        CustomComponent(CustomComponent&& other)                 = delete;
-        CustomComponent& operator=(const CustomComponent& other) = delete;
-        CustomComponent& operator=(CustomComponent&& other)      = delete;
+        custom_component(const custom_component& other)            = delete;
+        custom_component(custom_component&& other)                 = delete;
+        custom_component& operator=(const custom_component& other) = delete;
+        custom_component& operator=(custom_component&& other)      = delete;
 
-        ComponentFamily GetFamily() const override { return ComponentFamily::Custom; }
+        [[nodiscard]] auto get_family() const -> component_family override { return component_family::custom; }
     };
 }

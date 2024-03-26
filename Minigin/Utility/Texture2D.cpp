@@ -5,25 +5,25 @@
 
 namespace dae
 {
-    Texture2D::~Texture2D()
+    texture_2d::~texture_2d()
     {
-        SDL_DestroyTexture(m_texture);
+        SDL_DestroyTexture(texture_);
     }
 
-    glm::ivec2 Texture2D::GetSize() const
+    auto texture_2d::get_size() const -> glm::ivec2
     {
         SDL_Rect dst;
-        SDL_QueryTexture(GetSDLTexture(), nullptr, nullptr, &dst.w, &dst.h);
+        SDL_QueryTexture(get_sdl_texture(), nullptr, nullptr, &dst.w, &dst.h);
         return {dst.w, dst.h};
     }
 
-    SDL_Texture* Texture2D::GetSDLTexture() const
+    auto texture_2d::get_sdl_texture() const -> SDL_Texture*
     {
-        return m_texture;
+        return texture_;
     }
 
-    Texture2D::Texture2D(SDL_Texture* texture)
+    texture_2d::texture_2d(SDL_Texture* texture)
     {
-        m_texture = texture;
+        texture_ = texture;
     }
 }

@@ -8,17 +8,17 @@
 
 namespace dae
 {
-    void FPSComponent::Update()
+    void fps_component::update()
     {
-        TextComponent::Update();
+        text_component::update();
 
         // TODO: calculate fps on average
         // TODO: use stringstream
-        std::string fps = std::to_string(1.0f / GameTime::GetInstance().deltaTime);
+        std::string fps = std::to_string(1.0f / game_time::get_instance().delta_time_);
         fps = fps.substr(0, fps.find('.') + 2);
         fps += " fps";
         
-        SetText(fps);
+        set_text(fps);
 
         /*
          * delay = getDeltaTime();

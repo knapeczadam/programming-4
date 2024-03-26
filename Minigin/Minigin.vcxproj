@@ -208,8 +208,10 @@
     <ClInclude Include="Core\GameObject.h" />
     <ClInclude Include="Core\GameObject.hpp" />
     <ClInclude Include="Core\IObserver.h" />
-    <ClInclude Include="Engine\Input\Command.h" />
+    <ClInclude Include="Engine\Input\generic_command.h" />
+    <ClInclude Include="Engine\Input\game_command.h" />
     <ClInclude Include="Engine\Input\GameActorCommand.h" />
+    <ClInclude Include="Engine\Input\game_component_command.h" />
     <ClInclude Include="Engine\Input\IInputImpl.h" />
     <ClInclude Include="Engine\Input\InputManager.h" />
     <ClInclude Include="Engine\Input\SDLInputImpl.h" />
@@ -225,7 +227,7 @@
     <ClInclude Include="Test\Test2Component.h" />
     <ClInclude Include="Test\TestComponent.h" />
     <ClInclude Include="Test\TestManager.h" />
-    <ClInclude Include="Utility\Font.h" />
+    <ClInclude Include="Utility\game_font.h" />
     <ClInclude Include="Utility\Singleton.h" />
     <ClInclude Include="Utility\Texture2D.h" />
     <ClInclude Include="Utility\Transform.h" />
@@ -251,7 +253,9 @@
     <ClCompile Include="Component\Implementation\TrashTheCacheComponent.cpp" />
     <ClCompile Include="Core\GameObject.cpp" />
     <ClCompile Include="Core\IObserver.cpp" />
+    <ClCompile Include="Engine\Input\generic_command.cpp" />
     <ClCompile Include="Engine\Input\GameActorCommand.cpp" />
+    <ClCompile Include="Engine\Input\game_component_command.cpp" />
     <ClCompile Include="Engine\Input\InputManager.cpp" />
     <ClCompile Include="Engine\Input\SDLInputImpl.cpp" />
     <ClCompile Include="Engine\Input\XInputImpl.cpp" />
@@ -265,7 +269,7 @@
     <ClCompile Include="Test\TestManager.cpp" />
     <ClCompile Include="Test\Test1Component.h" />
     <ClCompile Include="Test\TestXInput.cpp" />
-    <ClCompile Include="Utility\Font.cpp" />
+    <ClCompile Include="Utility\game_font.cpp" />
     <ClCompile Include="Utility\Texture2D.cpp" />
     <ClCompile Include="Utility\Transform.cpp" />
     <ClCompile Include="Main.cpp" />

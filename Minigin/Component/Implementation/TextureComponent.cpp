@@ -7,22 +7,22 @@
 
 namespace dae
 {
-    TextureComponent::TextureComponent(const std::string& filename)
-        : m_texture(ResourceManager::GetInstance().LoadTexture(filename))
+    texture_component::texture_component(const std::string& filename)
+        : m_texture_(resource_manager::get_instance().load_texture(filename))
     {
     }
 
-    void TextureComponent::Render() const
+    void texture_component::render() const
     {
-        if (m_texture)
+        if (m_texture_)
         {
-            const auto& pos = GetOwner()->GetWorldPosition();
-            Renderer::GetInstance().RenderTexture(*m_texture, pos.x, pos.y);
+            const auto& pos = get_owner()->get_world_position();
+            renderer::get_instance().render_texture(*m_texture_, pos.x, pos.y);
         }
     }
 
-    void TextureComponent::SetTexture(const std::string& filename)
+    void texture_component::set_texture(const std::string& filename)
     {
-        m_texture = ResourceManager::GetInstance().LoadTexture(filename);
+        m_texture_ = resource_manager::get_instance().load_texture(filename);
     }
 }

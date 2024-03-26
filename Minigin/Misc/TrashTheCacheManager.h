@@ -8,7 +8,7 @@
 
 namespace dae
 {
-    struct TransformDummy
+    struct transform_dummy
     {
         float matrix[16] = {
             1, 0, 0, 0,
@@ -18,34 +18,34 @@ namespace dae
         };
     };
 
-    struct GameObject3D
+    struct game_object_3d
     {
-        TransformDummy transform{};
-        int ID{1};
+        transform_dummy transform{};
+        int id{1};
     };
 
-    struct GameObject3DAlt
+    struct game_object_3d_alt
     {
-        TransformDummy* transform{};
-        int ID{1};
+        transform_dummy* transform{};
+        int id{1};
     };
     
-    class TrashTheCacheManager final : public dae::Singleton<TrashTheCacheManager>
+    class trash_the_cache_manager final : public dae::singleton<trash_the_cache_manager>
     {
     public:
-        void CalculateData();
-        void CalculateDataAlt();
+        void calculate_data();
+        void calculate_data_alt();
         
-        std::vector<float>& GetData() { return m_Data; }
-        std::vector<float>& GetDataAlt() { return m_DataAlt; }
+        auto get_data() -> std::vector<float>& { return data_; }
+        auto get_data_alt() -> std::vector<float>& { return data_alt_; }
 
     private:
-        friend class dae::Singleton<TrashTheCacheManager>;
-        TrashTheCacheManager() = default;
+        friend class dae::singleton<trash_the_cache_manager>;
+        trash_the_cache_manager() = default;
         
-        std::vector<float> m_Data;
-        std::vector<float> m_DataAlt;
+        std::vector<float> data_;
+        std::vector<float> data_alt_;
 
-        const int m_sample = 20'000'000;
+        const int sample_ = 20'000'000;
     };
 }

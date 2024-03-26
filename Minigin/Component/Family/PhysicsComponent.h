@@ -5,19 +5,19 @@
 
 namespace dae
 {
-    class PhysicsComponent : public BaseComponent
+    class physics_component : public base_component
     {
     public:
-        PhysicsComponent() = default;
-        virtual ~PhysicsComponent() override = default;
+        physics_component() = default;
+        ~physics_component() override = default;
 
-        PhysicsComponent(const PhysicsComponent& other)            = delete;
-        PhysicsComponent(PhysicsComponent&& other)                 = delete;
-        PhysicsComponent& operator=(const PhysicsComponent& other) = delete;
-        PhysicsComponent& operator=(PhysicsComponent&& other)      = delete;
+        physics_component(const physics_component& other)            = delete;
+        physics_component(physics_component&& other)                 = delete;
+        physics_component& operator=(const physics_component& other) = delete;
+        physics_component& operator=(physics_component&& other)      = delete;
 
-        virtual ComponentFamily GetFamily() const override { return ComponentFamily::Physics; }
+        [[nodiscard]] auto get_family() const -> component_family override { return component_family::physics; }
         
-        virtual void FixedUpdate() = 0;
+        virtual void fixed_update() = 0;
     };
 }

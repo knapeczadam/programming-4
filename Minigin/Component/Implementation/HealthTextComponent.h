@@ -4,17 +4,17 @@
 
 namespace dae
 {
-    class HealthTextComponent final : public TextComponent, public IObserver
+    class health_text_component final : public text_component, public i_observer
     {
     public:
-        HealthTextComponent() = default;
-        virtual ~HealthTextComponent() override = default;
+        health_text_component() = default;
+        ~health_text_component() override = default;
 
-        HealthTextComponent(const HealthTextComponent& other)            = delete;
-        HealthTextComponent(HealthTextComponent&& other)                 = delete;
-        HealthTextComponent& operator=(const HealthTextComponent& other) = delete;
-        HealthTextComponent& operator=(HealthTextComponent&& other)      = delete;
+        health_text_component(const health_text_component& other)            = delete;
+        health_text_component(health_text_component&& other)                 = delete;
+        health_text_component& operator=(const health_text_component& other) = delete;
+        health_text_component& operator=(health_text_component&& other)      = delete;
         
-        void Notify(const std::string& event, Subject* subject) override;
+        void notify(const std::string& event, subject* subject) override;
     };
 }

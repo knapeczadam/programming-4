@@ -1,97 +1,59 @@
 ﻿#pragma once
 
 // Project includes
-#include "Command.h"
+#include "game_command.h"
 
 // GLM includes
 #include <glm/glm.hpp>
 
 namespace dae
 {
-    class GameActorCommand : public Command
+    // Forward declarations
+    class game_object;
+    
+    class game_object_command : public game_command
     {
     public:
-        GameActorCommand(void* gameActorPtr) : m_GameActorPtr(gameActorPtr)
+        explicit game_object_command(game_object* game_object_ptr) : game_object_ptr_(game_object_ptr)
         {
         }
 
-        virtual ~GameActorCommand() override = default;
+        ~game_object_command() override = default;
 
-        GameActorCommand(const GameActorCommand& other) = delete;
-        GameActorCommand(GameActorCommand&& other) = delete;
-        GameActorCommand& operator=(const GameActorCommand& other) = delete;
-        GameActorCommand& operator=(GameActorCommand&& other) = delete;
+        game_object_command(const game_object_command& other) = delete;
+        game_object_command(game_object_command&& other) = delete;
+        game_object_command& operator=(const game_object_command& other) = delete;
+        game_object_command& operator=(game_object_command&& other) = delete;
 
     protected:
-        void* GetGameActor() const { return m_GameActorPtr; }
+        auto get_game_actor() const -> game_object* { return game_object_ptr_; }
 
     private:
-        void* m_GameActorPtr = nullptr;
+        game_object* game_object_ptr_ = nullptr;
     };
 
     // MoveCommand
-    class MoveCommand final : public GameActorCommand
+    class move_command final : public game_object_command
     {
     public:
-        MoveCommand(void* gameActorPtr, const glm::vec3& direction)
-            : GameActorCommand(gameActorPtr)
-            , m_Direction(direction)
+        move_command(game_object* game_object_ptr, const glm::vec3& direction)
+            : game_object_command(game_object_ptr)
+            , direction_(direction)
         {
         }
         
-        MoveCommand(void* gameActorPtr, const glm::vec2& direction)
-            : GameActorCommand(gameActorPtr)
-            , m_Direction(glm::vec3(direction, 0.0f))
+        move_command(game_object* game_object_ptr, const glm::vec2& direction)
+            : game_object_command(game_object_ptr)
+            , direction_(glm::vec3(direction, 0.0f))
         {
         }
         
-        virtual void Execute() override;
+        void execute() override;
 
     private:
-        glm::vec3 m_Direction {1.0f, 0.0f, 0.0f};
-        float m_Speed{ 1.0f };
+        glm::vec3 direction_ {1.0f, 0.0f, 0.0f};
+        float speed_{ 1.0f };
     };
 
-    // HealthCommand
-    class DamageCommand final : public GameActorCommand
-    {
-    public:
-        DamageCommand(void* gameActorPtr, int damage = 1)
-            : GameActorCommand(gameActorPtr)
-            , m_Damage(damage)
-        {
-        }
-        void Execute() override;
 
-    private:
-        int m_Damage = 1;
-    };
-
-    // ScoreCommand
-    class ScoreCommand final : public GameActorCommand
-    {
-    public:
-        ScoreCommand(void* gameActorPtr, int score)
-            : GameActorCommand(gameActorPtr)
-            , m_Score(score)
-        {
-        }
-
-        void Execute() override;
-
-    private:
-        int m_Score = 0;
-    };
-
-    // ResetAchievementsCommand
-    class ResetAchievementsCommand final : public GameActorCommand
-    {
-    public:
-        ResetAchievementsCommand(void* gameActorPtr)
-            : GameActorCommand(gameActorPtr)
-        {
-        }
-
-        void Execute() override;
-    };
 }

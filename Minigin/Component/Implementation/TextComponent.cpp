@@ -3,7 +3,7 @@
 // Project includes
 #include "GameObject.h"
 #include "Renderer.h"
-#include "Font.h"
+#include "game_font.h"
 #include "Texture2D.h"
 
 // Standard includes
@@ -17,55 +17,55 @@
 
 namespace dae
 {
-    void TextComponent::Update()
+    void text_component::update()
     {
-        if (m_needsUpdate)
+        if (needs_update_)
         {
             constexpr SDL_Color color = {255, 255, 255, 255}; // only white text is supported now
-            const auto surf = TTF_RenderText_Blended_Wrapped(m_font->GetFont(), m_text.c_str(), color, 9999);
+            const auto surf = TTF_RenderText_Blended_Wrapped(font_->get_font(), text_.c_str(), color, 9999);
             if (surf == nullptr)
             {
                 throw std::runtime_error(std::string("Render text failed: ") + SDL_GetError());
             }
         
-            auto texture = SDL_CreateTextureFromSurface(Renderer::GetInstance().GetSDLRenderer(), surf);
+            auto texture = SDL_CreateTextureFromSurface(renderer::get_instance().get_sdl_renderer(), surf);
             if (texture == nullptr)
             {
                 throw std::runtime_error(std::string("Create text texture from surface failed: ") + SDL_GetError());
             }
         
             SDL_FreeSurface(surf);
-            m_textTexture.reset();
-            m_textTexture = std::make_unique<Texture2D>(texture);
-            m_needsUpdate = false;
+            text_texture_.reset();
+            text_texture_ = std::make_unique<texture_2d>(texture);
+            needs_update_ = false;
         }
     }
 
-    void TextComponent::RenderUI() const
+    void text_component::render_ui() const
     {
-        if (m_textTexture)
+        if (text_texture_)
         {
-            const auto& pos = GetOwner()->GetWorldPosition();
-            Renderer::GetInstance().RenderTexture(*m_textTexture, pos.x, pos.y);
+            const auto& pos = get_owner()->get_world_position();
+            renderer::get_instance().render_texture(*text_texture_, pos.x, pos.y);
         }
     }
 
     // This implementation uses the "dirty flag" pattern
-    void TextComponent::SetText(const std::string& text)
+    void text_component::set_text(const std::string& text)
     {
-        m_text = text;
-        m_needsUpdate = true;
+        text_ = text;
+        needs_update_ = true;
     }
 
-    void TextComponent::SetFont(Font* font)
+    void text_component::set_font(game_font* font)
     {
-        m_font = font;
-        m_needsUpdate = true;
+        font_ = font;
+        needs_update_ = true;
     }
 
-    void TextComponent::SetFont(const std::string& font, unsigned size)
+    void text_component::set_font(const std::string& font, unsigned size)
     {
-        m_font = ResourceManager::GetInstance().LoadFont(font, size);
-        m_needsUpdate = true;
+        font_ = resource_manager::get_instance().load_font(font, size);
+        needs_update_ = true;
     }
 }

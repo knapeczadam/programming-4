@@ -1,7 +1,7 @@
 #pragma once
 
 // Project includes
-#include "Font.h"
+#include "game_font.h"
 #include "Singleton.h"
 #include "Texture2D.h"
 
@@ -16,19 +16,19 @@ namespace dae
     // class Texture2D;
     // class Font;
 
-    class ResourceManager final : public Singleton<ResourceManager>
+    class resource_manager final : public singleton<resource_manager>
     {
     public:
-        void Init(const std::string& data);
-        Texture2D* LoadTexture(const std::string& file);
-        Font* LoadFont(const std::string& file, unsigned int size);
+        void init(const std::string& data_path);
+        auto load_texture(const std::string& file) -> texture_2d*;
+        auto load_font(const std::string& file, unsigned int size) -> game_font*;
 
     private:
-        friend class Singleton<ResourceManager>;
-        ResourceManager() = default;
-        std::string m_dataPath;
+        friend class singleton<resource_manager>;
+        resource_manager() = default;
+        std::string data_path_;
 
-        std::unordered_map<std::string, std::unique_ptr<Texture2D>> m_textures{};
-        std::unordered_multimap<std::string, std::pair<unsigned int, std::unique_ptr<Font>>> m_fonts{};
+        std::unordered_map<std::string, std::unique_ptr<texture_2d>> textures_{};
+        std::unordered_multimap<std::string, std::pair<unsigned int, std::unique_ptr<game_font>>> fonts_{};
     };
 }

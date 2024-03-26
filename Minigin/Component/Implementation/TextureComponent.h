@@ -10,25 +10,25 @@
 namespace dae
 {
     // Forward declarations
-    class Texture2D;
+    class texture_2d;
     
-    class TextureComponent final : public RenderingComponent
+    class texture_component final : public rendering_component
     {
     public:
-        TextureComponent() = default;
-        TextureComponent(const std::string& filename);
-        virtual ~TextureComponent() override = default;
+        texture_component() = default;
+        explicit texture_component(const std::string& filename);
+        ~texture_component() override = default;
 
-        TextureComponent(const TextureComponent& other)            = delete;
-        TextureComponent(TextureComponent&& other)                 = delete;
-        TextureComponent& operator=(const TextureComponent& other) = delete;
-        TextureComponent& operator=(TextureComponent&& other)      = delete;
+        texture_component(const texture_component& other)            = delete;
+        texture_component(texture_component&& other)                 = delete;
+        texture_component& operator=(const texture_component& other) = delete;
+        texture_component& operator=(texture_component&& other)      = delete;
 
-        virtual void Render() const override;
+        void render() const override;
         
-        void SetTexture(const std::string& filename);
+        void set_texture(const std::string& filename);
         
     private:
-        Texture2D* m_texture = nullptr;
+        texture_2d* m_texture_ = nullptr;
     };
 }

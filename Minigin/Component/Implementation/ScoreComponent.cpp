@@ -5,13 +5,13 @@
 
 namespace dae
 {
-    void ScoreComponent::AddScore(int score)
+    void score_component::add_score(int score)
     {
-        m_Score += score;
-        NotifyObservers("ScoreChanged");
-        if (m_Score >= 500)
+        score_ += score;
+        notify_observers("ScoreChanged");
+        if (score_ >= 500)
         {
-	        g_SteamAchievements->SetAchievement("ACH_WIN_ONE_GAME");
+	        g_steam_achievements->SetAchievement("ACH_WIN_ONE_GAME");
         }
     }
 }

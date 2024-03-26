@@ -5,17 +5,17 @@
 
 namespace dae
 {
-    class FPSComponent final : public TextComponent
+    class fps_component final : public text_component
     {
     public:
-        FPSComponent() = default;
-        virtual ~FPSComponent() override = default;
+        fps_component() = default;
+        ~fps_component() override = default;
 
-        FPSComponent(const FPSComponent& other)            = delete;
-        FPSComponent(FPSComponent&& other)                 = delete;
-        FPSComponent& operator=(const FPSComponent& other) = delete;
-        FPSComponent& operator=(FPSComponent&& other)      = delete;
+        fps_component(const fps_component& other)            = delete;
+        fps_component(fps_component&& other)                 = delete;
+        fps_component& operator=(const fps_component& other) = delete;
+        fps_component& operator=(fps_component&& other)      = delete;
 
-        virtual void Update() override;
+        void update() override;
     };
 }

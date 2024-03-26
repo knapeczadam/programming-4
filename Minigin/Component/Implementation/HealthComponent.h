@@ -6,23 +6,23 @@
 
 namespace dae
 {
-    class HealthComponent final : public CustomComponent, public Subject
+    class health_component final : public custom_component, public subject
     {
     public:
-        HealthComponent() = default;
-        virtual ~HealthComponent() override = default;
+        health_component() = default;
+        ~health_component() override = default;
         
-        HealthComponent(const HealthComponent& other)            = delete;
-        HealthComponent(HealthComponent&& other)                 = delete;
-        HealthComponent& operator=(const HealthComponent& other) = delete;
-        HealthComponent& operator=(HealthComponent&& other)      = delete;
+        health_component(const health_component& other)            = delete;
+        health_component(health_component&& other)                 = delete;
+        health_component& operator=(const health_component& other) = delete;
+        health_component& operator=(health_component&& other)      = delete;
 
-        void TakeDamage(int damage);
-        auto GetHealth() const -> int { return m_Health; }
+        void take_damage(const int damage);
+        [[nodiscard]] auto get_health() const -> int { return health_; }
 
-        static auto GetInitialHealth() -> int { return 3; }
+        static auto get_initial_health() -> int { return 3; }
 
     private:
-        int m_Health = GetInitialHealth();
+        int health_ = get_initial_health();
     };
 }

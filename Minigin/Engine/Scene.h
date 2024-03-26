@@ -8,41 +8,41 @@
 namespace dae
 {
     // Forward declarations
-    class GameObject;
-    class SceneManager;
+    class game_object;
+    class scene_manager;
 
     // Type aliases
-    using GameObjectPtr = std::unique_ptr<GameObject>;
+    using game_object_ptr = std::unique_ptr<game_object>;
     
-    class Scene final
+    class scene final
     {
-        friend class SceneManager;
+        friend class scene_manager;
 
     public:
-        ~Scene();
+        ~scene();
         
-        Scene(const Scene& other)            = delete;
-        Scene(Scene&& other)                 = delete;
-        Scene& operator=(const Scene& other) = delete;
-        Scene& operator=(Scene&& other)      = delete;
+        scene(const scene& other)            = delete;
+        scene(scene&& other)                 = delete;
+        scene& operator=(const scene& other) = delete;
+        scene& operator=(scene&& other)      = delete;
 
-        GameObject* AddGameObject(const std::string& name = "New Game Object");
-        void RemoveGameObject(GameObject* object);
-        void RemoveAll();
-        int GetGameObjectCount() const;
-        GameObject* FindGameObject(const std::string& name) const;
+        auto add_game_object(const std::string& name = "New Game Object") -> game_object*;
+        void remove_game_object(game_object* object);
+        void remove_all();
+        auto get_game_object_count() const -> int;
+        auto find_game_object(const std::string& name) const -> game_object*;
 
-        void Update();
-        void LateUpdate();
-        void Render() const;
-        void RenderUI() const;
+        void update();
+        void late_update();
+        void render() const;
+        void render_ui() const;
 
     private:
-        explicit Scene(std::string name);
+        explicit scene(std::string name);
 
-        std::string m_name;
-        std::vector<GameObjectPtr> m_objects{};
+        std::string name_;
+        std::vector<game_object_ptr> objects_{};
 
-        static unsigned int m_idCounter;
+        static unsigned int id_counter_;
     };
 }

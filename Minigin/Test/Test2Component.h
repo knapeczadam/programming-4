@@ -5,17 +5,17 @@
 
 namespace dae
 {
-    class Test2Component : public TestComponent
+    class test2_component : public test_component
     {
     public:
-        Test2Component() = default;
-        virtual ~Test2Component() override = default;
+        test2_component() = default;
+        ~test2_component() override = default;
 
-        Test2Component(const Test2Component& other)            = delete;
-        Test2Component(Test2Component&& other)                 = delete;
-        Test2Component& operator=(const Test2Component& other) = delete;
-        Test2Component& operator=(Test2Component&& other)      = delete;
+        test2_component(const test2_component& other)            = delete;
+        test2_component(test2_component&& other)                 = delete;
+        test2_component& operator=(const test2_component& other) = delete;
+        test2_component& operator=(test2_component&& other)      = delete;
 
-        void Test() const override { }
+        void test() const override { }
     };
 }

@@ -12,27 +12,27 @@
 #include "backends/imgui_impl_opengl3.h"
 #include "backends/imgui_impl_sdl2.h"
 
-int GetOpenGLDriverIndex()
+int get_open_gl_driver_index()
 {
-    auto openglIndex = -1;
-    const auto driverCount = SDL_GetNumRenderDrivers();
-    for (auto i = 0; i < driverCount; i++)
+    auto opengl_index = -1;
+    const auto driver_count = SDL_GetNumRenderDrivers();
+    for (auto i = 0; i < driver_count; i++)
     {
         SDL_RendererInfo info;
         if (!SDL_GetRenderDriverInfo(i, &info))
             if (!strcmp(info.name, "opengl"))
-                openglIndex = i;
+                opengl_index = i;
     }
-    return openglIndex;
+    return opengl_index;
 }
 
 namespace dae
 {
-    void Renderer::Init(SDL_Window* window)
+    void renderer::init(SDL_Window* window)
     {
-        m_window = window;
-        m_renderer = SDL_CreateRenderer(window, GetOpenGLDriverIndex(), SDL_RENDERER_ACCELERATED);
-        if (m_renderer == nullptr)
+        window_ = window;
+        renderer_ = SDL_CreateRenderer(window, get_open_gl_driver_index(), SDL_RENDERER_ACCELERATED);
+        if (renderer_ == nullptr)
         {
             throw std::runtime_error(std::string("SDL_CreateRenderer Error: ") + SDL_GetError());
         }
@@ -43,41 +43,41 @@ namespace dae
         ImGui_ImplOpenGL3_Init();
     }
     
-    void Renderer::Render() const
+    void renderer::render() const
     {
-        const auto& color = GetBackgroundColor();
-        SDL_SetRenderDrawColor(m_renderer, color.r, color.g, color.b, color.a);
-        SDL_RenderClear(m_renderer);
+        const auto& color = get_background_color();
+        SDL_SetRenderDrawColor(renderer_, color.r, color.g, color.b, color.a);
+        SDL_RenderClear(renderer_);
 
-        SceneManager::GetInstance().Render();
-        SceneManager::GetInstance().RenderUI();
+        scene_manager::get_instance().render();
+        scene_manager::get_instance().render_ui();
 
-        SDL_RenderPresent(m_renderer);
+        SDL_RenderPresent(renderer_);
     }
 
-    void Renderer::Destroy()
+    void renderer::destroy()
     {
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplSDL2_Shutdown();
         ImGui::DestroyContext();
 
-        if (m_renderer != nullptr)
+        if (renderer_ != nullptr)
         {
-            SDL_DestroyRenderer(m_renderer);
-            m_renderer = nullptr;
+            SDL_DestroyRenderer(renderer_);
+            renderer_ = nullptr;
         }
     }
 
-    void Renderer::RenderTexture(const Texture2D& texture, const float x, const float y) const
+    void renderer::render_texture(const texture_2d& texture, const float x, const float y) const
     {
         SDL_Rect dst{};
         dst.x = static_cast<int>(x);
         dst.y = static_cast<int>(y);
-        SDL_QueryTexture(texture.GetSDLTexture(), nullptr, nullptr, &dst.w, &dst.h);
-        SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &dst);
+        SDL_QueryTexture(texture.get_sdl_texture(), nullptr, nullptr, &dst.w, &dst.h);
+        SDL_RenderCopy(get_sdl_renderer(), texture.get_sdl_texture(), nullptr, &dst);
     }
 
-    void Renderer::RenderTexture(const Texture2D& texture, const float x, const float y, const float width,
+    void renderer::render_texture(const texture_2d& texture, const float x, const float y, const float width,
                                  const float height) const
     {
         SDL_Rect dst{};
@@ -85,8 +85,8 @@ namespace dae
         dst.y = static_cast<int>(y);
         dst.w = static_cast<int>(width);
         dst.h = static_cast<int>(height);
-        SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &dst);
+        SDL_RenderCopy(get_sdl_renderer(), texture.get_sdl_texture(), nullptr, &dst);
     }
 
-    SDL_Renderer* Renderer::GetSDLRenderer() const { return m_renderer; }
+    auto renderer::get_sdl_renderer() const -> SDL_Renderer* { return renderer_; }
 }

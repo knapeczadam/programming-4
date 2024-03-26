@@ -11,7 +11,9 @@
 #include "FPSComponent.h"
 #include "GameObject.h"
 #include "GameActorCommand.h"
+#include "game_component_command.h"
 #include "HealthComponent.h"
+#include "generic_command.h"
 #include "HealthTextComponent.h"
 #include "InputManager.h"
 #include "Minigin.h"
@@ -42,150 +44,150 @@ void load()
 {
     using namespace dae;
 
-    const auto scene = SceneManager::GetInstance().CreateScene("Demo");
+    const auto scene = scene_manager::get_instance().create_scene("Demo");
     
     // Fonts
-    const auto fontMedium = ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
-    const auto fontSmall = ResourceManager::GetInstance().LoadFont("Lingua.otf", 16);
+    const auto font_medium = resource_manager::get_instance().load_font("Lingua.otf", 24);
+    const auto font_small = resource_manager::get_instance().load_font("Lingua.otf", 16);
 
     // Background
-    auto go = scene->AddGameObject();
-    go->AddComponent<TextureComponent>("background.tga");
+    auto go = scene->add_game_object();
+    go->add_component<texture_component>("background.tga");
 
     // Text
-    go = scene->AddGameObject();
-    go->SetLocalPosition(180.0f, 10.0f);
-    auto textComp = go->AddComponent<TextComponent>();
-    textComp->SetFont(fontMedium);
-    textComp->SetText("Programming 4 Assignment");
+    go = scene->add_game_object();
+    go->set_local_position(180.0f, 10.0f);
+    auto text_comp = go->add_component<text_component>();
+    text_comp->set_font(font_medium);
+    text_comp->set_text("Programming 4 Assignment");
 
     // FPS
-    go = scene->AddGameObject();
-    go->SetLocalPosition(10.0f, 10.0f);
-    const auto fpsComp = go->AddComponent<FPSComponent>();
-    fpsComp->SetFont(fontMedium);
-    fpsComp->SetText("FPS: ");
+    go = scene->add_game_object();
+    go->set_local_position(10.0f, 10.0f);
+    const auto fps_comp = go->add_component<fps_component>();
+    fps_comp->set_font(font_medium);
+    fps_comp->set_text("FPS: ");
     
     //---------------------------------------------------------------------------------
     // UI
     //---------------------------------------------------------------------------------
-    go = scene->AddGameObject("hint");
-    go->SetLocalPosition(10, 80);
-    textComp = go->AddComponent<TextComponent>();
-    textComp->SetFont(fontSmall);
-    textComp->SetText("Use the D-Pad to move Pacman, X to inflict damage, A and B to pick up pellets\n"
+    go = scene->add_game_object("hint");
+    go->set_local_position(10, 80);
+    text_comp = go->add_component<text_component>();
+    text_comp->set_font(font_small);
+    text_comp->set_text("Use the D-Pad to move Pacman, X to inflict damage, A and B to pick up pellets\n"
                       "Use WASD to move GHOST, C to inflict damage, Z and X to pick up pellets");
 
-    std::stringstream healthSS;
-    healthSS << "# lives: " << HealthComponent::GetInitialHealth();
+    std::stringstream health_ss;
+    health_ss << "# lives: " << health_component::get_initial_health();
 
-    std::stringstream scoreSS;
-    scoreSS << "Score: " << ScoreComponent::GetInitialScore();
+    std::stringstream score_ss;
+    score_ss << "Score: " << score_component::get_initial_score();
 
-    go = scene->AddGameObject("pacman_health");
-    go->SetLocalPosition(10, 120);
-    const auto pacmanHealthText = go->AddComponent<HealthTextComponent>();
-    pacmanHealthText->SetFont(fontSmall);
-    pacmanHealthText->SetText(healthSS.str());
+    go = scene->add_game_object("pacman_health");
+    go->set_local_position(10, 120);
+    const auto pacman_health_text = go->add_component<health_text_component>();
+    pacman_health_text->set_font(font_small);
+    pacman_health_text->set_text(health_ss.str());
 
-    go = scene->AddGameObject("pacman_score");
-    go->SetLocalPosition(10, 140);
-    const auto pacmanScoreText = go->AddComponent<ScoreTextComponent>();
-    pacmanScoreText->SetFont(fontSmall);
-    pacmanScoreText->SetText(scoreSS.str());
+    go = scene->add_game_object("pacman_score");
+    go->set_local_position(10, 140);
+    const auto pacman_score_text = go->add_component<score_text_component>();
+    pacman_score_text->set_font(font_small);
+    pacman_score_text->set_text(score_ss.str());
     
-    go = scene->AddGameObject("ghost_health");
-    go->SetLocalPosition(10, 160);
-    const auto ghostHealthText = go->AddComponent<HealthTextComponent>();
-    ghostHealthText->SetFont(fontSmall);
-    ghostHealthText->SetText(healthSS.str());
+    go = scene->add_game_object("ghost_health");
+    go->set_local_position(10, 160);
+    const auto ghost_health_text = go->add_component<health_text_component>();
+    ghost_health_text->set_font(font_small);
+    ghost_health_text->set_text(health_ss.str());
     
-    go = scene->AddGameObject("ghost_score");
-    go->SetLocalPosition(10, 180);
-    const auto ghostScoreText = go->AddComponent<ScoreTextComponent>();
-    ghostScoreText->SetFont(fontSmall);
-    ghostScoreText->SetText(scoreSS.str());
+    go = scene->add_game_object("ghost_score");
+    go->set_local_position(10, 180);
+    const auto ghost_score_text = go->add_component<score_text_component>();
+    ghost_score_text->set_font(font_small);
+    ghost_score_text->set_text(score_ss.str());
     
     //---------------------------------------------------------------------------------
     // PACMAN
     //---------------------------------------------------------------------------------
-    go = scene->AddGameObject("pacman");
-    go->SetLocalPosition(200.0f, 200.0f);
-    go->AddComponent<TextureComponent>("pacman.tga");
-    auto healthComp = go->AddComponent<HealthComponent>();
-    healthComp->AddObserver(pacmanHealthText);
-    auto scoreComp = go->AddComponent<ScoreComponent>();
-    scoreComp->AddObserver(pacmanScoreText);
+    go = scene->add_game_object("pacman");
+    go->set_local_position(200.0f, 200.0f);
+    go->add_component<texture_component>("pacman.tga");
+    auto health_comp = go->add_component<health_component>();
+    health_comp->add_observer(pacman_health_text);
+    auto score_comp = go->add_component<score_component>();
+    score_comp->add_observer(pacman_score_text);
 
     // Arrow keys
-    auto moveLeftCommand1  = std::make_unique<MoveCommand>(go, glm::vec2{-1, 0});
-    auto moveRightCommand1 = std::make_unique<MoveCommand>(go, glm::vec2{1, 0});
-    auto moveUpCommand1    = std::make_unique<MoveCommand>(go, glm::vec2{0, -1});
-    auto moveDownCommand1  = std::make_unique<MoveCommand>(go, glm::vec2{0, 1});
+    auto move_left_command1  = std::make_unique<move_command>(go, glm::vec2{-1, 0});
+    auto move_right_command1 = std::make_unique<move_command>(go, glm::vec2{1, 0});
+    auto move_up_command1    = std::make_unique<move_command>(go, glm::vec2{0, -1});
+    auto move_down_command1  = std::make_unique<move_command>(go, glm::vec2{0, 1});
     
-    InputManager::GetInstance().BindCommand(InputType::Keyboard, InputState::Down, Input::K_LEFT, std::move(moveLeftCommand1));
-    InputManager::GetInstance().BindCommand(InputType::Keyboard, InputState::Down, Input::K_RIGHT, std::move(moveRightCommand1));
-    InputManager::GetInstance().BindCommand(InputType::Keyboard, InputState::Down, Input::K_UP, std::move(moveUpCommand1));
-    InputManager::GetInstance().BindCommand(InputType::Keyboard, InputState::Down, Input::K_DOWN, std::move(moveDownCommand1));
+    input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_left, std::move(move_left_command1));
+    input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_right, std::move(move_right_command1));
+    input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_up, std::move(move_up_command1));
+    input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_down, std::move(move_down_command1));
 
     // Controller
-    auto moveLeftCommand3  = std::make_unique<MoveCommand>(go, glm::vec2{-1, 0});
-    auto moveRightCommand3 = std::make_unique<MoveCommand>(go, glm::vec2{1, 0});
-    auto moveUpCommand3    = std::make_unique<MoveCommand>(go, glm::vec2{0, -1});
-    auto moveDownCommand3  = std::make_unique<MoveCommand>(go, glm::vec2{0, 1});
+    auto move_left_command3  = std::make_unique<move_command>(go, glm::vec2{-1, 0});
+    auto move_right_command3 = std::make_unique<move_command>(go, glm::vec2{1, 0});
+    auto move_up_command3    = std::make_unique<move_command>(go, glm::vec2{0, -1});
+    auto move_down_command3  = std::make_unique<move_command>(go, glm::vec2{0, 1});
     
-    InputManager::GetInstance().BindCommand(InputType::Controller, InputState::Pressed, Input::C_LEFT, std::move(moveLeftCommand3));
-    InputManager::GetInstance().BindCommand(InputType::Controller, InputState::Pressed, Input::C_RIGHT, std::move(moveRightCommand3));
-    InputManager::GetInstance().BindCommand(InputType::Controller, InputState::Pressed, Input::C_UP, std::move(moveUpCommand3));
-    InputManager::GetInstance().BindCommand(InputType::Controller, InputState::Pressed, Input::C_DOWN, std::move(moveDownCommand3));
+    input_manager::get_instance().bind_command(input_type::controller, input_state::pressed, input::c_left, std::move(move_left_command3));
+    input_manager::get_instance().bind_command(input_type::controller, input_state::pressed, input::c_right, std::move(move_right_command3));
+    input_manager::get_instance().bind_command(input_type::controller, input_state::pressed, input::c_up, std::move(move_up_command3));
+    input_manager::get_instance().bind_command(input_type::controller, input_state::pressed, input::c_down, std::move(move_down_command3));
     
     // Damage
-    auto damageCommand1 = std::make_unique<DamageCommand>(healthComp);
-    InputManager::GetInstance().BindCommand(InputType::Controller, InputState::Down, Input::C_X, std::move(damageCommand1));
+    auto damage_command1 = std::make_unique<damage_command>(health_comp);
+    input_manager::get_instance().bind_command(input_type::controller, input_state::down, input::c_x, std::move(damage_command1));
     
     // Scores
-    auto scoreCommand1 = std::make_unique<ScoreCommand>(scoreComp, 10);
-    auto scoreCommand2 = std::make_unique<ScoreCommand>(scoreComp, 100);
+    auto score_command1 = std::make_unique<score_command>(score_comp, 10);
+    auto score_command2 = std::make_unique<score_command>(score_comp, 100);
     
-    InputManager::GetInstance().BindCommand(InputType::Controller, InputState::Down, Input::C_A, std::move(scoreCommand1));
-    InputManager::GetInstance().BindCommand(InputType::Controller, InputState::Down, Input::C_B, std::move(scoreCommand2));
+    input_manager::get_instance().bind_command(input_type::controller, input_state::down, input::c_a, std::move(score_command1));
+    input_manager::get_instance().bind_command(input_type::controller, input_state::down, input::c_b, std::move(score_command2));
 
     //---------------------------------------------------------------------------------
     // GHOST
     //---------------------------------------------------------------------------------
-    go = scene->AddGameObject("ghost");
-    go->SetLocalPosition(300.0f, 300.0f);
-    go->AddComponent<TextureComponent>("ghost.tga");
-    healthComp = go->AddComponent<HealthComponent>();
-    healthComp->AddObserver(ghostHealthText);
-    scoreComp = go->AddComponent<ScoreComponent>();
-    scoreComp->AddObserver(ghostScoreText);
+    go = scene->add_game_object("ghost");
+    go->set_local_position(300.0f, 300.0f);
+    go->add_component<texture_component>("ghost.tga");
+    health_comp = go->add_component<health_component>();
+    health_comp->add_observer(ghost_health_text);
+    score_comp = go->add_component<score_component>();
+    score_comp->add_observer(ghost_score_text);
     
     // WASD
-    auto moveLeftCommand2  = std::make_unique<MoveCommand>(go, glm::vec2{-1, 0});
-    auto moveRightCommand2 = std::make_unique<MoveCommand>(go, glm::vec2{1, 0});
-    auto moveUpCommand2    = std::make_unique<MoveCommand>(go, glm::vec2{0, -1});
-    auto moveDownCommand2  = std::make_unique<MoveCommand>(go, glm::vec2{0, 1});
+    auto move_left_command2  = std::make_unique<move_command>(go, glm::vec2{-1, 0});
+    auto move_right_command2 = std::make_unique<move_command>(go, glm::vec2{1, 0});
+    auto move_up_command2    = std::make_unique<move_command>(go, glm::vec2{0, -1});
+    auto move_down_command2  = std::make_unique<move_command>(go, glm::vec2{0, 1});
     
-    InputManager::GetInstance().BindCommand(InputType::Keyboard, InputState::Down, Input::K_a, std::move(moveLeftCommand2));
-    InputManager::GetInstance().BindCommand(InputType::Keyboard, InputState::Down, Input::K_d, std::move(moveRightCommand2));
-    InputManager::GetInstance().BindCommand(InputType::Keyboard, InputState::Down, Input::K_w, std::move(moveUpCommand2));
-    InputManager::GetInstance().BindCommand(InputType::Keyboard, InputState::Down, Input::K_s, std::move(moveDownCommand2));
+    input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_a, std::move(move_left_command2));
+    input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_d, std::move(move_right_command2));
+    input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_w, std::move(move_up_command2));
+    input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_s, std::move(move_down_command2));
 
     // Damage
-    auto damageCommand2 = std::make_unique<DamageCommand>(healthComp);
-    InputManager::GetInstance().BindCommand(InputType::Keyboard, InputState::Down, Input::K_c, std::move(damageCommand2));
+    auto damage_command2 = std::make_unique<damage_command>(health_comp);
+    input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_c, std::move(damage_command2));
 
     // Scores
-    auto scoreCommand3 = std::make_unique<ScoreCommand>(scoreComp, 10);
-    auto scoreCommand4 = std::make_unique<ScoreCommand>(scoreComp, 100);
+    auto score_command3 = std::make_unique<score_command>(score_comp, 10);
+    auto score_command4 = std::make_unique<score_command>(score_comp, 100);
     
-    InputManager::GetInstance().BindCommand(InputType::Keyboard, InputState::Down, Input::K_z, std::move(scoreCommand3));
-    InputManager::GetInstance().BindCommand(InputType::Keyboard, InputState::Down, Input::K_x, std::move(scoreCommand4));
+    input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_z, std::move(score_command3));
+    input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_x, std::move(score_command4));
 
 	// Reset Achievements
-	auto resetAchievementsCommand = std::make_unique<ResetAchievementsCommand>(g_SteamAchievements);
-	InputManager::GetInstance().BindCommand(InputType::Keyboard, InputState::Down, Input::K_r, std::move(resetAchievementsCommand));
+	auto reset_command = std::make_unique<reset_achievements_command>(g_steam_achievements);
+	input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_r, std::move(reset_command));
 }
 
 int main(int, char*[])
@@ -201,25 +203,25 @@ int main(int, char*[])
 		return 1;
 	}
 	std::cout << "Successfully initialized steam." << '\n';
-	g_SteamAchievements = new CSteamAchievements(g_Achievements, 1);
+	g_steam_achievements = new CSteamAchievements(g_Achievements, 1);
 
 	// ------------------------
 	// Minigin
 	// ------------------------
-    Minigin engine("../Data/");
+    minigin engine("../Data/");
 	
 #if defined(_DAE_DEBUG)
-    TestManager::GetInstance().RunAllTests();
+    test_manager::get_instance().run_all_tests();
 #endif
 	
-    engine.Run(load);
+    engine.run(load);
 
 	// ------------------------
 	// Steam - Cleanup
 	// ------------------------
     SteamAPI_Shutdown();
     // Delete the SteamAchievements object
-	delete g_SteamAchievements;
+	delete g_steam_achievements;
 	
     return 0;
 }

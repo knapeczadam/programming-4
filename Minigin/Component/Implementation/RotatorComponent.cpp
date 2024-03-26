@@ -5,14 +5,14 @@
 
 namespace dae
 {
-    void RotatorComponent::Update()
+    void rotator_component::update()
     {
-        const auto& pos = GetOwner()->GetLocalPosition();
-        const float cosAngle = glm::cos(glm::radians(m_rotationAngleDeg));
-        const float sinAngle = glm::sin(glm::radians(m_rotationAngleDeg));
-        const float newX = pos.x * cosAngle - pos.y * sinAngle;
-        const float newY = pos.x * sinAngle + pos.y * cosAngle;
-        GetOwner()->SetLocalPosition(newX, newY);
+        const auto& pos = get_owner()->get_local_position();
+        const float cos_angle = glm::cos(glm::radians(rotation_angle_deg_));
+        const float sin_angle = glm::sin(glm::radians(rotation_angle_deg_));
+        const float new_x = pos.x * cos_angle - pos.y * sin_angle;
+        const float new_y = pos.x * sin_angle + pos.y * cos_angle;
+        get_owner()->set_local_position(new_x, new_y);
         // TODO: delta time?
     }
 }

@@ -6,17 +6,17 @@
 
 namespace dae
 {
-    class Minigin
+    class minigin
     {
     public:
-        explicit Minigin(const std::string& dataPath);
-        ~Minigin();
+        explicit minigin(const std::string& dataPath);
+        ~minigin();
 
-        Minigin(const Minigin& other)            = delete;
-        Minigin(Minigin&& other)                 = delete;
-        Minigin& operator=(const Minigin& other) = delete;
-        Minigin& operator=(Minigin&& other)      = delete;
+        minigin(const minigin& other)            = delete;
+        minigin(minigin&& other)                 = delete;
+        minigin& operator=(const minigin& other) = delete;
+        minigin& operator=(minigin&& other)      = delete;
         
-        void Run(const std::function<void()>& load);
+        void run(const std::function<void()>& load);
     };
 }

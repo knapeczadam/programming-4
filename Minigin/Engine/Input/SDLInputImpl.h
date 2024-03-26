@@ -5,9 +5,9 @@
 
 namespace dae
 {
-    class SDLInputImpl : public IInputImpl
+    class sdl_input_impl : public i_input_impl
     {
     public:
-        auto DoProcessInput(std::vector<GameInputCommand> commands) -> bool override;
+        auto do_process_input(std::vector<game_input_command> commands) -> bool override;
     };
 }

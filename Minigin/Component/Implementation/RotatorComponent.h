@@ -5,21 +5,21 @@
 
 namespace dae
 {
-    class RotatorComponent final : public CustomComponent
+    class rotator_component final : public custom_component
     {
     public:
-        RotatorComponent() = default;
-        virtual ~RotatorComponent() override = default;
+        rotator_component() = default;
+        ~rotator_component() override = default;
 
-        RotatorComponent(const RotatorComponent& other) = delete;
-        RotatorComponent(RotatorComponent&& other) = delete;
-        RotatorComponent& operator=(const RotatorComponent& other) = delete;
-        RotatorComponent& operator=(RotatorComponent&& other) = delete;
+        rotator_component(const rotator_component& other) = delete;
+        rotator_component(rotator_component&& other) = delete;
+        rotator_component& operator=(const rotator_component& other) = delete;
+        rotator_component& operator=(rotator_component&& other) = delete;
 
-        void Update() override;
+        void update() override;
 
     private:
-        const float m_rotationAngleDeg = 1.0f;
+        const float rotation_angle_deg_ = 1.0f;
         
     };
 }

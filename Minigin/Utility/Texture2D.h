@@ -11,21 +11,21 @@ namespace dae
     /**
      * Simple RAII wrapper for an SDL_Texture
      */
-    class Texture2D final
+    class texture_2d final
     {
     public:
-        explicit Texture2D(SDL_Texture* texture);
-        ~Texture2D();
+        explicit texture_2d(SDL_Texture* texture);
+        ~texture_2d();
         
-        Texture2D(const Texture2D&)             = delete;
-        Texture2D(Texture2D&&)                  = delete;
-        Texture2D& operator=(const Texture2D&)  = delete;
-        Texture2D& operator=(const Texture2D&&) = delete;
+        texture_2d(const texture_2d&)             = delete;
+        texture_2d(texture_2d&&)                  = delete;
+        texture_2d& operator=(const texture_2d&)  = delete;
+        texture_2d& operator=(const texture_2d&&) = delete;
 
-        SDL_Texture* GetSDLTexture() const;
-        glm::ivec2 GetSize() const;
+        auto get_sdl_texture() const -> SDL_Texture*;
+        auto get_size() const -> glm::ivec2;
 
     private:
-        SDL_Texture* m_texture;
+        SDL_Texture* texture_;
     };
 }

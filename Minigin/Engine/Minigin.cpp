@@ -27,7 +27,7 @@
 
 SDL_Window* g_window{};
 
-void PrintSDLVersion()
+void print_sdl_version()
 {
     SDL_version version{};
     SDL_VERSION(&version);
@@ -57,9 +57,9 @@ void PrintSDLVersion()
 
 namespace dae
 {
-    Minigin::Minigin(const std::string& dataPath)
+    minigin::minigin(const std::string& dataPath)
     {
-        PrintSDLVersion();
+        print_sdl_version();
 
         if (SDL_Init(SDL_INIT_VIDEO) != 0)
         {
@@ -93,53 +93,53 @@ namespace dae
             throw std::runtime_error(std::string("SDL_CreateWindow Error: ") + SDL_GetError());
         }
 
-        Renderer::GetInstance().Init(g_window);
+        renderer::get_instance().init(g_window);
 
-        ResourceManager::GetInstance().Init(dataPath);
+        resource_manager::get_instance().init(dataPath);
     }
 
-    Minigin::~Minigin()
+    minigin::~minigin()
     {
-        Renderer::GetInstance().Destroy();
+        renderer::get_instance().destroy();
         SDL_DestroyWindow(g_window);
         g_window = nullptr;
         SDL_Quit();
     }
 
-    void Minigin::Run(const std::function<void()>& load)
+    void minigin::run(const std::function<void()>& load)
     {
         using namespace std::chrono;
         using namespace std::chrono_literals;
         
         load();
 
-        const auto& renderer = Renderer::GetInstance();
-        auto& sceneManager   = SceneManager::GetInstance();
-        auto& input          = InputManager::GetInstance();
+        const auto& renderer = renderer::get_instance();
+        auto& scene_manager   = scene_manager::get_instance();
+        const auto& input          = input_manager::get_instance();
 
-        bool doContinue = true;
-        auto lastTime = high_resolution_clock::now();
+        bool do_continue = true;
+        auto last_time = high_resolution_clock::now();
         float lag = 0.0f;
         
-        while (doContinue)
+        while (do_continue)
         {
-            const auto currentTime = high_resolution_clock::now();
-            GameTime::GetInstance().deltaTime = duration<float>(currentTime - lastTime).count();
+            const auto current_time = high_resolution_clock::now();
+            game_time::get_instance().delta_time_ = duration<float>(current_time - last_time).count();
             
-            lastTime = currentTime;
-            lag += GameTime::GetInstance().deltaTime;
+            last_time = current_time;
+            lag += game_time::get_instance().delta_time_;
             
-            doContinue = input.ProcessInput();
+            do_continue = input.process_input();
             // std::cout << "FPS: " << 1.0f / Time::deltaTime << "\n";
-            sceneManager.Update();
-            sceneManager.LateUpdate();
-            renderer.Render();
+            scene_manager.update();
+            scene_manager.late_update();
+            renderer.render();
 
             SteamAPI_RunCallbacks(); 
 
-            const auto sleepTime = currentTime + milliseconds(static_cast<long long>(GameTime::GetInstance().msPerFrame)) - high_resolution_clock::now();
+            const auto sleep_time = current_time + milliseconds(static_cast<long long>(game_time::get_instance().ms_per_frame_)) - high_resolution_clock::now();
 
-            std::this_thread::sleep_for(sleepTime);
+            std::this_thread::sleep_for(sleep_time);
         }
     }
 }
