@@ -9,7 +9,7 @@
 // Project includes
 #include "achievement.h"
 #include "fps_component.h"
-#include "game_component_command.h"
+#include "component_command.h"
 #include "game_object.h"
 #include "game_object_command.h"
 #include "generic_command.h"

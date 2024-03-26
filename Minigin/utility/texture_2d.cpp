@@ -1,4 +1,4 @@
-#include "texture_2D.h"
+#include "texture_2d.h"
 
 // SDL includes
 #include <SDL.h>

@@ -1,12 +1,12 @@
 ﻿#pragma once
 
 // Project includes
-#include "game_command.h"
+#include "base_command.h"
 
 namespace dae
 {
     // ResetAchievementsCommand
-    class reset_achievements_command final : public game_command
+    class reset_achievements_command final : public base_command
     {
     public:
         explicit reset_achievements_command(void* achievement_ptr)

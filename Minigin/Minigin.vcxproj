@@ -209,13 +209,13 @@
     <ClInclude Include="core\game_object.hpp" />
     <ClInclude Include="core\i_observer.h" />
     <ClInclude Include="engine\input\generic_command.h" />
-    <ClInclude Include="engine\input\game_command.h" />
+    <ClInclude Include="engine\input\base_command.h" />
     <ClInclude Include="engine\input\game_object_command.h" />
-    <ClInclude Include="engine\input\game_component_command.h" />
-    <ClInclude Include="engine\input\i_input_impl.h" />
+    <ClInclude Include="engine\input\component_command.h" />
+    <ClInclude Include="engine\input\i_input.h" />
     <ClInclude Include="engine\input\input_manager.h" />
-    <ClInclude Include="engine\input\sdl_input_impl.h" />
-    <ClInclude Include="engine\input\x_input_impl.h" />
+    <ClInclude Include="engine\input\sdl_input.h" />
+    <ClInclude Include="engine\input\x_input.h" />
     <ClInclude Include="engine\minigin.h" />
     <ClInclude Include="engine\renderer.h" />
     <ClInclude Include="engine\resource_manager.h" />
@@ -229,7 +229,7 @@
     <ClInclude Include="test\test_manager.h" />
     <ClInclude Include="utility\game_font.h" />
     <ClInclude Include="utility\singleton.h" />
-    <ClInclude Include="utility\texture_2D.h" />
+    <ClInclude Include="utility\texture_2d.h" />
     <ClInclude Include="utility\transform.h" />
   </ItemGroup>
   <ItemGroup>
@@ -255,10 +255,10 @@
     <ClCompile Include="core\i_observer.cpp" />
     <ClCompile Include="engine\input\generic_command.cpp" />
     <ClCompile Include="engine\input\game_object_command.cpp" />
-    <ClCompile Include="engine\input\game_component_command.cpp" />
+    <ClCompile Include="engine\input\component_command.cpp" />
     <ClCompile Include="engine\input\input_manager.cpp" />
-    <ClCompile Include="engine\input\sdl_input_impl.cpp" />
-    <ClCompile Include="engine\input\x_input_impl.cpp" />
+    <ClCompile Include="engine\input\sdl_input.cpp" />
+    <ClCompile Include="engine\input\x_input.cpp" />
     <ClCompile Include="engine\minigin.cpp" />
     <ClCompile Include="engine\renderer.cpp" />
     <ClCompile Include="engine\resource_manager.cpp" />
@@ -270,7 +270,7 @@
     <ClCompile Include="test\test1_component.h" />
     <ClCompile Include="test\test_x_input.cpp" />
     <ClCompile Include="utility\game_font.cpp" />
-    <ClCompile Include="utility\texture_2D.cpp" />
+    <ClCompile Include="utility\texture_2d.cpp" />
     <ClCompile Include="utility\transform.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>

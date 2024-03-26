@@ -5,7 +5,7 @@
 #include "game_object.h"
 #include "renderer.h"
 #include "resource_manager.h"
-#include "texture_2D.h"
+#include "texture_2d.h"
 
 // Standard includes
 #include <stdexcept>

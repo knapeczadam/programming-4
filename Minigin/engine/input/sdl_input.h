@@ -1,11 +1,11 @@
 ﻿#pragma once
 
 // Project includes
-#include "i_input_impl.h"
+#include "i_input.h"
 
 namespace dae
 {
-    class sdl_input_impl : public i_input_impl
+    class sdl_input : public i_input
     {
     public:
         auto do_process_input(std::vector<game_input_command> commands) -> bool override;

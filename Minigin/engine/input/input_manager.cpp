@@ -1,10 +1,10 @@
 #include "input_manager.h"
 
 // Project includes
-#include "game_command.h"
-#include "i_input_impl.h"
-#include "sdl_input_impl.h"
-#include "x_input_impl.h"
+#include "base_command.h"
+#include "i_input.h"
+#include "sdl_input.h"
+#include "x_input.h"
 
 // Standard includes
 #include <iostream>
@@ -16,8 +16,8 @@ namespace dae
     public:
         input_manager_impl()
         {
-            input_impls.push_back(std::make_unique<sdl_input_impl>());
-            input_impls.push_back(std::make_unique<x_input_impl>());
+            input_impls.push_back(std::make_unique<sdl_input>());
+            input_impls.push_back(std::make_unique<x_input>());
         }
         
         bool do_process_input(std::vector<game_input_command> commands) const
@@ -33,10 +33,10 @@ namespace dae
         }
         
     public:
-        std::vector<std::unique_ptr<i_input_impl>> input_impls;
+        std::vector<std::unique_ptr<i_input>> input_impls;
         
         std::vector<game_input_command> commands_;
-        std::vector<std::unique_ptr<game_command>> game_actor_commands_;
+        std::vector<std::unique_ptr<base_command>> game_actor_commands_;
     };
 
     input_manager::input_manager()
@@ -51,7 +51,7 @@ namespace dae
         return impl_ptr_->do_process_input(impl_ptr_->commands_);
     }
 
-    void input_manager::bind_command(input_type input_type, input_state input_state, int input, std::unique_ptr<game_command> command) const
+    void input_manager::bind_command(input_type input_type, input_state input_state, int input, std::unique_ptr<base_command> command) const
     {
         impl_ptr_->game_actor_commands_.emplace_back(std::move(command));
         impl_ptr_->commands_.push_back({input_type, input_state, input, impl_ptr_->game_actor_commands_.back().get()});   

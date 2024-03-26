@@ -1,4 +1,4 @@
-﻿#include "sdl_input_impl.h"
+﻿#include "sdl_input.h"
 
 // Project includes
 #include "game_object_command.h"
@@ -16,7 +16,7 @@
 
 namespace dae
 {
-    auto sdl_input_impl::do_process_input(std::vector<game_input_command> commands) -> bool
+    auto sdl_input::do_process_input(std::vector<game_input_command> commands) -> bool
     {
         auto key_commands = commands | std::views::filter([](const auto& command) { return command.input_type == input_type::keyboard; });
         

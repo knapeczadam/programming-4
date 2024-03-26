@@ -3,7 +3,7 @@
 // Project includes
 #include "game_font.h"
 #include "singleton.h"
-#include "texture_2D.h"
+#include "texture_2d.h"
 
 // Standard includes
 #include <memory>

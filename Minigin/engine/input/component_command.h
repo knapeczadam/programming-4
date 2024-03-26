@@ -1,26 +1,26 @@
 ﻿#pragma once
 
 // Project includes
-#include "game_command.h"
+#include "base_command.h"
 
 namespace dae
 {
     // Forward declarations
     class base_component;
     
-    class game_component_command : public game_command
+    class component_command : public base_command
     {
     public:
-        game_component_command(base_component* component_ptr) : component_ptr_(component_ptr)
+        component_command(base_component* component_ptr) : component_ptr_(component_ptr)
         {
         }
 
-        ~game_component_command() override = default;
+        ~component_command() override = default;
 
-        game_component_command(const game_component_command& other) = delete;
-        game_component_command(game_component_command&& other) = delete;
-        game_component_command& operator=(const game_component_command& other) = delete;
-        game_component_command& operator=(game_component_command&& other) = delete;
+        component_command(const component_command& other) = delete;
+        component_command(component_command&& other) = delete;
+        component_command& operator=(const component_command& other) = delete;
+        component_command& operator=(component_command&& other) = delete;
 
     protected:
         auto get_game_component() const -> base_component* { return component_ptr_; }
@@ -31,11 +31,11 @@ namespace dae
     };
     
     // HealthCommand
-    class damage_command final : public game_component_command
+    class damage_command final : public component_command
     {
     public:
         damage_command(base_component* component_ptr, int damage = 1)
-            : game_component_command(component_ptr)
+            : component_command(component_ptr)
             , damage_(damage)
         {
         }
@@ -46,11 +46,11 @@ namespace dae
     };
 
     // ScoreCommand
-    class score_command final : public game_component_command
+    class score_command final : public component_command
     {
     public:
         score_command(base_component* component_ptr, int score)
-            : game_component_command(component_ptr)
+            : component_command(component_ptr)
             , score_(score)
         {
         }

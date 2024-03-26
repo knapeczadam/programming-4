@@ -58,7 +58,7 @@ namespace dae
     };
     
     // Forward declarations
-    class game_command;
+    class base_command;
     class game_object_command;
     
     struct game_input_command
@@ -66,7 +66,7 @@ namespace dae
         input_type input_type;
         input_state input_state;
         int input;
-        game_command* command = nullptr;
+        base_command* command = nullptr;
     };
     
     class input_manager final : public singleton<input_manager>
@@ -81,7 +81,7 @@ namespace dae
 
         [[nodiscard]] auto process_input() const -> bool;
         
-        void bind_command(input_type input_type, input_state input_state, int input, std::unique_ptr<game_command> command) const;
+        void bind_command(input_type input_type, input_state input_state, int input, std::unique_ptr<base_command> command) const;
         [[nodiscard]] auto unbind_command(input_type input_type, input_state input_state, int input) const -> bool;
         
     private:

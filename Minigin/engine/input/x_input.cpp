@@ -1,4 +1,4 @@
-﻿#include "x_input_impl.h"
+﻿#include "x_input.h"
 
 #define WIN32_LEAN_AND_MEAN
 
@@ -15,7 +15,7 @@
 
 namespace dae
 {
-    auto x_input_impl::do_process_input(std::vector<game_input_command> commands) -> bool
+    auto x_input::do_process_input(std::vector<game_input_command> commands) -> bool
     {
         CopyMemory(&previous_state_, &current_state_, sizeof(XINPUT_STATE));
         ZeroMemory(&current_state_, sizeof(XINPUT_STATE));
@@ -57,17 +57,17 @@ namespace dae
         return true;
     }
 
-    auto x_input_impl::is_down_this_frame(int button) const -> bool
+    auto x_input::is_down_this_frame(int button) const -> bool
     {
         return buttons_pressed_this_frame_ & button;
     }
 
-    auto x_input_impl::is_up_this_frame(int button) const -> bool
+    auto x_input::is_up_this_frame(int button) const -> bool
     {
         return buttons_released_this_frame_ & button;
     }
 
-    auto x_input_impl::is_pressed(int button) const -> bool
+    auto x_input::is_pressed(int button) const -> bool
     {
         return current_state_.Gamepad.wButtons & button;
     }

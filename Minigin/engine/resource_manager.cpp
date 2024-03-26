@@ -2,7 +2,7 @@
 
 // Project includes
 #include "renderer.h"
-#include "texture_2D.h"
+#include "texture_2d.h"
 #include "game_font.h"
 
 // Standard includes
