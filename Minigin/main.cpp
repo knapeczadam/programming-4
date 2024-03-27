@@ -118,6 +118,7 @@ void load()
     health_comp->add_observer(pacman_health_text);
     auto score_comp = go->add_component<score_component>();
     score_comp->add_observer(pacman_score_text);
+	score_comp->add_observer(g_steam_achievements);
 
     // Arrow keys
     auto move_left_command1  = std::make_unique<move_command>(go, glm::vec2{-1, 0});
@@ -162,6 +163,7 @@ void load()
     health_comp->add_observer(ghost_health_text);
     score_comp = go->add_component<score_component>();
     score_comp->add_observer(ghost_score_text);
+	score_comp->add_observer(g_steam_achievements);
     
     // WASD
     auto move_left_command2  = std::make_unique<move_command>(go, glm::vec2{-1, 0});

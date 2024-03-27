@@ -1,5 +1,8 @@
 ﻿#pragma once
 
+// Project includes
+#include "i_observer.h"
+
 // Steam includes
 #pragma warning (push)
 #pragma warning (disable: 4996)
@@ -20,7 +23,7 @@ namespace dae
         int m_iIconImage;
     };
 
-    class CSteamAchievements
+    class CSteamAchievements : public i_observer
     {
     private:
         int64 m_iAppID; // Our current AppID
@@ -36,12 +39,11 @@ namespace dae
         bool SetAchievement(const char* ID);
         void ResetAchievements();
 
-        STEAM_CALLBACK(CSteamAchievements, OnUserStatsReceived, UserStatsReceived_t,
-                       m_CallbackUserStatsReceived);
-        STEAM_CALLBACK(CSteamAchievements, OnUserStatsStored, UserStatsStored_t,
-                       m_CallbackUserStatsStored);
-        STEAM_CALLBACK(CSteamAchievements, OnAchievementStored,
-                       UserAchievementStored_t, m_CallbackAchievementStored);
+        STEAM_CALLBACK(CSteamAchievements, OnUserStatsReceived, UserStatsReceived_t, m_CallbackUserStatsReceived);
+        STEAM_CALLBACK(CSteamAchievements, OnUserStatsStored, UserStatsStored_t, m_CallbackUserStatsStored);
+        STEAM_CALLBACK(CSteamAchievements, OnAchievementStored, UserAchievementStored_t, m_CallbackAchievementStored);
+
+        void notify(const std::string& event, subject* subject) override;
     };
 
     // Defining our achievements

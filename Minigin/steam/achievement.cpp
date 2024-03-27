@@ -123,4 +123,10 @@ namespace dae
             OutputDebugString("Stored Achievement for Steam\n");
         }
     }
+
+    void CSteamAchievements::notify(const std::string& event, subject* subject)
+    {
+        if (event == "AchievementUnlocked")
+            SetAchievement("ACH_WIN_ONE_GAME");
+    }
 }

@@ -7,6 +7,7 @@
 #include "x_input.h"
 
 // Standard includes
+#include <algorithm>
 #include <iostream>
 
 namespace dae
@@ -19,17 +20,10 @@ namespace dae
             input_impls.push_back(std::make_unique<sdl_input>());
             input_impls.push_back(std::make_unique<x_input>());
         }
-        
-        bool do_process_input(std::vector<game_input_command> commands) const
+
+        [[nodiscard]] auto do_process_input(std::vector<game_input_command> commands) const -> bool
         {
-            for (auto& input_impl : input_impls)
-            {
-                if (not input_impl->do_process_input(commands))
-                {
-                    return false;
-                }
-            }
-            return true;
+            return std::ranges::all_of(input_impls, [&commands](const auto& input_impl) { return input_impl->do_process_input(commands); });
         }
         
     public:
