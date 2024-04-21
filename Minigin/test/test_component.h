@@ -1,11 +1,11 @@
 #pragma once
 
 // Project includes
-#include "component/core/base_component.h"
+#include "component/core/game_component.h"
 
 namespace dae
 {
-   class test_component : public base_component
+   class test_component : public game_component
    {
    public:
       test_component()           = default;

@@ -20,7 +20,7 @@
 #include "engine/resource_manager.h"
 #include "engine/scene.h"
 #include "engine/scene_manager.h"
-#include "engine/input/component_command.h"
+#include "engine/input/game_component_command.h"
 #include "engine/input/game_object_command.h"
 #include "engine/input/generic_command.h"
 #include "engine/input/input_manager.h"

@@ -15,18 +15,18 @@ namespace dae
 {
     // Forward declarations
     enum class component_family;
-    class base_component;
+    class game_component;
 
     // Concepts
     template <class T>
-    concept is_component_type = std::is_base_of_v<base_component, T> and std::is_constructible_v<T>;
+    concept is_component_type = std::is_base_of_v<game_component, T> and std::is_constructible_v<T>;
 
     template <class T>
-    concept is_component_family_type = std::is_base_of_v<base_component, T> and std::is_abstract_v<T>;
+    concept is_component_family_type = std::is_base_of_v<game_component, T> and std::is_abstract_v<T>;
 
     // Type aliases
-    using component_map = std::unordered_map<std::type_index, base_component*>;
-    using component_multimap = std::unordered_multimap<std::type_index, base_component*>;
+    using component_map = std::unordered_map<std::type_index, game_component*>;
+    using component_multimap = std::unordered_multimap<std::type_index, game_component*>;
     
     template <class T>
     using component_multimap_t = std::unordered_multimap<std::type_index, T*>;
@@ -60,7 +60,7 @@ namespace dae
         [[nodiscard]] auto get_child_count() const -> int;
         [[nodiscard]] auto get_child_at(int const index) const -> game_object *;
 
-        auto remove_component(base_component const *component_ptr) -> bool;
+        auto remove_component(game_component const *component_ptr) -> bool;
         auto remove_components(component_family const family_type) -> int;
 
         [[nodiscard]] auto has_component(component_family family_type) const -> bool;
@@ -133,7 +133,7 @@ namespace dae
         bool alive_           = true;
 
         // TODO: switch to map?
-        std::unordered_map<std::type_index, std::unique_ptr<base_component>> component_map_ = {};
+        std::unordered_map<std::type_index, std::unique_ptr<game_component>> component_map_ = {};
 
         game_object *parent_ptr_            = nullptr;
         std::vector<game_object*> children_ = {};

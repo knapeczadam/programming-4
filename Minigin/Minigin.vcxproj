@@ -195,7 +195,7 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="component\core\base_component.h" />
+    <ClInclude Include="component\core\game_component.h" />
     <ClInclude Include="component\family\custom_component.h" />
     <ClInclude Include="component\family\physics_component.h" />
     <ClInclude Include="component\family\rendering_component.h" />
@@ -216,7 +216,7 @@
     <ClInclude Include="engine\input\generic_command.h" />
     <ClInclude Include="engine\input\base_command.h" />
     <ClInclude Include="engine\input\game_object_command.h" />
-    <ClInclude Include="engine\input\component_command.h" />
+    <ClInclude Include="engine\input\game_component_command.h" />
     <ClInclude Include="engine\input\i_input.h" />
     <ClInclude Include="engine\input\input_manager.h" />
     <ClInclude Include="engine\input\sdl_input.h" />
@@ -246,7 +246,7 @@
     <ClCompile Include="..\3rdParty\imgui\imgui_plot.cpp" />
     <ClCompile Include="..\3rdParty\imgui\imgui_tables.cpp" />
     <ClCompile Include="..\3rdParty\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="component\core\base_component.cpp" />
+    <ClCompile Include="component\core\game_component.cpp" />
     <ClCompile Include="component\implementation\fps_component.cpp" />
     <ClCompile Include="component\implementation\health_component.cpp" />
     <ClCompile Include="component\implementation\health_text_component.cpp" />
@@ -261,7 +261,7 @@
     <ClCompile Include="core\i_observer.cpp" />
     <ClCompile Include="engine\input\generic_command.cpp" />
     <ClCompile Include="engine\input\game_object_command.cpp" />
-    <ClCompile Include="engine\input\component_command.cpp" />
+    <ClCompile Include="engine\input\game_component_command.cpp" />
     <ClCompile Include="engine\input\input_manager.cpp" />
     <ClCompile Include="engine\input\sdl_input.cpp" />
     <ClCompile Include="engine\input\x_input.cpp" />

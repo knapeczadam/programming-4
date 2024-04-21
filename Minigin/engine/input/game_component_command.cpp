@@ -1,4 +1,4 @@
-﻿#include "component_command.h"
+﻿#include "game_component_command.h"
 
 #include "component/implementation/health_component.h"
 #include "component/implementation/score_component.h"

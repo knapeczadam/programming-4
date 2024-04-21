@@ -1,7 +1,7 @@
 #include "game_object.h"
 
 // Project includes
-#include "component/core/base_component.h"
+#include "component/core/game_component.h"
 
 // Standard includes
 #include <algorithm>
@@ -138,7 +138,7 @@ namespace dae
         children_.erase(std::ranges::remove(children_, child_ptr).begin(), children_.end());
     }
 
-    auto game_object::remove_component(base_component const *component_ptr) -> bool
+    auto game_object::remove_component(game_component const *component_ptr) -> bool
     {
         for (auto it = component_map_.begin(); it != component_map_.end(); ++it)
         {

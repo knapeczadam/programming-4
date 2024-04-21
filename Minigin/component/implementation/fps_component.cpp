@@ -4,7 +4,7 @@
 #include "engine/game_time.h"
 
 // Standard includes
-#include <utility>
+#include <sstream>
 
 namespace dae
 {
@@ -12,39 +12,16 @@ namespace dae
     {
         text_component::update();
 
-        // TODO: calculate fps on average
-        // TODO: use stringstream
-        std::string fps = std::to_string(1.0f / game_time::get_instance().delta_time);
-        fps = fps.substr(0, fps.find('.') + 2);
-        fps += " fps";
-        
-        set_text(fps);
-
-        /*
-         * delay = getDeltaTime();
-         * count++;
-         * if (delay >= maxDelay)
-         * {
-         * setText(format("FPS: %d", count / delay));
-         * delay = 0;
-         * count = 0;
-         * }
-         */
-        
-        // void aze::FPS::Update()
-        //    {
-        //        m_TimeElapsed += GameTime::GetInstance().GetElapsed();
-        //        ++m_NrFramesPassed;
-        //        if (m_TimeElapsed >= m_UpdateInterval)
-        //        {
-        //            std::stringstream s;
-        //            s << /*static_cast<int>*/(m_NrFramesPassed / m_TimeElapsed);
-        //            s << " FPS";
-        //            m_pTextRenderer->SetText(s.str());
-        //            m_NrFramesPassed = 0;
-        //            m_TimeElapsed = 0.f;
-        //        }
-        //    }
-
+        update_timer_ += game_time::get_instance().delta_time;
+        ++frame_count_;
+        if (update_timer_ >= update_interval_)
+        {
+            std::stringstream ss;
+            ss << static_cast<int>(frame_count_ / update_timer_);
+            ss << " FPS";
+            set_text(ss.str());
+            frame_count_    = 0;
+            update_timer_ = 0.0f;
+        }
     }
 }

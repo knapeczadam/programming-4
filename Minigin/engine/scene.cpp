@@ -1,7 +1,7 @@
 #include "scene.h"
 
 // Project includes
-#include "component/core/base_component.h"
+#include "component/core/game_component.h"
 #include "core/game_object.h"
 #include "component/family/rendering_component.h"
 #include "component/family/ui_component.h"

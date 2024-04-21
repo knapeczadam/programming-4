@@ -17,5 +17,10 @@ namespace dae
         fps_component &operator=(fps_component &&other)      = delete;
 
         void update() override;
+
+    private:
+        float const update_interval_ =  0.5f;
+        float       update_timer_    =  0.0f;
+        int         frame_count_     =  0;
     };
 }

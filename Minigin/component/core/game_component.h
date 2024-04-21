@@ -16,18 +16,18 @@ namespace dae
         test
     };
     
-    class base_component
+    class game_component
     {
         friend class game_object;
         
     public:
-        base_component()          = default;
-        virtual ~base_component() = default;
+        game_component()          = default;
+        virtual ~game_component() = default;
 
-        base_component(base_component const &other)            = delete;
-        base_component(base_component &&other)                 = delete;
-        base_component &operator=(base_component const &other) = delete;
-        base_component &operator=(base_component &&other)      = delete;
+        game_component(game_component const &other)            = delete;
+        game_component(game_component &&other)                 = delete;
+        game_component &operator=(game_component const &other) = delete;
+        game_component &operator=(game_component &&other)      = delete;
 
         virtual void update() { }
 

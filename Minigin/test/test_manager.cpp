@@ -170,7 +170,7 @@ namespace dae
             go.add_component<test1_component>();
             go.add_component<test2_component>();
             // const int count = go.RemoveComponents(ComponentFamily::Test);
-            assert(go.remove_components<base_component>() == 2);
+            assert(go.remove_components<game_component>() == 2);
             assert(go.get_components().empty());
         }
         {
