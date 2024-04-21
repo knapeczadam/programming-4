@@ -1,11 +1,11 @@
 #include "test_manager.h"
 
 // Project includes
-#include "game_object.h"
-#include "scene.h"
-#include "scene_manager.h"
 #include "test1_component.h"
 #include "test2_component.h"
+#include "core/game_object.h"
+#include "engine/scene.h"
+#include "engine/scene_manager.h"
 
 // Standard includes
 #include <cassert>
@@ -41,7 +41,7 @@ namespace dae
             game_object go;
             go.add_component<test1_component>();
             assert(go.get_component<test1_component>() != nullptr);
-            assert(go.get_components().size()                      == 1);
+            assert(go.get_components().size()                       == 1);
             assert(go.get_components(component_family::test).size() == 1);
         }
         {
@@ -51,7 +51,7 @@ namespace dae
             game_object go;
             go.add_component<test1_component>();
             go.add_component<test2_component>();
-            assert(go.get_components().size()                      == 2);
+            assert(go.get_components().size()                       == 2);
             assert(go.get_components(component_family::test).size() == 2);
         }
         {
@@ -65,7 +65,7 @@ namespace dae
             go1.add_component<test1_component>();
             go2.add_component<test1_component>();
             go2.set_parent(&go1);
-            assert(go1.get_components_in_children().size()                      == 2);
+            assert(go1.get_components_in_children().size()                       == 2);
             assert(go1.get_components_in_children<test1_component>().size()      == 2);
             assert(go1.get_components_in_children(component_family::test).size() == 2);
         }
@@ -82,7 +82,7 @@ namespace dae
             go1.add_component<test1_component>();
             go2.add_component<test2_component>();
             go2.set_parent(&go1);
-            assert(go1.get_components_in_children().size()                      == 2);
+            assert(go1.get_components_in_children().size()                       == 2);
             assert(go1.get_components_in_children<test1_component>().size()      == 1);
             assert(go1.get_components_in_children<test2_component>().size()      == 1);
             assert(go1.get_components_in_children(component_family::test).size() == 2);
@@ -158,7 +158,7 @@ namespace dae
             // Test Component: Add 1 component (Test1) to a game object and remove it.
             // Assert 1: The game object has no components.
             game_object go;
-            const auto component = go.add_component<test1_component>();
+            auto const component = go.add_component<test1_component>();
             go.remove_component(component);
             assert(go.get_components().empty());
         }
@@ -205,7 +205,7 @@ namespace dae
             assert(go2.has_child( &go1));
             assert(go2.get_child_count() == 1);
             assert(go2.get_child_at(0)   == &go1);
-            assert(go1.get_parent()     == &go2);
+            assert(go1.get_parent()      == &go2);
         }
         {
             // Test Description: Set a game object as a child of another game object and then remove the parent.
@@ -251,15 +251,15 @@ namespace dae
         {
             // Test Description: Create a scene and add a game object to it.
             // Assert 1: The scene has 1 game object.
-            const auto scene = scene_manager::get_instance().create_scene("Test");
+            auto const scene = scene_manager::get_instance().create_scene("Test");
             scene->add_game_object();
             assert(scene->get_game_object_count() == 1);
         }
         {
             // Test Description: Create a scene and add a game object to it and then remove the game object.
             // Assert 1: The scene has no game objects.
-            const auto scene = scene_manager::get_instance().create_scene("Test");
-            const auto go = scene->add_game_object();
+            auto const scene = scene_manager::get_instance().create_scene("Test");
+            auto const go = scene->add_game_object();
             scene->remove_game_object(go);
             assert(scene->get_game_object_count() == 0);
         }
@@ -267,7 +267,7 @@ namespace dae
             // Test Description: Create a scene and add 2 game objects to it and then remove all game objects.
             // Assert 1: The scene has 2 game objects.
             // Assert 2: The scene has no game objects.
-            const auto scene = scene_manager::get_instance().create_scene("Test");
+            auto const scene = scene_manager::get_instance().create_scene("Test");
             scene->add_game_object();
             scene->add_game_object();
             assert(scene->get_game_object_count() == 2);
@@ -275,8 +275,8 @@ namespace dae
             assert(scene->get_game_object_count() == 0);
         }
         {
-            const auto scene = scene_manager::get_instance().create_scene("Test");
-            const auto go = scene->add_game_object();
+            auto const scene = scene_manager::get_instance().create_scene("Test");
+            auto const go = scene->add_game_object();
             go->destroy();
             scene->late_update();
             assert(scene->get_game_object_count() == 0);

@@ -21,16 +21,16 @@ namespace dae
     public:
         ~scene();
         
-        scene(const scene& other)            = delete;
-        scene(scene&& other)                 = delete;
-        scene& operator=(const scene& other) = delete;
-        scene& operator=(scene&& other)      = delete;
+        scene(scene const &other)            = delete;
+        scene(scene &&other)                 = delete;
+        scene &operator=(scene const &other) = delete;
+        scene &operator=(scene &&other)      = delete;
 
-        auto add_game_object(const std::string& name = "New Game Object") -> game_object*;
-        void remove_game_object(game_object* object);
+        auto add_game_object(std::string const &name = "New Game Object") -> game_object *;
+        void remove_game_object(game_object *object_ptr);
         void remove_all();
-        auto get_game_object_count() const -> int;
-        auto find_game_object(const std::string& name) const -> game_object*;
+        [[nodiscard]] auto get_game_object_count() const -> int;
+        [[nodiscard]] auto find_game_object(std::string const &name) const -> game_object *;
 
         void update();
         void late_update();

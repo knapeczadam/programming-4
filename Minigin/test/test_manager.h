@@ -1,7 +1,7 @@
 #pragma once
 
 // Project includes
-#include "singleton.h"
+#include "utility/singleton.h"
 
 namespace dae
 {

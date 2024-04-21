@@ -14,18 +14,18 @@ namespace dae
     class texture_2d final
     {
     public:
-        explicit texture_2d(SDL_Texture* texture);
+        explicit texture_2d(SDL_Texture *texture_ptr);
         ~texture_2d();
         
-        texture_2d(const texture_2d&)             = delete;
-        texture_2d(texture_2d&&)                  = delete;
-        texture_2d& operator=(const texture_2d&)  = delete;
-        texture_2d& operator=(const texture_2d&&) = delete;
+        texture_2d(texture_2d const &other)             = delete;
+        texture_2d(texture_2d &&other)                  = delete;
+        texture_2d &operator=(texture_2d const &other)  = delete;
+        texture_2d &operator=(texture_2d &&other)       = delete;
 
-        auto get_sdl_texture() const -> SDL_Texture*;
-        auto get_size() const -> glm::ivec2;
+        [[nodiscard]] auto get_sdl_texture() const -> SDL_Texture *;
+        [[nodiscard]] auto get_size() const -> glm::ivec2;
 
     private:
-        SDL_Texture* texture_;
+        SDL_Texture *texture_ptr_;
     };
 }

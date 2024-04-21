@@ -1,7 +1,7 @@
 #pragma once
 
 // Project includes
-#include "transform.h"
+#include "utility/transform.h"
 
 // Standard includes
 #include <algorithm>
@@ -29,7 +29,7 @@ namespace dae
     using component_multimap = std::unordered_multimap<std::type_index, base_component*>;
     
     template <class T>
-    using t_component_multimap = std::unordered_multimap<std::type_index, T*>;
+    using component_multimap_t = std::unordered_multimap<std::type_index, T*>;
 
     class game_object final
     {
@@ -38,10 +38,10 @@ namespace dae
         explicit game_object(std::string name);
         ~game_object();
 
-        game_object(const game_object& other)            = delete;
-        game_object(game_object&& other)                 = delete;
-        game_object& operator=(const game_object& other) = delete;
-        game_object& operator=(game_object&& other)      = delete;
+        game_object(game_object const &other)            = delete;
+        game_object(game_object &&other)                 = delete;
+        game_object &operator=(game_object const &other) = delete;
+        game_object &operator=(game_object &&other)      = delete;
 
         [[nodiscard]] auto get_name() const -> std::string { return name_; }
 
@@ -52,19 +52,19 @@ namespace dae
         [[nodiscard]] auto is_alive() const -> bool { return alive_; }
         void destroy() { alive_ = false; }
 
-        [[nodiscard]] auto get_parent() const -> game_object* { return parent_ptr_; }
-        auto set_parent(game_object* parent_ptr, bool keep_world_position = true) -> bool;
-        auto has_child(game_object* child_ptr) const -> bool;
+        [[nodiscard]] auto get_parent() const -> game_object * { return parent_ptr_; }
+        auto set_parent(game_object *parent_ptr, bool keep_world_position = true) -> bool;
+        auto has_child(game_object *child_ptr) const -> bool;
 
         [[nodiscard]] auto get_child_count() const -> int;
-        [[nodiscard]] auto get_child_at(int index) const -> game_object*;
+        [[nodiscard]] auto get_child_at(int const index) const -> game_object *;
 
-        auto remove_component(const base_component* component_ptr) -> bool;
-        auto remove_components(component_family family_type) -> int;
+        auto remove_component(base_component const *component_ptr) -> bool;
+        auto remove_components(component_family const family_type) -> int;
 
         [[nodiscard]] auto has_component(component_family family_type) const -> bool;
 
-        [[nodiscard]] auto get_components(component_family family_type) const -> component_map;
+        [[nodiscard]] auto get_components(component_family const family_type) const -> component_map;
         [[nodiscard]] auto get_components() const -> component_map;
 
         [[nodiscard]] auto get_components_in_children(component_family family_type) const -> component_multimap;
@@ -74,31 +74,32 @@ namespace dae
         [[nodiscard]] auto get_components_in_parent() const -> component_multimap;
 
         template <class T, typename... Args> requires is_component_type<T>
-        auto add_component(Args&&... args) -> T*;
+        auto add_component(Args &&... args) -> T *;
 
+        // TODO: if not found throw component_not_found_exception
         template <class T> requires is_component_type<T>
-        auto get_component() const -> T*;
+        auto get_component() const -> T *;
 
         template <class T> requires is_component_family_type<T>
-        auto get_components() const -> t_component_multimap<T>;
+        auto get_components() const -> component_multimap_t<T>;
 
         template <class T> requires is_component_type<T>
-        auto get_component_in_children() const -> T*;
+        auto get_component_in_children() const -> T *;
 
         template <class T> requires is_component_type<T>
-        auto get_components_in_children() const -> t_component_multimap<T>;
+        auto get_components_in_children() const -> component_multimap_t<T>;
 
         template <class T> requires is_component_family_type<T>
-        auto get_components_in_children() const -> t_component_multimap<T>;
+        auto get_components_in_children() const -> component_multimap_t<T>;
 
         template <class T> requires is_component_type<T>
-        auto get_component_in_parent() const -> T*;
+        auto get_component_in_parent() const -> T *;
 
         template <class T> requires is_component_type<T>
-        auto get_components_in_parent() const -> t_component_multimap<T>;
+        auto get_components_in_parent() const -> component_multimap_t<T>;
 
         template <class T> requires is_component_family_type<T>
-        auto get_components_in_parent() const -> t_component_multimap<T>;
+        auto get_components_in_parent() const -> component_multimap_t<T>;
 
         template <class T> requires is_component_type<T>
         auto remove_component() -> bool;
@@ -112,17 +113,17 @@ namespace dae
         template <class T> requires is_component_family_type<T>
         [[nodiscard]] auto has_component() const -> bool;
 
-        auto get_world_position() -> const glm::vec3&;
-        [[nodiscard]] auto get_local_position() const -> const glm::vec3&;
+        auto get_world_position() -> const glm::vec3 &;
+        [[nodiscard]] auto get_local_position() const -> const glm::vec3 &;
 
         void set_local_position(float x, float y);
         void set_local_position(float x, float y, float z);
-        void set_local_position(const glm::vec2& position);
-        void set_local_position(const glm::vec3& position);
+        void set_local_position(glm::vec2 const &position);
+        void set_local_position(glm::vec3 const &position);
 
     private:
-        void add_child(game_object* child_ptr);
-        void remove_child(game_object* child_ptr);
+        void add_child(game_object *child_ptr);
+        void remove_child(game_object *child_ptr);
 
     private:
         std::string name_     = {};
@@ -133,7 +134,7 @@ namespace dae
         // TODO: switch to map?
         std::unordered_map<std::type_index, std::unique_ptr<base_component>> component_map_ = {};
 
-        game_object* parent_ptr_ = nullptr;
+        game_object *parent_ptr_            = nullptr;
         std::vector<game_object*> children_ = {};
     };
 }

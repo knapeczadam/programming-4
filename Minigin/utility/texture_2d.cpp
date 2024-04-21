@@ -7,7 +7,7 @@ namespace dae
 {
     texture_2d::~texture_2d()
     {
-        SDL_DestroyTexture(texture_);
+        SDL_DestroyTexture(texture_ptr_);
     }
 
     auto texture_2d::get_size() const -> glm::ivec2
@@ -17,13 +17,13 @@ namespace dae
         return {dst.w, dst.h};
     }
 
-    auto texture_2d::get_sdl_texture() const -> SDL_Texture*
+    auto texture_2d::get_sdl_texture() const -> SDL_Texture *
     {
-        return texture_;
+        return texture_ptr_;
     }
 
-    texture_2d::texture_2d(SDL_Texture* texture)
+    texture_2d::texture_2d(SDL_Texture *texture_ptr)
     {
-        texture_ = texture;
+        texture_ptr_ = texture_ptr;
     }
 }

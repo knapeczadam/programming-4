@@ -2,8 +2,8 @@
 
 // Project includes
 #include "renderer.h"
-#include "texture_2d.h"
-#include "game_font.h"
+#include "utility/texture_2d.h"
+#include "utility/game_font.h"
 
 // Standard includes
 #include <stdexcept>
@@ -14,7 +14,7 @@
 
 namespace dae
 {
-    void resource_manager::init(const std::string& data_path)
+    void resource_manager::init(std::string const &data_path)
     {
         data_path_ = data_path;
 
@@ -24,11 +24,11 @@ namespace dae
         }
     }
 
-    auto resource_manager::load_texture(const std::string& file) -> texture_2d*
+    auto resource_manager::load_texture(std::string const &file) -> texture_2d *
     {
         // Check if texture is already present
-        const auto full_path = data_path_ + file;
-        const auto it = textures_.find(full_path);
+        auto const full_path = data_path_ + file;
+        auto const it = textures_.find(full_path);
         if (it != textures_.cend())
         {
             return it->second.get();
@@ -45,11 +45,11 @@ namespace dae
         return textures_[full_path].get();
     }
 
-    auto resource_manager::load_font(const std::string& file, unsigned int size) -> game_font*
+    auto resource_manager::load_font(std::string const &file, unsigned int size) -> game_font *
     {
         // Check if font is already present
-        const auto full_path = data_path_ + file;
-        const auto range = fonts_.equal_range(full_path);
+        auto const full_path = data_path_ + file;
+        auto const range = fonts_.equal_range(full_path);
         for (auto it = range.first; it != range.second; ++it)
         {
             if (it->second.first == size)
@@ -63,7 +63,7 @@ namespace dae
         fonts_.emplace(full_path, std::make_pair(size, std::move(font)));
 
         // Return the newly loaded font
-        const auto [fst, snd] = fonts_.equal_range(full_path);
+        auto const [fst, snd] = fonts_.equal_range(full_path);
         for (auto it = fst; it != snd; ++it)
         {
             if (it->second.first == size)

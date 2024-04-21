@@ -9,7 +9,7 @@ namespace dae
     /// \tparam T 
     /// \return 
     template <class T> requires is_component_type<T>
-    auto game_object::get_component() const -> T*
+    auto game_object::get_component() const -> T *
     {
         if (has_component<T>())
         {
@@ -19,10 +19,10 @@ namespace dae
     }
 
     template <class T> requires is_component_family_type<T>
-    auto game_object::get_components() const -> t_component_multimap<T>
+    auto game_object::get_components() const -> component_multimap_t<T>
     {
-        t_component_multimap<T> components;
-        for (const auto& [key, value] : component_map_)
+        component_multimap_t<T> components;
+        for (auto const &[key, value] : component_map_)
         {
             if (auto component_ptr = dynamic_cast<T*>(value.get()))
             {
@@ -36,13 +36,13 @@ namespace dae
     /// \tparam T 
     /// \return 
     template <class T> requires is_component_type<T>
-    auto game_object::get_component_in_children() const -> T*
+    auto game_object::get_component_in_children() const -> T *
     {
         if (auto component_ptr = get_component<T>())
         {
             return component_ptr;
         }
-        for (const auto& child : children_)
+        for (auto const &child : children_)
         {
             if (auto component_ptr = child->get_component_in_children<T>())
             {
@@ -56,16 +56,16 @@ namespace dae
     /// \tparam T 
     /// \return 
     template <class T> requires is_component_type<T>
-    auto game_object::get_components_in_children() const -> t_component_multimap<T>
+    auto game_object::get_components_in_children() const -> component_multimap_t<T>
     {
-        t_component_multimap<T> components;
+        component_multimap_t<T> components;
         if (auto component = get_component<T>())
         {
             components.emplace(typeid(T), component);
         }
-        for (const auto& child : children_)
+        for (auto const &child : children_)
         {
-            for (const auto& [key, value] : child->get_components_in_children<T>())
+            for (auto const &[key, value] : child->get_components_in_children<T>())
             {
                 components.emplace(key, value);
             }
@@ -74,19 +74,19 @@ namespace dae
     }
 
     template <class T> requires is_component_family_type<T>
-    auto game_object::get_components_in_children() const -> t_component_multimap<T>
+    auto game_object::get_components_in_children() const -> component_multimap_t<T>
     {
-        t_component_multimap<T> components;
-        for (const auto& [key, value] : component_map_)
+        component_multimap_t<T> components;
+        for (auto const &[key, value] : component_map_)
         {
             if (auto component_ptr = dynamic_cast<T*>(value.get()))
             {
                 components.emplace(key, component_ptr);
             }
         }
-        for (const auto& child : children_)
+        for (auto const &child : children_)
         {
-            for (const auto& [key, value] : child->get_components_in_children<T>())
+            for (auto const &[key, value] : child->get_components_in_children<T>())
             {
                 components.emplace(key, value);
             }
@@ -98,7 +98,7 @@ namespace dae
     /// \tparam T 
     /// \return 
     template <class T> requires is_component_type<T>
-    auto game_object::get_component_in_parent() const -> T*
+    auto game_object::get_component_in_parent() const -> T *
     {
         if (auto component_ptr = get_component<T>())
         {
@@ -115,16 +115,16 @@ namespace dae
     /// \tparam T 
     /// \return 
     template <class T> requires is_component_type<T>
-    auto game_object::get_components_in_parent() const -> t_component_multimap<T> 
+    auto game_object::get_components_in_parent() const -> component_multimap_t<T> 
     {
-        t_component_multimap<T> components;
+        component_multimap_t<T> components;
         if (auto component = get_component<T>())
         {
             components.emplace(typeid(T), component);
         }
         if (parent_ptr_)
         {
-            for (const auto& [key, value] : parent_ptr_->get_components_in_parent<T>())
+            for (auto const &[key, value] : parent_ptr_->get_components_in_parent<T>())
             {
                 components.emplace(key, value);
             }
@@ -133,10 +133,10 @@ namespace dae
     }
 
     template <class T> requires is_component_family_type<T>
-    auto game_object::get_components_in_parent() const -> t_component_multimap<T>
+    auto game_object::get_components_in_parent() const -> component_multimap_t<T>
     {
-        t_component_multimap<T> components;
-        for (const auto& [key, value] : component_map_)
+        component_multimap_t<T> components;
+        for (auto const &[key, value] : component_map_)
         {
             if (auto component_ptr = dynamic_cast<T*>(value.get()))
             {
@@ -145,7 +145,7 @@ namespace dae
         }
         if (parent_ptr_)
         {
-            for (const auto& [key, value] : parent_ptr_->get_components_in_parent<T>())
+            for (auto const &[key, value] : parent_ptr_->get_components_in_parent<T>())
             {
                 components.emplace(key, value);
             }
@@ -157,7 +157,7 @@ namespace dae
     /// \tparam T 
     /// \return 
     template <class T, typename... Args> requires is_component_type<T>
-    auto game_object::add_component(Args&&... args) -> T*
+    auto game_object::add_component(Args &&... args) -> T *
     {
         auto component_ptr = std::make_unique<T>(std::forward<Args>(args)...);
         component_ptr->set_owner(this);
@@ -205,7 +205,7 @@ namespace dae
     template <class T> requires is_component_family_type<T>
     auto game_object::has_component() const -> bool
     {
-        return std::ranges::any_of(component_map_, [](const auto& pair)
+        return std::ranges::any_of(component_map_, [](auto const &pair)
         {
             return dynamic_cast<T*>(pair.second.get());
         });

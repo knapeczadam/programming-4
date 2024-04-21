@@ -1,11 +1,11 @@
 #include "text_component.h"
 
 // Project includes
-#include "game_font.h"
-#include "game_object.h"
-#include "renderer.h"
-#include "resource_manager.h"
-#include "texture_2d.h"
+#include "core/game_object.h"
+#include "engine/renderer.h"
+#include "engine/resource_manager.h"
+#include "utility/game_font.h"
+#include "utility/texture_2d.h"
 
 // Standard includes
 #include <stdexcept>
@@ -14,7 +14,6 @@
 // SDL includes
 #include <SDL_ttf.h>
 
-
 namespace dae
 {
     void text_component::update()
@@ -22,21 +21,21 @@ namespace dae
         if (needs_update_)
         {
             constexpr SDL_Color color = {255, 255, 255, 255}; // only white text is supported now
-            const auto surf = TTF_RenderText_Blended_Wrapped(font_->get_font(), text_.c_str(), color, 9999);
-            if (surf == nullptr)
+            auto const surface_ptr = TTF_RenderText_Blended_Wrapped(font_ptr_->get_font(), text_.c_str(), color, 9999);
+            if (surface_ptr == nullptr)
             {
                 throw std::runtime_error(std::string("Render text failed: ") + SDL_GetError());
             }
         
-            auto texture = SDL_CreateTextureFromSurface(renderer::get_instance().get_sdl_renderer(), surf);
-            if (texture == nullptr)
+            auto texture_ptr = SDL_CreateTextureFromSurface(renderer::get_instance().get_sdl_renderer(), surface_ptr);
+            if (texture_ptr == nullptr)
             {
                 throw std::runtime_error(std::string("Create text texture from surface failed: ") + SDL_GetError());
             }
         
-            SDL_FreeSurface(surf);
+            SDL_FreeSurface(surface_ptr);
             text_texture_.reset();
-            text_texture_ = std::make_unique<texture_2d>(texture);
+            text_texture_ = std::make_unique<texture_2d>(texture_ptr);
             needs_update_ = false;
         }
     }
@@ -45,27 +44,27 @@ namespace dae
     {
         if (text_texture_)
         {
-            const auto& pos = get_owner()->get_world_position();
+            auto const &pos = get_owner()->get_world_position();
             renderer::get_instance().render_texture(*text_texture_, pos.x, pos.y);
         }
     }
 
     // This implementation uses the "dirty flag" pattern
-    void text_component::set_text(const std::string& text)
+    void text_component::set_text(std::string const &text)
     {
         text_ = text;
         needs_update_ = true;
     }
 
-    void text_component::set_font(game_font* font)
+    void text_component::set_font(game_font *font_ptr)
     {
-        font_ = font;
+        font_ptr_ = font_ptr;
         needs_update_ = true;
     }
 
-    void text_component::set_font(const std::string& font, unsigned size)
+    void text_component::set_font(std::string const &font, unsigned size)
     {
-        font_ = resource_manager::get_instance().load_font(font, size);
+        font_ptr_ = resource_manager::get_instance().load_font(font, size);
         needs_update_ = true;
     }
 }

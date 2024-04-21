@@ -10,26 +10,26 @@ namespace dae
     void trash_the_cache_manager::calculate_data()
     {
         std::vector<game_object_3d> buffer(sample_);
-        int stepSize = 1;
+        int step_size = 1;
 
         // vector for storing time
         std::vector<float> times;
 
-        for (stepSize = 1; stepSize <= 1024; stepSize *= 2)
+        for (step_size = 1; step_size <= 1024; step_size *= 2)
         {
-            std::vector<long long> tempTimes;
+            std::vector<long long> temp_times;
             for (int i = 0; i < 10; ++i)
             {
                 // measure time - start
                 auto start = std::chrono::high_resolution_clock::now();
-                for (size_t j = 0; j < buffer.size(); j += stepSize)
+                for (size_t j = 0; j < buffer.size(); j += step_size)
                 {
                     buffer[j].id *= 2;
                 }
                 auto end = std::chrono::high_resolution_clock::now();
                 // store the time difference between start and end
-                const auto total = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
-                tempTimes.push_back(total);
+                auto const total = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+                temp_times.push_back(total);
             }
             
             // 3 liners
@@ -39,17 +39,17 @@ namespace dae
 
             
             // sort temp times
-            std::ranges::sort(tempTimes);
+            std::ranges::sort(temp_times);
             // remove first and last element
-            tempTimes.pop_back();
-            tempTimes.erase(tempTimes.begin());
+            temp_times.pop_back();
+            temp_times.erase(temp_times.begin());
             // calculate average
             long long sum = 0;
-            for (const auto tempTime : tempTimes)
+            for (auto const temp_time : temp_times)
             {
-                sum += tempTime;
+                sum += temp_time;
             }
-            times.push_back(static_cast<float>(sum) / static_cast<float>(tempTimes.size()));
+            times.push_back(static_cast<float>(sum) / static_cast<float>(temp_times.size()));
         }
         data_ = times;
     }
@@ -57,39 +57,39 @@ namespace dae
     void trash_the_cache_manager::calculate_data_alt()
     {
         std::vector<game_object_3d_alt> buffer(sample_);
-        int stepSize = 1;
+        int step_size = 1;
 
         // vector for storing time
         std::vector<float> times;
 
-        for (stepSize = 1; stepSize <= 1024; stepSize *= 2)
+        for (step_size = 1; step_size <= 1024; step_size *= 2)
         {
-            std::vector<long long> tempTimes;
+            std::vector<long long> temp_times;
             for (int i = 0; i < 10; ++i)
             {
                 // measure time - start
                 auto start = std::chrono::high_resolution_clock::now();
-                for (size_t j = 0; j < buffer.size(); j += stepSize)
+                for (size_t j = 0; j < buffer.size(); j += step_size)
                 {
                     buffer[j].id *= 2;
                 }
                 auto end = std::chrono::high_resolution_clock::now();
                 // store the time difference between start and end
-                const auto total = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
-                tempTimes.push_back(total);
+                auto const total = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+                temp_times.push_back(total);
             }
             // sort temp times
-            std::ranges::sort(tempTimes);
+            std::ranges::sort(temp_times);
             // remove first and last element
-            tempTimes.pop_back();
-            tempTimes.erase(tempTimes.begin());
+            temp_times.pop_back();
+            temp_times.erase(temp_times.begin());
             // calculate average
             long long sum = 0;
-            for (const auto tempTime : tempTimes)
+            for (auto const temp_time : temp_times)
             {
-                sum += tempTime;
+                sum += temp_time;
             }
-            times.push_back(static_cast<float>(sum) / static_cast<float>(tempTimes.size()));
+            times.push_back(static_cast<float>(sum) / static_cast<float>(temp_times.size()));
         }
         data_alt_ = times;
     }

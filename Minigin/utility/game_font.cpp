@@ -8,15 +8,15 @@
 
 namespace dae
 {
-    auto game_font::get_font() const -> TTF_Font*
+    auto game_font::get_font() const -> TTF_Font *
     {
-        return font_;
+        return font_ptr_;
     }
 
-    game_font::game_font(const std::string& full_path, unsigned int size) : font_(nullptr)
+    game_font::game_font(std::string const &full_path, unsigned int size) : font_ptr_(nullptr)
     {
-        font_ = TTF_OpenFont(full_path.c_str(), static_cast<int>(size));
-        if (font_ == nullptr)
+        font_ptr_ = TTF_OpenFont(full_path.c_str(), static_cast<int>(size));
+        if (font_ptr_ == nullptr)
         {
             throw std::runtime_error(std::string("Failed to load font: ") + SDL_GetError());
         }
@@ -24,6 +24,6 @@ namespace dae
 
     game_font::~game_font()
     {
-        TTF_CloseFont(font_);
+        TTF_CloseFont(font_ptr_);
     }
 }

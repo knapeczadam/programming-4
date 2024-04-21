@@ -18,7 +18,7 @@ namespace dae
 {
     auto sdl_input::do_process_input(std::vector<game_input_command> commands) -> bool
     {
-        auto key_commands = commands | std::views::filter([](const auto& command) { return command.input_type == input_type::keyboard; });
+        auto key_commands = commands | std::views::filter([](auto const &command) { return command.input_type == input_type::keyboard; });
         
         SDL_Event e;
         while (SDL_PollEvent(&e))
@@ -30,22 +30,22 @@ namespace dae
             }
             if (e.type == SDL_KEYDOWN)
             {
-                auto key_down_commands = key_commands | std::views::filter([](const auto& command) { return command.input_state == input_state::down; });
-                for (const auto& game_command : key_down_commands)
+                auto key_down_commands = key_commands | std::views::filter([](auto const &command) { return command.input_state == input_state::down; });
+                for (auto const &game_command : key_down_commands)
                 {
                     if (game_command.input == e.key.keysym.sym)
                     {
-                        game_command.command->execute();
+                        game_command.command_ptr->execute();
                     }
                 }
                 if (e.type == SDL_KEYUP)
                 {
-                    auto key_up_commands = key_commands | std::views::filter([](const auto& command) { return command.input_state == input_state::up; });
-                    for (const auto& game_command : key_up_commands)
+                    auto key_up_commands = key_commands | std::views::filter([](auto const &command) { return command.input_state == input_state::up; });
+                    for (auto const &game_command : key_up_commands)
                     {
                         if (game_command.input == e.key.keysym.sym)
                         {
-                            game_command.command->execute();
+                            game_command.command_ptr->execute();
                         }
                     }
                 }

@@ -2,21 +2,21 @@
 
 namespace dae
 {
-    void subject::add_observer(i_observer* observer)
+    void subject::add_observer(i_observer *observer_ptr)
     {
-        observers_.push_back(observer);
+        observers_.push_back(observer_ptr);
     }
 
-    void subject::remove_observer(i_observer* observer)
+    void subject::remove_observer(i_observer *observer_ptr)
     {
-        std::erase(observers_, observer);
+        std::erase(observers_, observer_ptr);
     }
 
-    void subject::notify_observers(const std::string& event)
+    void subject::notify_observers(std::string const &event)
     {
-        for (i_observer* observer : observers_)
+        for (i_observer *observer_ptr : observers_)
         {
-            observer->notify(event, this);
+            observer_ptr->notify(event, this);
         }
     }
 }

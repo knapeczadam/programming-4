@@ -1,9 +1,9 @@
 #pragma once
 
 // Project includes
-#include "game_font.h"
-#include "singleton.h"
-#include "texture_2d.h"
+#include "utility/game_font.h"
+#include "utility/singleton.h"
+#include "utility/texture_2d.h"
 
 // Standard includes
 #include <memory>
@@ -19,9 +19,9 @@ namespace dae
     class resource_manager final : public singleton<resource_manager>
     {
     public:
-        void init(const std::string& data_path);
-        auto load_texture(const std::string& file) -> texture_2d*;
-        auto load_font(const std::string& file, unsigned int size) -> game_font*;
+        void init(std::string const &data_path);
+        auto load_texture(std::string const &file) -> texture_2d *;
+        auto load_font(std::string const &file, unsigned int size) -> game_font *;
 
     private:
         friend class singleton<resource_manager>;

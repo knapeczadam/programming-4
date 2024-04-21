@@ -44,11 +44,11 @@ void load()
 {
     using namespace dae;
 
-    const auto scene = scene_manager::get_instance().create_scene("Demo");
+    auto const scene = scene_manager::get_instance().create_scene("Demo");
     
     // Fonts
-    const auto font_medium = resource_manager::get_instance().load_font("Lingua.otf", 24);
-    const auto font_small = resource_manager::get_instance().load_font("Lingua.otf", 16);
+    auto const font_medium = resource_manager::get_instance().load_font("Lingua.otf", 24);
+    auto const font_small = resource_manager::get_instance().load_font("Lingua.otf", 16);
 
     // Background
     auto go = scene->add_game_object();
@@ -64,7 +64,7 @@ void load()
     // FPS
     go = scene->add_game_object();
     go->set_local_position(10.0f, 10.0f);
-    const auto fps_comp = go->add_component<fps_component>();
+    auto const fps_comp = go->add_component<fps_component>();
     fps_comp->set_font(font_medium);
     fps_comp->set_text("FPS: ");
     
@@ -76,7 +76,7 @@ void load()
     text_comp = go->add_component<text_component>();
     text_comp->set_font(font_small);
     text_comp->set_text("Use the D-Pad to move Pacman, X to inflict damage, A and B to pick up pellets\n"
-                      "Use WASD to move GHOST, C to inflict damage, Z and X to pick up pellets");
+	    "Use WASD to move GHOST, C to inflict damage, Z and X to pick up pellets");
 
     std::stringstream health_ss;
     health_ss << "# lives: " << health_component::get_initial_health();
@@ -86,25 +86,25 @@ void load()
 
     go = scene->add_game_object("pacman_health");
     go->set_local_position(10, 120);
-    const auto pacman_health_text = go->add_component<health_text_component>();
+    auto const pacman_health_text = go->add_component<health_text_component>();
     pacman_health_text->set_font(font_small);
     pacman_health_text->set_text(health_ss.str());
 
     go = scene->add_game_object("pacman_score");
     go->set_local_position(10, 140);
-    const auto pacman_score_text = go->add_component<score_text_component>();
+    auto const pacman_score_text = go->add_component<score_text_component>();
     pacman_score_text->set_font(font_small);
     pacman_score_text->set_text(score_ss.str());
     
     go = scene->add_game_object("ghost_health");
     go->set_local_position(10, 160);
-    const auto ghost_health_text = go->add_component<health_text_component>();
+    auto const ghost_health_text = go->add_component<health_text_component>();
     ghost_health_text->set_font(font_small);
     ghost_health_text->set_text(health_ss.str());
     
     go = scene->add_game_object("ghost_score");
     go->set_local_position(10, 180);
-    const auto ghost_score_text = go->add_component<score_text_component>();
+    auto const ghost_score_text = go->add_component<score_text_component>();
     ghost_score_text->set_font(font_small);
     ghost_score_text->set_text(score_ss.str());
     
@@ -118,7 +118,7 @@ void load()
     health_comp->add_observer(pacman_health_text);
     auto score_comp = go->add_component<score_component>();
     score_comp->add_observer(pacman_score_text);
-	score_comp->add_observer(g_steam_achievements);
+	score_comp->add_observer(g_steam_achievements_ptr);
 
     // Arrow keys
     auto move_left_command1  = std::make_unique<move_command>(go, glm::vec2{-1, 0});
@@ -163,7 +163,7 @@ void load()
     health_comp->add_observer(ghost_health_text);
     score_comp = go->add_component<score_component>();
     score_comp->add_observer(ghost_score_text);
-	score_comp->add_observer(g_steam_achievements);
+	score_comp->add_observer(g_steam_achievements_ptr);
     
     // WASD
     auto move_left_command2  = std::make_unique<move_command>(go, glm::vec2{-1, 0});
@@ -188,24 +188,24 @@ void load()
     input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_x, std::move(score_command4));
 
 	// Reset Achievements
-	auto reset_command = std::make_unique<reset_achievements_command>(g_steam_achievements);
+	auto reset_command = std::make_unique<reset_achievements_command>(g_steam_achievements_ptr);
 	input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_r, std::move(reset_command));
 }
 
-int main(int, char*[])
+int main(int, char *[])
 {
     using namespace dae;
 
 	// ------------------------
 	// Steam - Initialize
 	// ------------------------
-	if (!SteamAPI_Init())
+	if (not SteamAPI_Init())
 	{
-		std::cerr << "Fatal Error - Steam must be running to play this game (SteamAPI_Init() failed)." << std::endl;
+		std::cerr << "Fatal Error - Steam must be running to play this game (SteamAPI_Init() failed)." << '\n';
 		return 1;
 	}
 	std::cout << "Successfully initialized steam." << '\n';
-	g_steam_achievements = new CSteamAchievements(g_Achievements, 1);
+	g_steam_achievements_ptr = new steam_achievements(g_achievements, 1);
 
 	// ------------------------
 	// Minigin
@@ -223,7 +223,7 @@ int main(int, char*[])
 	// ------------------------
     SteamAPI_Shutdown();
     // Delete the SteamAchievements object
-	delete g_steam_achievements;
+	delete g_steam_achievements_ptr;
 	
     return 0;
 }

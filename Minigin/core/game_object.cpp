@@ -1,7 +1,7 @@
 #include "game_object.h"
 
 // Project includes
-#include "base_component.h"
+#include "component/core/base_component.h"
 
 // Standard includes
 #include <algorithm>
@@ -10,7 +10,7 @@
 namespace dae
 {
     game_object::game_object(std::string name)
-        : name_(std::move(name))
+        : name_{std::move(name)}
     {
     }
 
@@ -18,13 +18,13 @@ namespace dae
 
     void game_object::update()
     {
-        for (const auto& component_ptr : component_map_ | std::views::values)
+        for (auto const &component_ptr : component_map_ | std::views::values)
         {
             component_ptr->update();
         }
     }
 
-    void game_object::add_child(game_object* child_ptr)
+    void game_object::add_child(game_object *child_ptr)
     {
         children_.push_back(child_ptr);
     }
@@ -35,7 +35,7 @@ namespace dae
         {
             if (parent_ptr_)
             {
-                const auto new_pos = parent_ptr_->get_world_position() + transform_.get_local_position();
+                auto const new_pos = parent_ptr_->get_world_position() + transform_.get_local_position();
                 transform_.set_world_position(new_pos);
             }
             else
@@ -50,7 +50,7 @@ namespace dae
     {
         if (position_dirty_)
         {
-            for (const auto& child : children_)
+            for (auto const &child : children_)
             {
                 child->position_dirty_ = true;
             }
@@ -58,7 +58,7 @@ namespace dae
         update_world_position();
     }
 
-    auto game_object::set_parent(game_object* parent_ptr, bool keep_world_position) -> bool
+    auto game_object::set_parent(game_object *parent_ptr, bool keep_world_position) -> bool
     {
         // SetParent has to do five things:
         // 1. Check if the new parent is valid (not itself or one of its children)
@@ -79,8 +79,8 @@ namespace dae
         {
             if (keep_world_position)
             {
-                const auto newPos = get_world_position() - parent_ptr->get_world_position();
-                transform_.set_local_position(newPos);
+                auto const new_pos = get_world_position() - parent_ptr->get_world_position();
+                transform_.set_local_position(new_pos);
             }
             position_dirty_ = true;
         }
@@ -96,9 +96,9 @@ namespace dae
         return true;
     }
 
-    auto game_object::has_child(game_object* child_ptr) const -> bool
+    auto game_object::has_child(game_object *child_ptr) const -> bool
     {
-        return std::ranges::any_of(children_, [child_ptr](const auto& child) { return child == child_ptr || child->has_child(child_ptr); });
+        return std::ranges::any_of(children_, [child_ptr](auto const &child) { return child == child_ptr or child->has_child(child_ptr); });
     }
 
     /// \brief The number of children the parent Transform has.
@@ -111,21 +111,21 @@ namespace dae
     /// \brief Returns the child GameObject at the specified index.
     /// \param index 
     /// \return 
-    auto game_object::get_child_at(int index) const -> game_object*
+    auto game_object::get_child_at(int const index) const -> game_object *
     {
-        if (index < 0 || index >= static_cast<int>(children_.size()))
+        if (index < 0 or index >= static_cast<int>(children_.size()))
         {
             return nullptr;
         }
         return children_.at(index);
     }
 
-    void game_object::remove_child(game_object* child_ptr)
+    void game_object::remove_child(game_object *child_ptr)
     {
         children_.erase(std::ranges::remove(children_, child_ptr).begin(), children_.end());
     }
-    
-    auto game_object::remove_component(const base_component* component_ptr) -> bool
+
+    auto game_object::remove_component(base_component const *component_ptr) -> bool
     {
         for (auto it = component_map_.begin(); it != component_map_.end(); ++it)
         {
@@ -138,7 +138,7 @@ namespace dae
         return false;
     }
 
-    auto game_object::remove_components(component_family family_type) -> int
+    auto game_object::remove_components(component_family const family_type) -> int
     {
     int count = 0;
     for (auto it = component_map_.begin(); it != component_map_.end();)
@@ -158,16 +158,16 @@ namespace dae
 
     auto game_object::has_component(component_family family_type) const -> bool
     {
-        return std::ranges::any_of(component_map_ | std::views::values, [family_type](const auto& value) { return value->get_family() == family_type; });
+        return std::ranges::any_of(component_map_ | std::views::values, [family_type](auto const &value) { return value->get_family() == family_type; });
     }
 
     /// \brief Gets references to all components of type T on the same GameObject as the component specified.
     /// \param family_type 
     /// \return 
-    auto game_object::get_components(const component_family family_type) const -> component_map
+    auto game_object::get_components(component_family const family_type) const -> component_map
     {
         component_map components{};
-        for (const auto& [key, value] : component_map_)
+        for (auto const &[key, value] : component_map_)
         {
             if (value->get_family() == family_type)
             {
@@ -182,7 +182,7 @@ namespace dae
     auto game_object::get_components() const -> component_map
     {
         component_map components{};
-        for (const auto& [key, value] : component_map_)
+        for (auto const &[key, value] : component_map_)
         {
             components[key] = value.get();
         }
@@ -195,16 +195,16 @@ namespace dae
     auto game_object::get_components_in_children(component_family family_type) const -> component_multimap
     {
         component_multimap components{};
-        for (const auto& [key, value] : component_map_)
+        for (auto const &[key, value] : component_map_)
         {
             if (value->get_family() == family_type)
             {
                 components.emplace(key, value.get());
             }
         }
-        for (const auto& child : children_)
+        for (auto const &child : children_)
         {
-            for (const auto& [key, value] : child->get_components_in_children(family_type))
+            for (auto const &[key, value] : child->get_components_in_children(family_type))
             {
                 components.emplace(key, value);
             }
@@ -218,13 +218,13 @@ namespace dae
     auto game_object::get_components_in_children() const -> component_multimap
     {
         component_multimap components{};
-        for (const auto& [key, value] : component_map_)
+        for (auto const &[key, value] : component_map_)
         {
             components.emplace(key, value.get());
         }
-        for (const auto& child : children_)
+        for (auto const &child : children_)
         {
-            for (const auto& [key, value] : child->get_components_in_children())
+            for (auto const &[key, value] : child->get_components_in_children())
             {
                 components.emplace(key, value);
             }
@@ -238,7 +238,7 @@ namespace dae
     auto game_object::get_components_in_parent(component_family family_type) const -> component_multimap
     {
         component_multimap components{};
-        for (const auto& [key, value] : component_map_)
+        for (auto const &[key, value] : component_map_)
         {
             if (value->get_family() == family_type)
             {
@@ -247,7 +247,7 @@ namespace dae
         }
         if (parent_ptr_)
         {
-            for (const auto& [key, value] : parent_ptr_->get_components_in_parent(family_type))
+            for (auto const &[key, value] : parent_ptr_->get_components_in_parent(family_type))
             {
                 components.emplace(key, value);
             }
@@ -260,13 +260,13 @@ namespace dae
     auto game_object::get_components_in_parent() const -> component_multimap
     {
         component_multimap components{};
-        for (const auto& [key, value] : component_map_)
+        for (auto const &[key, value] : component_map_)
         {
             components.emplace(key, value.get());
         }
         if (parent_ptr_)
         {
-            for (const auto& [key, value] : parent_ptr_->get_components_in_parent())
+            for (auto const &[key, value] : parent_ptr_->get_components_in_parent())
             {
                 components.emplace(key, value);
             }
@@ -274,7 +274,7 @@ namespace dae
         return components;
     }
 
-    auto game_object::get_world_position() -> const glm::vec3&
+    auto game_object::get_world_position() -> const glm::vec3 &
     {
         if (position_dirty_)
         {
@@ -283,7 +283,7 @@ namespace dae
         return transform_.get_world_position();
     }
 
-    auto game_object::get_local_position() const -> const glm::vec3&
+    auto game_object::get_local_position() const -> const glm::vec3 &
     {
         return transform_.get_local_position();
     }
@@ -298,12 +298,12 @@ namespace dae
         set_local_position(glm::vec3{x, y, z});
     }
 
-    void game_object::set_local_position(const glm::vec2& position)
+    void game_object::set_local_position(glm::vec2 const &position)
     {
         set_local_position(glm::vec3{position, transform_.get_local_position().z});
     }
 
-    void game_object::set_local_position(const glm::vec3& position)
+    void game_object::set_local_position(glm::vec3 const &position)
     {
         transform_.set_local_position(position);
         position_dirty_ = true;

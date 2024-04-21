@@ -1,7 +1,7 @@
 #pragma once
 
 // Project includes
-#include "singleton.h"
+#include "utility/singleton.h"
 
 // Standard includes
 #include <memory>
@@ -21,12 +21,12 @@ namespace dae
     public:
         ~scene_manager() override;
 
-        scene_manager(const scene_manager& other)            = delete;
-        scene_manager(scene_manager&& other)                 = delete;
-        scene_manager& operator=(const scene_manager& other) = delete;
-        scene_manager& operator=(scene_manager&& other)      = delete;
-        
-        auto create_scene(const std::string& name) -> scene*;
+        scene_manager(scene_manager const &other)            = delete;
+        scene_manager(scene_manager &&other)                 = delete;
+        scene_manager &operator=(scene_manager const &other) = delete;
+        scene_manager &operator=(scene_manager &&other)      = delete;
+
+        auto create_scene(std::string const &name) -> scene *;
 
         void update();
         void late_update();

@@ -1,7 +1,7 @@
 ﻿#include "trash_the_cache_component.h"
 
 // Project includes
-#include "trash_the_cache_manager.h"
+#include "misc/trash_the_cache_manager.h"
 
 // ImGui includes
 #include "imgui.h"
@@ -22,20 +22,20 @@ namespace dae
         
         if (not trash_the_cache_manager::get_instance().get_data().empty())
         {
-            const float x_data[11] = {1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024};
-            
-            ImGui::PlotConfig conf;
-            conf.values.xs = x_data; // this line is optional
-            conf.values.ys = trash_the_cache_manager::get_instance().get_data().data();
-            conf.values.count = static_cast<int>(trash_the_cache_manager::get_instance().get_data().size());
-            conf.values.color = colors[0];
-            conf.scale.min = 0;
-            conf.scale.max = trash_the_cache_manager::get_instance().get_data()[0];
-            conf.tooltip.show = true;
+            float const x_data[11] = {1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024};
+
+            ImGui::PlotConfig conf{};
+            conf.values.xs      = x_data;
+            conf.values.ys      = trash_the_cache_manager::get_instance().get_data().data();
+            conf.values.count   = static_cast<int>(trash_the_cache_manager::get_instance().get_data().size());
+            conf.values.color   = colors[0];
+            conf.scale.min      = 0;
+            conf.scale.max      = trash_the_cache_manager::get_instance().get_data()[0];
+            conf.tooltip.show   = true;
             conf.tooltip.format = "x=%.2f, y=%.2f";
-            conf.grid_x.show = true;
-            conf.grid_y.show = true;
-            conf.frame_size = ImVec2(200, 100);
+            conf.grid_x.show    = true;
+            conf.grid_y.show    = true;
+            conf.frame_size     = ImVec2(200, 100);
             conf.line_thickness = 2.f;
         
             ImGui::Plot("plot", conf);
@@ -47,19 +47,19 @@ namespace dae
         if (not trash_the_cache_manager::get_instance().get_data_alt().empty())
         {
             const float x_data[11] = {1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024};
-            
-            ImGui::PlotConfig conf;
-            conf.values.xs = x_data; // this line is optional
-            conf.values.ys = trash_the_cache_manager::get_instance().get_data_alt().data();
-            conf.values.count = static_cast<int>(trash_the_cache_manager::get_instance().get_data_alt().size());
-            conf.values.color = colors[1];
-            conf.scale.min = 0;
-            conf.scale.max = trash_the_cache_manager::get_instance().get_data_alt()[0];
-            conf.tooltip.show = true;
+
+            ImGui::PlotConfig conf{};
+            conf.values.xs      = x_data;
+            conf.values.ys      = trash_the_cache_manager::get_instance().get_data_alt().data();
+            conf.values.count   = static_cast<int>(trash_the_cache_manager::get_instance().get_data_alt().size());
+            conf.values.color   = colors[1];
+            conf.scale.min      = 0;
+            conf.scale.max      = trash_the_cache_manager::get_instance().get_data_alt()[0];
+            conf.tooltip.show   = true;
             conf.tooltip.format = "x=%.2f, y=%.2f";
-            conf.grid_x.show = true;
-            conf.grid_y.show = true;
-            conf.frame_size = ImVec2(200, 100);
+            conf.grid_x.show    = true;
+            conf.grid_y.show    = true;
+            conf.frame_size     = ImVec2(200, 100);
             conf.line_thickness = 2.f;
         
             ImGui::Plot("plot2", conf);
@@ -69,22 +69,25 @@ namespace dae
             ImGui::Text("Combined:");
             
             const float x_data[11] = {1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024};
-            const float* list[] = { trash_the_cache_manager::get_instance().get_data().data(), trash_the_cache_manager::get_instance().get_data_alt().data() };
+            const float *list[] = {
+                trash_the_cache_manager::get_instance().get_data().data(),
+                trash_the_cache_manager::get_instance().get_data_alt().data()
+            };
             
-            ImGui::PlotConfig conf;
-            conf.values.xs = x_data; // this line is optional
-            conf.values.count = static_cast<int>(trash_the_cache_manager::get_instance().get_data().size());
-            conf.values.ys_list = list;
+            ImGui::PlotConfig conf{};
+            conf.values.xs       = x_data;
+            conf.values.count    = static_cast<int>(trash_the_cache_manager::get_instance().get_data().size());
+            conf.values.ys_list  = list;
             conf.values.ys_count = 2;
-            conf.values.colors = colors;
-            conf.scale.min = 0;
-            conf.scale.max = trash_the_cache_manager::get_instance().get_data()[0];
-            conf.tooltip.show = true;
-            conf.tooltip.format = "x=%.2f, y=%.2f";
-            conf.grid_x.show = true;
-            conf.grid_y.show = true;
-            conf.frame_size = ImVec2(200, 100);
-            conf.line_thickness = 2.f;
+            conf.values.colors   = colors;
+            conf.scale.min       = 0;
+            conf.scale.max       = trash_the_cache_manager::get_instance().get_data()[0];
+            conf.tooltip.show    = true;
+            conf.tooltip.format  = "x=%.2f, y=%.2f";
+            conf.grid_x.show     = true;
+            conf.grid_y.show     = true;
+            conf.frame_size      = ImVec2(200, 100);
+            conf.line_thickness  = 2.f;
         
             ImGui::Plot("plot3", conf);
         }

@@ -14,17 +14,17 @@ namespace dae
     class game_font final
     {
     public:
-        explicit game_font(const std::string& full_path, unsigned int size);
+        explicit game_font(std::string const &full_path, unsigned int size);
         ~game_font();
 
-        game_font(const game_font&)             = delete;
-        game_font(game_font&&)                  = delete;
-        game_font& operator=(const game_font&)  = delete;
-        game_font& operator=(const game_font&&) = delete;
-        
-        auto get_font() const -> _TTF_Font*;
+        game_font(game_font const &other)             = delete;
+        game_font(game_font &&other)                  = delete;
+        game_font &operator=(game_font const &other)  = delete;
+        game_font &operator=(game_font &&other)       = delete;
+
+        [[nodiscard]] auto get_font() const -> _TTF_Font *;
 
     private:
-        _TTF_Font* font_;
+        _TTF_Font *font_ptr_;
     };
 }

@@ -23,18 +23,18 @@ namespace dae
 
         [[nodiscard]] auto do_process_input(std::vector<game_input_command> commands) const -> bool
         {
-            return std::ranges::all_of(input_impls, [&commands](const auto& input_impl) { return input_impl->do_process_input(commands); });
+            return std::ranges::all_of(input_impls, [&commands](auto const &input_impl) { return input_impl->do_process_input(commands); });
         }
         
     public:
         std::vector<std::unique_ptr<i_input>> input_impls;
         
         std::vector<game_input_command> commands_;
-        std::vector<std::unique_ptr<base_command>> game_actor_commands_;
+        std::vector<std::unique_ptr<base_command>> game_actor_commands;
     };
 
     input_manager::input_manager()
-        : impl_ptr_(std::make_unique<input_manager_impl>())
+        : impl_{std::make_unique<input_manager_impl>()}
     {
     }
 
@@ -42,26 +42,25 @@ namespace dae
 
     auto input_manager::process_input() const -> bool
     {
-        return impl_ptr_->do_process_input(impl_ptr_->commands_);
+        return impl_->do_process_input(impl_->commands_);
     }
 
     void input_manager::bind_command(input_type input_type, input_state input_state, int input, std::unique_ptr<base_command> command) const
     {
-        impl_ptr_->game_actor_commands_.emplace_back(std::move(command));
-        impl_ptr_->commands_.push_back({input_type, input_state, input, impl_ptr_->game_actor_commands_.back().get()});   
+        impl_->game_actor_commands.emplace_back(std::move(command));
+        impl_->commands_.push_back({input_type, input_state, input, impl_->game_actor_commands.back().get()});   
     }
 
     auto input_manager::unbind_command(input_type input_type, input_state input_state, int input) const -> bool
     {
-        for (auto it = impl_ptr_->commands_.begin(); it != impl_ptr_->commands_.end(); ++it)
+        for (auto it = impl_->commands_.begin(); it != impl_->commands_.end(); ++it)
         {
             if (it->input_type == input_type and it->input_state == input_state and it->input == input)
             {
-                impl_ptr_->commands_.erase(it);
+                impl_->commands_.erase(it);
                 return true;
             }
         }
         return false;
     }
-        
 }

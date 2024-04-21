@@ -1,14 +1,14 @@
 #include "base_component.h"
 
+// Project includes
+#include "core/game_object.h"
+
 // Standard includes
 #include <cassert>
 
-// Project includes
-#include "game_object.h"
-
 namespace dae
 {
-    void base_component::set_owner(game_object* owner_ptr)
+    void base_component::set_owner(game_object *owner_ptr)
     {
         assert(owner_ptr != nullptr and "BaseComponent::SetOwner: ownerPtr is nullptr");
         if (not owner_ptr)

@@ -21,36 +21,36 @@ namespace dae
         ZeroMemory(&current_state_, sizeof(XINPUT_STATE));
         XInputGetState(controller_index_, &current_state_);
 
-        const auto buttonChanges = current_state_.Gamepad.wButtons ^ previous_state_.Gamepad.wButtons;
-        buttons_pressed_this_frame_ = buttonChanges & current_state_.Gamepad.wButtons;
-        buttons_released_this_frame_ = buttonChanges & (~current_state_.Gamepad.wButtons);
+        auto const button_changes = current_state_.Gamepad.wButtons ^ previous_state_.Gamepad.wButtons;
+        buttons_pressed_this_frame_ = button_changes & current_state_.Gamepad.wButtons;
+        buttons_released_this_frame_ = button_changes & (~current_state_.Gamepad.wButtons);
 
-        auto controller_commands = commands | std::views::filter([](const game_input_command& command) { return command.input_type == input_type::controller; });
-        for (const auto& game_command : controller_commands)
+        auto controller_commands = commands | std::views::filter([](game_input_command const &command) { return command.input_type == input_type::controller; });
+        for (auto const &game_command : controller_commands)
         {
-            const auto input_state = game_command.input_state;
+            auto const input_state = game_command.input_state;
             if (input_state == input_state::down)
             {
-                const auto input = game_command.input;
+                auto const input = game_command.input;
                 if (is_down_this_frame(input))
                 {
-                    game_command.command->execute();
+                    game_command.command_ptr->execute();
                 }
             }
             if (input_state == input_state::up)
             {
-                const auto input = game_command.input;
+                auto const input = game_command.input;
                 if (is_up_this_frame(input))
                 {
-                    game_command.command->execute();
+                    game_command.command_ptr->execute();
                 }
             }
             if (input_state == input_state::pressed)
             {
-                const auto input = game_command.input;
+                auto const input = game_command.input;
                 if (is_pressed(input))
                 {
-                    game_command.command->execute();
+                    game_command.command_ptr->execute();
                 }
             }
         }

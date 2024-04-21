@@ -8,15 +8,16 @@
 
 namespace dae
 {
-    void health_text_component::notify(const std::string& event, subject* subject)
+    void health_text_component::notify(std::string const &event, subject *subject_ptr)
     {
         if (event == "HealthChanged")
         {
-            const auto health_comp = static_cast<health_component*>(subject);
-            
-            std::stringstream ss;
-            ss << "# lives: " << health_comp->get_health();
-            set_text(ss.str());
+            if (auto const health_comp = dynamic_cast<health_component*>(subject_ptr))
+            {
+                std::stringstream ss;
+                ss << "# lives: " << health_comp->get_health();
+                set_text(ss.str());
+            }
         }
     }
 }

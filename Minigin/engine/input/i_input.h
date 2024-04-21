@@ -16,13 +16,13 @@ namespace dae
     class i_input
     {
     public:
-        i_input() = default;
+        i_input()          = default;
         virtual ~i_input() = default;
 
-        i_input(const i_input& other)            = delete;
-        i_input(i_input&& other)                 = delete;
-        i_input& operator=(const i_input& other) = delete;
-        i_input& operator=(i_input&& other)      = delete;
+        i_input(i_input const &other)            = delete;
+        i_input(i_input &&other)                 = delete;
+        i_input &operator=(i_input const &other) = delete;
+        i_input &operator=(i_input &&other)      = delete;
         
         virtual auto do_process_input(std::vector<game_input_command> commands) -> bool = 0;
     };

@@ -6,7 +6,7 @@ namespace dae
     class singleton
     {
     public:
-        static T& get_instance()
+        static T &get_instance()
         {
             static T instance{};
             return instance;
@@ -14,10 +14,10 @@ namespace dae
 
         virtual ~singleton() = default;
         
-        singleton(const singleton& other)            = delete;
-        singleton(singleton&& other)                 = delete;
-        singleton& operator=(const singleton& other) = delete;
-        singleton& operator=(singleton&& other)      = delete;
+        singleton(singleton const &other)            = delete;
+        singleton(singleton &&other)                 = delete;
+        singleton &operator=(singleton const &other) = delete;
+        singleton &operator=(singleton &&other)      = delete;
 
     protected:
         singleton() = default;

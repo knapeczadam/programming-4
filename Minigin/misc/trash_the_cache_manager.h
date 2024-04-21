@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 // Project includes
-#include "singleton.h"
+#include "utility/singleton.h"
 
 // Standard includes
 #include <vector>
@@ -21,26 +21,26 @@ namespace dae
     struct game_object_3d
     {
         transform_dummy transform{};
-        int id{1};
+        int id = 1;
     };
 
     struct game_object_3d_alt
     {
-        transform_dummy* transform{};
-        int id{1};
+        transform_dummy *transform_ptr = nullptr;
+        int id = 1;
     };
     
-    class trash_the_cache_manager final : public dae::singleton<trash_the_cache_manager>
+    class trash_the_cache_manager final : public singleton<trash_the_cache_manager>
     {
     public:
         void calculate_data();
         void calculate_data_alt();
-        
-        auto get_data() -> std::vector<float>& { return data_; }
-        auto get_data_alt() -> std::vector<float>& { return data_alt_; }
+
+        auto get_data() -> std::vector<float> & { return data_; }
+        auto get_data_alt() -> std::vector<float> & { return data_alt_; }
 
     private:
-        friend class dae::singleton<trash_the_cache_manager>;
+        friend class singleton<trash_the_cache_manager>;
         trash_the_cache_manager() = default;
         
         std::vector<float> data_;

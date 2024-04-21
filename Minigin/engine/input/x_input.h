@@ -15,9 +15,9 @@ namespace dae
         auto do_process_input(std::vector<game_input_command> commands) -> bool override;
 
     private:
-        auto is_down_this_frame(int button) const -> bool;
-        auto is_up_this_frame(int button) const -> bool;
-        auto is_pressed(int button) const -> bool;
+        [[nodiscard]] auto is_down_this_frame(int button) const -> bool;
+        [[nodiscard]] auto is_up_this_frame(int button) const -> bool;
+        [[nodiscard]] auto is_pressed(int button) const -> bool;
 
     private:
         XINPUT_STATE previous_state_              = {};

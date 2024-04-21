@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 // Project includes
-#include "i_observer.h"
+#include "core/i_observer.h"
 
 // Steam includes
 #pragma warning (push)
@@ -13,54 +13,55 @@
 
 namespace dae
 {
-    struct Achievement_t
+    struct achievement_t
     {
-        int m_eAchievementID;
-        const char* m_pchAchievementID;
-        char m_rgchName[128];
-        char m_rgchDescription[256];
-        bool m_bAchieved;
-        int m_iIconImage;
+        int achievement_id;
+        char const *achievement_name;
+        char name[128];
+        char description[256];
+        bool achieved;
+        int icon_image;
     };
 
-    class CSteamAchievements : public i_observer
+    class steam_achievements final : public i_observer
     {
-    private:
-        int64 m_iAppID; // Our current AppID
-        Achievement_t* m_pAchievements; // Achievements data
-        int m_iNumAchievements; // The number of Achievements
-        bool m_bInitialized; // Have we called Request stats and received the callback?
-
     public:
-        CSteamAchievements(Achievement_t* Achievements, int NumAchievements);
-        ~CSteamAchievements() = default;
+        steam_achievements(achievement_t *achievements_ptr, int num_achievements);
+        ~steam_achievements() override = default;
 
-        bool RequestStats();
-        bool SetAchievement(const char* ID);
-        void ResetAchievements();
+        auto request_stats() -> bool;
+        auto set_achievement(char const *id) -> bool;
+        void reset_achievements();
 
-        STEAM_CALLBACK(CSteamAchievements, OnUserStatsReceived, UserStatsReceived_t, m_CallbackUserStatsReceived);
-        STEAM_CALLBACK(CSteamAchievements, OnUserStatsStored, UserStatsStored_t, m_CallbackUserStatsStored);
-        STEAM_CALLBACK(CSteamAchievements, OnAchievementStored, UserAchievementStored_t, m_CallbackAchievementStored);
+        STEAM_CALLBACK(steam_achievements, OnUserStatsReceived, UserStatsReceived_t, m_CallbackUserStatsReceived);
+        STEAM_CALLBACK(steam_achievements, OnUserStatsStored, UserStatsStored_t, m_CallbackUserStatsStored);
+        STEAM_CALLBACK(steam_achievements, OnAchievementStored, UserAchievementStored_t, m_CallbackAchievementStored);
 
-        void notify(const std::string& event, subject* subject) override;
+        void notify(std::string const &event, subject *subject_ptr) override;
+        
+    private:
+        int64          app_id_;           // Our current AppID
+        achievement_t *achievements_ptr_; // Achievements data
+        int            num_achievements_; // The number of Achievements
+        bool           initialized_;      // Have we walled Request stats and received the callback?
+
     };
 
     // Defining our achievements
-    enum EAchievements
+    enum achievements
     {
-        ACH_WIN_ONE_GAME = 0,
-        ACH_WIN_100_GAMES = 1,
-        ACH_TRAVEL_FAR_ACCUM = 2,
-        ACH_TRAVEL_FAR_SINGLE = 3,
+        win_one_game      = 0,
+        win_100_games     = 1,
+        travel_far_accum  = 2,
+        travel_far_single = 3,
     };
 
     // Achievement array which will hold data about the achievements and their state
-    inline Achievement_t g_Achievements[] =
+    inline achievement_t g_achievements[] =
     {
-        _ACH_ID(ACH_WIN_ONE_GAME, "Winner")
+        _ACH_ID(win_one_game, "Winner")
     };
 
     // Global access to Achievements object
-    inline CSteamAchievements* g_steam_achievements = NULL;
+    inline steam_achievements *g_steam_achievements_ptr = nullptr;
 }

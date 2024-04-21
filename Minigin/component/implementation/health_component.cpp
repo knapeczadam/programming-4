@@ -2,7 +2,7 @@
 
 namespace dae
 {
-    void health_component::take_damage(const int damage)
+    void health_component::take_damage(int const damage)
     {
         if (health_ <= 0)
             return;

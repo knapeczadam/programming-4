@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 // Project includes
-#include "rendering_component.h"
+#include "component/family/rendering_component.h"
 
 // Standard includes
 #include <memory>
@@ -15,20 +15,20 @@ namespace dae
     class texture_component final : public rendering_component
     {
     public:
-        texture_component() = default;
-        explicit texture_component(const std::string& filename);
+        explicit texture_component(std::string const &filename);
+        texture_component()           = default;
         ~texture_component() override = default;
 
-        texture_component(const texture_component& other)            = delete;
-        texture_component(texture_component&& other)                 = delete;
-        texture_component& operator=(const texture_component& other) = delete;
-        texture_component& operator=(texture_component&& other)      = delete;
+        texture_component(texture_component const &other)            = delete;
+        texture_component(texture_component &&other)                 = delete;
+        texture_component &operator=(texture_component const &other) = delete;
+        texture_component &operator=(texture_component &&other)      = delete;
 
         void render() const override;
         
-        void set_texture(const std::string& filename);
+        void set_texture(std::string const &filename);
         
     private:
-        texture_2d* m_texture_ = nullptr;
+        texture_2d *m_texture_ptr_ = nullptr;
     };
 }
