@@ -9,6 +9,14 @@ namespace dae
     scene_manager::scene_manager() = default;
 
     scene_manager::~scene_manager() = default;
+    
+    void scene_manager::fixed_update()
+    {
+        for (auto const & scene : scenes_)
+        {
+            scene->fixed_update();
+        }
+    }
 
     void scene_manager::update()
     {

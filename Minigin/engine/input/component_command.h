@@ -17,10 +17,10 @@ namespace dae
 
         ~component_command() override = default;
 
-        component_command(component_command const &other)            = delete;
-        component_command(component_command &&other)                 = delete;
-        component_command &operator=(component_command const &other) = delete;
-        component_command &operator=(component_command &&other)      = delete;
+        component_command(component_command const &other)            = default;
+        component_command(component_command &&other)                 = default;
+        component_command &operator=(component_command const &other) = default;
+        component_command &operator=(component_command &&other)      = default;
 
     protected:
         [[nodiscard]] auto get_game_component() const -> base_component * { return component_ptr_; }
@@ -41,6 +41,11 @@ namespace dae
         }
         void execute() override;
 
+        [[nodiscard]] auto clone() const -> std::unique_ptr<base_command> override
+        {
+            return std::make_unique<damage_command>(*this);
+        }
+
     private:
         int damage_ = 1;
     };
@@ -53,6 +58,11 @@ namespace dae
             : component_command(component_ptr)
             , score_(score)
         {
+        }
+
+        [[nodiscard]] auto clone() const -> std::unique_ptr<base_command> override
+        {
+            return std::make_unique<score_command>(*this);
         }
 
         void execute() override;

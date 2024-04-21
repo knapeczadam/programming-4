@@ -7,24 +7,25 @@
 #endif
 
 // Project includes
-#include "achievement.h"
-#include "fps_component.h"
-#include "component_command.h"
-#include "game_object.h"
-#include "game_object_command.h"
-#include "generic_command.h"
-#include "health_component.h"
-#include "health_text_component.h"
-#include "input_manager.h"
-#include "minigin.h"
-#include "resource_manager.h"
-#include "scene.h"
-#include "scene_manager.h"
-#include "score_component.h"
-#include "score_text_component.h"
-#include "test_manager.h"
-#include "texture_component.h"
-#include "text_component.h"
+#include "component/implementation/fps_component.h"
+#include "component/implementation/health_component.h"
+#include "component/implementation/health_text_component.h"
+#include "component/implementation/move_component.h"
+#include "component/implementation/score_component.h"
+#include "component/implementation/score_text_component.h"
+#include "component/implementation/texture_component.h"
+#include "component/implementation/text_component.h"
+#include "core/game_object.h"
+#include "engine/minigin.h"
+#include "engine/resource_manager.h"
+#include "engine/scene.h"
+#include "engine/scene_manager.h"
+#include "engine/input/component_command.h"
+#include "engine/input/game_object_command.h"
+#include "engine/input/generic_command.h"
+#include "engine/input/input_manager.h"
+#include "steam/achievement.h"
+#include "test/test_manager.h"
 
 // Standard includes
 #include <cassert>
@@ -114,6 +115,7 @@ void load()
     go = scene->add_game_object("pacman");
     go->set_local_position(200.0f, 200.0f);
     go->add_component<texture_component>("pacman.tga");
+	go->add_component<move_component>();
     auto health_comp = go->add_component<health_component>();
     health_comp->add_observer(pacman_health_text);
     auto score_comp = go->add_component<score_component>();
@@ -125,11 +127,18 @@ void load()
     auto move_right_command1 = std::make_unique<move_command>(go, glm::vec2{1, 0});
     auto move_up_command1    = std::make_unique<move_command>(go, glm::vec2{0, -1});
     auto move_down_command1  = std::make_unique<move_command>(go, glm::vec2{0, 1});
-    
+
+	auto reset_move_command_pacman = std::make_unique<reset_move_command>(go);
+
     input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_left, std::move(move_left_command1));
     input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_right, std::move(move_right_command1));
     input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_up, std::move(move_up_command1));
     input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_down, std::move(move_down_command1));
+
+	input_manager::get_instance().bind_command(input_type::keyboard, input_state::up, input::k_left, reset_move_command_pacman->clone());
+	input_manager::get_instance().bind_command(input_type::keyboard, input_state::up, input::k_right, reset_move_command_pacman->clone());
+	input_manager::get_instance().bind_command(input_type::keyboard, input_state::up, input::k_up, reset_move_command_pacman->clone());
+	input_manager::get_instance().bind_command(input_type::keyboard, input_state::up, input::k_down, reset_move_command_pacman->clone());
 
     // Controller
     auto move_left_command3  = std::make_unique<move_command>(go, glm::vec2{-1, 0});
@@ -137,10 +146,15 @@ void load()
     auto move_up_command3    = std::make_unique<move_command>(go, glm::vec2{0, -1});
     auto move_down_command3  = std::make_unique<move_command>(go, glm::vec2{0, 1});
     
-    input_manager::get_instance().bind_command(input_type::controller, input_state::pressed, input::c_left, std::move(move_left_command3));
-    input_manager::get_instance().bind_command(input_type::controller, input_state::pressed, input::c_right, std::move(move_right_command3));
-    input_manager::get_instance().bind_command(input_type::controller, input_state::pressed, input::c_up, std::move(move_up_command3));
-    input_manager::get_instance().bind_command(input_type::controller, input_state::pressed, input::c_down, std::move(move_down_command3));
+    input_manager::get_instance().bind_command(input_type::controller, input_state::down, input::c_left, std::move(move_left_command3));
+    input_manager::get_instance().bind_command(input_type::controller, input_state::down, input::c_right, std::move(move_right_command3));
+    input_manager::get_instance().bind_command(input_type::controller, input_state::down, input::c_up, std::move(move_up_command3));
+    input_manager::get_instance().bind_command(input_type::controller, input_state::down, input::c_down, std::move(move_down_command3));
+
+	input_manager::get_instance().bind_command(input_type::controller, input_state::up, input::c_left, reset_move_command_pacman->clone());
+	input_manager::get_instance().bind_command(input_type::controller, input_state::up, input::c_right, reset_move_command_pacman->clone());
+	input_manager::get_instance().bind_command(input_type::controller, input_state::up, input::c_up, reset_move_command_pacman->clone());
+	input_manager::get_instance().bind_command(input_type::controller, input_state::up, input::c_down, reset_move_command_pacman->clone());
     
     // Damage
     auto damage_command1 = std::make_unique<damage_command>(health_comp);
@@ -159,6 +173,7 @@ void load()
     go = scene->add_game_object("ghost");
     go->set_local_position(300.0f, 300.0f);
     go->add_component<texture_component>("ghost.tga");
+	go->add_component<move_component>();
     health_comp = go->add_component<health_component>();
     health_comp->add_observer(ghost_health_text);
     score_comp = go->add_component<score_component>();
@@ -170,11 +185,18 @@ void load()
     auto move_right_command2 = std::make_unique<move_command>(go, glm::vec2{1, 0});
     auto move_up_command2    = std::make_unique<move_command>(go, glm::vec2{0, -1});
     auto move_down_command2  = std::make_unique<move_command>(go, glm::vec2{0, 1});
+
+	auto reset_move_command_ghost = std::make_unique<reset_move_command>(go);
     
     input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_a, std::move(move_left_command2));
     input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_d, std::move(move_right_command2));
     input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_w, std::move(move_up_command2));
     input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_s, std::move(move_down_command2));
+
+	input_manager::get_instance().bind_command(input_type::keyboard, input_state::up, input::k_a, reset_move_command_ghost->clone());
+	input_manager::get_instance().bind_command(input_type::keyboard, input_state::up, input::k_d, reset_move_command_ghost->clone());
+	input_manager::get_instance().bind_command(input_type::keyboard, input_state::up, input::k_w, reset_move_command_ghost->clone());
+	input_manager::get_instance().bind_command(input_type::keyboard, input_state::up, input::k_s, reset_move_command_ghost->clone());
 
     // Damage
     auto damage_command2 = std::make_unique<damage_command>(health_comp);
@@ -188,8 +210,8 @@ void load()
     input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_x, std::move(score_command4));
 
 	// Reset Achievements
-	auto reset_command = std::make_unique<reset_achievements_command>(g_steam_achievements_ptr);
-	input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_r, std::move(reset_command));
+	auto reset_achievement_command = std::make_unique<reset_achievements_command>(g_steam_achievements_ptr);
+	input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_r, std::move(reset_achievement_command));
 }
 
 int main(int, char *[])

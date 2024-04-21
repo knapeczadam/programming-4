@@ -31,7 +31,7 @@ namespace dae
     void renderer::init(SDL_Window *window_ptr)
     {
         window_ptr_ = window_ptr;
-        renderer_ptr_ = SDL_CreateRenderer(window_ptr, get_open_gl_driver_index(), SDL_RENDERER_ACCELERATED);
+        renderer_ptr_ = SDL_CreateRenderer(window_ptr, get_open_gl_driver_index(), SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
         if (renderer_ptr_ == nullptr)
         {
             throw std::runtime_error(std::string("SDL_CreateRenderer Error: ") + SDL_GetError());

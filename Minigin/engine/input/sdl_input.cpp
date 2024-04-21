@@ -30,7 +30,10 @@ namespace dae
             }
             if (e.type == SDL_KEYDOWN)
             {
-                auto key_down_commands = key_commands | std::views::filter([](auto const &command) { return command.input_state == input_state::down; });
+                auto key_down_commands = key_commands | std::views::filter([](auto const &command)
+                {
+                    return command.input_state == input_state::down;
+                });
                 for (auto const &game_command : key_down_commands)
                 {
                     if (game_command.input == e.key.keysym.sym)
@@ -38,20 +41,23 @@ namespace dae
                         game_command.command_ptr->execute();
                     }
                 }
-                if (e.type == SDL_KEYUP)
+            }
+            if (e.type == SDL_KEYUP)
+            {
+                auto key_up_commands = key_commands | std::views::filter([](auto const &command)
                 {
-                    auto key_up_commands = key_commands | std::views::filter([](auto const &command) { return command.input_state == input_state::up; });
-                    for (auto const &game_command : key_up_commands)
+                    return command.input_state == input_state::up;
+                });
+                for (auto const &game_command : key_up_commands)
+                {
+                    if (game_command.input == e.key.keysym.sym)
                     {
-                        if (game_command.input == e.key.keysym.sym)
-                        {
-                            game_command.command_ptr->execute();
-                        }
+                        game_command.command_ptr->execute();
                     }
                 }
-                if (e.type == SDL_MOUSEBUTTONDOWN)
-                {
-                }
+            }
+            if (e.type == SDL_MOUSEBUTTONDOWN)
+            {
             }
         }
         return true;

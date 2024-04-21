@@ -118,13 +118,19 @@ namespace dae
         while (do_continue)
         {
             auto const current_time = high_resolution_clock::now();
-            game_time::get_instance().delta_time = duration<float>(current_time - last_time).count();
+            game_time::get_instance().delta_time = duration<float>(current_time - last_time).count(); // dt always has a 1 frame delay
             
             last_time = current_time;
             lag += game_time::get_instance().delta_time;
             
             do_continue = input.process_input();
-            // std::cout << "FPS: " << 1.0f / Time::deltaTime << "\n";
+
+            while (lag >= game_time::get_instance().fixed_time_step)
+            {
+                scene_manager.fixed_update();
+                lag -= game_time::get_instance().fixed_time_step;
+            }
+            
             scene_manager.update();
             scene_manager.late_update();
             renderer.render();

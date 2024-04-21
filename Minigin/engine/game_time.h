@@ -11,7 +11,7 @@ namespace dae
         float delta_time = 0.0f;
         
         float const fixed_time_step = 0.02f;
-        float const ms_per_frame = 16.666666666666668f;
+        float const ms_per_frame = 0.0f;
         
     private:
         friend class singleton<game_time>;

@@ -45,6 +45,7 @@ namespace dae
 
         [[nodiscard]] auto get_name() const -> std::string { return name_; }
 
+        void fixed_update();
         void update();
         void update_world_position();
         void late_update();

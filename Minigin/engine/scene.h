@@ -32,6 +32,7 @@ namespace dae
         [[nodiscard]] auto get_game_object_count() const -> int;
         [[nodiscard]] auto find_game_object(std::string const &name) const -> game_object *;
 
+        void fixed_update();
         void update();
         void late_update();
         void render() const;

@@ -15,6 +15,11 @@ namespace dae
         }
 
         void execute() override;
+
+        [[nodiscard]] auto clone() const -> std::unique_ptr<base_command> override
+        {
+            return std::make_unique<reset_achievements_command>(*this);
+        }
         
     private:
         void *achievement_ptr_;

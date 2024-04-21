@@ -59,6 +59,14 @@ namespace dae
         return it != objects_.end() ? it->get() : nullptr;
     }
 
+    void scene::fixed_update()
+    {
+        for (auto const &object : objects_)
+        {
+            object->fixed_update();
+        }
+    }
+
     void scene::update()
     {
         for (auto const &object : objects_)

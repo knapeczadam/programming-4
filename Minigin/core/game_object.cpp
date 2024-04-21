@@ -7,6 +7,8 @@
 #include <algorithm>
 #include <ranges>
 
+#include "physics_component.h"
+
 namespace dae
 {
     game_object::game_object(std::string name)
@@ -15,6 +17,17 @@ namespace dae
     }
 
     game_object::~game_object() = default;
+
+    void game_object::fixed_update()
+    {
+        for (auto const &component_ptr : component_map_ | std::views::values)
+        {
+            if (auto physics_comp_ptr = dynamic_cast<physics_component*>(component_ptr.get()))
+            {
+                physics_comp_ptr->fixed_update();
+            }
+        }
+    }
 
     void game_object::update()
     {

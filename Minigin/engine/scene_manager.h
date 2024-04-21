@@ -28,6 +28,7 @@ namespace dae
 
         auto create_scene(std::string const &name) -> scene *;
 
+        void fixed_update();
         void update();
         void late_update();
         void render();
