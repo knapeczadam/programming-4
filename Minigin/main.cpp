@@ -24,6 +24,9 @@
 #include "engine/input/game_object_command.h"
 #include "engine/input/generic_command.h"
 #include "engine/input/input_manager.h"
+#include "engine/services/logging_sound_system.h"
+#include "engine/services/sdl_sound_system.h"
+#include "engine/services/service_locator.h"
 #include "steam/achievement.h"
 #include "test/test_manager.h"
 
@@ -41,9 +44,20 @@
 #include "steam_api.h"
 #pragma warning (pop)
 
+void register_services()
+{
+#ifndef _NDEBUG
+	dae::service_locator::register_sound_system(std::make_unique<dae::logging_sound_system>(std::make_unique<dae::sdl_sound_system>()));
+#else
+	dae::service_locator::register_sound_system(std::make_unique<dae::sdl_sound_system>());
+#endif
+}
+
 void load()
 {
     using namespace dae;
+
+	register_services();
 
     auto const scene = scene_manager::get_instance().create_scene("Demo");
     
@@ -146,10 +160,10 @@ void load()
     auto move_up_command3    = std::make_unique<move_command>(go, glm::vec2{0, -1});
     auto move_down_command3  = std::make_unique<move_command>(go, glm::vec2{0, 1});
     
-    input_manager::get_instance().bind_command(input_type::controller, input_state::down, input::c_left, std::move(move_left_command3));
-    input_manager::get_instance().bind_command(input_type::controller, input_state::down, input::c_right, std::move(move_right_command3));
-    input_manager::get_instance().bind_command(input_type::controller, input_state::down, input::c_up, std::move(move_up_command3));
-    input_manager::get_instance().bind_command(input_type::controller, input_state::down, input::c_down, std::move(move_down_command3));
+    input_manager::get_instance().bind_command(input_type::controller, input_state::pressed, input::c_left, std::move(move_left_command3));
+    input_manager::get_instance().bind_command(input_type::controller, input_state::pressed, input::c_right, std::move(move_right_command3));
+    input_manager::get_instance().bind_command(input_type::controller, input_state::pressed, input::c_up, std::move(move_up_command3));
+    input_manager::get_instance().bind_command(input_type::controller, input_state::pressed, input::c_down, std::move(move_down_command3));
 
 	input_manager::get_instance().bind_command(input_type::controller, input_state::up, input::c_left, reset_move_command_pacman->clone());
 	input_manager::get_instance().bind_command(input_type::controller, input_state::up, input::c_right, reset_move_command_pacman->clone());

@@ -5,7 +5,7 @@
   <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Component;$(ProjectDir)Component\Core;$(ProjectDir)Component\Family;$(ProjectDir)Component\Implementation;$(ProjectDir)Core;$(ProjectDir)Engine;$(ProjectDir)Engine\Input;$(ProjectDir)Game;$(ProjectDir)Misc;$(ProjectDir)Steam;$(ProjectDir)Test;$(ProjectDir)Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)component;$(ProjectDir)component\core;$(ProjectDir)component\family;$(ProjectDir)component\implementation;$(ProjectDir)core;$(ProjectDir)engine;$(ProjectDir)engine\input;$(ProjectDir)engine\services;$(ProjectDir)game;$(ProjectDir)misc;$(ProjectDir)steam;$(ProjectDir)test;$(ProjectDir)utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup />

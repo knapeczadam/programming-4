@@ -60,6 +60,7 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\Props\sdl.props" />
     <Import Project="..\Props\vld.props" />
+    <Import Project="..\Props\glm.props" />
     <Import Project="..\Props\imgui.props" />
     <Import Project="..\Props\steam_x86.props" />
     <Import Project="..\Props\include_dirs.props" />
@@ -69,6 +70,7 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\Props\sdl.props" />
     <Import Project="..\Props\vld.props" />
+    <Import Project="..\Props\glm.props" />
     <Import Project="..\Props\imgui.props" />
     <Import Project="..\Props\steam_x86.props" />
     <Import Project="..\Props\include_dirs.props" />
@@ -78,6 +80,7 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\Props\sdl.props" />
     <Import Project="..\Props\vld.props" />
+    <Import Project="..\Props\glm.props" />
     <Import Project="..\Props\imgui.props" />
     <Import Project="..\Props\steam_x64.props" />
     <Import Project="..\Props\include_dirs.props" />
@@ -87,6 +90,7 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\Props\sdl.props" />
     <Import Project="..\Props\vld.props" />
+    <Import Project="..\Props\glm.props" />
     <Import Project="..\Props\imgui.props" />
     <Import Project="..\Props\steam_x64.props" />
     <Import Project="..\Props\include_dirs.props" />
@@ -227,6 +231,11 @@
     <ClInclude Include="engine\scene.h" />
     <ClInclude Include="engine\scene_manager.h" />
     <ClInclude Include="engine\game_time.h" />
+    <ClInclude Include="engine\services\i_sound_system.h" />
+    <ClInclude Include="engine\services\logging_sound_system.h" />
+    <ClInclude Include="engine\services\null_sound_system.h" />
+    <ClInclude Include="engine\services\sdl_sound_system.h" />
+    <ClInclude Include="engine\services\service_locator.h" />
     <ClInclude Include="misc\trash_the_cache_manager.h" />
     <ClInclude Include="steam\achievement.h" />
     <ClInclude Include="test\test2_component.h" />
@@ -270,6 +279,9 @@
     <ClCompile Include="engine\resource_manager.cpp" />
     <ClCompile Include="engine\scene.cpp" />
     <ClCompile Include="engine\scene_manager.cpp" />
+    <ClCompile Include="engine\services\logging_sound_system.cpp" />
+    <ClCompile Include="engine\services\sdl_sound_system.cpp" />
+    <ClCompile Include="engine\services\service_locator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="misc\trash_the_cache_manager.cpp" />
     <ClCompile Include="steam\achievement.cpp" />
