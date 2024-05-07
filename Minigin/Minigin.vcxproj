@@ -213,7 +213,6 @@
     <ClInclude Include="component\implementation\text_component.h" />
     <ClInclude Include="component\implementation\texture_component.h" />
     <ClInclude Include="component\implementation\move_component.h" />
-    <ClInclude Include="component\implementation\trash_the_cache_component.h" />
     <ClInclude Include="core\game_object.h" />
     <ClInclude Include="core\game_object.hpp" />
     <ClInclude Include="core\i_observer.h" />
@@ -245,7 +244,6 @@
     <ClInclude Include="engine\sound\sound_effect.h" />
     <ClInclude Include="engine\sound\sound_manager.h" />
     <ClInclude Include="engine\sound\sound_stream.h" />
-    <ClInclude Include="misc\trash_the_cache_manager.h" />
     <ClInclude Include="steam\achievement.h" />
     <ClInclude Include="test\test2_component.h" />
     <ClInclude Include="test\test_component.h" />
@@ -274,7 +272,6 @@
     <ClCompile Include="component\implementation\text_component.cpp" />
     <ClCompile Include="component\implementation\texture_component.cpp" />
     <ClCompile Include="component\implementation\move_component.cpp" />
-    <ClCompile Include="component\implementation\trash_the_cache_component.cpp" />
     <ClCompile Include="core\game_object.cpp" />
     <ClCompile Include="core\i_observer.cpp" />
     <ClCompile Include="engine\events\event_handler.cpp" />
@@ -297,7 +294,6 @@
     <ClCompile Include="engine\sound\sound_effect.cpp" />
     <ClCompile Include="engine\sound\sound_manager.cpp" />
     <ClCompile Include="engine\sound\sound_stream.cpp" />
-    <ClCompile Include="misc\trash_the_cache_manager.cpp" />
     <ClCompile Include="steam\achievement.cpp" />
     <ClCompile Include="test\test_manager.cpp" />
     <ClCompile Include="test\test1_component.h" />
