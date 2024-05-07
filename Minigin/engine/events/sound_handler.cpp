@@ -2,7 +2,7 @@
 
 // Project includes
 #include "event.h"
-#include "service_locator.h"
+#include "engine/services/service_locator.h"
 
 namespace dae
 {

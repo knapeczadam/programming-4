@@ -13,6 +13,5 @@ namespace dae
         float const new_x = pos.x * cos_angle - pos.y * sin_angle;
         float const new_y = pos.x * sin_angle + pos.y * cos_angle;
         get_owner()->set_local_position(new_x, new_y);
-        // TODO: delta time?
     }
 }

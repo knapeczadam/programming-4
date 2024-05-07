@@ -19,7 +19,27 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="component\fps_component.cpp" />
+    <ClCompile Include="component\health_component.cpp" />
+    <ClCompile Include="component\health_text_component.cpp" />
+    <ClCompile Include="component\move_component.cpp" />
+    <ClCompile Include="component\rotator_component.cpp" />
+    <ClCompile Include="component\score_component.cpp" />
+    <ClCompile Include="component\score_text_component.cpp" />
+    <ClCompile Include="input\game_component_commands.cpp" />
+    <ClCompile Include="input\game_object_commands.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="component\fps_component.h" />
+    <ClInclude Include="component\health_component.h" />
+    <ClInclude Include="component\health_text_component.h" />
+    <ClInclude Include="component\move_component.h" />
+    <ClInclude Include="component\rotator_component.h" />
+    <ClInclude Include="component\score_component.h" />
+    <ClInclude Include="component\score_text_component.h" />
+    <ClInclude Include="input\game_component_commands.h" />
+    <ClInclude Include="input\game_object_commands.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -129,6 +149,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -145,6 +166,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -161,6 +183,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -177,6 +200,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

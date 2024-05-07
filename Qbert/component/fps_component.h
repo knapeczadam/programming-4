@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 // Project includes
-#include "text_component.h"
+#include "component/implementation/text_component.h"
 
 namespace dae
 {

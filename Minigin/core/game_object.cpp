@@ -7,7 +7,7 @@
 #include <algorithm>
 #include <ranges>
 
-#include "physics_component.h"
+#include "component/family/physics_component.h"
 
 namespace dae
 {

@@ -14,7 +14,7 @@
 // ImGui includes
 #include <backends/imgui_impl_sdl2.h>
 
-#include "event_manager.h"
+#include "engine/events/event_manager.h"
 
 namespace dae
 {

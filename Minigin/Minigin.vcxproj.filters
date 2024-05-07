@@ -48,16 +48,7 @@
     <ClInclude Include="component\family\ui_component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="component\implementation\fps_component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="component\implementation\health_component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="component\implementation\health_text_component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="component\implementation\rotator_component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="component\implementation\score_component.h">
@@ -70,9 +61,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="component\implementation\texture_component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="component\implementation\trash_the_cache_component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="core\game_object.h">
@@ -114,9 +102,6 @@
     <ClInclude Include="engine\game_time.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="misc\trash_the_cache_manager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="test\test2_component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -133,9 +118,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="component\core\game_component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="component\implementation\move_component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\input\game_component_command.h">
@@ -206,9 +188,6 @@
     <ClCompile Include="..\3rdParty\imgui\imgui_draw.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="..\3rdParty\imgui\imgui_plot.cpp">
-      <Filter>imgui</Filter>
-    </ClCompile>
     <ClCompile Include="..\3rdParty\imgui\imgui_tables.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
@@ -224,16 +203,7 @@
     <ClCompile Include="Steam\Achievement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="component\implementation\fps_component.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="component\implementation\health_component.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="component\implementation\health_text_component.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="component\implementation\rotator_component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="component\implementation\score_component.cpp">
@@ -248,9 +218,6 @@
     <ClCompile Include="component\implementation\texture_component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="component\implementation\trash_the_cache_component.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="core\game_object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -258,9 +225,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine\input\generic_command.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\input\game_object_command.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine\input\input_manager.cpp">
@@ -276,9 +240,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine\scene_manager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="misc\trash_the_cache_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="test\test_manager.cpp">
@@ -297,12 +258,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="component\core\game_component.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="component\implementation\move_component.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\input\game_component_command.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine\services\logging_sound_system.cpp">

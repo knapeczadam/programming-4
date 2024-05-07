@@ -13,8 +13,8 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 
-#include "sound_effect.h"
-#include "sound_stream.h"
+#include "engine/sound/sound_effect.h"
+#include "engine/sound/sound_stream.h"
 
 namespace dae
 {

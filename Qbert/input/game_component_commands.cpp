@@ -1,8 +1,8 @@
-﻿#include "game_component_command.h"
+﻿#include "game_component_commands.h"
 
-#include "resource_manager.h"
-#include "component/implementation/health_component.h"
-#include "component/implementation/score_component.h"
+#include "engine/resource_manager.h"
+#include "component/health_component.h"
+#include "component/score_component.h"
 #include "engine/events/event.h"
 #include "engine/events/event_manager.h"
 #include "engine/events/sound_handler.h"

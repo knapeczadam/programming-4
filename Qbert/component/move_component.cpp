@@ -1,7 +1,7 @@
 ﻿#include "move_component.h"
 
 // Project includes
-#include "game_object.h"
+#include "core/game_object.h"
 
 namespace dae
 {
