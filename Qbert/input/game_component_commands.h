@@ -1,15 +1,15 @@
 ﻿#pragma once
 
 // Project includes
-#include "engine/input/game_component_command.h"
+#include "minigin/input/game_component_command.h"
 
-namespace dae
+namespace qbert
 {
     // HealthCommand
-    class damage_command final : public game_component_command
+    class damage_command final : public mngn::game_component_command
     {
     public:
-        damage_command(game_component *component_ptr, int damage = 1)
+        damage_command(mngn::game_component *component_ptr, int damage = 1)
             : game_component_command(component_ptr)
             , damage_(damage)
         {
@@ -26,10 +26,10 @@ namespace dae
     };
 
     // ScoreCommand
-    class score_command final : public game_component_command
+    class score_command final : public mngn::game_component_command
     {
     public:
-        score_command(game_component *component_ptr, int score)
+        score_command(mngn::game_component *component_ptr, int score)
             : game_component_command(component_ptr)
             , score_(score)
         {

@@ -1,12 +1,12 @@
 ﻿#pragma once
 
 // Project includes
-#include "component/family/custom_component.h"
-#include "core/i_observer.h"
+#include "minigin/component/family/custom_component.h"
+#include "minigin/core/i_observer.h"
 
-namespace dae
+namespace qbert
 {
-    class score_component final : public custom_component, public subject
+    class score_component final : public mngn::custom_component, public mngn::subject
     {
     public:
         score_component()           = default;

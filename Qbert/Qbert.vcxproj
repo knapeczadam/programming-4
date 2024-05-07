@@ -85,6 +85,7 @@
     <Import Project="..\Props\sdl.props" />
     <Import Project="..\Props\vld.props" />
     <Import Project="..\Props\glm.props" />
+    <Import Project="..\Props\nlohmann.props" />
     <Import Project="..\Props\imgui.props" />
     <Import Project="..\Props\steam_x86.props" />
     <Import Project="..\Props\xinput.props" />
@@ -96,6 +97,7 @@
     <Import Project="..\Props\sdl.props" />
     <Import Project="..\Props\vld.props" />
     <Import Project="..\Props\glm.props" />
+    <Import Project="..\Props\nlohmann.props" />
     <Import Project="..\Props\imgui.props" />
     <Import Project="..\Props\steam_x86.props" />
     <Import Project="..\Props\xinput.props" />
@@ -107,6 +109,7 @@
     <Import Project="..\Props\sdl.props" />
     <Import Project="..\Props\vld.props" />
     <Import Project="..\Props\glm.props" />
+    <Import Project="..\Props\nlohmann.props" />
     <Import Project="..\Props\imgui.props" />
     <Import Project="..\Props\steam_x64.props" />
     <Import Project="..\Props\xinput.props" />
@@ -118,6 +121,7 @@
     <Import Project="..\Props\sdl.props" />
     <Import Project="..\Props\vld.props" />
     <Import Project="..\Props\glm.props" />
+    <Import Project="..\Props\nlohmann.props" />
     <Import Project="..\Props\imgui.props" />
     <Import Project="..\Props\steam_x64.props" />
     <Import Project="..\Props\xinput.props" />

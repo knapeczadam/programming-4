@@ -13,23 +13,25 @@
 #include "component/move_component.h"
 #include "component/score_component.h"
 #include "component/score_text_component.h"
-#include "component/implementation/texture_component.h"
-#include "component/implementation/text_component.h"
-#include "core/game_object.h"
-#include "engine/minigin.h"
-#include "engine/resource_manager.h"
-#include "engine/scene.h"
-#include "engine/scene_manager.h"
 #include "input/game_component_commands.h"
 #include "input/game_object_commands.h"
-#include "engine/input/generic_command.h"
-#include "engine/input/input_manager.h"
-#include "engine/services/logging_sound_system.h"
-#include "engine/services/sdl_sound_system.h"
-#include "engine/services/service_locator.h"
+
+#include "minigin/component/texture_component.h"
+#include "minigin/component/text_component.h"
+#include "minigin/core/game_object.h"
+#include "minigin/core/engine.h"
+#include "minigin/core/resource_manager.h"
+#include "minigin/core/scene.h"
+#include "minigin/core/scene_manager.h"
+#include "minigin/events/event_manager.h"
+#include "minigin/input/generic_command.h"
+#include "minigin/input/input_manager.h"
+#include "minigin/services/logging_sound_system.h"
+#include "minigin/services/sdl_sound_system.h"
+#include "minigin/services/service_locator.h"
+#include "minigin/test/test_manager.h"
+
 #include "steam/achievement.h"
-#include "test/test_manager.h"
-#include "engine/events/event_manager.h"
 
 // Standard includes
 #include <cassert>
@@ -48,7 +50,7 @@
 void register_services()
 {
 #ifndef _NDEBUG
-	dae::service_locator::register_sound_system(std::make_unique<dae::logging_sound_system>(std::make_unique<dae::sdl_sound_system>()));
+	mngn::service_locator::register_sound_system(std::make_unique<mngn::logging_sound_system>(std::make_unique<mngn::sdl_sound_system>()));
 #else
 	dae::service_locator::register_sound_system(std::make_unique<dae::sdl_sound_system>());
 #endif
@@ -56,7 +58,8 @@ void register_services()
 
 void load()
 {
-    using namespace dae;
+    using namespace mngn;
+	using namespace qbert;
 
 	register_services();
 
@@ -231,21 +234,21 @@ void load()
 
 auto init_steam() -> int
 {
-    using namespace dae;
+    using namespace mngn;
 	if (not SteamAPI_Init())
 	{
 		std::cerr << "Fatal Error - Steam must be running to play this game (SteamAPI_Init() failed)." << '\n';
 		return 1;
 	}
 	std::cout << "Successfully initialized steam." << '\n';
-	g_steam_achievements_ptr = new steam_achievements(g_achievements, 1);
+	steam::g_steam_achievements_ptr = new steam::steam_achievements(steam::g_achievements, 1);
 
 	return 0;
 }
 
 int main(int, char *[])
 {
-    using namespace dae;
+    using namespace mngn;
 	// ------------------------
 	// Steam - Initialize
 	// ------------------------
@@ -257,7 +260,7 @@ int main(int, char *[])
 	// ------------------------
 	// Minigin
 	// ------------------------
-    minigin engine("../Data/");
+    engine engine("../Data/");
 	
 #if defined(_DAE_DEBUG)
     test_manager::get_instance().run_all_tests();
@@ -270,7 +273,7 @@ int main(int, char *[])
 	// ------------------------
     SteamAPI_Shutdown();
     // Delete the SteamAchievements object
-	delete g_steam_achievements_ptr;
+	delete steam::g_steam_achievements_ptr;
 	
     return 0;
 }

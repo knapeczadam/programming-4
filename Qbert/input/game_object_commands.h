@@ -1,24 +1,24 @@
 ﻿#pragma once
 
 // Project includes
-#include "engine/input/game_object_command.h"
+#include "minigin/input/game_object_command.h"
 
 // GLM includes
 #include <glm/glm.hpp>
 
-namespace dae
+namespace qbert
 {
     // Move command
-    class move_command final : public game_object_command
+    class move_command final : public mngn::game_object_command
     {
     public:
-        move_command(game_object *game_object_ptr, glm::vec3 const &direction)
+        move_command(mngn::game_object *game_object_ptr, glm::vec3 const &direction)
             : game_object_command{game_object_ptr}
             , direction_{direction}
         {
         }
 
-        move_command(game_object *game_object_ptr, glm::vec2 const &direction)
+        move_command(mngn::game_object *game_object_ptr, glm::vec2 const &direction)
             : game_object_command{game_object_ptr}
             , direction_{glm::vec3{direction, 0.0f}}
         {
@@ -37,10 +37,10 @@ namespace dae
     };
 
     // Reset move command
-    class reset_move_command final : public game_object_command
+    class reset_move_command final : public mngn::game_object_command
     {
     public:
-        reset_move_command(game_object *game_object_ptr)
+        reset_move_command(mngn::game_object *game_object_ptr)
             : game_object_command{game_object_ptr}
         {
         }

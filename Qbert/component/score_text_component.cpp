@@ -6,9 +6,9 @@
 // Standard includes
 #include <sstream>
 
-namespace dae
+namespace qbert
 {
-    void score_text_component::notify(std::string const &event, subject *subject_ptr)
+    void score_text_component::notify(std::string const &event, mngn::subject *subject_ptr)
     {
         if (event == "ScoreChanged")
         {

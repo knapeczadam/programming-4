@@ -1,6 +1,6 @@
 ﻿#include "health_component.h"
 
-namespace dae
+namespace qbert
 {
     void health_component::take_damage(int const damage)
     {

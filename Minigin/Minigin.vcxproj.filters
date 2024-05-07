@@ -18,167 +18,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Engine\Minigin.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Renderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Scene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Utility\Singleton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Utility\Transform.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Steam\Achievement.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="component\family\custom_component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="component\family\physics_component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="component\family\rendering_component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="component\family\ui_component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="component\implementation\health_component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="component\implementation\score_component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="component\implementation\score_text_component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="component\implementation\text_component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="component\implementation\texture_component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="core\game_object.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="core\game_object.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="core\i_observer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\input\generic_command.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\input\base_command.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\input\game_object_command.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\input\i_input.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\input\input_manager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\input\sdl_input.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\input\x_input.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\resource_manager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\scene_manager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\game_time.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="test\test2_component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="test\test_component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="test\test_manager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="utility\game_font.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="utility\texture_2d.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="component\core\game_component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\input\game_component_command.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\services\i_sound_system.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\services\logging_sound_system.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\services\null_sound_system.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\services\sdl_sound_system.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\services\service_locator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\events\event.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\events\event_handler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\events\event_manager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\events\event_manager.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\events\sound_handler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\sound\sound_effect.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\sound\sound_stream.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\json.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\sound\sound_manager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Engine\Minigin.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Scene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Utility\Transform.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\3rdParty\imgui\imgui.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
@@ -200,92 +39,232 @@
     <ClCompile Include="..\3rdParty\imgui\backends\imgui_impl_sdl2.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="Steam\Achievement.cpp">
+    <ClCompile Include="minigin\component\core\game_component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="component\implementation\health_component.cpp">
+    <ClCompile Include="minigin\component\implementation\text_component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="component\implementation\score_component.cpp">
+    <ClCompile Include="minigin\component\implementation\texture_component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="component\implementation\score_text_component.cpp">
+    <ClCompile Include="minigin\test\test_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="component\implementation\text_component.cpp">
+    <ClCompile Include="minigin\test\test_x_input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="component\implementation\texture_component.cpp">
+    <ClCompile Include="minigin\utility\game_font.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\game_object.cpp">
+    <ClCompile Include="minigin\utility\texture_2d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\i_observer.cpp">
+    <ClCompile Include="minigin\utility\transform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\input\generic_command.cpp">
+    <ClCompile Include="minigin\events\event_handler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\input\input_manager.cpp">
+    <ClCompile Include="minigin\events\event_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\input\sdl_input.cpp">
+    <ClCompile Include="minigin\events\sound_handler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\input\x_input.cpp">
+    <ClCompile Include="minigin\input\generic_command.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\resource_manager.cpp">
+    <ClCompile Include="minigin\input\input_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\scene_manager.cpp">
+    <ClCompile Include="minigin\input\sdl_input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test\test_manager.cpp">
+    <ClCompile Include="minigin\input\x_input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test\test1_component.h">
+    <ClCompile Include="minigin\services\logging_sound_system.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minigin\services\sdl_sound_system.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minigin\services\service_locator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minigin\sound\sound_effect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minigin\sound\sound_manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minigin\sound\sound_stream.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steam\achievement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minigin\core\game_object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minigin\core\i_observer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minigin\core\minigin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minigin\core\renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minigin\core\resource_manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minigin\core\scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minigin\core\scene_manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="minigin\component\core\game_component.h">
       <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="test\test_x_input.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="utility\game_font.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="utility\texture_2d.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="component\core\game_component.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\services\logging_sound_system.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\services\sdl_sound_system.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\events\event_handler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\events\event_manager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\events\sound_handler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\services\service_locator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\sound\sound_effect.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\sound\sound_stream.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\sound\sound_manager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    </ClInclude>
+    <ClInclude Include="minigin\component\family\custom_component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\component\family\physics_component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\component\family\rendering_component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\component\family\ui_component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\component\implementation\text_component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\component\implementation\texture_component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\test\test_component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\test\test_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\test\test1_component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\test\test2_component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\utility\game_font.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\utility\singleton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\utility\texture_2d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\utility\transform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\events\event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\events\event_handler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\events\event_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\events\event_manager.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\events\sound_handler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\input\base_command.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\input\game_component_command.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\input\game_object_command.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\input\generic_command.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\input\i_input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\input\input_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\input\sdl_input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\input\x_input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\services\i_sound_system.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\services\logging_sound_system.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\services\null_sound_system.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\services\sdl_sound_system.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\services\service_locator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\sound\sound_effect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\sound\sound_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\sound\sound_stream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steam\achievement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\core\game_object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\core\game_object.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\core\game_time.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\core\i_observer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\core\minigin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\core\renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\core\resource_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\core\scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\core\scene_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

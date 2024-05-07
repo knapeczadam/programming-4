@@ -2,9 +2,9 @@
 
 // Project includes
 #include "component/move_component.h"
-#include "core/game_object.h"
+#include "minigin/core/game_object.h"
 
-namespace dae
+namespace qbert
 {
     void move_command::execute()
     {

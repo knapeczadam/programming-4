@@ -1,11 +1,11 @@
 ﻿#pragma once
 
 // Project includes
-#include "component/implementation/text_component.h"
+#include "minigin/component/text_component.h"
 
-namespace dae
+namespace qbert
 {
-    class fps_component final : public text_component
+    class fps_component final : public mngn::text_component
     {
     public:
         fps_component()           = default;

@@ -1,18 +1,18 @@
 ﻿#include "fps_component.h"
 
 // Project includes
-#include "engine/game_time.h"
+#include "minigin/core/game_time.h"
 
 // Standard includes
 #include <sstream>
 
-namespace dae
+namespace qbert
 {
     void fps_component::update()
     {
         text_component::update();
 
-        update_timer_ += game_time::get_instance().delta_time;
+        update_timer_ += mngn::game_time::get_instance().delta_time;
         ++frame_count_;
         if (update_timer_ >= update_interval_)
         {

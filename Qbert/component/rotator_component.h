@@ -1,11 +1,11 @@
 ﻿#pragma once
 
 // Project includes
-#include "component/family/custom_component.h"
+#include "minigin/component/family/custom_component.h"
 
-namespace dae
+namespace qbert
 {
-    class rotator_component final : public custom_component
+    class rotator_component final : public mngn::custom_component
     {
     public:
         rotator_component()           = default;

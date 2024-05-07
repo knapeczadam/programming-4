@@ -1,9 +1,9 @@
 ﻿#include "move_component.h"
 
 // Project includes
-#include "core/game_object.h"
+#include "minigin/core/game_object.h"
 
-namespace dae
+namespace qbert
 {
     void move_component::fixed_update()
     {

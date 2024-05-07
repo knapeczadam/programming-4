@@ -39,6 +39,12 @@
     <ClCompile Include="input\game_object_commands.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="component\score_component.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="component\score_text_component.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="component\fps_component.h">
@@ -60,6 +66,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="input\game_object_commands.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="component\score_component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="component\score_text_component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

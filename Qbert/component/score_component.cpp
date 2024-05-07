@@ -1,6 +1,6 @@
 ﻿#include "score_component.h"
 
-namespace dae
+namespace qbert
 {
     void score_component::add_score(int const score)
     {

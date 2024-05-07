@@ -61,9 +61,9 @@
     <Import Project="..\Props\sdl.props" />
     <Import Project="..\Props\vld.props" />
     <Import Project="..\Props\glm.props" />
+    <Import Project="..\Props\nlohmann.props" />
     <Import Project="..\Props\imgui.props" />
     <Import Project="..\Props\steam_x86.props" />
-    <Import Project="..\Props\include_dirs.props" />
     <Import Project="..\Props\post_build.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -71,9 +71,9 @@
     <Import Project="..\Props\sdl.props" />
     <Import Project="..\Props\vld.props" />
     <Import Project="..\Props\glm.props" />
+    <Import Project="..\Props\nlohmann.props" />
     <Import Project="..\Props\imgui.props" />
     <Import Project="..\Props\steam_x86.props" />
-    <Import Project="..\Props\include_dirs.props" />
     <Import Project="..\Props\post_build.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -81,9 +81,9 @@
     <Import Project="..\Props\sdl.props" />
     <Import Project="..\Props\vld.props" />
     <Import Project="..\Props\glm.props" />
+    <Import Project="..\Props\nlohmann.props" />
     <Import Project="..\Props\imgui.props" />
     <Import Project="..\Props\steam_x64.props" />
-    <Import Project="..\Props\include_dirs.props" />
     <Import Project="..\Props\post_build.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -91,9 +91,9 @@
     <Import Project="..\Props\sdl.props" />
     <Import Project="..\Props\vld.props" />
     <Import Project="..\Props\glm.props" />
+    <Import Project="..\Props\nlohmann.props" />
     <Import Project="..\Props\imgui.props" />
     <Import Project="..\Props\steam_x64.props" />
-    <Import Project="..\Props\include_dirs.props" />
     <Import Project="..\Props\post_build.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -125,7 +125,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_DAE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -143,7 +143,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;_DAE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -163,7 +163,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -185,7 +185,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -199,108 +199,315 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="component\core\game_component.h" />
-    <ClInclude Include="component\family\custom_component.h" />
-    <ClInclude Include="component\family\physics_component.h" />
-    <ClInclude Include="component\family\rendering_component.h" />
-    <ClInclude Include="component\family\ui_component.h" />
-    <ClInclude Include="component\implementation\fps_component.h" />
-    <ClInclude Include="component\implementation\health_component.h" />
-    <ClInclude Include="component\implementation\health_text_component.h" />
-    <ClInclude Include="component\implementation\rotator_component.h" />
-    <ClInclude Include="component\implementation\score_component.h" />
-    <ClInclude Include="component\implementation\score_text_component.h" />
-    <ClInclude Include="component\implementation\text_component.h" />
-    <ClInclude Include="component\implementation\texture_component.h" />
-    <ClInclude Include="component\implementation\move_component.h" />
-    <ClInclude Include="core\game_object.h" />
-    <ClInclude Include="core\game_object.hpp" />
-    <ClInclude Include="core\i_observer.h" />
-    <ClInclude Include="engine\events\event.h" />
-    <ClInclude Include="engine\events\event_handler.h" />
-    <ClInclude Include="engine\events\event_manager.h" />
-    <ClInclude Include="engine\events\event_manager.hpp" />
-    <ClInclude Include="engine\events\sound_handler.h" />
-    <ClInclude Include="engine\input\generic_command.h" />
-    <ClInclude Include="engine\input\base_command.h" />
-    <ClInclude Include="engine\input\game_object_command.h" />
-    <ClInclude Include="engine\input\game_component_command.h" />
-    <ClInclude Include="engine\input\i_input.h" />
-    <ClInclude Include="engine\input\input_manager.h" />
-    <ClInclude Include="engine\input\sdl_input.h" />
-    <ClInclude Include="engine\input\x_input.h" />
-    <ClInclude Include="engine\json.hpp" />
-    <ClInclude Include="engine\minigin.h" />
-    <ClInclude Include="engine\renderer.h" />
-    <ClInclude Include="engine\resource_manager.h" />
-    <ClInclude Include="engine\scene.h" />
-    <ClInclude Include="engine\scene_manager.h" />
-    <ClInclude Include="engine\game_time.h" />
-    <ClInclude Include="engine\services\i_sound_system.h" />
-    <ClInclude Include="engine\services\logging_sound_system.h" />
-    <ClInclude Include="engine\services\null_sound_system.h" />
-    <ClInclude Include="engine\services\sdl_sound_system.h" />
-    <ClInclude Include="engine\services\service_locator.h" />
-    <ClInclude Include="engine\sound\sound_effect.h" />
-    <ClInclude Include="engine\sound\sound_manager.h" />
-    <ClInclude Include="engine\sound\sound_stream.h" />
-    <ClInclude Include="steam\achievement.h" />
-    <ClInclude Include="test\test2_component.h" />
-    <ClInclude Include="test\test_component.h" />
-    <ClInclude Include="test\test_manager.h" />
-    <ClInclude Include="utility\game_font.h" />
-    <ClInclude Include="utility\singleton.h" />
-    <ClInclude Include="utility\texture_2d.h" />
-    <ClInclude Include="utility\transform.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\3rdParty\imgui\backends\imgui_impl_opengl3.cpp" />
     <ClCompile Include="..\3rdParty\imgui\backends\imgui_impl_sdl2.cpp" />
     <ClCompile Include="..\3rdParty\imgui\imgui.cpp" />
     <ClCompile Include="..\3rdParty\imgui\imgui_demo.cpp" />
     <ClCompile Include="..\3rdParty\imgui\imgui_draw.cpp" />
-    <ClCompile Include="..\3rdParty\imgui\imgui_plot.cpp" />
     <ClCompile Include="..\3rdParty\imgui\imgui_tables.cpp" />
     <ClCompile Include="..\3rdParty\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="component\core\game_component.cpp" />
-    <ClCompile Include="component\implementation\fps_component.cpp" />
-    <ClCompile Include="component\implementation\health_component.cpp" />
-    <ClCompile Include="component\implementation\health_text_component.cpp" />
-    <ClCompile Include="component\implementation\rotator_component.cpp" />
-    <ClCompile Include="component\implementation\score_component.cpp" />
-    <ClCompile Include="component\implementation\score_text_component.cpp" />
-    <ClCompile Include="component\implementation\text_component.cpp" />
-    <ClCompile Include="component\implementation\texture_component.cpp" />
-    <ClCompile Include="component\implementation\move_component.cpp" />
-    <ClCompile Include="core\game_object.cpp" />
-    <ClCompile Include="core\i_observer.cpp" />
-    <ClCompile Include="engine\events\event_handler.cpp" />
-    <ClCompile Include="engine\events\event_manager.cpp" />
-    <ClCompile Include="engine\events\sound_handler.cpp" />
-    <ClCompile Include="engine\input\generic_command.cpp" />
-    <ClCompile Include="engine\input\game_object_command.cpp" />
-    <ClCompile Include="engine\input\game_component_command.cpp" />
-    <ClCompile Include="engine\input\input_manager.cpp" />
-    <ClCompile Include="engine\input\sdl_input.cpp" />
-    <ClCompile Include="engine\input\x_input.cpp" />
-    <ClCompile Include="engine\minigin.cpp" />
-    <ClCompile Include="engine\renderer.cpp" />
-    <ClCompile Include="engine\resource_manager.cpp" />
-    <ClCompile Include="engine\scene.cpp" />
-    <ClCompile Include="engine\scene_manager.cpp" />
-    <ClCompile Include="engine\services\logging_sound_system.cpp" />
-    <ClCompile Include="engine\services\sdl_sound_system.cpp" />
-    <ClCompile Include="engine\services\service_locator.cpp" />
-    <ClCompile Include="engine\sound\sound_effect.cpp" />
-    <ClCompile Include="engine\sound\sound_manager.cpp" />
-    <ClCompile Include="engine\sound\sound_stream.cpp" />
+    <ClCompile Include="minigin\component\texture_component.cpp">
+      <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <Optimization>Disabled</Optimization>
+      <SupportJustMyCode>true</SupportJustMyCode>
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\intermediates\x64\Debug\Minigin\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\intermediates\x64\Debug\Minigin\</BrowseInformationFile>
+      <CompileAs>Default</CompileAs>
+      <ConformanceMode>true</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFuzzer>false</EnableFuzzer>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\intermediates\x64\Debug\Minigin\</ModuleDependenciesFile>
+      <ModuleOutputFile>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\intermediates\x64\Debug\Minigin\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <ObjectFileName>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\intermediates\x64\Debug\Minigin\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\x64\Debug\Minigin\Minigin.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\intermediates\x64\Debug\Minigin\Minigin.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\intermediates\x64\Debug\Minigin\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TrackerLogDirectory>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\intermediates\x64\Debug\Minigin\Minigin.tlog\</TrackerLogDirectory>
+      <TranslateIncludes>false</TranslateIncludes>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <XMLDocumentationFileName>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\intermediates\x64\Debug\Minigin\</XMLDocumentationFileName>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <BuildStlModules>false</BuildStlModules>
+      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>InheritWarningLevel</ExternalWarningLevel>
+      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
+      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_DAE_DEBUG;_MBCS;</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\steamworks\public\steam;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\imgui\;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\nlohmann;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\glm;C:\Program Files (x86)\Visual Leak Detector\include;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\SDL2\include;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\SDL2_image\include;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\SDL2_mixer\include;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\SDL2_ttf\include;C:\Program Files (x86)\Visual Leak Detector\include;</AdditionalIncludeDirectories>
+      <SDLCheck>true</SDLCheck>
+      <LibCompiled>true</LibCompiled>
+    </ClCompile>
+    <ClCompile Include="minigin\component\text_component.cpp">
+      <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <Optimization>Disabled</Optimization>
+      <SupportJustMyCode>true</SupportJustMyCode>
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\intermediates\x64\Debug\Minigin\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\intermediates\x64\Debug\Minigin\</BrowseInformationFile>
+      <CompileAs>Default</CompileAs>
+      <ConformanceMode>true</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFuzzer>false</EnableFuzzer>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\intermediates\x64\Debug\Minigin\</ModuleDependenciesFile>
+      <ModuleOutputFile>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\intermediates\x64\Debug\Minigin\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <ObjectFileName>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\intermediates\x64\Debug\Minigin\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\x64\Debug\Minigin\Minigin.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\intermediates\x64\Debug\Minigin\Minigin.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\intermediates\x64\Debug\Minigin\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TrackerLogDirectory>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\intermediates\x64\Debug\Minigin\Minigin.tlog\</TrackerLogDirectory>
+      <TranslateIncludes>false</TranslateIncludes>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <XMLDocumentationFileName>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\intermediates\x64\Debug\Minigin\</XMLDocumentationFileName>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <BuildStlModules>false</BuildStlModules>
+      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>InheritWarningLevel</ExternalWarningLevel>
+      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
+      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_DAE_DEBUG;_MBCS;</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\steamworks\public\steam;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\imgui\;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\nlohmann;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\glm;C:\Program Files (x86)\Visual Leak Detector\include;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\SDL2\include;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\SDL2_image\include;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\SDL2_mixer\include;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\SDL2_ttf\include;C:\Program Files (x86)\Visual Leak Detector\include;</AdditionalIncludeDirectories>
+      <SDLCheck>true</SDLCheck>
+      <LibCompiled>true</LibCompiled>
+    </ClCompile>
+    <ClCompile Include="minigin\core\game_component.cpp">
+      <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <Optimization>Disabled</Optimization>
+      <SupportJustMyCode>true</SupportJustMyCode>
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\intermediates\x64\Debug\Minigin\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\intermediates\x64\Debug\Minigin\</BrowseInformationFile>
+      <CompileAs>Default</CompileAs>
+      <ConformanceMode>true</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFuzzer>false</EnableFuzzer>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\intermediates\x64\Debug\Minigin\</ModuleDependenciesFile>
+      <ModuleOutputFile>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\intermediates\x64\Debug\Minigin\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <ObjectFileName>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\intermediates\x64\Debug\Minigin\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\x64\Debug\Minigin\Minigin.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\intermediates\x64\Debug\Minigin\Minigin.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\intermediates\x64\Debug\Minigin\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TrackerLogDirectory>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\intermediates\x64\Debug\Minigin\Minigin.tlog\</TrackerLogDirectory>
+      <TranslateIncludes>false</TranslateIncludes>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <XMLDocumentationFileName>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\bin\intermediates\x64\Debug\Minigin\</XMLDocumentationFileName>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <BuildStlModules>false</BuildStlModules>
+      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>InheritWarningLevel</ExternalWarningLevel>
+      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
+      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_DAE_DEBUG;_MBCS;</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\Minigin\;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\steamworks\public\steam;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\imgui\;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\nlohmann;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\glm;C:\Program Files (x86)\Visual Leak Detector\include;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\SDL2\include;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\SDL2_image\include;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\SDL2_mixer\include;C:\Users\K-M\OneDrive - Hogeschool West-Vlaanderen\DAE\23_24\Sem4\Prog4\Other\Weekly Assignments\3rdParty\SDL2_ttf\include;C:\Program Files (x86)\Visual Leak Detector\include;</AdditionalIncludeDirectories>
+      <SDLCheck>true</SDLCheck>
+      <LibCompiled>true</LibCompiled>
+    </ClCompile>
+    <ClCompile Include="minigin\core\game_object.cpp" />
+    <ClCompile Include="minigin\core\i_observer.cpp" />
+    <ClCompile Include="minigin\core\engine.cpp" />
+    <ClCompile Include="minigin\core\renderer.cpp" />
+    <ClCompile Include="minigin\core\resource_manager.cpp" />
+    <ClCompile Include="minigin\core\scene.cpp" />
+    <ClCompile Include="minigin\core\scene_manager.cpp" />
+    <ClCompile Include="minigin\events\event_handler.cpp" />
+    <ClCompile Include="minigin\events\event_manager.cpp" />
+    <ClCompile Include="minigin\events\sound_handler.cpp" />
+    <ClCompile Include="minigin\input\generic_command.cpp" />
+    <ClCompile Include="minigin\input\input_manager.cpp" />
+    <ClCompile Include="minigin\input\sdl_input.cpp" />
+    <ClCompile Include="minigin\input\x_input.cpp" />
+    <ClCompile Include="minigin\services\logging_sound_system.cpp" />
+    <ClCompile Include="minigin\services\sdl_sound_system.cpp" />
+    <ClCompile Include="minigin\services\service_locator.cpp" />
+    <ClCompile Include="minigin\sound\sound_effect.cpp" />
+    <ClCompile Include="minigin\sound\sound_manager.cpp" />
+    <ClCompile Include="minigin\sound\sound_stream.cpp" />
+    <ClCompile Include="minigin\test\test_manager.cpp" />
+    <ClCompile Include="minigin\test\test_x_input.cpp" />
+    <ClCompile Include="minigin\utility\game_font.cpp" />
+    <ClCompile Include="minigin\utility\texture_2d.cpp" />
+    <ClCompile Include="minigin\utility\transform.cpp" />
     <ClCompile Include="steam\achievement.cpp" />
-    <ClCompile Include="test\test_manager.cpp" />
-    <ClCompile Include="test\test1_component.h" />
-    <ClCompile Include="test\test_x_input.cpp" />
-    <ClCompile Include="utility\game_font.cpp" />
-    <ClCompile Include="utility\texture_2d.cpp" />
-    <ClCompile Include="utility\transform.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="minigin\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="minigin\component\family\custom_component.h" />
+    <ClInclude Include="minigin\component\family\physics_component.h" />
+    <ClInclude Include="minigin\component\family\rendering_component.h" />
+    <ClInclude Include="minigin\component\family\ui_component.h" />
+    <ClInclude Include="minigin\component\texture_component.h" />
+    <ClInclude Include="minigin\component\text_component.h" />
+    <ClInclude Include="minigin\core\game_component.h" />
+    <ClInclude Include="minigin\core\game_object.h" />
+    <ClInclude Include="minigin\core\game_object.hpp" />
+    <ClInclude Include="minigin\core\game_time.h" />
+    <ClInclude Include="minigin\core\i_observer.h" />
+    <ClInclude Include="minigin\core\engine.h" />
+    <ClInclude Include="minigin\core\renderer.h" />
+    <ClInclude Include="minigin\core\resource_manager.h" />
+    <ClInclude Include="minigin\core\scene.h" />
+    <ClInclude Include="minigin\core\scene_manager.h" />
+    <ClInclude Include="minigin\events\event.h" />
+    <ClInclude Include="minigin\events\event_handler.h" />
+    <ClInclude Include="minigin\events\event_manager.h" />
+    <ClInclude Include="minigin\events\event_manager.hpp" />
+    <ClInclude Include="minigin\events\sound_handler.h" />
+    <ClInclude Include="minigin\input\base_command.h" />
+    <ClInclude Include="minigin\input\game_component_command.h" />
+    <ClInclude Include="minigin\input\game_object_command.h" />
+    <ClInclude Include="minigin\input\generic_command.h" />
+    <ClInclude Include="minigin\input\input_manager.h" />
+    <ClInclude Include="minigin\input\i_input.h" />
+    <ClInclude Include="minigin\input\sdl_input.h" />
+    <ClInclude Include="minigin\input\x_input.h" />
+    <ClInclude Include="minigin\services\i_sound_system.h" />
+    <ClInclude Include="minigin\services\logging_sound_system.h" />
+    <ClInclude Include="minigin\services\null_sound_system.h" />
+    <ClInclude Include="minigin\services\sdl_sound_system.h" />
+    <ClInclude Include="minigin\services\service_locator.h" />
+    <ClInclude Include="minigin\sound\sound_effect.h" />
+    <ClInclude Include="minigin\sound\sound_manager.h" />
+    <ClInclude Include="minigin\sound\sound_stream.h" />
+    <ClInclude Include="minigin\test\test1_component.h" />
+    <ClInclude Include="minigin\test\test2_component.h" />
+    <ClInclude Include="minigin\test\test_component.h" />
+    <ClInclude Include="minigin\test\test_manager.h" />
+    <ClInclude Include="minigin\utility\game_font.h" />
+    <ClInclude Include="minigin\utility\singleton.h" />
+    <ClInclude Include="minigin\utility\texture_2d.h" />
+    <ClInclude Include="minigin\utility\transform.h" />
+    <ClInclude Include="steam\achievement.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

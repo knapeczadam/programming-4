@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 // Project includes
-#include "core/i_observer.h"
+#include "minigin/core/i_observer.h"
 
 // Steam includes
 #pragma warning (push)
@@ -11,7 +11,7 @@
 
 #define _ACH_ID( id, name ) { id, #id, name, "", 0, 0 }
 
-namespace dae
+namespace steam
 {
     struct achievement_t
     {
@@ -23,7 +23,7 @@ namespace dae
         int icon_image;
     };
 
-    class steam_achievements final : public i_observer
+    class steam_achievements final : public mngn::i_observer
     {
     public:
         steam_achievements(achievement_t *achievements_ptr, int num_achievements);
@@ -37,7 +37,7 @@ namespace dae
         STEAM_CALLBACK(steam_achievements, OnUserStatsStored, UserStatsStored_t, m_CallbackUserStatsStored);
         STEAM_CALLBACK(steam_achievements, OnAchievementStored, UserAchievementStored_t, m_CallbackAchievementStored);
 
-        void notify(std::string const &event, subject *subject_ptr) override;
+        void notify(std::string const &event, mngn::subject *subject_ptr) override;
         
     private:
         int64          app_id_;           // Our current AppID

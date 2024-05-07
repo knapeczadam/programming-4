@@ -1,14 +1,14 @@
 ﻿#pragma once
 
 // Project includes
-#include "component/family/physics_component.h"
+#include "minigin/component/family/physics_component.h"
 
 // GLM includes
 #include <glm/glm.hpp>
 
-namespace dae
+namespace qbert
 {
-    class move_component final : public physics_component
+    class move_component final : public mngn::physics_component
     {
     public:
         move_component()           = default;

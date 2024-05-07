@@ -3,7 +3,7 @@
 // Windows includes
 #include <windows.h>
 
-namespace dae
+namespace steam
 {
     steam_achievements::steam_achievements(achievement_t *achievements_ptr, int num_achievements):
         app_id_{0},
@@ -120,7 +120,7 @@ namespace dae
         }
     }
 
-    void steam_achievements::notify(std::string const &event, [[maybe_unused]] subject *subject_ptr)
+    void steam_achievements::notify(std::string const &event, [[maybe_unused]] mngn::subject *subject_ptr)
     {
         if (event == "AchievementUnlocked")
             set_achievement("ACH_WIN_ONE_GAME");
