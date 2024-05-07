@@ -156,10 +156,31 @@
     <ClInclude Include="engine\services\service_locator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="engine\events\event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\events\event_handler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\events\event_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\events\event_manager.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\events\sound_handler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="engine\sound\sound_effect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\sound\sound_stream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\sound\sound_manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -293,10 +314,25 @@
     <ClCompile Include="engine\services\sdl_sound_system.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="engine\events\event_handler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\events\event_manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\events\sound_handler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\services\service_locator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="engine\sound\sound_effect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine\sound\sound_stream.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\sound\sound_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
