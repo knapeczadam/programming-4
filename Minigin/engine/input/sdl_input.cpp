@@ -14,6 +14,8 @@
 // ImGui includes
 #include <backends/imgui_impl_sdl2.h>
 
+#include "event_manager.h"
+
 namespace dae
 {
     auto sdl_input::do_process_input(std::vector<game_input_command> commands) -> bool
@@ -26,6 +28,7 @@ namespace dae
             ImGui_ImplSDL2_ProcessEvent(&e);
             if (e.type == SDL_QUIT)
             {
+                event_manager::get_instance().stop_all();
                 return false;
             }
             if (e.type == SDL_KEYDOWN)

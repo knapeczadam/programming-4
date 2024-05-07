@@ -2,12 +2,13 @@
 
 // Standard includes
 #include <iostream>
+#include <thread>
 
 namespace dae
 {
-    void logging_sound_system::play_sound(sound_id const id, float const volume) const
+    void logging_sound_system::play_sound(resource_id id, int const volume)
     {
         sound_system_->play_sound(id, volume);
-        std::cout << "Playing " << id << " at volume " << volume << '\n';
+        std::cout << "# Thread " << std::this_thread::get_id() << ": Playing " << (int) id << " at volume " << volume << '\n';
     }
 }

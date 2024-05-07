@@ -15,7 +15,7 @@ namespace dae
         
         explicit logging_sound_system(std::unique_ptr<i_sound_system> &&sound_system) : sound_system_{std::move(sound_system)} {}
         
-        void play_sound(sound_id const id, float const volume) const override;
+        void play_sound(resource_id id, int const volume) override;
 
     private:
         std::unique_ptr<i_sound_system> sound_system_;

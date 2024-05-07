@@ -10,6 +10,6 @@ namespace dae
     public:
         ~null_sound_system() override = default;
         
-        void play_sound([[maybe_unused]] sound_id const id, [[maybe_unused]] float const volume) const override { }
+        void play_sound([[maybe_unused]] resource_id id, [[maybe_unused]] int const volume) override { }
     };
 }
