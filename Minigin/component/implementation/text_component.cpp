@@ -16,6 +16,10 @@
 
 namespace dae
 {
+    text_component::text_component() = default;
+    
+    text_component::~text_component() = default;
+
     void text_component::update()
     {
         if (needs_update_)

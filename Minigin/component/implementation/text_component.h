@@ -17,8 +17,8 @@ namespace dae
     class text_component : public ui_component
     {
     public:
-        text_component()           = default;
-        ~text_component() override = default;
+        text_component();
+        ~text_component() override;
         
         text_component(text_component const &other)            = delete;
         text_component(text_component &&other)                 = delete;

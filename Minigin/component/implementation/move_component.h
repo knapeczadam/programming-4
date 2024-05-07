@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 // Project includes
-#include "physics_component.h"
+#include "component/family/physics_component.h"
 
 // GLM includes
 #include <glm/glm.hpp>

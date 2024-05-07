@@ -16,8 +16,8 @@ namespace dae
     {
     public:
         explicit texture_component(std::string const &filename);
-        texture_component()           = default;
-        ~texture_component() override = default;
+        texture_component();
+        ~texture_component() override;
 
         texture_component(texture_component const &other)            = delete;
         texture_component(texture_component &&other)                 = delete;

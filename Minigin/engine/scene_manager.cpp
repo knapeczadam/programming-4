@@ -12,7 +12,7 @@ namespace dae
     
     void scene_manager::fixed_update()
     {
-        for (auto const & scene : scenes_)
+        for (auto const &scene : scenes_)
         {
             scene->fixed_update();
         }
@@ -20,7 +20,7 @@ namespace dae
 
     void scene_manager::update()
     {
-        for (auto const & scene : scenes_)
+        for (auto const &scene : scenes_)
         {
             scene->update();
         }

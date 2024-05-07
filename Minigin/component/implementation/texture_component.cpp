@@ -4,6 +4,7 @@
 #include "core/game_object.h"
 #include "engine/renderer.h"
 #include "engine/resource_manager.h"
+#include "utility/texture_2d.h"
 
 namespace dae
 {
@@ -11,6 +12,10 @@ namespace dae
         : m_texture_ptr_{resource_manager::get_instance().load_texture(filename)}
     {
     }
+    
+    texture_component::texture_component() = default;
+
+    texture_component::~texture_component() = default;
 
     void texture_component::render() const
     {

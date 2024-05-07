@@ -159,10 +159,10 @@ namespace dae
     template <class T, typename... Args> requires is_component_type<T>
     auto game_object::add_component(Args &&... args) -> T *
     {
-        auto component_ptr = std::make_unique<T>(std::forward<Args>(args)...);
-        component_ptr->set_owner(this);
-        auto copy_ptr = component_ptr.get();
-        component_map_[typeid(T)] = std::move(component_ptr);
+        auto component = std::make_unique<T>(std::forward<Args>(args)...);
+        component->set_owner(this);
+        auto copy_ptr = component.get();
+        component_map_[typeid(T)] = std::move(component);
         return copy_ptr;
     }
 
