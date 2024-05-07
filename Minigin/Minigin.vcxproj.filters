@@ -296,9 +296,6 @@
     <ClCompile Include="utility\texture_2d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="component\core\game_component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

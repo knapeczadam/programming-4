@@ -29,6 +29,7 @@
 #include "engine/services/service_locator.h"
 #include "steam/achievement.h"
 #include "test/test_manager.h"
+#include "engine/events/event_manager.h"
 
 // Standard includes
 #include <cassert>
@@ -134,7 +135,7 @@ void load()
     health_comp->add_observer(pacman_health_text);
     auto score_comp = go->add_component<score_component>();
     score_comp->add_observer(pacman_score_text);
-	score_comp->add_observer(g_steam_achievements_ptr);
+	// score_comp->add_observer(g_steam_achievements_ptr);
 
     // Arrow keys
     auto move_left_command1  = std::make_unique<move_command>(go, glm::vec2{-1, 0});
@@ -192,7 +193,7 @@ void load()
     health_comp->add_observer(ghost_health_text);
     score_comp = go->add_component<score_component>();
     score_comp->add_observer(ghost_score_text);
-	score_comp->add_observer(g_steam_achievements_ptr);
+	// score_comp->add_observer(g_steam_achievements_ptr);
     
     // WASD
     auto move_left_command2  = std::make_unique<move_command>(go, glm::vec2{-1, 0});
@@ -224,17 +225,13 @@ void load()
     input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_x, std::move(score_command4));
 
 	// Reset Achievements
-	auto reset_achievement_command = std::make_unique<reset_achievements_command>(g_steam_achievements_ptr);
-	input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_r, std::move(reset_achievement_command));
+	// auto reset_achievement_command = std::make_unique<reset_achievements_command>(g_steam_achievements_ptr);
+	// input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_r, std::move(reset_achievement_command));
 }
 
-int main(int, char *[])
+auto init_steam() -> int
 {
     using namespace dae;
-
-	// ------------------------
-	// Steam - Initialize
-	// ------------------------
 	if (not SteamAPI_Init())
 	{
 		std::cerr << "Fatal Error - Steam must be running to play this game (SteamAPI_Init() failed)." << '\n';
@@ -242,6 +239,20 @@ int main(int, char *[])
 	}
 	std::cout << "Successfully initialized steam." << '\n';
 	g_steam_achievements_ptr = new steam_achievements(g_achievements, 1);
+
+	return 0;
+}
+
+int main(int, char *[])
+{
+    using namespace dae;
+	// ------------------------
+	// Steam - Initialize
+	// ------------------------
+	// if (init_steam() != 0)
+	// {
+	// 	return 1;
+	// }
 
 	// ------------------------
 	// Minigin
