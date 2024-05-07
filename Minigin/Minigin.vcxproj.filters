@@ -156,6 +156,12 @@
     <ClInclude Include="engine\services\service_locator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="engine\sound\sound_effect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\sound\sound_stream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Minigin.cpp">
@@ -285,6 +291,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine\services\sdl_sound_system.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\sound\sound_effect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\sound\sound_stream.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

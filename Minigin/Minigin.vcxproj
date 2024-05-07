@@ -225,6 +225,7 @@
     <ClInclude Include="engine\input\input_manager.h" />
     <ClInclude Include="engine\input\sdl_input.h" />
     <ClInclude Include="engine\input\x_input.h" />
+    <ClInclude Include="engine\json.hpp" />
     <ClInclude Include="engine\minigin.h" />
     <ClInclude Include="engine\renderer.h" />
     <ClInclude Include="engine\resource_manager.h" />
@@ -236,6 +237,8 @@
     <ClInclude Include="engine\services\null_sound_system.h" />
     <ClInclude Include="engine\services\sdl_sound_system.h" />
     <ClInclude Include="engine\services\service_locator.h" />
+    <ClInclude Include="engine\sound\sound_effect.h" />
+    <ClInclude Include="engine\sound\sound_stream.h" />
     <ClInclude Include="misc\trash_the_cache_manager.h" />
     <ClInclude Include="steam\achievement.h" />
     <ClInclude Include="test\test2_component.h" />
@@ -283,6 +286,8 @@
     <ClCompile Include="engine\services\sdl_sound_system.cpp" />
     <ClCompile Include="engine\services\service_locator.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="engine\sound\sound_effect.cpp" />
+    <ClCompile Include="engine\sound\sound_stream.cpp" />
     <ClCompile Include="misc\trash_the_cache_manager.cpp" />
     <ClCompile Include="steam\achievement.cpp" />
     <ClCompile Include="test\test_manager.cpp" />

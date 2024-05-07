@@ -6,14 +6,22 @@
 #include "utility/game_font.h"
 
 // Standard includes
+#include <fstream>
 #include <stdexcept>
 
 // SDL includes
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 
+#include "sound_effect.h"
+#include "sound_stream.h"
+
 namespace dae
 {
+    resource_manager::resource_manager() = default;
+    
+    resource_manager::~resource_manager() = default;
+
     void resource_manager::init(std::string const &data_path)
     {
         data_path_ = data_path;
@@ -21,6 +29,24 @@ namespace dae
         if (TTF_Init() != 0)
         {
             throw std::runtime_error(std::string("Failed to load support for fonts: ") + SDL_GetError());
+        }
+
+        init_resource_ids();
+        load_resource_config();
+    }
+
+    void resource_manager::init_resource_ids()
+    {
+        resource_ids_[resource_id::e_qbert_fall] = "e_qbert_fall";
+        resource_ids_[resource_id::e_qbert_jump] = "e_qbert_jump";
+    }
+
+    void resource_manager::load_resource_config()
+    {
+        std::ifstream file(data_path_ + "config/resource_config.json");
+        if (file)
+        {
+            resource_config_ = json::parse(file);
         }
     }
 
@@ -40,7 +66,7 @@ namespace dae
             throw std::runtime_error(std::string("Failed to load texture: ") + SDL_GetError());
         }
 
-        // Cache the texture
+        // Cache texture
         textures_[full_path] = std::make_unique<texture_2d>(texture);
         return textures_[full_path].get();
     }
@@ -72,5 +98,68 @@ namespace dae
             }
         }
         return nullptr;
+    }
+
+    auto resource_manager::get_sound_effect(resource_id id) -> sound_effect *
+    {
+        for (auto const& sound : resource_config_["sounds"])
+        {
+            auto const effects = sound["effects"];
+            for (auto const& effect : effects)
+            {
+                if (effect["id"] == to_string(id))
+                {
+                    return load_sound_effect(effect["file"]);
+                }
+            }
+        }
+        return nullptr;
+    }
+
+    auto resource_manager::get_sound_stream(resource_id id) -> sound_stream *
+    {
+        for (auto const& stream : resource_config_["sounds"]["streams"])
+        {
+            if (stream["id"] == to_string(id))
+            {
+                return load_sound_stream(stream["file"]);
+            }
+        }
+        return nullptr;
+    }
+
+    auto resource_manager::load_sound_effect(std::string const &file) -> sound_effect *
+    {
+        // Check if sound effect is already present
+        auto const full_path = data_path_ + "sound/effect/" + file;
+        auto const it = sound_effects_.find(full_path);
+        if (it != sound_effects_.cend())
+        {
+            return it->second.get();
+        }
+
+        // Cache sound effect
+        sound_effects_[full_path] = std::make_unique<sound_effect>(full_path);
+        return sound_effects_[full_path].get();
+    }
+
+    auto resource_manager::load_sound_stream(std::string const &file) -> sound_stream *
+    {
+        // Check if sound stream is already present
+        auto const full_path = data_path_ + "sound/stream/" + file;
+        auto const it = sound_streams_.find(full_path);
+        if (it != sound_streams_.cend())
+        {
+            return it->second.get();
+        }
+
+        // Cache sound stream
+        sound_streams_[full_path] = std::make_unique<sound_stream>(full_path);
+        return sound_streams_[full_path].get();
+    }
+
+    auto resource_manager::to_string(resource_id id) -> std::string const &
+    {
+        return resource_ids_[id];
     }
 }
