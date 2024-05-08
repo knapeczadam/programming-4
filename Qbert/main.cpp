@@ -264,7 +264,7 @@ int main(int, char *[])
 	// ------------------------
     engine engine("../Data/");
 	
-#ifndef _NDEBUG
+#ifndef NDEBUG
     test_manager::get_instance().run_all_tests();
 #endif
 	

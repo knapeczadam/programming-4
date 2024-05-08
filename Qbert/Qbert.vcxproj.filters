@@ -45,6 +45,9 @@
     <ClCompile Include="component\score_text_component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="core\resources.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="component\fps_component.h">
@@ -72,6 +75,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="component\score_text_component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\resources.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
