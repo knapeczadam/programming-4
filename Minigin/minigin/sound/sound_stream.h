@@ -20,7 +20,7 @@ namespace mngn
         sound_stream &operator=(sound_stream &&other)      = delete;
 
         [[nodiscard]] auto is_loaded() const -> bool;
-        [[nodiscard]] auto play(bool repeat) const -> bool;
+        auto play(bool repeat) const -> bool;
 
         static void stop();
         static void pause();

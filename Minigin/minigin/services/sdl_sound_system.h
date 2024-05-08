@@ -12,6 +12,6 @@ namespace mngn
     public:
         sdl_sound_system();
         
-        void play_sound(resource_id id, int const volume) override;
+        void play_sound(int id, int const volume) override;
     };
 }

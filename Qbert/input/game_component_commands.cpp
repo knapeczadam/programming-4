@@ -6,6 +6,7 @@
 #include "minigin/events/event.h"
 #include "minigin/events/event_manager.h"
 #include "minigin/events/sound_handler.h"
+#include "core/resources.h"
 
 // Standard includes
 #include <iostream>
@@ -20,7 +21,7 @@ namespace qbert
 
         // Play test sound - temporary
         auto event = std::make_unique<mngn::sound_event>();
-        event->sound_id = mngn::resource_id::e_qbert_jump;
+        event->sound_id = to_int(resource::e_qbert_fall);
         event->volume = 100;
         std::cout << "# Thread " << std::this_thread::get_id() << " : calling sound handler" << '\n';
         mngn::event_manager::get_instance().get_handler<mngn::sound_handler>()->add_event(std::move(event));

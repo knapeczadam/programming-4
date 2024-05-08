@@ -10,6 +10,6 @@ namespace mngn
     public:
         ~null_sound_system() override = default;
         
-        void play_sound([[maybe_unused]] resource_id id, [[maybe_unused]] int const volume) override { }
+        void play_sound([[maybe_unused]] int id, [[maybe_unused]] int const volume) override { }
     };
 }

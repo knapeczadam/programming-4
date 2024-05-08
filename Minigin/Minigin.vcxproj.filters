@@ -39,15 +39,6 @@
     <ClCompile Include="..\3rdParty\imgui\backends\imgui_impl_sdl2.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="minigin\component\core\game_component.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="minigin\component\implementation\text_component.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="minigin\component\implementation\texture_component.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="minigin\test\test_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -111,9 +102,6 @@
     <ClCompile Include="minigin\core\i_observer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="minigin\core\minigin.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="minigin\core\renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -126,11 +114,20 @@
     <ClCompile Include="minigin\core\scene_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="minigin\component\texture_component.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minigin\component\text_component.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minigin\core\game_component.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minigin\core\engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="minigin\component\core\game_component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="minigin\component\family\custom_component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -141,12 +138,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="minigin\component\family\ui_component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="minigin\component\implementation\text_component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="minigin\component\implementation\texture_component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="minigin\test\test_component.h">
@@ -251,9 +242,6 @@
     <ClInclude Include="minigin\core\i_observer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="minigin\core\minigin.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="minigin\core\renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -264,6 +252,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="minigin\core\scene_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\component\texture_component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\component\text_component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\core\game_component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\core\engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minigin\core\types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

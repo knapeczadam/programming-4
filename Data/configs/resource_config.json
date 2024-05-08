@@ -1,0 +1,23 @@
+{
+  "resources": [
+    {
+      "_comment" : "IMAGES",
+      "id"       : "c_arthur",
+      "path"     : "characters/arthur.png"
+    },
+    {
+      "_comment" : "EFFECTS",
+      "id"       : "e_qbert_fall",
+      "path"     : "sounds/effects/qbert_fall.wav"
+    },
+    {
+      "_comment" : "STREAMS",
+      "id"       : "e_qbert_jump",
+      "path"     : "sounds/effects/qbert_jump.wav"
+    },
+    {
+      "id"   : "s_01_credit",
+      "path" : "sounds/streams/01_credit.mp3"
+    }
+  ]
+}

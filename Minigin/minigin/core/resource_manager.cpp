@@ -30,30 +30,21 @@ namespace mngn
         {
             throw std::runtime_error(std::string("Failed to load support for fonts: ") + SDL_GetError());
         }
-
-        init_resource_ids();
-        load_resource_config();
-    }
-
-    void resource_manager::init_resource_ids()
-    {
-        resource_ids_[resource_id::e_qbert_fall] = "e_qbert_fall";
-        resource_ids_[resource_id::e_qbert_jump] = "e_qbert_jump";
     }
 
     void resource_manager::load_resource_config()
     {
-        std::ifstream file(data_path_ + "config/resource_config.json");
+        std::ifstream file(data_path_ + resource_config_path_);
         if (file)
         {
             resource_config_ = json::parse(file);
         }
     }
 
-    auto resource_manager::load_texture(std::string const &file) -> texture_2d *
+    auto resource_manager::load_texture(std::string const &file_path) -> texture_2d *
     {
         // Check if texture is already present
-        auto const full_path = data_path_ + file;
+        auto const full_path = data_path_ + file_path;
         auto const it = textures_.find(full_path);
         if (it != textures_.cend())
         {
@@ -71,10 +62,10 @@ namespace mngn
         return textures_[full_path].get();
     }
 
-    auto resource_manager::load_font(std::string const &file, unsigned int size) -> game_font *
+    auto resource_manager::load_font(std::string const &file_path, unsigned int size) -> game_font *
     {
         // Check if font is already present
-        auto const full_path = data_path_ + file;
+        auto const full_path = data_path_ + file_path;
         auto const range = fonts_.equal_range(full_path);
         for (auto it = range.first; it != range.second; ++it)
         {
@@ -100,38 +91,42 @@ namespace mngn
         return nullptr;
     }
 
-    auto resource_manager::get_sound_effect(resource_id id) -> sound_effect *
+    auto resource_manager::get_sound_effect(int id) -> sound_effect *
     {
-        for (auto const& sound : resource_config_["sounds"])
+        std::string path;
+        if (get_resource_path(id, path))
         {
-            auto const effects = sound["effects"];
-            for (auto const& effect : effects)
-            {
-                if (effect["id"] == to_string(id))
-                {
-                    return load_sound_effect(effect["file"]);
-                }
-            }
+            return load_sound_effect(path);
         }
         return nullptr;
     }
 
-    auto resource_manager::get_sound_stream(resource_id id) -> sound_stream *
+    auto resource_manager::get_sound_stream(int id) -> sound_stream *
     {
-        for (auto const& stream : resource_config_["sounds"]["streams"])
+        std::string path;
+        if (get_resource_path(id, path))
         {
-            if (stream["id"] == to_string(id))
-            {
-                return load_sound_stream(stream["file"]);
-            }
+            return load_sound_stream(path);
         }
         return nullptr;
     }
 
-    auto resource_manager::load_sound_effect(std::string const &file) -> sound_effect *
+    auto resource_manager::add_resource_pair(int id, std::string const &name) -> resource_manager &
+    {
+        resources_[id] = name;
+        return *this;
+    }
+
+    auto resource_manager::set_resource_config_path(std::string const &file_path) -> resource_manager &
+    {
+        resource_config_path_ = file_path;
+        return *this;
+    }
+
+    auto resource_manager::load_sound_effect(std::string const &file_path) -> sound_effect *
     {
         // Check if sound effect is already present
-        auto const full_path = data_path_ + "sound/effect/" + file;
+        auto const full_path = data_path_ + file_path;
         auto const it = sound_effects_.find(full_path);
         if (it != sound_effects_.cend())
         {
@@ -143,10 +138,10 @@ namespace mngn
         return sound_effects_[full_path].get();
     }
 
-    auto resource_manager::load_sound_stream(std::string const &file) -> sound_stream *
+    auto resource_manager::load_sound_stream(std::string const &file_path) -> sound_stream *
     {
         // Check if sound stream is already present
-        auto const full_path = data_path_ + "sound/stream/" + file;
+        auto const full_path = data_path_ + file_path;
         auto const it = sound_streams_.find(full_path);
         if (it != sound_streams_.cend())
         {
@@ -158,8 +153,21 @@ namespace mngn
         return sound_streams_[full_path].get();
     }
 
-    auto resource_manager::to_string(resource_id id) -> std::string const &
+    auto resource_manager::get_resource_path(int id, std::string &file_path) -> bool
     {
-        return resource_ids_[id];
+        for (auto const& resource : resource_config_["resources"])
+        {
+            if (resource["id"] == to_string(id))
+            {
+                file_path = resource["path"];
+                return true;
+            }
+        }
+        return false;
+    }
+
+    auto resource_manager::to_string(int id) -> std::string const &
+    {
+        return resources_[id];
     }
 }

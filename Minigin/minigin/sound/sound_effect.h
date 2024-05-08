@@ -20,7 +20,7 @@ namespace mngn
         sound_effect &operator=(sound_effect &&other)      = delete;
 
         [[nodiscard]] auto is_loaded() const -> bool;
-        [[nodiscard]] auto play(int const loops) const -> bool;
+        auto play(int const loops) const -> bool;
         [[nodiscard]] auto get_volume() const -> int;
         void set_volume(int const value);
 

@@ -21,20 +21,6 @@ namespace mngn
 
     // Aliases
     using json = nlohmann::json;
-    
-    enum class resource_id
-    {
-        // --- IMAGES ---
-
-        // --- SOUNDS ---
-
-        // Effects
-        e_qbert_fall,
-        e_qbert_jump
-
-        // Streams
-    };
-
 
     class resource_manager final : public singleton<resource_manager>
     {
@@ -47,31 +33,36 @@ namespace mngn
         resource_manager &operator=(resource_manager &&other)      = delete;
         
         void init(std::string const &data_path);
-        void init_resource_ids();
         void load_resource_config();
-        auto load_texture(std::string const &file) -> texture_2d *;
-        auto load_font(std::string const &file, unsigned int size) -> game_font *;
+        auto load_texture(std::string const &file_path) -> texture_2d *;
+        auto load_font(std::string const &file_path, unsigned int size) -> game_font *;
         
-        [[nodiscard]] auto get_sound_effect(resource_id id) -> sound_effect *;
-        [[nodiscard]] auto get_sound_stream(resource_id id) -> sound_stream *;
+        [[nodiscard]] auto get_sound_effect(int id) -> sound_effect *;
+        [[nodiscard]] auto get_sound_stream(int id) -> sound_stream *;
+
+        auto add_resource_pair(int id, std::string const &name) -> resource_manager &;
+        auto set_resource_config_path(std::string const &file_path) -> resource_manager &;
 
     private:
-        auto load_sound_effect(std::string const& file) -> sound_effect *;
-        auto load_sound_stream(std::string const& file) -> sound_stream *;
+        auto load_sound_effect(std::string const& file_path) -> sound_effect *;
+        auto load_sound_stream(std::string const& file_path) -> sound_stream *;
+        auto get_resource_path(int id, std::string &file_path) -> bool;
 
-        auto to_string(resource_id id) -> std::string const &;
+        auto to_string(int id) -> std::string const &;
 
     private:
         friend class singleton<resource_manager>;
         resource_manager();
+        
         std::string data_path_;
-        json resource_config_;
+        std::string resource_config_path_;
+        json        resource_config_;
 
         std::unordered_map<std::string, std::unique_ptr<texture_2d>>                              textures_;
         std::unordered_map<std::string, std::unique_ptr<sound_effect>>                            sound_effects_;
         std::unordered_map<std::string, std::unique_ptr<sound_stream>>                            sound_streams_;
         std::unordered_multimap<std::string, std::pair<unsigned int, std::unique_ptr<game_font>>> fonts_;
 
-        std::unordered_map<resource_id, std::string> resource_ids_;
+        std::unordered_map<int, std::string> resources_;
     };
 }

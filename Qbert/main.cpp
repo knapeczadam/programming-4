@@ -13,6 +13,7 @@
 #include "component/move_component.h"
 #include "component/score_component.h"
 #include "component/score_text_component.h"
+#include "core/resources.h"
 #include "input/game_component_commands.h"
 #include "input/game_object_commands.h"
 
@@ -62,6 +63,7 @@ void load()
 	using namespace qbert;
 
 	register_services();
+	init_resources();
 
     auto const scene = scene_manager::get_instance().create_scene("Demo");
     
@@ -262,7 +264,7 @@ int main(int, char *[])
 	// ------------------------
     engine engine("../Data/");
 	
-#if defined(_DAE_DEBUG)
+#ifndef _NDEBUG
     test_manager::get_instance().run_all_tests();
 #endif
 	
@@ -271,9 +273,9 @@ int main(int, char *[])
 	// ------------------------
 	// Steam - Cleanup
 	// ------------------------
-    SteamAPI_Shutdown();
+    // SteamAPI_Shutdown();
     // Delete the SteamAchievements object
-	delete steam::g_steam_achievements_ptr;
+	// delete steam::g_steam_achievements_ptr;
 	
     return 0;
 }

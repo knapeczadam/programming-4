@@ -1,0 +1,17 @@
+{
+  "sprites": [
+    {
+      "id": "c_unicorn",
+      "rows": 5,
+      "columns": 3,
+      "sub_rows": 0,
+      "sub_columns": 0,
+      "frames_per_second": 5,
+      "scale": 2,
+      "collider_width": 29,
+      "collider_height": 48,
+      "collider_horizontal_offset": 3,
+      "collider_vertical_offset": -4
+    }
+  ]
+}
