@@ -5,7 +5,7 @@
 #include "minigin/core/renderer.h"
 #include "minigin/core/resource_manager.h"
 #include "minigin/utility/game_font.h"
-#include "minigin/utility/texture_2d.h"
+#include "minigin/utility/texture.h"
 
 // Standard includes
 #include <stdexcept>
@@ -39,7 +39,7 @@ namespace mngn
         
             SDL_FreeSurface(surface_ptr);
             text_texture_.reset();
-            text_texture_ = std::make_unique<texture_2d>(texture_ptr);
+            text_texture_ = std::make_unique<texture>(texture_ptr);
             needs_update_ = false;
         }
     }

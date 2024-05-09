@@ -14,16 +14,19 @@
 #include "component/score_component.h"
 #include "component/score_text_component.h"
 #include "core/resources.h"
+#include "core/sprites.h"
 #include "input/game_component_commands.h"
 #include "input/game_object_commands.h"
 
+#include "minigin/component/sprite_component.h"
 #include "minigin/component/texture_component.h"
 #include "minigin/component/text_component.h"
-#include "minigin/core/game_object.h"
 #include "minigin/core/engine.h"
+#include "minigin/core/game_object.h"
 #include "minigin/core/resource_manager.h"
 #include "minigin/core/scene.h"
 #include "minigin/core/scene_manager.h"
+#include "minigin/core/sprite_manager.h"
 #include "minigin/events/event_manager.h"
 #include "minigin/input/generic_command.h"
 #include "minigin/input/input_manager.h"
@@ -31,6 +34,7 @@
 #include "minigin/services/sdl_sound_system.h"
 #include "minigin/services/service_locator.h"
 #include "minigin/test/test_manager.h"
+#include "minigin/utility/sprite.h"
 
 #include "steam/achievement.h"
 
@@ -63,17 +67,19 @@ void load()
 	using namespace qbert;
 
 	register_services();
+	
 	init_resources();
+	init_sprites();
 
     auto const scene = scene_manager::get_instance().create_scene("Demo");
     
     // Fonts
-    auto const font_medium = resource_manager::get_instance().load_font("Lingua.otf", 24);
-    auto const font_small = resource_manager::get_instance().load_font("Lingua.otf", 16);
+    auto const font_medium = resource_manager::get_instance().load_font("fonts/Lingua.otf", 24);
+    auto const font_small = resource_manager::get_instance().load_font("fonts/Lingua.otf", 16);
 
     // Background
     auto go = scene->add_game_object();
-    go->add_component<texture_component>("background.tga");
+    go->add_component<texture_component>(qb_re_t_background);
 
     // Text
     go = scene->add_game_object();
@@ -128,13 +134,21 @@ void load()
     auto const ghost_score_text = go->add_component<score_text_component>();
     ghost_score_text->set_font(font_small);
     ghost_score_text->set_text(score_ss.str());
+
+	//---------------------------------------------------------------------------------
+	// TEST SPRITES
+	//---------------------------------------------------------------------------------
+	go = scene->add_game_object("dummy");
+	go->set_local_position(50.0f, 50.0f);
+	auto sprite = sprite_manager::get_instance().create_sprite(qb_sp_level_1_disk_1, qb_re_t_sprite_atlas);
+	go->add_component<sprite_component>(sprite);
     
     //---------------------------------------------------------------------------------
     // PACMAN
     //---------------------------------------------------------------------------------
     go = scene->add_game_object("pacman");
     go->set_local_position(200.0f, 200.0f);
-    go->add_component<texture_component>("pacman.tga");
+    go->add_component<texture_component>(qb_re_t_pacman);
 	go->add_component<move_component>();
     auto health_comp = go->add_component<health_component>();
     health_comp->add_observer(pacman_health_text);
@@ -192,7 +206,7 @@ void load()
     //---------------------------------------------------------------------------------
     go = scene->add_game_object("ghost");
     go->set_local_position(300.0f, 300.0f);
-    go->add_component<texture_component>("ghost.tga");
+    go->add_component<texture_component>(qb_re_t_ghost);
 	go->add_component<move_component>();
     health_comp = go->add_component<health_component>();
     health_comp->add_observer(ghost_health_text);

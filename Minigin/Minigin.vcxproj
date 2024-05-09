@@ -206,6 +206,7 @@
     <ClCompile Include="..\3rdParty\imgui\imgui_draw.cpp" />
     <ClCompile Include="..\3rdParty\imgui\imgui_tables.cpp" />
     <ClCompile Include="..\3rdParty\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="minigin\component\sprite_component.cpp" />
     <ClCompile Include="minigin\component\texture_component.cpp" />
     <ClCompile Include="minigin\component\text_component.cpp" />
     <ClCompile Include="minigin\core\game_component.cpp" />
@@ -216,6 +217,7 @@
     <ClCompile Include="minigin\core\resource_manager.cpp" />
     <ClCompile Include="minigin\core\scene.cpp" />
     <ClCompile Include="minigin\core\scene_manager.cpp" />
+    <ClCompile Include="minigin\core\sprite_manager.cpp" />
     <ClCompile Include="minigin\events\event_handler.cpp" />
     <ClCompile Include="minigin\events\event_manager.cpp" />
     <ClCompile Include="minigin\events\sound_handler.cpp" />
@@ -232,7 +234,8 @@
     <ClCompile Include="minigin\test\test_manager.cpp" />
     <ClCompile Include="minigin\test\test_x_input.cpp" />
     <ClCompile Include="minigin\utility\game_font.cpp" />
-    <ClCompile Include="minigin\utility\texture_2d.cpp" />
+    <ClCompile Include="minigin\utility\sprite.cpp" />
+    <ClCompile Include="minigin\utility\texture.cpp" />
     <ClCompile Include="minigin\utility\transform.cpp" />
     <ClCompile Include="steam\achievement.cpp" />
   </ItemGroup>
@@ -244,6 +247,7 @@
     <ClInclude Include="minigin\component\family\physics_component.h" />
     <ClInclude Include="minigin\component\family\rendering_component.h" />
     <ClInclude Include="minigin\component\family\ui_component.h" />
+    <ClInclude Include="minigin\component\sprite_component.h" />
     <ClInclude Include="minigin\component\texture_component.h" />
     <ClInclude Include="minigin\component\text_component.h" />
     <ClInclude Include="minigin\core\game_component.h" />
@@ -256,6 +260,7 @@
     <ClInclude Include="minigin\core\resource_manager.h" />
     <ClInclude Include="minigin\core\scene.h" />
     <ClInclude Include="minigin\core\scene_manager.h" />
+    <ClInclude Include="minigin\core\sprite_manager.h" />
     <ClInclude Include="minigin\events\event.h" />
     <ClInclude Include="minigin\events\event_handler.h" />
     <ClInclude Include="minigin\events\event_manager.h" />
@@ -283,7 +288,8 @@
     <ClInclude Include="minigin\test\test_manager.h" />
     <ClInclude Include="minigin\utility\game_font.h" />
     <ClInclude Include="minigin\utility\singleton.h" />
-    <ClInclude Include="minigin\utility\texture_2d.h" />
+    <ClInclude Include="minigin\utility\sprite.h" />
+    <ClInclude Include="minigin\utility\texture.h" />
     <ClInclude Include="minigin\utility\transform.h" />
     <ClInclude Include="steam\achievement.h" />
   </ItemGroup>

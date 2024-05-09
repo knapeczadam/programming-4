@@ -14,7 +14,8 @@
 namespace mngn
 {
     // Forward declarations
-    class texture_2d;
+    class texture;
+    class sprite;
     class game_font;
     class sound_effect;
     class sound_stream;
@@ -34,13 +35,16 @@ namespace mngn
         
         void init(std::string const &data_path);
         void load_resource_config();
-        auto load_texture(std::string const &file_path) -> texture_2d *;
+        auto load_texture(std::string const &file_path) -> texture *;
+        auto load_texture(int id) -> texture *;
+        
         auto load_font(std::string const &file_path, unsigned int size) -> game_font *;
+        auto load_font(int id, unsigned int size) -> game_font *;
         
         [[nodiscard]] auto get_sound_effect(int id) -> sound_effect *;
         [[nodiscard]] auto get_sound_stream(int id) -> sound_stream *;
 
-        auto add_resource_pair(int id, std::string const &name) -> resource_manager &;
+        auto add_resource_pair(int enum_id, std::string const &json_id) -> resource_manager &;
         auto set_resource_config_path(std::string const &file_path) -> resource_manager &;
 
     private:
@@ -53,16 +57,17 @@ namespace mngn
     private:
         friend class singleton<resource_manager>;
         resource_manager();
-        
+
+    private:
         std::string data_path_;
         std::string resource_config_path_;
         json        resource_config_;
 
-        std::unordered_map<std::string, std::unique_ptr<texture_2d>>                              textures_;
+        std::unordered_map<std::string, std::unique_ptr<texture>>                              textures_;
         std::unordered_map<std::string, std::unique_ptr<sound_effect>>                            sound_effects_;
         std::unordered_map<std::string, std::unique_ptr<sound_stream>>                            sound_streams_;
         std::unordered_multimap<std::string, std::pair<unsigned int, std::unique_ptr<game_font>>> fonts_;
 
-        std::unordered_map<int, std::string> resources_;
+        std::unordered_map<int, std::string> resource_map_;
     };
 }

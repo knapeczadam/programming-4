@@ -12,7 +12,7 @@ namespace mngn
 {
     // Forward declarations
     class game_font;
-    class texture_2d;
+    class texture;
 
     class text_component : public ui_component
     {
@@ -37,6 +37,6 @@ namespace mngn
         std::string text_;
         bool                        needs_update_ = true;
         game_font                   *font_ptr_    = nullptr;
-        std::unique_ptr<texture_2d> text_texture_ = nullptr;
+        std::unique_ptr<texture> text_texture_ = nullptr;
     };
 }

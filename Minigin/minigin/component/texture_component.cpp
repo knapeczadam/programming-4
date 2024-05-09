@@ -4,7 +4,7 @@
 #include "minigin/core/game_object.h"
 #include "minigin/core/renderer.h"
 #include "minigin/core/resource_manager.h"
-#include "minigin/utility/texture_2d.h"
+#include "minigin/utility/texture.h"
 
 namespace mngn
 {
@@ -12,7 +12,12 @@ namespace mngn
         : m_texture_ptr_{resource_manager::get_instance().load_texture(filename)}
     {
     }
-    
+
+    texture_component::texture_component(int id)
+        : m_texture_ptr_{resource_manager::get_instance().load_texture(id)}
+    {
+    }
+
     texture_component::texture_component() = default;
 
     texture_component::~texture_component() = default;

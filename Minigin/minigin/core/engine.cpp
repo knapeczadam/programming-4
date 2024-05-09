@@ -26,6 +26,8 @@
 // Steam includes
 #include <steam_api_common.h>
 
+#include "sprite_manager.h"
+
 SDL_Window *g_window_ptr = nullptr;
 
 void print_sdl_version()
@@ -95,6 +97,7 @@ namespace mngn
         renderer::get_instance().init(g_window_ptr);
 
         resource_manager::get_instance().init(data_path);
+        sprite_manager::get_instance().set_data_path(data_path);
     }
 
     engine::~engine()

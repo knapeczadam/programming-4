@@ -1,9 +1,21 @@
 {
   "resources": [
     {
-      "_comment" : "IMAGES",
-      "id"       : "c_arthur",
-      "path"     : "characters/arthur.png"
+      "_comment" : "TEXTURES",
+      "id"       : "t_background",
+      "path"     : "textures/background.tga"
+    },
+    {
+      "id"   : "t_pacman",
+      "path" : "textures/pacman.png"
+    },
+    {
+      "id" : "t_ghost",
+      "path" : "textures/ghost.png"
+    },
+    {
+      "id" : "t_sprite_atlas",
+      "path" : "textures/sprite_atlas.png"
     },
     {
       "_comment" : "EFFECTS",
@@ -16,8 +28,8 @@
       "path"     : "sounds/effects/qbert_jump.wav"
     },
     {
-      "id"   : "s_01_credit",
-      "path" : "sounds/streams/01_credit.mp3"
+      "id"   : "s_level_screen",
+      "path" : "sounds/streams/level_screen.wav"
     }
   ]
 }

@@ -2,13 +2,21 @@
 
 namespace qbert
 {
-    enum class resource
+    enum qbert_resource
     {
-        e_qbert_fall,
-        e_qbert_jump,
-        
-        s_01_credit
+        // --- Textures ---
+        qb_re_t_background,
+        qb_re_t_pacman,
+        qb_re_t_ghost,
+        qb_re_t_sprite_atlas,
+
+        // --- Effects ---
+        qb_re_e_qbert_fall,
+        qb_re_e_qbert_jump,
+
+        // --- Streams ---
+        qb_re_s_level_screen
     };
+    
     void init_resources();
-    auto to_int(resource id) -> int;
 }

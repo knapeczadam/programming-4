@@ -10,12 +10,13 @@
 namespace mngn
 {
     // Forward declarations
-    class texture_2d;
+    class texture;
     
     class texture_component final : public rendering_component
     {
     public:
         explicit texture_component(std::string const &filename);
+        explicit texture_component(int id);
         texture_component();
         ~texture_component() override;
 
@@ -29,6 +30,6 @@ namespace mngn
         void set_texture(std::string const &filename);
         
     private:
-        texture_2d *m_texture_ptr_ = nullptr;
+        texture *m_texture_ptr_ = nullptr;
     };
 }

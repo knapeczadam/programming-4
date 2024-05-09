@@ -8,7 +8,7 @@
 
 namespace mngn
 {
-    class texture_2d;
+    class texture;
     /**
      * Simple RAII wrapper for the SDL renderer
      */
@@ -19,8 +19,9 @@ namespace mngn
         void render() const;
         void destroy();
 
-        void render_texture(texture_2d const &texture, float x, float y) const;
-        void render_texture(texture_2d const &texture, float x, float y, float width, float height) const;
+        void render_texture(texture const &texture, float x, float y) const;
+        void render_texture(texture const &texture, float x, float y, float width, float height) const;
+        void render_texture(texture const &texture, SDL_Rect const &src_rect, SDL_Rect const &dst_rect) const;
 
         [[nodiscard]] auto get_sdl_renderer() const -> SDL_Renderer *;
 

@@ -2,7 +2,7 @@
 
 // Project includes
 #include "scene_manager.h"
-#include "minigin/utility/texture_2d.h"
+#include "minigin/utility/texture.h"
 
 // Standard includes
 #include <stdexcept>
@@ -68,7 +68,7 @@ namespace mngn
         }
     }
 
-    void renderer::render_texture(texture_2d const &texture, const float x, const float y) const
+    void renderer::render_texture(texture const &texture, const float x, const float y) const
     {
         SDL_Rect dst{};
         dst.x = static_cast<int>(x);
@@ -77,7 +77,7 @@ namespace mngn
         SDL_RenderCopy(get_sdl_renderer(), texture.get_sdl_texture(), nullptr, &dst);
     }
 
-    void renderer::render_texture(texture_2d const &texture, const float x, const float y, const float width, const float height) const
+    void renderer::render_texture(texture const &texture, const float x, const float y, const float width, const float height) const
     {
         SDL_Rect dst{};
         dst.x = static_cast<int>(x);
@@ -85,6 +85,11 @@ namespace mngn
         dst.w = static_cast<int>(width);
         dst.h = static_cast<int>(height);
         SDL_RenderCopy(get_sdl_renderer(), texture.get_sdl_texture(), nullptr, &dst);
+    }
+
+    void renderer::render_texture(texture const &texture, SDL_Rect const &src_rect, SDL_Rect const &dst_rect) const
+    {
+        SDL_RenderCopy(get_sdl_renderer(), texture.get_sdl_texture(), &src_rect, &dst_rect);
     }
 
     auto renderer::get_sdl_renderer() const -> SDL_Renderer * { return renderer_ptr_; }

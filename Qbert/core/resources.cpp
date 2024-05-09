@@ -13,13 +13,12 @@ namespace qbert
     		.load_resource_config();
 
     	resource_manager::get_instance()
-    		.add_resource_pair(to_int(resource::e_qbert_fall), "e_qbert_fall")
-    		.add_resource_pair(to_int(resource::e_qbert_jump), "e_qbert_jump")
-    		.add_resource_pair(to_int(resource::s_01_credit), "s_01_credit");
-    }
-
-    auto to_int(resource id) -> int
-    {
-    	return static_cast<int>(id);
+    		.add_resource_pair(qb_re_t_background, "t_background")
+    		.add_resource_pair(qb_re_t_pacman, "t_pacman")
+    		.add_resource_pair(qb_re_t_ghost, "t_ghost")
+    		.add_resource_pair(qb_re_t_sprite_atlas, "t_sprite_atlas")
+    		.add_resource_pair(qb_re_e_qbert_fall, "e_qbert_fall")
+    		.add_resource_pair(qb_re_e_qbert_jump, "e_qbert_jump")
+    		.add_resource_pair(qb_re_s_level_screen, "s_level_screen");
     }
 }

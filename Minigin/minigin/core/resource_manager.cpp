@@ -2,7 +2,7 @@
 
 // Project includes
 #include "renderer.h"
-#include "minigin/utility/texture_2d.h"
+#include "minigin/utility/texture.h"
 #include "minigin/utility/game_font.h"
 
 // Standard includes
@@ -41,7 +41,7 @@ namespace mngn
         }
     }
 
-    auto resource_manager::load_texture(std::string const &file_path) -> texture_2d *
+    auto resource_manager::load_texture(std::string const &file_path) -> texture *
     {
         // Check if texture is already present
         auto const full_path = data_path_ + file_path;
@@ -51,15 +51,25 @@ namespace mngn
             return it->second.get();
         }
         
-        auto texture = IMG_LoadTexture(renderer::get_instance().get_sdl_renderer(), full_path.c_str());
-        if (texture == nullptr)
+        auto texture_ptr = IMG_LoadTexture(renderer::get_instance().get_sdl_renderer(), full_path.c_str());
+        if (texture_ptr == nullptr)
         {
             throw std::runtime_error(std::string("Failed to load texture: ") + SDL_GetError());
         }
 
         // Cache texture
-        textures_[full_path] = std::make_unique<texture_2d>(texture);
+        textures_[full_path] = std::make_unique<texture>(texture_ptr);
         return textures_[full_path].get();
+    }
+
+    auto resource_manager::load_texture(int id) -> texture *
+    {
+        std::string path;
+        if (get_resource_path(id, path))
+        {
+            return load_texture(path);
+        }
+        return nullptr;
     }
 
     auto resource_manager::load_font(std::string const &file_path, unsigned int size) -> game_font *
@@ -91,6 +101,16 @@ namespace mngn
         return nullptr;
     }
 
+    auto resource_manager::load_font(int id, unsigned int size) -> game_font *
+    {
+        std::string path;
+        if (get_resource_path(id, path))
+        {
+            return load_font(path, size);
+        }
+        return nullptr;
+    }
+
     auto resource_manager::get_sound_effect(int id) -> sound_effect *
     {
         std::string path;
@@ -111,9 +131,9 @@ namespace mngn
         return nullptr;
     }
 
-    auto resource_manager::add_resource_pair(int id, std::string const &name) -> resource_manager &
+    auto resource_manager::add_resource_pair(int enum_id, std::string const &json_id) -> resource_manager &
     {
-        resources_[id] = name;
+        resource_map_[enum_id] = json_id;
         return *this;
     }
 
@@ -155,11 +175,11 @@ namespace mngn
 
     auto resource_manager::get_resource_path(int id, std::string &file_path) -> bool
     {
-        for (auto const& resource : resource_config_["resources"])
+        for (auto const& resource_config : resource_config_["resources"])
         {
-            if (resource["id"] == to_string(id))
+            if (resource_config["id"] == to_string(id))
             {
-                file_path = resource["path"];
+                file_path = resource_config["path"];
                 return true;
             }
         }
@@ -168,6 +188,6 @@ namespace mngn
 
     auto resource_manager::to_string(int id) -> std::string const &
     {
-        return resources_[id];
+        return resource_map_[id];
     }
 }
