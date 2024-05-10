@@ -30,6 +30,7 @@
     <ClCompile Include="core\sprites.cpp" />
     <ClCompile Include="input\game_component_commands.cpp" />
     <ClCompile Include="input\game_object_commands.cpp" />
+    <ClCompile Include="input\generic_commands.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -44,6 +45,7 @@
     <ClInclude Include="core\sprites.h" />
     <ClInclude Include="input\game_component_commands.h" />
     <ClInclude Include="input\game_object_commands.h" />
+    <ClInclude Include="input\generic_commands.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

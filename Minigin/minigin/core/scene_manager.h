@@ -28,6 +28,7 @@ namespace mngn
 
         auto create_scene(std::string const &name) -> scene *;
 
+        void awake();
         void fixed_update();
         void update();
         void late_update();
