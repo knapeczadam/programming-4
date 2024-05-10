@@ -1,4 +1,4 @@
-#include "text_component.h"
+#include "text_ui_component.h"
 
 // Project includes
 #include "minigin/core/game_object.h"
@@ -16,11 +16,11 @@
 
 namespace mngn
 {
-    text_component::text_component() = default;
+    text_ui_component::text_ui_component() = default;
     
-    text_component::~text_component() = default;
+    text_ui_component::~text_ui_component() = default;
 
-    void text_component::update()
+    void text_ui_component::update()
     {
         if (needs_update_)
         {
@@ -44,7 +44,7 @@ namespace mngn
         }
     }
 
-    void text_component::render_ui() const
+    void text_ui_component::render_ui() const
     {
         if (text_texture_)
         {
@@ -54,19 +54,19 @@ namespace mngn
     }
 
     // This implementation uses the "dirty flag" pattern
-    void text_component::set_text(std::string const &text)
+    void text_ui_component::set_text(std::string const &text)
     {
         text_ = text;
         needs_update_ = true;
     }
 
-    void text_component::set_font(game_font *font_ptr)
+    void text_ui_component::set_font(game_font *font_ptr)
     {
         font_ptr_ = font_ptr;
         needs_update_ = true;
     }
 
-    void text_component::set_font(std::string const &font, unsigned size)
+    void text_ui_component::set_font(std::string const &font, unsigned size)
     {
         font_ptr_ = resource_manager::get_instance().load_font(font, size);
         needs_update_ = true;

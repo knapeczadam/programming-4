@@ -10,7 +10,7 @@ namespace qbert
 {
     void score_text_component::notify(std::string const &event, mngn::subject *subject_ptr)
     {
-        if (event == "ScoreChanged")
+        if (event == "score_changed")
         {
             if (auto const score_comp = dynamic_cast<score_component*>(subject_ptr))
             {

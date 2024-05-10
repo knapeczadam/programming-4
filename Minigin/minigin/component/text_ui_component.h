@@ -14,16 +14,16 @@ namespace mngn
     class game_font;
     class texture;
 
-    class text_component : public ui_component
+    class text_ui_component : public ui_component
     {
     public:
-        text_component();
-        ~text_component() override;
+        text_ui_component();
+        ~text_ui_component() override;
         
-        text_component(text_component const &other)            = delete;
-        text_component(text_component &&other)                 = delete;
-        text_component &operator=(text_component const &other) = delete;
-        text_component &operator=(text_component &&other)      = delete;
+        text_ui_component(text_ui_component const &other)            = delete;
+        text_ui_component(text_ui_component &&other)                 = delete;
+        text_ui_component &operator=(text_ui_component const &other) = delete;
+        text_ui_component &operator=(text_ui_component &&other)      = delete;
         
         void update() override;
         void render_ui() const override;

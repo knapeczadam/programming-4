@@ -10,7 +10,7 @@ namespace qbert
 {
     void fps_component::update()
     {
-        text_component::update();
+        text_ui_component::update();
 
         update_timer_ += mngn::game_time::get_instance().delta_time;
         ++frame_count_;

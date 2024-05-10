@@ -206,9 +206,11 @@
     <ClCompile Include="..\3rdParty\imgui\imgui_draw.cpp" />
     <ClCompile Include="..\3rdParty\imgui\imgui_tables.cpp" />
     <ClCompile Include="..\3rdParty\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="minigin\component\multisprite_ui_component.cpp" />
     <ClCompile Include="minigin\component\sprite_component.cpp" />
+    <ClCompile Include="minigin\component\sprite_ui_component.cpp" />
     <ClCompile Include="minigin\component\texture_component.cpp" />
-    <ClCompile Include="minigin\component\text_component.cpp" />
+    <ClCompile Include="minigin\component\text_ui_component.cpp" />
     <ClCompile Include="minigin\core\game_component.cpp" />
     <ClCompile Include="minigin\core\game_object.cpp" />
     <ClCompile Include="minigin\core\i_observer.cpp" />
@@ -248,9 +250,11 @@
     <ClInclude Include="minigin\component\family\physics_component.h" />
     <ClInclude Include="minigin\component\family\rendering_component.h" />
     <ClInclude Include="minigin\component\family\ui_component.h" />
+    <ClInclude Include="minigin\component\multisprite_ui_component.h" />
     <ClInclude Include="minigin\component\sprite_component.h" />
+    <ClInclude Include="minigin\component\sprite_ui_component.h" />
     <ClInclude Include="minigin\component\texture_component.h" />
-    <ClInclude Include="minigin\component\text_component.h" />
+    <ClInclude Include="minigin\component\text_ui_component.h" />
     <ClInclude Include="minigin\core\game_component.h" />
     <ClInclude Include="minigin\core\game_object.h" />
     <ClInclude Include="minigin\core\game_object.hpp" />

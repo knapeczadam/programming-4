@@ -1,12 +1,12 @@
 ﻿#pragma once
 
 // Project includes
-#include "minigin/component/text_component.h"
+#include "minigin/component/text_ui_component.h"
 #include "minigin/core/i_observer.h"
 
 namespace qbert
 {
-    class health_text_component final : public mngn::text_component, public mngn::i_observer
+    class health_text_component final : public mngn::text_ui_component, public mngn::i_observer
     {
     public:
         health_text_component()           = default;

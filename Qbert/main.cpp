@@ -20,7 +20,6 @@
 
 #include "minigin/component/sprite_component.h"
 #include "minigin/component/texture_component.h"
-#include "minigin/component/text_component.h"
 #include "minigin/core/engine.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/resource_manager.h"
