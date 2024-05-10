@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="component\cube_component.cpp" />
     <ClCompile Include="component\fps_component.cpp" />
     <ClCompile Include="component\health_component.cpp" />
     <ClCompile Include="component\health_text_component.cpp" />
@@ -31,9 +32,12 @@
     <ClCompile Include="input\game_component_commands.cpp" />
     <ClCompile Include="input\game_object_commands.cpp" />
     <ClCompile Include="input\generic_commands.cpp" />
+    <ClCompile Include="level\levels.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ui\ui.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="component\cube_component.h" />
     <ClInclude Include="component\fps_component.h" />
     <ClInclude Include="component\health_component.h" />
     <ClInclude Include="component\health_text_component.h" />
@@ -46,6 +50,8 @@
     <ClInclude Include="input\game_component_commands.h" />
     <ClInclude Include="input\game_object_commands.h" />
     <ClInclude Include="input\generic_commands.h" />
+    <ClInclude Include="level\levels.h" />
+    <ClInclude Include="ui\ui.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
