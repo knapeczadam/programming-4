@@ -1,11 +1,21 @@
 {
   "sprites": [
     {
-      "id": "qbert",
+      "id": "qbert_1",
       "rows": 24,
       "columns": 45,
       "sub_rows": 1,
       "sub_columns": 8,
+      "frames_per_second": 5,
+      "scale": 2
+    },
+    {
+      "id": "qbert_2",
+      "rows": 24,
+      "columns": 45,
+      "sub_rows": 1,
+      "sub_columns": 8,
+      "left_offset_columns": 21,
       "frames_per_second": 5,
       "scale": 2
     },

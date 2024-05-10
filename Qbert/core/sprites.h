@@ -4,7 +4,8 @@ namespace qbert
 {
     enum qbert_sprite
     {
-        qb_sp_qbert,
+        qb_sp_qbert_1,
+        qb_sp_qbert_2,
         qb_sp_qbert_life,
         qb_sp_qbert_curse,
         qb_sp_qbert_big,

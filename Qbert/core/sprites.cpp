@@ -13,7 +13,8 @@ namespace qbert
             .load_sprite_config();
 
         sprite_manager::get_instance()
-            .add_sprite_pair(qb_sp_qbert, "qbert")
+            .add_sprite_pair(qb_sp_qbert_1, "qbert_1")
+            .add_sprite_pair(qb_sp_qbert_2, "qbert_2")
             .add_sprite_pair(qb_sp_qbert_life, "qbert_life")
             .add_sprite_pair(qb_sp_qbert_curse, "qbert_curse")
             .add_sprite_pair(qb_sp_qbert_big, "qbert_big")

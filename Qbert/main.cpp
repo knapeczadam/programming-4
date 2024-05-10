@@ -75,7 +75,7 @@ void load()
     //---------------------------------------------------------------------------------
     go = scene->add_game_object("player_1");
     go->set_local_position(100.0f, 50.0f);
-    go->add_component<sprite_component>(qb_sp_qbert, qb_re_t_sprite_general);
+    go->add_component<sprite_component>(qb_sp_qbert_1, qb_re_t_sprite_general);
 	go->add_component<move_component>();
     auto health_comp = go->add_component<health_component>();
     // health_comp->add_observer();
@@ -132,7 +132,7 @@ void load()
     //---------------------------------------------------------------------------------
     go = scene->add_game_object("player_2");
     go->set_local_position(50.0f, 50.0f);
-    go->add_component<sprite_component>(qb_sp_coily, qb_re_t_sprite_general);
+    go->add_component<sprite_component>(qb_sp_qbert_2, qb_re_t_sprite_general);
 	go->add_component<move_component>();
     health_comp = go->add_component<health_component>();
     // health_comp->add_observer();
