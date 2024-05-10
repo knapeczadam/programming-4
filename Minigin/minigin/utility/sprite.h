@@ -60,6 +60,7 @@ namespace mngn
         void set_clip_height(int clip_height);
         
         void set_position(const glm::ivec2 & pos);
+        void set_current_frame(int frame);
         
         [[nodiscard]] auto get_src_rect() const -> rect;
         [[nodiscard]] auto get_dst_rect() const -> rect;
@@ -95,7 +96,6 @@ namespace mngn
         float   frames_per_sec_   = 0.0f;
         float   frame_time_       = 0.0f;
         float   scale_            = 1.0f;
-        bool    animated_         = false;
 
         // SPRITE RELATED DATA MEMBERS
         float accu_time_                  = 0.0f;
@@ -111,5 +111,7 @@ namespace mngn
         int   collider_horizontal_offset_ = 0;
         int   collider_vertical_offset_   = 0;
         int   iter_count_                 = 0;
+        
+        bool    animated_         = false;
     };
 }

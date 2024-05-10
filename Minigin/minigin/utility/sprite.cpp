@@ -183,6 +183,12 @@ namespace mngn
         dst_rect_.bottom = pos.y;
     }
 
+    void sprite::set_current_frame(int frame)
+    {
+        curr_frame_ = frame;
+        update_src_rect();
+    }
+
     //---------------------------------------------------------------------------------
 
     auto sprite::get_src_rect() const -> rect

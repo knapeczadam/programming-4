@@ -16,9 +16,9 @@ namespace mngn
     {
     }
 
-    sprite_component::sprite_component(int sprite_id, int texture_id)
+    sprite_component::sprite_component(int sprite_id, int texture_id, bool cache)
     {
-        sprite_ptr_ = sprite_manager::get_instance().load_sprite(sprite_id, texture_id);
+        sprite_ptr_ = sprite_manager::get_instance().load_sprite(sprite_id, texture_id, cache);
     }
 
     sprite_component::~sprite_component() = default;

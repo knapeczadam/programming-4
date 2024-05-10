@@ -13,7 +13,7 @@ namespace mngn
     public:
         sprite_component();
         explicit sprite_component(sprite *sprite_ptr);
-        sprite_component(int sprite_id, int texture_id);
+        sprite_component(int sprite_id, int texture_id, bool cache = true);
         ~sprite_component() override;
 
         sprite_component(sprite_component const &other)            = delete;
