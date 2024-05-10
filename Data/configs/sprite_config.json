@@ -392,7 +392,7 @@
       "scale": 2
     },
     {
-      "id": "level_1_small_red_cube",
+      "id": "level_1_red_cube_small",
       "rows": 24,
       "columns": 45,
       "left_offset_columns": 4,
@@ -419,7 +419,7 @@
       "scale": 2
     },
     {
-      "id": "level_1_small_yellow_cube",
+      "id": "level_1_yellow_cube_small",
       "rows": 24,
       "columns": 45,
       "left_offset_columns": 4,
@@ -446,7 +446,7 @@
       "scale": 2
     },
     {
-      "id": "level_1_small_blue_cube",
+      "id": "level_1_blue_cube_small",
       "rows": 24,
       "columns": 45,
       "left_offset_columns": 4,
@@ -474,7 +474,7 @@
       "scale": 2
     },
     {
-      "id": "level_2_small_blue_cube",
+      "id": "level_2_blue_cube_small",
       "rows": 24,
       "columns": 45,
       "left_offset_columns": 9,
@@ -502,7 +502,7 @@
       "scale": 2
     },
     {
-      "id": "level_2_small_yellow_cube",
+      "id": "level_2_yellow_cube_small",
       "rows": 24,
       "columns": 45,
       "left_offset_columns": 9,
@@ -530,7 +530,7 @@
       "scale": 2
     },
     {
-      "id": "level_2_small_green_cube",
+      "id": "level_2_green_cube_small",
       "rows": 24,
       "columns": 45,
       "left_offset_columns": 9,
@@ -558,7 +558,7 @@
       "scale": 2
     },
     {
-      "id": "level_3_small_white_cube",
+      "id": "level_3_white_cube_small",
       "rows": 24,
       "columns": 45,
       "left_offset_columns": 14,
@@ -586,7 +586,7 @@
       "scale": 2
     },
     {
-      "id": "level_3_white_cube",
+      "id": "level_3_gray_cube_small",
       "rows": 24,
       "columns": 45,
       "left_offset_columns": 14,
@@ -614,7 +614,7 @@
       "scale": 2
     },
     {
-      "id": "level_3_blue_cube",
+      "id": "level_3_blue_cube_small",
       "rows": 24,
       "columns": 45,
       "left_offset_columns": 14,
