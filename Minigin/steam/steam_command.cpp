@@ -1,9 +1,9 @@
-﻿#include "generic_command.h"
+﻿#include "steam_command.h"
 
 // Project includes
 #include "steam/achievement.h"
 
-namespace mngn
+namespace steam
 {
     void reset_achievements_command::execute()
     {

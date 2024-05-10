@@ -28,7 +28,6 @@
 #include "minigin/core/scene_manager.h"
 #include "minigin/core/sprite_manager.h"
 #include "minigin/events/event_manager.h"
-#include "minigin/input/generic_command.h"
 #include "minigin/input/input_manager.h"
 #include "minigin/services/logging_sound_system.h"
 #include "minigin/services/sdl_sound_system.h"

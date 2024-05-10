@@ -1,12 +1,12 @@
 ﻿#pragma once
 
 // Project includes
-#include "base_command.h"
+#include "minigin/input/base_command.h"
 
-namespace mngn
+namespace steam
 {
     // ResetAchievementsCommand
-    class reset_achievements_command final : public base_command
+    class reset_achievements_command final : public mngn::base_command
     {
     public:
         explicit reset_achievements_command(void *achievement_ptr)

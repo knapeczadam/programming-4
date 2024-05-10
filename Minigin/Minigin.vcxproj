@@ -221,7 +221,6 @@
     <ClCompile Include="minigin\events\event_handler.cpp" />
     <ClCompile Include="minigin\events\event_manager.cpp" />
     <ClCompile Include="minigin\events\sound_handler.cpp" />
-    <ClCompile Include="minigin\input\generic_command.cpp" />
     <ClCompile Include="minigin\input\input_manager.cpp" />
     <ClCompile Include="minigin\input\sdl_input.cpp" />
     <ClCompile Include="minigin\input\x_input.cpp" />
@@ -239,6 +238,7 @@
     <ClCompile Include="minigin\utility\transform.cpp" />
     <ClCompile Include="steam\achievement.cpp" />
     <ClCompile Include="steam\steam.cpp" />
+    <ClCompile Include="steam\steam_command.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="minigin\" />
@@ -270,7 +270,6 @@
     <ClInclude Include="minigin\input\base_command.h" />
     <ClInclude Include="minigin\input\game_component_command.h" />
     <ClInclude Include="minigin\input\game_object_command.h" />
-    <ClInclude Include="minigin\input\generic_command.h" />
     <ClInclude Include="minigin\input\input_manager.h" />
     <ClInclude Include="minigin\input\i_input.h" />
     <ClInclude Include="minigin\input\sdl_input.h" />
@@ -294,6 +293,7 @@
     <ClInclude Include="minigin\utility\transform.h" />
     <ClInclude Include="steam\achievement.h" />
     <ClInclude Include="steam\steam.h" />
+    <ClInclude Include="steam\steam_command.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
