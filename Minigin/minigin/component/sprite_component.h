@@ -23,6 +23,8 @@ namespace mngn
         void render() const override;
         void update() override;
 
+        void set_sprite(sprite *sprite_ptr) { sprite_ptr_ = sprite_ptr; }
+
     private:
         sprite *sprite_ptr_ = nullptr;
     };
