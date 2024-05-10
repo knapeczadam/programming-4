@@ -66,15 +66,15 @@ namespace mngn
     {
         if (animated_)
         {
-            accu_sec_ += elapsed_sec;
-            if (accu_sec_ > frame_time_)
+            accu_time_ += elapsed_sec;
+            if (accu_time_ > frame_time_)
             {
                 ++curr_frame_ %= (curr_rows_ * curr_cols_);
                 if (curr_frame_ == 0)
                 {
                     ++iter_count_;
                 }
-                accu_sec_ -= frame_time_;
+                accu_time_ -= frame_time_;
                 update_src_rect();
             }
         }

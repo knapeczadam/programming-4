@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="component\cube_component.cpp" />
+    <ClCompile Include="component\flicker_component.cpp" />
     <ClCompile Include="component\fps_component.cpp" />
     <ClCompile Include="component\health_component.cpp" />
     <ClCompile Include="component\health_text_component.cpp" />
@@ -38,6 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="component\cube_component.h" />
+    <ClInclude Include="component\flicker_component.h" />
     <ClInclude Include="component\fps_component.h" />
     <ClInclude Include="component\health_component.h" />
     <ClInclude Include="component\health_text_component.h" />

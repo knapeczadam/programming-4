@@ -1,6 +1,7 @@
 ﻿#include "ui.h"
 
 // Project includes
+#include "component/flicker_component.h"
 #include "core/resources.h"
 #include "core/sprites.h"
 
@@ -36,10 +37,12 @@ namespace qbert
 
         go = scene->add_game_object("right_arrow_1");
         go->set_local_position(32, 96);
+        go->add_component<flicker_component>();
         go->add_component<sprite_component>(qb_sp_arrow_right, qb_re_t_sprite_general);
         
         go = scene->add_game_object("right_arrow_1");
         go->set_local_position(48, 96);
+        go->add_component<flicker_component>(0.2f);
         go->add_component<sprite_component>(qb_sp_arrow_right, qb_re_t_sprite_general);
         
         go = scene->add_game_object("small_cube");
@@ -48,10 +51,12 @@ namespace qbert
         
         go = scene->add_game_object("left_arrow_1");
         go->set_local_position(96, 96);
+        go->add_component<flicker_component>(0.2f);
         go->add_component<sprite_component>(qb_sp_arrow_left, qb_re_t_sprite_general);
         
         go = scene->add_game_object("left_arrow_2");
         go->set_local_position(112, 96);
+        go->add_component<flicker_component>();
         go->add_component<sprite_component>(qb_sp_arrow_left, qb_re_t_sprite_general);
         
         go = scene->add_game_object("text_level");

@@ -98,7 +98,7 @@ namespace mngn
         bool    animated_         = false;
 
         // SPRITE RELATED DATA MEMBERS
-        float accu_sec_                   = 0.0f;
+        float accu_time_                  = 0.0f;
         int   curr_frame_                 = 0;
         rect  src_rect_                   = {};
         rect  dst_rect_                   = {};

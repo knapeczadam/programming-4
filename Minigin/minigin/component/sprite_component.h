@@ -24,6 +24,7 @@ namespace mngn
         void render() const override;
         void update() override;
 
+        [[nodiscard]] auto get_sprite() const -> sprite * { return sprite_ptr_; }
         void set_sprite(sprite *sprite_ptr) { sprite_ptr_ = sprite_ptr; }
 
     private:
