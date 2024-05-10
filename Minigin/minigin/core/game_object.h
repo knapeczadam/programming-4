@@ -45,6 +45,7 @@ namespace mngn
 
         [[nodiscard]] auto get_name() const -> std::string { return name_; }
 
+        void awake();
         void fixed_update();
         void update();
         void update_world_position();

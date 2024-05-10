@@ -32,6 +32,7 @@ namespace mngn
         [[nodiscard]] auto get_game_object_count() const -> int;
         [[nodiscard]] auto find_game_object(std::string const &name) const -> game_object *;
 
+        void awake();
         void fixed_update();
         void update();
         void late_update();

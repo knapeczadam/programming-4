@@ -9,6 +9,14 @@ namespace mngn
     scene_manager::scene_manager() = default;
 
     scene_manager::~scene_manager() = default;
+
+    void scene_manager::awake()
+    {
+        for (auto const &scene : scenes_)
+        {
+            scene->awake();
+        }
+    }
     
     void scene_manager::fixed_update()
     {

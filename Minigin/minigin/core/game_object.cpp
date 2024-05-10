@@ -18,6 +18,14 @@ namespace mngn
 
     game_object::~game_object() = default;
 
+    void game_object::awake()
+    {
+        for (auto const &component_ptr : component_map_ | std::views::values)
+        {
+            component_ptr->awake();
+        }
+    }
+
     void game_object::fixed_update()
     {
         for (auto const &component_ptr : component_map_ | std::views::values)

@@ -122,6 +122,8 @@ namespace mngn
         bool do_continue = true;
         auto last_time = high_resolution_clock::now();
         float lag = 0.0f;
+
+        scene_manager.awake();
         
         while (do_continue)
         {

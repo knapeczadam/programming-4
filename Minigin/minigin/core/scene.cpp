@@ -59,6 +59,14 @@ namespace mngn
         return it != objects_.end() ? it->get() : nullptr;
     }
 
+    void scene::awake()
+    {
+        for (auto const &object : objects_)
+        {
+            object->awake();
+        }
+    }
+
     void scene::fixed_update()
     {
         for (auto const &object : objects_)
