@@ -36,8 +36,6 @@
 #include "minigin/test/test_manager.h"
 #include "minigin/utility/sprite.h"
 
-#include "steam/achievement.h"
-
 // Standard includes
 #include <cassert>
 #include <iostream>
@@ -45,12 +43,6 @@
 
 // SDL includes
 #include <SDL.h>
-
-// Steam includes
-#pragma warning (push)
-#pragma warning (disable: 4996)
-#include "steam_api.h"
-#pragma warning (pop)
 
 void register_services()
 {
@@ -248,48 +240,15 @@ void load()
 	// input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_r, std::move(reset_achievement_command));
 }
 
-auto init_steam() -> int
-{
-    using namespace mngn;
-	if (not SteamAPI_Init())
-	{
-		std::cerr << "Fatal Error - Steam must be running to play this game (SteamAPI_Init() failed)." << '\n';
-		return 1;
-	}
-	std::cout << "Successfully initialized steam." << '\n';
-	steam::g_steam_achievements_ptr = new steam::steam_achievements(steam::g_achievements, 1);
-
-	return 0;
-}
-
 int main(int, char *[])
 {
-    using namespace mngn;
-	// ------------------------
-	// Steam - Initialize
-	// ------------------------
-	// if (init_steam() != 0)
-	// {
-	// 	return 1;
-	// }
-
-	// ------------------------
-	// Minigin
-	// ------------------------
-    engine engine("../Data/");
+    mngn::engine engine("../Data/");
 	
 #ifndef NDEBUG
-    test_manager::get_instance().run_all_tests();
+    mngn::test_manager::get_instance().run_all_tests();
 #endif
 	
     engine.run(load);
-
-	// ------------------------
-	// Steam - Cleanup
-	// ------------------------
-    // SteamAPI_Shutdown();
-    // Delete the SteamAchievements object
-	// delete steam::g_steam_achievements_ptr;
 	
     return 0;
 }

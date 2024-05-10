@@ -238,6 +238,7 @@
     <ClCompile Include="minigin\utility\texture.cpp" />
     <ClCompile Include="minigin\utility\transform.cpp" />
     <ClCompile Include="steam\achievement.cpp" />
+    <ClCompile Include="steam\steam.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="minigin\" />
@@ -292,6 +293,7 @@
     <ClInclude Include="minigin\utility\texture.h" />
     <ClInclude Include="minigin\utility\transform.h" />
     <ClInclude Include="steam\achievement.h" />
+    <ClInclude Include="steam\steam.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
