@@ -33,12 +33,12 @@ namespace mngn
         auto set_data_path(std::string const &data_path) -> sprite_manager &;
         auto set_sprite_config_path(std::string const &sprite_config_path) -> sprite_manager &;
         void load_sprite_config();
-        auto create_sprite(int sprite_id, int texture_id) -> sprite *;
+        auto load_sprite(int sprite_id, int texture_id) -> sprite *;
         
         auto add_sprite_pair(int enum_id, std::string const &json_id) -> sprite_manager &;
 
     private:
-        auto load_sprite(int id, texture* texture_ptr) -> sprite *;
+        auto create_sprite(int id, texture* texture_ptr) -> sprite *;
         auto to_string(int id) -> std::string const &;
 
     private:
@@ -49,7 +49,8 @@ namespace mngn
         std::string data_path_;
         std::string sprite_config_path_;
         json sprite_config_;
-        std::vector<std::unique_ptr<sprite>> sprites_;
+        // std::vector<std::unique_ptr<sprite>> sprites_;
+        std::unordered_map<int, std::unique_ptr<sprite>> sprites_;
         
         std::unordered_map<int, std::string> sprite_map_;
     };

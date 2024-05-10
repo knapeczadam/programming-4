@@ -35,13 +35,18 @@ namespace mngn
         }
     }
 
-    auto sprite_manager::create_sprite(int sprite_id, int texture_id) -> sprite *
+    auto sprite_manager::load_sprite(int sprite_id, int texture_id) -> sprite *
     {
+        if (sprites_.contains(sprite_id))
+        {
+            return sprites_[sprite_id].get();
+        }
+        
         auto texture_ptr = resource_manager::get_instance().load_texture(texture_id);
-        return load_sprite(sprite_id, texture_ptr);
+        return create_sprite(sprite_id, texture_ptr);
     }
 
-    auto sprite_manager::load_sprite(int id, texture * texture_ptr) -> sprite *
+    auto sprite_manager::create_sprite(int id, texture * texture_ptr) -> sprite *
     {
         std::unique_ptr<sprite> new_sprite = nullptr;
         for (auto const &sprite_config : sprite_config_["sprites"])
@@ -70,7 +75,7 @@ namespace mngn
                 new_sprite->init();
 
                 sprite *copy_ptr = new_sprite.get();
-                sprites_.push_back(std::move(new_sprite));
+                sprites_[id] = std::move(new_sprite);
 
                 return copy_ptr;
             }

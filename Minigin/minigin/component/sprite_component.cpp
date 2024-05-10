@@ -4,6 +4,7 @@
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
 #include "minigin/core/renderer.h"
+#include "minigin/core/sprite_manager.h"
 #include "minigin/utility/sprite.h"
 
 namespace mngn
@@ -13,6 +14,11 @@ namespace mngn
     sprite_component::sprite_component(sprite *sprite_ptr)
         : sprite_ptr_{sprite_ptr}
     {
+    }
+
+    sprite_component::sprite_component(int sprite_id, int texture_id)
+    {
+        sprite_ptr_ = sprite_manager::get_instance().load_sprite(sprite_id, texture_id);
     }
 
     sprite_component::~sprite_component() = default;
