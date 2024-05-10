@@ -9,14 +9,14 @@
 // Project includes
 #include "component/fps_component.h"
 #include "component/health_component.h"
-#include "component/health_text_component.h"
 #include "component/move_component.h"
 #include "component/score_component.h"
-#include "component/score_text_component.h"
 #include "core/resources.h"
 #include "core/sprites.h"
 #include "input/game_component_commands.h"
 #include "input/game_object_commands.h"
+#include "level/levels.h"
+#include "ui/ui.h"
 
 #include "minigin/component/sprite_component.h"
 #include "minigin/component/texture_component.h"
@@ -27,18 +27,14 @@
 #include "minigin/core/scene.h"
 #include "minigin/core/scene_manager.h"
 #include "minigin/core/sprite_manager.h"
-#include "minigin/events/event_manager.h"
 #include "minigin/input/input_manager.h"
 #include "minigin/services/logging_sound_system.h"
 #include "minigin/services/sdl_sound_system.h"
 #include "minigin/services/service_locator.h"
 #include "minigin/test/test_manager.h"
-#include "minigin/utility/sprite.h"
 
 // Standard includes
 #include <cassert>
-#include <iostream>
-#include <sstream>
 
 // SDL includes
 #include <SDL.h>
@@ -65,87 +61,26 @@ void load()
     auto const scene = scene_manager::get_instance().create_scene("Demo");
     
     // Fonts
-    auto const font_medium = resource_manager::get_instance().load_font("fonts/Lingua.otf", 24);
-    auto const font_small = resource_manager::get_instance().load_font("fonts/Lingua.otf", 16);
-
-    // Background
-    auto go = scene->add_game_object();
-    go->add_component<texture_component>(qb_re_t_background);
-
-    // Text
-    go = scene->add_game_object();
-    go->set_local_position(180.0f, 10.0f);
-    auto text_comp = go->add_component<text_component>();
-    text_comp->set_font(font_medium);
-    text_comp->set_text("Programming 4 Assignment");
+    auto const font_small = resource_manager::get_instance().load_font("fonts/Lingua.otf", 10);
 
     // FPS
-    go = scene->add_game_object();
-    go->set_local_position(10.0f, 10.0f);
+    auto go = scene->add_game_object();
+    go->set_local_position(10.0f, 500.0f);
     auto const fps_comp = go->add_component<fps_component>();
-    fps_comp->set_font(font_medium);
+    fps_comp->set_font(font_small);
     fps_comp->set_text("FPS: ");
-    
+
     //---------------------------------------------------------------------------------
-    // UI
+    // PLAYER 1
     //---------------------------------------------------------------------------------
-    go = scene->add_game_object("hint");
-    go->set_local_position(10, 80);
-    text_comp = go->add_component<text_component>();
-    text_comp->set_font(font_small);
-    text_comp->set_text("Use the D-Pad to move Pacman, X to inflict damage, A and B to pick up pellets\n"
-	    "Use WASD to move GHOST, C to inflict damage, Z and X to pick up pellets");
-
-    std::stringstream health_ss;
-    health_ss << "# lives: " << health_component::get_initial_health();
-
-    std::stringstream score_ss;
-    score_ss << "Score: " << score_component::get_initial_score();
-
-    go = scene->add_game_object("pacman_health");
-    go->set_local_position(10, 120);
-    auto const pacman_health_text = go->add_component<health_text_component>();
-    pacman_health_text->set_font(font_small);
-    pacman_health_text->set_text(health_ss.str());
-
-    go = scene->add_game_object("pacman_score");
-    go->set_local_position(10, 140);
-    auto const pacman_score_text = go->add_component<score_text_component>();
-    pacman_score_text->set_font(font_small);
-    pacman_score_text->set_text(score_ss.str());
-    
-    go = scene->add_game_object("ghost_health");
-    go->set_local_position(10, 160);
-    auto const ghost_health_text = go->add_component<health_text_component>();
-    ghost_health_text->set_font(font_small);
-    ghost_health_text->set_text(health_ss.str());
-    
-    go = scene->add_game_object("ghost_score");
-    go->set_local_position(10, 180);
-    auto const ghost_score_text = go->add_component<score_text_component>();
-    ghost_score_text->set_font(font_small);
-    ghost_score_text->set_text(score_ss.str());
-
-	//---------------------------------------------------------------------------------
-	// TEST SPRITES
-	//---------------------------------------------------------------------------------
-	go = scene->add_game_object("dummy");
-	go->set_local_position(50.0f, 50.0f);
-	auto sprite = sprite_manager::get_instance().create_sprite(qb_sp_level_1_disk_1, qb_re_t_sprite_atlas);
-	go->add_component<sprite_component>(sprite);
-    
-    //---------------------------------------------------------------------------------
-    // PACMAN
-    //---------------------------------------------------------------------------------
-    go = scene->add_game_object("pacman");
-    go->set_local_position(200.0f, 200.0f);
-    go->add_component<texture_component>(qb_re_t_pacman);
+    go = scene->add_game_object("player_1");
+    go->set_local_position(100.0f, 50.0f);
+    go->add_component<sprite_component>(qb_sp_qbert, qb_re_t_sprite_general);
 	go->add_component<move_component>();
     auto health_comp = go->add_component<health_component>();
-    health_comp->add_observer(pacman_health_text);
+    // health_comp->add_observer();
     auto score_comp = go->add_component<score_component>();
-    score_comp->add_observer(pacman_score_text);
-	// score_comp->add_observer(g_steam_achievements_ptr);
+    // score_comp->add_observer();
 
     // Arrow keys
     auto move_left_command1  = std::make_unique<move_command>(go, glm::vec2{-1, 0});
@@ -193,17 +128,16 @@ void load()
     input_manager::get_instance().bind_command(input_type::controller, input_state::down, input::c_b, std::move(score_command2));
 
     //---------------------------------------------------------------------------------
-    // GHOST
+    // PLAYER 2
     //---------------------------------------------------------------------------------
-    go = scene->add_game_object("ghost");
-    go->set_local_position(300.0f, 300.0f);
-    go->add_component<texture_component>(qb_re_t_ghost);
+    go = scene->add_game_object("player_2");
+    go->set_local_position(50.0f, 50.0f);
+    go->add_component<sprite_component>(qb_sp_coily, qb_re_t_sprite_general);
 	go->add_component<move_component>();
     health_comp = go->add_component<health_component>();
-    health_comp->add_observer(ghost_health_text);
+    // health_comp->add_observer();
     score_comp = go->add_component<score_component>();
-    score_comp->add_observer(ghost_score_text);
-	// score_comp->add_observer(g_steam_achievements_ptr);
+    // score_comp->add_observer();
     
     // WASD
     auto move_left_command2  = std::make_unique<move_command>(go, glm::vec2{-1, 0});
@@ -234,9 +168,8 @@ void load()
     input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_z, std::move(score_command3));
     input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_x, std::move(score_command4));
 
-	// Reset Achievements
-	// auto reset_achievement_command = std::make_unique<reset_achievements_command>(g_steam_achievements_ptr);
-	// input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_r, std::move(reset_achievement_command));
+	load_test_level();
+	load_test_ui();
 }
 
 int main(int, char *[])

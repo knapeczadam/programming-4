@@ -46,6 +46,8 @@ namespace mngn
         k_z     = SDLK_z,
         k_x     = SDLK_x,
 
+        k_j    = SDLK_j,
+
         c_left  = XINPUT_GAMEPAD_DPAD_LEFT,
         c_right = XINPUT_GAMEPAD_DPAD_RIGHT,
         c_up    = XINPUT_GAMEPAD_DPAD_UP,
