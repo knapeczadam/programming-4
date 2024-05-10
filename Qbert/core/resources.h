@@ -8,7 +8,8 @@ namespace qbert
         qb_re_t_background,
         qb_re_t_pacman,
         qb_re_t_ghost,
-        qb_re_t_sprite_atlas,
+        qb_re_t_sprite_general,
+        qb_re_t_sprite_large_text,
 
         // --- Effects ---
         qb_re_e_qbert_fall,

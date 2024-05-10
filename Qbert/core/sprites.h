@@ -75,6 +75,13 @@ namespace qbert
         qb_sp_level_3_blue_cube_1,
         qb_sp_level_3_blue_cube_2,
         qb_sp_level_3_blue_cube_small,
+        
+        qb_sp_numbers_large_yellow,
+        qb_sp_numbers_large_gray,
+        qb_sp_alphabet_large_yellow,
+        qb_sp_alphabet_large_gray,
+        qb_sp_text_large_yellow_qbert,
+        qb_sp_text_large_gray_qbert,
     };
     
     void init_sprites();

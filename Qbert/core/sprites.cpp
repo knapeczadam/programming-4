@@ -75,6 +75,12 @@ namespace qbert
             .add_sprite_pair(qb_sp_level_3_gray_cube_small, "level_3_gray_cube_small")
             .add_sprite_pair(qb_sp_level_3_blue_cube_1, "level_3_blue_cube_1")
             .add_sprite_pair(qb_sp_level_3_blue_cube_2, "level_3_blue_cube_2")
-            .add_sprite_pair(qb_sp_level_3_blue_cube_small, "level_3_blue_cube_small");
+            .add_sprite_pair(qb_sp_level_3_blue_cube_small, "level_3_blue_cube_small")
+            .add_sprite_pair(qb_sp_numbers_large_yellow, "numbers_large_yellow")
+            .add_sprite_pair(qb_sp_numbers_large_gray, "numbers_large_gray")
+            .add_sprite_pair(qb_sp_alphabet_large_yellow, "alphabet_large_yellow")
+            .add_sprite_pair(qb_sp_alphabet_large_gray, "alphabet_large_gray")
+            .add_sprite_pair(qb_sp_text_large_yellow_qbert, "text_large_yellow_qbert")
+            .add_sprite_pair(qb_sp_text_large_gray_qbert, "text_large_gray_qbert");
     }
 }
