@@ -18,8 +18,11 @@ namespace qbert
     		.add_resource_pair(qb_re_t_ghost, "t_ghost")
     		.add_resource_pair(qb_re_t_sprite_general, "t_sprite_general")
     		.add_resource_pair(qb_re_t_sprite_large_text, "t_sprite_large_text")
+    		.add_resource_pair(qb_re_t_debug, "t_debug")
+    	
     		.add_resource_pair(qb_re_e_qbert_fall, "e_qbert_fall")
     		.add_resource_pair(qb_re_e_qbert_jump, "e_qbert_jump")
+    	
     		.add_resource_pair(qb_re_s_level_screen, "s_level_screen");
     }
 }

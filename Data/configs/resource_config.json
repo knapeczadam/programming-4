@@ -14,8 +14,16 @@
       "path" : "textures/ghost.png"
     },
     {
-      "id" : "t_sprite_atlas",
-      "path" : "textures/sprite_atlas.png"
+      "id" : "t_sprite_general",
+      "path" : "textures/sprite_general.png"
+    },
+    {
+      "id" : "t_sprite_large_text",
+      "path" : "textures/sprite_large_text.png"
+    },
+    {
+      "id" : "t_debug",
+      "path" : "textures/debug.png"
     },
     {
       "_comment" : "EFFECTS",
