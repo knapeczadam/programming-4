@@ -11,6 +11,7 @@
 #include "component/health_component.h"
 #include "component/move_component.h"
 #include "component/score_component.h"
+#include "component/score_display_component.h"
 #include "core/resources.h"
 #include "core/sprites.h"
 #include "input/game_component_commands.h"
@@ -18,6 +19,7 @@
 #include "level/levels.h"
 #include "ui/ui.h"
 
+#include "minigin/component/multisprite_ui_component.h"
 #include "minigin/component/sprite_component.h"
 #include "minigin/component/texture_component.h"
 #include "minigin/core/engine.h"
@@ -56,6 +58,9 @@ void load()
 	
 	init_resources();
 	init_sprites();
+	
+	load_test_level();
+	load_test_ui();
 
     auto const scene = scene_manager::get_instance().create_scene("Demo");
     
@@ -68,6 +73,11 @@ void load()
     auto const fps_comp = go->add_component<fps_component>();
     fps_comp->set_font(font_small);
     fps_comp->set_text("FPS: ");
+	
+	go = scene->add_game_object("score_1");
+	go->set_local_position(32, 48);
+	go->add_component<multisprite_ui_component>();
+	auto score_display_comp = go->add_component<score_display_component>();
 
     //---------------------------------------------------------------------------------
     // PLAYER 1
@@ -79,7 +89,7 @@ void load()
     auto health_comp = go->add_component<health_component>();
     // health_comp->add_observer();
     auto score_comp = go->add_component<score_component>();
-    // score_comp->add_observer();
+    // score_comp->add_observer(score_display_comp);
 
     // Arrow keys
     auto move_left_command1  = std::make_unique<move_command>(go, glm::vec2{-1, 0});
@@ -136,7 +146,7 @@ void load()
     health_comp = go->add_component<health_component>();
     // health_comp->add_observer();
     score_comp = go->add_component<score_component>();
-    // score_comp->add_observer();
+    score_comp->add_observer(score_display_comp);
     
     // WASD
     auto move_left_command2  = std::make_unique<move_command>(go, glm::vec2{-1, 0});
@@ -167,8 +177,6 @@ void load()
     input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_z, std::move(score_command3));
     input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_x, std::move(score_command4));
 
-	load_test_level();
-	load_test_ui();
 }
 
 int main(int, char *[])

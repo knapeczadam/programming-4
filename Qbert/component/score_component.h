@@ -17,13 +17,12 @@ namespace qbert
         score_component &operator=(score_component const &other) = delete;
         score_component &operator=(score_component &&other)      = delete;
 
+        void awake() override;
+
         void add_score(int const score);
         [[nodiscard]] auto get_score() const -> int { return score_; }
 
-        static auto get_initial_score() -> int { return 0; }
-
     private:
-        int score_ = get_initial_score();
-        bool achievement_unlocked_ = false;
+        int score_ = 0;
     };
 }

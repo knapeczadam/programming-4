@@ -2,14 +2,14 @@
 
 namespace qbert
 {
+    void score_component::awake()
+    {
+        notify_observers("score_changed");
+    }
+
     void score_component::add_score(int const score)
     {
         score_ += score;
-        notify_observers("ScoreChanged");
-        if (score_ >= 500 and not achievement_unlocked_)
-        {
-            notify_observers("AchievementUnlocked");
-            achievement_unlocked_ = true;
-        }
+        notify_observers("score_changed");
     }
 }

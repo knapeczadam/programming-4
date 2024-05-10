@@ -1,7 +1,7 @@
 ﻿#include "flicker_component.h"
 
 // Project includes
-#include "minigin/component/sprite_component.h"
+#include "minigin/component/sprite_ui_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
 
@@ -15,7 +15,7 @@ namespace qbert
 
     void flicker_component::awake()
     {
-        sprite_component_ptr_ = get_owner()->get_component<mngn::sprite_component>();
+        sprite_component_ptr_ = get_owner()->get_component<mngn::sprite_ui_component>();
         sprite_ptr_           = sprite_component_ptr_->get_sprite();
     }
 

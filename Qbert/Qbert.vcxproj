@@ -28,6 +28,7 @@
     <ClCompile Include="component\rotator_component.cpp" />
     <ClCompile Include="component\score_component.cpp" />
     <ClCompile Include="component\score_text_component.cpp" />
+    <ClCompile Include="component\score_display_component.cpp" />
     <ClCompile Include="core\resources.cpp" />
     <ClCompile Include="core\sprites.cpp" />
     <ClCompile Include="input\game_component_commands.cpp" />
@@ -47,6 +48,7 @@
     <ClInclude Include="component\rotator_component.h" />
     <ClInclude Include="component\score_component.h" />
     <ClInclude Include="component\score_text_component.h" />
+    <ClInclude Include="component\score_display_component.h" />
     <ClInclude Include="core\resources.h" />
     <ClInclude Include="core\sprites.h" />
     <ClInclude Include="input\game_component_commands.h" />
