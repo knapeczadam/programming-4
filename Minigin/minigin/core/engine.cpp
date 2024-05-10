@@ -85,8 +85,8 @@ namespace mngn
             title.c_str(),
             SDL_WINDOWPOS_CENTERED,
             SDL_WINDOWPOS_CENTERED,
-            640,
             480,
+            512,
             SDL_WINDOW_OPENGL
         );
         if (g_window_ptr == nullptr)
