@@ -9,13 +9,18 @@
 // Project includes
 #include "component/move_component.h"
 #include "component/player/health_component.h"
+#include "component/player/level_component.h"
+#include "component/player/round_component.h"
 #include "component/player/score_component.h"
 #include "component/ui/health_display_component.h"
+#include "component/ui/level_display_component.h"
+#include "component/ui/round_display_component.h"
 #include "component/ui/score_display_component.h"
 #include "core/resources.h"
 #include "core/sprites.h"
 #include "input/game_component_commands.h"
 #include "input/game_object_commands.h"
+#include "input/generic_commands.h"
 #include "level/levels.h"
 #include "ui/ui.h"
 
@@ -23,6 +28,7 @@
 #include "minigin/component/rendering/sprite_component.h"
 #include "minigin/component/rendering/texture_component.h"
 #include "minigin/component/ui/multisprite_ui_component.h"
+#include "minigin/component/ui/sprite_ui_component.h"
 #include "minigin/core/engine.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/resource_manager.h"
@@ -34,13 +40,13 @@
 #include "minigin/services/sdl_sound_system.h"
 #include "minigin/services/service_locator.h"
 #include "minigin/test/test_manager.h"
+#include "minigin/utility/sprite.h"
 
 // Standard includes
 #include <cassert>
 
 // SDL includes
 #include <SDL.h>
-
 
 void register_services()
 {
@@ -85,7 +91,29 @@ void load()
 	go->set_local_position(16, 160);
 	go->add_component<multisprite_ui_component>(multisprite_orientation::vertical);
 	auto health_display_comp = go->add_component<health_display_component>();
+	
+	go = scene->add_game_object("numbers_level");
+	go->set_local_position(432, 80);
+	go->add_component<sprite_ui_component>(qb_sp_numbers_regular_orange, qb_re_t_sprite_general, false);
+	auto level_display_comp_ptr = go->add_component<level_display_component>();
 
+	go = scene->add_game_object("numbers_round");
+	go->set_local_position(432, 96);
+	go->add_component<sprite_ui_component>(qb_sp_numbers_regular_orange, qb_re_t_sprite_general, false);
+	auto round_display_comp_ptr = go->add_component<round_display_component>();
+
+	go = scene->add_game_object("player");
+	auto level_comp_ptr = go->add_component<level_component>();
+	level_comp_ptr->add_observer(level_display_comp_ptr);
+	auto round_comp_ptr = go->add_component<round_component>();
+	round_comp_ptr->add_observer(round_display_comp_ptr);
+
+	//---------------------------------------------------------------------------------
+	// DEBUG
+	//---------------------------------------------------------------------------------
+	auto debug_command_ptr = std::make_unique<debug_command>(round_comp_ptr);
+	input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, k_j, std::move(debug_command_ptr));
+	
     //---------------------------------------------------------------------------------
     // PLAYER 1
     //---------------------------------------------------------------------------------

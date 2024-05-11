@@ -23,7 +23,7 @@ namespace qbert
     {
         using namespace mngn;
 
-        auto debug_command = std::make_unique<qbert::debug_command>();
+        // auto debug_command = std::make_unique<qbert::debug_command>();
 
         auto const scene = scene_manager::get_instance().create_scene("test_level");
         glm::vec2 origin{208, 96};
@@ -43,10 +43,11 @@ namespace qbert
                 glm::vec2 pos = start_position + glm::vec2(j * 64, 0);
                 go->set_local_position(pos);
                 go->add_component<sprite_component>();
-                auto cube = go->add_component<cube_component>(std::vector{color_1, color_2, color_3}, true);
-                debug_command->add_observer(cube);
+                go->add_component<cube_component>(std::vector{color_1, color_2, color_3}, true);
+                // auto cube = go->add_component<cube_component>(std::vector{color_1, color_2, color_3}, true);
+                // debug_command->add_observer(cube);
             }
         }
-        input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, k_j, std::move(debug_command));
+        // input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, k_j, std::move(debug_command));
     }
 }
