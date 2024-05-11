@@ -51,6 +51,7 @@
 #include "component/animation/face_component.h"
 #include "component/animation/jump_component.h"
 #include "component/level/cube_component.h"
+#include "component/level/fly_component.h"
 
 void register_services()
 {
@@ -135,6 +136,16 @@ void load()
 	auto round_comp_ptr = go->add_component<round_component>();
 	round_comp_ptr->add_observer(round_display_comp_ptr);
 
+	go = scene->add_game_object("disk_1");
+	go->add_component<sprite_component>(qb_sp_level_1_disk_1, qb_re_t_sprite_general);
+	go->set_local_position(60.0f, 260.0f);
+	auto fly_comp_ptr = go->add_component<fly_component>(go->get_local_position());
+
+	go = scene->add_game_object("disk_2");
+	go->add_component<sprite_component>(qb_sp_level_1_disk_1, qb_re_t_sprite_general);
+	go->set_local_position(386.0f, 260.0f);
+	fly_comp_ptr = go->add_component<fly_component>(go->get_local_position());
+
 	//---------------------------------------------------------------------------------
 	// DEBUG
 	//---------------------------------------------------------------------------------
@@ -155,6 +166,7 @@ void load()
 
 	jump_comp_ptr->add_observer(position_comp_ptr);
 	jump_comp_ptr->add_observer(face_comp_ptr);
+	jump_comp_ptr->add_observer(fly_comp_ptr);
 	health_comp_ptr->add_observer(health_display_comp);
 	
 	position_comp_ptr->add_observer(health_comp_ptr);
