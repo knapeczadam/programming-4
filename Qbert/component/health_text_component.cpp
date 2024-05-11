@@ -10,7 +10,7 @@ namespace qbert
 {
     void health_text_component::notify(std::string const &event, mngn::subject *subject_ptr)
     {
-        if (event == "HealthChanged")
+        if (event == "health_changed")
         {
             if (auto const health_comp = dynamic_cast<health_component*>(subject_ptr))
             {

@@ -17,12 +17,12 @@ namespace qbert
         health_component &operator=(health_component const &other) = delete;
         health_component &operator=(health_component &&other)      = delete;
 
-        void take_damage(int const damage);
+        void awake() override;
+
+        void take_damage(int damage);
         [[nodiscard]] auto get_health() const -> int { return health_; }
 
-        static auto get_initial_health() -> int { return 3; }
-
     private:
-        int health_ = get_initial_health();
+        int health_ = 3;
     };
 }

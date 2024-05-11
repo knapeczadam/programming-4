@@ -2,11 +2,16 @@
 
 namespace qbert
 {
-    void health_component::take_damage(int const damage)
+    void health_component::awake()
+    {
+        notify_observers("health_changed");
+    }
+
+    void health_component::take_damage(int damage)
     {
         if (health_ <= 0)
             return;
         health_ -= damage;
-        notify_observers("HealthChanged");
+        notify_observers("health_changed");
     }
 }

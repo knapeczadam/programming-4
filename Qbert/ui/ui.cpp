@@ -74,17 +74,5 @@ namespace qbert
         go->set_local_position(432, 96);
         sprite_component_ptr = go->add_component<sprite_ui_component>(qb_sp_numbers_regular_orange, qb_re_t_sprite_general, false);
         sprite_component_ptr->get_sprite()->set_current_frame(1);
-        
-        go = scene->add_game_object("qbert_life_1");
-        go->set_local_position(16, 160);
-        go->add_component<sprite_ui_component>(qb_sp_qbert_life, qb_re_t_sprite_general);
-        
-        go = scene->add_game_object("qbert_life_2");
-        go->set_local_position(16, 192);
-        go->add_component<sprite_ui_component>(qb_sp_qbert_life, qb_re_t_sprite_general);
-        
-        go = scene->add_game_object("qbert_life_3");
-        go->set_local_position(16, 224);
-        go->add_component<sprite_ui_component>(qb_sp_qbert_life, qb_re_t_sprite_general);
     }
 }

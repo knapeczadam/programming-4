@@ -9,6 +9,7 @@
 // Project includes
 #include "component/fps_component.h"
 #include "component/health_component.h"
+#include "component/health_display_component.h"
 #include "component/move_component.h"
 #include "component/score_component.h"
 #include "component/score_display_component.h"
@@ -39,6 +40,7 @@
 
 // SDL includes
 #include <SDL.h>
+
 
 void register_services()
 {
@@ -78,6 +80,11 @@ void load()
 	go->set_local_position(32, 48);
 	go->add_component<multisprite_ui_component>();
 	auto score_display_comp = go->add_component<score_display_component>();
+        
+	go = scene->add_game_object("qbert_life_1");
+	go->set_local_position(16, 160);
+	go->add_component<multisprite_ui_component>(multisprite_orientation::vertical);
+	auto health_display_comp = go->add_component<health_display_component>();
 
     //---------------------------------------------------------------------------------
     // PLAYER 1
@@ -144,7 +151,7 @@ void load()
     go->add_component<sprite_component>(qb_sp_qbert_2, qb_re_t_sprite_general);
 	go->add_component<move_component>();
     health_comp = go->add_component<health_component>();
-    // health_comp->add_observer();
+    health_comp->add_observer(health_display_comp);
     score_comp = go->add_component<score_component>();
     score_comp->add_observer(score_display_comp);
     

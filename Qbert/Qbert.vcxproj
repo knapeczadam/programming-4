@@ -23,6 +23,7 @@
     <ClCompile Include="component\flicker_component.cpp" />
     <ClCompile Include="component\fps_component.cpp" />
     <ClCompile Include="component\health_component.cpp" />
+    <ClCompile Include="component\health_display_component.cpp" />
     <ClCompile Include="component\health_text_component.cpp" />
     <ClCompile Include="component\move_component.cpp" />
     <ClCompile Include="component\rotator_component.cpp" />
@@ -43,6 +44,7 @@
     <ClInclude Include="component\flicker_component.h" />
     <ClInclude Include="component\fps_component.h" />
     <ClInclude Include="component\health_component.h" />
+    <ClInclude Include="component\health_display_component.h" />
     <ClInclude Include="component\health_text_component.h" />
     <ClInclude Include="component\move_component.h" />
     <ClInclude Include="component\rotator_component.h" />

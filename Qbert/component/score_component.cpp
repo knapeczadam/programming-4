@@ -7,7 +7,7 @@ namespace qbert
         notify_observers("score_changed");
     }
 
-    void score_component::add_score(int const score)
+    void score_component::add_score(int score)
     {
         score_ += score;
         notify_observers("score_changed");

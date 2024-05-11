@@ -1,4 +1,6 @@
 ﻿#pragma once
+
+// Project includes
 #include "minigin/component/family/custom_component.h"
 #include "minigin/core/i_observer.h"
 

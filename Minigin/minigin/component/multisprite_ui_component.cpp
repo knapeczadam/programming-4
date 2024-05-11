@@ -11,8 +11,14 @@ namespace mngn
 {
     multisprite_ui_component::multisprite_ui_component() = default;
     
-    multisprite_ui_component::multisprite_ui_component(std::vector<sprite *> const &sprites)
+    multisprite_ui_component::multisprite_ui_component(std::vector<sprite *> const &sprites, multisprite_orientation orientation)
         : sprites_{sprites}
+        , orientation_{orientation}
+    {
+    }
+
+    multisprite_ui_component::multisprite_ui_component(multisprite_orientation orientation)
+        : orientation_{orientation}
     {
     }
 
@@ -41,7 +47,14 @@ namespace mngn
             }
             else
             {
-                dst_rect.x += dst.width;
+                if (orientation_ == multisprite_orientation::horizontal)
+                {
+                    dst_rect.x += dst.width;
+                }
+                else
+                {
+                    dst_rect.y += dst.height;
+                }
             }
             
             dst_rect.w = dst.width;

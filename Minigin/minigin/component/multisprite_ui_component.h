@@ -10,12 +10,19 @@ namespace mngn
 {
     // Forward declarations
     class sprite;
+
+    enum class multisprite_orientation
+    {
+        horizontal,
+        vertical
+    };
     
     class multisprite_ui_component final : public ui_component
     {
     public:
         multisprite_ui_component();
-        explicit multisprite_ui_component(std::vector<sprite*> const &sprites);
+        explicit multisprite_ui_component(std::vector<sprite*> const &sprites, multisprite_orientation orientation = multisprite_orientation::horizontal);
+        explicit multisprite_ui_component(multisprite_orientation orientation);
         ~multisprite_ui_component() override;
 
         multisprite_ui_component(multisprite_ui_component const &other)            = delete;
@@ -30,5 +37,6 @@ namespace mngn
 
     private:
         std::vector<sprite*> sprites_;
+        multisprite_orientation orientation_ = multisprite_orientation::horizontal;
     };
 }
