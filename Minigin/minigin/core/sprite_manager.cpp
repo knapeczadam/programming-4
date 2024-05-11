@@ -69,10 +69,12 @@ namespace mngn
                 if (sprite_config.contains("collider_vertical_offset"))   new_sprite->set_collider_vertical_offset(sprite_config["collider_vertical_offset"]);
                 if (sprite_config.contains("frames_per_second"))          new_sprite->set_frames_per_sec(sprite_config["frames_per_second"]);
                 if (sprite_config.contains("scale"))                      new_sprite->set_scale(sprite_config["scale"]);
-                if (sprite_config.contains("clip_width"))                new_sprite->set_clip_width(sprite_config["clip_width"]);
-                if (sprite_config.contains("clip_height"))               new_sprite->set_clip_height(sprite_config["clip_height"]);
+                if (sprite_config.contains("clip_width"))                 new_sprite->set_clip_width(sprite_config["clip_width"]);
+                if (sprite_config.contains("clip_height"))                new_sprite->set_clip_height(sprite_config["clip_height"]);
 
                 new_sprite->init();
+                
+                if (sprite_config.contains("current_frame"))              new_sprite->set_current_frame(sprite_config["current_frame"]);
 
                 sprite *copy_ptr = new_sprite.get();
                 if (cache)
