@@ -8,8 +8,8 @@ namespace qbert
 {
     void position_component::set_position(int row, int col)
     {
-        curr_row_ += row;
-        curr_col_ += col;
+        row_pos_ += row;
+        col_pos_ += col;
         
         notify_observers("position_changed");
     }
@@ -19,7 +19,7 @@ namespace qbert
         if (event == "jump_finished")
         {
             auto jump_comp_ptr = dynamic_cast<jump_component*>(subject_ptr);
-            set_position(jump_comp_ptr->get_row(), jump_comp_ptr->get_col());
+            set_position(jump_comp_ptr->get_row_direction(), jump_comp_ptr->get_col_direction());
         }
     }
 }

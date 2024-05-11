@@ -29,7 +29,7 @@ namespace qbert
         if (event == "position_changed")
         {
             auto position_comp_ptr = dynamic_cast<position_component*>(subject_ptr);
-            if (position_comp_ptr->get_row() == row_id_ and position_comp_ptr->get_col() == col_id_)
+            if (position_comp_ptr->get_row_position() == row_id_ and position_comp_ptr->get_col_position() == col_id_)
             {
                 if (revertible_)
                 {

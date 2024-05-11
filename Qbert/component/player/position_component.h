@@ -23,13 +23,13 @@ namespace qbert
         position_component &operator=(position_component &&other)      = delete;
 
         void set_position(int row, int col);
-        [[nodiscard]] auto get_row() const -> int { return curr_row_; }
-        [[nodiscard]] auto get_col() const -> int { return curr_col_; }
+        [[nodiscard]] auto get_row_position() const -> int { return row_pos_; }
+        [[nodiscard]] auto get_col_position() const -> int { return col_pos_; }
 
         void notify(std::string const &event, subject *subject_ptr) override;
 
     private:
-        int curr_row_ = 0;
-        int curr_col_ = 0;
+        int row_pos_ = 0;
+        int col_pos_ = 0;
     };
 }

@@ -22,10 +22,10 @@ namespace qbert
         jump_component &operator=(jump_component &&other)      = delete;
 
         void fixed_update() override;
-        void jump(int row, int col);
+        void jump(int row_dir, int col_dir);
 
-        [[nodiscard]] auto get_row() const -> int { return row_; }
-        [[nodiscard]] auto get_col() const -> int { return col_; }
+        [[nodiscard]] auto get_row_direction() const -> int { return row_dir_; }
+        [[nodiscard]] auto get_col_direction() const -> int { return col_dir_; }
         
     private:
         void calculate_end_position(int row, int col);
@@ -33,11 +33,11 @@ namespace qbert
         
 
     private:
-        float jump_time_   = 0.5f;
-        float accu_time_   = 0.0f;
-        int   row_         = 0;
-        int   col_         = 0;
-        bool  is_jumping_  = false;
+        float jump_time_  = 0.5f;
+        float accu_time_  = 0.0f;
+        int   row_dir_    = 0;
+        int   col_dir_    = 0;
+        bool  is_jumping_ = false;
         glm::vec2 start_pos_{};
         glm::vec2 end_pos_{};
         glm::vec2 curr_pos_{};

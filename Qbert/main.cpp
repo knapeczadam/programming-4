@@ -48,6 +48,7 @@
 // SDL includes
 #include <SDL.h>
 
+#include "component/animation/face_component.h"
 #include "component/animation/jump_component.h"
 #include "component/level/cube_component.h"
 
@@ -150,11 +151,14 @@ void load()
 	auto position_comp_ptr = go->add_component<position_component>();
     auto health_comp_ptr = go->add_component<health_component>();
     auto score_comp_ptr = go->add_component<score_component>();
+	auto face_comp_ptr = go->add_component<face_component>();
 
 	jump_comp_ptr->add_observer(position_comp_ptr);
+	jump_comp_ptr->add_observer(face_comp_ptr);
 	health_comp_ptr->add_observer(health_display_comp);
 	
 	position_comp_ptr->add_observer(health_comp_ptr);
+	position_comp_ptr->add_observer(face_comp_ptr);
 	std::ranges::for_each(cubes, [position_comp_ptr](auto cube) { position_comp_ptr->add_observer(cube); });
 
     // Arrow keys

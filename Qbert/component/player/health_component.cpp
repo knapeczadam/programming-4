@@ -15,8 +15,8 @@ namespace qbert
         if (event == "position_changed")
         {
             auto position_comp_ptr = dynamic_cast<position_component*>(subject_ptr);
-            auto const row = position_comp_ptr->get_row();
-            auto const col = position_comp_ptr->get_col();
+            auto const row = position_comp_ptr->get_row_position();
+            auto const col = position_comp_ptr->get_col_position();
             if (row < 0 or col < 0 or col > row)
             {
                 take_damage(1);

@@ -25,12 +25,12 @@ namespace qbert
         }
     }
 
-    void jump_component::jump(int row, int col)
+    void jump_component::jump(int row_dir, int col_dir)
     {
-        row_ = row;
-        col_ = col;
+        row_dir_ = row_dir;
+        col_dir_ = col_dir;
         is_jumping_ = true;
-        calculate_end_position(row, col);
+        calculate_end_position(row_dir, col_dir);
         notify_observers("jump_started");
     }
 
@@ -41,8 +41,8 @@ namespace qbert
         int offset_x = 32;
         int offset_y = 48;
 
-        if (row_ == 1 and col_ == 0) col = -1;
-        if (row_ == -1 and col_ == 0) col = 1;
+        if (row_dir_ == 1 and col_dir_ == 0) col = -1;
+        if (row_dir_ == -1 and col_dir_ == 0) col = 1;
 
         end_pos_.x = start_pos_.x + col * offset_x;
         end_pos_.y = start_pos_.y + row * offset_y;
@@ -60,12 +60,12 @@ namespace qbert
         glm::vec2 corner;
 
         // I-II. quadrants (top right, top left)
-        if (row_ == -1)
+        if (row_dir_ == -1)
         {
             corner = {start_pos_.x, end_pos_.y};
         }
         // III-IV. quadrants (bottom left, bottom right)
-        else if (row_ == 1)
+        else if (row_dir_ == 1)
         {
             corner = {end_pos_.x, start_pos_.y};
         }
