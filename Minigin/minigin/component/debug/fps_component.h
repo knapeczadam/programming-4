@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 // Project includes
-#include "minigin/component/text_ui_component.h"
+#include "minigin/component/ui/text_ui_component.h"
 
 namespace qbert
 {

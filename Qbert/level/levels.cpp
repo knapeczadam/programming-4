@@ -1,15 +1,15 @@
 ﻿#include "levels.h"
 
 // Project includes
-#include "component/cube_component.h"
-#include "component/health_component.h"
+#include "component/level/cube_component.h"
+#include "component/player/health_component.h"
 #include "core/resources.h"
 #include "core/sprites.h"
 #include "input/game_object_commands.h"
 #include "input/generic_commands.h"
 
-#include "minigin/component/sprite_component.h"
-#include "minigin/component/texture_component.h"
+#include "minigin/component/rendering/sprite_component.h"
+#include "minigin/component/rendering/texture_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/scene.h"
 #include "minigin/core/scene_manager.h"

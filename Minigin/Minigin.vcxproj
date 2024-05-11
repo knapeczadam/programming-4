@@ -206,11 +206,12 @@
     <ClCompile Include="..\3rdParty\imgui\imgui_draw.cpp" />
     <ClCompile Include="..\3rdParty\imgui\imgui_tables.cpp" />
     <ClCompile Include="..\3rdParty\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="minigin\component\multisprite_ui_component.cpp" />
-    <ClCompile Include="minigin\component\sprite_component.cpp" />
-    <ClCompile Include="minigin\component\sprite_ui_component.cpp" />
-    <ClCompile Include="minigin\component\texture_component.cpp" />
-    <ClCompile Include="minigin\component\text_ui_component.cpp" />
+    <ClCompile Include="minigin\component\debug\fps_component.cpp" />
+    <ClCompile Include="minigin\component\rendering\sprite_component.cpp" />
+    <ClCompile Include="minigin\component\rendering\texture_component.cpp" />
+    <ClCompile Include="minigin\component\ui\multisprite_ui_component.cpp" />
+    <ClCompile Include="minigin\component\ui\sprite_ui_component.cpp" />
+    <ClCompile Include="minigin\component\ui\text_ui_component.cpp" />
     <ClCompile Include="minigin\core\game_component.cpp" />
     <ClCompile Include="minigin\core\game_object.cpp" />
     <ClCompile Include="minigin\core\i_observer.cpp" />
@@ -246,15 +247,16 @@
     <Folder Include="minigin\" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="minigin\component\debug\fps_component.h" />
     <ClInclude Include="minigin\component\family\custom_component.h" />
     <ClInclude Include="minigin\component\family\physics_component.h" />
     <ClInclude Include="minigin\component\family\rendering_component.h" />
     <ClInclude Include="minigin\component\family\ui_component.h" />
-    <ClInclude Include="minigin\component\multisprite_ui_component.h" />
-    <ClInclude Include="minigin\component\sprite_component.h" />
-    <ClInclude Include="minigin\component\sprite_ui_component.h" />
-    <ClInclude Include="minigin\component\texture_component.h" />
-    <ClInclude Include="minigin\component\text_ui_component.h" />
+    <ClInclude Include="minigin\component\rendering\sprite_component.h" />
+    <ClInclude Include="minigin\component\rendering\texture_component.h" />
+    <ClInclude Include="minigin\component\ui\multisprite_ui_component.h" />
+    <ClInclude Include="minigin\component\ui\sprite_ui_component.h" />
+    <ClInclude Include="minigin\component\ui\text_ui_component.h" />
     <ClInclude Include="minigin\core\game_component.h" />
     <ClInclude Include="minigin\core\game_object.h" />
     <ClInclude Include="minigin\core\game_object.hpp" />

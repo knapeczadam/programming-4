@@ -1,11 +1,11 @@
 ﻿#include "ui.h"
 
 // Project includes
-#include "component/flicker_component.h"
+#include "component/ui/flicker_component.h"
 #include "core/resources.h"
 #include "core/sprites.h"
 
-#include "minigin/component/sprite_ui_component.h"
+#include "minigin/component/ui/sprite_ui_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/scene.h"
 #include "minigin/core/scene_manager.h"

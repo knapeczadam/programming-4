@@ -1,12 +1,12 @@
 ﻿#include "game_component_commands.h"
 
+#include "component/player/health_component.h"
+#include "component/player/score_component.h"
+#include "core/resources.h"
 #include "minigin/core/resource_manager.h"
-#include "component/health_component.h"
-#include "component/score_component.h"
 #include "minigin/events/event.h"
 #include "minigin/events/event_manager.h"
 #include "minigin/events/sound_handler.h"
-#include "core/resources.h"
 
 // Standard includes
 #include <iostream>

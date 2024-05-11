@@ -7,12 +7,11 @@
 #endif
 
 // Project includes
-#include "component/fps_component.h"
-#include "component/health_component.h"
-#include "component/health_display_component.h"
 #include "component/move_component.h"
-#include "component/score_component.h"
-#include "component/score_display_component.h"
+#include "component/player/health_component.h"
+#include "component/player/score_component.h"
+#include "component/ui/health_display_component.h"
+#include "component/ui/score_display_component.h"
 #include "core/resources.h"
 #include "core/sprites.h"
 #include "input/game_component_commands.h"
@@ -20,9 +19,10 @@
 #include "level/levels.h"
 #include "ui/ui.h"
 
-#include "minigin/component/multisprite_ui_component.h"
-#include "minigin/component/sprite_component.h"
-#include "minigin/component/texture_component.h"
+#include "minigin/component/debug/fps_component.h"
+#include "minigin/component/rendering/sprite_component.h"
+#include "minigin/component/rendering/texture_component.h"
+#include "minigin/component/ui/multisprite_ui_component.h"
 #include "minigin/core/engine.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/resource_manager.h"

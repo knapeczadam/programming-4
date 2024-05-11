@@ -1,11 +1,11 @@
 ﻿#include "health_display_component.h"
 
 // Project includes
-#include "health_component.h"
+#include "component/player/health_component.h"
 #include "core/resources.h"
 #include "core/sprites.h"
 #include "minigin/core/game_object.h"
-#include "minigin/component/multisprite_ui_component.h"
+#include "minigin/component/ui/multisprite_ui_component.h"
 #include "minigin/core/sprite_manager.h"
 #include "minigin/utility/sprite.h"
 

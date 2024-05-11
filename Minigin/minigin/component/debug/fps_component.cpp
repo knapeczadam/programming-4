@@ -17,8 +17,8 @@ namespace qbert
         if (update_timer_ >= update_interval_)
         {
             std::stringstream ss;
-            ss << static_cast<int>(frame_count_ / update_timer_);
-            ss << " FPS";
+            ss << "FPS: ";
+            ss << static_cast<float>(frame_count_) / update_timer_;
             set_text(ss.str());
             frame_count_    = 0;
             update_timer_ = 0.0f;
