@@ -7,7 +7,7 @@
 #endif
 
 // Project includes
-#include "component/move_component.h"
+#include "component/player/position_component.h"
 #include "component/player/health_component.h"
 #include "component/player/level_component.h"
 #include "component/player/round_component.h"
@@ -48,6 +48,9 @@
 // SDL includes
 #include <SDL.h>
 
+#include "component/animation/jump_component.h"
+#include "component/level/cube_component.h"
+
 void register_services()
 {
 #ifndef _NDEBUG
@@ -67,7 +70,7 @@ void load()
 	init_resources();
 	init_sprites();
 	
-	load_test_level();
+	// load_test_level();
 	load_test_ui();
 
     auto const scene = scene_manager::get_instance().create_scene("Demo");
@@ -81,6 +84,29 @@ void load()
     auto const fps_comp = go->add_component<fps_component>();
     fps_comp->set_font(font_small);
     fps_comp->set_text("FPS: ");
+	
+	glm::vec2 origin{208, 96};
+	int offset_x = -32;
+	int offset_y = 48;
+	
+	auto color_1 = sprite_manager::get_instance().load_sprite(qb_sp_level_1_red_cube_1, qb_re_t_sprite_general);
+	auto color_2 = sprite_manager::get_instance().load_sprite(qb_sp_level_1_yellow_cube_1, qb_re_t_sprite_general);
+	auto color_3 = sprite_manager::get_instance().load_sprite(qb_sp_level_1_blue_cube_1, qb_re_t_sprite_general);
+
+	std::vector<cube_component*> cubes;
+	for (int i = 0; i < 7; ++i)
+	{
+		glm::vec2 start_position = origin + glm::vec2(i * offset_x, i * offset_y);
+		for (int j = 0; j < i + 1; ++j)
+		{
+			go = scene->add_game_object("cube_" + std::to_string(i) + "_" + std::to_string(j));
+			glm::vec2 pos = start_position + glm::vec2(j * 64, 0);
+			go->set_local_position(pos);
+			go->add_component<sprite_component>();
+			auto cube_comp_ptr = go->add_component<cube_component>(i, j, std::vector{color_1, color_2, color_3});
+			cubes.push_back(cube_comp_ptr);
+		}
+	}
 	
 	go = scene->add_game_object("score_1");
 	go->set_local_position(32, 48);
@@ -118,19 +144,29 @@ void load()
     // PLAYER 1
     //---------------------------------------------------------------------------------
     go = scene->add_game_object("player_1");
-    go->set_local_position(100.0f, 50.0f);
+    go->set_local_position(224.0f, 84.0f);
     go->add_component<sprite_component>(qb_sp_qbert_1, qb_re_t_sprite_general);
-	go->add_component<move_component>();
-    auto health_comp = go->add_component<health_component>();
-    // health_comp->add_observer();
-    auto score_comp = go->add_component<score_component>();
-    // score_comp->add_observer(score_display_comp);
+	auto jump_comp_ptr = go->add_component<jump_component>();
+	auto position_comp_ptr = go->add_component<position_component>();
+    auto health_comp_ptr = go->add_component<health_component>();
+    auto score_comp_ptr = go->add_component<score_component>();
+
+	jump_comp_ptr->add_observer(position_comp_ptr);
+	health_comp_ptr->add_observer(health_display_comp);
+	
+	position_comp_ptr->add_observer(health_comp_ptr);
+	std::ranges::for_each(cubes, [position_comp_ptr](auto cube) { position_comp_ptr->add_observer(cube); });
 
     // Arrow keys
-    auto move_left_command1  = std::make_unique<move_command>(go, glm::vec2{-1, 0});
-    auto move_right_command1 = std::make_unique<move_command>(go, glm::vec2{1, 0});
-    auto move_up_command1    = std::make_unique<move_command>(go, glm::vec2{0, -1});
-    auto move_down_command1  = std::make_unique<move_command>(go, glm::vec2{0, 1});
+    auto move_left_command1  = std::make_unique<jump_command>(go, -1, -1);
+    auto move_right_command1 = std::make_unique<jump_command>(go, 1, 1);
+    auto move_up_command1    = std::make_unique<jump_command>(go, -1, 0);
+    auto move_down_command1  = std::make_unique<jump_command>(go, 1, 0);
+
+	jump_comp_ptr->add_observer(move_left_command1.get());
+	jump_comp_ptr->add_observer(move_right_command1.get());
+	jump_comp_ptr->add_observer(move_up_command1.get());
+	jump_comp_ptr->add_observer(move_down_command1.get());
 
 	auto reset_move_command_pacman = std::make_unique<reset_move_command>(go);
 
@@ -145,10 +181,10 @@ void load()
 	input_manager::get_instance().bind_command(input_type::keyboard, input_state::up, input::k_down, reset_move_command_pacman->clone());
 
     // Controller
-    auto move_left_command3  = std::make_unique<move_command>(go, glm::vec2{-1, 0});
-    auto move_right_command3 = std::make_unique<move_command>(go, glm::vec2{1, 0});
-    auto move_up_command3    = std::make_unique<move_command>(go, glm::vec2{0, -1});
-    auto move_down_command3  = std::make_unique<move_command>(go, glm::vec2{0, 1});
+    auto move_left_command3  = std::make_unique<jump_command>(go, -1, -1);
+    auto move_right_command3 = std::make_unique<jump_command>(go, 1, 1);
+    auto move_up_command3    = std::make_unique<jump_command>(go, -1, 0);
+    auto move_down_command3  = std::make_unique<jump_command>(go, 1, 0);
     
     input_manager::get_instance().bind_command(input_type::controller, input_state::pressed, input::c_left, std::move(move_left_command3));
     input_manager::get_instance().bind_command(input_type::controller, input_state::pressed, input::c_right, std::move(move_right_command3));
@@ -161,12 +197,12 @@ void load()
 	input_manager::get_instance().bind_command(input_type::controller, input_state::up, input::c_down, reset_move_command_pacman->clone());
     
     // Damage
-    auto damage_command1 = std::make_unique<damage_command>(health_comp);
+    auto damage_command1 = std::make_unique<damage_command>(health_comp_ptr);
     input_manager::get_instance().bind_command(input_type::controller, input_state::down, input::c_x, std::move(damage_command1));
     
     // Scores
-    auto score_command1 = std::make_unique<score_command>(score_comp, 10);
-    auto score_command2 = std::make_unique<score_command>(score_comp, 100);
+    auto score_command1 = std::make_unique<score_command>(score_comp_ptr, 10);
+    auto score_command2 = std::make_unique<score_command>(score_comp_ptr, 100);
     
     input_manager::get_instance().bind_command(input_type::controller, input_state::down, input::c_a, std::move(score_command1));
     input_manager::get_instance().bind_command(input_type::controller, input_state::down, input::c_b, std::move(score_command2));
@@ -175,19 +211,20 @@ void load()
     // PLAYER 2
     //---------------------------------------------------------------------------------
     go = scene->add_game_object("player_2");
-    go->set_local_position(50.0f, 50.0f);
+    go->set_local_position(32.0f, 372.0f);
     go->add_component<sprite_component>(qb_sp_qbert_2, qb_re_t_sprite_general);
-	go->add_component<move_component>();
-    health_comp = go->add_component<health_component>();
-    health_comp->add_observer(health_display_comp);
-    score_comp = go->add_component<score_component>();
-    score_comp->add_observer(score_display_comp);
+	go->add_component<position_component>();
+	go->add_component<jump_component>();
+    health_comp_ptr = go->add_component<health_component>();
+    health_comp_ptr->add_observer(health_display_comp);
+    score_comp_ptr = go->add_component<score_component>();
+    score_comp_ptr->add_observer(score_display_comp);
     
     // WASD
-    auto move_left_command2  = std::make_unique<move_command>(go, glm::vec2{-1, 0});
-    auto move_right_command2 = std::make_unique<move_command>(go, glm::vec2{1, 0});
-    auto move_up_command2    = std::make_unique<move_command>(go, glm::vec2{0, -1});
-    auto move_down_command2  = std::make_unique<move_command>(go, glm::vec2{0, 1});
+    auto move_left_command2  = std::make_unique<jump_command>(go, -1, -1);
+    auto move_right_command2 = std::make_unique<jump_command>(go, 1, 1);
+    auto move_up_command2    = std::make_unique<jump_command>(go, -1, 0);
+    auto move_down_command2  = std::make_unique<jump_command>(go, 1, 0);
 
 	auto reset_move_command_ghost = std::make_unique<reset_move_command>(go);
     
@@ -202,12 +239,12 @@ void load()
 	input_manager::get_instance().bind_command(input_type::keyboard, input_state::up, input::k_s, reset_move_command_ghost->clone());
 
     // Damage
-    auto damage_command2 = std::make_unique<damage_command>(health_comp);
+    auto damage_command2 = std::make_unique<damage_command>(health_comp_ptr);
     input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_c, std::move(damage_command2));
 
     // Scores
-    auto score_command3 = std::make_unique<score_command>(score_comp, 10);
-    auto score_command4 = std::make_unique<score_command>(score_comp, 100);
+    auto score_command3 = std::make_unique<score_command>(score_comp_ptr, 10);
+    auto score_command4 = std::make_unique<score_command>(score_comp_ptr, 100);
     
     input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_z, std::move(score_command3));
     input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_x, std::move(score_command4));

@@ -9,8 +9,7 @@ namespace mngn
     {
     public:
         float delta_time = 0.0f;
-        
-        float const fixed_time_step = 0.02f;
+        float const fixed_delta_time = 0.02f;
         float const ms_per_frame = 0.0f;
         
     private:

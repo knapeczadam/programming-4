@@ -3,6 +3,7 @@
 #include <utility>
 
 // Project includes
+#include "component/player/position_component.h"
 #include "minigin/component/rendering/sprite_component.h"
 #include "minigin/core/game_component.h"
 #include "minigin/core/game_object.h"
@@ -10,9 +11,11 @@
 
 namespace qbert
 {
-    cube_component::cube_component(std::vector<mngn::sprite*> colors, bool revertible)
-        : colors_{std::move(colors)}
+    cube_component::cube_component(int row_id, int col_id, std::vector<mngn::sprite*> colors, bool revertible)
+        : row_id_{row_id}
+        , col_id_{col_id}
         , revertible_{revertible}
+        , colors_{std::move(colors)}
     {
     }
 
@@ -23,15 +26,11 @@ namespace qbert
 
     void cube_component::notify(std::string const &event, mngn::subject *subject_ptr)
     {
-        if (event == "debug")
+        if (event == "position_changed")
         {
-            subject_ptr = nullptr;
-            // auto go = dynamic_cast<game_component*>(subject_ptr);
-            // auto pos = go->get_owner()->get_local_position();
-            // auto diff_x = get_owner()->get_local_position().x - pos.x;
-            // auto diff_y = get_owner()->get_local_position().y - pos.y;
-            // if (diff_x <= 16.0f and diff_y <= 12.0f)
-            // {
+            auto position_comp_ptr = dynamic_cast<position_component*>(subject_ptr);
+            if (position_comp_ptr->get_row() == row_id_ and position_comp_ptr->get_col() == col_id_)
+            {
                 if (revertible_)
                 {
                     current_color_ = (current_color_ + 1) % colors_.size();
@@ -40,8 +39,8 @@ namespace qbert
                 {
                     ++current_color_;
                 }
-            get_owner()->get_component<mngn::sprite_component>()->set_sprite(colors_[current_color_]);
-            // }
+                get_owner()->get_component<mngn::sprite_component>()->set_sprite(colors_[current_color_]);
+            }
         }
     }
 }

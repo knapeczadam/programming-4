@@ -1,18 +1,33 @@
 ﻿#include "game_object_commands.h"
 
 // Project includes
-#include "component/move_component.h"
+#include "component/animation/jump_component.h"
 #include "minigin/core/game_object.h"
 
 namespace qbert
 {
-    void move_command::execute()
+    void jump_command::execute()
     {
-        get_game_object()->get_component<move_component>()->set_direction(direction_);
+        if (not is_jumping_)
+        {
+            get_game_object()->get_component<jump_component>()->jump(row_, col_);
+            is_jumping_ = true;
+        }
+    }
+
+    void jump_command::notify(std::string const &event, [[maybe_unused]] mngn::subject *subject_ptr)
+    {
+        if (event == "jump_started")
+        {
+            is_jumping_ = true;
+        }
+        if (event == "jump_finished")
+        {
+            is_jumping_ = false;
+        }
     }
 
     void reset_move_command::execute()
     {
-        get_game_object()->get_component<move_component>()->stop_moving();
     }
 }

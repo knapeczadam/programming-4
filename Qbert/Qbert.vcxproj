@@ -19,13 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="component\animation\jump_component.cpp" />
     <ClCompile Include="component\level\cube_component.cpp" />
-    <ClCompile Include="component\move_component.cpp" />
     <ClCompile Include="component\player\health_component.cpp" />
     <ClCompile Include="component\player\level_component.cpp" />
+    <ClCompile Include="component\player\position_component.cpp" />
     <ClCompile Include="component\player\round_component.cpp" />
     <ClCompile Include="component\player\score_component.cpp" />
-    <ClCompile Include="component\rotator_component.cpp" />
     <ClCompile Include="component\ui\flicker_component.cpp" />
     <ClCompile Include="component\ui\health_display_component.cpp" />
     <ClCompile Include="component\ui\level_display_component.cpp" />
@@ -41,13 +41,13 @@
     <ClCompile Include="ui\ui.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="component\animation\jump_component.h" />
     <ClInclude Include="component\level\cube_component.h" />
-    <ClInclude Include="component\move_component.h" />
     <ClInclude Include="component\player\health_component.h" />
     <ClInclude Include="component\player\level_component.h" />
+    <ClInclude Include="component\player\position_component.h" />
     <ClInclude Include="component\player\round_component.h" />
     <ClInclude Include="component\player\score_component.h" />
-    <ClInclude Include="component\rotator_component.h" />
     <ClInclude Include="component\ui\flicker_component.h" />
     <ClInclude Include="component\ui\health_display_component.h" />
     <ClInclude Include="component\ui\level_display_component.h" />

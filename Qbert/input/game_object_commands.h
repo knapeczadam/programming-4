@@ -2,38 +2,38 @@
 
 // Project includes
 #include "minigin/input/game_object_command.h"
+#include "minigin/core/i_observer.h"
 
 // GLM includes
 #include <glm/glm.hpp>
 
+
 namespace qbert
 {
-    // Move command
-    class move_command final : public mngn::game_object_command
+    // Jump command
+    class jump_command final : public mngn::game_object_command, public mngn::i_observer
     {
     public:
-        move_command(mngn::game_object *game_object_ptr, glm::vec3 const &direction)
+        jump_command(mngn::game_object *game_object_ptr, int row, int col)
             : game_object_command{game_object_ptr}
-            , direction_{direction}
-        {
-        }
-
-        move_command(mngn::game_object *game_object_ptr, glm::vec2 const &direction)
-            : game_object_command{game_object_ptr}
-            , direction_{glm::vec3{direction, 0.0f}}
+            , row_{row}
+            , col_{col}
         {
         }
         
         void execute() override;
+        void notify(std::string const &event, mngn::subject *subject_ptr) override;
 
         [[nodiscard]] auto clone() const -> std::unique_ptr<base_command> override
         {
-            return std::make_unique<move_command>(*this);
+            return nullptr;
         }
 
     private:
-        glm::vec3 direction_ = {1.0f, 0.0f, 0.0f};
-        float speed_         = 1.0f;
+        int row_ = 0;
+        int col_ = 0;
+
+        bool is_jumping_ = false;
     };
 
     // Reset move command
@@ -52,5 +52,4 @@ namespace qbert
             return std::make_unique<reset_move_command>(*this);
         }
     };
-    
 }
