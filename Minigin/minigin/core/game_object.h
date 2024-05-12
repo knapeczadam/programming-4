@@ -84,28 +84,28 @@ namespace mngn
 
         // TODO: if not found throw component_not_found_exception
         template <class T> requires is_component_type<T>
-        auto get_component() const -> T *;
+        [[nodiscard]] auto get_component() const -> T *;
 
         template <class T> requires is_component_family_type<T>
-        auto get_components() const -> component_multimap_t<T>;
+        [[nodiscard]] auto get_components() const -> component_multimap_t<T>;
 
         template <class T> requires is_component_type<T>
-        auto get_component_in_children() const -> T *;
+        [[nodiscard]] auto get_component_in_children() const -> T *;
 
         template <class T> requires is_component_type<T>
-        auto get_components_in_children() const -> component_vector_t<T>;
+        [[nodiscard]] auto get_components_in_children() const -> component_vector_t<T>;
 
         template <class T> requires is_component_family_type<T>
-        auto get_components_in_children() const -> component_multimap_t<T>;
+        [[nodiscard]] auto get_components_in_children() const -> component_multimap_t<T>;
 
         template <class T> requires is_component_type<T>
-        auto get_component_in_parent() const -> T *;
+        [[nodiscard]] auto get_component_in_parent() const -> T *;
 
         template <class T> requires is_component_type<T>
-        auto get_components_in_parent() const -> component_vector_t<T>;
+        [[nodiscard]] auto get_components_in_parent() const -> component_vector_t<T>;
 
         template <class T> requires is_component_family_type<T>
-        auto get_components_in_parent() const -> component_multimap_t<T>;
+        [[nodiscard]] auto get_components_in_parent() const -> component_multimap_t<T>;
 
         template <class T> requires is_component_type<T>
         auto remove_component() -> bool;

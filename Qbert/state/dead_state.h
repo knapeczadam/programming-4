@@ -3,11 +3,6 @@
 // Project includes
 #include "state/player_state.h"
 
-namespace mngn
-{
-    class game_object;
-}
-
 namespace qbert
 {
     class dead_state final : public player_state

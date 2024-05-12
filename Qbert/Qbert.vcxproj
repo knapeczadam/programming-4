@@ -52,6 +52,7 @@
     <ClCompile Include="state\null_state.cpp" />
     <ClCompile Include="state\player_state.cpp" />
     <ClCompile Include="state\start_state.cpp" />
+    <ClCompile Include="state\waiting_state.cpp" />
     <ClCompile Include="ui\ui.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +66,7 @@
     <ClInclude Include="component\player\health_component.h" />
     <ClInclude Include="component\player\jump_component.h" />
     <ClInclude Include="component\player\player_state_component.h" />
+    <ClInclude Include="component\player\player_state_component.hpp" />
     <ClInclude Include="component\player\position_idx_component.h" />
     <ClInclude Include="component\player\score_counter_component.h" />
     <ClInclude Include="component\ui\flicker_component.h" />
@@ -87,6 +89,7 @@
     <ClInclude Include="state\null_state.h" />
     <ClInclude Include="state\player_state.h" />
     <ClInclude Include="state\start_state.h" />
+    <ClInclude Include="state\waiting_state.h" />
     <ClInclude Include="ui\ui.h" />
   </ItemGroup>
   <ItemGroup>

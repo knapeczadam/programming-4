@@ -27,7 +27,7 @@ namespace qbert
                 accu_time_ = 0.0f;
                 
                 auto player_state_comp_ptr = get_owner()->get_component<player_state_component>();
-                player_state_comp_ptr->change_state(std::make_unique<landing_state>(get_owner()));
+                player_state_comp_ptr->change_state<landing_state>(get_owner());
             }
         }
     }

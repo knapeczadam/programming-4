@@ -34,13 +34,13 @@ namespace qbert
                 {
                     if (row_idx + 1 == disc_ptr->get_row_idx() and cold_idx == disc_ptr->get_col_idx())
                     {
-                        player_state_comp_ptr->change_state(std::make_unique<flying_state>(player_ptr, disc_ptr));
+                        player_state_comp_ptr->change_state<flying_state>(player_ptr, disc_ptr);
                         return;
                     }
                 }
                 else if (row_idx + 1 == disc_ptr->get_row_idx() and cold_idx + 1 == disc_ptr->get_col_idx()) // right side
                 {
-                    player_state_comp_ptr->change_state(std::make_unique<flying_state>(player_ptr, disc_ptr));
+                    player_state_comp_ptr->change_state<flying_state>(player_ptr, disc_ptr);
                     return;
                 }
             }
@@ -48,12 +48,12 @@ namespace qbert
             // player is dead
             if (row_idx < 0 or cold_idx < 0 or cold_idx > row_idx or row_idx >= 7)
             {
-                player_state_comp_ptr->change_state(std::make_unique<dead_state>(player_ptr));
+                player_state_comp_ptr->change_state<dead_state>(player_ptr);
                 return;
             }
 
             // player is idle
-            player_state_comp_ptr->change_state(std::make_unique<idle_state>(player_ptr));
+            player_state_comp_ptr->change_state<idle_state>(player_ptr);
         }
     }
 }

@@ -6,6 +6,8 @@
 // Standard includes
 #include <memory>
 
+#include "state/player_state.h"
+
 namespace qbert
 {
     // Forward declarations
@@ -24,15 +26,19 @@ namespace qbert
 
         void awake() override;
         void update() override;
-        void change_state(std::unique_ptr<player_state> new_state);
+
+        template <class T, typename... Args>
+        void change_state(Args &&...args);
 
         template <class T>
-        [[nodiscard]] auto get_state() const -> T * { return dynamic_cast<T*>(player_state_.get()); }
+        [[nodiscard]] auto get_state() const -> T *;
 
         template <class T>
-        [[nodiscard]] auto is_state() const -> bool { return dynamic_cast<T*>(player_state_.get()) != nullptr; }
+        [[nodiscard]] auto is_state() const -> bool;
 
     private:
         std::unique_ptr<player_state> player_state_;
     };
 }
+
+#include "player_state_component.hpp"
