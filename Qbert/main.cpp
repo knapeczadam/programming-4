@@ -51,6 +51,7 @@
 #include "component/player/face_component.h"
 #include "component/player/jump_component.h"
 #include "component/level/cube_component.h"
+#include "component/level/disc_component.h"
 #include "component/level/fly_component.h"
 #include "component/player/player_state_component.h"
 
@@ -139,12 +140,12 @@ void load()
 
 	go = scene->add_game_object("disk_1");
 	go->add_component<sprite_component>(qb_sp_level_1_disk_1, qb_re_t_sprite_general);
-	go->set_local_position(60.0f, 260.0f);
+	go->add_component<disc_component>(6, -1);
 	auto fly_comp_ptr = go->add_component<fly_component>(go->get_local_position());
 
 	go = scene->add_game_object("disk_2");
 	go->add_component<sprite_component>(qb_sp_level_1_disk_1, qb_re_t_sprite_general);
-	go->set_local_position(386.0f, 260.0f);
+	go->add_component<disc_component>(2, 3);
 	fly_comp_ptr = go->add_component<fly_component>(go->get_local_position());
 
 	//---------------------------------------------------------------------------------
@@ -157,7 +158,6 @@ void load()
     // PLAYER 1
     //---------------------------------------------------------------------------------
     go = scene->add_game_object("player_1");
-    go->set_local_position(224.0f, 84.0f);
     go->add_component<sprite_component>(qb_sp_qbert_1, qb_re_t_sprite_general);
 	auto jump_comp_ptr = go->add_component<jump_component>();
 	auto position_comp_ptr = go->add_component<position_component>();

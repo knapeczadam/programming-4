@@ -15,5 +15,7 @@ namespace qbert
     {
         auto sprite_comp_ptr_ = player_ptr_->get_component<mngn::sprite_component>();
         sprite_comp_ptr_->get_sprite()->set_current_frame(7);
+
+        player_ptr_->set_local_position(224.0f, 84.0f);
     }
 }

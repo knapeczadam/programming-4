@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="component\level\cube_component.cpp" />
+    <ClCompile Include="component\level\disc_component.cpp" />
     <ClCompile Include="component\level\fly_component.cpp" />
     <ClCompile Include="component\level\level_component.cpp" />
     <ClCompile Include="component\level\round_component.cpp" />
@@ -53,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="component\level\cube_component.h" />
+    <ClInclude Include="component\level\disc_component.h" />
     <ClInclude Include="component\level\fly_component.h" />
     <ClInclude Include="component\level\level_component.h" />
     <ClInclude Include="component\level\round_component.h" />
