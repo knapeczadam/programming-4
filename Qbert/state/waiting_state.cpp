@@ -9,18 +9,19 @@
 
 namespace qbert
 {
-    waiting_state::waiting_state(mngn::game_object* player_ptr)
+    waiting_state::waiting_state(mngn::game_object* player_ptr, float waiting_time)
         : player_state{player_ptr}
+        , waiting_time_{waiting_time}
     {
     }
 
     void waiting_state::update()
     {
-        accu_time += mngn::game_time::get_instance().delta_time;
-        if (accu_time >= waiting_time)
+        accu_time_ += mngn::game_time::get_instance().delta_time;
+        if (accu_time_ >= waiting_time_)
         {
             player_ptr_->get_component<player_state_component>()->change_state<start_state>(player_ptr_);
-            accu_time = 0.0f;
+            accu_time_ = 0.0f;
         }
     }
 

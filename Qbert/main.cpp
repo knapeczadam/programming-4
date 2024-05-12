@@ -55,6 +55,7 @@
 #include "component/level/disc_component.h"
 #include "component/level/fly_component.h"
 #include "component/level/level_manager_component.h"
+#include "component/player/fall_component.h"
 #include "component/player/player_state_component.h"
 
 void register_services()
@@ -175,6 +176,7 @@ void load()
     auto score_comp_ptr = go->add_component<score_counter_component>();
 	go->add_component<face_component>();
 	go->add_component<player_state_component>();
+	go->add_component<fall_component>();
 
 	health_comp_ptr->add_observer(health_display_comp_ptr);
     score_comp_ptr->add_observer(score_display_comp_ptr);

@@ -5,7 +5,7 @@
 #include "component/player/player_state_component.h"
 #include "component/player/position_idx_component.h"
 #include "minigin/core/game_object.h"
-#include "state/dead_state.h"
+#include "state/falling_state.h"
 #include "state/flying_state.h"
 #include "state/idle_state.h"
 
@@ -48,7 +48,7 @@ namespace qbert
             // player is dead
             if (row_idx < 0 or cold_idx < 0 or cold_idx > row_idx or row_idx >= 7)
             {
-                player_state_comp_ptr->change_state<dead_state>(player_ptr);
+                player_state_comp_ptr->change_state<falling_state>(player_ptr, cold_idx);
                 return;
             }
 
