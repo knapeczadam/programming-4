@@ -46,7 +46,7 @@ namespace qbert
             }
 
             // player is dead
-            if (row_idx < 0 or cold_idx < 0 or cold_idx > row_idx)
+            if (row_idx < 0 or cold_idx < 0 or cold_idx > row_idx or row_idx >= 7)
             {
                 player_state_comp_ptr->change_state(std::make_unique<dead_state>(player_ptr));
                 return;
