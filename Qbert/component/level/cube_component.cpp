@@ -33,9 +33,9 @@ namespace qbert
             {
                 if (revertible_)
                 {
-                    current_color_ = (current_color_ + 1) % colors_.size();
+                    current_color_ = (current_color_ + 1) % static_cast<int>(colors_.size());
                 }
-                else if (current_color_ < colors_.size() - 1)
+                else if (current_color_ < static_cast<int>(colors_.size()) - 1)
                 {
                     ++current_color_;
                 }
