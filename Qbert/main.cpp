@@ -7,7 +7,7 @@
 #endif
 
 // Project includes
-#include "component/player/position_component.h"
+#include "component/player/position_idx_component.h"
 #include "component/player/health_component.h"
 #include "component/level/level_counter_component.h"
 #include "component/level/round_counter_component.h"
@@ -54,7 +54,7 @@
 #include "component/level/cube_component.h"
 #include "component/level/disc_component.h"
 #include "component/level/fly_component.h"
-#include "component/level/position_manager_component.h"
+#include "component/level/level_manager_component.h"
 #include "component/player/player_state_component.h"
 
 void register_services()
@@ -91,6 +91,9 @@ void load()
     fps_comp->set_font(font_small);
     fps_comp->set_text("FPS: ");
 	
+	auto root_go_ptr = scene->add_game_object("root");
+	auto level_manager_comp_ptr = root_go_ptr->add_component<level_manager_component>();
+	
 	glm::vec2 origin{208, 96};
 	int offset_x = -32;
 	int offset_y = 48;
@@ -117,12 +120,12 @@ void load()
 	go = scene->add_game_object("score_1");
 	go->set_local_position(32, 48);
 	go->add_component<multisprite_ui_component>();
-	auto score_display_comp = go->add_component<score_display_component>();
+	auto score_display_comp_ptr = go->add_component<score_display_component>();
         
 	go = scene->add_game_object("qbert_life_1");
 	go->set_local_position(16, 160);
 	go->add_component<multisprite_ui_component>(multisprite_orientation::vertical);
-	auto health_display_comp = go->add_component<health_display_component>();
+	auto health_display_comp_ptr = go->add_component<health_display_component>();
 	
 	go = scene->add_game_object("numbers_level");
 	go->set_local_position(432, 80);
@@ -140,20 +143,18 @@ void load()
 	auto round_comp_ptr = go->add_component<round_counter_component>();
 	round_comp_ptr->add_observer(round_display_comp_ptr);
 	
-	auto pos_man_go_ptr = scene->add_game_object("position_manager");
-	auto void_comp_ptr = pos_man_go_ptr->add_component<position_manager_component>();
 
 	go = scene->add_game_object("disk_1");
-	go->set_parent(pos_man_go_ptr);
+	go->set_parent(root_go_ptr);
 	go->add_component<sprite_component>(qb_sp_level_1_disk_1, qb_re_t_sprite_general);
 	go->add_component<disc_component>(6, -1);
-	auto fly_comp_ptr = go->add_component<fly_component>(go->get_local_position());
+	auto fly_comp_ptr = go->add_component<fly_component>();
 
 	go = scene->add_game_object("disk_2");
-	go->set_parent(pos_man_go_ptr);
+	go->set_parent(root_go_ptr);
 	go->add_component<sprite_component>(qb_sp_level_1_disk_1, qb_re_t_sprite_general);
 	go->add_component<disc_component>(2, 3);
-	fly_comp_ptr = go->add_component<fly_component>(go->get_local_position());
+	fly_comp_ptr = go->add_component<fly_component>();
 
 	//---------------------------------------------------------------------------------
 	// DEBUG
@@ -165,19 +166,19 @@ void load()
     // PLAYER 1
     //---------------------------------------------------------------------------------
     go = scene->add_game_object("player_1");
+	go->set_parent(root_go_ptr);
+	go->set_local_position(224.0f, 84.0f);
     go->add_component<sprite_component>(qb_sp_qbert_1, qb_re_t_sprite_general);
-	auto jump_comp_ptr = go->add_component<jump_component>();
-	auto position_comp_ptr = go->add_component<position_component>();
+	go->add_component<jump_component>();
+	auto position_comp_ptr = go->add_component<position_idx_component>(0, 0);
     auto health_comp_ptr = go->add_component<health_component>();
     auto score_comp_ptr = go->add_component<score_counter_component>();
 	go->add_component<face_component>();
 	go->add_component<player_state_component>();
 
-	jump_comp_ptr->add_observer(fly_comp_ptr);
-	health_comp_ptr->add_observer(health_display_comp);
-
-    score_comp_ptr->add_observer(score_display_comp);
-	position_comp_ptr->add_observer(void_comp_ptr);
+	health_comp_ptr->add_observer(health_display_comp_ptr);
+    score_comp_ptr->add_observer(score_display_comp_ptr);
+	position_comp_ptr->add_observer(level_manager_comp_ptr);
 	std::ranges::for_each(cubes, [position_comp_ptr](auto cube) { position_comp_ptr->add_observer(cube); });
 
     // Arrow keys
@@ -229,13 +230,20 @@ void load()
     // PLAYER 2
     //---------------------------------------------------------------------------------
     go = scene->add_game_object("player_2");
+	go->set_parent(root_go_ptr);
     go->set_local_position(32.0f, 372.0f);
     go->add_component<sprite_component>(qb_sp_qbert_2, qb_re_t_sprite_general);
-	go->add_component<position_component>();
 	go->add_component<jump_component>();
+	position_comp_ptr = go->add_component<position_idx_component>(6, 0);
     health_comp_ptr = go->add_component<health_component>();
-    health_comp_ptr->add_observer(health_display_comp);
     score_comp_ptr = go->add_component<score_counter_component>();
+	go->add_component<face_component>();
+	go->add_component<player_state_component>();
+	
+    health_comp_ptr->add_observer(health_display_comp_ptr);
+	score_comp_ptr->add_observer(score_display_comp_ptr);
+	position_comp_ptr->add_observer(level_manager_comp_ptr);
+	std::ranges::for_each(cubes, [position_comp_ptr](auto cube) { position_comp_ptr->add_observer(cube); });
     
     // WASD
     auto move_left_command2  = std::make_unique<jump_command>(go, -1, -1);

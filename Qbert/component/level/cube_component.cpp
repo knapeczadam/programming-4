@@ -3,7 +3,7 @@
 #include <utility>
 
 // Project includes
-#include "component/player/position_component.h"
+#include "component/player/position_idx_component.h"
 #include "component/player/score_counter_component.h"
 #include "minigin/component/rendering/sprite_component.h"
 #include "minigin/core/game_component.h"
@@ -30,7 +30,7 @@ namespace qbert
     {
         if (event == "position_changed")
         {
-            auto position_comp_ptr = dynamic_cast<position_component*>(subject_ptr);
+            auto position_comp_ptr = dynamic_cast<position_idx_component*>(subject_ptr);
             if (position_comp_ptr->get_row_idx() == row_idx_ and position_comp_ptr->get_col_idx() == col_idx_)
             {
                 if (revertible_)

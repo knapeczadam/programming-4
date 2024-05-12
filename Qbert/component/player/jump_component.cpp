@@ -52,8 +52,6 @@ namespace qbert
 
         end_pos_.x = start_pos_.x + col_dir * offset_x;
         end_pos_.y = start_pos_.y + row_dir * offset_y;
-
-        std::cout << "Start pos: " << start_pos_.x << ", " << start_pos_.y << std::endl;
     }
 
     void jump_component::calculate_bezier_curve()

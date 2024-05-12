@@ -13,7 +13,7 @@ namespace qbert
     void jump_command::execute()
     {
         auto player_state_comp_ptr = get_game_object()->get_component<player_state_component>();
-        if (dynamic_cast<start_state*>(player_state_comp_ptr->get_state()) or dynamic_cast<idle_state*>(player_state_comp_ptr->get_state()))
+        if (player_state_comp_ptr->is_state<start_state>() or player_state_comp_ptr->is_state<idle_state>())
         {
             player_state_comp_ptr->change_state(std::make_unique<jumping_state>(get_game_object(), row_dir_, col_dir_));
         }

@@ -12,7 +12,7 @@
 
 namespace qbert
 {
-    class fly_component final : public mngn::physics_component, public mngn::subject, public mngn::i_observer
+    class fly_component final : public mngn::physics_component
     {
     public:
         fly_component()           = default;
@@ -24,8 +24,9 @@ namespace qbert
         fly_component &operator=(fly_component const &other) = delete;
         fly_component &operator=(fly_component &&other)      = delete;
 
+        void awake() override;
         void fixed_update() override;
-        void notify(std::string const &event, mngn::subject *subject_ptr) override;
+        void fly();
 
     private:
         float fly_time_  = 2.0f;

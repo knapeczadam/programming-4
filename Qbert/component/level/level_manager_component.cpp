@@ -1,9 +1,9 @@
-﻿#include "position_manager_component.h"
+﻿#include "level_manager_component.h"
 
 // Project includes
 #include "component/level/disc_component.h"
 #include "component/player/player_state_component.h"
-#include "component/player/position_component.h"
+#include "component/player/position_idx_component.h"
 #include "minigin/core/game_object.h"
 #include "state/dead_state.h"
 #include "state/flying_state.h"
@@ -11,16 +11,16 @@
 
 namespace qbert
 {
-    void position_manager_component::awake()
+    void level_manager_component::awake()
     {
         discs_ = get_owner()->get_components_in_children<disc_component>();
     }
 
-    void position_manager_component::notify(std::string const &event, mngn::subject *subject_ptr)
+    void level_manager_component::notify(std::string const &event, mngn::subject *subject_ptr)
     {
         if (event == "position_changed")
         {
-            auto position_comp_ptr = dynamic_cast<position_component*>(subject_ptr);
+            auto position_comp_ptr = dynamic_cast<position_idx_component*>(subject_ptr);
             auto const row_idx = position_comp_ptr->get_row_idx();
             auto const cold_idx = position_comp_ptr->get_col_idx();
 
@@ -34,14 +34,14 @@ namespace qbert
                 {
                     if (row_idx + 1 == disc_ptr->get_row_idx() and cold_idx == disc_ptr->get_col_idx())
                     {
-                        player_state_comp_ptr->change_state(std::make_unique<flying_state>(player_ptr));
+                        player_state_comp_ptr->change_state(std::make_unique<flying_state>(player_ptr, disc_ptr));
                         return;
                     }
                 }
                 else if (row_idx + 1 == disc_ptr->get_row_idx() and cold_idx + 1 == disc_ptr->get_col_idx()) // right side
                 {
-                        player_state_comp_ptr->change_state(std::make_unique<flying_state>(player_ptr));
-                        return;
+                    player_state_comp_ptr->change_state(std::make_unique<flying_state>(player_ptr, disc_ptr));
+                    return;
                 }
             }
 

@@ -3,7 +3,7 @@
 // Project includes
 #include "component/player/face_component.h"
 #include "component/player/jump_component.h"
-#include "component/player/position_component.h"
+#include "component/player/position_idx_component.h"
 #include "minigin/core/game_object.h"
 
 namespace qbert

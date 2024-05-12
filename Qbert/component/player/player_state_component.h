@@ -25,7 +25,12 @@ namespace qbert
         void awake() override;
         void update() override;
         void change_state(std::unique_ptr<player_state> new_state);
-        [[nodiscard]] auto get_state() const -> player_state * { return player_state_.get(); }
+
+        template <class T>
+        [[nodiscard]] auto get_state() const -> T * { return dynamic_cast<T*>(player_state_.get()); }
+
+        template <class T>
+        [[nodiscard]] auto is_state() const -> bool { return dynamic_cast<T*>(player_state_.get()) != nullptr; }
 
     private:
         std::unique_ptr<player_state> player_state_;
