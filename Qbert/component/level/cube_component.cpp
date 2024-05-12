@@ -4,6 +4,7 @@
 
 // Project includes
 #include "component/player/position_component.h"
+#include "component/player/score_counter_component.h"
 #include "minigin/component/rendering/sprite_component.h"
 #include "minigin/core/game_component.h"
 #include "minigin/core/game_object.h"
@@ -14,6 +15,7 @@ namespace qbert
     cube_component::cube_component(int row_idx, int col_idx, std::vector<mngn::sprite*> colors, bool revertible)
         : row_idx_{row_idx}
         , col_idx_{col_idx}
+        , score_count_{static_cast<int>(colors.size()) - 1}
         , revertible_{revertible}
         , colors_{std::move(colors)}
     {
@@ -38,6 +40,11 @@ namespace qbert
                 else if (current_color_ < static_cast<int>(colors_.size()) - 1)
                 {
                     ++current_color_;
+                }
+                if (score_count_ > 0)
+                {
+                    --score_count_;
+                    position_comp_ptr->get_owner()->get_component<score_counter_component>()->add_score(25);
                 }
                 get_owner()->get_component<mngn::sprite_component>()->set_sprite(colors_[current_color_]);
             }

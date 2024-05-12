@@ -34,6 +34,7 @@ namespace qbert
         int  row_idx_       = 0;
         int  col_idx_       = 0;
         int  current_color_ = 0;
+        int  score_count_   = 0;
         bool revertible_    = false;
         
         std::vector<mngn::sprite*> colors_;

@@ -176,6 +176,7 @@ void load()
 	jump_comp_ptr->add_observer(fly_comp_ptr);
 	health_comp_ptr->add_observer(health_display_comp);
 
+    score_comp_ptr->add_observer(score_display_comp);
 	position_comp_ptr->add_observer(void_comp_ptr);
 	std::ranges::for_each(cubes, [position_comp_ptr](auto cube) { position_comp_ptr->add_observer(cube); });
 
@@ -235,7 +236,6 @@ void load()
     health_comp_ptr = go->add_component<health_component>();
     health_comp_ptr->add_observer(health_display_comp);
     score_comp_ptr = go->add_component<score_counter_component>();
-    score_comp_ptr->add_observer(score_display_comp);
     
     // WASD
     auto move_left_command2  = std::make_unique<jump_command>(go, -1, -1);
