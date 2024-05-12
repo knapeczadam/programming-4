@@ -42,9 +42,9 @@ namespace mngn
         {
             return component_ptr;
         }
-        for (auto const &child : children_)
+        for (auto const &child_ptr : children_)
         {
-            if (auto component_ptr = child->get_component_in_children<T>())
+            if (auto component_ptr = child_ptr->get_component_in_children<T>())
             {
                 return component_ptr;
             }
@@ -56,18 +56,18 @@ namespace mngn
     /// \tparam T 
     /// \return 
     template <class T> requires is_component_type<T>
-    auto game_object::get_components_in_children() const -> component_multimap_t<T>
+    auto game_object::get_components_in_children() const -> component_vector_t<T>
     {
-        component_multimap_t<T> components;
+        component_vector_t<T> components;
         if (auto component = get_component<T>())
         {
-            components.emplace(typeid(T), component);
+            components.emplace_back(component);
         }
-        for (auto const &child : children_)
+        for (auto const &child_ptr : children_)
         {
-            for (auto const &[key, value] : child->get_components_in_children<T>())
+            for (auto const &component_ptr : child_ptr->get_components_in_children<T>())
             {
-                components.emplace(key, value);
+                components.emplace_back(component_ptr);
             }
         }
         return components;
@@ -84,9 +84,9 @@ namespace mngn
                 components.emplace(key, component_ptr);
             }
         }
-        for (auto const &child : children_)
+        for (auto const &child_ptr : children_)
         {
-            for (auto const &[key, value] : child->get_components_in_children<T>())
+            for (auto const &[key, value] : child_ptr->get_components_in_children<T>())
             {
                 components.emplace(key, value);
             }
@@ -115,18 +115,18 @@ namespace mngn
     /// \tparam T 
     /// \return 
     template <class T> requires is_component_type<T>
-    auto game_object::get_components_in_parent() const -> component_multimap_t<T> 
+    auto game_object::get_components_in_parent() const -> component_vector_t<T> 
     {
-        component_multimap_t<T> components;
-        if (auto component = get_component<T>())
+        component_vector_t<T> components;
+        if (auto component_ptr = get_component<T>())
         {
-            components.emplace(typeid(T), component);
+            components.emplace_back(component_ptr);
         }
         if (parent_ptr_)
         {
-            for (auto const &[key, value] : parent_ptr_->get_components_in_parent<T>())
+            for (auto const &component_ptr : parent_ptr_->get_components_in_parent<T>())
             {
-                components.emplace(key, value);
+                components.emplace_back(component_ptr);
             }
         }
         return components;

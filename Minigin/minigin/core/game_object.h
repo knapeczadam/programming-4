@@ -9,6 +9,7 @@
 #include <ranges>
 #include <string>
 #include <typeindex>
+#include <vector>
 #include <unordered_map>
 
 namespace mngn
@@ -30,6 +31,9 @@ namespace mngn
     
     template <class T>
     using component_multimap_t = std::unordered_multimap<std::type_index, T*>;
+
+    template <class T>
+    using component_vector_t = std::vector<T*>;
 
     class game_object final
     {
@@ -89,7 +93,7 @@ namespace mngn
         auto get_component_in_children() const -> T *;
 
         template <class T> requires is_component_type<T>
-        auto get_components_in_children() const -> component_multimap_t<T>;
+        auto get_components_in_children() const -> component_vector_t<T>;
 
         template <class T> requires is_component_family_type<T>
         auto get_components_in_children() const -> component_multimap_t<T>;
@@ -98,7 +102,7 @@ namespace mngn
         auto get_component_in_parent() const -> T *;
 
         template <class T> requires is_component_type<T>
-        auto get_components_in_parent() const -> component_multimap_t<T>;
+        auto get_components_in_parent() const -> component_vector_t<T>;
 
         template <class T> requires is_component_family_type<T>
         auto get_components_in_parent() const -> component_multimap_t<T>;
