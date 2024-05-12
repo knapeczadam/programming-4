@@ -22,12 +22,4 @@ namespace qbert
         auto jump_comp_ptr = player_ptr_->get_component<jump_component>();
         jump_comp_ptr->jump(row_dir_, col_dir_);
     }
-
-    void jumping_state::on_exit()
-    {
-        auto position_comp_ptr = player_ptr_->get_component<position_component>();
-        position_comp_ptr->set_position(row_dir_, col_dir_);
-        auto face_comp_ptr = player_ptr_->get_component<face_component>();
-        face_comp_ptr->set_idle_sprite(row_dir_, col_dir_);
-    }
 }

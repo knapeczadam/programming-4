@@ -22,12 +22,12 @@ namespace qbert
         position_component &operator=(position_component const &other) = delete;
         position_component &operator=(position_component &&other)      = delete;
 
-        void set_position(int row_dir, int col_dir);
-        [[nodiscard]] auto get_row_position() const -> int { return row_pos_; }
-        [[nodiscard]] auto get_col_position() const -> int { return col_pos_; }
+        void set_position_idx(int row_dir, int col_dir);
+        [[nodiscard]] auto get_row_idx() const -> int { return row_idx_; }
+        [[nodiscard]] auto get_col_idx() const -> int { return col_idx_; }
 
     private:
-        int row_pos_ = 0;
-        int col_pos_ = 0;
+        int row_idx_ = 0;
+        int col_idx_ = 0;
     };
 }

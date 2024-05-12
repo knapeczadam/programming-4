@@ -1,7 +1,7 @@
 ﻿#include "level_display_component.h"
 
 // Project includes
-#include "component/level/level_component.h"
+#include "component/level/level_counter_component.h"
 #include "minigin/component/ui/sprite_ui_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/sprite_manager.h"
@@ -18,7 +18,7 @@ namespace qbert
     {
         if (event == "level_changed")
         {
-            auto const *level_component_ptr = dynamic_cast<qbert::level_component*>(subject_ptr);
+            auto const *level_component_ptr = dynamic_cast<qbert::level_counter_component*>(subject_ptr);
             auto level = level_component_ptr->get_level();
             sprite_ui_component_ptr_->get_sprite()->set_current_frame(level);
         }

@@ -10,7 +10,7 @@ namespace mngn
 {
     void game_component::set_owner(game_object *owner_ptr)
     {
-        assert(owner_ptr != nullptr and "BaseComponent::SetOwner: ownerPtr is nullptr");
+        assert(owner_ptr != nullptr and "game_component::set_owner: owner_ptr is nullptr");
         if (not owner_ptr)
         {
             return;

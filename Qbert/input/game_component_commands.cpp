@@ -1,7 +1,7 @@
 ﻿#include "game_component_commands.h"
 
 #include "component/player/health_component.h"
-#include "component/player/score_component.h"
+#include "component/player/score_counter_component.h"
 #include "core/resources.h"
 #include "minigin/core/resource_manager.h"
 #include "minigin/events/event.h"
@@ -30,6 +30,6 @@ namespace qbert
     void score_command::execute()
     {
         // basically its just broadcasting a function, simpler way to call a function
-        static_cast<score_component*>(get_game_component())->add_score(score_);
+        static_cast<score_counter_component*>(get_game_component())->add_score(score_);
     }
 }

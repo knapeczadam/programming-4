@@ -1,7 +1,7 @@
 ﻿#include "round_display_component.h"
 
 // Project includes
-#include "component/level/round_component.h"
+#include "component/level/round_counter_component.h"
 #include "minigin/component/ui/sprite_ui_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/sprite_manager.h"
@@ -18,7 +18,7 @@ namespace qbert
     {
         if (event == "round_changed")
         {
-            auto const *round_component_ptr = dynamic_cast<qbert::round_component*>(subject_ptr);
+            auto const *round_component_ptr = dynamic_cast<qbert::round_counter_component*>(subject_ptr);
             auto round = round_component_ptr->get_round();
             sprite_ui_component_ptr_->get_sprite()->set_current_frame(round);
         }

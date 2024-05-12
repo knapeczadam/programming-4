@@ -9,7 +9,7 @@ namespace qbert
     {
     public:
         disc_component()           = default;
-        disc_component(int row_id, int col_id);
+        disc_component(int row_idx, int col_idx);
         ~disc_component() override = default;
 
         disc_component(disc_component const &other)            = delete;
@@ -19,11 +19,11 @@ namespace qbert
 
         void awake() override;
 
-        [[nodiscard]] int get_row_id() const { return row_id_; }
-        [[nodiscard]] int get_col_id() const { return col_id_; }
+        [[nodiscard]] int get_row_idx() const { return row_idx_; }
+        [[nodiscard]] int get_col_idx() const { return col_idx_; }
 
     private:
-        int row_id_ = 0;
-        int col_id_ = 0;
+        int row_idx_ = 0;
+        int col_idx_ = 0;
     };
 }

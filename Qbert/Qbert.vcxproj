@@ -22,14 +22,15 @@
     <ClCompile Include="component\level\cube_component.cpp" />
     <ClCompile Include="component\level\disc_component.cpp" />
     <ClCompile Include="component\level\fly_component.cpp" />
-    <ClCompile Include="component\level\level_component.cpp" />
-    <ClCompile Include="component\level\round_component.cpp" />
+    <ClCompile Include="component\level\level_counter_component.cpp" />
+    <ClCompile Include="component\level\round_counter_component.cpp" />
+    <ClCompile Include="component\level\position_manager_component.cpp" />
     <ClCompile Include="component\player\face_component.cpp" />
     <ClCompile Include="component\player\health_component.cpp" />
     <ClCompile Include="component\player\jump_component.cpp" />
     <ClCompile Include="component\player\player_state_component.cpp" />
     <ClCompile Include="component\player\position_component.cpp" />
-    <ClCompile Include="component\player\score_component.cpp" />
+    <ClCompile Include="component\player\score_counter_component.cpp" />
     <ClCompile Include="component\ui\flicker_component.cpp" />
     <ClCompile Include="component\ui\health_display_component.cpp" />
     <ClCompile Include="component\ui\level_display_component.cpp" />
@@ -47,6 +48,7 @@
     <ClCompile Include="state\flying_state.cpp" />
     <ClCompile Include="state\idle_state.cpp" />
     <ClCompile Include="state\jumping_state.cpp" />
+    <ClCompile Include="state\landing_state.cpp" />
     <ClCompile Include="state\null_state.cpp" />
     <ClCompile Include="state\player_state.cpp" />
     <ClCompile Include="state\start_state.cpp" />
@@ -56,14 +58,15 @@
     <ClInclude Include="component\level\cube_component.h" />
     <ClInclude Include="component\level\disc_component.h" />
     <ClInclude Include="component\level\fly_component.h" />
-    <ClInclude Include="component\level\level_component.h" />
-    <ClInclude Include="component\level\round_component.h" />
+    <ClInclude Include="component\level\level_counter_component.h" />
+    <ClInclude Include="component\level\round_counter_component.h" />
+    <ClInclude Include="component\level\position_manager_component.h" />
     <ClInclude Include="component\player\face_component.h" />
     <ClInclude Include="component\player\health_component.h" />
     <ClInclude Include="component\player\jump_component.h" />
     <ClInclude Include="component\player\player_state_component.h" />
     <ClInclude Include="component\player\position_component.h" />
-    <ClInclude Include="component\player\score_component.h" />
+    <ClInclude Include="component\player\score_counter_component.h" />
     <ClInclude Include="component\ui\flicker_component.h" />
     <ClInclude Include="component\ui\health_display_component.h" />
     <ClInclude Include="component\ui\level_display_component.h" />
@@ -80,10 +83,15 @@
     <ClInclude Include="state\flying_state.h" />
     <ClInclude Include="state\idle_state.h" />
     <ClInclude Include="state\jumping_state.h" />
+    <ClInclude Include="state\landing_state.h" />
     <ClInclude Include="state\null_state.h" />
     <ClInclude Include="state\player_state.h" />
     <ClInclude Include="state\start_state.h" />
     <ClInclude Include="ui\ui.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="component\ai\" />
+    <Folder Include="component\animation\" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

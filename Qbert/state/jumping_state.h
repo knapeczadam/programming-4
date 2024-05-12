@@ -16,7 +16,6 @@ namespace qbert
         jumping_state(mngn::game_object* player_ptr, int row_dir, int col_dir);
 
         void on_enter() override;
-        void on_exit() override;
 
     private:
         int row_dir_ = 0;

@@ -8,9 +8,9 @@
 
 namespace qbert
 {
-    disc_component::disc_component(int row_id, int col_id)
-        : row_id_{row_id}
-        , col_id_{col_id}
+    disc_component::disc_component(int row_idx, int col_idx)
+        : row_idx_{row_idx}
+        , col_idx_{col_idx}
     {
     }
 
@@ -20,14 +20,14 @@ namespace qbert
         int offset_x = -32;
         int offset_y = 48;
 
-        glm::vec2 pos = origin + glm::vec2{row_id_ * offset_x, row_id_ * offset_y};
-        if (col_id_ == -1)
+        glm::vec2 pos = origin + glm::vec2{row_idx_ * offset_x, row_idx_ * offset_y};
+        if (col_idx_ == -1)
         {
             pos += glm::vec2{-20.0f, -28.0f};
         }
         else
         {
-           pos += glm::vec2{(col_id_ - 1.0f) * 64.0f + 50.0f, -28.0f}; 
+           pos += glm::vec2{(col_idx_ - 1.0f) * 64.0f + 50.0f, -28.0f}; 
         }
         get_owner()->set_local_position(pos);
     }

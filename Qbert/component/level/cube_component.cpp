@@ -11,9 +11,9 @@
 
 namespace qbert
 {
-    cube_component::cube_component(int row_id, int col_id, std::vector<mngn::sprite*> colors, bool revertible)
-        : row_id_{row_id}
-        , col_id_{col_id}
+    cube_component::cube_component(int row_idx, int col_idx, std::vector<mngn::sprite*> colors, bool revertible)
+        : row_idx_{row_idx}
+        , col_idx_{col_idx}
         , revertible_{revertible}
         , colors_{std::move(colors)}
     {
@@ -29,7 +29,7 @@ namespace qbert
         if (event == "position_changed")
         {
             auto position_comp_ptr = dynamic_cast<position_component*>(subject_ptr);
-            if (position_comp_ptr->get_row_position() == row_id_ and position_comp_ptr->get_col_position() == col_id_)
+            if (position_comp_ptr->get_row_idx() == row_idx_ and position_comp_ptr->get_col_idx() == col_idx_)
             {
                 if (revertible_)
                 {

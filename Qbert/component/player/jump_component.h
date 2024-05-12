@@ -28,7 +28,7 @@ namespace qbert
         [[nodiscard]] auto get_col_direction() const -> int { return col_dir_; }
         
     private:
-        void calculate_end_position(int row, int col);
+        void calculate_end_position(int row_dir, int col_dir);
         void calculate_bezier_curve();
         
 

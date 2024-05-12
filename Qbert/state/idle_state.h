@@ -14,5 +14,7 @@ namespace qbert
     {
     public:
         explicit idle_state(mngn::game_object* player_ptr);
+
+        void on_enter() override;
     };
 }

@@ -1,7 +1,7 @@
 ﻿#include "score_display_component.h"
 
 // Project includes
-#include "component/player/score_component.h"
+#include "component/player/score_counter_component.h"
 #include "core/resources.h"
 #include "core/sprites.h"
 #include "minigin/component/ui/multisprite_ui_component.h"
@@ -23,7 +23,7 @@ namespace qbert
     {
         if (event == "score_changed")
         {
-            auto const *score_component_ptr = dynamic_cast<score_component*>(subject_ptr);
+            auto const *score_component_ptr = dynamic_cast<score_counter_component*>(subject_ptr);
             std::deque<mngn::sprite*> sprites;
             if (score_component_ptr)
             {

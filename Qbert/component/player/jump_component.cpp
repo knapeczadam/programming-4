@@ -4,7 +4,10 @@
 #include "player_state_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
-#include "state/idle_state.h"
+#include "state/landing_state.h"
+
+// Standard includes
+#include <iostream>
 
 namespace qbert
 {
@@ -24,7 +27,7 @@ namespace qbert
                 accu_time_ = 0.0f;
                 
                 auto player_state_comp_ptr = get_owner()->get_component<player_state_component>();
-                player_state_comp_ptr->change_state(std::make_unique<idle_state>(get_owner()));
+                player_state_comp_ptr->change_state(std::make_unique<landing_state>(get_owner()));
             }
         }
     }
@@ -37,18 +40,20 @@ namespace qbert
         calculate_end_position(row_dir, col_dir);
     }
 
-    void jump_component::calculate_end_position(int row, int col)
+    void jump_component::calculate_end_position(int row_dir, int col_dir)
     {
         start_pos_ = get_owner()->get_local_position();
         
         int offset_x = 32;
         int offset_y = 48;
 
-        if (row_dir_ == 1 and col_dir_ == 0) col = -1;
-        if (row_dir_ == -1 and col_dir_ == 0) col = 1;
+        if (row_dir_ == 1 and col_dir_ == 0) col_dir = -1;
+        if (row_dir_ == -1 and col_dir_ == 0) col_dir = 1;
 
-        end_pos_.x = start_pos_.x + col * offset_x;
-        end_pos_.y = start_pos_.y + row * offset_y;
+        end_pos_.x = start_pos_.x + col_dir * offset_x;
+        end_pos_.y = start_pos_.y + row_dir * offset_y;
+
+        std::cout << "Start pos: " << start_pos_.x << ", " << start_pos_.y << std::endl;
     }
 
     void jump_component::calculate_bezier_curve()

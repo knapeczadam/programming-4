@@ -1,7 +1,7 @@
 ﻿#include "generic_commands.h"
 
-#include "component/level/level_component.h"
-#include "component/level/round_component.h"
+#include "component/level/level_counter_component.h"
+#include "component/level/round_counter_component.h"
 
 namespace qbert
 {
@@ -13,7 +13,7 @@ namespace qbert
     void debug_command::execute()
     {
         notify_observers("debug");
-        auto level_comp_ptr = static_cast<round_component *>(debug_ptr_);
+        auto level_comp_ptr = static_cast<round_counter_component *>(debug_ptr_);
         level_comp_ptr->increase_round();
     }
 }

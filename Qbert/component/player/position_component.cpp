@@ -6,11 +6,10 @@
 
 namespace qbert
 {
-    void position_component::set_position(int row_dir, int col_dir)
+    void position_component::set_position_idx(int row_dir, int col_dir)
     {
-        row_pos_ += row_dir;
-        col_pos_ += col_dir;
-        
+        row_idx_ += row_dir;
+        col_idx_ += col_dir;
         notify_observers("position_changed");
     }
 }
