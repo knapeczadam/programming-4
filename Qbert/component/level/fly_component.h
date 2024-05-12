@@ -1,11 +1,13 @@
 ﻿#pragma once
 
 // Project includes
-#include "minigin/component/family/physics_component.h"
 #include "input/game_object_commands.h"
+#include "minigin/component/family/physics_component.h"
+#include "minigin/core/i_observer.h"
 
 // GLM includes
 #include <glm/glm.hpp>
+
 
 
 namespace qbert

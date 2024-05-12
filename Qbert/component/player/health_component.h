@@ -6,7 +6,7 @@
 
 namespace qbert
 {
-    class health_component final : public mngn::custom_component, public mngn::subject, public mngn::i_observer
+    class health_component final : public mngn::custom_component, public mngn::subject
     {
     public:
         health_component()           = default;
@@ -18,7 +18,6 @@ namespace qbert
         health_component &operator=(health_component &&other)      = delete;
 
         void awake() override;
-        void notify(std::string const &event, subject *subject_ptr) override;
 
         void take_damage(int damage);
         [[nodiscard]] auto get_health() const -> int { return health_; }

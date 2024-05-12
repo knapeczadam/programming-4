@@ -52,6 +52,7 @@
 #include "component/player/jump_component.h"
 #include "component/level/cube_component.h"
 #include "component/level/fly_component.h"
+#include "component/player/player_state_component.h"
 
 void register_services()
 {
@@ -162,15 +163,12 @@ void load()
 	auto position_comp_ptr = go->add_component<position_component>();
     auto health_comp_ptr = go->add_component<health_component>();
     auto score_comp_ptr = go->add_component<score_component>();
-	auto face_comp_ptr = go->add_component<face_component>();
+	go->add_component<face_component>();
+	go->add_component<player_state_component>();
 
-	jump_comp_ptr->add_observer(position_comp_ptr);
-	jump_comp_ptr->add_observer(face_comp_ptr);
 	jump_comp_ptr->add_observer(fly_comp_ptr);
 	health_comp_ptr->add_observer(health_display_comp);
 	
-	position_comp_ptr->add_observer(health_comp_ptr);
-	position_comp_ptr->add_observer(face_comp_ptr);
 	std::ranges::for_each(cubes, [position_comp_ptr](auto cube) { position_comp_ptr->add_observer(cube); });
 
     // Arrow keys
@@ -178,11 +176,6 @@ void load()
     auto move_right_command1 = std::make_unique<jump_command>(go, 1, 1);
     auto move_up_command1    = std::make_unique<jump_command>(go, -1, 0);
     auto move_down_command1  = std::make_unique<jump_command>(go, 1, 0);
-
-	jump_comp_ptr->add_observer(move_left_command1.get());
-	jump_comp_ptr->add_observer(move_right_command1.get());
-	jump_comp_ptr->add_observer(move_up_command1.get());
-	jump_comp_ptr->add_observer(move_down_command1.get());
 
 	auto reset_move_command_pacman = std::make_unique<reset_move_command>(go);
 

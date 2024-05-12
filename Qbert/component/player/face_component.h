@@ -2,7 +2,6 @@
 
 // Project includes
 #include "minigin/component/family/custom_component.h"
-#include "minigin/core/i_observer.h"
 
 namespace mngn
 {
@@ -11,7 +10,7 @@ namespace mngn
 
 namespace qbert
 {
-    class face_component final : public mngn::custom_component, public mngn::i_observer
+    class face_component final : public mngn::custom_component
     {
     public:
         face_component()           = default;
@@ -22,8 +21,9 @@ namespace qbert
         face_component& operator=(const face_component& other) = delete;
         face_component& operator=(face_component&& other)      = delete;
 
+        void set_jump_sprite(int row_dir, int col_dir);
+        void set_idle_sprite(int row_dir, int col_dir);
         void awake() override;
-        void notify(std::string const &event, mngn::subject *subject_ptr) override;
 
     private:
         mngn::sprite_component *sprite_comp_ptr_ = nullptr;

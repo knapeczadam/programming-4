@@ -2,38 +2,30 @@
 
 // Project includes
 #include "minigin/input/game_object_command.h"
-#include "minigin/core/i_observer.h"
-
-// GLM includes
-#include <glm/glm.hpp>
-
 
 namespace qbert
 {
     // Jump command
-    class jump_command final : public mngn::game_object_command, public mngn::i_observer
+    class jump_command final : public mngn::game_object_command
     {
     public:
-        jump_command(mngn::game_object *game_object_ptr, int row, int col)
+        jump_command(mngn::game_object *game_object_ptr, int row_dir, int col_dir)
             : game_object_command{game_object_ptr}
-            , row_{row}
-            , col_{col}
+            , row_dir_{row_dir}
+            , col_dir_{col_dir}
         {
         }
         
         void execute() override;
-        void notify(std::string const &event, mngn::subject *subject_ptr) override;
 
         [[nodiscard]] auto clone() const -> std::unique_ptr<base_command> override
         {
-            return nullptr;
+            return std::make_unique<jump_command>(*this);
         }
 
     private:
-        int row_ = 0;
-        int col_ = 0;
-
-        bool is_jumping_ = false;
+        int row_dir_ = 0;
+        int col_dir_ = 0;
     };
 
     // Reset move command

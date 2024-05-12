@@ -6,20 +6,11 @@
 
 namespace qbert
 {
-    void position_component::set_position(int row, int col)
+    void position_component::set_position(int row_dir, int col_dir)
     {
-        row_pos_ += row;
-        col_pos_ += col;
+        row_pos_ += row_dir;
+        col_pos_ += col_dir;
         
         notify_observers("position_changed");
-    }
-
-    void position_component::notify(std::string const &event, subject *subject_ptr)
-    {
-        if (event == "jump_finished")
-        {
-            auto jump_comp_ptr = dynamic_cast<jump_component*>(subject_ptr);
-            set_position(jump_comp_ptr->get_row_direction(), jump_comp_ptr->get_col_direction());
-        }
     }
 }

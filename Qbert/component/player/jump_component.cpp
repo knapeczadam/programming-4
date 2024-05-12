@@ -1,8 +1,10 @@
 ﻿#include "jump_component.h"
 
 // Project includes
+#include "player_state_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
+#include "state/idle_state.h"
 
 namespace qbert
 {
@@ -20,7 +22,9 @@ namespace qbert
             {
                 is_jumping_ = false;
                 accu_time_ = 0.0f;
-                notify_observers("jump_finished");
+                
+                auto player_state_comp_ptr = get_owner()->get_component<player_state_component>();
+                player_state_comp_ptr->change_state(std::make_unique<idle_state>(get_owner()));
             }
         }
     }
@@ -31,7 +35,6 @@ namespace qbert
         col_dir_ = col_dir;
         is_jumping_ = true;
         calculate_end_position(row_dir, col_dir);
-        notify_observers("jump_started");
     }
 
     void jump_component::calculate_end_position(int row, int col)

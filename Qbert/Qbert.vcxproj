@@ -23,8 +23,10 @@
     <ClCompile Include="component\level\fly_component.cpp" />
     <ClCompile Include="component\level\level_component.cpp" />
     <ClCompile Include="component\level\round_component.cpp" />
+    <ClCompile Include="component\player\face_component.cpp" />
     <ClCompile Include="component\player\health_component.cpp" />
     <ClCompile Include="component\player\jump_component.cpp" />
+    <ClCompile Include="component\player\player_state_component.cpp" />
     <ClCompile Include="component\player\position_component.cpp" />
     <ClCompile Include="component\player\score_component.cpp" />
     <ClCompile Include="component\ui\flicker_component.cpp" />
@@ -39,6 +41,14 @@
     <ClCompile Include="input\generic_commands.cpp" />
     <ClCompile Include="level\levels.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="state\colliding_state.cpp" />
+    <ClCompile Include="state\dead_state.cpp" />
+    <ClCompile Include="state\flying_state.cpp" />
+    <ClCompile Include="state\idle_state.cpp" />
+    <ClCompile Include="state\jumping_state.cpp" />
+    <ClCompile Include="state\null_state.cpp" />
+    <ClCompile Include="state\player_state.cpp" />
+    <ClCompile Include="state\start_state.cpp" />
     <ClCompile Include="ui\ui.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -46,8 +56,10 @@
     <ClInclude Include="component\level\fly_component.h" />
     <ClInclude Include="component\level\level_component.h" />
     <ClInclude Include="component\level\round_component.h" />
+    <ClInclude Include="component\player\face_component.h" />
     <ClInclude Include="component\player\health_component.h" />
     <ClInclude Include="component\player\jump_component.h" />
+    <ClInclude Include="component\player\player_state_component.h" />
     <ClInclude Include="component\player\position_component.h" />
     <ClInclude Include="component\player\score_component.h" />
     <ClInclude Include="component\ui\flicker_component.h" />
@@ -61,6 +73,14 @@
     <ClInclude Include="input\game_object_commands.h" />
     <ClInclude Include="input\generic_commands.h" />
     <ClInclude Include="level\levels.h" />
+    <ClInclude Include="state\colliding_state.h" />
+    <ClInclude Include="state\dead_state.h" />
+    <ClInclude Include="state\flying_state.h" />
+    <ClInclude Include="state\idle_state.h" />
+    <ClInclude Include="state\jumping_state.h" />
+    <ClInclude Include="state\null_state.h" />
+    <ClInclude Include="state\player_state.h" />
+    <ClInclude Include="state\start_state.h" />
     <ClInclude Include="ui\ui.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
