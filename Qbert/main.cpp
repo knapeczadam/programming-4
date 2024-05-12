@@ -9,8 +9,8 @@
 // Project includes
 #include "component/player/position_component.h"
 #include "component/player/health_component.h"
-#include "component/player/level_component.h"
-#include "component/player/round_component.h"
+#include "component/level/level_component.h"
+#include "component/level/round_component.h"
 #include "component/player/score_component.h"
 #include "component/ui/health_display_component.h"
 #include "component/ui/level_display_component.h"
@@ -48,8 +48,8 @@
 // SDL includes
 #include <SDL.h>
 
-#include "component/animation/face_component.h"
-#include "component/animation/jump_component.h"
+#include "component/player/face_component.h"
+#include "component/player/jump_component.h"
 #include "component/level/cube_component.h"
 #include "component/level/fly_component.h"
 

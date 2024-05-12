@@ -1,7 +1,7 @@
 ﻿#include "game_object_commands.h"
 
 // Project includes
-#include "component/animation/jump_component.h"
+#include "component/player/jump_component.h"
 #include "minigin/core/game_object.h"
 
 namespace qbert
