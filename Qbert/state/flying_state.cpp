@@ -18,4 +18,9 @@ namespace qbert
         player_ptr_->set_parent(disc_ptr_->owner());
         disc_ptr_->owner()->component<fly_component>()->fly();
     }
+
+    void flying_state::on_exit()
+    {
+        disc_ptr_->disable();
+    }
 }

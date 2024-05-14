@@ -18,6 +18,7 @@ namespace qbert
         disc_component &operator=(disc_component &&other)      = delete;
 
         void awake() override;
+        void disable();
 
         [[nodiscard]] int row_idx() const { return row_idx_; }
         [[nodiscard]] int col_idx() const { return col_idx_; }

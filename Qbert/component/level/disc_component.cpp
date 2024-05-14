@@ -31,4 +31,10 @@ namespace qbert
         }
         owner()->set_local_position(pos);
     }
+
+    void disc_component::disable()
+    {
+        row_idx_ = -1;
+        col_idx_ = -1;
+    }
 }

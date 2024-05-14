@@ -2,6 +2,7 @@
 
 // Project includes
 #include "component/level/disc_component.h"
+#include "component/player/jump_component.h"
 #include "component/player/player_state_component.h"
 #include "component/player/position_idx_component.h"
 #include "minigin/core/game_object.h"
@@ -26,6 +27,9 @@ namespace qbert
 
             auto player_ptr = position_comp_ptr->owner();
             auto player_state_comp_ptr = player_ptr->component<player_state_component>();
+            auto jump_comp_ptr = player_ptr->component<jump_component>();
+            auto const row_dir = jump_comp_ptr->row_direction();
+            auto const col_dir = jump_comp_ptr->col_direction();
             
             for (auto const &disc_ptr : discs_)
             {
@@ -45,10 +49,10 @@ namespace qbert
                 }
             }
 
-            // player is dead
+            // player is falling
             if (row_idx < 0 or cold_idx < 0 or cold_idx > row_idx or row_idx >= 7)
             {
-                player_state_comp_ptr->change_state<falling_state>(player_ptr, cold_idx);
+                player_state_comp_ptr->change_state<falling_state>(player_ptr, row_dir, col_dir, row_idx, cold_idx);
                 return;
             }
 

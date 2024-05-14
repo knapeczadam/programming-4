@@ -21,10 +21,10 @@ namespace qbert
 
         void fixed_update() override;
 
-        void fall(int col_idx);
+        void fall(int row_dir, int col_dir, int row_idx, int col_idx);
 
     private:
-        void calculate_bezier_positions(int col_idx);
+        void calculate_bezier_positions(int row_dir, int col_dir, int row_idx, int col_idx);
 
     private:
         float fall_time_  = 1.0f;
