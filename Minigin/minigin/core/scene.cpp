@@ -25,40 +25,6 @@ namespace mngn
 
     scene::~scene() = default;
 
-    auto scene::add_game_object(std::string const &name) -> game_object *
-    {
-        objects_.emplace_back(std::make_unique<game_object>(name));
-        return objects_.back().get();
-    }
-
-    void scene::remove_game_object(game_object *object_ptr)
-    {
-        std::erase_if(objects_, [object_ptr](auto const &object)
-        {
-            return object.get() == object_ptr;
-        });
-    }
-
-    void scene::remove_all()
-    {
-        objects_.clear();
-    }
-
-    auto scene::game_object_count() const -> int
-    {
-        return static_cast<int>(objects_.size());
-    }
-
-    auto scene::find_game_object(std::string const &name) const -> game_object *
-    {
-        auto const it = std::ranges::find_if(objects_, [&name](auto const &object)
-        {
-            return object->name() == name;
-        });
-
-        return it != objects_.end() ? it->get() : nullptr;
-    }
-
     void scene::awake()
     {
         for (auto const &object : objects_)
@@ -125,5 +91,39 @@ namespace mngn
                 ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
             }
         }
+    }
+
+    auto scene::add_game_object(std::string const &name) -> game_object *
+    {
+        objects_.emplace_back(std::make_unique<game_object>(name));
+        return objects_.back().get();
+    }
+
+    void scene::remove_game_object(game_object *object_ptr)
+    {
+        std::erase_if(objects_, [object_ptr](auto const &object)
+        {
+            return object.get() == object_ptr;
+        });
+    }
+
+    void scene::remove_all()
+    {
+        objects_.clear();
+    }
+
+    auto scene::game_object_count() const -> int
+    {
+        return static_cast<int>(objects_.size());
+    }
+
+    auto scene::find_game_object(std::string const &name) const -> game_object *
+    {
+        auto const it = std::ranges::find_if(objects_, [&name](auto const &object)
+        {
+            return object->name() == name;
+        });
+
+        return it != objects_.end() ? it->get() : nullptr;
     }
 }

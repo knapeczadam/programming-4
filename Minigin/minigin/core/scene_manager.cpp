@@ -15,32 +15,50 @@ namespace mngn
 
     void scene_manager::awake()
     {
-        std::ranges::for_each(scenes_, [](auto const &scene) { scene->awake(); });
+        for (auto const &scene : scenes_)
+        {
+            if (scene->active()) scene->awake();
+        }
     }
     
     void scene_manager::fixed_update()
     {
-        std::ranges::for_each(scenes_, [](auto const &scene) { scene->fixed_update(); });
+        for (auto const &scene : scenes_)
+        {
+            if (scene->active()) scene->fixed_update();
+        }
     }
 
     void scene_manager::update()
     {
-        std::ranges::for_each(scenes_, [](auto const &scene) { scene->update(); });
+        for (auto const &scene : scenes_)
+        {
+            if (scene->active()) scene->update();
+        }
     }
 
     void scene_manager::late_update()
     {
-        std::ranges::for_each(scenes_, [](auto const &scene) { scene->late_update(); });
+        for (auto const &scene : scenes_)
+        {
+            if (scene->active()) scene->late_update();
+        }
     }
 
     void scene_manager::render()
     {
-        std::ranges::for_each(scenes_, [](auto const &scene) { scene->render(); });
+        for (auto const &scene : scenes_)
+        {
+            if (scene->active()) scene->render();
+        }
     }
 
     void scene_manager::render_ui()
     {
-        std::ranges::for_each(scenes_, [](auto const &scene) { scene->render_ui(); });
+        for (auto const &scene : scenes_)
+        {
+            if (scene->active()) scene->render_ui();
+        }
     }
 
     auto scene_manager::create_scene(std::string const &name) -> scene *

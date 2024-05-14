@@ -26,14 +26,14 @@ namespace mngn
         scene_manager &operator=(scene_manager const &other) = delete;
         scene_manager &operator=(scene_manager &&other)      = delete;
 
-        auto create_scene(std::string const &name) -> scene *;
-
         void awake();
         void fixed_update();
         void update();
         void late_update();
         void render();
         void render_ui();
+        
+        auto create_scene(std::string const &name) -> scene *;
 
     private:
         friend class singleton<scene_manager>;

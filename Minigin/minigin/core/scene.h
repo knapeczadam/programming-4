@@ -25,13 +25,7 @@ namespace mngn
         scene(scene &&other)                 = delete;
         scene &operator=(scene const &other) = delete;
         scene &operator=(scene &&other)      = delete;
-
-        auto add_game_object(std::string const &name = "New Game Object") -> game_object *;
-        void remove_game_object(game_object *object_ptr);
-        void remove_all();
-        [[nodiscard]] auto game_object_count() const -> int;
-        [[nodiscard]] auto find_game_object(std::string const &name) const -> game_object *;
-
+        
         void awake();
         void fixed_update();
         void update();
@@ -39,14 +33,22 @@ namespace mngn
         void render() const;
         void render_ui() const;
 
+        auto add_game_object(std::string const &name = "new_game_object") -> game_object *;
+        void remove_game_object(game_object *object_ptr);
+        void remove_all();
+        [[nodiscard]] auto game_object_count() const -> int;
+        [[nodiscard]] auto find_game_object(std::string const &name) const -> game_object *;
+
+        [[nodiscard]] auto active() const -> bool { return active_; }
+        void set_active(bool active) { active_ = active; }
+        
     private:
         explicit scene(std::string name);
 
         std::string name_;
         std::vector<game_object_uptr> objects_{};
+        bool active_ = true;
 
         static unsigned int id_counter_;
-
-        // TODO: active scene
     };
 }
