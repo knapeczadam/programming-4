@@ -13,6 +13,7 @@
 #include "component/player/position_idx_component.h"
 #include "component/player/round_counter_component.h"
 #include "component/player/score_counter_component.h"
+#include "component/ui/flicker_component.h"
 #include "component/ui/health_display_component.h"
 #include "component/ui/level_display_component.h"
 #include "component/ui/round_display_component.h"
@@ -195,6 +196,27 @@ namespace qbert
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<mngn::sprite_ui_component>(config.sprite_id, config.texture_id);
         info.round_display_comp_ptr = info.go_ptr->add_component<round_display_component>();
+        return info;
+    }
+
+    auto factory::ui::create_sprite(sprite_config_info const &config) -> sprite_info
+    {
+        sprite_info info{};
+        info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr->set_parent(config.parent_ptr);
+        info.go_ptr->set_local_position(config.local_position);
+        info.go_ptr->add_component<mngn::sprite_ui_component>(config.sprite_id, config.texture_id);
+        return info;
+    }
+
+    auto factory::ui::create_arrow(arrow_config_info const &config) -> arrow_info
+    {
+        arrow_info info{};
+        info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr->set_parent(config.parent_ptr);
+        info.go_ptr->set_local_position(config.local_position);
+        info.go_ptr->add_component<mngn::sprite_ui_component>(config.sprite_id, config.texture_id);
+        info.go_ptr->add_component<flicker_component>(config.delay);
         return info;
     }
 }

@@ -64,7 +64,7 @@ namespace qbert
             }
             else
             {
-                end_pos_.x = start_pos_.x - offset_x / 3.0f;;
+                end_pos_.x = start_pos_.x - offset_x / 3.0f;
                 corner_pos_ = (start_pos_ + end_pos_) / 2.0f;
             }
         }

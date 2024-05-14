@@ -176,6 +176,23 @@ namespace qbert
             };
 
             static auto create_round_display(round_display_config_info const& config) -> round_display_info;
+
+            // Sprite
+            struct sprite_config_info : config_info { };
+
+            struct sprite_info : info { };
+
+            static auto create_sprite(sprite_config_info const& config) -> sprite_info;
+
+            // Arrow
+            struct arrow_config_info : config_info
+            {
+                float delay;
+            };
+
+            struct arrow_info : info { };
+
+            static auto create_arrow(arrow_config_info const& config) -> arrow_info;
         };
     };
 }
