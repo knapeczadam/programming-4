@@ -24,7 +24,6 @@
 #include "input/generic_commands.h"
 #include "ui/ui.h"
 
-#include "minigin/component/rendering/sprite_component.h"
 #include "minigin/core/engine.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/resource_manager.h"
@@ -36,7 +35,6 @@
 #include "minigin/services/sdl_sound_system.h"
 #include "minigin/services/service_locator.h"
 #include "minigin/test/test_manager.h"
-#include "minigin/utility/sprite.h"
 
 // Standard includes
 #include <cassert>
@@ -72,7 +70,6 @@ void load()
 	//---------------------------------------------------------------------------------
 	//
 	//---------------------------------------------------------------------------------
-	// load_test_level();
 	load_test_ui();
 
 	//---------------------------------------------------------------------------------
