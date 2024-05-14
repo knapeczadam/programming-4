@@ -20,26 +20,27 @@ namespace mngn
 
     void game_object::awake()
     {
-        std::ranges::for_each(component_map_ | std::views::values, [](auto const &comp)
+        for (auto const &comp : component_map_ | std::views::values)
         {
             comp->awake();
-        });
+        }
     }
 
     void game_object::fixed_update()
     {
-        std::ranges::for_each(components(component_family::physics) | std::views::values, [](auto const &comp)
+        auto const physics_components = components(component_family::physics);
+        for (auto const &comp : physics_components | std::views::values)
         {
-            static_cast<physics_component*>(comp)->fixed_update();
-        });
+            static_cast<physics_component *>(comp)->fixed_update();
+        }
     }
 
     void game_object::update()
     {
-        std::ranges::for_each(component_map_ | std::views::values, [](auto const &comp)
+        for (auto const &comp : component_map_ | std::views::values)
         {
             comp->update();
-        });
+        }
     }
 
     void game_object::add_child(game_object *child_ptr)
@@ -78,7 +79,7 @@ namespace mngn
 
     auto game_object::set_parent(game_object *parent_ptr, bool keep_world_position) -> bool
     {
-        // SetParent has to do five things:
+        // set_parent has to do five things:
         // 1. Check if the new parent is valid (not itself or one of its children)
         // 2. Remove itself from the previous parent (if any).
         // 3. Set the given parent on itself.

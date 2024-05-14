@@ -61,49 +61,49 @@ namespace mngn
 
     void scene::awake()
     {
-        std::ranges::for_each(objects_, [](auto const &object) { object->awake(); });
+        for (auto const &object : objects_)
+        {
+            if (object->active()) object->awake();
+        }
     }
 
     void scene::fixed_update()
     {
-        std::ranges::for_each(objects_, [](auto const &object) { object->fixed_update(); });
+        for (auto const &object : objects_)
+        {
+            if (object->active()) object->fixed_update();
+        }
     }
 
     void scene::update()
     {
-        std::ranges::for_each(objects_, [](auto const &object) { object->update(); });
+        for (auto const &object : objects_)
+        {
+            if (object->active()) object->update();
+        }
     }
 
     void scene::late_update()
     {
-        std::ranges::for_each(objects_, [this](auto const &object)
+        for (auto const &object : objects_)
         {
-            object->is_alive() ? object->late_update() : remove_game_object(object.get());
-        });
-        
+            if (object->active()) object->late_update();
+        }
     }
 
     void scene::render() const
     {
+        // TODO: measure performance: get_components_in_children
         for (auto const &object : objects_)
         {
-            // TODO: measure performance!
-            // auto const renderers = object->get_components_in_children(component_family::rendering);
-            // for (auto const &comp : renderers | std::views::values)
-            // {
-            //     static_cast<rendering_component*>(comp)->render();
-            // }
-            std::ranges::for_each(object->components(component_family::rendering) | std::views::values, [](auto const &comp)
+            if (object->active())
             {
-                static_cast<rendering_component*>(comp)->render();
-            });
-            
-            
-            // auto renderers = object->GetComponentsInChildren<RenderingComponent>();
-            // for (auto const &comp : renderers | std::views::values)
-            // {
-            //     comp->Render();
-            // }
+                auto const renderers = object->components(component_family::rendering);
+                for (auto const &comp : renderers | std::views::values)
+                {
+                    static_cast<rendering_component*>(comp)->render();
+                }
+            }
         }
     }
 

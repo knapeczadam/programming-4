@@ -36,5 +36,6 @@ namespace qbert
     {
         row_idx_ = -1;
         col_idx_ = -1;
+        owner()->set_active(false);
     }
 }

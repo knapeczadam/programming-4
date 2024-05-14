@@ -119,9 +119,9 @@ namespace mngn
         auto &scene_manager  = scene_manager::instance();
         auto const &input    = input_manager::instance();
 
-        bool do_continue = true;
-        auto last_time = high_resolution_clock::now();
-        float lag = 0.0f;
+        bool  do_continue = true;
+        auto  last_time   = high_resolution_clock::now();
+        float lag         = 0.0f;
 
         scene_manager.awake();
         
@@ -145,7 +145,7 @@ namespace mngn
             scene_manager.late_update();
             renderer.render();
 
-            SteamAPI_RunCallbacks(); 
+            // SteamAPI_RunCallbacks(); 
 
             auto const sleep_time = current_time + milliseconds(static_cast<long long>(game_time::instance().ms_per_frame)) - high_resolution_clock::now();
 

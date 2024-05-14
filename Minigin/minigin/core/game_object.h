@@ -55,8 +55,8 @@ namespace mngn
         void update_world_position();
         void late_update();
 
-        [[nodiscard]] auto is_alive() const -> bool { return alive_; }
-        void destroy() { alive_ = false; }
+        [[nodiscard]] auto active() const -> bool { return active_; }
+        void set_active(bool active) { active_ = active; }
 
         [[nodiscard]] auto parent() const -> game_object * { return parent_ptr_; }
         auto set_parent(game_object *parent_ptr, bool keep_world_position = true) -> bool;
@@ -134,7 +134,7 @@ namespace mngn
         std::string name_     = {};
         transform transform_  = {};
         bool position_dirty_  = false;
-        bool alive_           = true;
+        bool active_          = true;
 
         // TODO: switch to map?
         std::unordered_map<std::type_index, std::unique_ptr<game_component>> component_map_ = {};

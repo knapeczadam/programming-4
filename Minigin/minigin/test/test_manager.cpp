@@ -274,13 +274,6 @@ namespace mngn
             scene->remove_all();
             assert(scene->game_object_count() == 0);
         }
-        {
-            auto const scene = scene_manager::instance().create_scene("Test");
-            auto const go = scene->add_game_object();
-            go->destroy();
-            scene->late_update();
-            assert(scene->game_object_count() == 0);
-        }
     }
 
     void test_manager::test_position()
