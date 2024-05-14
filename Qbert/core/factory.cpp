@@ -1,6 +1,8 @@
 ﻿#include "factory.h"
 
 // Project includes
+#include "component/level/disc_component.h"
+#include "component/level/fly_component.h"
 #include "component/player/face_component.h"
 #include "component/player/fall_component.h"
 #include "component/player/health_component.h"
@@ -61,6 +63,18 @@ namespace qbert
             auto down_command_alt = std::make_unique<jump_command>(info.go_ptr, 1, 0);
             mngn::input_manager::instance().bind_command(config.down_command_alt.value().input_type, config.down_command_alt.value().input_state, config.down_command_alt.value().input, std::move(down_command_alt));
         }
+
+        return info;
+    }
+
+    auto factory::level::create_disc(disc_config_info const &config) -> disc_info
+    {
+        disc_info info;
+        info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr->set_parent(config.parent_go_ptr);
+        info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
+        info.go_ptr->add_component<disc_component>(config.row_idx, config.col_idx);
+        info.go_ptr->add_component<fly_component>();
 
         return info;
     }

@@ -77,7 +77,24 @@ namespace qbert
         
         struct level
         {
-            
+            struct disc_config_info
+            {
+                mngn::scene       *scene_ptr;
+                mngn::game_object *parent_go_ptr;
+                std::string       name;
+                glm::vec2         local_position;
+                qbert_sprite      sprite_id;
+                qbert_resource    texture_id;
+                int               row_idx;
+                int               col_idx;
+            };
+
+            struct disc_info
+            {
+                mngn::game_object *go_ptr;
+            };
+
+            static auto create_disc(disc_config_info const& config) -> disc_info;
         };
 
         struct my_struct

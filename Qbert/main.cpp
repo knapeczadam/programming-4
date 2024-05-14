@@ -18,8 +18,6 @@
 #include "component/ui/score_display_component.h"
 #include "component/player/jump_component.h"
 #include "component/level/cube_component.h"
-#include "component/level/disc_component.h"
-#include "component/level/fly_component.h"
 #include "component/level/level_manager_component.h"
 #include "component/player/player_state_component.h"
 #include "core/factory.h"
@@ -137,19 +135,29 @@ void load()
 	level_comp_ptr->add_observer(level_display_comp_ptr);
 	auto round_comp_ptr = go->add_component<round_counter_component>();
 	round_comp_ptr->add_observer(round_display_comp_ptr);
-	
 
-	go = scene->add_game_object("disk_1");
-	go->set_parent(root_go_ptr);
-	go->add_component<sprite_component>(qb_sp_level_1_disk_1, qb_re_t_sprite_general);
-	go->add_component<disc_component>(6, -1);
-	auto fly_comp_ptr = go->add_component<fly_component>();
+	//---------------------------------------------------------------------------------
+	// DISCS
+	//---------------------------------------------------------------------------------
+	factory::level::disc_config_info disc_config;
+	disc_config.scene_ptr = scene;
+	disc_config.parent_go_ptr = root_go_ptr;
+	disc_config.name = "disc_1";
+	disc_config.sprite_id = qb_sp_level_1_disk_1;
+	disc_config.texture_id = qb_re_t_sprite_general;
+	disc_config.row_idx = 6;
+	disc_config.col_idx = -1;
+	factory::level::create_disc(disc_config);
 
-	go = scene->add_game_object("disk_2");
-	go->set_parent(root_go_ptr);
-	go->add_component<sprite_component>(qb_sp_level_1_disk_1, qb_re_t_sprite_general);
-	go->add_component<disc_component>(2, 3);
-	fly_comp_ptr = go->add_component<fly_component>();
+	factory::level::disc_config_info disc_config_2;
+	disc_config_2.scene_ptr = scene;
+	disc_config_2.parent_go_ptr = root_go_ptr;
+	disc_config_2.name = "disc_2";
+	disc_config_2.sprite_id = qb_sp_level_1_disk_2;
+	disc_config_2.texture_id = qb_re_t_sprite_general;
+	disc_config_2.row_idx = 2;
+	disc_config_2.col_idx = 3;
+	factory::level::create_disc(disc_config_2);
 	
     //---------------------------------------------------------------------------------
     // PLAYER 1
