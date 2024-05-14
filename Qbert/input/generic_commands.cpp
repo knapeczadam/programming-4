@@ -1,7 +1,7 @@
 ﻿#include "generic_commands.h"
 
-#include "component/level/level_counter_component.h"
-#include "component/level/round_counter_component.h"
+#include "component/player/level_counter_component.h"
+#include "component/player/round_counter_component.h"
 
 namespace qbert
 {

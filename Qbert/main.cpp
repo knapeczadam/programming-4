@@ -9,27 +9,22 @@
 // Project includes
 #include "component/player/position_idx_component.h"
 #include "component/player/health_component.h"
-#include "component/level/level_counter_component.h"
-#include "component/level/round_counter_component.h"
 #include "component/player/score_counter_component.h"
 #include "component/ui/health_display_component.h"
 #include "component/ui/level_display_component.h"
 #include "component/ui/round_display_component.h"
 #include "component/ui/score_display_component.h"
 #include "component/player/jump_component.h"
+#include "component/player/round_counter_component.h"
 #include "component/level/cube_component.h"
 #include "component/level/level_manager_component.h"
-#include "component/player/player_state_component.h"
 #include "core/factory.h"
 #include "core/resources.h"
 #include "core/sprites.h"
 #include "input/generic_commands.h"
 #include "ui/ui.h"
 
-#include "minigin/component/debug/fps_component.h"
 #include "minigin/component/rendering/sprite_component.h"
-#include "minigin/component/ui/multisprite_ui_component.h"
-#include "minigin/component/ui/sprite_ui_component.h"
 #include "minigin/core/engine.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/resource_manager.h"
@@ -50,6 +45,8 @@
 // SDL includes
 #include <SDL.h>
 
+#include "component/player/level_counter_component.h"
+
 void register_services()
 {
 #ifndef _NDEBUG
@@ -65,106 +62,124 @@ void load()
 	using namespace qbert;
 
 	register_services();
-	
+
+	//---------------------------------------------------------------------------------
+	// RESOURCES
+	//---------------------------------------------------------------------------------
 	init_resources();
 	init_sprites();
-	
+
+	//---------------------------------------------------------------------------------
+	//
+	//---------------------------------------------------------------------------------
 	// load_test_level();
 	load_test_ui();
 
-    auto const scene = scene_manager::instance().create_scene("Demo");
-    
-    // Fonts
+	//---------------------------------------------------------------------------------
+	// FONTS
+	//---------------------------------------------------------------------------------
     auto const font_small = resource_manager::instance().load_font("fonts/Lingua.otf", 10);
 
+	//---------------------------------------------------------------------------------
+	// TEST SCENE
+	//---------------------------------------------------------------------------------
+    auto const scene = scene_manager::instance().create_scene("Demo");
+    
+	//---------------------------------------------------------------------------------
+	// ROOT
+	//---------------------------------------------------------------------------------
+	auto root_ptr = scene->add_game_object("root");
+	auto level_manager_comp_ptr = root_ptr->add_component<level_manager_component>();
+
+	//---------------------------------------------------------------------------------
     // FPS
-    auto go = scene->add_game_object();
-    go->set_local_position(10.0f, 500.0f);
-    auto const fps_comp = go->add_component<fps_component>();
-    fps_comp->set_font(font_small);
-    fps_comp->set_text("FPS: ");
-	
-	auto root_go_ptr = scene->add_game_object("root");
-	auto level_manager_comp_ptr = root_go_ptr->add_component<level_manager_component>();
-	
-	glm::vec2 origin{208, 96};
-	int offset_x = -32;
-	int offset_y = 48;
-	
-	auto color_1 = sprite_manager::instance().load_sprite(qb_sp_level_1_red_cube_1, qb_re_t_sprite_general);
-	auto color_2 = sprite_manager::instance().load_sprite(qb_sp_level_1_yellow_cube_1, qb_re_t_sprite_general);
-	auto color_3 = sprite_manager::instance().load_sprite(qb_sp_level_1_blue_cube_1, qb_re_t_sprite_general);
+	//---------------------------------------------------------------------------------
+	factory::ui::fps_config_info fps_config{};
+	fps_config.scene_ptr      = scene;
+	fps_config.parent_ptr     = root_ptr;
+	fps_config.name           = "fps";
+	fps_config.local_position = {10.0f,      500.0f};
+	fps_config.font_ptr       = font_small;
+	fps_config.text		      = "FPS: ";
+	factory::ui::create_fps(fps_config);
 
-	std::vector<cube_component*> cubes;
-	for (int i = 0; i < 7; ++i)
-	{
-		glm::vec2 start_position = origin + glm::vec2(i * offset_x, i * offset_y);
-		for (int j = 0; j < i + 1; ++j)
-		{
-			go = scene->add_game_object("cube_" + std::to_string(i) + "_" + std::to_string(j));
-			glm::vec2 pos = start_position + glm::vec2(j * 64, 0);
-			go->set_local_position(pos);
-			go->add_component<sprite_component>();
-			auto cube_comp_ptr = go->add_component<cube_component>(i, j, std::vector{color_1, color_2, color_3});
-			cubes.push_back(cube_comp_ptr);
-		}
-	}
+	//---------------------------------------------------------------------------------
+	// CUBES
+	//---------------------------------------------------------------------------------
+	factory::level::cube_config_info cube_config{};
+	cube_config.scene_ptr  = scene;
+	cube_config.parent_ptr = root_ptr;
+	cube_config.texture_id = qb_re_t_sprite_general;
+	cube_config.color_1    = qb_sp_level_1_blue_cube_1;
+	cube_config.color_2    = qb_sp_level_1_red_cube_1;
+	// cube_config.color_3    = qb_sp_level_1_yellow_cube_1;
+	cube_config.revertible = true;
+	auto cube_components = factory::level::create_cubes(cube_config);
 	
-	go = scene->add_game_object("score_1");
-	go->set_local_position(32, 48);
-	go->add_component<multisprite_ui_component>();
-	auto score_display_comp_ptr = go->add_component<score_display_component>();
-        
-	go = scene->add_game_object("qbert_life_1");
-	go->set_local_position(16, 160);
-	go->add_component<multisprite_ui_component>(multisprite_orientation::vertical);
-	auto health_display_comp_ptr = go->add_component<health_display_component>();
-	
-	go = scene->add_game_object("numbers_level");
-	go->set_local_position(432, 80);
-	go->add_component<sprite_ui_component>(qb_sp_numbers_regular_orange, qb_re_t_sprite_general, false);
-	auto level_display_comp_ptr = go->add_component<level_display_component>();
+	//---------------------------------------------------------------------------------
+	// UI
+	//---------------------------------------------------------------------------------
+	factory::ui::score_display_config_info score_display_config{};
+	score_display_config.scene_ptr      = scene;
+	score_display_config.parent_ptr     = root_ptr;
+	score_display_config.name           = "score_1";
+	score_display_config.local_position = {32.0f,    48.0f};
+	auto score_display_info = factory::ui::create_score_display(score_display_config);
 
-	go = scene->add_game_object("numbers_round");
-	go->set_local_position(432, 96);
-	go->add_component<sprite_ui_component>(qb_sp_numbers_regular_orange, qb_re_t_sprite_general, false);
-	auto round_display_comp_ptr = go->add_component<round_display_component>();
+	factory::ui::health_display_config_info health_display_config{};
+	health_display_config.scene_ptr      = scene;
+	health_display_config.parent_ptr     = root_ptr;
+	health_display_config.name           = "health_1";
+	health_display_config.local_position = {16.0f, 160.0f};
+	auto health_display_info = factory::ui::create_health_display(health_display_config);
 
-	go = scene->add_game_object("player");
-	auto level_comp_ptr = go->add_component<level_counter_component>();
-	level_comp_ptr->add_observer(level_display_comp_ptr);
-	auto round_comp_ptr = go->add_component<round_counter_component>();
-	round_comp_ptr->add_observer(round_display_comp_ptr);
+	factory::ui::level_display_config_info level_display_config{};
+	level_display_config.scene_ptr      = scene;
+	level_display_config.parent_ptr     = root_ptr;
+	level_display_config.name           = "numbers_level";
+	level_display_config.local_position = {432.0f, 80.0f};
+	level_display_config.sprite_id      = qb_sp_numbers_regular_orange;
+	level_display_config.texture_id     = qb_re_t_sprite_general;
+	auto level_display_info = factory::ui::create_level_display(level_display_config);
+
+	factory::ui::round_display_config_info round_display_config{};
+	round_display_config.scene_ptr      = scene;
+	round_display_config.parent_ptr     = root_ptr;
+	round_display_config.name           = "round_1";
+	round_display_config.local_position = {432.0f, 96.0f};
+	round_display_config.sprite_id      = qb_sp_numbers_regular_orange;
+	round_display_config.texture_id     = qb_re_t_sprite_general;
+	auto round_display_info = factory::ui::create_round_display(round_display_config);
 
 	//---------------------------------------------------------------------------------
 	// DISCS
 	//---------------------------------------------------------------------------------
-	factory::level::disc_config_info disc_config;
-	disc_config.scene_ptr = scene;
-	disc_config.parent_go_ptr = root_go_ptr;
-	disc_config.name = "disc_1";
-	disc_config.sprite_id = qb_sp_level_1_disk_1;
+	factory::level::disc_config_info disc_config{};
+	disc_config.scene_ptr  = scene;
+	disc_config.parent_ptr = root_ptr;
+	disc_config.name       = "disc_1";
+	disc_config.sprite_id  = qb_sp_level_1_disk_1;
 	disc_config.texture_id = qb_re_t_sprite_general;
-	disc_config.row_idx = 6;
-	disc_config.col_idx = -1;
+	disc_config.row_idx    = 6;
+	disc_config.col_idx    = -1;
 	factory::level::create_disc(disc_config);
 
-	factory::level::disc_config_info disc_config_2;
-	disc_config_2.scene_ptr = scene;
-	disc_config_2.parent_go_ptr = root_go_ptr;
-	disc_config_2.name = "disc_2";
-	disc_config_2.sprite_id = qb_sp_level_1_disk_2;
+	factory::level::disc_config_info disc_config_2{};
+	disc_config_2.scene_ptr  = scene;
+	disc_config_2.parent_ptr = root_ptr;
+	disc_config_2.name       = "disc_2";
+	disc_config_2.sprite_id  = qb_sp_level_1_disk_2;
 	disc_config_2.texture_id = qb_re_t_sprite_general;
-	disc_config_2.row_idx = 2;
-	disc_config_2.col_idx = 3;
+	disc_config_2.row_idx    = 2;
+	disc_config_2.col_idx    = 3;
 	factory::level::create_disc(disc_config_2);
 	
     //---------------------------------------------------------------------------------
     // PLAYER 1
     //---------------------------------------------------------------------------------
-	factory::character::player_config_info player_1_config;
+	factory::character::player_config_info player_1_config{};
 	player_1_config.scene_ptr         = scene;
-	player_1_config.parent_go_ptr     = root_go_ptr;
+	player_1_config.parent_ptr     = root_ptr;
 	player_1_config.name              = "player_1";
 	player_1_config.local_position    = {224.0f,                 84.0f};
 	player_1_config.sprite_id         = qb_sp_qbert_1;
@@ -179,19 +194,22 @@ void load()
 	player_1_config.right_command_alt = {input_type::controller, input_state::pressed, c_right};
 	player_1_config.up_command_alt    = {input_type::controller, input_state::pressed, c_up};
 	player_1_config.down_command_alt  = {input_type::controller, input_state::pressed, c_down};
-	
+
+	// Observers
 	auto player_1_info = factory::character::create_player(player_1_config);
-	player_1_info.health_comp_ptr->add_observer(health_display_comp_ptr);
-    player_1_info.score_counter_comp_ptr->add_observer(score_display_comp_ptr);
+	player_1_info.health_comp_ptr->add_observer(health_display_info.health_display_comp_ptr);
+    player_1_info.score_counter_comp_ptr->add_observer(score_display_info.score_display_comp_ptr);
 	player_1_info.position_idx_comp_ptr->add_observer(level_manager_comp_ptr);
-	std::ranges::for_each(cubes, [player_1_info](auto cube) { player_1_info.position_idx_comp_ptr->add_observer(cube); });
+	player_1_info.level_counter_comp_ptr->add_observer(level_display_info.level_display_comp_ptr);
+	player_1_info.round_counter_comp_ptr->add_observer(round_display_info.round_display_comp_ptr);
+	std::ranges::for_each(cube_components.cube_components, [player_1_info](auto cube_comp_ptr) { player_1_info.position_idx_comp_ptr->add_observer(cube_comp_ptr); });
 
     //---------------------------------------------------------------------------------
     // PLAYER 2
     //---------------------------------------------------------------------------------
-	factory::character::player_config_info player_2_config;
+	factory::character::player_config_info player_2_config{};
 	player_2_config.scene_ptr      = scene;
-	player_2_config.parent_go_ptr  = root_go_ptr;
+	player_2_config.parent_ptr  = root_ptr;
 	player_2_config.name           = "player_2";
 	player_2_config.local_position = {32.0f,                 372.0f};
 	player_2_config.sprite_id      = qb_sp_qbert_2;
@@ -202,17 +220,18 @@ void load()
 	player_2_config.right_command  = {input_type::keyboard,  input_state::down, k_d};
 	player_2_config.up_command     = {input_type::keyboard,  input_state::down, k_w};
 	player_2_config.down_command   = {input_type::keyboard,  input_state::down, k_s};
+
+	// Observers
 	auto player_2_info = factory::character::create_player(player_2_config);
-	
-    player_2_info.health_comp_ptr->add_observer(health_display_comp_ptr);
-	player_2_info.score_counter_comp_ptr->add_observer(score_display_comp_ptr);
+    player_2_info.health_comp_ptr->add_observer(health_display_info.health_display_comp_ptr);
+	player_2_info.score_counter_comp_ptr->add_observer(score_display_info.score_display_comp_ptr);
 	player_2_info.position_idx_comp_ptr->add_observer(level_manager_comp_ptr);
-	std::ranges::for_each(cubes, [player_2_info](auto cube) { player_2_info.position_idx_comp_ptr->add_observer(cube); });
+	std::ranges::for_each(cube_components.cube_components, [player_2_info](auto cube_comp_ptr) { player_2_info.position_idx_comp_ptr->add_observer(cube_comp_ptr); });
 
 	//---------------------------------------------------------------------------------
 	// DEBUG
 	//---------------------------------------------------------------------------------
-	auto debug_command_ptr = std::make_unique<debug_command>(round_comp_ptr);
+	auto debug_command_ptr = std::make_unique<debug_command>();
 	input_manager::instance().bind_command(input_type::keyboard, input_state::down, k_j, std::move(debug_command_ptr));
 }
 

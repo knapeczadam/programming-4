@@ -3,7 +3,7 @@
 // Project includes
 #include "minigin/component/ui/text_ui_component.h"
 
-namespace qbert
+namespace mngn
 {
     class fps_component final : public mngn::text_ui_component
     {

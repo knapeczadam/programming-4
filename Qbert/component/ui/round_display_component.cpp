@@ -1,7 +1,7 @@
 ﻿#include "round_display_component.h"
 
 // Project includes
-#include "component/level/round_counter_component.h"
+#include "component/player/round_counter_component.h"
 #include "minigin/component/ui/sprite_ui_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/sprite_manager.h"

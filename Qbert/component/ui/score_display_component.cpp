@@ -23,6 +23,7 @@ namespace qbert
     {
         if (event == "score_changed")
         {
+            // TODO: delete previous sprites
             auto const score_comp_ptr = dynamic_cast<score_counter_component*>(subject_ptr);
             std::deque<mngn::sprite*> sprites;
             if (score_comp_ptr)

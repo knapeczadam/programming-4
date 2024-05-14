@@ -6,7 +6,7 @@
 // Standard includes
 #include <sstream>
 
-namespace qbert
+namespace mngn
 {
     void fps_component::update()
     {
