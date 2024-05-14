@@ -18,8 +18,4 @@ namespace qbert
             player_state_comp_ptr->change_state<jumping_state>(game_object(), row_dir_, col_dir_);
         }
     }
-
-    void reset_move_command::execute()
-    {
-    }
 }

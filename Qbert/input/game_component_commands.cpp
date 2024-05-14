@@ -24,12 +24,6 @@ namespace qbert
         event->sound_id = qb_re_e_qbert_fall;
         event->volume = 100;
         std::cout << "# Thread " << std::this_thread::get_id() << " : calling sound handler" << '\n';
-        mngn::event_manager::instance().get_handler<mngn::sound_handler>()->add_event(std::move(event));
-    }
-
-    void score_command::execute()
-    {
-        // basically its just broadcasting a function, simpler way to call a function
-        static_cast<score_counter_component*>(game_component())->add_score(score_);
+        mngn::event_manager::instance().handler<mngn::sound_handler>()->add_event(std::move(event));
     }
 }

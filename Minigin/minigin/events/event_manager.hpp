@@ -6,7 +6,7 @@ namespace mngn
     class event_manager;
     
     template <class T> requires is_event_handler<T>
-    auto event_manager::get_handler() -> T *
+    auto event_manager::handler() -> T *
     {
         if (event_handlers_.contains(typeid(T)))
         {

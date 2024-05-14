@@ -27,21 +27,4 @@ namespace qbert
         int row_dir_ = 0;
         int col_dir_ = 0;
     };
-
-    // Reset move command
-    class reset_move_command final : public mngn::game_object_command
-    {
-    public:
-        explicit reset_move_command(mngn::game_object *game_object_ptr)
-            : game_object_command{game_object_ptr}
-        {
-        }
-        
-        void execute() override;
-
-        [[nodiscard]] auto clone() const -> std::unique_ptr<base_command> override
-        {
-            return std::make_unique<reset_move_command>(*this);
-        }
-    };
 }

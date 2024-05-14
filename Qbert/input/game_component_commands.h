@@ -5,7 +5,6 @@
 
 namespace qbert
 {
-    // HealthCommand
     class damage_command final : public mngn::game_component_command
     {
     public:
@@ -23,26 +22,5 @@ namespace qbert
 
     private:
         int damage_ = 1;
-    };
-
-    // ScoreCommand
-    class score_command final : public mngn::game_component_command
-    {
-    public:
-        score_command(mngn::game_component *component_ptr, int score)
-            : game_component_command(component_ptr)
-            , score_(score)
-        {
-        }
-
-        [[nodiscard]] auto clone() const -> std::unique_ptr<base_command> override
-        {
-            return std::make_unique<score_command>(*this);
-        }
-
-        void execute() override;
-
-    private:
-        int score_ = 0;
     };
 }

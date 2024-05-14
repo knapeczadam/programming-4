@@ -28,7 +28,7 @@ namespace mngn
         event_manager &operator=(event_manager &&other) = delete;
 
         template <class T> requires is_event_handler<T>
-        auto get_handler() -> T *;
+        auto handler() -> T *;
 
         void stop_all();
 
