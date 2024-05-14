@@ -27,7 +27,7 @@ namespace mngn
     void sdl_sound_system::play_sound(int id, int const volume)
     {
         std::cout << "# Thread " << std::this_thread::get_id() << " : calling sdl_sound_system::play_sound" << '\n';
-        auto effect = resource_manager::get_instance().get_sound_effect(id);
+        auto effect = resource_manager::instance().get_sound_effect(id);
         effect->set_volume(volume);
         // auto stream = resource_manager::get_instance().get_sound_stream(id);
         // stream->set_volume(volume);

@@ -19,8 +19,8 @@ namespace qbert
 
         void awake() override;
 
-        [[nodiscard]] int get_row_idx() const { return row_idx_; }
-        [[nodiscard]] int get_col_idx() const { return col_idx_; }
+        [[nodiscard]] int row_idx() const { return row_idx_; }
+        [[nodiscard]] int col_idx() const { return col_idx_; }
 
     private:
         int row_idx_ = 0;

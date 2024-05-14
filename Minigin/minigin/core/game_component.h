@@ -32,9 +32,8 @@ namespace mngn
         virtual void awake()  { }
         virtual void update() { }
 
-        [[nodiscard]] virtual auto get_family() const -> component_family = 0;
-
-        [[nodiscard]] auto get_owner() const -> game_object * { return owner_ptr_; }
+        [[nodiscard]] virtual auto family() const -> component_family = 0;
+        [[nodiscard]] auto owner() const -> game_object * { return owner_ptr_; }
         
     private:
         void set_owner(game_object *owner_ptr);

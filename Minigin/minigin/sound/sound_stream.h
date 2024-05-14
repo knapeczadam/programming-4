@@ -25,7 +25,7 @@ namespace mngn
         static void stop();
         static void pause();
         static void resume();
-        static auto get_volume() -> int;
+        static auto volume() -> int;
         static void set_volume(int value);
         static auto is_playing() -> bool;
 

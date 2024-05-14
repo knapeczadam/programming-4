@@ -43,7 +43,7 @@ namespace mngn
         return false;
     }
     
-    auto sound_effect::get_volume() const -> int
+    auto sound_effect::volume() const -> int
     {
         if (mix_chunk_ptr_)
         {

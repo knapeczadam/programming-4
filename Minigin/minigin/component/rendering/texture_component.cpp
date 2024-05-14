@@ -9,12 +9,12 @@
 namespace mngn
 {
     texture_component::texture_component(std::string const &filename)
-        : m_texture_ptr_{resource_manager::get_instance().load_texture(filename)}
+        : m_texture_ptr_{resource_manager::instance().load_texture(filename)}
     {
     }
 
     texture_component::texture_component(int id)
-        : m_texture_ptr_{resource_manager::get_instance().load_texture(id)}
+        : m_texture_ptr_{resource_manager::instance().load_texture(id)}
     {
     }
 
@@ -26,13 +26,13 @@ namespace mngn
     {
         if (m_texture_ptr_)
         {
-            auto const &pos = get_owner()->get_world_position();
-            renderer::get_instance().render_texture(*m_texture_ptr_, pos.x, pos.y);
+            auto const &pos = owner()->world_position();
+            renderer::instance().render_texture(*m_texture_ptr_, pos.x, pos.y);
         }
     }
 
     void texture_component::set_texture(std::string const &filename)
     {
-        m_texture_ptr_ = resource_manager::get_instance().load_texture(filename);
+        m_texture_ptr_ = resource_manager::instance().load_texture(filename);
     }
 }

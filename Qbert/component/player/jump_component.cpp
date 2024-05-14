@@ -19,19 +19,20 @@ namespace qbert
         {
             if (curr_pos_ != end_pos_)
             {
-                accu_time_ += mngn::game_time::get_instance().fixed_delta_time;
+                accu_time_ += mngn::game_time::instance().fixed_delta_time;
                 float t = accu_time_ / jump_time_;
                 t = glm::clamp(t, 0.0f, 1.0f);
                 curr_pos_ = mngn::bezier_curve(start_pos_, pos_1_, pos_2_, end_pos_, t);
-                get_owner()->set_local_position(curr_pos_);
+                owner()->set_local_position(curr_pos_);
             }
             else
             {
                 is_jumping_ = false;
                 accu_time_ = 0.0f;
+                curr_pos_ = {};
                 
-                auto player_state_comp_ptr = get_owner()->get_component<player_state_component>();
-                player_state_comp_ptr->change_state<landing_state>(get_owner());
+                auto player_state_comp_ptr = owner()->component<player_state_component>();
+                player_state_comp_ptr->change_state<landing_state>(owner());
             }
         }
     }
@@ -46,7 +47,7 @@ namespace qbert
 
     void jump_component::calculate_bezier_positions(int row_dir, int col_dir)
     {
-        start_pos_ = get_owner()->get_local_position();
+        start_pos_ = owner()->local_position();
         
         int offset_x = 32;
         int offset_y = 48;

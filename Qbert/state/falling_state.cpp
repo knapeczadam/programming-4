@@ -15,7 +15,7 @@ namespace qbert
 
     void falling_state::on_enter()
     {
-        auto fall_comp_ptr = player_ptr_->get_component<fall_component>();
+        auto fall_comp_ptr = player_ptr_->component<fall_component>();
         fall_comp_ptr->fall(col_idx_);
     }
 }

@@ -11,16 +11,16 @@ namespace qbert
 {
     void round_display_component::awake()
     {
-        sprite_ui_component_ptr_ = get_owner()->get_component<mngn::sprite_ui_component>();
+        sprite_ui_comp_ptr_ = owner()->component<mngn::sprite_ui_component>();
     }
 
     void round_display_component::notify(std::string const &event, mngn::subject *subject_ptr)
     {
         if (event == "round_changed")
         {
-            auto const *round_component_ptr = dynamic_cast<qbert::round_counter_component*>(subject_ptr);
-            auto round = round_component_ptr->get_round();
-            sprite_ui_component_ptr_->get_sprite()->set_current_frame(round);
+            auto const round_counter_comp_ptr = dynamic_cast<qbert::round_counter_component*>(subject_ptr);
+            auto round = round_counter_comp_ptr->round();
+            sprite_ui_comp_ptr_->get_sprite()->set_current_frame(round);
         }
     }
 }

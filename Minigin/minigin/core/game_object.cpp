@@ -20,29 +20,26 @@ namespace mngn
 
     void game_object::awake()
     {
-        for (auto const &component_ptr : component_map_ | std::views::values)
+        std::ranges::for_each(component_map_ | std::views::values, [](auto const &comp)
         {
-            component_ptr->awake();
-        }
+            comp->awake();
+        });
     }
 
     void game_object::fixed_update()
     {
-        for (auto const &component_ptr : component_map_ | std::views::values)
+        std::ranges::for_each(components(component_family::physics) | std::views::values, [](auto const &comp)
         {
-            if (auto physics_comp_ptr = dynamic_cast<physics_component*>(component_ptr.get()))
-            {
-                physics_comp_ptr->fixed_update();
-            }
-        }
+            static_cast<physics_component*>(comp)->fixed_update();
+        });
     }
 
     void game_object::update()
     {
-        for (auto const &component_ptr : component_map_ | std::views::values)
+        std::ranges::for_each(component_map_ | std::views::values, [](auto const &comp)
         {
-            component_ptr->update();
-        }
+            comp->update();
+        });
     }
 
     void game_object::add_child(game_object *child_ptr)
@@ -56,12 +53,12 @@ namespace mngn
         {
             if (parent_ptr_)
             {
-                auto const new_pos = parent_ptr_->get_world_position() + transform_.get_local_position();
+                auto const new_pos = parent_ptr_->world_position() + transform_.local_position();
                 transform_.set_world_position(new_pos);
             }
             else
             {
-                transform_.set_world_position(transform_.get_local_position());
+                transform_.set_world_position(transform_.local_position());
             }
         }
         position_dirty_ = false;
@@ -94,13 +91,13 @@ namespace mngn
         }
         if (parent_ptr == nullptr)
         {
-            set_local_position(get_world_position());
+            set_local_position(world_position());
         }
         else
         {
             if (keep_world_position)
             {
-                auto const new_pos = get_world_position() - parent_ptr->get_world_position();
+                auto const new_pos = world_position() - parent_ptr->world_position();
                 transform_.set_local_position(new_pos);
             }
             position_dirty_ = true;
@@ -124,7 +121,7 @@ namespace mngn
 
     /// \brief The number of children the parent Transform has.
     /// \return 
-    auto game_object::get_child_count() const -> int
+    auto game_object::child_count() const -> int
     {
         return static_cast<int>(children_.size());
     }
@@ -132,7 +129,7 @@ namespace mngn
     /// \brief Returns the child GameObject at the specified index.
     /// \param index 
     /// \return 
-    auto game_object::get_child_at(int const index) const -> game_object *
+    auto game_object::child_at(int const index) const -> game_object *
     {
         if (index < 0 or index >= static_cast<int>(children_.size()))
         {
@@ -164,7 +161,7 @@ namespace mngn
     int count = 0;
     for (auto it = component_map_.begin(); it != component_map_.end();)
     {
-        if (it->second->get_family() == family_type)
+        if (it->second->family() == family_type)
         {
             it = component_map_.erase(it);
             ++count;
@@ -179,20 +176,20 @@ namespace mngn
 
     auto game_object::has_component(component_family family_type) const -> bool
     {
-        return std::ranges::any_of(component_map_ | std::views::values, [family_type](auto const &value) { return value->get_family() == family_type; });
+        return std::ranges::any_of(component_map_ | std::views::values, [family_type](auto const &comp) { return comp->family() == family_type; });
     }
 
     /// \brief Gets references to all components of type T on the same GameObject as the component specified.
     /// \param family_type 
     /// \return 
-    auto game_object::get_components(component_family const family_type) const -> component_map
+    auto game_object::components(component_family const family_type) const -> component_map
     {
         component_map components{};
-        for (auto const &[key, value] : component_map_)
+        for (auto const &[key, comp] : component_map_)
         {
-            if (value->get_family() == family_type)
+            if (comp->family() == family_type)
             {
-                components[key] = value.get();
+                components[key] = comp.get();
             }
         }
         return components;
@@ -200,12 +197,12 @@ namespace mngn
 
     /// \brief Gets references to all components of type T on the same GameObject as the component specified.
     /// \return 
-    auto game_object::get_components() const -> component_map
+    auto game_object::components() const -> component_map
     {
         component_map components{};
-        for (auto const &[key, value] : component_map_)
+        for (auto const &[key, comp] : component_map_)
         {
-            components[key] = value.get();
+            components[key] = comp.get();
         }
         return components;
     }
@@ -213,21 +210,21 @@ namespace mngn
     /// \brief Gets references to all components of type T on the same GameObject as the component specified, and any child of the GameObject.
     /// \param family_type 
     /// \return 
-    auto game_object::get_components_in_children(component_family family_type) const -> component_multimap
+    auto game_object::components_in_children(component_family family_type) const -> component_multimap
     {
         component_multimap components{};
-        for (auto const &[key, value] : component_map_)
+        for (auto const &[key, comp] : component_map_)
         {
-            if (value->get_family() == family_type)
+            if (comp->family() == family_type)
             {
-                components.emplace(key, value.get());
+                components.emplace(key, comp.get());
             }
         }
-        for (auto const &child : children_)
+        for (auto const &child_ptr : children_)
         {
-            for (auto const &[key, value] : child->get_components_in_children(family_type))
+            for (auto const &[key, comp_ptr] : child_ptr->components_in_children(family_type))
             {
-                components.emplace(key, value);
+                components.emplace(key, comp_ptr);
             }
         }
         return components;
@@ -236,18 +233,18 @@ namespace mngn
 
     /// \brief Gets references to all components of type T on the same GameObject as the component specified, and any child of the GameObject.
     /// \return
-    auto game_object::get_components_in_children() const -> component_multimap
+    auto game_object::components_in_children() const -> component_multimap
     {
         component_multimap components{};
-        for (auto const &[key, value] : component_map_)
+        for (auto const &[key, comp] : component_map_)
         {
-            components.emplace(key, value.get());
+            components.emplace(key, comp.get());
         }
-        for (auto const &child : children_)
+        for (auto const &child_ptr : children_)
         {
-            for (auto const &[key, value] : child->get_components_in_children())
+            for (auto const &[key, comp_ptr] : child_ptr->components_in_children())
             {
-                components.emplace(key, value);
+                components.emplace(key, comp_ptr);
             }
         }
         return components;
@@ -256,21 +253,21 @@ namespace mngn
     /// \brief Gets references to all components of type T on the same GameObject as the component specified, and any parent of the GameObject.
     /// \param family_type 
     /// \return 
-    auto game_object::get_components_in_parent(component_family family_type) const -> component_multimap
+    auto game_object::components_in_parent(component_family family_type) const -> component_multimap
     {
         component_multimap components{};
-        for (auto const &[key, value] : component_map_)
+        for (auto const &[key, comp] : component_map_)
         {
-            if (value->get_family() == family_type)
+            if (comp->family() == family_type)
             {
-                components.emplace(key, value.get());
+                components.emplace(key, comp.get());
             }
         }
         if (parent_ptr_)
         {
-            for (auto const &[key, value] : parent_ptr_->get_components_in_parent(family_type))
+            for (auto const &[key, comp_ptr] : parent_ptr_->components_in_parent(family_type))
             {
-                components.emplace(key, value);
+                components.emplace(key, comp_ptr);
             }
         }
         return components;
@@ -278,40 +275,40 @@ namespace mngn
 
     /// \brief Gets references to all components of type T on the same GameObject as the component specified, and any parent of the GameObject.
     /// \return 
-    auto game_object::get_components_in_parent() const -> component_multimap
+    auto game_object::components_in_parent() const -> component_multimap
     {
         component_multimap components{};
-        for (auto const &[key, value] : component_map_)
+        for (auto const &[key, comp] : component_map_)
         {
-            components.emplace(key, value.get());
+            components.emplace(key, comp.get());
         }
         if (parent_ptr_)
         {
-            for (auto const &[key, value] : parent_ptr_->get_components_in_parent())
+            for (auto const &[key, comp_ptr] : parent_ptr_->components_in_parent())
             {
-                components.emplace(key, value);
+                components.emplace(key, comp_ptr);
             }
         }
         return components;
     }
 
-    auto game_object::get_world_position() -> const glm::vec3 &
+    auto game_object::world_position() -> const glm::vec3 &
     {
         if (position_dirty_)
         {
             update_world_position();
         }
-        return transform_.get_world_position();
+        return transform_.world_position();
     }
 
-    auto game_object::get_local_position() const -> const glm::vec3 &
+    auto game_object::local_position() const -> const glm::vec3 &
     {
-        return transform_.get_local_position();
+        return transform_.local_position();
     }
 
     void game_object::set_local_position(float x, float y)
     {
-        set_local_position(glm::vec3{x, y, transform_.get_local_position().z});
+        set_local_position(glm::vec3{x, y, transform_.local_position().z});
     }
 
     void game_object::set_local_position(float x, float y, float z)
@@ -321,7 +318,7 @@ namespace mngn
 
     void game_object::set_local_position(glm::vec2 const &position)
     {
-        set_local_position(glm::vec3{position, transform_.get_local_position().z});
+        set_local_position(glm::vec3{position, transform_.local_position().z});
     }
 
     void game_object::set_local_position(glm::vec3 const &position)

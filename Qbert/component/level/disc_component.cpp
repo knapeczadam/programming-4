@@ -29,6 +29,6 @@ namespace qbert
         {
            pos += glm::vec2{(col_idx_ - 1.0f) * 64.0f + 50.0f, -28.0f}; 
         }
-        get_owner()->set_local_position(pos);
+        owner()->set_local_position(pos);
     }
 }

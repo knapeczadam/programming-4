@@ -94,15 +94,15 @@ namespace mngn
             throw std::runtime_error(std::string("SDL_CreateWindow Error: ") + SDL_GetError());
         }
 
-        renderer::get_instance().init(g_window_ptr);
+        renderer::instance().init(g_window_ptr);
 
-        resource_manager::get_instance().init(data_path);
-        sprite_manager::get_instance().set_data_path(data_path);
+        resource_manager::instance().init(data_path);
+        sprite_manager::instance().set_data_path(data_path);
     }
 
     engine::~engine()
     {
-        renderer::get_instance().destroy();
+        renderer::instance().destroy();
         SDL_DestroyWindow(g_window_ptr);
         g_window_ptr = nullptr;
         SDL_Quit();
@@ -115,9 +115,9 @@ namespace mngn
         
         load();
 
-        auto const &renderer = renderer::get_instance();
-        auto &scene_manager  = scene_manager::get_instance();
-        auto const &input    = input_manager::get_instance();
+        auto const &renderer = renderer::instance();
+        auto &scene_manager  = scene_manager::instance();
+        auto const &input    = input_manager::instance();
 
         bool do_continue = true;
         auto last_time = high_resolution_clock::now();
@@ -128,17 +128,17 @@ namespace mngn
         while (do_continue)
         {
             auto const current_time = high_resolution_clock::now();
-            game_time::get_instance().delta_time = duration<float>(current_time - last_time).count(); // dt always has a 1 frame delay
+            game_time::instance().delta_time = duration<float>(current_time - last_time).count(); // dt always has a 1 frame delay
             
             last_time = current_time;
-            lag += game_time::get_instance().delta_time;
+            lag += game_time::instance().delta_time;
             
             do_continue = input.process_input();
 
-            while (lag >= game_time::get_instance().fixed_delta_time)
+            while (lag >= game_time::instance().fixed_delta_time)
             {
                 scene_manager.fixed_update();
-                lag -= game_time::get_instance().fixed_delta_time;
+                lag -= game_time::instance().fixed_delta_time;
             }
             
             scene_manager.update();
@@ -147,7 +147,7 @@ namespace mngn
 
             SteamAPI_RunCallbacks(); 
 
-            auto const sleep_time = current_time + milliseconds(static_cast<long long>(game_time::get_instance().ms_per_frame)) - high_resolution_clock::now();
+            auto const sleep_time = current_time + milliseconds(static_cast<long long>(game_time::instance().ms_per_frame)) - high_resolution_clock::now();
 
             std::this_thread::sleep_for(sleep_time);
         }

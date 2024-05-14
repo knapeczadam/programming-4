@@ -20,10 +20,10 @@ namespace mngn
 
     // Concepts
     template <class T>
-    concept is_component_type = std::is_base_of_v<game_component, T> and std::is_constructible_v<T>;
+    concept family_component = std::is_base_of_v<game_component, T> and std::is_abstract_v<T>;
 
     template <class T>
-    concept is_component_family_type = std::is_base_of_v<game_component, T> and std::is_abstract_v<T>;
+    concept child_component = std::is_base_of_v<game_component, T> and std::is_constructible_v<T>;
 
     // Type aliases
     using component_map = std::unordered_map<std::type_index, game_component*>;
@@ -47,7 +47,7 @@ namespace mngn
         game_object &operator=(game_object const &other) = delete;
         game_object &operator=(game_object &&other)      = delete;
 
-        [[nodiscard]] auto get_name() const -> std::string { return name_; }
+        [[nodiscard]] auto name() const -> std::string { return name_; }
 
         void awake();
         void fixed_update();
@@ -58,69 +58,68 @@ namespace mngn
         [[nodiscard]] auto is_alive() const -> bool { return alive_; }
         void destroy() { alive_ = false; }
 
-        [[nodiscard]] auto get_parent() const -> game_object * { return parent_ptr_; }
+        [[nodiscard]] auto parent() const -> game_object * { return parent_ptr_; }
         auto set_parent(game_object *parent_ptr, bool keep_world_position = true) -> bool;
         auto has_child(game_object *child_ptr) const -> bool;
 
-        [[nodiscard]] auto get_child_count() const -> int;
-        [[nodiscard]] auto get_child_at(int const index) const -> game_object *;
+        [[nodiscard]] auto child_count() const -> int;
+        [[nodiscard]] auto child_at(int const index) const -> game_object *;
 
         auto remove_component(game_component const *component_ptr) -> bool;
         auto remove_components(component_family const family_type) -> int;
 
         [[nodiscard]] auto has_component(component_family family_type) const -> bool;
 
-        [[nodiscard]] auto get_components(component_family const family_type) const -> component_map;
-        [[nodiscard]] auto get_components() const -> component_map;
+        [[nodiscard]] auto components(component_family const family_type) const -> component_map;
+        [[nodiscard]] auto components() const -> component_map;
 
-        [[nodiscard]] auto get_components_in_children(component_family family_type) const -> component_multimap;
-        [[nodiscard]] auto get_components_in_children() const -> component_multimap;
+        [[nodiscard]] auto components_in_children(component_family family_type) const -> component_multimap;
+        [[nodiscard]] auto components_in_children() const -> component_multimap;
 
-        [[nodiscard]] auto get_components_in_parent(component_family family_type) const -> component_multimap;
-        [[nodiscard]] auto get_components_in_parent() const -> component_multimap;
+        [[nodiscard]] auto components_in_parent(component_family family_type) const -> component_multimap;
+        [[nodiscard]] auto components_in_parent() const -> component_multimap;
 
-        template <class T, typename... Args> requires is_component_type<T>
+        template <class T, typename... Args> requires child_component<T>
         auto add_component(Args &&... args) -> T *;
 
-        // TODO: if not found throw component_not_found_exception
-        template <class T> requires is_component_type<T>
-        [[nodiscard]] auto get_component() const -> T *;
+        template <class T> requires child_component<T>
+        [[nodiscard]] auto component() const -> T *;
 
-        template <class T> requires is_component_family_type<T>
-        [[nodiscard]] auto get_components() const -> component_multimap_t<T>;
+        template <class T> requires family_component<T>
+        [[nodiscard]] auto components() const -> component_multimap_t<T>;
 
-        template <class T> requires is_component_type<T>
-        [[nodiscard]] auto get_component_in_children() const -> T *;
+        template <class T> requires child_component<T>
+        [[nodiscard]] auto component_in_children() const -> T *;
 
-        template <class T> requires is_component_type<T>
-        [[nodiscard]] auto get_components_in_children() const -> component_vector_t<T>;
+        template <class T> requires child_component<T>
+        [[nodiscard]] auto components_in_children() const -> component_vector_t<T>;
 
-        template <class T> requires is_component_family_type<T>
-        [[nodiscard]] auto get_components_in_children() const -> component_multimap_t<T>;
+        template <class T> requires family_component<T>
+        [[nodiscard]] auto components_in_children() const -> component_multimap_t<T>;
 
-        template <class T> requires is_component_type<T>
-        [[nodiscard]] auto get_component_in_parent() const -> T *;
+        template <class T> requires child_component<T>
+        [[nodiscard]] auto component_in_parent() const -> T *;
 
-        template <class T> requires is_component_type<T>
-        [[nodiscard]] auto get_components_in_parent() const -> component_vector_t<T>;
+        template <class T> requires child_component<T>
+        [[nodiscard]] auto components_in_parent() const -> component_vector_t<T>;
 
-        template <class T> requires is_component_family_type<T>
-        [[nodiscard]] auto get_components_in_parent() const -> component_multimap_t<T>;
+        template <class T> requires family_component<T>
+        [[nodiscard]] auto components_in_parent() const -> component_multimap_t<T>;
 
-        template <class T> requires is_component_type<T>
+        template <class T> requires child_component<T>
         auto remove_component() -> bool;
 
-        template <class T> requires is_component_family_type<T>
+        template <class T> requires family_component<T>
         auto remove_components() -> int;
 
-        template <class T> requires is_component_type<T>
+        template <class T> requires child_component<T>
         [[nodiscard]] auto has_component() const -> bool;
 
-        template <class T> requires is_component_family_type<T>
+        template <class T> requires family_component<T>
         [[nodiscard]] auto has_component() const -> bool;
 
-        auto get_world_position() -> const glm::vec3 &;
-        [[nodiscard]] auto get_local_position() const -> const glm::vec3 &;
+        auto world_position() -> const glm::vec3 &;
+        [[nodiscard]] auto local_position() const -> const glm::vec3 &;
 
         void set_local_position(float x, float y);
         void set_local_position(float x, float y, float z);

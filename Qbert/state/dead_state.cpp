@@ -12,7 +12,7 @@ namespace qbert
 
     void dead_state::on_enter()
     {
-        auto health_comp_ptr = player_ptr_->get_component<health_component>();
+        auto health_comp_ptr = player_ptr_->component<health_component>();
         health_comp_ptr->take_damage(1);
     }
 }

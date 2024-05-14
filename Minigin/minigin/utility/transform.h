@@ -8,8 +8,8 @@ namespace mngn
     class transform final
     {
     public:
-        [[nodiscard]] auto get_world_position() const -> const glm::vec3 & { return world_position_; }
-        [[nodiscard]] auto get_local_position() const -> const glm::vec3 & { return local_position_; }
+        [[nodiscard]] auto world_position() const -> const glm::vec3 & { return world_position_; }
+        [[nodiscard]] auto local_position() const -> const glm::vec3 & { return local_position_; }
         
         void set_world_position(float const x, float const y);
         void set_world_position(float const x, float const y, float const z);

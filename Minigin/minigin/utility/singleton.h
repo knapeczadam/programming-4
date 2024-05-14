@@ -6,7 +6,7 @@ namespace mngn
     class singleton
     {
     public:
-        static T &get_instance()
+        static T &instance()
         {
             static T instance{};
             return instance;

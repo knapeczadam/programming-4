@@ -20,7 +20,7 @@ namespace mngn
     {
     public:
         sprite() = default;
-        explicit sprite(texture *texture_ptr);  
+        explicit sprite(mngn::texture *texture_ptr);  
         ~sprite() = default;
     
         sprite(const sprite &other)            = delete;
@@ -62,25 +62,25 @@ namespace mngn
         void set_position(const glm::ivec2 & pos);
         void set_current_frame(int frame);
         
-        [[nodiscard]] auto get_src_rect() const -> rect;
-        [[nodiscard]] auto get_dst_rect() const -> rect;
-        [[nodiscard]] auto get_texture() const -> texture *;
-        [[nodiscard]] auto get_texture_width() const -> int;
-        [[nodiscard]] auto get_texture_height() const -> int;
-        [[nodiscard]] auto get_collider_width() const -> int;
-        [[nodiscard]] auto get_collider_height() const -> int;
-        [[nodiscard]] auto get_collider_horizontal_offset() const -> int;
-        [[nodiscard]] auto get_collider_vertical_offset() const -> int;
-        [[nodiscard]] auto get_scaled_clip_width() const -> int;
-        [[nodiscard]] auto get_scaled_clip_height() const -> int;
-        [[nodiscard]] auto get_position() const -> glm::ivec2;
-        [[nodiscard]] auto get_iter_count() const -> int;
+        [[nodiscard]] auto src_rect() const -> rect;
+        [[nodiscard]] auto dst_rect() const -> rect;
+        [[nodiscard]] auto texture() const -> texture *;
+        [[nodiscard]] auto texture_width() const -> int;
+        [[nodiscard]] auto texture_height() const -> int;
+        [[nodiscard]] auto collider_width() const -> int;
+        [[nodiscard]] auto collider_height() const -> int;
+        [[nodiscard]] auto collider_horizontal_offset() const -> int;
+        [[nodiscard]] auto collider_vertical_offset() const -> int;
+        [[nodiscard]] auto scaled_clip_width() const -> int;
+        [[nodiscard]] auto scaled_clip_height() const -> int;
+        [[nodiscard]] auto position() const -> glm::ivec2;
+        [[nodiscard]] auto iter_count() const -> int;
         
         [[nodiscard]] auto is_last_frame() const -> bool;
 
     private:
         // SPRITE PROPERTIES
-        texture *texture_ptr_     = nullptr;
+        mngn::texture *texture_ptr_     = nullptr;
         int     left_offset_px_   = 0;
         int     top_offset_px_    = 0;
         int     left_offset_cols_ = 0;

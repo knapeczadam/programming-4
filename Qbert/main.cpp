@@ -80,10 +80,10 @@ void load()
 	// load_test_level();
 	load_test_ui();
 
-    auto const scene = scene_manager::get_instance().create_scene("Demo");
+    auto const scene = scene_manager::instance().create_scene("Demo");
     
     // Fonts
-    auto const font_small = resource_manager::get_instance().load_font("fonts/Lingua.otf", 10);
+    auto const font_small = resource_manager::instance().load_font("fonts/Lingua.otf", 10);
 
     // FPS
     auto go = scene->add_game_object();
@@ -99,9 +99,9 @@ void load()
 	int offset_x = -32;
 	int offset_y = 48;
 	
-	auto color_1 = sprite_manager::get_instance().load_sprite(qb_sp_level_1_red_cube_1, qb_re_t_sprite_general);
-	auto color_2 = sprite_manager::get_instance().load_sprite(qb_sp_level_1_yellow_cube_1, qb_re_t_sprite_general);
-	auto color_3 = sprite_manager::get_instance().load_sprite(qb_sp_level_1_blue_cube_1, qb_re_t_sprite_general);
+	auto color_1 = sprite_manager::instance().load_sprite(qb_sp_level_1_red_cube_1, qb_re_t_sprite_general);
+	auto color_2 = sprite_manager::instance().load_sprite(qb_sp_level_1_yellow_cube_1, qb_re_t_sprite_general);
+	auto color_3 = sprite_manager::instance().load_sprite(qb_sp_level_1_blue_cube_1, qb_re_t_sprite_general);
 
 	std::vector<cube_component*> cubes;
 	for (int i = 0; i < 7; ++i)
@@ -161,7 +161,7 @@ void load()
 	// DEBUG
 	//---------------------------------------------------------------------------------
 	auto debug_command_ptr = std::make_unique<debug_command>(round_comp_ptr);
-	input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, k_j, std::move(debug_command_ptr));
+	input_manager::instance().bind_command(input_type::keyboard, input_state::down, k_j, std::move(debug_command_ptr));
 	
     //---------------------------------------------------------------------------------
     // PLAYER 1
@@ -191,15 +191,15 @@ void load()
 
 	auto reset_move_command_pacman = std::make_unique<reset_move_command>(go);
 
-    input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_left, std::move(move_left_command1));
-    input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_right, std::move(move_right_command1));
-    input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_up, std::move(move_up_command1));
-    input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_down, std::move(move_down_command1));
+    input_manager::instance().bind_command(input_type::keyboard, input_state::down, input::k_left, std::move(move_left_command1));
+    input_manager::instance().bind_command(input_type::keyboard, input_state::down, input::k_right, std::move(move_right_command1));
+    input_manager::instance().bind_command(input_type::keyboard, input_state::down, input::k_up, std::move(move_up_command1));
+    input_manager::instance().bind_command(input_type::keyboard, input_state::down, input::k_down, std::move(move_down_command1));
 
-	input_manager::get_instance().bind_command(input_type::keyboard, input_state::up, input::k_left, reset_move_command_pacman->clone());
-	input_manager::get_instance().bind_command(input_type::keyboard, input_state::up, input::k_right, reset_move_command_pacman->clone());
-	input_manager::get_instance().bind_command(input_type::keyboard, input_state::up, input::k_up, reset_move_command_pacman->clone());
-	input_manager::get_instance().bind_command(input_type::keyboard, input_state::up, input::k_down, reset_move_command_pacman->clone());
+	input_manager::instance().bind_command(input_type::keyboard, input_state::up, input::k_left, reset_move_command_pacman->clone());
+	input_manager::instance().bind_command(input_type::keyboard, input_state::up, input::k_right, reset_move_command_pacman->clone());
+	input_manager::instance().bind_command(input_type::keyboard, input_state::up, input::k_up, reset_move_command_pacman->clone());
+	input_manager::instance().bind_command(input_type::keyboard, input_state::up, input::k_down, reset_move_command_pacman->clone());
 
     // Controller
     auto move_left_command3  = std::make_unique<jump_command>(go, -1, -1);
@@ -207,26 +207,26 @@ void load()
     auto move_up_command3    = std::make_unique<jump_command>(go, -1, 0);
     auto move_down_command3  = std::make_unique<jump_command>(go, 1, 0);
     
-    input_manager::get_instance().bind_command(input_type::controller, input_state::pressed, input::c_left, std::move(move_left_command3));
-    input_manager::get_instance().bind_command(input_type::controller, input_state::pressed, input::c_right, std::move(move_right_command3));
-    input_manager::get_instance().bind_command(input_type::controller, input_state::pressed, input::c_up, std::move(move_up_command3));
-    input_manager::get_instance().bind_command(input_type::controller, input_state::pressed, input::c_down, std::move(move_down_command3));
+    input_manager::instance().bind_command(input_type::controller, input_state::pressed, input::c_left, std::move(move_left_command3));
+    input_manager::instance().bind_command(input_type::controller, input_state::pressed, input::c_right, std::move(move_right_command3));
+    input_manager::instance().bind_command(input_type::controller, input_state::pressed, input::c_up, std::move(move_up_command3));
+    input_manager::instance().bind_command(input_type::controller, input_state::pressed, input::c_down, std::move(move_down_command3));
 
-	input_manager::get_instance().bind_command(input_type::controller, input_state::up, input::c_left, reset_move_command_pacman->clone());
-	input_manager::get_instance().bind_command(input_type::controller, input_state::up, input::c_right, reset_move_command_pacman->clone());
-	input_manager::get_instance().bind_command(input_type::controller, input_state::up, input::c_up, reset_move_command_pacman->clone());
-	input_manager::get_instance().bind_command(input_type::controller, input_state::up, input::c_down, reset_move_command_pacman->clone());
+	input_manager::instance().bind_command(input_type::controller, input_state::up, input::c_left, reset_move_command_pacman->clone());
+	input_manager::instance().bind_command(input_type::controller, input_state::up, input::c_right, reset_move_command_pacman->clone());
+	input_manager::instance().bind_command(input_type::controller, input_state::up, input::c_up, reset_move_command_pacman->clone());
+	input_manager::instance().bind_command(input_type::controller, input_state::up, input::c_down, reset_move_command_pacman->clone());
     
     // Damage
     auto damage_command1 = std::make_unique<damage_command>(health_comp_ptr);
-    input_manager::get_instance().bind_command(input_type::controller, input_state::down, input::c_x, std::move(damage_command1));
+    input_manager::instance().bind_command(input_type::controller, input_state::down, input::c_x, std::move(damage_command1));
     
     // Scores
     auto score_command1 = std::make_unique<score_command>(score_comp_ptr, 10);
     auto score_command2 = std::make_unique<score_command>(score_comp_ptr, 100);
     
-    input_manager::get_instance().bind_command(input_type::controller, input_state::down, input::c_a, std::move(score_command1));
-    input_manager::get_instance().bind_command(input_type::controller, input_state::down, input::c_b, std::move(score_command2));
+    input_manager::instance().bind_command(input_type::controller, input_state::down, input::c_a, std::move(score_command1));
+    input_manager::instance().bind_command(input_type::controller, input_state::down, input::c_b, std::move(score_command2));
 
     //---------------------------------------------------------------------------------
     // PLAYER 2
@@ -241,6 +241,7 @@ void load()
     score_comp_ptr = go->add_component<score_counter_component>();
 	go->add_component<face_component>();
 	go->add_component<player_state_component>();
+	go->add_component<fall_component>();
 	
     health_comp_ptr->add_observer(health_display_comp_ptr);
 	score_comp_ptr->add_observer(score_display_comp_ptr);
@@ -255,26 +256,26 @@ void load()
 
 	auto reset_move_command_ghost = std::make_unique<reset_move_command>(go);
     
-    input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_a, std::move(move_left_command2));
-    input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_d, std::move(move_right_command2));
-    input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_w, std::move(move_up_command2));
-    input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_s, std::move(move_down_command2));
+    input_manager::instance().bind_command(input_type::keyboard, input_state::down, input::k_a, std::move(move_left_command2));
+    input_manager::instance().bind_command(input_type::keyboard, input_state::down, input::k_d, std::move(move_right_command2));
+    input_manager::instance().bind_command(input_type::keyboard, input_state::down, input::k_w, std::move(move_up_command2));
+    input_manager::instance().bind_command(input_type::keyboard, input_state::down, input::k_s, std::move(move_down_command2));
 
-	input_manager::get_instance().bind_command(input_type::keyboard, input_state::up, input::k_a, reset_move_command_ghost->clone());
-	input_manager::get_instance().bind_command(input_type::keyboard, input_state::up, input::k_d, reset_move_command_ghost->clone());
-	input_manager::get_instance().bind_command(input_type::keyboard, input_state::up, input::k_w, reset_move_command_ghost->clone());
-	input_manager::get_instance().bind_command(input_type::keyboard, input_state::up, input::k_s, reset_move_command_ghost->clone());
+	input_manager::instance().bind_command(input_type::keyboard, input_state::up, input::k_a, reset_move_command_ghost->clone());
+	input_manager::instance().bind_command(input_type::keyboard, input_state::up, input::k_d, reset_move_command_ghost->clone());
+	input_manager::instance().bind_command(input_type::keyboard, input_state::up, input::k_w, reset_move_command_ghost->clone());
+	input_manager::instance().bind_command(input_type::keyboard, input_state::up, input::k_s, reset_move_command_ghost->clone());
 
     // Damage
     auto damage_command2 = std::make_unique<damage_command>(health_comp_ptr);
-    input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_c, std::move(damage_command2));
+    input_manager::instance().bind_command(input_type::keyboard, input_state::down, input::k_c, std::move(damage_command2));
 
     // Scores
     auto score_command3 = std::make_unique<score_command>(score_comp_ptr, 10);
     auto score_command4 = std::make_unique<score_command>(score_comp_ptr, 100);
     
-    input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_z, std::move(score_command3));
-    input_manager::get_instance().bind_command(input_type::keyboard, input_state::down, input::k_x, std::move(score_command4));
+    input_manager::instance().bind_command(input_type::keyboard, input_state::down, input::k_z, std::move(score_command3));
+    input_manager::instance().bind_command(input_type::keyboard, input_state::down, input::k_x, std::move(score_command4));
 
 }
 
@@ -283,7 +284,7 @@ int main(int, char *[])
     mngn::engine engine("../Data/");
 	
 #ifndef NDEBUG
-    mngn::test_manager::get_instance().run_all_tests();
+    mngn::test_manager::instance().run_all_tests();
 #endif
 	
     engine.run(load);

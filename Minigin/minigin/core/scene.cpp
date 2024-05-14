@@ -33,9 +33,9 @@ namespace mngn
 
     void scene::remove_game_object(game_object *object_ptr)
     {
-        std::erase_if(objects_, [object_ptr](auto const &obj)
+        std::erase_if(objects_, [object_ptr](auto const &object)
         {
-            return obj.get() == object_ptr;
+            return object.get() == object_ptr;
         });
     }
 
@@ -44,16 +44,16 @@ namespace mngn
         objects_.clear();
     }
 
-    auto scene::get_game_object_count() const -> int
+    auto scene::game_object_count() const -> int
     {
         return static_cast<int>(objects_.size());
     }
 
     auto scene::find_game_object(std::string const &name) const -> game_object *
     {
-        auto const it = std::ranges::find_if(objects_, [&name](auto const &obj)
+        auto const it = std::ranges::find_if(objects_, [&name](auto const &object)
         {
-            return obj->get_name() == name;
+            return object->name() == name;
         });
 
         return it != objects_.end() ? it->get() : nullptr;
@@ -61,41 +61,26 @@ namespace mngn
 
     void scene::awake()
     {
-        for (auto const &object : objects_)
-        {
-            object->awake();
-        }
+        std::ranges::for_each(objects_, [](auto const &object) { object->awake(); });
     }
 
     void scene::fixed_update()
     {
-        for (auto const &object : objects_)
-        {
-            object->fixed_update();
-        }
+        std::ranges::for_each(objects_, [](auto const &object) { object->fixed_update(); });
     }
 
     void scene::update()
     {
-        for (auto const &object : objects_)
-        {
-            object->update();
-        }
+        std::ranges::for_each(objects_, [](auto const &object) { object->update(); });
     }
 
     void scene::late_update()
     {
-        for (auto const &object : objects_)
+        std::ranges::for_each(objects_, [this](auto const &object)
         {
-            if (object->is_alive())
-            {
-                object->late_update();
-            }
-            else
-            {
-                remove_game_object(object.get());
-            }
-        }
+            object->is_alive() ? object->late_update() : remove_game_object(object.get());
+        });
+        
     }
 
     void scene::render() const
@@ -103,11 +88,16 @@ namespace mngn
         for (auto const &object : objects_)
         {
             // TODO: measure performance!
-            auto const renderers = object->get_components_in_children(component_family::rendering);
-            for (auto const &comp : renderers | std::views::values)
+            // auto const renderers = object->get_components_in_children(component_family::rendering);
+            // for (auto const &comp : renderers | std::views::values)
+            // {
+            //     static_cast<rendering_component*>(comp)->render();
+            // }
+            std::ranges::for_each(object->components(component_family::rendering) | std::views::values, [](auto const &comp)
             {
                 static_cast<rendering_component*>(comp)->render();
-            }
+            });
+            
             
             // auto renderers = object->GetComponentsInChildren<RenderingComponent>();
             // for (auto const &comp : renderers | std::views::values)
@@ -121,7 +111,7 @@ namespace mngn
     {
         for (auto const &object : objects_)
         {
-            auto const renderers = object->get_components(component_family::ui);
+            auto const renderers = object->components(component_family::ui);
             for (auto const &comp : renderers | std::views::values)
             {
                 ImGui_ImplOpenGL3_NewFrame();

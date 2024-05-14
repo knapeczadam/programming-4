@@ -16,6 +16,6 @@ namespace mngn
         custom_component &operator=(custom_component const &other) = delete;
         custom_component &operator=(custom_component &&other)      = delete;
 
-        [[nodiscard]] auto get_family() const -> component_family override { return component_family::custom; }
+        [[nodiscard]] auto family() const -> component_family override { return component_family::custom; }
     };
 }

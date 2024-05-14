@@ -11,14 +11,14 @@ namespace mngn
 {
     sprite_component::sprite_component() = default;
 
-    sprite_component::sprite_component(sprite *sprite_ptr)
+    sprite_component::sprite_component(mngn::sprite *sprite_ptr)
         : sprite_ptr_{sprite_ptr}
     {
     }
 
     sprite_component::sprite_component(int sprite_id, int texture_id, bool cache)
     {
-        sprite_ptr_ = sprite_manager::get_instance().load_sprite(sprite_id, texture_id, cache);
+        sprite_ptr_ = sprite_manager::instance().load_sprite(sprite_id, texture_id, cache);
     }
 
     sprite_component::~sprite_component() = default;
@@ -27,9 +27,9 @@ namespace mngn
     {
         if (sprite_ptr_)
         {
-            auto src = sprite_ptr_->get_src_rect();
-            auto dst = sprite_ptr_->get_dst_rect();
-            auto const &pos = get_owner()->get_world_position();
+            auto src = sprite_ptr_->src_rect();
+            auto dst = sprite_ptr_->dst_rect();
+            auto const &pos = owner()->world_position();
             
             SDL_Rect src_rect;
             src_rect.x = src.left;
@@ -44,7 +44,7 @@ namespace mngn
             dst_rect.h = dst.height;
 
 
-            renderer::get_instance().render_texture(*sprite_ptr_->get_texture(), src_rect, dst_rect);
+            renderer::instance().render_texture(*sprite_ptr_->texture(), src_rect, dst_rect);
         }
     }
 
@@ -52,7 +52,7 @@ namespace mngn
     {
         if (sprite_ptr_)
         {
-            sprite_ptr_->update(game_time::get_instance().delta_time);
+            sprite_ptr_->update(game_time::instance().delta_time);
         }
     }
 }

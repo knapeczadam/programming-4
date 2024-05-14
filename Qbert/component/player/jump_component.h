@@ -23,8 +23,8 @@ namespace qbert
         void fixed_update() override;
         void jump(int row_dir, int col_dir);
 
-        [[nodiscard]] auto get_row_direction() const -> int { return row_dir_; }
-        [[nodiscard]] auto get_col_direction() const -> int { return col_dir_; }
+        [[nodiscard]] auto row_direction() const -> int { return row_dir_; }
+        [[nodiscard]] auto col_direction() const -> int { return col_dir_; }
         
     private:
         void calculate_bezier_positions(int row_dir, int col_dir);

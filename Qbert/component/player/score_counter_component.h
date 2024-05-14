@@ -20,7 +20,7 @@ namespace qbert
         void awake() override;
 
         void add_score(int score);
-        [[nodiscard]] auto get_score() const -> int { return score_; }
+        [[nodiscard]] auto score() const -> int { return score_; }
 
     private:
         int score_ = 0;

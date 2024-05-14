@@ -14,7 +14,7 @@ namespace qbert
 
     void start_state::on_enter()
     {
-        auto sprite_comp_ptr_ = player_ptr_->get_component<mngn::sprite_component>();
-        sprite_comp_ptr_->get_sprite()->set_current_frame(7);
+        auto sprite_comp_ptr_ = player_ptr_->component<mngn::sprite_component>();
+        sprite_comp_ptr_->sprite()->set_current_frame(7);
     }
 }

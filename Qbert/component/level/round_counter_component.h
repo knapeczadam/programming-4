@@ -19,7 +19,7 @@ namespace qbert
 
         void awake() override;
         
-        [[nodiscard]] auto get_round() const -> int { return round_; }
+        [[nodiscard]] auto round() const -> int { return round_; }
         void set_round(int round);
         void increase_round();
 

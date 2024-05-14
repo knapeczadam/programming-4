@@ -32,7 +32,7 @@ namespace qbert
     class reset_move_command final : public mngn::game_object_command
     {
     public:
-        reset_move_command(mngn::game_object *game_object_ptr)
+        explicit reset_move_command(mngn::game_object *game_object_ptr)
             : game_object_command{game_object_ptr}
         {
         }

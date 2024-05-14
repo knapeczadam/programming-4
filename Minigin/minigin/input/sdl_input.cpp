@@ -28,7 +28,7 @@ namespace mngn
             ImGui_ImplSDL2_ProcessEvent(&e);
             if (e.type == SDL_QUIT)
             {
-                event_manager::get_instance().stop_all();
+                event_manager::instance().stop_all();
                 return false;
             }
             if (e.type == SDL_KEYDOWN)

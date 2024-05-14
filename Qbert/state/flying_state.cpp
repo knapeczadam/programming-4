@@ -15,7 +15,7 @@ namespace qbert
 
     void flying_state::on_enter()
     {
-        player_ptr_->set_parent(disc_ptr_->get_owner());
-        disc_ptr_->get_owner()->get_component<fly_component>()->fly();
+        player_ptr_->set_parent(disc_ptr_->owner());
+        disc_ptr_->owner()->component<fly_component>()->fly();
     }
 }

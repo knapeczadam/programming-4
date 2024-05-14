@@ -35,8 +35,8 @@ namespace mngn
 
     private:
         std::string text_;
-        bool                        needs_update_ = true;
-        game_font                   *font_ptr_    = nullptr;
+        bool                     needs_update_ = true;
+        game_font                *font_ptr_    = nullptr;
         std::unique_ptr<texture> text_texture_ = nullptr;
     };
 }

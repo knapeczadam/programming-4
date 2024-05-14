@@ -52,7 +52,7 @@ namespace mngn
         Mix_ResumeMusic();
     }
     
-    auto sound_stream::get_volume() -> int
+    auto sound_stream::volume() -> int
     {
         return Mix_VolumeMusic(-1);
     }

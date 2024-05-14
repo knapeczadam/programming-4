@@ -11,16 +11,16 @@ namespace qbert
 {
     void level_display_component::awake()
     {
-        sprite_ui_component_ptr_ = get_owner()->get_component<mngn::sprite_ui_component>();
+        sprite_ui_comp_ptr_ = owner()->component<mngn::sprite_ui_component>();
     }
 
     void level_display_component::notify(std::string const &event, mngn::subject *subject_ptr)
     {
         if (event == "level_changed")
         {
-            auto const *level_component_ptr = dynamic_cast<qbert::level_counter_component*>(subject_ptr);
-            auto level = level_component_ptr->get_level();
-            sprite_ui_component_ptr_->get_sprite()->set_current_frame(level);
+            auto const level_comp_ptr = dynamic_cast<qbert::level_counter_component*>(subject_ptr);
+            auto level = level_comp_ptr->level();
+            sprite_ui_comp_ptr_->get_sprite()->set_current_frame(level);
         }
     }
 }

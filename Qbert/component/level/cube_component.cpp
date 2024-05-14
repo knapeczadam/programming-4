@@ -23,7 +23,7 @@ namespace qbert
 
     void cube_component::awake()
     {
-        get_owner()->get_component<mngn::sprite_component>()->set_sprite(colors_[0]);
+        owner()->component<mngn::sprite_component>()->set_sprite(colors_[0]);
     }
 
     void cube_component::notify(std::string const &event, mngn::subject *subject_ptr)
@@ -31,7 +31,7 @@ namespace qbert
         if (event == "position_changed")
         {
             auto position_comp_ptr = dynamic_cast<position_idx_component*>(subject_ptr);
-            if (position_comp_ptr->get_row_idx() == row_idx_ and position_comp_ptr->get_col_idx() == col_idx_)
+            if (position_comp_ptr->row_idx() == row_idx_ and position_comp_ptr->col_idx() == col_idx_)
             {
                 if (revertible_)
                 {
@@ -44,9 +44,9 @@ namespace qbert
                 if (score_count_ > 0)
                 {
                     --score_count_;
-                    position_comp_ptr->get_owner()->get_component<score_counter_component>()->add_score(25);
+                    position_comp_ptr->owner()->component<score_counter_component>()->add_score(25);
                 }
-                get_owner()->get_component<mngn::sprite_component>()->set_sprite(colors_[current_color_]);
+                owner()->component<mngn::sprite_component>()->set_sprite(colors_[current_color_]);
             }
         }
     }

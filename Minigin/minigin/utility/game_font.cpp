@@ -8,7 +8,7 @@
 
 namespace mngn
 {
-    auto game_font::get_font() const -> TTF_Font *
+    auto game_font::font() const -> TTF_Font *
     {
         return font_ptr_;
     }

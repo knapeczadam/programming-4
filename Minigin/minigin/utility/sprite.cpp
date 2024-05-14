@@ -5,10 +5,10 @@
 
 namespace mngn
 {
-    sprite::sprite(texture* texture_ptr)
+    sprite::sprite(mngn::texture* texture_ptr)
         : texture_ptr_{texture_ptr}
-        , width_{texture_ptr_->get_width()}
-        , height_{texture_ptr_->get_height()}
+        , width_{texture_ptr_->width()}
+        , height_{texture_ptr_->height()}
     {
     }
 
@@ -191,32 +191,32 @@ namespace mngn
 
     //---------------------------------------------------------------------------------
 
-    auto sprite::get_src_rect() const -> rect
+    auto sprite::src_rect() const -> rect
     {
         return src_rect_;
     }
 
-    auto sprite::get_dst_rect() const -> rect
+    auto sprite::dst_rect() const -> rect
     {
         return dst_rect_;
     }
 
-    auto sprite::get_texture() const -> texture *
+    auto sprite::texture() const -> mngn::texture *
     {
         return texture_ptr_;
     }
     
-    auto sprite::get_texture_width() const -> int
+    auto sprite::texture_width() const -> int
     {
         return width_;
     }
 
-    auto sprite::get_texture_height() const -> int
+    auto sprite::texture_height() const -> int
     {
         return height_;
     }
 
-    auto sprite::get_collider_width() const -> int
+    auto sprite::collider_width() const -> int
     {
         if (collider_width_ == 0)
         {
@@ -225,7 +225,7 @@ namespace mngn
         return static_cast<int>(collider_width_ * scale_);
     }
 
-    auto sprite::get_collider_height() const -> int
+    auto sprite::collider_height() const -> int
     {
         if (collider_height_ == 0)
         {
@@ -234,27 +234,27 @@ namespace mngn
         return static_cast<int>(collider_height_ * scale_);
     }
 
-    auto sprite::get_collider_horizontal_offset() const -> int
+    auto sprite::collider_horizontal_offset() const -> int
     {
         return static_cast<int>(collider_horizontal_offset_ * scale_);
     }
 
-    auto sprite::get_collider_vertical_offset() const -> int
+    auto sprite::collider_vertical_offset() const -> int
     {
         return static_cast<int>(collider_vertical_offset_ * scale_);
     }
 
-    auto sprite::get_scaled_clip_width() const -> int
+    auto sprite::scaled_clip_width() const -> int
     {
         return static_cast<int>(clip_width_ * scale_);
     }
 
-    auto sprite::get_scaled_clip_height() const -> int
+    auto sprite::scaled_clip_height() const -> int
     {
         return static_cast<int>(clip_height_ * scale_);
     }
 
-    auto sprite::get_position() const -> glm::ivec2
+    auto sprite::position() const -> glm::ivec2
     {
         glm::ivec2 pos;
         pos.x = dst_rect_.left;
@@ -262,7 +262,7 @@ namespace mngn
         return pos;
     }
 
-    auto sprite::get_iter_count() const -> int
+    auto sprite::iter_count() const -> int
     {
         return iter_count_;
     }

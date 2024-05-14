@@ -28,8 +28,8 @@ namespace qbert
         void update() override;
 
     private:
-        mngn::sprite           *sprite_ptr_           = nullptr;
-        mngn::sprite_ui_component *sprite_component_ptr_ = nullptr;
+        mngn::sprite              *sprite_ptr_      = nullptr;
+        mngn::sprite_ui_component *sprite_comp_ptr_ = nullptr;
         float flicker_time_ = 0.4f;
         float delay_        = 0.0f;
         float accu_time_    = 0.0f;

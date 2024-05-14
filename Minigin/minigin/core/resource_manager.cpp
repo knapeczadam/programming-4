@@ -51,7 +51,7 @@ namespace mngn
             return it->second.get();
         }
         
-        auto texture_ptr = IMG_LoadTexture(renderer::get_instance().get_sdl_renderer(), full_path.c_str());
+        auto texture_ptr = IMG_LoadTexture(renderer::instance().sdl_renderer(), full_path.c_str());
         if (texture_ptr == nullptr)
         {
             throw std::runtime_error(std::string("Failed to load texture: ") + SDL_GetError());

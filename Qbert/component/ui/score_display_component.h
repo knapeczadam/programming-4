@@ -27,7 +27,7 @@ namespace qbert
         void notify(std::string const &event, mngn::subject *subject_ptr) override;
 
     private:
-        mngn::multisprite_ui_component *multisprite_ui_component_ptr_ = nullptr;
+        mngn::multisprite_ui_component *multisprite_ui_comp_ptr_ = nullptr;
         
     };
 }

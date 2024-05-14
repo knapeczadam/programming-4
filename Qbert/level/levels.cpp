@@ -23,14 +23,14 @@ namespace qbert
     {
         using namespace mngn;
 
-        auto const scene = scene_manager::get_instance().create_scene("test_level");
+        auto const scene = scene_manager::instance().create_scene("test_level");
         glm::vec2 origin{208, 96};
         int offset_x = -32;
         int offset_y = 48;
         
-        auto color_1 = sprite_manager::get_instance().load_sprite(qb_sp_level_1_red_cube_1, qb_re_t_sprite_general);
-        auto color_2 = sprite_manager::get_instance().load_sprite(qb_sp_level_1_yellow_cube_1, qb_re_t_sprite_general);
-        auto color_3 = sprite_manager::get_instance().load_sprite(qb_sp_level_1_blue_cube_1, qb_re_t_sprite_general);
+        auto color_1 = sprite_manager::instance().load_sprite(qb_sp_level_1_red_cube_1, qb_re_t_sprite_general);
+        auto color_2 = sprite_manager::instance().load_sprite(qb_sp_level_1_yellow_cube_1, qb_re_t_sprite_general);
+        auto color_3 = sprite_manager::instance().load_sprite(qb_sp_level_1_blue_cube_1, qb_re_t_sprite_general);
         
         for (int i = 0; i < 7; ++i)
         {

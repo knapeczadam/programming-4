@@ -14,7 +14,7 @@ namespace mngn
     class scene;
 
     // Type aliases
-    using scene_ptr = std::unique_ptr<scene>;
+    using scene_uptr = std::unique_ptr<scene>;
     
     class scene_manager final : public singleton<scene_manager>
     {
@@ -39,6 +39,6 @@ namespace mngn
         friend class singleton<scene_manager>;
         scene_manager();
         
-        std::vector<scene_ptr> scenes_;
+        std::vector<scene_uptr> scenes_;
     };
 }

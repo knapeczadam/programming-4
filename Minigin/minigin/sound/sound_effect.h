@@ -21,7 +21,7 @@ namespace mngn
 
         [[nodiscard]] auto is_loaded() const -> bool;
         auto play(int const loops) const -> bool;
-        [[nodiscard]] auto get_volume() const -> int;
+        [[nodiscard]] auto volume() const -> int;
         void set_volume(int const value);
 
         static void stop_all();

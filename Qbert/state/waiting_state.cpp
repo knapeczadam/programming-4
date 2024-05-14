@@ -17,10 +17,10 @@ namespace qbert
 
     void waiting_state::update()
     {
-        accu_time_ += mngn::game_time::get_instance().delta_time;
+        accu_time_ += mngn::game_time::instance().delta_time;
         if (accu_time_ >= waiting_time_)
         {
-            player_ptr_->get_component<player_state_component>()->change_state<start_state>(player_ptr_);
+            player_ptr_->component<player_state_component>()->change_state<start_state>(player_ptr_);
             accu_time_ = 0.0f;
         }
     }
@@ -29,7 +29,7 @@ namespace qbert
     {
         player_ptr_->set_local_position(224.0f, 84.0f);
         
-        auto position_comp_ptr = player_ptr_->get_component<position_idx_component>();
+        auto position_comp_ptr = player_ptr_->component<position_idx_component>();
         position_comp_ptr->reset_position_idx();
     }
 }

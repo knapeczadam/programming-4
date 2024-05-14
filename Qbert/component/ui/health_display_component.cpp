@@ -13,7 +13,7 @@ namespace qbert
 {
     void health_display_component::awake()
     {
-        multisprite_ui_component_ptr_ = get_owner()->get_component<mngn::multisprite_ui_component>();
+        multisprite_ui_comp_ptr_ = owner()->component<mngn::multisprite_ui_component>();
     }
 
     void health_display_component::notify(std::string const &event, mngn::subject *subject_ptr)
@@ -23,13 +23,13 @@ namespace qbert
             if (auto const health_comp = dynamic_cast<health_component*>(subject_ptr))
             {
                 std::vector<mngn::sprite*> sprites;
-                auto health = health_comp->get_health();
+                auto health = health_comp->health();
                 for (auto i = 0; i < health; ++i)
                 {
-                    auto sprite_ptr = mngn::sprite_manager::get_instance().load_sprite(qb_sp_qbert_life, qb_re_t_sprite_general);
+                    auto sprite_ptr = mngn::sprite_manager::instance().load_sprite(qb_sp_qbert_life, qb_re_t_sprite_general);
                     sprites.push_back(sprite_ptr);
                 }
-                multisprite_ui_component_ptr_->set_sprites(sprites);
+                multisprite_ui_comp_ptr_->set_sprites(sprites);
             }
         }
     }

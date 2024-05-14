@@ -18,7 +18,7 @@ namespace qbert
     {
         using namespace mngn;
 
-        auto const scene = scene_manager::get_instance().create_scene("test_ui");
+        auto const scene = scene_manager::instance().create_scene("test_ui");
 
         auto go = scene->add_game_object("text_player_1");
         go->set_local_position(32, 32);

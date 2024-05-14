@@ -42,7 +42,7 @@ namespace mngn
             return cached_sprites_[sprite_id].get();
         }
         
-        auto texture_ptr = resource_manager::get_instance().load_texture(texture_id);
+        auto texture_ptr = resource_manager::instance().load_texture(texture_id);
         return create_sprite(sprite_id, texture_ptr, cache);
     }
 

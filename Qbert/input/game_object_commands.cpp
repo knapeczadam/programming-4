@@ -12,10 +12,10 @@ namespace qbert
 {
     void jump_command::execute()
     {
-        auto player_state_comp_ptr = get_game_object()->get_component<player_state_component>();
+        auto player_state_comp_ptr = game_object()->component<player_state_component>();
         if (player_state_comp_ptr->is_state<start_state>() or player_state_comp_ptr->is_state<idle_state>())
         {
-            player_state_comp_ptr->change_state<jumping_state>(get_game_object(), row_dir_, col_dir_);
+            player_state_comp_ptr->change_state<jumping_state>(game_object(), row_dir_, col_dir_);
         }
     }
 

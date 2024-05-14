@@ -30,9 +30,9 @@ namespace mngn
         for (int i = 0; i < std::ssize(sprites_); ++i)
         {
             sprite *sprite = sprites_[i];
-            auto src = sprite->get_src_rect();
-            auto dst = sprite->get_dst_rect();
-            auto const &pos = get_owner()->get_world_position();
+            auto src = sprite->src_rect();
+            auto dst = sprite->dst_rect();
+            auto const &pos = owner()->world_position();
             
             SDL_Rect src_rect;
             src_rect.x = src.left;
@@ -60,7 +60,7 @@ namespace mngn
             dst_rect.w = dst.width;
             dst_rect.h = dst.height;
             
-            renderer::get_instance().render_texture(*sprite->get_texture(), src_rect, dst_rect);
+            renderer::instance().render_texture(*sprite->texture(), src_rect, dst_rect);
         }
     }
 
@@ -68,7 +68,7 @@ namespace mngn
     {
         for (auto const &sprite : sprites_)
         {
-            sprite->update(game_time::get_instance().delta_time);
+            sprite->update(game_time::instance().delta_time);
         }
     }
 }

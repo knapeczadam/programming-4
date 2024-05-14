@@ -22,10 +22,10 @@ namespace mngn
         texture &operator=(texture const &other)  = delete;
         texture &operator=(texture &&other)       = delete;
 
-        [[nodiscard]] auto get_sdl_texture() const -> SDL_Texture *;
-        [[nodiscard]] auto get_size() const -> glm::ivec2;
-        [[nodiscard]] auto get_width() const -> int;
-        [[nodiscard]] auto get_height() const -> int;
+        [[nodiscard]] auto sdl_texture() const -> SDL_Texture * { return texture_ptr_; }
+        [[nodiscard]] auto size() const -> glm::ivec2;
+        [[nodiscard]] auto width() const -> int { return size().x; }
+        [[nodiscard]] auto height() const -> int { return size().y; }
 
     private:
         SDL_Texture *texture_ptr_;

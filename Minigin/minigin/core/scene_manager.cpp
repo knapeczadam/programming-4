@@ -4,6 +4,9 @@
 #include "scene.h"
 #include "minigin/core/game_object.h"
 
+// Standard includes
+#include <algorithm>
+
 namespace mngn
 {
     scene_manager::scene_manager() = default;
@@ -12,50 +15,32 @@ namespace mngn
 
     void scene_manager::awake()
     {
-        for (auto const &scene : scenes_)
-        {
-            scene->awake();
-        }
+        std::ranges::for_each(scenes_, [](auto const &scene) { scene->awake(); });
     }
     
     void scene_manager::fixed_update()
     {
-        for (auto const &scene : scenes_)
-        {
-            scene->fixed_update();
-        }
+        std::ranges::for_each(scenes_, [](auto const &scene) { scene->fixed_update(); });
     }
 
     void scene_manager::update()
     {
-        for (auto const &scene : scenes_)
-        {
-            scene->update();
-        }
+        std::ranges::for_each(scenes_, [](auto const &scene) { scene->update(); });
     }
 
     void scene_manager::late_update()
     {
-        for (auto const &scene : scenes_)
-        {
-            scene->late_update();
-        }
+        std::ranges::for_each(scenes_, [](auto const &scene) { scene->late_update(); });
     }
 
     void scene_manager::render()
     {
-        for (auto const &scene : scenes_)
-        {
-            scene->render();
-        }
+        std::ranges::for_each(scenes_, [](auto const &scene) { scene->render(); });
     }
 
     void scene_manager::render_ui()
     {
-        for (auto const &scene : scenes_)
-        {
-            scene->render_ui();
-        }
+        std::ranges::for_each(scenes_, [](auto const &scene) { scene->render_ui(); });
     }
 
     auto scene_manager::create_scene(std::string const &name) -> scene *

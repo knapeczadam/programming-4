@@ -12,7 +12,7 @@ namespace mngn
     class scene_manager;
 
     // Type aliases
-    using game_object_ptr = std::unique_ptr<game_object>;
+    using game_object_uptr = std::unique_ptr<game_object>;
     
     class scene final
     {
@@ -29,7 +29,7 @@ namespace mngn
         auto add_game_object(std::string const &name = "New Game Object") -> game_object *;
         void remove_game_object(game_object *object_ptr);
         void remove_all();
-        [[nodiscard]] auto get_game_object_count() const -> int;
+        [[nodiscard]] auto game_object_count() const -> int;
         [[nodiscard]] auto find_game_object(std::string const &name) const -> game_object *;
 
         void awake();
@@ -43,8 +43,10 @@ namespace mngn
         explicit scene(std::string name);
 
         std::string name_;
-        std::vector<game_object_ptr> objects_{};
+        std::vector<game_object_uptr> objects_{};
 
         static unsigned int id_counter_;
+
+        // TODO: active scene
     };
 }

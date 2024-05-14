@@ -20,7 +20,7 @@ namespace qbert
         void awake() override;
 
         void take_damage(int damage);
-        [[nodiscard]] auto get_health() const -> int { return health_; }
+        [[nodiscard]] auto health() const -> int { return health_; }
 
     private:
         int health_ = 3;

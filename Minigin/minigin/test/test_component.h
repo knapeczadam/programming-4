@@ -16,7 +16,7 @@ namespace mngn
       test_component &operator=(test_component const &other) = delete;
       test_component &operator=(test_component &&other)      = delete;
 
-      [[nodiscard]] auto get_family() const -> component_family override { return component_family::test; }
+      [[nodiscard]] auto family() const -> component_family override { return component_family::test; }
 
       virtual void test() const = 0;
    };

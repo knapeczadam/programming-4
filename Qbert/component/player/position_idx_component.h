@@ -24,8 +24,8 @@ namespace qbert
         position_idx_component &operator=(position_idx_component &&other)      = delete;
 
         void set_position_idx(int row_dir, int col_dir);
-        [[nodiscard]] auto get_row_idx() const -> int { return row_idx_; }
-        [[nodiscard]] auto get_col_idx() const -> int { return col_idx_; }
+        [[nodiscard]] auto row_idx() const -> int { return row_idx_; }
+        [[nodiscard]] auto col_idx() const -> int { return col_idx_; }
 
         void reset_position_idx() noexcept { row_idx_ = 0; col_idx_ = 0; }
 

@@ -23,10 +23,10 @@ namespace mngn
         game_component_command &operator=(game_component_command &&other)      = default;
 
     protected:
-        [[nodiscard]] auto get_game_component() const -> game_component * { return component_ptr_; }
+        [[nodiscard]] auto game_component() const -> game_component * { return component_ptr_; }
 
     private:
-        game_component *component_ptr_;
+        mngn::game_component *component_ptr_;
         
     };
 }

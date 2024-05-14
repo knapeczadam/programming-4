@@ -4,6 +4,7 @@
 #include "minigin/component/family/custom_component.h"
 
 // Standard includes
+#include <concepts>
 #include <memory>
 
 #include "state/player_state.h"
@@ -12,6 +13,10 @@ namespace qbert
 {
     // Forward declarations
     class player_state;
+
+    // Concepts
+    template <class T>
+    concept child_state = std::derived_from<T, player_state> and not std::same_as<T, player_state>;
     
     class player_state_component final : public mngn::custom_component
     {
@@ -27,13 +32,13 @@ namespace qbert
         void awake() override;
         void update() override;
 
-        template <class T, typename... Args>
+        template <class T, typename... Args> requires child_state<T>
         void change_state(Args &&...args);
 
-        template <class T>
-        [[nodiscard]] auto get_state() const -> T *;
+        template <class T> requires child_state<T>
+        [[nodiscard]] auto state() const -> T *;
 
-        template <class T>
+        template <class T> requires child_state<T>
         [[nodiscard]] auto is_state() const -> bool;
 
     private:

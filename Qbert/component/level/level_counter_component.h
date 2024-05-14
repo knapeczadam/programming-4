@@ -19,7 +19,7 @@ namespace qbert
 
         void awake() override;
         
-        [[nodiscard]] auto get_level() const -> int { return level_; }
+        [[nodiscard]] auto level() const -> int { return level_; }
         void set_level(int level);
         void increase_level();
 

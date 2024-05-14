@@ -12,7 +12,7 @@ namespace qbert
     {
         text_ui_component::update();
 
-        update_timer_ += mngn::game_time::get_instance().delta_time;
+        update_timer_ += mngn::game_time::instance().delta_time;
         ++frame_count_;
         if (update_timer_ >= update_interval_)
         {

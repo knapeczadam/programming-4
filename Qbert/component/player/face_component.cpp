@@ -10,26 +10,26 @@ namespace qbert
 {
     void face_component::awake()
     {
-        sprite_comp_ptr_ = get_owner()->get_component<mngn::sprite_component>();
+        sprite_comp_ptr_ = owner()->component<mngn::sprite_component>();
     }
     
     void face_component::set_jump_sprite(int row_dir, int col_dir)
     {
         if (row_dir == -1 and col_dir == 0)
         {
-            sprite_comp_ptr_->get_sprite()->set_current_frame(1);
+            sprite_comp_ptr_->sprite()->set_current_frame(1);
         }
         else if (row_dir == -1 and col_dir == -1)
         {
-            sprite_comp_ptr_->get_sprite()->set_current_frame(3);
+            sprite_comp_ptr_->sprite()->set_current_frame(3);
         }
         else if (row_dir == 1 and col_dir == 0)
         {
-            sprite_comp_ptr_->get_sprite()->set_current_frame(7);
+            sprite_comp_ptr_->sprite()->set_current_frame(7);
         }
         else
         {
-            sprite_comp_ptr_->get_sprite()->set_current_frame(5);
+            sprite_comp_ptr_->sprite()->set_current_frame(5);
         }
     }
 
@@ -37,19 +37,19 @@ namespace qbert
     {
         if (row_dir == -1 and col_dir == 0)
         {
-            sprite_comp_ptr_->get_sprite()->set_current_frame(0);
+            sprite_comp_ptr_->sprite()->set_current_frame(0);
         }
         else if (row_dir == -1 and col_dir == -1)
         {
-            sprite_comp_ptr_->get_sprite()->set_current_frame(2);
+            sprite_comp_ptr_->sprite()->set_current_frame(2);
         }
         else if (row_dir == 1 and col_dir == 0)
         {
-            sprite_comp_ptr_->get_sprite()->set_current_frame(6);
+            sprite_comp_ptr_->sprite()->set_current_frame(6);
         }
         else
         {
-            sprite_comp_ptr_->get_sprite()->set_current_frame(4);
+            sprite_comp_ptr_->sprite()->set_current_frame(4);
         }
     }
 }

@@ -17,9 +17,9 @@ namespace qbert
 
     void jumping_state::on_enter()
     {
-        auto face_comp_ptr = player_ptr_->get_component<face_component>();
+        auto face_comp_ptr = player_ptr_->component<face_component>();
         face_comp_ptr->set_jump_sprite(row_dir_, col_dir_);
-        auto jump_comp_ptr = player_ptr_->get_component<jump_component>();
+        auto jump_comp_ptr = player_ptr_->component<jump_component>();
         jump_comp_ptr->jump(row_dir_, col_dir_);
     }
 }

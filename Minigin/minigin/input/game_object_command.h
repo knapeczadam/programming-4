@@ -26,9 +26,9 @@ namespace mngn
         game_object_command &operator=(game_object_command &&other)      = default;
 
     protected:
-        [[nodiscard]] auto get_game_object() const -> game_object * { return game_object_ptr_; }
+        [[nodiscard]] auto game_object() const -> game_object * { return game_object_ptr_; }
 
     private:
-        game_object *game_object_ptr_ = nullptr;
+        mngn::game_object *game_object_ptr_ = nullptr;
     };
 }

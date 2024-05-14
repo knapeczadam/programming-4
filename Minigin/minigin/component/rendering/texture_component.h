@@ -4,7 +4,6 @@
 #include "minigin/component/family/rendering_component.h"
 
 // Standard includes
-#include <memory>
 #include <string>
 
 namespace mngn

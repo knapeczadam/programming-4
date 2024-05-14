@@ -14,8 +14,8 @@ namespace qbert
 
     void landing_state::on_enter()
     {
-        auto jump_comp_ptr = player_ptr_->get_component<jump_component>();
-        auto position_comp_ptr = player_ptr_->get_component<position_idx_component>();
-        position_comp_ptr->set_position_idx(jump_comp_ptr->get_row_direction(), jump_comp_ptr->get_col_direction());
+        auto jump_comp_ptr = player_ptr_->component<jump_component>();
+        auto position_comp_ptr = player_ptr_->component<position_idx_component>();
+        position_comp_ptr->set_position_idx(jump_comp_ptr->row_direction(), jump_comp_ptr->col_direction());
     }
 }

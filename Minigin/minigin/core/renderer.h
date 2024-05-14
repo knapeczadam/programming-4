@@ -23,9 +23,9 @@ namespace mngn
         void render_texture(texture const &texture, float x, float y, float width, float height) const;
         void render_texture(texture const &texture, SDL_Rect const &src_rect, SDL_Rect const &dst_rect) const;
 
-        [[nodiscard]] auto get_sdl_renderer() const -> SDL_Renderer *;
+        [[nodiscard]] auto sdl_renderer() const -> SDL_Renderer *;
 
-        [[nodiscard]] auto get_background_color() const -> const SDL_Color & { return clear_color_; }
+        [[nodiscard]] auto background_color() const -> const SDL_Color & { return clear_color_; }
         void set_background_color(SDL_Color const &color) { clear_color_ = color; }
         
     private:

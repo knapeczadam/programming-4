@@ -14,8 +14,8 @@ namespace qbert
 
     void idle_state::on_enter()
     {
-        auto jump_comp_ptr = player_ptr_->get_component<jump_component>();
-        auto face_comp_ptr = player_ptr_->get_component<face_component>();
-        face_comp_ptr->set_idle_sprite(jump_comp_ptr->get_row_direction(), jump_comp_ptr->get_col_direction());
+        auto jump_comp_ptr = player_ptr_->component<jump_component>();
+        auto face_comp_ptr = player_ptr_->component<face_component>();
+        face_comp_ptr->set_idle_sprite(jump_comp_ptr->row_direction(), jump_comp_ptr->col_direction());
     }
 }

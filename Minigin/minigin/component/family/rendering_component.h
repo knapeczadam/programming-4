@@ -16,7 +16,7 @@ namespace mngn
         rendering_component &operator=(rendering_component const &other) = delete;
         rendering_component &operator=(rendering_component &&other)      = delete;
 
-        [[nodiscard]] auto get_family() const -> component_family override { return component_family::rendering; }
+        [[nodiscard]] auto family() const -> component_family override { return component_family::rendering; }
 
         virtual void render() const = 0;
     };

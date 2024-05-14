@@ -22,7 +22,7 @@ namespace mngn
         game_font &operator=(game_font const &other)  = delete;
         game_font &operator=(game_font &&other)       = delete;
 
-        [[nodiscard]] auto get_font() const -> _TTF_Font *;
+        [[nodiscard]] auto font() const -> _TTF_Font *;
 
     private:
         _TTF_Font *font_ptr_;

@@ -8,7 +8,7 @@
 namespace qbert
 {
     player_state_component::player_state_component()
-        : player_state_{std::make_unique<null_state>(get_owner())}
+        : player_state_{std::make_unique<null_state>(owner())}
     {
     }
 
@@ -16,7 +16,7 @@ namespace qbert
 
     void player_state_component::awake()
     {
-        change_state<start_state>(get_owner());
+        change_state<start_state>(owner());
     }
 
     void player_state_component::update()

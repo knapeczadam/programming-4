@@ -8,11 +8,11 @@ namespace qbert
     void init_sprites()
     {
         using namespace mngn;
-        sprite_manager::get_instance()
+        sprite_manager::instance()
             .set_sprite_config_path("configs/sprite_config.json")
             .load_sprite_config();
 
-        sprite_manager::get_instance()
+        sprite_manager::instance()
             .add_sprite_pair(qb_sp_qbert_1, "qbert_1")
             .add_sprite_pair(qb_sp_qbert_2, "qbert_2")
             .add_sprite_pair(qb_sp_qbert_life, "qbert_life")
