@@ -121,14 +121,25 @@ void load()
 	score_display_config.parent_ptr     = root_ptr;
 	score_display_config.name           = "score_1";
 	score_display_config.local_position = {32.0f,    48.0f};
-	auto score_display_info = factory::ui::create_score_display(score_display_config);
+	score_display_config.sprite_id	  = qb_sp_numbers_regular_orange;
+	score_display_config.texture_id     = qb_re_t_sprite_general;
+	auto score_display_info_1 = factory::ui::create_score_display(score_display_config);
+	
+	score_display_config.name           = "score_2";
+	score_display_config.sprite_id	  = qb_sp_numbers_regular_purple;
+	score_display_config.local_position = {332.0f,    48.0f};
+	auto score_display_info_2 = factory::ui::create_score_display(score_display_config);
 
 	factory::ui::health_display_config_info health_display_config{};
 	health_display_config.scene_ptr      = scene;
 	health_display_config.parent_ptr     = root_ptr;
 	health_display_config.name           = "health_1";
 	health_display_config.local_position = {16.0f, 160.0f};
-	auto health_display_info = factory::ui::create_health_display(health_display_config);
+	auto heal_display_info_1 = factory::ui::create_health_display(health_display_config);
+	
+	health_display_config.name           = "health_1";
+	health_display_config.local_position = {448.0f, 160.0f};
+	auto heal_display_info_2 = factory::ui::create_health_display(health_display_config);
 
 	factory::ui::level_display_config_info level_display_config{};
 	level_display_config.scene_ptr      = scene;
@@ -194,8 +205,8 @@ void load()
 
 	// Observers
 	auto player_1_info = factory::character::create_player(player_1_config);
-	player_1_info.health_comp_ptr->add_observer(health_display_info.health_display_comp_ptr);
-    player_1_info.score_counter_comp_ptr->add_observer(score_display_info.score_display_comp_ptr);
+	player_1_info.health_comp_ptr->add_observer(heal_display_info_1.health_display_comp_ptr);
+    player_1_info.score_counter_comp_ptr->add_observer(score_display_info_1.score_display_comp_ptr);
 	player_1_info.position_idx_comp_ptr->add_observer(level_manager_comp_ptr);
 	player_1_info.level_counter_comp_ptr->add_observer(level_display_info.level_display_comp_ptr);
 	player_1_info.round_counter_comp_ptr->add_observer(round_display_info.round_display_comp_ptr);
@@ -220,8 +231,8 @@ void load()
 
 	// Observers
 	auto player_2_info = factory::character::create_player(player_2_config);
-    player_2_info.health_comp_ptr->add_observer(health_display_info.health_display_comp_ptr);
-	player_2_info.score_counter_comp_ptr->add_observer(score_display_info.score_display_comp_ptr);
+    player_2_info.health_comp_ptr->add_observer(heal_display_info_2.health_display_comp_ptr);
+	player_2_info.score_counter_comp_ptr->add_observer(score_display_info_2.score_display_comp_ptr);
 	player_2_info.position_idx_comp_ptr->add_observer(level_manager_comp_ptr);
 	std::ranges::for_each(cube_components.cube_components, [player_2_info](auto cube_comp_ptr) { player_2_info.position_idx_comp_ptr->add_observer(cube_comp_ptr); });
 

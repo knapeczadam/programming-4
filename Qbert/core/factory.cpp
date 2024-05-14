@@ -162,7 +162,7 @@ namespace qbert
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<mngn::multisprite_ui_component>();
-        info.score_display_comp_ptr = info.go_ptr->add_component<score_display_component>();
+        info.score_display_comp_ptr = info.go_ptr->add_component<score_display_component>(config.sprite_id, config.texture_id);
         return info;
     }
 

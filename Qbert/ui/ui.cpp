@@ -25,9 +25,20 @@ namespace qbert
         sprite_config.texture_id     = qb_re_t_sprite_general;
         factory::ui::create_sprite(sprite_config);
         
+        sprite_config.name           = "text_player_2";
+        sprite_config.local_position = {332, 32};
+        sprite_config.sprite_id      = qb_sp_text_orange_player;
+        sprite_config.texture_id     = qb_re_t_sprite_general;
+        factory::ui::create_sprite(sprite_config);
+        
         sprite_config.name           = "text_1";
         sprite_config.local_position = {144, 16};
         sprite_config.sprite_id      = qb_sp_text_one;
+        factory::ui::create_sprite(sprite_config);
+        
+        sprite_config.name           = "text_2";
+        sprite_config.local_position = {444, 16};
+        sprite_config.sprite_id      = qb_sp_text_two;
         factory::ui::create_sprite(sprite_config);
 
         sprite_config.name = "text_change_to";

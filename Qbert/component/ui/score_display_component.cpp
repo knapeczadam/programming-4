@@ -14,6 +14,12 @@
 
 namespace qbert
 {
+    score_display_component::score_display_component(int sprite_id, int texture_id)
+        : sprite_id_{sprite_id}
+        , texture_id_{texture_id}
+    {
+    }
+
     void score_display_component::awake()
     {
         multisprite_ui_comp_ptr_ = owner()->component<mngn::multisprite_ui_component>();
@@ -31,12 +37,12 @@ namespace qbert
                 auto score = score_comp_ptr->score();
                 if (score == 0)
                 {
-                    auto sprite_ptr = mngn::sprite_manager::instance().load_sprite(qb_sp_numbers_regular_orange,  qb_re_t_sprite_general, false);
+                    auto sprite_ptr = mngn::sprite_manager::instance().load_sprite(sprite_id_,  texture_id_, false);
                     sprites.push_front(sprite_ptr);
                 }
                 for (; score > 0; score /= 10)
                 {
-                    auto sprite_ptr = mngn::sprite_manager::instance().load_sprite(qb_sp_numbers_regular_orange,  qb_re_t_sprite_general, false);
+                    auto sprite_ptr = mngn::sprite_manager::instance().load_sprite(sprite_id_,  texture_id_, false);
                     sprite_ptr->set_current_frame(score % 10);
                     sprites.push_front(sprite_ptr);
                 }

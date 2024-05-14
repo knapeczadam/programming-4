@@ -16,6 +16,7 @@ namespace qbert
     {
     public:
         score_display_component()           = default;
+        score_display_component(int sprite_id, int texture_id);
         ~score_display_component() override = default;
 
         score_display_component(score_display_component const &other)            = delete;
@@ -28,6 +29,8 @@ namespace qbert
 
     private:
         mngn::multisprite_ui_component *multisprite_ui_comp_ptr_ = nullptr;
+        int sprite_id_  = 0;
+        int texture_id_ = 0;
         
     };
 }
