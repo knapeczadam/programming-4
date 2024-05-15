@@ -1,5 +1,9 @@
 ﻿#pragma once
 
+// Project includes
+#include "minigin/component/family/collider_component.h"
+#include "minigin/core/collision_manager.h"
+
 namespace mngn
 {
     // Forward declaration
@@ -162,6 +166,10 @@ namespace mngn
         auto component = std::make_unique<T>(std::forward<Args>(args)...);
         component->set_owner(this);
         auto comp_ptr = component.get();
+        if (auto collider_comp_ptr = dynamic_cast<collider_component*>(comp_ptr))
+        {
+            collision_manager::instance().add_collider(collider_comp_ptr);
+        }
         component_map_[typeid(T)] = std::move(component);
         return comp_ptr;
     }

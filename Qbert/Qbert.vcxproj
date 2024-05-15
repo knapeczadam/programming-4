@@ -29,8 +29,9 @@
     <ClCompile Include="component\player\health_component.cpp" />
     <ClCompile Include="component\player\jump_component.cpp" />
     <ClCompile Include="component\player\level_counter_component.cpp" />
+    <ClCompile Include="component\player\player_collider_component.cpp" />
     <ClCompile Include="component\player\player_state_component.cpp" />
-    <ClCompile Include="component\player\position_idx_component.cpp" />
+    <ClCompile Include="component\player\position_component.cpp" />
     <ClCompile Include="component\player\round_counter_component.cpp" />
     <ClCompile Include="component\player\score_counter_component.cpp" />
     <ClCompile Include="component\player\swear_component.cpp" />
@@ -64,6 +65,7 @@
     <ClCompile Include="ui\ui.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="component\direction_component.h" />
     <ClInclude Include="component\game\game_state_component.h" />
     <ClInclude Include="component\level\cube_component.h" />
     <ClInclude Include="component\level\disc_component.h" />
@@ -74,8 +76,9 @@
     <ClInclude Include="component\player\health_component.h" />
     <ClInclude Include="component\player\jump_component.h" />
     <ClInclude Include="component\player\level_counter_component.h" />
+    <ClInclude Include="component\player\player_collider_component.h" />
     <ClInclude Include="component\player\player_state_component.h" />
-    <ClInclude Include="component\player\position_idx_component.h" />
+    <ClInclude Include="component\player\position_component.h" />
     <ClInclude Include="component\player\round_counter_component.h" />
     <ClInclude Include="component\player\score_counter_component.h" />
     <ClInclude Include="component\player\swear_component.h" />
@@ -111,8 +114,7 @@
     <ClInclude Include="ui\ui.h" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="component\ai\" />
-    <Folder Include="component\animation\" />
+    <Folder Include="component\npc\" />
     <Folder Include="state\ui\" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

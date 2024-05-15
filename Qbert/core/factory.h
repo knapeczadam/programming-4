@@ -14,6 +14,7 @@ namespace mngn
     class game_font;
     class game_object;
     class scene;
+    class collider_component;
 
     enum input : int;
     enum class input_type;
@@ -27,7 +28,7 @@ namespace qbert
     enum qbert_sprite   : int;
     
     
-    class position_idx_component;
+    class position_component;
     class health_component;
     class health_display_component;
     class level_display_component;
@@ -37,6 +38,7 @@ namespace qbert
     class score_display_component;
     class round_display_component;
     class cube_component;
+    class player_collider_component;
     
     struct factory
     {
@@ -84,14 +86,15 @@ namespace qbert
 
             struct player_info : info
             {
-                position_idx_component  *position_idx_comp_ptr;
-                health_component        *health_comp_ptr;
-                score_counter_component *score_counter_comp_ptr;
-                level_counter_component *level_counter_comp_ptr;
-                round_counter_component *round_counter_comp_ptr;
+                position_component        *position_comp_ptr;
+                health_component          *health_comp_ptr;
+                score_counter_component   *score_counter_comp_ptr;
+                level_counter_component   *level_counter_comp_ptr;
+                round_counter_component   *round_counter_comp_ptr;
+                player_collider_component *collider_comp_ptr;
             };
-            
-            static auto create_player(player_config_info const& config) -> player_info;
+
+            static auto create_player(player_config_info const &config) -> player_info;
         };
         
         struct level
@@ -99,13 +102,13 @@ namespace qbert
             // Disc
             struct disc_config_info : config_info
             {
-                int               row_idx;
-                int               col_idx;
+                int row_idx;
+                int col_idx;
             };
 
             struct disc_info : info { };
 
-            static auto create_disc(disc_config_info const& config) -> disc_info;
+            static auto create_disc(disc_config_info const &config) -> disc_info;
 
             // Cube
             struct cube_config_info : config_info
@@ -121,7 +124,7 @@ namespace qbert
                 std::vector<cube_component*> cube_components;
             };
 
-            static auto create_cubes(cube_config_info const& config) -> cube_info;
+            static auto create_cubes(cube_config_info const &config) -> cube_info;
         };
 
         struct ui
@@ -135,7 +138,7 @@ namespace qbert
 
             struct fps_info : info { };
 
-            static auto create_fps(fps_config_info const& config) -> fps_info;
+            static auto create_fps(fps_config_info const &config) -> fps_info;
 
             // Score display
             struct score_display_config_info : config_info { };
@@ -145,7 +148,7 @@ namespace qbert
                 score_display_component *score_display_comp_ptr;
             };
 
-            static auto create_score_display(score_display_config_info const& config) -> score_display_info;
+            static auto create_score_display(score_display_config_info const &config) -> score_display_info;
 
             // Health
             struct health_display_config_info : config_info { };
@@ -155,7 +158,7 @@ namespace qbert
                 health_display_component *health_display_comp_ptr;
             };
 
-            static auto create_health_display(health_display_config_info const& config) -> health_display_info;
+            static auto create_health_display(health_display_config_info const &config) -> health_display_info;
 
             // Level
             struct level_display_config_info : config_info { };
@@ -165,7 +168,7 @@ namespace qbert
                 level_display_component *level_display_comp_ptr;
             };
 
-            static auto create_level_display(level_display_config_info const& config) -> level_display_info;
+            static auto create_level_display(level_display_config_info const &config) -> level_display_info;
 
             // Round
             struct round_display_config_info : config_info { };
@@ -175,14 +178,14 @@ namespace qbert
                 round_display_component *round_display_comp_ptr;
             };
 
-            static auto create_round_display(round_display_config_info const& config) -> round_display_info;
+            static auto create_round_display(round_display_config_info const &config) -> round_display_info;
 
             // Sprite
             struct sprite_config_info : config_info { };
 
             struct sprite_info : info { };
 
-            static auto create_sprite(sprite_config_info const& config) -> sprite_info;
+            static auto create_sprite(sprite_config_info const &config) -> sprite_info;
 
             // Arrow
             struct arrow_config_info : config_info
@@ -192,7 +195,7 @@ namespace qbert
 
             struct arrow_info : info { };
 
-            static auto create_arrow(arrow_config_info const& config) -> arrow_info;
+            static auto create_arrow(arrow_config_info const &config) -> arrow_info;
         };
     };
 }

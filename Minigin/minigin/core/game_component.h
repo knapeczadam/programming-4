@@ -9,6 +9,7 @@ namespace mngn
     enum class component_family
     {
         audio,
+        collision,
         custom,
         physics,
         rendering,

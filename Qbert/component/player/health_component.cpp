@@ -1,7 +1,7 @@
 ﻿#include "health_component.h"
 
 // Project includes
-#include "component/player/position_idx_component.h"
+#include "component/player/position_component.h"
 
 namespace qbert
 {

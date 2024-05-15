@@ -138,22 +138,22 @@ namespace mngn
         top_offset_rows_ = top;
     }
 
-    void sprite::set_collider_width(int collider_width)
+    void sprite::set_collider_width(float collider_width)
     {
         collider_width_ = collider_width;
     }
 
-    void sprite::set_collider_height(int collider_height)
+    void sprite::set_collider_height(float collider_height)
     {
         collider_height_ = collider_height;
     }
 
-    void sprite::set_collider_horizontal_offset(int collider_horizontal_offset)
+    void sprite::set_collider_horizontal_offset(float collider_horizontal_offset)
     {
         collider_horizontal_offset_ = collider_horizontal_offset;
     }
 
-    void sprite::set_collider_vertical_offset(int collider_vertical_offset)
+    void sprite::set_collider_vertical_offset(float collider_vertical_offset)
     {
         collider_vertical_offset_ = collider_vertical_offset;
     }
@@ -216,42 +216,42 @@ namespace mngn
         return height_;
     }
 
-    auto sprite::collider_width() const -> int
+    auto sprite::collider_width() const -> float
     {
-        if (collider_width_ == 0)
+        if (collider_width_ == 0.0f)
         {
-            return static_cast<int>(clip_width_ * scale_);
+            return static_cast<float>(clip_width_) * scale_;
         }
-        return static_cast<int>(collider_width_ * scale_);
+        return collider_width_ * scale_;
     }
 
-    auto sprite::collider_height() const -> int
+    auto sprite::collider_height() const -> float
     {
-        if (collider_height_ == 0)
+        if (collider_height_ == 0.0f)
         {
-            return static_cast<int>(clip_height_ * scale_);
+            return static_cast<float>(clip_height_) * scale_;
         }
-        return static_cast<int>(collider_height_ * scale_);
+        return collider_height_ * scale_;
     }
 
-    auto sprite::collider_horizontal_offset() const -> int
+    auto sprite::collider_horizontal_offset() const -> float
     {
-        return static_cast<int>(collider_horizontal_offset_ * scale_);
+        return collider_horizontal_offset_ * scale_;
     }
 
-    auto sprite::collider_vertical_offset() const -> int
+    auto sprite::collider_vertical_offset() const -> float
     {
-        return static_cast<int>(collider_vertical_offset_ * scale_);
+        return collider_vertical_offset_ * scale_;
     }
 
-    auto sprite::scaled_clip_width() const -> int
+    auto sprite::scaled_clip_width() const -> float
     {
-        return static_cast<int>(clip_width_ * scale_);
+        return static_cast<float>(clip_width_) * scale_;
     }
 
-    auto sprite::scaled_clip_height() const -> int
+    auto sprite::scaled_clip_height() const -> float
     {
-        return static_cast<int>(clip_height_ * scale_);
+        return static_cast<float>(clip_height_) * scale_;
     }
 
     auto sprite::position() const -> glm::ivec2

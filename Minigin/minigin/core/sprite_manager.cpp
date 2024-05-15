@@ -76,7 +76,7 @@ namespace mngn
                 
                 if (sprite_config.contains("current_frame"))              new_sprite->set_current_frame(sprite_config["current_frame"]);
 
-                sprite *copy_ptr = new_sprite.get();
+                sprite *sprite_ptr = new_sprite.get();
                 if (cache)
                 {
                     cached_sprites_[id] = std::move(new_sprite);
@@ -85,7 +85,7 @@ namespace mngn
                 {
                     sprites_.emplace(id, std::move(new_sprite));
                 }
-                return copy_ptr;
+                return sprite_ptr;
             }
         }
         if (new_sprite == nullptr)

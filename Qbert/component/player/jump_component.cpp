@@ -1,18 +1,20 @@
 ﻿#include "jump_component.h"
 
 // Project includes
-#include "player_state_component.h"
+#include "component/player/player_state_component.h"
+#include "component/direction_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
 #include "state/player/landing_state.h"
 #include "minigin/utility/math.h"
 
-// Standard includes
-#include <iostream>
-
-
 namespace qbert
 {
+    void jump_component::awake()
+    {
+        direction_comp_ptr_ = owner()->component<direction_component>();
+    }
+
     void jump_component::fixed_update()
     {
         if (is_jumping_)
@@ -37,34 +39,34 @@ namespace qbert
         }
     }
 
-    void jump_component::jump(int row_dir, int col_dir)
+    void jump_component::jump()
     {
-        row_dir_ = row_dir;
-        col_dir_ = col_dir;
         is_jumping_ = true;
-        calculate_bezier_positions(row_dir, col_dir);
+        calculate_bezier_positions();
     }
 
-    void jump_component::calculate_bezier_positions(int row_dir, int col_dir)
+    void jump_component::calculate_bezier_positions()
     {
         start_pos_ = owner()->local_position();
+        int row_dir = direction_comp_ptr_->row();
+        int col_dir = direction_comp_ptr_->col();
         
         int offset_x = 32;
         int offset_y = 48;
 
-        if (row_dir_ == 1 and col_dir_ == 0) col_dir = -1;
-        if (row_dir_ == -1 and col_dir_ == 0) col_dir = 1;
+        if (row_dir == 1 and col_dir == 0) col_dir = -1;
+        else if (row_dir == -1 and col_dir == 0) col_dir = 1;
 
         end_pos_.x = start_pos_.x + col_dir * offset_x;
         end_pos_.y = start_pos_.y + row_dir * offset_y;
         
         // I-II. quadrants (top right, top left)
-        if (row_dir_ == -1)
+        if (row_dir == -1)
         {
             corner_pos_ = {start_pos_.x, end_pos_.y};
         }
         // III-IV. quadrants (bottom left, bottom right)
-        else if (row_dir_ == 1)
+        else if (row_dir == 1)
         {
             corner_pos_ = {end_pos_.x, start_pos_.y};
         }

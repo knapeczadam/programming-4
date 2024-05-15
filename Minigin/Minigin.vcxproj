@@ -212,6 +212,7 @@
     <ClCompile Include="minigin\component\ui\multisprite_ui_component.cpp" />
     <ClCompile Include="minigin\component\ui\sprite_ui_component.cpp" />
     <ClCompile Include="minigin\component\ui\text_ui_component.cpp" />
+    <ClCompile Include="minigin\core\collider_manager.cpp" />
     <ClCompile Include="minigin\core\game_component.cpp" />
     <ClCompile Include="minigin\core\game_object.cpp" />
     <ClCompile Include="minigin\core\i_observer.cpp" />
@@ -248,6 +249,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="minigin\component\debug\fps_component.h" />
+    <ClInclude Include="minigin\component\family\collider_component.h" />
     <ClInclude Include="minigin\component\family\custom_component.h" />
     <ClInclude Include="minigin\component\family\physics_component.h" />
     <ClInclude Include="minigin\component\family\rendering_component.h" />
@@ -257,6 +259,7 @@
     <ClInclude Include="minigin\component\ui\multisprite_ui_component.h" />
     <ClInclude Include="minigin\component\ui\sprite_ui_component.h" />
     <ClInclude Include="minigin\component\ui\text_ui_component.h" />
+    <ClInclude Include="minigin\core\collision_manager.h" />
     <ClInclude Include="minigin\core\game_component.h" />
     <ClInclude Include="minigin\core\game_object.h" />
     <ClInclude Include="minigin\core\game_object.hpp" />

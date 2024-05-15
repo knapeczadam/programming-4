@@ -13,8 +13,8 @@ namespace mngn
             return static_cast<T*>(event_handlers_.at(typeid(T)).get());
         }
         auto handler = std::make_unique<T>();
-        auto copy_ptr = handler.get();
+        auto handler_ptr = handler.get();
         event_handlers_[typeid(T)] = std::move(handler);
-        return copy_ptr;
+        return handler_ptr;
     }
 }

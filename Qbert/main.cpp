@@ -13,7 +13,8 @@
 #include "component/player/health_component.h"
 #include "component/player/jump_component.h"
 #include "component/player/level_counter_component.h"
-#include "component/player/position_idx_component.h"
+#include "component/player/player_collider_component.h"
+#include "component/player/position_component.h"
 #include "component/player/round_counter_component.h"
 #include "component/player/score_counter_component.h"
 #include "component/ui/health_display_component.h"
@@ -206,13 +207,14 @@ void load()
 
 	// Observers
 	auto player_1_info = factory::character::create_player(player_1_config);
+	collision_manager::instance().register_collider(player_1_info.collider_comp_ptr);
 	player_1_info.health_comp_ptr->add_observer(heal_display_info_1.health_display_comp_ptr);
 	player_1_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
     player_1_info.score_counter_comp_ptr->add_observer(score_display_info_1.score_display_comp_ptr);
-	player_1_info.position_idx_comp_ptr->add_observer(level_manager_comp_ptr);
+	player_1_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
 	player_1_info.level_counter_comp_ptr->add_observer(level_display_info.level_display_comp_ptr);
 	player_1_info.round_counter_comp_ptr->add_observer(round_display_info.round_display_comp_ptr);
-	std::ranges::for_each(cube_components.cube_components, [player_1_info](auto cube_comp_ptr) { player_1_info.position_idx_comp_ptr->add_observer(cube_comp_ptr); });
+	std::ranges::for_each(cube_components.cube_components, [player_1_info](auto cube_comp_ptr) { player_1_info.position_comp_ptr->add_observer(cube_comp_ptr); });
 
     //---------------------------------------------------------------------------------
     // PLAYER 2
@@ -236,8 +238,8 @@ void load()
     player_2_info.health_comp_ptr->add_observer(heal_display_info_2.health_display_comp_ptr);
     player_2_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
 	player_2_info.score_counter_comp_ptr->add_observer(score_display_info_2.score_display_comp_ptr);
-	player_2_info.position_idx_comp_ptr->add_observer(level_manager_comp_ptr);
-	std::ranges::for_each(cube_components.cube_components, [player_2_info](auto cube_comp_ptr) { player_2_info.position_idx_comp_ptr->add_observer(cube_comp_ptr); });
+	player_2_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
+	std::ranges::for_each(cube_components.cube_components, [player_2_info](auto cube_comp_ptr) { player_2_info.position_comp_ptr->add_observer(cube_comp_ptr); });
 
 	//---------------------------------------------------------------------------------
 	// DEBUG

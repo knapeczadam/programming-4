@@ -9,6 +9,9 @@
 
 namespace qbert
 {
+    // Forward declarations
+    class direction_component;
+    
     class jump_component final : public mngn::physics_component, public mngn::subject
     {
     public:
@@ -20,20 +23,17 @@ namespace qbert
         jump_component &operator=(jump_component const &other) = delete;
         jump_component &operator=(jump_component &&other)      = delete;
 
+        void awake() override;
         void fixed_update() override;
-        void jump(int row_dir, int col_dir);
-
-        [[nodiscard]] auto row_direction() const -> int { return row_dir_; }
-        [[nodiscard]] auto col_direction() const -> int { return col_dir_; }
+        void jump();
         
     private:
-        void calculate_bezier_positions(int row_dir, int col_dir);
+        void calculate_bezier_positions();
 
     private:
+        direction_component *direction_comp_ptr_ = nullptr;
         float jump_time_  = 0.5f;
         float accu_time_  = 0.0f;
-        int   row_dir_    = 0;
-        int   col_dir_    = 0;
         bool  is_jumping_ = false;
         
         glm::vec2 start_pos_  = {};

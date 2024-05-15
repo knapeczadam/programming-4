@@ -10,8 +10,9 @@
 #include "component/player/health_component.h"
 #include "component/player/jump_component.h"
 #include "component/player/level_counter_component.h"
+#include "component/player/player_collider_component.h"
 #include "component/player/player_state_component.h"
-#include "component/player/position_idx_component.h"
+#include "component/player/position_component.h"
 #include "component/player/round_counter_component.h"
 #include "component/player/score_counter_component.h"
 #include "component/player/swear_component.h"
@@ -20,6 +21,7 @@
 #include "component/ui/level_display_component.h"
 #include "component/ui/round_display_component.h"
 #include "component/ui/score_display_component.h"
+#include "component/direction_component.h"
 #include "input/game_object_commands.h"
 #include "minigin/component/debug/fps_component.h"
 #include "minigin/component/rendering/sprite_component.h"
@@ -29,6 +31,7 @@
 #include "minigin/core/scene.h"
 #include "minigin/core/sprite_manager.h"
 #include "minigin/input/input_manager.h"
+#include "minigin/utility/sprite.h"
 
 namespace qbert
 {
@@ -38,17 +41,19 @@ namespace qbert
         info.go_ptr = config.scene_ptr->add_game_object(config.name);
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
-        info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         info.go_ptr->add_component<jump_component>();
         info.go_ptr->add_component<face_component>();
         info.go_ptr->add_component<player_state_component>();
         info.go_ptr->add_component<fall_component>();
         info.go_ptr->add_component<swear_component>();
-        info.position_idx_comp_ptr  = info.go_ptr->add_component<position_idx_component>(config.row_idx, config.col_idx);
+        info.go_ptr->add_component<direction_component>();
+        auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
+        info.position_comp_ptr      = info.go_ptr->add_component<position_component>(config.row_idx,                                             config.col_idx);
         info.health_comp_ptr        = info.go_ptr->add_component<health_component>();
         info.score_counter_comp_ptr = info.go_ptr->add_component<score_counter_component>();
         info.level_counter_comp_ptr = info.go_ptr->add_component<level_counter_component>();
         info.round_counter_comp_ptr = info.go_ptr->add_component<round_counter_component>();
+        info.collider_comp_ptr      = info.go_ptr->add_component<player_collider_component>(sprite_comp_ptr->sprite()->collider_width(), sprite_comp_ptr->sprite()->collider_height());
 
         auto swearing_go_ptr = config.scene_ptr->add_game_object("swearing");
         swearing_go_ptr->set_parent(info.go_ptr);

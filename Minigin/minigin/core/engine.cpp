@@ -26,6 +26,7 @@
 // Steam includes
 #include <steam_api_common.h>
 
+#include "collision_manager.h"
 #include "sprite_manager.h"
 
 SDL_Window *g_window_ptr = nullptr;
@@ -138,6 +139,7 @@ namespace mngn
             while (lag >= game_time::instance().fixed_delta_time)
             {
                 scene_manager.fixed_update();
+                collision_manager::instance().detect_collisions();
                 lag -= game_time::instance().fixed_delta_time;
             }
             

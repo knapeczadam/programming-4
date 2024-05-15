@@ -6,7 +6,8 @@
 #include "component/player/health_component.h"
 #include "component/player/jump_component.h"
 #include "component/player/player_state_component.h"
-#include "component/player/position_idx_component.h"
+#include "component/player/position_component.h"
+#include "component/direction_component.h"
 #include "minigin/core/game_object.h"
 #include "state/player/dead_state.h"
 #include "state/player/falling_state.h"
@@ -27,28 +28,28 @@ namespace qbert
     {
         if (event == "position_changed")
         {
-            auto position_comp_ptr = dynamic_cast<position_idx_component*>(subject_ptr);
-            auto const row_idx = position_comp_ptr->row_idx();
-            auto const cold_idx = position_comp_ptr->col_idx();
+            auto position_comp_ptr = dynamic_cast<position_component*>(subject_ptr);
+            auto const row_idx = position_comp_ptr->row();
+            auto const cold_idx = position_comp_ptr->col();
 
             auto player_ptr = position_comp_ptr->owner();
             auto player_state_comp_ptr = player_ptr->component<player_state_component>();
-            auto jump_comp_ptr = player_ptr->component<jump_component>();
-            auto const row_dir = jump_comp_ptr->row_direction();
-            auto const col_dir = jump_comp_ptr->col_direction();
+            auto direction_comp_ptr = player_ptr->component<direction_component>();
+            auto const row_dir = direction_comp_ptr->row();
+            auto const col_dir = direction_comp_ptr->col();
             
             for (auto const &disc_ptr : discs_)
             {
                 // player is on a disc
-                if (disc_ptr->col_idx() == -1) // left side
+                if (disc_ptr->col() == -1) // left side
                 {
-                    if (row_idx + 1 == disc_ptr->row_idx() and cold_idx == disc_ptr->col_idx())
+                    if (row_idx + 1 == disc_ptr->row() and cold_idx == disc_ptr->col())
                     {
                         player_state_comp_ptr->change_state<flying_state>(player_ptr, disc_ptr);
                         return;
                     }
                 }
-                else if (row_idx + 1 == disc_ptr->row_idx() and cold_idx + 1 == disc_ptr->col_idx()) // right side
+                else if (row_idx + 1 == disc_ptr->row() and cold_idx + 1 == disc_ptr->col()) // right side
                 {
                     player_state_comp_ptr->change_state<flying_state>(player_ptr, disc_ptr);
                     return;
@@ -70,9 +71,9 @@ namespace qbert
         {
             auto health_comp_ptr = dynamic_cast<health_component*>(subject_ptr);
             auto player_ptr = health_comp_ptr->owner();
-            auto position_idx_comp_ptr = player_ptr->component<position_idx_component>();
-            auto const row_idx = position_idx_comp_ptr->row_idx();
-            auto const col_idx = position_idx_comp_ptr->col_idx();
+            auto position_idx_comp_ptr = player_ptr->component<position_component>();
+            auto const row_idx = position_idx_comp_ptr->row();
+            auto const col_idx = position_idx_comp_ptr->col();
             if (health_comp_ptr->health() == 0)
             {
                 player_ptr->component<player_state_component>()->change_state<dead_state>(player_ptr);
