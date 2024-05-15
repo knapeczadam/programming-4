@@ -28,7 +28,7 @@ namespace qbert
     enum qbert_sprite   : int;
     
     
-    class position_component;
+    class player_position_component;
     class health_component;
     class health_display_component;
     class level_display_component;
@@ -86,7 +86,7 @@ namespace qbert
 
             struct player_info : info
             {
-                position_component        *position_comp_ptr;
+                player_position_component        *position_comp_ptr;
                 health_component          *health_comp_ptr;
                 score_counter_component   *score_counter_comp_ptr;
                 level_counter_component   *level_counter_comp_ptr;
@@ -95,6 +95,41 @@ namespace qbert
             };
 
             static auto create_player(player_config_info const &config) -> player_info;
+
+            // Red ball
+            struct red_ball_config_info : config_info { };
+            struct red_ball_info : info { };
+            static auto create_red_ball(red_ball_config_info const &config) -> red_ball_info;
+
+            // Green ball
+            struct green_ball_config_info : config_info { };
+            struct green_ball_info : info { };
+            static auto create_green_ball(green_ball_config_info const &config) -> green_ball_info;
+
+            // Coily
+            struct coily_config_info : config_info { };
+            struct coily_info : info { };
+            static auto create_coily(coily_config_info const &config) -> coily_info;
+
+            // Ugg
+            struct ugg_config_info : config_info { };
+            struct ugg_info : info { };
+            static auto create_ugg(ugg_config_info const &config) -> ugg_info;
+
+            // Wrong-way
+            struct wrong_way_config_info : config_info { };
+            struct wrong_way_info : info { };
+            static auto create_wrong_way(wrong_way_config_info const &config) -> wrong_way_info;
+
+            // Slick
+            struct slick_config_info : config_info { };
+            struct slick_info : info { };
+            static auto create_slick(slick_config_info const &config) -> slick_info;
+
+            // Sam
+            struct sam_config_info : config_info { };
+            struct sam_info : info { };
+            static auto create_sam(sam_config_info const &config) -> sam_info;
         };
         
         struct level

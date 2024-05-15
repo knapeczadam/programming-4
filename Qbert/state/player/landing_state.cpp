@@ -1,7 +1,7 @@
 ﻿#include "landing_state.h"
 
 // Project includes
-#include "component/player/position_component.h"
+#include "component/player/player_position_component.h"
 #include "minigin/core/game_object.h"
 
 namespace qbert
@@ -13,6 +13,6 @@ namespace qbert
 
     void landing_state::on_enter()
     {
-        player_ptr_->component<position_component>()->update_position();
+        player_ptr_->component<player_position_component>()->update_position();
     }
 }

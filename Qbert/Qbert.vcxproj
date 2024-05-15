@@ -31,7 +31,7 @@
     <ClCompile Include="component\player\level_counter_component.cpp" />
     <ClCompile Include="component\player\player_collider_component.cpp" />
     <ClCompile Include="component\player\player_state_component.cpp" />
-    <ClCompile Include="component\player\position_component.cpp" />
+    <ClCompile Include="component\player\player_position_component.cpp" />
     <ClCompile Include="component\player\round_counter_component.cpp" />
     <ClCompile Include="component\player\score_counter_component.cpp" />
     <ClCompile Include="component\player\swear_component.cpp" />
@@ -85,7 +85,7 @@
     <ClInclude Include="component\player\level_counter_component.h" />
     <ClInclude Include="component\player\player_collider_component.h" />
     <ClInclude Include="component\player\player_state_component.h" />
-    <ClInclude Include="component\player\position_component.h" />
+    <ClInclude Include="component\player\player_position_component.h" />
     <ClInclude Include="component\player\round_counter_component.h" />
     <ClInclude Include="component\player\score_counter_component.h" />
     <ClInclude Include="component\player\swear_component.h" />

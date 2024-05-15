@@ -1,6 +1,6 @@
 ﻿#include "start_state.h"
 
-#include "component/player/position_component.h"
+#include "component/player/player_position_component.h"
 #include "minigin/component/rendering/sprite_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/utility/sprite.h"

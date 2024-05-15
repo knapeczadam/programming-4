@@ -12,7 +12,7 @@
 #include "component/player/level_counter_component.h"
 #include "component/player/player_collider_component.h"
 #include "component/player/player_state_component.h"
-#include "component/player/position_component.h"
+#include "component/player/player_position_component.h"
 #include "component/player/round_counter_component.h"
 #include "component/player/score_counter_component.h"
 #include "component/player/swear_component.h"
@@ -48,7 +48,7 @@ namespace qbert
         info.go_ptr->add_component<swear_component>();
         info.go_ptr->add_component<direction_component>();
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
-        info.position_comp_ptr      = info.go_ptr->add_component<position_component>(config.row_idx,                                             config.col_idx);
+        info.position_comp_ptr      = info.go_ptr->add_component<player_position_component>(config.row_idx,                                             config.col_idx);
         info.health_comp_ptr        = info.go_ptr->add_component<health_component>();
         info.score_counter_comp_ptr = info.go_ptr->add_component<score_counter_component>();
         info.level_counter_comp_ptr = info.go_ptr->add_component<level_counter_component>();
@@ -91,6 +91,83 @@ namespace qbert
             mngn::input_manager::instance().bind_command(config.down_command_alt.value().input_type, config.down_command_alt.value().input_state, config.down_command_alt.value().input, std::move(down_command_alt));
         }
 
+        return info;
+    }
+
+    auto factory::character::create_red_ball(red_ball_config_info const &config) -> red_ball_info
+    {
+        red_ball_info info{};
+        info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr->set_parent(config.parent_ptr);
+        info.go_ptr->set_local_position(config.local_position);
+        info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
+        info.go_ptr->add_component<direction_component>();
+        return info;
+    }
+
+    auto factory::character::create_green_ball(green_ball_config_info const &config) -> green_ball_info
+    {
+        green_ball_info info{};
+        info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr->set_parent(config.parent_ptr);
+        info.go_ptr->set_local_position(config.local_position);
+        info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
+        info.go_ptr->add_component<direction_component>();
+        return info;
+    }
+
+    auto factory::character::create_coily(coily_config_info const &config) -> coily_info
+    {
+        coily_info info{};
+        info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr->set_parent(config.parent_ptr);
+        info.go_ptr->set_local_position(config.local_position);
+        info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
+        info.go_ptr->add_component<direction_component>();
+        return info;
+    }
+
+    auto factory::character::create_ugg(ugg_config_info const &config) -> ugg_info
+    {
+        ugg_info info{};
+        info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr->set_parent(config.parent_ptr);
+        info.go_ptr->set_local_position(config.local_position);
+        info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
+        info.go_ptr->add_component<direction_component>();
+        return info;
+    }
+
+    auto factory::character::create_wrong_way(wrong_way_config_info const &config) -> wrong_way_info
+    {
+        wrong_way_info info{};
+        info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr->set_parent(config.parent_ptr);
+        info.go_ptr->set_local_position(config.local_position);
+        info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
+        info.go_ptr->add_component<direction_component>();
+        return info;
+    }
+
+    auto factory::character::create_slick(slick_config_info const &config) -> slick_info
+    {
+        slick_info info{};
+        info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr->set_parent(config.parent_ptr);
+        info.go_ptr->set_local_position(config.local_position);
+        info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
+        info.go_ptr->add_component<direction_component>();
+        return info;
+    }
+
+    auto factory::character::create_sam(sam_config_info const &config) -> sam_info
+    {
+        sam_info info{};
+        info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr->set_parent(config.parent_ptr);
+        info.go_ptr->set_local_position(config.local_position);
+        info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
+        info.go_ptr->add_component<direction_component>();
         return info;
     }
 

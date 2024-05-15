@@ -6,7 +6,7 @@
 #include "component/player/health_component.h"
 #include "component/player/jump_component.h"
 #include "component/player/player_state_component.h"
-#include "component/player/position_component.h"
+#include "component/player/player_position_component.h"
 #include "component/direction_component.h"
 #include "minigin/core/game_object.h"
 #include "state/player/dead_state.h"
@@ -28,7 +28,7 @@ namespace qbert
     {
         if (event == "position_changed")
         {
-            auto position_comp_ptr = dynamic_cast<position_component*>(subject_ptr);
+            auto position_comp_ptr = dynamic_cast<player_position_component*>(subject_ptr);
             auto const row_idx = position_comp_ptr->row();
             auto const cold_idx = position_comp_ptr->col();
 
@@ -71,7 +71,7 @@ namespace qbert
         {
             auto health_comp_ptr = dynamic_cast<health_component*>(subject_ptr);
             auto player_ptr = health_comp_ptr->owner();
-            auto position_idx_comp_ptr = player_ptr->component<position_component>();
+            auto position_idx_comp_ptr = player_ptr->component<player_position_component>();
             auto const row_idx = position_idx_comp_ptr->row();
             auto const col_idx = position_idx_comp_ptr->col();
             if (health_comp_ptr->health() == 0)

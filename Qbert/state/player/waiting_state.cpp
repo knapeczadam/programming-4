@@ -3,7 +3,7 @@
 // Project includes
 #include "start_state.h"
 #include "component/player/player_state_component.h"
-#include "component/player/position_component.h"
+#include "component/player/player_position_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
 
@@ -28,6 +28,6 @@ namespace qbert
     void waiting_state::on_exit()
     {
         player_ptr_->set_local_position(224.0f, 84.0f);
-        player_ptr_->component<position_component>()->reset();
+        player_ptr_->component<player_position_component>()->reset();
     }
 }

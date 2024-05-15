@@ -14,7 +14,7 @@
 #include "component/player/jump_component.h"
 #include "component/player/level_counter_component.h"
 #include "component/player/player_collider_component.h"
-#include "component/player/position_component.h"
+#include "component/player/player_position_component.h"
 #include "component/player/round_counter_component.h"
 #include "component/player/score_counter_component.h"
 #include "component/ui/health_display_component.h"
@@ -191,7 +191,7 @@ void load()
 	player_1_config.scene_ptr         = scene;
 	player_1_config.parent_ptr     = root_ptr;
 	player_1_config.name              = "player_1";
-	player_1_config.local_position    = {224.0f,                 84.0f};
+	player_1_config.local_position    = {224.0f, 84.0f};
 	player_1_config.sprite_id         = qb_sp_qbert_1;
 	player_1_config.texture_id        = qb_re_t_sprite_general;
 	player_1_config.row_idx           = 0;
@@ -223,7 +223,7 @@ void load()
 	player_2_config.scene_ptr      = scene;
 	player_2_config.parent_ptr  = root_ptr;
 	player_2_config.name           = "player_2";
-	player_2_config.local_position = {32.0f,                 372.0f};
+	player_2_config.local_position = {32.0f, 372.0f};
 	player_2_config.sprite_id      = qb_sp_qbert_2;
 	player_2_config.texture_id     = qb_re_t_sprite_general;
 	player_2_config.row_idx        = 6;
@@ -240,6 +240,75 @@ void load()
 	player_2_info.score_counter_comp_ptr->add_observer(score_display_info_2.score_display_comp_ptr);
 	player_2_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
 	std::ranges::for_each(cube_components.cube_components, [player_2_info](auto cube_comp_ptr) { player_2_info.position_comp_ptr->add_observer(cube_comp_ptr); });
+
+	//---------------------------------------------------------------------------------
+	// ENEMY
+	//---------------------------------------------------------------------------------
+	factory::character::red_ball_config_info red_ball_config{};
+	red_ball_config.scene_ptr      = scene;
+	red_ball_config.parent_ptr     = root_ptr;
+	red_ball_config.name           = "red_ball_1";
+	red_ball_config.local_position = {192.0f, 132.0f};
+	red_ball_config.sprite_id	   = qb_sp_ball_red;
+	red_ball_config.texture_id     = qb_re_t_sprite_general;
+	factory::character::create_red_ball(red_ball_config);
+
+	factory::character::coily_config_info coily_config{};
+	coily_config.scene_ptr      = scene;
+	coily_config.parent_ptr     = root_ptr;
+	coily_config.name           = "coily_1";
+	coily_config.local_position = {224.0f, 180.0f};
+	coily_config.sprite_id	   = qb_sp_coily_egg;
+	coily_config.texture_id     = qb_re_t_sprite_general;
+	factory::character::create_coily(coily_config);
+
+	factory::character::ugg_config_info ugg_config{};
+	ugg_config.scene_ptr      = scene;
+	ugg_config.parent_ptr     = root_ptr;
+	ugg_config.name           = "ugg_1";
+	ugg_config.local_position = {448.0f, 420.0f};
+	ugg_config.sprite_id	   = qb_sp_ugg;
+	ugg_config.texture_id     = qb_re_t_sprite_general;
+	factory::character::create_ugg(ugg_config);
+
+	factory::character::wrong_way_config_info wrong_way_config{};
+	wrong_way_config.scene_ptr      = scene;
+	wrong_way_config.parent_ptr     = root_ptr;
+	wrong_way_config.name           = "wrong_way_1";
+	wrong_way_config.local_position = {0.0f, 420.0f};
+	wrong_way_config.sprite_id	   = qb_sp_wrong_way;
+	wrong_way_config.texture_id     = qb_re_t_sprite_general;
+	factory::character::create_wrong_way(wrong_way_config);
+
+	//---------------------------------------------------------------------------------
+	// FRIENDS
+	//---------------------------------------------------------------------------------
+	factory::character::green_ball_config_info green_ball_config{};
+	green_ball_config.scene_ptr      = scene;
+	green_ball_config.parent_ptr     = root_ptr;
+	green_ball_config.name           = "green_ball_1";
+	green_ball_config.local_position = {256.0f, 132.0f};
+	green_ball_config.sprite_id	   = qb_sp_ball_green;
+	green_ball_config.texture_id     = qb_re_t_sprite_general;
+	factory::character::create_green_ball(green_ball_config);
+
+	factory::character::slick_config_info slick_config{};
+	slick_config.scene_ptr      = scene;
+	slick_config.parent_ptr     = root_ptr;
+	slick_config.name           = "slick_1";
+	slick_config.local_position = {288.0f, 180.0f};
+	slick_config.sprite_id	   = qb_sp_slick;
+	slick_config.texture_id     = qb_re_t_sprite_general;
+	factory::character::create_slick(slick_config);
+
+	factory::character::sam_config_info sam_config{};
+	sam_config.scene_ptr      = scene;
+	sam_config.parent_ptr     = root_ptr;
+	sam_config.name           = "sam_1";
+	sam_config.local_position = {160.0f, 180.0f};
+	sam_config.sprite_id	   = qb_sp_sam;
+	sam_config.texture_id     = qb_re_t_sprite_general;
+	factory::character::create_sam(sam_config);
 
 	//---------------------------------------------------------------------------------
 	// DEBUG
