@@ -1,16 +1,10 @@
 ﻿#include "fall_component.h"
 
 // Project includes
-#include "player_state_component.h"
+#include "component/player/health_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
 #include "minigin/utility/math.h"
-#include "state/start_state.h"
-
-// Standard includes
-#include <iostream>
-
-#include "state/waiting_state.h"
 
 namespace qbert
 {
@@ -32,9 +26,8 @@ namespace qbert
                 is_falling_ = false;
                 accu_time_ = 0.0f;
                 curr_pos_ = {};
-                
-                auto player_state_comp_ptr = owner()->component<player_state_component>();
-                player_state_comp_ptr->change_state<waiting_state>(owner(), 1.0f);
+
+                owner()->component<health_component>()->take_damage(1);
             }
         }
     }

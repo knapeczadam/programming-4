@@ -36,15 +36,15 @@ namespace qbert
                 is_flying_ = false;
                 accu_time_ = 0.0f;
 
-                auto root = owner()->parent();
-                auto player_states =root->components_in_children<player_state_component>();
+                auto root_ptr = owner()->parent();
+                auto player_states = root_ptr->components_in_children<player_state_component>();
                 for (auto player_state : player_states)
                 {
                     if (player_state->is_state<flying_state>())
                     {
                         auto player_ptr = player_state->owner();
-                        player_ptr->set_parent(root);
-                        player_state->change_state<waiting_state>(player_ptr);
+                        player_ptr->set_parent(root_ptr);
+                        player_state->change_state<waiting_state>(player_ptr, 0.5f);
                     }
                 }
             }

@@ -18,9 +18,6 @@ namespace qbert
 
     void falling_state::on_enter()
     {
-        auto health_comp_ptr = player_ptr_->component<health_component>();
-        health_comp_ptr->take_damage(1);
-        auto fall_comp_ptr = player_ptr_->component<fall_component>();
-        fall_comp_ptr->fall(row_dir_, col_dir_, row_idx_, col_idx_);
+        player_ptr_->component<fall_component>()->fall(row_dir_, col_dir_, row_idx_, col_idx_);
     }
 }
