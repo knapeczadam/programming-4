@@ -16,7 +16,7 @@ namespace qbert
             .add_sprite_pair(qb_sp_qbert_1, "qbert_1")
             .add_sprite_pair(qb_sp_qbert_2, "qbert_2")
             .add_sprite_pair(qb_sp_qbert_life, "qbert_life")
-            .add_sprite_pair(qb_sp_qbert_curse, "qbert_curse")
+            .add_sprite_pair(qb_sp_qbert_swearing, "qbert_swearing")
             .add_sprite_pair(qb_sp_qbert_big, "qbert_big")
             .add_sprite_pair(qb_sp_ball_red, "ball_red")
             .add_sprite_pair(qb_sp_ball_green, "ball_green")

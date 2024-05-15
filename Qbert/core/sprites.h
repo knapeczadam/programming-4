@@ -7,7 +7,7 @@ namespace qbert
         qb_sp_qbert_1,
         qb_sp_qbert_2,
         qb_sp_qbert_life,
-        qb_sp_qbert_curse,
+        qb_sp_qbert_swearing,
         qb_sp_qbert_big,
         qb_sp_ball_red,
         qb_sp_ball_green,

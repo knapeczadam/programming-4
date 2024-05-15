@@ -32,6 +32,7 @@
     <ClCompile Include="component\player\position_idx_component.cpp" />
     <ClCompile Include="component\player\round_counter_component.cpp" />
     <ClCompile Include="component\player\score_counter_component.cpp" />
+    <ClCompile Include="component\player\swear_component.cpp" />
     <ClCompile Include="component\ui\flicker_component.cpp" />
     <ClCompile Include="component\ui\health_display_component.cpp" />
     <ClCompile Include="component\ui\level_display_component.cpp" />
@@ -74,6 +75,7 @@
     <ClInclude Include="component\player\position_idx_component.h" />
     <ClInclude Include="component\player\round_counter_component.h" />
     <ClInclude Include="component\player\score_counter_component.h" />
+    <ClInclude Include="component\player\swear_component.h" />
     <ClInclude Include="component\ui\flicker_component.h" />
     <ClInclude Include="component\ui\health_display_component.h" />
     <ClInclude Include="component\ui\level_display_component.h" />

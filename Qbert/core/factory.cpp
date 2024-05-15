@@ -1,6 +1,7 @@
 ﻿#include "factory.h"
 
 // Project includes
+#include "sprites.h"
 #include "component/level/cube_component.h"
 #include "component/level/disc_component.h"
 #include "component/level/fly_component.h"
@@ -13,6 +14,7 @@
 #include "component/player/position_idx_component.h"
 #include "component/player/round_counter_component.h"
 #include "component/player/score_counter_component.h"
+#include "component/player/swear_component.h"
 #include "component/ui/flicker_component.h"
 #include "component/ui/health_display_component.h"
 #include "component/ui/level_display_component.h"
@@ -41,11 +43,17 @@ namespace qbert
         info.go_ptr->add_component<face_component>();
         info.go_ptr->add_component<player_state_component>();
         info.go_ptr->add_component<fall_component>();
+        info.go_ptr->add_component<swear_component>();
         info.position_idx_comp_ptr  = info.go_ptr->add_component<position_idx_component>(config.row_idx, config.col_idx);
         info.health_comp_ptr        = info.go_ptr->add_component<health_component>();
         info.score_counter_comp_ptr = info.go_ptr->add_component<score_counter_component>();
         info.level_counter_comp_ptr = info.go_ptr->add_component<level_counter_component>();
         info.round_counter_comp_ptr = info.go_ptr->add_component<round_counter_component>();
+
+        auto swearing_go_ptr = config.scene_ptr->add_game_object("swearing");
+        swearing_go_ptr->set_parent(info.go_ptr);
+        swearing_go_ptr->set_local_position(-24.0f, -50.0f);
+        swearing_go_ptr->add_component<mngn::sprite_component>(qb_sp_qbert_swearing, config.texture_id);
 
         auto left_command = std::make_unique<jump_command>(info.go_ptr, -1, -1);
         auto right_command = std::make_unique<jump_command>(info.go_ptr, 1, 1);
