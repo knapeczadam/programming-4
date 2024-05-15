@@ -4,7 +4,7 @@
 #include "player_state_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
-#include "state/landing_state.h"
+#include "state/player/landing_state.h"
 #include "minigin/utility/math.h"
 
 // Standard includes

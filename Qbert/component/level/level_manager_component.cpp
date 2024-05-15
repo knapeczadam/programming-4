@@ -1,14 +1,20 @@
 ﻿#include "level_manager_component.h"
 
 // Project includes
+#include "component/game/game_state_component.h"
 #include "component/level/disc_component.h"
+#include "component/player/health_component.h"
 #include "component/player/jump_component.h"
 #include "component/player/player_state_component.h"
 #include "component/player/position_idx_component.h"
 #include "minigin/core/game_object.h"
-#include "state/falling_state.h"
-#include "state/flying_state.h"
-#include "state/idle_state.h"
+#include "state/player/dead_state.h"
+#include "state/player/falling_state.h"
+#include "state/player/flying_state.h"
+#include "state/player/idle_state.h"
+#include "state/player/swearing_state.h"
+#include "state/player/waiting_state.h"
+#include "state/game/loosing_state.h"
 
 namespace qbert
 {
@@ -59,5 +65,30 @@ namespace qbert
             // player is idle
             player_state_comp_ptr->change_state<idle_state>(player_ptr);
         }
+
+        if (event == "health_changed")
+        {
+            auto health_comp_ptr = dynamic_cast<health_component*>(subject_ptr);
+            auto player_ptr = health_comp_ptr->owner();
+            auto position_idx_comp_ptr = player_ptr->component<position_idx_component>();
+            auto const row_idx = position_idx_comp_ptr->row_idx();
+            auto const col_idx = position_idx_comp_ptr->col_idx();
+            if (health_comp_ptr->health() == 0)
+            {
+                player_ptr->component<player_state_component>()->change_state<dead_state>(player_ptr);
+
+                auto game_state_comp_ptr = owner()->component<game_state_component>();
+                game_state_comp_ptr->change_state<loosing_state>(game_state_comp_ptr->scene());
+            }
+            else if (row_idx < 0 or col_idx < 0 or col_idx > row_idx or row_idx >= 7)
+            {
+                player_ptr->component<player_state_component>()->change_state<waiting_state>(player_ptr, 1.0f);
+            }
+            else if (health_comp_ptr->health() != 3)
+            {
+                player_ptr->component<player_state_component>()->change_state<swearing_state>(player_ptr);
+            }
+        }
     }
+
 }

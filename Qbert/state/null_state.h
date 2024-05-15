@@ -1,13 +1,15 @@
 ﻿#pragma once
 
 // Project includes
-#include "state/player_state.h"
+#include "state/i_state.h"
 
 namespace qbert
 {
-    class null_state final : public player_state
+    class null_state final : public i_state
     {
     public:
-        explicit null_state(mngn::game_object* player_ptr);
+        void on_enter() override { } 
+        void update() override   { }
+        void on_exit() override  { }
     };
 }

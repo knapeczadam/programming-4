@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="component\game\game_state_component.cpp" />
     <ClCompile Include="component\level\cube_component.cpp" />
     <ClCompile Include="component\level\disc_component.cpp" />
     <ClCompile Include="component\level\fly_component.cpp" />
@@ -46,21 +47,24 @@
     <ClCompile Include="input\generic_commands.cpp" />
     <ClCompile Include="level\levels.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="state\colliding_state.cpp" />
-    <ClCompile Include="state\dead_state.cpp" />
-    <ClCompile Include="state\falling_state.cpp" />
-    <ClCompile Include="state\flying_state.cpp" />
-    <ClCompile Include="state\idle_state.cpp" />
-    <ClCompile Include="state\jumping_state.cpp" />
-    <ClCompile Include="state\landing_state.cpp" />
-    <ClCompile Include="state\null_state.cpp" />
-    <ClCompile Include="state\player_state.cpp" />
-    <ClCompile Include="state\start_state.cpp" />
-    <ClCompile Include="state\swearing_state.cpp" />
-    <ClCompile Include="state\waiting_state.cpp" />
+    <ClCompile Include="state\game\game_state.cpp" />
+    <ClCompile Include="state\game\loosing_state.cpp" />
+    <ClCompile Include="state\game\playing_state.cpp" />
+    <ClCompile Include="state\player\colliding_state.cpp" />
+    <ClCompile Include="state\player\dead_state.cpp" />
+    <ClCompile Include="state\player\falling_state.cpp" />
+    <ClCompile Include="state\player\flying_state.cpp" />
+    <ClCompile Include="state\player\idle_state.cpp" />
+    <ClCompile Include="state\player\jumping_state.cpp" />
+    <ClCompile Include="state\player\landing_state.cpp" />
+    <ClCompile Include="state\player\player_state.cpp" />
+    <ClCompile Include="state\player\start_state.cpp" />
+    <ClCompile Include="state\player\swearing_state.cpp" />
+    <ClCompile Include="state\player\waiting_state.cpp" />
     <ClCompile Include="ui\ui.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="component\game\game_state_component.h" />
     <ClInclude Include="component\level\cube_component.h" />
     <ClInclude Include="component\level\disc_component.h" />
     <ClInclude Include="component\level\fly_component.h" />
@@ -71,11 +75,11 @@
     <ClInclude Include="component\player\jump_component.h" />
     <ClInclude Include="component\player\level_counter_component.h" />
     <ClInclude Include="component\player\player_state_component.h" />
-    <ClInclude Include="component\player\player_state_component.hpp" />
     <ClInclude Include="component\player\position_idx_component.h" />
     <ClInclude Include="component\player\round_counter_component.h" />
     <ClInclude Include="component\player\score_counter_component.h" />
     <ClInclude Include="component\player\swear_component.h" />
+    <ClInclude Include="component\state\i_state_component.h" />
     <ClInclude Include="component\ui\flicker_component.h" />
     <ClInclude Include="component\ui\health_display_component.h" />
     <ClInclude Include="component\ui\level_display_component.h" />
@@ -88,23 +92,28 @@
     <ClInclude Include="input\game_object_commands.h" />
     <ClInclude Include="input\generic_commands.h" />
     <ClInclude Include="level\levels.h" />
-    <ClInclude Include="state\colliding_state.h" />
-    <ClInclude Include="state\dead_state.h" />
-    <ClInclude Include="state\falling_state.h" />
-    <ClInclude Include="state\flying_state.h" />
-    <ClInclude Include="state\idle_state.h" />
-    <ClInclude Include="state\jumping_state.h" />
-    <ClInclude Include="state\landing_state.h" />
+    <ClInclude Include="state\game\game_state.h" />
+    <ClInclude Include="state\game\loosing_state.h" />
+    <ClInclude Include="state\game\playing_state.h" />
+    <ClInclude Include="state\i_state.h" />
     <ClInclude Include="state\null_state.h" />
-    <ClInclude Include="state\player_state.h" />
-    <ClInclude Include="state\start_state.h" />
-    <ClInclude Include="state\swearing_state.h" />
-    <ClInclude Include="state\waiting_state.h" />
+    <ClInclude Include="state\player\colliding_state.h" />
+    <ClInclude Include="state\player\dead_state.h" />
+    <ClInclude Include="state\player\falling_state.h" />
+    <ClInclude Include="state\player\flying_state.h" />
+    <ClInclude Include="state\player\idle_state.h" />
+    <ClInclude Include="state\player\jumping_state.h" />
+    <ClInclude Include="state\player\landing_state.h" />
+    <ClInclude Include="state\player\player_state.h" />
+    <ClInclude Include="state\player\start_state.h" />
+    <ClInclude Include="state\player\swearing_state.h" />
+    <ClInclude Include="state\player\waiting_state.h" />
     <ClInclude Include="ui\ui.h" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="component\ai\" />
     <Folder Include="component\animation\" />
+    <Folder Include="state\ui\" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

@@ -7,17 +7,19 @@
 #endif
 
 // Project includes
-#include "component/player/position_idx_component.h"
+#include "component/game/game_state_component.h"
+#include "component/level/cube_component.h"
+#include "component/level/level_manager_component.h"
 #include "component/player/health_component.h"
+#include "component/player/jump_component.h"
+#include "component/player/level_counter_component.h"
+#include "component/player/position_idx_component.h"
+#include "component/player/round_counter_component.h"
 #include "component/player/score_counter_component.h"
 #include "component/ui/health_display_component.h"
 #include "component/ui/level_display_component.h"
 #include "component/ui/round_display_component.h"
 #include "component/ui/score_display_component.h"
-#include "component/player/jump_component.h"
-#include "component/player/round_counter_component.h"
-#include "component/level/cube_component.h"
-#include "component/level/level_manager_component.h"
 #include "core/factory.h"
 #include "core/resources.h"
 #include "core/sprites.h"
@@ -42,8 +44,6 @@
 
 // SDL includes
 #include <SDL.h>
-
-#include "component/player/level_counter_component.h"
 
 void register_services()
 {
@@ -87,6 +87,7 @@ void load()
 	//---------------------------------------------------------------------------------
 	auto root_ptr = scene->add_game_object("root");
 	auto level_manager_comp_ptr = root_ptr->add_component<level_manager_component>();
+	root_ptr->add_component<game_state_component>(scene);
 
 	//---------------------------------------------------------------------------------
     // FPS
@@ -206,6 +207,7 @@ void load()
 	// Observers
 	auto player_1_info = factory::character::create_player(player_1_config);
 	player_1_info.health_comp_ptr->add_observer(heal_display_info_1.health_display_comp_ptr);
+	player_1_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
     player_1_info.score_counter_comp_ptr->add_observer(score_display_info_1.score_display_comp_ptr);
 	player_1_info.position_idx_comp_ptr->add_observer(level_manager_comp_ptr);
 	player_1_info.level_counter_comp_ptr->add_observer(level_display_info.level_display_comp_ptr);
@@ -232,6 +234,7 @@ void load()
 	// Observers
 	auto player_2_info = factory::character::create_player(player_2_config);
     player_2_info.health_comp_ptr->add_observer(heal_display_info_2.health_display_comp_ptr);
+    player_2_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
 	player_2_info.score_counter_comp_ptr->add_observer(score_display_info_2.score_display_comp_ptr);
 	player_2_info.position_idx_comp_ptr->add_observer(level_manager_comp_ptr);
 	std::ranges::for_each(cube_components.cube_components, [player_2_info](auto cube_comp_ptr) { player_2_info.position_idx_comp_ptr->add_observer(cube_comp_ptr); });

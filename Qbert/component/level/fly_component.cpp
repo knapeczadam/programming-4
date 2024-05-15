@@ -4,9 +4,9 @@
 #include "component/player/player_state_component.h"
 #include "minigin/core/game_time.h"
 #include "minigin/core/game_object.h"
-#include "state/flying_state.h"
-#include "state/start_state.h"
-#include "state/waiting_state.h"
+#include "state/player/flying_state.h"
+#include "state/player/start_state.h"
+#include "state/player/waiting_state.h"
 
 namespace qbert
 {

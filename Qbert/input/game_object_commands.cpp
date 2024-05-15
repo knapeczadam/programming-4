@@ -4,9 +4,9 @@
 #include "component/player/jump_component.h"
 #include "component/player/player_state_component.h"
 #include "minigin/core/game_object.h"
-#include "state/idle_state.h"
-#include "state/jumping_state.h"
-#include "state/start_state.h"
+#include "state/player/idle_state.h"
+#include "state/player/jumping_state.h"
+#include "state/player/start_state.h"
 
 namespace qbert
 {
