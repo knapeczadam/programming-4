@@ -15,7 +15,7 @@
 #include "state/player/idle_state.h"
 #include "state/player/swearing_state.h"
 #include "state/player/waiting_state.h"
-#include "state/game/loosing_state.h"
+#include "state/game/game_over_state.h"
 
 namespace qbert
 {
@@ -79,7 +79,7 @@ namespace qbert
                 player_ptr->component<player_state_component>()->change_state<dead_state>(player_ptr);
 
                 auto game_state_comp_ptr = owner()->component<game_state_component>();
-                game_state_comp_ptr->change_state<loosing_state>(game_state_comp_ptr->scene());
+                game_state_comp_ptr->change_state<game_over_state>(game_state_comp_ptr->scene());
             }
             else if (row_idx < 0 or col_idx < 0 or col_idx > row_idx or row_idx >= 7)
             {

@@ -5,10 +5,10 @@
 
 namespace qbert
 {
-    class loosing_state final : public game_state
+    class game_over_state final : public game_state
     {
     public:
-        explicit loosing_state(mngn::scene *scene_ptr);
+        explicit game_over_state(mngn::scene *scene_ptr);
 
         void on_exit() override;
     };
