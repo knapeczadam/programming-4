@@ -18,6 +18,22 @@ namespace mngn
 
     game_object::~game_object() = default;
 
+    auto game_object::find(std::string const &name) const -> game_object *
+    {
+        if (name_ == name)
+        {
+            return const_cast<game_object*>(this);
+        }
+        for (auto const &child_ptr : children_)
+        {
+            if (auto const found = child_ptr->find(name))
+            {
+                return found;
+            }
+        }
+        return nullptr;
+    }
+
     void game_object::awake()
     {
         for (auto const &comp : component_map_ | std::views::values)

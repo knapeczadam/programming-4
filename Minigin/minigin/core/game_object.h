@@ -48,6 +48,7 @@ namespace mngn
         game_object &operator=(game_object &&other)      = delete;
 
         [[nodiscard]] auto name() const -> std::string { return name_; }
+        [[nodiscard]] auto find(std::string const &name) const -> game_object *;
 
         void awake();
         void fixed_update();
