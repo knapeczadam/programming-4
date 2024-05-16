@@ -5,8 +5,14 @@
 #include "component/character/position_component.h"
 #include "minigin/core/game_object.h"
 
+// Standard includes
+#include <iostream>
+
 // GLM includes
 #include <glm/glm.hpp>
+
+#include "component/state/state_component.h"
+#include "state/player/colliding_state.h"
 
 namespace qbert
 {
@@ -38,17 +44,33 @@ namespace qbert
         glm::ivec2 other_dir = {other_row_dir, other_col_dir};
         glm::ivec2 idle = {0, 0};
 
+        // player is idle and other player is moving towards it
         if (dir == idle and pos == other_pos + other_dir)
         {
-            // player is idle and other player is moving towards it
+            owner()->component<state_component>()->change_state<colliding_state>(owner());
         }
+        // other player is idle and player is moving towards it
         else if (other_dir == idle and other_pos == pos + dir)
         {
-            // other player is idle and player is moving towards it
+            owner()->component<state_component>()->change_state<colliding_state>(owner());
         }
+        // both players are moving towards each other
         else if (pos == other_pos + other_dir and other_pos == pos + dir)
         {
-            // both players are moving towards each other
+            owner()->component<state_component>()->change_state<colliding_state>(owner());
+        }
+        // player is moving towards other player
+        else if (pos + dir == other_pos)
+        {
+            owner()->component<state_component>()->change_state<colliding_state>(owner());
+        }
+        else
+        {
+            std::cout << "Collision detected" << std::endl;
+            std::cout << "Player position: " << pos.x << ", " << pos.y << std::endl;
+            std::cout << "Player direction: " << dir.x << ", " << dir.y << std::endl;
+            std::cout << "Other player position: " << other_pos.x << ", " << other_pos.y << std::endl;
+            std::cout << "Other player direction: " << other_dir.x << ", " << other_dir.y << std::endl;
         }
     }
 }

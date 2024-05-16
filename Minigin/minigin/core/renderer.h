@@ -27,6 +27,9 @@ namespace mngn
 
         [[nodiscard]] auto background_color() const -> const SDL_Color & { return clear_color_; }
         void set_background_color(SDL_Color const &color) { clear_color_ = color; }
+
+    private:
+        void darw_debug_rect(SDL_Rect const &dst_rect) const;
         
     private:
         SDL_Renderer *renderer_ptr_ = nullptr;

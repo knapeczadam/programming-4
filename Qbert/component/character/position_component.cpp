@@ -18,9 +18,9 @@ namespace qbert
         notify_observers("position_changed");
     }
 
-    void position_component::reset()
+    void position_component::reset(int row_idx, int col_idx)
     {
-        row_idx_ = 0;
-        col_idx_ = 0;
+        row_idx_ = row_idx;
+        col_idx_ = col_idx;
     }
 }

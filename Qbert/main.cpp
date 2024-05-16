@@ -81,12 +81,12 @@ void load()
 	//---------------------------------------------------------------------------------
 	// TEST SCENE
 	//---------------------------------------------------------------------------------
-    auto const scene = scene_manager::instance().create_scene("Demo");
+    auto const scene = scene_manager::instance().create("Demo");
     
 	//---------------------------------------------------------------------------------
 	// ROOT
 	//---------------------------------------------------------------------------------
-	auto root_ptr = scene->add_game_object("root");
+	auto root_ptr = scene->create("root");
 	auto level_manager_comp_ptr = root_ptr->add_component<level_manager_component>();
 	// root_ptr->add_component<state_component>(scene);
 
@@ -250,9 +250,10 @@ void load()
 	red_ball_config.name           = "red_ball_1";
 	red_ball_config.sprite_id	   = qb_sp_ball_red;
 	red_ball_config.texture_id     = qb_re_t_sprite_general;
-	
 	auto red_ball_info = factory::character::create_red_ball(red_ball_config);
+
 	red_ball_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
+	red_ball_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
 
 	factory::character::coily_config_info coily_config{};
 	coily_config.scene_ptr      = scene;

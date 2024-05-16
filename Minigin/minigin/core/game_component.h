@@ -1,4 +1,6 @@
 ﻿#pragma once
+
+// Standard includes
 #include <string>
 
 namespace mngn
@@ -38,6 +40,9 @@ namespace mngn
         
     private:
         void set_owner(game_object *owner_ptr);
+
+    public:
+        bool enabled = true;
         
     private:
         game_object *owner_ptr_ = nullptr;

@@ -251,28 +251,28 @@ namespace mngn
         {
             // Test Description: Create a scene and add a game object to it.
             // Assert 1: The scene has 1 game object.
-            auto const scene = scene_manager::instance().create_scene("Test");
-            scene->add_game_object();
-            assert(scene->game_object_count() == 1);
+            auto const scene = scene_manager::instance().create("Test");
+            scene->create();
+            assert(scene->count() == 1);
         }
         {
             // Test Description: Create a scene and add a game object to it and then remove the game object.
             // Assert 1: The scene has no game objects.
-            auto const scene = scene_manager::instance().create_scene("Test");
-            auto const go = scene->add_game_object();
-            scene->remove_game_object(go);
-            assert(scene->game_object_count() == 0);
+            auto const scene = scene_manager::instance().create("Test");
+            auto const go = scene->create();
+            scene->remove(go);
+            assert(scene->count() == 0);
         }
         {
             // Test Description: Create a scene and add 2 game objects to it and then remove all game objects.
             // Assert 1: The scene has 2 game objects.
             // Assert 2: The scene has no game objects.
-            auto const scene = scene_manager::instance().create_scene("Test");
-            scene->add_game_object();
-            scene->add_game_object();
-            assert(scene->game_object_count() == 2);
+            auto const scene = scene_manager::instance().create("Test");
+            scene->create();
+            scene->create();
+            assert(scene->count() == 2);
             scene->remove_all();
-            assert(scene->game_object_count() == 0);
+            assert(scene->count() == 0);
         }
     }
 

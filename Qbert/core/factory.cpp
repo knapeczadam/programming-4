@@ -39,7 +39,7 @@ namespace qbert
     auto factory::character::create_player(player_config_info const &config) -> player_info
     {
         player_info info{};
-        info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr = config.scene_ptr->create(config.name);
         info.go_ptr->add_tag("player");
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
@@ -57,7 +57,7 @@ namespace qbert
         info.round_counter_comp_ptr = info.go_ptr->add_component<round_counter_component>();
         info.collider_comp_ptr      = info.go_ptr->add_component<player_collider_component>(sprite_comp_ptr->sprite()->collider_width(), sprite_comp_ptr->sprite()->collider_height());
 
-        auto swearing_go_ptr = config.scene_ptr->add_game_object("swearing");
+        auto swearing_go_ptr = config.scene_ptr->create("swearing");
         swearing_go_ptr->set_parent(info.go_ptr);
         swearing_go_ptr->set_local_position(-24.0f, -50.0f);
         swearing_go_ptr->add_component<mngn::sprite_component>(qb_sp_qbert_swearing, config.texture_id);
@@ -99,25 +99,26 @@ namespace qbert
     auto factory::character::create_red_ball(red_ball_config_info const &config) -> red_ball_info
     {
         red_ball_info info{};
-        info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr = config.scene_ptr->create(config.name);
         info.go_ptr->add_tags({"npc", "enemy"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
-        info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         info.go_ptr->add_component<direction_component>();
         info.go_ptr->add_component<state_component>();
         info.go_ptr->add_component<jump_component>();
         info.go_ptr->add_component<descend_component>();
         info.go_ptr->add_component<fall_component>();
-        info.go_ptr->add_component<health_component>(1);
+        auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
+        info.go_ptr->add_component<mngn::collider_component>(sprite_comp_ptr->sprite()->collider_width(), sprite_comp_ptr->sprite()->collider_height());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>(1, 0);
+        info.health_comp_ptr   = info.go_ptr->add_component<health_component>(1);
         return info;
     }
 
     auto factory::character::create_green_ball(green_ball_config_info const &config) -> green_ball_info
     {
         green_ball_info info{};
-        info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr = config.scene_ptr->create(config.name);
         info.go_ptr->add_tags({"npc", "friend"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
@@ -131,7 +132,7 @@ namespace qbert
     auto factory::character::create_coily(coily_config_info const &config) -> coily_info
     {
         coily_info info{};
-        info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr = config.scene_ptr->create(config.name);
         info.go_ptr->add_tags({"npc", "enemy"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
@@ -145,7 +146,7 @@ namespace qbert
     auto factory::character::create_ugg(ugg_config_info const &config) -> ugg_info
     {
         ugg_info info{};
-        info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr = config.scene_ptr->create(config.name);
         info.go_ptr->add_tags({"npc", "enemy"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
@@ -159,7 +160,7 @@ namespace qbert
     auto factory::character::create_wrong_way(wrong_way_config_info const &config) -> wrong_way_info
     {
         wrong_way_info info{};
-        info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr = config.scene_ptr->create(config.name);
         info.go_ptr->add_tags({"npc", "enemy"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
@@ -173,7 +174,7 @@ namespace qbert
     auto factory::character::create_slick(slick_config_info const &config) -> slick_info
     {
         slick_info info{};
-        info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr = config.scene_ptr->create(config.name);
         info.go_ptr->add_tags({"npc", "friend"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
@@ -187,7 +188,7 @@ namespace qbert
     auto factory::character::create_sam(sam_config_info const &config) -> sam_info
     {
         sam_info info{};
-        info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr = config.scene_ptr->create(config.name);
         info.go_ptr->add_tags({"npc", "friend"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
@@ -201,7 +202,7 @@ namespace qbert
     auto factory::level::create_disc(disc_config_info const &config) -> disc_info
     {
         disc_info info{};
-        info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr = config.scene_ptr->create(config.name);
         info.go_ptr->add_tag("level");
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
@@ -236,7 +237,7 @@ namespace qbert
             glm::vec2 start_position = origin + glm::vec2(i * offset_x, i * offset_y);
             for (int j = 0; j < i + 1; ++j)
             {
-                auto go = config.scene_ptr->add_game_object("cube_" + std::to_string(i) + "_" + std::to_string(j));
+                auto go = config.scene_ptr->create("cube_" + std::to_string(i) + "_" + std::to_string(j));
                 go->add_tag("level");
                 go->set_parent(config.parent_ptr);
                 
@@ -265,7 +266,7 @@ namespace qbert
     auto factory::ui::create_fps(fps_config_info const &config) -> fps_info
     {
         fps_info info{};
-        info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr = config.scene_ptr->create(config.name);
         info.go_ptr->add_tag("ui");
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
@@ -278,7 +279,7 @@ namespace qbert
     auto factory::ui::create_score_display(score_display_config_info const &config) -> score_display_info
     {
         score_display_info info{};
-        info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr = config.scene_ptr->create(config.name);
         info.go_ptr->add_tag("ui");
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
@@ -290,7 +291,7 @@ namespace qbert
     auto factory::ui::create_health_display(health_display_config_info const &config) -> health_display_info
     {
         health_display_info info{};
-        info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr = config.scene_ptr->create(config.name);
         info.go_ptr->add_tag("ui");
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
@@ -302,7 +303,7 @@ namespace qbert
     auto factory::ui::create_level_display(level_display_config_info const &config) -> level_display_info
     {
         level_display_info info{};
-        info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr = config.scene_ptr->create(config.name);
         info.go_ptr->add_tag("ui");
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
@@ -314,7 +315,7 @@ namespace qbert
     auto factory::ui::create_round_display(round_display_config_info const &config) -> round_display_info
     {
         round_display_info info{};
-        info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr = config.scene_ptr->create(config.name);
         info.go_ptr->add_tag("ui");
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
@@ -326,7 +327,7 @@ namespace qbert
     auto factory::ui::create_sprite(sprite_config_info const &config) -> sprite_info
     {
         sprite_info info{};
-        info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr = config.scene_ptr->create(config.name);
         info.go_ptr->add_tag("ui");
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
@@ -337,7 +338,7 @@ namespace qbert
     auto factory::ui::create_arrow(arrow_config_info const &config) -> arrow_info
     {
         arrow_info info{};
-        info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr = config.scene_ptr->create(config.name);
         info.go_ptr->add_tag("ui");
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);

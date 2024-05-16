@@ -212,7 +212,7 @@
     <ClCompile Include="minigin\component\ui\multisprite_ui_component.cpp" />
     <ClCompile Include="minigin\component\ui\sprite_ui_component.cpp" />
     <ClCompile Include="minigin\component\ui\text_ui_component.cpp" />
-    <ClCompile Include="minigin\core\collider_manager.cpp" />
+    <ClCompile Include="minigin\core\collision_manager.cpp" />
     <ClCompile Include="minigin\core\game_component.cpp" />
     <ClCompile Include="minigin\core\game_object.cpp" />
     <ClCompile Include="minigin\core\i_observer.cpp" />

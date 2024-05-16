@@ -12,6 +12,7 @@ namespace mngn
 {
     // Forward declarations
     class scene;
+    class game_object;
 
     // Type aliases
     using scene_uptr = std::unique_ptr<scene>;
@@ -33,7 +34,8 @@ namespace mngn
         void render();
         void render_ui();
         
-        auto create_scene(std::string const &name) -> scene *;
+        auto create(std::string const &name) -> scene *;
+        [[nodiscard]] auto find_game_objects_with_tag(std::string const &tag) const -> std::vector<game_object*>;
 
     private:
         friend class singleton<scene_manager>;

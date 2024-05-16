@@ -33,11 +33,12 @@ namespace mngn
         void render() const;
         void render_ui() const;
 
-        auto add_game_object(std::string const &name = "new_game_object") -> game_object *;
-        void remove_game_object(game_object *object_ptr);
+        auto create(std::string const &name = "new_game_object") -> game_object *;
+        void remove(game_object *game_object_ptr);
         void remove_all();
-        [[nodiscard]] auto game_object_count() const -> int;
-        [[nodiscard]] auto find_game_object(std::string const &name) const -> game_object *;
+        [[nodiscard]] auto count() const -> int;
+        [[nodiscard]] auto find(std::string const &name) const -> game_object *;
+        [[nodiscard]] auto find_with_tag(std::string const &tag) const -> std::vector<game_object *>;
 
         [[nodiscard]] auto active() const -> bool { return active_; }
         void set_active(bool active) { active_ = active; }

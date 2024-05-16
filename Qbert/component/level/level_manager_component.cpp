@@ -8,6 +8,7 @@
 #include "component/character/position_component.h"
 #include "component/character/direction_component.h"
 #include "minigin/core/game_object.h"
+#include "minigin/core/scene_manager.h"
 #include "state/player/dead_state.h"
 #include "state/player/falling_state.h"
 #include "state/player/flying_state.h"
@@ -15,6 +16,7 @@
 #include "state/player/swearing_state.h"
 #include "state/player/waiting_state.h"
 #include "state/game/game_over_state.h"
+#include "state/npc/npc_dead_state.h"
 #include "state/npc/npc_idle_state.h"
 
 namespace qbert
@@ -80,24 +82,32 @@ namespace qbert
         if (event == "health_changed")
         {
             auto health_comp_ptr = static_cast<health_component*>(subject_ptr);
-            auto player_ptr = health_comp_ptr->owner();
-            auto position_idx_comp_ptr = player_ptr->component<position_component>();
+            auto character_ptr = health_comp_ptr->owner();
+            auto position_idx_comp_ptr = character_ptr->component<position_component>();
             auto const row_idx = position_idx_comp_ptr->row();
             auto const col_idx = position_idx_comp_ptr->col();
-            if (health_comp_ptr->health() == 0)
+            if (character_ptr->has_tag("player"))
             {
-                player_ptr->component<state_component>()->change_state<dead_state>(player_ptr);
-
-                // auto game_state_comp_ptr = owner()->component<state_component>();
-                // game_state_comp_ptr->change_state<game_over_state>(game_state_comp_ptr->scene());
+                // player is dead
+                if (health_comp_ptr->health() == 0)
+                {
+                    character_ptr->component<state_component>()->change_state<dead_state>(character_ptr);
+                }
+                // player is falling
+                else if (row_idx < 0 or col_idx < 0 or col_idx > row_idx or row_idx >= 7)
+                {
+                    character_ptr->component<state_component>()->change_state<waiting_state>(character_ptr, 1.0f);
+                }
+                // player is colliding
+                else if (health_comp_ptr->health() != 3)
+                {
+                    character_ptr->component<state_component>()->change_state<swearing_state>(character_ptr);
+                }
             }
-            else if (row_idx < 0 or col_idx < 0 or col_idx > row_idx or row_idx >= 7)
+            // npc is dead
+            else if (character_ptr->has_tag("npc"))
             {
-                player_ptr->component<state_component>()->change_state<waiting_state>(player_ptr, 1.0f);
-            }
-            else if (health_comp_ptr->health() != 3)
-            {
-                player_ptr->component<state_component>()->change_state<swearing_state>(player_ptr);
+                character_ptr->component<state_component>()->change_state<npc_dead_state>(character_ptr);
             }
         }
     }

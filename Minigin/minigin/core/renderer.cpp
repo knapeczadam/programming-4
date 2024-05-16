@@ -70,27 +70,49 @@ namespace mngn
 
     void renderer::render_texture(texture const &texture, const float x, const float y) const
     {
-        SDL_Rect dst{};
-        dst.x = static_cast<int>(x);
-        dst.y = static_cast<int>(y);
-        SDL_QueryTexture(texture.sdl_texture(), nullptr, nullptr, &dst.w, &dst.h);
-        SDL_RenderCopy(sdl_renderer(), texture.sdl_texture(), nullptr, &dst);
+        SDL_Rect dst_rect{};
+        dst_rect.x = static_cast<int>(x);
+        dst_rect.y = static_cast<int>(y);
+        SDL_QueryTexture(texture.sdl_texture(), nullptr, nullptr, &dst_rect.w, &dst_rect.h);
+        SDL_RenderCopy(sdl_renderer(), texture.sdl_texture(), nullptr, &dst_rect);
+
+        // draw debug magenta rectangle
+        SDL_SetRenderDrawColor(sdl_renderer(), 255, 0, 255, 255);
+        SDL_RenderDrawRect(sdl_renderer(), &dst_rect);
+        
+#ifndef NDEBUG
+        darw_debug_rect(dst_rect);
+#endif
     }
 
     void renderer::render_texture(texture const &texture, const float x, const float y, const float width, const float height) const
     {
-        SDL_Rect dst{};
-        dst.x = static_cast<int>(x);
-        dst.y = static_cast<int>(y);
-        dst.w = static_cast<int>(width);
-        dst.h = static_cast<int>(height);
-        SDL_RenderCopy(sdl_renderer(), texture.sdl_texture(), nullptr, &dst);
+        SDL_Rect dst_rect{};
+        dst_rect.x = static_cast<int>(x);
+        dst_rect.y = static_cast<int>(y);
+        dst_rect.w = static_cast<int>(width);
+        dst_rect.h = static_cast<int>(height);
+        SDL_RenderCopy(sdl_renderer(), texture.sdl_texture(), nullptr, &dst_rect);
+
+#ifndef NDEBUG
+        darw_debug_rect(dst_rect);
+#endif
     }
 
     void renderer::render_texture(texture const &texture, SDL_Rect const &src_rect, SDL_Rect const &dst_rect) const
     {
         SDL_RenderCopy(sdl_renderer(), texture.sdl_texture(), &src_rect, &dst_rect);
+        
+#ifndef NDEBUG
+        darw_debug_rect(dst_rect);
+#endif
     }
 
     auto renderer::sdl_renderer() const -> SDL_Renderer * { return renderer_ptr_; }
+
+    void renderer::darw_debug_rect(SDL_Rect const &dst_rect) const
+    {
+        SDL_SetRenderDrawColor(sdl_renderer(), 255, 0, 255, 255);
+        SDL_RenderDrawRect(sdl_renderer(), &dst_rect);
+    }
 }

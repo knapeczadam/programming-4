@@ -61,9 +61,23 @@ namespace mngn
         }
     }
 
-    auto scene_manager::create_scene(std::string const &name) -> scene *
+    auto scene_manager::create(std::string const &name) -> scene *
     {
         scenes_.emplace_back(std::unique_ptr<scene>(new scene(name)));
         return scenes_.back().get();
+    }
+
+    auto scene_manager::find_game_objects_with_tag(std::string const &tag) const -> std::vector<game_object*>
+    {
+        std::vector<game_object*> result{};
+        for (auto const &scene : scenes_)
+        {
+            if (scene->active())
+            {
+                auto const objects = scene->find_with_tag(tag);
+                result.insert(result.end(), objects.begin(), objects.end());
+            }
+        }
+        return result;
     }
 }

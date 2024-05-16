@@ -38,7 +38,7 @@ namespace mngn
     {
         for (auto const &comp : component_map_ | std::views::values)
         {
-            comp->awake();
+            if (comp->enabled) comp->awake();
         }
     }
 
@@ -47,7 +47,7 @@ namespace mngn
         auto const physics_components = components(component_family::physics);
         for (auto const &comp : physics_components | std::views::values)
         {
-            static_cast<physics_component *>(comp)->fixed_update();
+            if (comp->enabled) static_cast<physics_component *>(comp)->fixed_update();
         }
     }
 
@@ -55,7 +55,7 @@ namespace mngn
     {
         for (auto const &comp : component_map_ | std::views::values)
         {
-            comp->update();
+            if (comp->enabled) comp->update();
         }
     }
 

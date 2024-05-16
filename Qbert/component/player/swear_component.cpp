@@ -1,6 +1,7 @@
 ﻿#include "swear_component.h"
 
 // Project includes
+#include "health_component.h"
 #include "minigin/component/rendering/sprite_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
@@ -23,6 +24,8 @@ namespace qbert
                 swearing_go_ptr_->set_active(false);
                 is_swearing_ = false;
                 accu_time_  = 0.0f;
+
+                owner()->component<health_component>()->take_damage(1);
             }
         }
     }

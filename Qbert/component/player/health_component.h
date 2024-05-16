@@ -21,6 +21,7 @@ namespace qbert
         void awake() override;
 
         void take_damage(int damage);
+        void heal(int health);
         [[nodiscard]] auto health() const -> int { return health_; }
 
     private:

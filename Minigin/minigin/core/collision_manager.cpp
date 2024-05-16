@@ -20,7 +20,7 @@ namespace mngn
     {
         for (auto *collider_ptr : colliders_to_register_)
         {
-            if (not collider_ptr->owner()->active()) continue;
+            if (not collider_ptr->owner()->active() or not collider_ptr->enabled) continue;
             for (auto *other_collider_ptr : colliders_)
             {
                 if (check_collision(collider_ptr, other_collider_ptr))

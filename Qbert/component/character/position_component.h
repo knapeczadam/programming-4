@@ -27,8 +27,8 @@ namespace qbert
 
         void awake() override;
 
-        virtual void update_position();
-        virtual void reset();
+        void update_position();
+        void reset(int row_idx = 0, int col_idx = 0);
         
     protected:
         direction_component *direction_comp_ptr_ = nullptr;
