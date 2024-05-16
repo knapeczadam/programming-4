@@ -111,8 +111,8 @@ void load()
 	cube_config.texture_id = qb_re_t_sprite_general;
 	cube_config.color_1    = qb_sp_level_1_blue_cube_1;
 	cube_config.color_2    = qb_sp_level_1_red_cube_1;
-	// cube_config.color_3    = qb_sp_level_1_yellow_cube_1;
-	cube_config.revertible = true;
+	cube_config.color_3    = qb_sp_level_1_yellow_cube_1;
+	cube_config.revertible = false;
 	auto cube_components = factory::level::create_cubes(cube_config);
 	
 	//---------------------------------------------------------------------------------
@@ -304,6 +304,7 @@ void load()
 	// Observers
 	// slick_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
 	// slick_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
+	// std::ranges::for_each(cube_components.cube_components, [slick_info](auto cube_comp_ptr) { slick_info.position_comp_ptr->add_observer(cube_comp_ptr); });
 
 	factory::character::sam_config_info sam_config{};
 	sam_config.scene_ptr  = scene;
@@ -315,6 +316,7 @@ void load()
 	// Observers
 	sam_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
 	sam_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
+	std::ranges::for_each(cube_components.cube_components, [sam_info](auto cube_comp_ptr) { sam_info.position_comp_ptr->add_observer(cube_comp_ptr); });
 
 	//---------------------------------------------------------------------------------
 	// DEBUG
