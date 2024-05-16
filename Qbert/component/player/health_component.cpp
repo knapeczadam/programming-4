@@ -1,8 +1,5 @@
 ﻿#include "health_component.h"
 
-// Project includes
-#include "component/player/player_position_component.h"
-
 namespace qbert
 {
     void health_component::awake()

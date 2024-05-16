@@ -1,14 +1,14 @@
 ﻿#pragma once
 
 // Project includes
-#include "state/player/player_state.h"
+#include "state/character/character_state.h"
 
 namespace qbert
 {
-    class jumping_state final : public player_state
+    class jumping_state final : public character_state
     {
     public:
-        jumping_state(mngn::game_object* player_ptr);
+        explicit jumping_state(mngn::game_object* character_ptr);
 
         void on_enter() override;
     };

@@ -1,12 +1,15 @@
 ﻿#include "jump_component.h"
 
 // Project includes
-#include "component/player/player_state_component.h"
-#include "component/direction_component.h"
+#include "component/state/state_component.h"
+#include "component/character/direction_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
-#include "state/player/landing_state.h"
+#include "state/character/landing_state.h"
 #include "minigin/utility/math.h"
+
+// Standard includes
+#include <iostream>
 
 namespace qbert
 {
@@ -33,8 +36,7 @@ namespace qbert
                 accu_time_ = 0.0f;
                 curr_pos_ = {};
                 
-                auto player_state_comp_ptr = owner()->component<player_state_component>();
-                player_state_comp_ptr->change_state<landing_state>(owner());
+                owner()->component<state_component>()->change_state<landing_state>(owner());
             }
         }
     }
@@ -59,6 +61,8 @@ namespace qbert
 
         end_pos_.x = start_pos_.x + col_dir * offset_x;
         end_pos_.y = start_pos_.y + row_dir * offset_y;
+
+        std::cout << "end_pos_: " << end_pos_.x << ", " << end_pos_.y << std::endl;
         
         // I-II. quadrants (top right, top left)
         if (row_dir == -1)

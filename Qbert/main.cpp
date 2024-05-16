@@ -7,14 +7,13 @@
 #endif
 
 // Project includes
-#include "component/game/game_state_component.h"
 #include "component/level/cube_component.h"
 #include "component/level/level_manager_component.h"
 #include "component/player/health_component.h"
-#include "component/player/jump_component.h"
+#include "component/character/jump_component.h"
 #include "component/player/level_counter_component.h"
 #include "component/player/player_collider_component.h"
-#include "component/player/player_position_component.h"
+#include "component/character/position_component.h"
 #include "component/player/round_counter_component.h"
 #include "component/player/score_counter_component.h"
 #include "component/ui/health_display_component.h"
@@ -45,6 +44,7 @@
 
 // SDL includes
 #include <SDL.h>
+
 
 void register_services()
 {
@@ -88,7 +88,7 @@ void load()
 	//---------------------------------------------------------------------------------
 	auto root_ptr = scene->add_game_object("root");
 	auto level_manager_comp_ptr = root_ptr->add_component<level_manager_component>();
-	root_ptr->add_component<game_state_component>(scene);
+	// root_ptr->add_component<state_component>(scene);
 
 	//---------------------------------------------------------------------------------
     // FPS
@@ -248,10 +248,11 @@ void load()
 	red_ball_config.scene_ptr      = scene;
 	red_ball_config.parent_ptr     = root_ptr;
 	red_ball_config.name           = "red_ball_1";
-	red_ball_config.local_position = {192.0f, 132.0f};
 	red_ball_config.sprite_id	   = qb_sp_ball_red;
 	red_ball_config.texture_id     = qb_re_t_sprite_general;
-	factory::character::create_red_ball(red_ball_config);
+	
+	auto red_ball_info = factory::character::create_red_ball(red_ball_config);
+	red_ball_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
 
 	factory::character::coily_config_info coily_config{};
 	coily_config.scene_ptr      = scene;
@@ -260,7 +261,7 @@ void load()
 	coily_config.local_position = {224.0f, 180.0f};
 	coily_config.sprite_id	   = qb_sp_coily_egg;
 	coily_config.texture_id     = qb_re_t_sprite_general;
-	factory::character::create_coily(coily_config);
+	// factory::character::create_coily(coily_config);
 
 	factory::character::ugg_config_info ugg_config{};
 	ugg_config.scene_ptr      = scene;
@@ -269,7 +270,7 @@ void load()
 	ugg_config.local_position = {448.0f, 420.0f};
 	ugg_config.sprite_id	   = qb_sp_ugg;
 	ugg_config.texture_id     = qb_re_t_sprite_general;
-	factory::character::create_ugg(ugg_config);
+	// factory::character::create_ugg(ugg_config);
 
 	factory::character::wrong_way_config_info wrong_way_config{};
 	wrong_way_config.scene_ptr      = scene;
@@ -278,7 +279,7 @@ void load()
 	wrong_way_config.local_position = {0.0f, 420.0f};
 	wrong_way_config.sprite_id	   = qb_sp_wrong_way;
 	wrong_way_config.texture_id     = qb_re_t_sprite_general;
-	factory::character::create_wrong_way(wrong_way_config);
+	// factory::character::create_wrong_way(wrong_way_config);
 
 	//---------------------------------------------------------------------------------
 	// FRIENDS
@@ -290,7 +291,7 @@ void load()
 	green_ball_config.local_position = {256.0f, 132.0f};
 	green_ball_config.sprite_id	   = qb_sp_ball_green;
 	green_ball_config.texture_id     = qb_re_t_sprite_general;
-	factory::character::create_green_ball(green_ball_config);
+	// factory::character::create_green_ball(green_ball_config);
 
 	factory::character::slick_config_info slick_config{};
 	slick_config.scene_ptr      = scene;
@@ -299,7 +300,7 @@ void load()
 	slick_config.local_position = {288.0f, 180.0f};
 	slick_config.sprite_id	   = qb_sp_slick;
 	slick_config.texture_id     = qb_re_t_sprite_general;
-	factory::character::create_slick(slick_config);
+	// factory::character::create_slick(slick_config);
 
 	factory::character::sam_config_info sam_config{};
 	sam_config.scene_ptr      = scene;
@@ -308,7 +309,7 @@ void load()
 	sam_config.local_position = {160.0f, 180.0f};
 	sam_config.sprite_id	   = qb_sp_sam;
 	sam_config.texture_id     = qb_re_t_sprite_general;
-	factory::character::create_sam(sam_config);
+	// factory::character::create_sam(sam_config);
 
 	//---------------------------------------------------------------------------------
 	// DEBUG

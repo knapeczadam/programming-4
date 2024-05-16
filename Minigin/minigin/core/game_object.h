@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <memory>
 #include <ranges>
+#include <set>
 #include <string>
 #include <typeindex>
 #include <vector>
@@ -49,6 +50,10 @@ namespace mngn
 
         [[nodiscard]] auto name() const -> std::string { return name_; }
         [[nodiscard]] auto find(std::string const &name) const -> game_object *;
+
+        [[nodiscard]] auto has_tag(std::string const &tag) const -> bool { return tags_.contains(tag); }
+        void add_tag(std::string const &tag) { tags_.insert(tag); }
+        void add_tags(std::set<std::string> const &tags) { tags_.insert(tags.begin(), tags.end()); }
 
         void awake();
         void fixed_update();
@@ -136,6 +141,7 @@ namespace mngn
         transform transform_  = {};
         bool position_dirty_  = false;
         bool active_          = true;
+        std::set<std::string>   tags_;
 
         // TODO: switch to map?
         std::unordered_map<std::type_index, std::unique_ptr<game_component>> component_map_ = {};

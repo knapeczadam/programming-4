@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "state/i_state.h"
+#include "state/state.h"
 
 namespace mngn
 {
@@ -8,7 +8,7 @@ namespace mngn
 
 namespace qbert
 {
-    class game_state : public i_state
+    class game_state : public state
     {
     public:
         game_state() = default;

@@ -7,7 +7,7 @@ namespace qbert
 {
     // Forward declarations
     class direction_component;
-    class player_position_component;
+    class position_component;
     
     class player_collider_component final : public mngn::collider_component
     {
@@ -25,7 +25,7 @@ namespace qbert
         void on_trigger_enter(mngn::game_object *other_ptr) override;
 
     private:
-        direction_component *direction_ptr_ = nullptr;
-        player_position_component  *position_ptr_  = nullptr;
+        direction_component *direction_comp_ptr_ = nullptr;
+        position_component  *position_comp_ptr_  = nullptr;
     };
 }

@@ -2,8 +2,8 @@
 
 namespace qbert
 {
-    swearing_state::swearing_state(mngn::game_object *player_ptr)
-        : player_state(player_ptr)
+    swearing_state::swearing_state(mngn::game_object *character_ptr)
+        : character_state(character_ptr)
     {
     }
 }

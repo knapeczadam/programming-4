@@ -5,8 +5,8 @@
 
 namespace qbert
 {
-    dead_state::dead_state(mngn::game_object *player_ptr)
-        : player_state{player_ptr}
+    dead_state::dead_state(mngn::game_object *character_ptr)
+        : character_state{character_ptr}
     {
     }
 }

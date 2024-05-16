@@ -1,14 +1,14 @@
 ﻿#pragma once
 
 // Project includes
-#include "player_state.h"
+#include "state/character/character_state.h"
 
 namespace qbert
 {
-    class waiting_state final : public player_state
+    class waiting_state final : public character_state
     {
     public:
-        explicit waiting_state(mngn::game_object* player_ptr, float waiting_time);
+        explicit waiting_state(mngn::game_object* character_ptr, float waiting_time);
 
         void update() override;
         void on_exit() override;

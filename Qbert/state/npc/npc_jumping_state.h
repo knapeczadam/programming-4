@@ -5,10 +5,10 @@
 
 namespace qbert
 {
-    class colliding_state final : public character_state
+    class npc_jumping_state final : public character_state
     {
     public:
-        explicit colliding_state(mngn::game_object* character_ptr);
+        explicit npc_jumping_state(mngn::game_object* character_ptr);
 
         void on_enter() override;
     };

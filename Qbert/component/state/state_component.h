@@ -1,28 +1,33 @@
 ﻿#pragma once
 
 // Project includes
-#include "state/i_state.h"
+#include "state/state.h"
+#include "minigin/component/family/custom_component.h"
 
 // Standard includes
 #include <concepts>
 #include <memory>
 
+
 namespace qbert
 {
     // Concepts
     template <class T>
-    concept child_state = std::derived_from<T, i_state> and not std::same_as<T, i_state>;
+    concept child_state = std::derived_from<T, state> and not std::same_as<T, state>;
     
-    class i_state_component
+    class state_component : public mngn::custom_component
     {
     public:
-        i_state_component() = default;
-        virtual ~i_state_component() = default;
+        state_component();
+        ~state_component() override = default;
 
-        i_state_component(i_state_component const &other)            = delete;
-        i_state_component(i_state_component &&other)                 = delete;
-        i_state_component &operator=(i_state_component const &other) = delete;
-        i_state_component &operator=(i_state_component &&other)      = delete;
+        state_component(state_component const &other)            = delete;
+        state_component(state_component &&other)                 = delete;
+        state_component &operator=(state_component const &other) = delete;
+        state_component &operator=(state_component &&other)      = delete;
+
+        void awake() override;
+        void update() override;
 
         template <class T, typename... Args> requires child_state<T>
         void change_state(Args &&...args)
@@ -44,7 +49,7 @@ namespace qbert
             return dynamic_cast<T*>(state_.get()) != nullptr;
         }
 
-    protected:
-        std::unique_ptr<i_state> state_;
+    private:
+        std::unique_ptr<qbert::state> state_;
     };
 }

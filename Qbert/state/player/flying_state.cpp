@@ -7,15 +7,15 @@
 
 namespace qbert
 {
-    flying_state::flying_state(mngn::game_object *player_ptr, disc_component *disc_ptr)
-        : player_state{player_ptr}
+    flying_state::flying_state(mngn::game_object *character_ptr, disc_component *disc_ptr)
+        : character_state{character_ptr}
         , disc_ptr_{disc_ptr}
     {
     }
 
     void flying_state::on_enter()
     {
-        player_ptr_->set_parent(disc_ptr_->owner());
+        character_ptr_->set_parent(disc_ptr_->owner());
         disc_ptr_->owner()->component<fly_component>()->fly();
     }
 

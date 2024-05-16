@@ -1,13 +1,13 @@
 ﻿#pragma once
 
 // Project includes
-#include "state/player/player_state.h"
+#include "state/character/character_state.h"
 
 namespace qbert
 {
-    class dead_state final : public player_state
+    class dead_state final : public character_state
     {
     public:
-        explicit dead_state(mngn::game_object* player_ptr);
+        explicit dead_state(mngn::game_object* character_ptr);
     };
 }

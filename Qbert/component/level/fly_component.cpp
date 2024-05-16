@@ -1,7 +1,7 @@
 ﻿#include "fly_component.h"
 
 // Project includes
-#include "component/player/player_state_component.h"
+#include "component/state/state_component.h"
 #include "minigin/core/game_time.h"
 #include "minigin/core/game_object.h"
 #include "state/player/flying_state.h"
@@ -9,11 +9,6 @@
 
 namespace qbert
 {
-    fly_component::fly_component(glm::vec2 start_pos)
-        : start_pos_(start_pos)
-    {
-    }
-
     void fly_component::awake()
     {
         start_pos_ = owner()->local_position();
@@ -36,7 +31,7 @@ namespace qbert
                 accu_time_ = 0.0f;
 
                 auto root_ptr = owner()->parent();
-                auto player_states = root_ptr->components_in_children<player_state_component>();
+                auto player_states = root_ptr->components_in_children<state_component>();
                 for (auto player_state : player_states)
                 {
                     if (player_state->is_state<flying_state>())

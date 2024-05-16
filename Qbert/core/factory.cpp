@@ -8,11 +8,11 @@
 #include "component/player/face_component.h"
 #include "component/player/fall_component.h"
 #include "component/player/health_component.h"
-#include "component/player/jump_component.h"
+#include "component/character/jump_component.h"
 #include "component/player/level_counter_component.h"
 #include "component/player/player_collider_component.h"
-#include "component/player/player_state_component.h"
-#include "component/player/player_position_component.h"
+#include "component/state/state_component.h"
+#include "component/character/position_component.h"
 #include "component/player/round_counter_component.h"
 #include "component/player/score_counter_component.h"
 #include "component/player/swear_component.h"
@@ -21,7 +21,8 @@
 #include "component/ui/level_display_component.h"
 #include "component/ui/round_display_component.h"
 #include "component/ui/score_display_component.h"
-#include "component/direction_component.h"
+#include "component/character/direction_component.h"
+#include "component/npc/descend_component.h"
 #include "input/game_object_commands.h"
 #include "minigin/component/debug/fps_component.h"
 #include "minigin/component/rendering/sprite_component.h"
@@ -39,16 +40,17 @@ namespace qbert
     {
         player_info info{};
         info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr->add_tag("player");
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<jump_component>();
         info.go_ptr->add_component<face_component>();
-        info.go_ptr->add_component<player_state_component>();
+        info.go_ptr->add_component<state_component>();
         info.go_ptr->add_component<fall_component>();
         info.go_ptr->add_component<swear_component>();
         info.go_ptr->add_component<direction_component>();
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
-        info.position_comp_ptr      = info.go_ptr->add_component<player_position_component>(config.row_idx,                                             config.col_idx);
+        info.position_comp_ptr      = info.go_ptr->add_component<position_component>(config.row_idx, config.col_idx);
         info.health_comp_ptr        = info.go_ptr->add_component<health_component>();
         info.score_counter_comp_ptr = info.go_ptr->add_component<score_counter_component>();
         info.level_counter_comp_ptr = info.go_ptr->add_component<level_counter_component>();
@@ -98,10 +100,15 @@ namespace qbert
     {
         red_ball_info info{};
         info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr->add_tags({"npc", "enemy"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         info.go_ptr->add_component<direction_component>();
+        info.go_ptr->add_component<state_component>();
+        info.go_ptr->add_component<jump_component>();
+        info.go_ptr->add_component<descend_component>();
+        info.position_comp_ptr = info.go_ptr->add_component<position_component>();
         return info;
     }
 
@@ -109,10 +116,13 @@ namespace qbert
     {
         green_ball_info info{};
         info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr->add_tags({"npc", "friend"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         info.go_ptr->add_component<direction_component>();
+        info.go_ptr->add_component<position_component>();
+        info.go_ptr->add_component<state_component>();
         return info;
     }
 
@@ -120,10 +130,13 @@ namespace qbert
     {
         coily_info info{};
         info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr->add_tags({"npc", "enemy"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         info.go_ptr->add_component<direction_component>();
+        info.go_ptr->add_component<position_component>();
+        info.go_ptr->add_component<state_component>();
         return info;
     }
 
@@ -131,10 +144,13 @@ namespace qbert
     {
         ugg_info info{};
         info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr->add_tags({"npc", "enemy"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         info.go_ptr->add_component<direction_component>();
+        info.go_ptr->add_component<position_component>();
+        info.go_ptr->add_component<state_component>();
         return info;
     }
 
@@ -142,10 +158,13 @@ namespace qbert
     {
         wrong_way_info info{};
         info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr->add_tags({"npc", "enemy"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         info.go_ptr->add_component<direction_component>();
+        info.go_ptr->add_component<position_component>();
+        info.go_ptr->add_component<state_component>();
         return info;
     }
 
@@ -153,10 +172,13 @@ namespace qbert
     {
         slick_info info{};
         info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr->add_tags({"npc", "friend"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         info.go_ptr->add_component<direction_component>();
+        info.go_ptr->add_component<position_component>();
+        info.go_ptr->add_component<state_component>();
         return info;
     }
 
@@ -164,10 +186,13 @@ namespace qbert
     {
         sam_info info{};
         info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr->add_tags({"npc", "friend"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         info.go_ptr->add_component<direction_component>();
+        info.go_ptr->add_component<position_component>();
+        info.go_ptr->add_component<state_component>();
         return info;
     }
 
@@ -175,6 +200,7 @@ namespace qbert
     {
         disc_info info{};
         info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr->add_tag("level");
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         info.go_ptr->add_component<disc_component>(config.row_idx, config.col_idx);
@@ -209,6 +235,7 @@ namespace qbert
             for (int j = 0; j < i + 1; ++j)
             {
                 auto go = config.scene_ptr->add_game_object("cube_" + std::to_string(i) + "_" + std::to_string(j));
+                go->add_tag("level");
                 go->set_parent(config.parent_ptr);
                 
                 glm::vec2 pos = start_position + glm::vec2(j * 64, 0);
@@ -237,6 +264,7 @@ namespace qbert
     {
         fps_info info{};
         info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr->add_tag("ui");
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         auto fps_comp_ptr = info.go_ptr->add_component<mngn::fps_component>();
@@ -249,6 +277,7 @@ namespace qbert
     {
         score_display_info info{};
         info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr->add_tag("ui");
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<mngn::multisprite_ui_component>();
@@ -260,6 +289,7 @@ namespace qbert
     {
         health_display_info info{};
         info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr->add_tag("ui");
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<mngn::multisprite_ui_component>(mngn::multisprite_orientation::vertical);
@@ -271,6 +301,7 @@ namespace qbert
     {
         level_display_info info{};
         info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr->add_tag("ui");
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<mngn::sprite_ui_component>(config.sprite_id, config.texture_id);
@@ -282,6 +313,7 @@ namespace qbert
     {
         round_display_info info{};
         info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr->add_tag("ui");
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<mngn::sprite_ui_component>(config.sprite_id, config.texture_id);
@@ -293,6 +325,7 @@ namespace qbert
     {
         sprite_info info{};
         info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr->add_tag("ui");
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<mngn::sprite_ui_component>(config.sprite_id, config.texture_id);
@@ -303,6 +336,7 @@ namespace qbert
     {
         arrow_info info{};
         info.go_ptr = config.scene_ptr->add_game_object(config.name);
+        info.go_ptr->add_tag("ui");
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<mngn::sprite_ui_component>(config.sprite_id, config.texture_id);

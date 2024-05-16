@@ -19,22 +19,22 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="component\game\game_state_component.cpp" />
+    <ClCompile Include="component\character\jump_component.cpp" />
+    <ClCompile Include="component\character\position_component.cpp" />
     <ClCompile Include="component\level\cube_component.cpp" />
     <ClCompile Include="component\level\disc_component.cpp" />
     <ClCompile Include="component\level\fly_component.cpp" />
     <ClCompile Include="component\level\level_manager_component.cpp" />
+    <ClCompile Include="component\npc\descend_component.cpp" />
     <ClCompile Include="component\player\face_component.cpp" />
     <ClCompile Include="component\player\fall_component.cpp" />
     <ClCompile Include="component\player\health_component.cpp" />
-    <ClCompile Include="component\player\jump_component.cpp" />
     <ClCompile Include="component\player\level_counter_component.cpp" />
     <ClCompile Include="component\player\player_collider_component.cpp" />
-    <ClCompile Include="component\player\player_state_component.cpp" />
-    <ClCompile Include="component\player\player_position_component.cpp" />
     <ClCompile Include="component\player\round_counter_component.cpp" />
     <ClCompile Include="component\player\score_counter_component.cpp" />
     <ClCompile Include="component\player\swear_component.cpp" />
+    <ClCompile Include="component\state\state_component.cpp" />
     <ClCompile Include="component\ui\flicker_component.cpp" />
     <ClCompile Include="component\ui\health_display_component.cpp" />
     <ClCompile Include="component\ui\level_display_component.cpp" />
@@ -48,17 +48,20 @@
     <ClCompile Include="input\generic_commands.cpp" />
     <ClCompile Include="level\levels.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="state\character\landing_state.cpp" />
+    <ClCompile Include="state\character\character_state.cpp" />
     <ClCompile Include="state\game\game_state.cpp" />
     <ClCompile Include="state\game\game_over_state.cpp" />
     <ClCompile Include="state\game\playing_state.cpp" />
+    <ClCompile Include="state\npc\npc_jumping_state.cpp" />
+    <ClCompile Include="state\npc\npc_idle_state.cpp" />
+    <ClCompile Include="state\npc\npc_start_state.cpp" />
     <ClCompile Include="state\player\colliding_state.cpp" />
     <ClCompile Include="state\player\dead_state.cpp" />
     <ClCompile Include="state\player\falling_state.cpp" />
     <ClCompile Include="state\player\flying_state.cpp" />
     <ClCompile Include="state\player\idle_state.cpp" />
     <ClCompile Include="state\player\jumping_state.cpp" />
-    <ClCompile Include="state\player\landing_state.cpp" />
-    <ClCompile Include="state\player\player_state.cpp" />
     <ClCompile Include="state\player\start_state.cpp" />
     <ClCompile Include="state\player\swearing_state.cpp" />
     <ClCompile Include="state\player\waiting_state.cpp" />
@@ -72,24 +75,23 @@
     <ClCompile Include="ui\ui.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="component\direction_component.h" />
-    <ClInclude Include="component\game\game_state_component.h" />
+    <ClInclude Include="component\character\direction_component.h" />
+    <ClInclude Include="component\character\jump_component.h" />
+    <ClInclude Include="component\character\position_component.h" />
     <ClInclude Include="component\level\cube_component.h" />
     <ClInclude Include="component\level\disc_component.h" />
     <ClInclude Include="component\level\fly_component.h" />
     <ClInclude Include="component\level\level_manager_component.h" />
+    <ClInclude Include="component\npc\descend_component.h" />
     <ClInclude Include="component\player\face_component.h" />
     <ClInclude Include="component\player\fall_component.h" />
     <ClInclude Include="component\player\health_component.h" />
-    <ClInclude Include="component\player\jump_component.h" />
     <ClInclude Include="component\player\level_counter_component.h" />
     <ClInclude Include="component\player\player_collider_component.h" />
-    <ClInclude Include="component\player\player_state_component.h" />
-    <ClInclude Include="component\player\player_position_component.h" />
     <ClInclude Include="component\player\round_counter_component.h" />
     <ClInclude Include="component\player\score_counter_component.h" />
     <ClInclude Include="component\player\swear_component.h" />
-    <ClInclude Include="component\state\i_state_component.h" />
+    <ClInclude Include="component\state\state_component.h" />
     <ClInclude Include="component\ui\flicker_component.h" />
     <ClInclude Include="component\ui\health_display_component.h" />
     <ClInclude Include="component\ui\level_display_component.h" />
@@ -102,10 +104,15 @@
     <ClInclude Include="input\game_object_commands.h" />
     <ClInclude Include="input\generic_commands.h" />
     <ClInclude Include="level\levels.h" />
+    <ClInclude Include="state\character\landing_state.h" />
+    <ClInclude Include="state\character\character_state.h" />
     <ClInclude Include="state\game\game_state.h" />
     <ClInclude Include="state\game\game_over_state.h" />
     <ClInclude Include="state\game\playing_state.h" />
-    <ClInclude Include="state\i_state.h" />
+    <ClInclude Include="state\state.h" />
+    <ClInclude Include="state\npc\npc_jumping_state.h" />
+    <ClInclude Include="state\npc\npc_idle_state.h" />
+    <ClInclude Include="state\npc\npc_start_state.h" />
     <ClInclude Include="state\null_state.h" />
     <ClInclude Include="state\player\colliding_state.h" />
     <ClInclude Include="state\player\dead_state.h" />
@@ -113,8 +120,6 @@
     <ClInclude Include="state\player\flying_state.h" />
     <ClInclude Include="state\player\idle_state.h" />
     <ClInclude Include="state\player\jumping_state.h" />
-    <ClInclude Include="state\player\landing_state.h" />
-    <ClInclude Include="state\player\player_state.h" />
     <ClInclude Include="state\player\start_state.h" />
     <ClInclude Include="state\player\swearing_state.h" />
     <ClInclude Include="state\player\waiting_state.h" />
@@ -126,9 +131,6 @@
     <ClInclude Include="state\ui\ui_state.h" />
     <ClInclude Include="state\ui\versus_state.h" />
     <ClInclude Include="ui\ui.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="component\npc\" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

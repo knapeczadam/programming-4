@@ -1,11 +1,11 @@
 ﻿#pragma once
 
 // Project includes
-#include "state/i_state.h"
+#include "state/state.h"
 
 namespace qbert
 {
-    class ui_state : public i_state
+    class ui_state : public state
     {
     public:
         void on_enter() override { }

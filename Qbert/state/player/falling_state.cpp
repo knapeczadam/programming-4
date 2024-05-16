@@ -7,8 +7,8 @@
 
 namespace qbert
 {
-    falling_state::falling_state(mngn::game_object *player_ptr, int row_dir, int col_dir, int row_idx, int col_idx)
-        : player_state(player_ptr)
+    falling_state::falling_state(mngn::game_object *character_ptr, int row_dir, int col_dir, int row_idx, int col_idx)
+        : character_state{character_ptr}
         , row_dir_{row_dir}
         , col_dir_{col_dir}
         , row_idx_{row_idx}
@@ -18,6 +18,6 @@ namespace qbert
 
     void falling_state::on_enter()
     {
-        player_ptr_->component<fall_component>()->fall(row_dir_, col_dir_, row_idx_, col_idx_);
+        character_ptr_->component<fall_component>()->fall(row_dir_, col_dir_, row_idx_, col_idx_);
     }
 }

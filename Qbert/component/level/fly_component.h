@@ -1,14 +1,10 @@
 ﻿#pragma once
 
 // Project includes
-#include "input/game_object_commands.h"
 #include "minigin/component/family/physics_component.h"
-#include "minigin/core/i_observer.h"
 
 // GLM includes
 #include <glm/glm.hpp>
-
-
 
 namespace qbert
 {
@@ -16,7 +12,6 @@ namespace qbert
     {
     public:
         fly_component()           = default;
-        explicit fly_component(glm::vec2 start_pos);
         ~fly_component() override = default;
 
         fly_component(fly_component const &other)            = delete;

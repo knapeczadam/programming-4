@@ -28,7 +28,7 @@ namespace qbert
     enum qbert_sprite   : int;
     
     
-    class player_position_component;
+    class position_component;
     class health_component;
     class health_display_component;
     class level_display_component;
@@ -86,7 +86,7 @@ namespace qbert
 
             struct player_info : info
             {
-                player_position_component        *position_comp_ptr;
+                position_component        *position_comp_ptr;
                 health_component          *health_comp_ptr;
                 score_counter_component   *score_counter_comp_ptr;
                 level_counter_component   *level_counter_comp_ptr;
@@ -98,7 +98,10 @@ namespace qbert
 
             // Red ball
             struct red_ball_config_info : config_info { };
-            struct red_ball_info : info { };
+            struct red_ball_info : info
+            {
+                position_component *position_comp_ptr;
+            };
             static auto create_red_ball(red_ball_config_info const &config) -> red_ball_info;
 
             // Green ball

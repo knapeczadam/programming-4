@@ -1,7 +1,7 @@
 ﻿#include "face_component.h"
 
 // Proejct includes
-#include "component/direction_component.h"
+#include "component/character/direction_component.h"
 #include "minigin/component/rendering/sprite_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/utility/sprite.h"

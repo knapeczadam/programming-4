@@ -2,7 +2,6 @@
 
 // Project includes
 #include "minigin/component/family/physics_component.h"
-#include "minigin/core/i_observer.h"
 
 // GLM includes
 #include <glm/glm.hpp>
@@ -12,25 +11,26 @@ namespace qbert
     // Forward declarations
     class direction_component;
     
-    class jump_component final : public mngn::physics_component, public mngn::subject
+    class jump_component : public mngn::physics_component
     {
     public:
-        jump_component()           = default;
+        jump_component()          = default;
         ~jump_component() override = default;
 
         jump_component(jump_component const &other)            = delete;
         jump_component(jump_component &&other)                 = delete;
         jump_component &operator=(jump_component const &other) = delete;
         jump_component &operator=(jump_component &&other)      = delete;
-
+        
         void awake() override;
         void fixed_update() override;
+
         void jump();
-        
-    private:
+
+    protected:
         void calculate_bezier_positions();
 
-    private:
+    protected:
         direction_component *direction_comp_ptr_ = nullptr;
         float jump_time_  = 0.5f;
         float accu_time_  = 0.0f;
@@ -42,5 +42,6 @@ namespace qbert
         glm::vec2 pos_2_      = {};
         glm::vec2 end_pos_    = {};
         glm::vec2 curr_pos_   = {};
+        
     };
 }

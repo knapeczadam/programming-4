@@ -6,14 +6,14 @@
 
 namespace qbert
 {
-    colliding_state::colliding_state(mngn::game_object *player_ptr)
-        : player_state{player_ptr}
+    colliding_state::colliding_state(mngn::game_object *character_ptr)
+        : character_state{character_ptr}
     {
     }
 
     void colliding_state::on_enter()
     {
-        auto health_comp_ptr = player_ptr_->component<health_component>();
+        auto health_comp_ptr = character_ptr_->component<health_component>();
         health_comp_ptr->take_damage(1);
     }
 }
