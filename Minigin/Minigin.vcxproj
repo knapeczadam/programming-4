@@ -297,6 +297,7 @@
     <ClInclude Include="minigin\test\test_manager.h" />
     <ClInclude Include="minigin\utility\game_font.h" />
     <ClInclude Include="minigin\utility\math.h" />
+    <ClInclude Include="minigin\utility\random.h" />
     <ClInclude Include="minigin\utility\singleton.h" />
     <ClInclude Include="minigin\utility\sprite.h" />
     <ClInclude Include="minigin\utility\texture.h" />

@@ -23,6 +23,7 @@ namespace qbert
         
         [[nodiscard]] auto row() const -> int { return row_idx_; }
         [[nodiscard]] auto col() const -> int { return col_idx_; }
+        void set_col(int col) { col_idx_ = col; }
 
         void awake() override;
 

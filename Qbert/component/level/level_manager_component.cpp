@@ -28,60 +28,58 @@ namespace qbert
     {
         if (event == "position_changed")
         {
-            if (auto position_comp_ptr = dynamic_cast<position_component*>(subject_ptr))
-            {
-                if (position_comp_ptr->owner()->has_tag("player"))
-                {
-                    auto const row_idx = position_comp_ptr->row();
-                    auto const cold_idx = position_comp_ptr->col();
+            auto position_comp_ptr = static_cast<position_component*>(subject_ptr);
+            auto const row_idx = position_comp_ptr->row();
+            auto const cold_idx = position_comp_ptr->col();
 
-                    auto player_ptr = position_comp_ptr->owner();
-                    auto state_comp_ptr = player_ptr->component<state_component>();
-                    auto direction_comp_ptr = player_ptr->component<direction_component>();
-                    auto const row_dir = direction_comp_ptr->row();
-                    auto const col_dir = direction_comp_ptr->col();
-            
-                    for (auto const &disc_ptr : discs_)
+            auto character_ptr = position_comp_ptr->owner();
+            auto state_comp_ptr = character_ptr->component<state_component>();
+            auto direction_comp_ptr = character_ptr->component<direction_component>();
+            auto const row_dir = direction_comp_ptr->row();
+            auto const col_dir = direction_comp_ptr->col();
+
+            if (character_ptr->has_tag("player"))
+            {
+                for (auto const &disc_ptr : discs_)
+                {
+                    // player is on a disc
+                    if (disc_ptr->col() == -1) // left side
                     {
-                        // player is on a disc
-                        if (disc_ptr->col() == -1) // left side
+                        if (row_idx + 1 == disc_ptr->row() and cold_idx == disc_ptr->col())
                         {
-                            if (row_idx + 1 == disc_ptr->row() and cold_idx == disc_ptr->col())
-                            {
-                                state_comp_ptr->change_state<flying_state>(player_ptr, disc_ptr);
-                                return;
-                            }
-                        }
-                        else if (row_idx + 1 == disc_ptr->row() and cold_idx + 1 == disc_ptr->col()) // right side
-                        {
-                            state_comp_ptr->change_state<flying_state>(player_ptr, disc_ptr);
+                            state_comp_ptr->change_state<flying_state>(character_ptr, disc_ptr);
                             return;
                         }
                     }
-
-                    // player is falling
-                    if (row_idx < 0 or cold_idx < 0 or cold_idx > row_idx or row_idx >= 7)
+                    else if (row_idx + 1 == disc_ptr->row() and cold_idx + 1 == disc_ptr->col()) // right side
                     {
-                        state_comp_ptr->change_state<falling_state>(player_ptr, row_dir, col_dir, row_idx, cold_idx);
+                        state_comp_ptr->change_state<flying_state>(character_ptr, disc_ptr);
                         return;
                     }
+                }
+            }
 
-                    // player is idle
-                    state_comp_ptr->change_state<idle_state>(player_ptr);
-                }
-                else if (position_comp_ptr->owner()->has_tag("npc"))
-                {
-                    auto enemy_ptr = position_comp_ptr->owner();
-                    auto state_comp_ptr = enemy_ptr->component<state_component>();
-                    // player is idle
-                    state_comp_ptr->change_state<npc_idle_state>(enemy_ptr);
-                }
+            // character is falling
+            if (row_idx < 0 or cold_idx < 0 or cold_idx > row_idx or row_idx >= 7)
+            {
+                state_comp_ptr->change_state<falling_state>(character_ptr, row_dir, col_dir, row_idx, cold_idx);
+                return;
+            }
+
+            // character is idle
+            if (character_ptr->has_tag("player"))
+            {
+                state_comp_ptr->change_state<idle_state>(character_ptr);
+            }
+            else if (character_ptr->has_tag("npc"))
+            {
+                state_comp_ptr->change_state<npc_idle_state>(character_ptr);
             }
         }
 
         if (event == "health_changed")
         {
-            auto health_comp_ptr = dynamic_cast<health_component*>(subject_ptr);
+            auto health_comp_ptr = static_cast<health_component*>(subject_ptr);
             auto player_ptr = health_comp_ptr->owner();
             auto position_idx_comp_ptr = player_ptr->component<position_component>();
             auto const row_idx = position_idx_comp_ptr->row();
@@ -103,5 +101,4 @@ namespace qbert
             }
         }
     }
-
 }

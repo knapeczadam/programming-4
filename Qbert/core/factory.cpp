@@ -51,7 +51,7 @@ namespace qbert
         info.go_ptr->add_component<direction_component>();
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         info.position_comp_ptr      = info.go_ptr->add_component<position_component>(config.row_idx, config.col_idx);
-        info.health_comp_ptr        = info.go_ptr->add_component<health_component>();
+        info.health_comp_ptr        = info.go_ptr->add_component<health_component>(3);
         info.score_counter_comp_ptr = info.go_ptr->add_component<score_counter_component>();
         info.level_counter_comp_ptr = info.go_ptr->add_component<level_counter_component>();
         info.round_counter_comp_ptr = info.go_ptr->add_component<round_counter_component>();
@@ -108,7 +108,9 @@ namespace qbert
         info.go_ptr->add_component<state_component>();
         info.go_ptr->add_component<jump_component>();
         info.go_ptr->add_component<descend_component>();
-        info.position_comp_ptr = info.go_ptr->add_component<position_component>();
+        info.go_ptr->add_component<fall_component>();
+        info.go_ptr->add_component<health_component>(1);
+        info.position_comp_ptr = info.go_ptr->add_component<position_component>(1, 0);
         return info;
     }
 

@@ -5,12 +5,15 @@
 #include "component/npc/descend_component.h"
 #include "minigin/component/rendering/sprite_component.h"
 #include "minigin/utility/sprite.h"
+#include "minigin/utility/random.h"
 
 // Standard includes
 #include <cstdlib>
 
 // GLM includes
 #include <glm/glm.hpp>
+
+#include "component/character/position_component.h"
 
 namespace qbert
 {
@@ -23,14 +26,17 @@ namespace qbert
     {
         glm::vec2 start_pos;
         glm::vec2 end_pos = {0.0f, 132.0f};
-        
-        if (std::rand() % 2)
+
+        bool is_left = mngn::random_int(0, 1);
+        if (is_left)
         {
             start_pos = {192.0f, -32.0f};
+            character_ptr_->component<position_component>()->set_col(0);
         }
         else
         {
             start_pos = {256.0f, -32.0f};
+            character_ptr_->component<position_component>()->set_col(1);
         }
         end_pos.x = start_pos.x;
 

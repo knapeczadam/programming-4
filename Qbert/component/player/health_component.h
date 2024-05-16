@@ -10,6 +10,7 @@ namespace qbert
     {
     public:
         health_component()           = default;
+        explicit health_component(int health) : health_{health} {}
         ~health_component() override = default;
         
         health_component(health_component const &other)            = delete;
@@ -23,6 +24,6 @@ namespace qbert
         [[nodiscard]] auto health() const -> int { return health_; }
 
     private:
-        int health_ = 3;
+        int health_ = 0;
     };
 }
