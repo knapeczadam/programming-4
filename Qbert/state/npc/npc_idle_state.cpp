@@ -2,6 +2,7 @@
 
 #include "npc_jumping_state.h"
 #include "component/character/direction_component.h"
+#include "component/player/face_component.h"
 #include "component/state/state_component.h"
 #include "minigin/component/rendering/sprite_component.h"
 #include "minigin/core/game_object.h"
@@ -18,7 +19,14 @@ namespace qbert
 
     void npc_idle_state::on_enter()
     {
-        character_ptr_->component<mngn::sprite_component>()->sprite()->set_current_frame(0);
+        if (character_ptr_->has_tag("ball"))
+        {
+            character_ptr_->component<mngn::sprite_component>()->sprite()->set_current_frame(0);
+        }
+        else
+        {
+            character_ptr_->component<face_component>()->set_sprite_orientation(0, 4, 0, 0);
+        }
     }
 
     void npc_idle_state::update()
@@ -29,7 +37,7 @@ namespace qbert
             accu_time_ = 0.0f;
             auto direction_comp_ptr = character_ptr_->component<direction_component>();
             int col = mngn::random_int(0, 1);
-            direction_comp_ptr->set_direction(1, col);
+            direction_comp_ptr->set(1, col);
             character_ptr_->component<state_component>()->change_state<npc_jumping_state>(character_ptr_);
         }
 

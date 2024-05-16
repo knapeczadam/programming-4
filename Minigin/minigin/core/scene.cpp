@@ -33,6 +33,14 @@ namespace mngn
         }
     }
 
+    void scene::start()
+    {
+        for (auto const &object : objects_)
+        {
+            if (object->active()) object->start();
+        }
+    }
+
     void scene::fixed_update()
     {
         for (auto const &object : objects_)
@@ -67,7 +75,7 @@ namespace mngn
                 auto const renderers = object->components(component_family::rendering);
                 for (auto const &comp : renderers | std::views::values)
                 {
-                    if (comp->enabled) static_cast<rendering_component*>(comp)->render();
+                    if (comp->enabled()) static_cast<rendering_component*>(comp)->render();
                 }
             }
         }
@@ -84,7 +92,7 @@ namespace mngn
                 ImGui_ImplSDL2_NewFrame();
                 ImGui::NewFrame();
             
-                if (comp->enabled) static_cast<ui_component*>(comp)->render_ui();
+                if (comp->enabled()) static_cast<ui_component*>(comp)->render_ui();
                 
                 ImGui::Render();
                 ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

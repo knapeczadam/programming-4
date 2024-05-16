@@ -100,11 +100,11 @@ namespace qbert
     {
         red_ball_info info{};
         info.go_ptr = config.scene_ptr->create(config.name);
-        info.go_ptr->add_tags({"npc", "enemy"});
+        info.go_ptr->add_tags({"npc", "enemy", "ball"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
-        info.go_ptr->add_component<direction_component>();
         info.go_ptr->add_component<state_component>();
+        info.go_ptr->add_component<direction_component>();
         info.go_ptr->add_component<jump_component>();
         info.go_ptr->add_component<descend_component>();
         info.go_ptr->add_component<fall_component>();
@@ -119,13 +119,18 @@ namespace qbert
     {
         green_ball_info info{};
         info.go_ptr = config.scene_ptr->create(config.name);
-        info.go_ptr->add_tags({"npc", "friend"});
+        info.go_ptr->add_tags({"npc", "friend", "ball"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
-        info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
-        info.go_ptr->add_component<direction_component>();
-        info.go_ptr->add_component<position_component>();
         info.go_ptr->add_component<state_component>();
+        info.go_ptr->add_component<direction_component>();
+        info.go_ptr->add_component<jump_component>();
+        info.go_ptr->add_component<descend_component>();
+        info.go_ptr->add_component<fall_component>();
+        auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
+        info.go_ptr->add_component<mngn::collider_component>(sprite_comp_ptr->sprite()->collider_width(), sprite_comp_ptr->sprite()->collider_height());
+        info.position_comp_ptr = info.go_ptr->add_component<position_component>(1, 0);
+        info.health_comp_ptr   = info.go_ptr->add_component<health_component>(1);
         return info;
     }
 
@@ -133,13 +138,17 @@ namespace qbert
     {
         coily_info info{};
         info.go_ptr = config.scene_ptr->create(config.name);
-        info.go_ptr->add_tags({"npc", "enemy"});
+        info.go_ptr->add_tags({"npc", "enemy", "ball"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
-        info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
-        info.go_ptr->add_component<direction_component>();
-        info.go_ptr->add_component<position_component>();
         info.go_ptr->add_component<state_component>();
+        info.go_ptr->add_component<direction_component>();
+        info.go_ptr->add_component<jump_component>();
+        info.go_ptr->add_component<descend_component>();
+        auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
+        info.go_ptr->add_component<mngn::collider_component>(sprite_comp_ptr->sprite()->collider_width(), sprite_comp_ptr->sprite()->collider_height());
+        info.position_comp_ptr = info.go_ptr->add_component<position_component>(1, 0);
+        info.health_comp_ptr   = info.go_ptr->add_component<health_component>(1);
         return info;
     }
 
@@ -150,10 +159,16 @@ namespace qbert
         info.go_ptr->add_tags({"npc", "enemy"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
-        info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
-        info.go_ptr->add_component<direction_component>();
-        info.go_ptr->add_component<position_component>();
         info.go_ptr->add_component<state_component>();
+        info.go_ptr->add_component<direction_component>();
+        info.go_ptr->add_component<jump_component>();
+        info.go_ptr->add_component<face_component>();
+        info.go_ptr->add_component<descend_component>();
+        info.go_ptr->add_component<fall_component>();
+        auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
+        info.go_ptr->add_component<mngn::collider_component>(sprite_comp_ptr->sprite()->collider_width(), sprite_comp_ptr->sprite()->collider_height());
+        info.position_comp_ptr = info.go_ptr->add_component<position_component>(1, 0);
+        info.health_comp_ptr   = info.go_ptr->add_component<health_component>(1);
         return info;
     }
 
@@ -164,10 +179,16 @@ namespace qbert
         info.go_ptr->add_tags({"npc", "enemy"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
-        info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
-        info.go_ptr->add_component<direction_component>();
-        info.go_ptr->add_component<position_component>();
         info.go_ptr->add_component<state_component>();
+        info.go_ptr->add_component<direction_component>();
+        info.go_ptr->add_component<jump_component>();
+        info.go_ptr->add_component<face_component>();
+        info.go_ptr->add_component<descend_component>();
+        info.go_ptr->add_component<fall_component>();
+        auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
+        info.go_ptr->add_component<mngn::collider_component>(sprite_comp_ptr->sprite()->collider_width(), sprite_comp_ptr->sprite()->collider_height());
+        info.position_comp_ptr = info.go_ptr->add_component<position_component>(1, 0);
+        info.health_comp_ptr   = info.go_ptr->add_component<health_component>(1);
         return info;
     }
 
@@ -178,10 +199,16 @@ namespace qbert
         info.go_ptr->add_tags({"npc", "friend"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
-        info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
-        info.go_ptr->add_component<direction_component>();
-        info.go_ptr->add_component<position_component>();
         info.go_ptr->add_component<state_component>();
+        info.go_ptr->add_component<direction_component>();
+        info.go_ptr->add_component<jump_component>();
+        info.go_ptr->add_component<face_component>();
+        info.go_ptr->add_component<descend_component>();
+        info.go_ptr->add_component<fall_component>();
+        auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
+        info.go_ptr->add_component<mngn::collider_component>(sprite_comp_ptr->sprite()->collider_width(), sprite_comp_ptr->sprite()->collider_height());
+        info.position_comp_ptr = info.go_ptr->add_component<position_component>(1, 0);
+        info.health_comp_ptr   = info.go_ptr->add_component<health_component>(1);
         return info;
     }
 
@@ -192,10 +219,16 @@ namespace qbert
         info.go_ptr->add_tags({"npc", "friend"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
-        info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
-        info.go_ptr->add_component<direction_component>();
-        info.go_ptr->add_component<position_component>();
         info.go_ptr->add_component<state_component>();
+        info.go_ptr->add_component<direction_component>();
+        info.go_ptr->add_component<jump_component>();
+        info.go_ptr->add_component<face_component>();
+        info.go_ptr->add_component<descend_component>();
+        info.go_ptr->add_component<fall_component>();
+        auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
+        info.go_ptr->add_component<mngn::collider_component>(sprite_comp_ptr->sprite()->collider_width(), sprite_comp_ptr->sprite()->collider_height());
+        info.position_comp_ptr = info.go_ptr->add_component<position_component>(1, 0);
+        info.health_comp_ptr   = info.go_ptr->add_component<health_component>(1);
         return info;
     }
 

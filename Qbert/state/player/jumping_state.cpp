@@ -14,7 +14,7 @@ namespace qbert
 
     void jumping_state::on_enter()
     {
-        character_ptr_->component<face_component>()->set_jump_sprite();
+        character_ptr_->component<face_component>()->set_sprite_orientation(3, 5, 1, 7);
         character_ptr_->component<jump_component>()->jump();
     }
 }

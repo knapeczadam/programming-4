@@ -204,7 +204,6 @@ void load()
 	player_1_config.right_command_alt = {input_type::controller, input_state::pressed, c_right};
 	player_1_config.up_command_alt    = {input_type::controller, input_state::pressed, c_up};
 	player_1_config.down_command_alt  = {input_type::controller, input_state::pressed, c_down};
-
 	// Observers
 	auto player_1_info = factory::character::create_player(player_1_config);
 	collision_manager::instance().register_collider(player_1_info.collider_comp_ptr);
@@ -232,7 +231,6 @@ void load()
 	player_2_config.right_command  = {input_type::keyboard,  input_state::down, k_d};
 	player_2_config.up_command     = {input_type::keyboard,  input_state::down, k_w};
 	player_2_config.down_command   = {input_type::keyboard,  input_state::down, k_s};
-
 	// Observers
 	auto player_2_info = factory::character::create_player(player_2_config);
     player_2_info.health_comp_ptr->add_observer(heal_display_info_2.health_display_comp_ptr);
@@ -250,10 +248,10 @@ void load()
 	red_ball_config.name           = "red_ball_1";
 	red_ball_config.sprite_id	   = qb_sp_ball_red;
 	red_ball_config.texture_id     = qb_re_t_sprite_general;
-	auto red_ball_info = factory::character::create_red_ball(red_ball_config);
-
-	red_ball_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
-	red_ball_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
+	// auto red_ball_info = factory::character::create_red_ball(red_ball_config);
+	// Observers
+	// red_ball_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
+	// red_ball_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
 
 	factory::character::coily_config_info coily_config{};
 	coily_config.scene_ptr      = scene;
@@ -286,31 +284,37 @@ void load()
 	// FRIENDS
 	//---------------------------------------------------------------------------------
 	factory::character::green_ball_config_info green_ball_config{};
-	green_ball_config.scene_ptr      = scene;
-	green_ball_config.parent_ptr     = root_ptr;
-	green_ball_config.name           = "green_ball_1";
-	green_ball_config.local_position = {256.0f, 132.0f};
-	green_ball_config.sprite_id	   = qb_sp_ball_green;
-	green_ball_config.texture_id     = qb_re_t_sprite_general;
-	// factory::character::create_green_ball(green_ball_config);
+	green_ball_config.scene_ptr  = scene;
+	green_ball_config.parent_ptr = root_ptr;
+	green_ball_config.name       = "green_ball_1";
+	green_ball_config.sprite_id  = qb_sp_ball_green;
+	green_ball_config.texture_id = qb_re_t_sprite_general;
+	// auto green_ball_info = factory::character::create_green_ball(green_ball_config);
+	// Observers
+	// green_ball_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
+	// green_ball_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
 
 	factory::character::slick_config_info slick_config{};
-	slick_config.scene_ptr      = scene;
-	slick_config.parent_ptr     = root_ptr;
-	slick_config.name           = "slick_1";
-	slick_config.local_position = {288.0f, 180.0f};
-	slick_config.sprite_id	   = qb_sp_slick;
-	slick_config.texture_id     = qb_re_t_sprite_general;
-	// factory::character::create_slick(slick_config);
+	slick_config.scene_ptr  = scene;
+	slick_config.parent_ptr = root_ptr;
+	slick_config.name       = "slick_1";
+	slick_config.sprite_id  = qb_sp_slick;
+	slick_config.texture_id = qb_re_t_sprite_general;
+	// auto slick_info = factory::character::create_slick(slick_config);
+	// Observers
+	// slick_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
+	// slick_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
 
 	factory::character::sam_config_info sam_config{};
-	sam_config.scene_ptr      = scene;
-	sam_config.parent_ptr     = root_ptr;
-	sam_config.name           = "sam_1";
-	sam_config.local_position = {160.0f, 180.0f};
-	sam_config.sprite_id	   = qb_sp_sam;
-	sam_config.texture_id     = qb_re_t_sprite_general;
-	// factory::character::create_sam(sam_config);
+	sam_config.scene_ptr  = scene;
+	sam_config.parent_ptr = root_ptr;
+	sam_config.name       = "sam_1";
+	sam_config.sprite_id  = qb_sp_sam;
+	sam_config.texture_id = qb_re_t_sprite_general;
+	auto sam_info = factory::character::create_sam(sam_config);
+	// Observers
+	sam_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
+	sam_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
 
 	//---------------------------------------------------------------------------------
 	// DEBUG

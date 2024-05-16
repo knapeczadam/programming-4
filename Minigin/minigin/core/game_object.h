@@ -56,6 +56,7 @@ namespace mngn
         void add_tags(std::set<std::string> const &tags) { tags_.insert(tags.begin(), tags.end()); }
 
         void awake();
+        void start();
         void fixed_update();
         void update();
         void update_world_position();

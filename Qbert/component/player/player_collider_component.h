@@ -22,7 +22,7 @@ namespace qbert
         player_collider_component &operator=(player_collider_component &&other)      = delete;
 
         void awake() override;
-        void on_trigger_enter(mngn::game_object *other_ptr) override;
+        void on_collision_stay(mngn::game_object *other_ptr) override;
 
     private:
         direction_component *direction_comp_ptr_ = nullptr;

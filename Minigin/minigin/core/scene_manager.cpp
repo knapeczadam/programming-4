@@ -20,7 +20,15 @@ namespace mngn
             if (scene->active()) scene->awake();
         }
     }
-    
+
+    void scene_manager::start()
+    {
+        for (auto const &scene : scenes_)
+        {
+            if (scene->active()) scene->start();
+        }
+    }
+
     void scene_manager::fixed_update()
     {
         for (auto const &scene : scenes_)

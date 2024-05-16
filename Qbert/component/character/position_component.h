@@ -29,6 +29,7 @@ namespace qbert
 
         void update_position();
         void reset(int row_idx = 0, int col_idx = 0);
+        void move_to_previous();
         
     protected:
         direction_component *direction_comp_ptr_ = nullptr;

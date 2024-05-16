@@ -136,6 +136,8 @@ namespace mngn
             
             do_continue = input.process_input();
 
+            scene_manager.start();
+
             while (lag >= game_time::instance().fixed_delta_time)
             {
                 scene_manager.fixed_update();

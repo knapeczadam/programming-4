@@ -20,7 +20,7 @@ namespace mngn
         collider_component &operator=(collider_component const &other) = delete;
         collider_component &operator=(collider_component &&other)      = delete;
 
-        virtual void on_trigger_enter([[maybe_unused]] game_object *other_ptr) { }
+        virtual void on_collision_stay([[maybe_unused]] game_object *other_ptr) { }
 
         [[nodiscard]] auto width() const -> float { return width_; }
         [[nodiscard]] auto height() const -> float { return height_; }

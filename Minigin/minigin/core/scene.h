@@ -27,6 +27,7 @@ namespace mngn
         scene &operator=(scene &&other)      = delete;
         
         void awake();
+        void start();
         void fixed_update();
         void update();
         void late_update();

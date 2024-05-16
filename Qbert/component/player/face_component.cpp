@@ -13,50 +13,27 @@ namespace qbert
         sprite_comp_ptr_ = owner()->component<mngn::sprite_component>();
         direction_comp_ptr_ = owner()->component<direction_component>();
     }
-    
-    void face_component::set_jump_sprite()
-    {
-        int row_dir = direction_comp_ptr_->row();
-        int col_dir = direction_comp_ptr_->col();
-        
-        if (row_dir == -1 and col_dir == 0)
-        {
-            sprite_comp_ptr_->sprite()->set_current_frame(1);
-        }
-        else if (row_dir == -1 and col_dir == -1)
-        {
-            sprite_comp_ptr_->sprite()->set_current_frame(3);
-        }
-        else if (row_dir == 1 and col_dir == 0)
-        {
-            sprite_comp_ptr_->sprite()->set_current_frame(7);
-        }
-        else
-        {
-            sprite_comp_ptr_->sprite()->set_current_frame(5);
-        }
-    }
 
-    void face_component::set_idle_sprite()
+    void face_component::set_sprite_orientation(int left_dir_frame, int right_dir_frame, int up_dir_frame, int down_dir_frame)
     {
         int row_dir = direction_comp_ptr_->row();
         int col_dir = direction_comp_ptr_->col();
         
-        if (row_dir == -1 and col_dir == 0)
+        if (row_dir == -1 and col_dir == -1)
         {
-            sprite_comp_ptr_->sprite()->set_current_frame(0);
+            sprite_comp_ptr_->sprite()->set_current_frame(left_dir_frame);
         }
-        else if (row_dir == -1 and col_dir == -1)
+        else if (row_dir == 1 and col_dir == 1)
         {
-            sprite_comp_ptr_->sprite()->set_current_frame(2);
+            sprite_comp_ptr_->sprite()->set_current_frame(right_dir_frame);
         }
-        else if (row_dir == 1 and col_dir == 0)
+        else if (row_dir == -1 and col_dir == 0)
         {
-            sprite_comp_ptr_->sprite()->set_current_frame(6);
+            sprite_comp_ptr_->sprite()->set_current_frame(up_dir_frame);
         }
         else
         {
-            sprite_comp_ptr_->sprite()->set_current_frame(4);
+            sprite_comp_ptr_->sprite()->set_current_frame(down_dir_frame);
         }
     }
 }

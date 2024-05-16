@@ -16,7 +16,7 @@ namespace qbert
         if (player_state_comp_ptr->is_state<start_state>() or player_state_comp_ptr->is_state<idle_state>())
         {
             auto direction_comp_ptr = game_object()->component<direction_component>();
-            direction_comp_ptr->set_direction(row_dir_, col_dir_);
+            direction_comp_ptr->set(row_dir_, col_dir_);
             player_state_comp_ptr->change_state<jumping_state>(game_object());
         }
     }

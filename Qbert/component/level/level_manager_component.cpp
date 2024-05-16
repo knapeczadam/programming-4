@@ -18,6 +18,8 @@
 #include "state/game/game_over_state.h"
 #include "state/npc/npc_dead_state.h"
 #include "state/npc/npc_idle_state.h"
+#include "state/player/continue_state.h"
+#include "state/player/start_state.h"
 
 namespace qbert
 {
@@ -86,6 +88,7 @@ namespace qbert
             auto position_idx_comp_ptr = character_ptr->component<position_component>();
             auto const row_idx = position_idx_comp_ptr->row();
             auto const col_idx = position_idx_comp_ptr->col();
+            
             if (character_ptr->has_tag("player"))
             {
                 // player is dead
@@ -101,11 +104,11 @@ namespace qbert
                 // player is colliding
                 else if (health_comp_ptr->health() != 3)
                 {
-                    character_ptr->component<state_component>()->change_state<swearing_state>(character_ptr);
+                    character_ptr->component<state_component>()->change_state<continue_state>(character_ptr);
                 }
             }
             // npc is dead
-            else if (character_ptr->has_tag("npc"))
+            else if (character_ptr->has_tag("npc") and health_comp_ptr->health() == 0)
             {
                 character_ptr->component<state_component>()->change_state<npc_dead_state>(character_ptr);
             }

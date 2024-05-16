@@ -14,7 +14,7 @@ namespace qbert
 
     void idle_state::on_enter()
     {
-        character_ptr_->component<face_component>()->set_idle_sprite();
+        character_ptr_->component<face_component>()->set_sprite_orientation(2, 4, 0, 6);
         character_ptr_->component<direction_component>()->reset();
     }
 }

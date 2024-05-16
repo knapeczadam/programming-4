@@ -28,6 +28,7 @@ namespace mngn
         scene_manager &operator=(scene_manager &&other)      = delete;
 
         void awake();
+        void start();
         void fixed_update();
         void update();
         void late_update();

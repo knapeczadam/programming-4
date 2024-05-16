@@ -4,6 +4,9 @@
 #include "component/character/direction_component.h"
 #include "minigin/core/game_object.h"
 
+// GLM includes
+#include <glm/glm.hpp>
+
 namespace qbert
 {
     void position_component::awake()
@@ -22,5 +25,17 @@ namespace qbert
     {
         row_idx_ = row_idx;
         col_idx_ = col_idx;
+    }
+
+    void position_component::move_to_previous()
+    {
+        float offset_x = 32.0f;
+        float offset_y = 48.0f;
+
+        glm::vec2 start_pos = {224.0f, 84.0f};
+        glm::vec2 end_pos;
+        end_pos.x = start_pos.x + (col_idx_ * 2 - row_idx_) * offset_x;
+        end_pos.y = start_pos.y + (row_idx_ * offset_y);
+        owner()->set_local_position(end_pos);
     }
 }

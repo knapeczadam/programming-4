@@ -58,6 +58,7 @@
     <ClCompile Include="state\npc\npc_idle_state.cpp" />
     <ClCompile Include="state\npc\npc_start_state.cpp" />
     <ClCompile Include="state\player\colliding_state.cpp" />
+    <ClCompile Include="state\player\continue_state.cpp" />
     <ClCompile Include="state\player\dead_state.cpp" />
     <ClCompile Include="state\player\falling_state.cpp" />
     <ClCompile Include="state\player\flying_state.cpp" />
@@ -111,6 +112,7 @@
     <ClInclude Include="state\game\game_over_state.h" />
     <ClInclude Include="state\game\playing_state.h" />
     <ClInclude Include="state\npc\npc_dead_state.h" />
+    <ClInclude Include="state\player\continue_state.h" />
     <ClInclude Include="state\state.h" />
     <ClInclude Include="state\npc\npc_jumping_state.h" />
     <ClInclude Include="state\npc\npc_idle_state.h" />

@@ -8,6 +8,19 @@
 
 namespace mngn
 {
+    void game_component::set_enabled(bool enabled)
+    {
+        if (enabled)
+        {
+            start_dirty_ = not enabled_;
+            enabled_ = true;
+        }
+        else
+        {
+            enabled_ = false;
+        }
+    }
+
     void game_component::set_owner(game_object *owner_ptr)
     {
         assert(owner_ptr != nullptr and "game_component::set_owner: owner_ptr is nullptr");

@@ -11,6 +11,7 @@
 // GLM includes
 #include <glm/glm.hpp>
 
+#include "component/character/jump_component.h"
 #include "component/state/state_component.h"
 #include "state/player/colliding_state.h"
 
@@ -27,7 +28,7 @@ namespace qbert
         position_comp_ptr_  = owner()->component<position_component>();
     }
 
-    void player_collider_component::on_trigger_enter(mngn::game_object *other_ptr)
+    void player_collider_component::on_collision_stay(mngn::game_object *other_ptr)
     {
         auto row_pos       = position_comp_ptr_->row();
         auto col_pos       = position_comp_ptr_->col();
@@ -42,25 +43,14 @@ namespace qbert
         glm::ivec2 other_pos = {other_row_pos, other_col_pos};
         glm::ivec2 dir = {row_dir, col_dir};
         glm::ivec2 other_dir = {other_row_dir, other_col_dir};
-        glm::ivec2 idle = {0, 0};
+        // glm::ivec2 idle_dir = {0, 0};
 
-        // player is idle and other player is moving towards it
-        if (dir == idle and pos == other_pos + other_dir)
-        {
-            owner()->component<state_component>()->change_state<colliding_state>(owner());
-        }
-        // other player is idle and player is moving towards it
-        else if (other_dir == idle and other_pos == pos + dir)
-        {
-            owner()->component<state_component>()->change_state<colliding_state>(owner());
-        }
-        // both players are moving towards each other
-        else if (pos == other_pos + other_dir and other_pos == pos + dir)
-        {
-            owner()->component<state_component>()->change_state<colliding_state>(owner());
-        }
-        // player is moving towards other player
-        else if (pos + dir == other_pos)
+        // bool this_idle = dir == idle_dir;
+        // bool other_idle = other_dir == idle_dir;
+        bool other_moving_to_this = pos == other_pos + other_dir;
+        bool this_moving_to_other = other_pos == pos + dir;
+        
+        if (other_moving_to_this or this_moving_to_other)
         {
             owner()->component<state_component>()->change_state<colliding_state>(owner());
         }
