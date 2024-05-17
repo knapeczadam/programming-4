@@ -11,7 +11,7 @@ namespace qbert
     // Forward declarations
     class direction_component;
     
-    class jump_component : public mngn::physics_component
+    class jump_component final : public mngn::physics_component
     {
     public:
         jump_component()          = default;
@@ -28,7 +28,7 @@ namespace qbert
 
         void jump();
 
-    protected:
+    private:
         void calculate_bezier_positions();
 
     protected:

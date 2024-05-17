@@ -100,7 +100,7 @@ namespace qbert
     {
         red_ball_info info{};
         info.go_ptr = config.scene_ptr->create_game_object(config.name);
-        info.go_ptr->add_tags({"npc", "enemy", "ball"});
+        info.go_ptr->add_tags({"npc", "enemy", "ball", "down"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<state_component>();
@@ -119,7 +119,7 @@ namespace qbert
     {
         green_ball_info info{};
         info.go_ptr = config.scene_ptr->create_game_object(config.name);
-        info.go_ptr->add_tags({"npc", "friend", "ball"});
+        info.go_ptr->add_tags({"npc", "friend", "ball", "down"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<state_component>();
@@ -138,7 +138,7 @@ namespace qbert
     {
         coily_info info{};
         info.go_ptr = config.scene_ptr->create_game_object(config.name);
-        info.go_ptr->add_tags({"npc", "enemy", "ball"});
+        info.go_ptr->add_tags({"npc", "enemy", "ball", "down"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<state_component>();
@@ -158,7 +158,7 @@ namespace qbert
     {
         ugg_info info{};
         info.go_ptr = config.scene_ptr->create_game_object(config.name);
-        info.go_ptr->add_tags({"npc", "enemy"});
+        info.go_ptr->add_tags({"npc", "enemy", "right"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<state_component>();
@@ -169,7 +169,7 @@ namespace qbert
         info.go_ptr->add_component<fall_component>();
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         info.go_ptr->add_component<mngn::collider_component>(sprite_comp_ptr->sprite()->collider_width(), sprite_comp_ptr->sprite()->collider_height());
-        info.position_comp_ptr = info.go_ptr->add_component<position_component>();
+        info.position_comp_ptr = info.go_ptr->add_component<position_component>(6, 6);
         info.health_comp_ptr   = info.go_ptr->add_component<health_component>(1);
         return info;
     }
@@ -178,7 +178,7 @@ namespace qbert
     {
         wrong_way_info info{};
         info.go_ptr = config.scene_ptr->create_game_object(config.name);
-        info.go_ptr->add_tags({"npc", "enemy"});
+        info.go_ptr->add_tags({"npc", "enemy", "left"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<state_component>();
@@ -189,7 +189,7 @@ namespace qbert
         info.go_ptr->add_component<fall_component>();
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         info.go_ptr->add_component<mngn::collider_component>(sprite_comp_ptr->sprite()->collider_width(), sprite_comp_ptr->sprite()->collider_height());
-        info.position_comp_ptr = info.go_ptr->add_component<position_component>();
+        info.position_comp_ptr = info.go_ptr->add_component<position_component>(6, 0);
         info.health_comp_ptr   = info.go_ptr->add_component<health_component>(1);
         return info;
     }
@@ -198,7 +198,7 @@ namespace qbert
     {
         slick_info info{};
         info.go_ptr = config.scene_ptr->create_game_object(config.name);
-        info.go_ptr->add_tags({"npc", "friend"});
+        info.go_ptr->add_tags({"npc", "friend", "down"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<state_component>();
@@ -218,7 +218,7 @@ namespace qbert
     {
         sam_info info{};
         info.go_ptr = config.scene_ptr->create_game_object(config.name);
-        info.go_ptr->add_tags({"npc", "friend"});
+        info.go_ptr->add_tags({"npc", "friend", "down"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<state_component>();

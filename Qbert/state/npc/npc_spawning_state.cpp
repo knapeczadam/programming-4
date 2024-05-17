@@ -24,21 +24,8 @@ namespace qbert
     void npc_spawning_state::on_enter()
     {
         character_ptr_->component<mngn::collider_component>()->set_enabled(false);
-        
-        bool is_right = mngn::random_int(0, 1);
-        start_pos_.x = is_right ? 256.0f : 192.0f;
-        end_pos_.x = start_pos_.x;
-        character_ptr_->component<direction_component>()->set_direction(1, is_right);
-
-        if (character_ptr_->has_tag("ball"))
-        {
-            character_ptr_->component<mngn::sprite_component>()->sprite()->set_current_frame(1);
-        }
-        else
-        {
-            character_ptr_->component<face_component>()->set_sprite_orientation(0, 5, 0, 1);
-        }
-        character_ptr_->set_local_position(start_pos_);
+        set_positions();
+        set_sprite();
     }
 
     void npc_spawning_state::update()
@@ -55,5 +42,45 @@ namespace qbert
     {
         character_ptr_->component<mngn::collider_component>()->set_enabled(true);
         character_ptr_->component<jump_component>()->set_enabled(true);
+    }
+
+    void npc_spawning_state::set_positions()
+    {
+        if (character_ptr_->has_tag("down"))
+        {
+            start_pos_.y = -32.0f;
+            end_pos_.y = 132.0f;
+            bool is_right = mngn::random_int(0, 1);
+            start_pos_.x = is_right ? 256.0f : 192.0f;
+            end_pos_.x = start_pos_.x;
+            character_ptr_->component<direction_component>()->set_direction(1, is_right);
+        }
+        else if (character_ptr_->has_tag("left"))
+        {
+            start_pos_ = {-32.0f, 512.0f};
+            end_pos_ = {0.0f, 420.0f};
+        }
+        else if (character_ptr_->has_tag("right"))
+        {
+            start_pos_ = {480.0f, 512.0f};
+            end_pos_ = {448.0f, 420.0f};
+        }
+        character_ptr_->set_local_position(start_pos_);
+    }
+
+    void npc_spawning_state::set_sprite()
+    {
+        if (character_ptr_->has_tag("ball") or character_ptr_->has_tag("left"))
+        {
+            character_ptr_->component<mngn::sprite_component>()->sprite()->set_current_frame(1);
+        }
+        else if (character_ptr_->has_tag("right"))
+        {
+            character_ptr_->component<mngn::sprite_component>()->sprite()->set_current_frame(5);
+        }
+        else
+        {
+            character_ptr_->component<face_component>()->set_sprite_orientation(0, 5, 0, 1);
+        }
     }
 }

@@ -19,8 +19,20 @@ namespace qbert
     {
         character_ptr_->component<health_component>()->heal(1);
         character_ptr_->component<jump_component>()->set_enabled(false);
-        character_ptr_->component<position_component>()->reset();
         character_ptr_->component<direction_component>()->reset();
+        if (character_ptr_->has_tag("down"))
+        {
+            character_ptr_->component<position_component>()->reset();
+        }
+        else if (character_ptr_->has_tag("left"))
+        {
+            character_ptr_->component<position_component>()->reset(6, 0);
+        }
+        else if (character_ptr_->has_tag("right"))
+        {
+            character_ptr_->component<position_component>()->reset(6, 6);
+        }
+        
         character_ptr_->component<state_component>()->change_state<npc_spawning_state>(character_ptr_);
     }
 }

@@ -23,6 +23,14 @@ namespace qbert
         {
             character_ptr_->component<mngn::sprite_component>()->sprite()->set_current_frame(0);
         }
+        else if (character_ptr_->has_tag("left"))
+        {
+            character_ptr_->component<face_component>()->set_sprite_orientation(4, 0, 4, 0, 0);
+        }
+        else if (character_ptr_->has_tag("right"))
+        {
+            character_ptr_->component<face_component>()->set_sprite_orientation(0, 0, 0, 0, 4);
+        }
         else
         {
             character_ptr_->component<face_component>()->set_sprite_orientation(0, 4, 0, 0);
@@ -36,10 +44,34 @@ namespace qbert
         {
             accu_time_ = 0.0f;
             auto direction_comp_ptr = character_ptr_->component<direction_component>();
-            int col = mngn::random_int(0, 1);
-            direction_comp_ptr->set_direction(1, col);
+            if (character_ptr_->has_tag("down"))
+            {
+                int col = mngn::random_int(0, 1);
+                direction_comp_ptr->set_direction(1, col);
+            }
+            else if (character_ptr_->has_tag("left"))
+            {
+                if (mngn::random_int(0, 1)) // upwards
+                {
+                    direction_comp_ptr->set_direction(-1, 0);
+                }
+                else // to the right
+                {
+                    direction_comp_ptr->set_direction(0, 1);
+                }
+            }
+            else if (character_ptr_->has_tag("right"))
+            {
+                if (mngn::random_int(0, 1)) // upwards
+                {
+                    direction_comp_ptr->set_direction(-1, -1);
+                }
+                else // to the left
+                {
+                    direction_comp_ptr->set_direction(0, -1);
+                }
+            }
             character_ptr_->component<state_component>()->change_state<npc_jumping_state>(character_ptr_);
         }
-
     }
 }

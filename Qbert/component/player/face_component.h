@@ -25,7 +25,7 @@ namespace qbert
         face_component& operator=(face_component&& other)      = delete;
 
         void awake() override;
-        void set_sprite_orientation(int left_dir_frame, int right_dir_frame, int up_dir_frame, int down_dir_frame);
+        void set_sprite_orientation(int left_dir_frame, int right_dir_frame, int up_dir_frame, int down_dir_frame, int diagonal_dir_frame = 0);
 
     private:
         mngn::sprite_component *sprite_comp_ptr_ = nullptr;

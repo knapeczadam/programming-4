@@ -14,7 +14,7 @@ namespace qbert
         direction_comp_ptr_ = owner()->component<direction_component>();
     }
 
-    void face_component::set_sprite_orientation(int left_dir_frame, int right_dir_frame, int up_dir_frame, int down_dir_frame)
+    void face_component::set_sprite_orientation(int left_dir_frame, int right_dir_frame, int up_dir_frame, int down_dir_frame, int diagonal_dir_frame)
     {
         int row_dir = direction_comp_ptr_->row();
         int col_dir = direction_comp_ptr_->col();
@@ -31,9 +31,13 @@ namespace qbert
         {
             sprite_comp_ptr_->sprite()->set_current_frame(up_dir_frame);
         }
-        else
+        else if (row_dir == 1 and col_dir == 0)
         {
             sprite_comp_ptr_->sprite()->set_current_frame(down_dir_frame);
+        }
+        else
+        {
+            sprite_comp_ptr_->sprite()->set_current_frame(diagonal_dir_frame);
         }
     }
 }

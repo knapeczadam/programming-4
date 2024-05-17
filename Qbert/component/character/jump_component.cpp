@@ -59,15 +59,20 @@ namespace qbert
         
         int offset_x = 32;
         int offset_y = 48;
+        int offset_x_diagonal = 64;
 
         if (row_dir == 1 and col_dir == 0) col_dir = -1;
         else if (row_dir == -1 and col_dir == 0) col_dir = 1;
 
         end_pos_.x = start_pos_.x + col_dir * offset_x;
         end_pos_.y = start_pos_.y + row_dir * offset_y;
-
-        // std::cout << "end_pos_: " << end_pos_.x << ", " << end_pos_.y << std::endl;
         
+        if (row_dir == 0)
+        {
+            end_pos_.x = start_pos_.x + col_dir * offset_x_diagonal;
+            end_pos_.y = start_pos_.y;
+        }
+
         // I-II. quadrants (top right, top left)
         if (row_dir == -1)
         {
@@ -77,6 +82,11 @@ namespace qbert
         else if (row_dir == 1)
         {
             corner_pos_ = {end_pos_.x, start_pos_.y};
+        }
+        else if (row_dir == 0)
+        {
+            corner_pos_.x = (start_pos_.x + end_pos_.x) / 2.0f;
+            corner_pos_.y = end_pos_.y + offset_y;
         }
         
         pos_1_ = (start_pos_ + corner_pos_) / 2.0f;

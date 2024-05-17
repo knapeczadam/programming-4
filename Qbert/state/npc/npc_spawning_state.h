@@ -17,10 +17,14 @@ namespace qbert
         void update() override;
         void on_exit() override;
 
+        void set_positions();
+        void set_sprite();
+        
+
     private:
-        float spawn_time_ = 2.0f;
-        float accu_time_ = 0.0f;
-        glm::vec2 start_pos_ {0.0f, -32.0f};
-        glm::vec2 end_pos_ = {0.0f, 132.0f};
+        float     spawn_time_ = 2.0f;
+        float     accu_time_  = 0.0f;
+        glm::vec2 start_pos_  = {};
+        glm::vec2 end_pos_    = {};
     };
 }
