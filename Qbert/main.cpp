@@ -189,7 +189,7 @@ void load()
     //---------------------------------------------------------------------------------
 	factory::character::player_config_info player_1_config{};
 	player_1_config.scene_ptr         = scene;
-	player_1_config.parent_ptr     = root_ptr;
+	player_1_config.parent_ptr        = root_ptr;
 	player_1_config.name              = "player_1";
 	player_1_config.local_position    = {224.0f, 84.0f};
 	player_1_config.sprite_id         = qb_sp_qbert_1;

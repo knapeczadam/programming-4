@@ -11,8 +11,9 @@
 
 namespace mngn
 {
-    game_object::game_object(std::string name)
+    game_object::game_object(std::string name, mngn::scene *scene_ptr)
         : name_{std::move(name)}
+        , scene_ptr_{scene_ptr}
     {
     }
 

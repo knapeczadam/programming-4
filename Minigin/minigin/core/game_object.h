@@ -18,6 +18,7 @@ namespace mngn
     // Forward declarations
     enum class component_family;
     class game_component;
+    class scene;
 
     // Concepts
     template <class T>
@@ -40,7 +41,7 @@ namespace mngn
     {
     public:
         game_object() = default;
-        explicit game_object(std::string name);
+        game_object(std::string name, scene *scene_ptr);
         ~game_object();
 
         game_object(game_object const &other)            = delete;
@@ -54,6 +55,8 @@ namespace mngn
         [[nodiscard]] auto has_tag(std::string const &tag) const -> bool { return tags_.contains(tag); }
         void add_tag(std::string const &tag) { tags_.insert(tag); }
         void add_tags(std::set<std::string> const &tags) { tags_.insert(tags.begin(), tags.end()); }
+
+        [[nodiscard]] auto scene() const -> scene * { return scene_ptr_; }
 
         void awake();
         void on_enable();
@@ -145,6 +148,7 @@ namespace mngn
         bool position_dirty_  = false;
         bool active_          = true;
         std::set<std::string>   tags_;
+        mngn::scene *scene_ptr_     = nullptr;
 
         // TODO: switch to map?
         std::unordered_map<std::type_index, std::unique_ptr<game_component>> component_map_ = {};

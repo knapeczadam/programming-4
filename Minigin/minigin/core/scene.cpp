@@ -118,7 +118,7 @@ namespace mngn
 
     auto scene::create_game_object(std::string const &name) -> game_object *
     {
-        objects_.emplace_back(std::make_unique<game_object>(name));
+        objects_.emplace_back(std::make_unique<game_object>(name, this));
         return objects_.back().get();
     }
 
