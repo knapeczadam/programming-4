@@ -30,8 +30,14 @@ namespace qbert
         end_pos_.x = start_pos_.x;
 
         character_ptr_->component<mngn::sprite_component>()->sprite()->set_current_frame(1);
-        character_ptr_->component<direction_component>()->set_direction(1, is_right);
-        character_ptr_->component<face_component>()->set_sprite_orientation(0, 5, 0, 1);
+        if (character_ptr_->has_tag("ball"))
+        {
+            character_ptr_->component<direction_component>()->set_direction(1, is_right);
+        }
+        else
+        {
+            character_ptr_->component<face_component>()->set_sprite_orientation(0, 5, 0, 1);
+        }
         character_ptr_->set_local_position(start_pos_);
     }
 

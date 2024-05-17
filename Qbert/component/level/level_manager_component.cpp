@@ -10,7 +10,6 @@
 #include "minigin/core/game_object.h"
 #include "state/npc/npc_dead_state.h"
 #include "state/npc/npc_idle_state.h"
-#include "state/player/continue_state.h"
 #include "state/player/dead_state.h"
 #include "state/player/falling_state.h"
 #include "state/player/flying_state.h"
@@ -19,6 +18,8 @@
 
 // Standard includes
 #include <iostream>
+
+#include "state/player/swearing_state.h"
 
 namespace qbert
 {
@@ -108,7 +109,7 @@ namespace qbert
                 // player is colliding
                 else if (health_comp_ptr->health() != 3)
                 {
-                    character_ptr->component<state_component>()->change_state<continue_state>(character_ptr);
+                    character_ptr->component<state_component>()->change_state<swearing_state>(character_ptr);
                 }
             }
             // npc is dead

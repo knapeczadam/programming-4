@@ -242,17 +242,19 @@ void load()
 	//---------------------------------------------------------------------------------
 	// ENEMY
 	//---------------------------------------------------------------------------------
+	// Red Ball
 	factory::character::red_ball_config_info red_ball_config{};
 	red_ball_config.scene_ptr      = scene;
 	red_ball_config.parent_ptr     = root_ptr;
 	red_ball_config.name           = "red_ball_1";
 	red_ball_config.sprite_id	   = qb_sp_ball_red;
 	red_ball_config.texture_id     = qb_re_t_sprite_general;
-	// auto red_ball_info = factory::character::create_red_ball(red_ball_config);
+	auto red_ball_info = factory::character::create_red_ball(red_ball_config);
 	// Observers
-	// red_ball_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
-	// red_ball_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
+	red_ball_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
+	red_ball_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
 
+	// Coily
 	factory::character::coily_config_info coily_config{};
 	coily_config.scene_ptr      = scene;
 	coily_config.parent_ptr     = root_ptr;
@@ -262,6 +264,7 @@ void load()
 	coily_config.texture_id     = qb_re_t_sprite_general;
 	// factory::character::create_coily(coily_config);
 
+	// Ugg
 	factory::character::ugg_config_info ugg_config{};
 	ugg_config.scene_ptr      = scene;
 	ugg_config.parent_ptr     = root_ptr;
@@ -271,6 +274,7 @@ void load()
 	ugg_config.texture_id     = qb_re_t_sprite_general;
 	// factory::character::create_ugg(ugg_config);
 
+	// Wrong-Way
 	factory::character::wrong_way_config_info wrong_way_config{};
 	wrong_way_config.scene_ptr      = scene;
 	wrong_way_config.parent_ptr     = root_ptr;
@@ -283,6 +287,7 @@ void load()
 	//---------------------------------------------------------------------------------
 	// FRIENDS
 	//---------------------------------------------------------------------------------
+	// Green Ball
 	factory::character::green_ball_config_info green_ball_config{};
 	green_ball_config.scene_ptr  = scene;
 	green_ball_config.parent_ptr = root_ptr;
@@ -294,6 +299,7 @@ void load()
 	// green_ball_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
 	// green_ball_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
 
+	// Slick
 	factory::character::slick_config_info slick_config{};
 	slick_config.scene_ptr  = scene;
 	slick_config.parent_ptr = root_ptr;
@@ -306,17 +312,18 @@ void load()
 	// slick_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
 	// std::ranges::for_each(cube_components.cube_components, [slick_info](auto cube_comp_ptr) { slick_info.position_comp_ptr->add_observer(cube_comp_ptr); });
 
+	// Sam
 	factory::character::sam_config_info sam_config{};
 	sam_config.scene_ptr  = scene;
 	sam_config.parent_ptr = root_ptr;
 	sam_config.name       = "sam_1";
 	sam_config.sprite_id  = qb_sp_sam;
 	sam_config.texture_id = qb_re_t_sprite_general;
-	auto sam_info = factory::character::create_sam(sam_config);
+	// auto sam_info = factory::character::create_sam(sam_config);
 	// Observers
-	sam_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
-	sam_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
-	std::ranges::for_each(cube_components.cube_components, [sam_info](auto cube_comp_ptr) { sam_info.position_comp_ptr->add_observer(cube_comp_ptr); });
+	// sam_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
+	// sam_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
+	// std::ranges::for_each(cube_components.cube_components, [sam_info](auto cube_comp_ptr) { sam_info.position_comp_ptr->add_observer(cube_comp_ptr); });
 
 	//---------------------------------------------------------------------------------
 	// DEBUG

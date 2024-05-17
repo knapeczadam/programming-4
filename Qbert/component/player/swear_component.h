@@ -23,13 +23,9 @@ namespace qbert
         swear_component &operator=(swear_component &&other)      = delete;
 
         void awake() override;
-        void update() override;
-        void swear();
+        void swear(bool swear_on);
 
     private:
         mngn::game_object *swearing_go_ptr_ = nullptr;
-        float             swear_time_       = 2.0f;
-        float             accu_time_        = 0.0f;
-        bool              is_swearing_      = false;
     };
 }
