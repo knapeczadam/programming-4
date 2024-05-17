@@ -28,14 +28,16 @@ namespace mngn
         scene_manager &operator=(scene_manager &&other)      = delete;
 
         void awake();
+        void on_enable();
         void start();
         void fixed_update();
         void update();
         void late_update();
         void render();
         void render_ui();
+        void on_disable();
         
-        auto create(std::string const &name) -> scene *;
+        auto create_scene(std::string const &name) -> scene *;
         [[nodiscard]] auto find_game_objects_with_tag(std::string const &tag) const -> std::vector<game_object*>;
 
     private:

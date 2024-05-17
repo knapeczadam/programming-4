@@ -125,6 +125,7 @@ namespace mngn
         float lag         = 0.0f;
 
         scene_manager.awake();
+        scene_manager.start();
         
         while (do_continue)
         {
@@ -136,7 +137,7 @@ namespace mngn
             
             do_continue = input.process_input();
 
-            scene_manager.start();
+            scene_manager.on_enable();
 
             while (lag >= game_time::instance().fixed_delta_time)
             {
@@ -148,6 +149,7 @@ namespace mngn
             scene_manager.update();
             scene_manager.late_update();
             renderer.render();
+            scene_manager.on_disable();
 
             // SteamAPI_RunCallbacks(); 
 

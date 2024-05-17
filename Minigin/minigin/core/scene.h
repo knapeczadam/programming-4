@@ -27,14 +27,16 @@ namespace mngn
         scene &operator=(scene &&other)      = delete;
         
         void awake();
+        void on_enable();
         void start();
         void fixed_update();
         void update();
         void late_update();
         void render() const;
         void render_ui() const;
+        void on_disable();
 
-        auto create(std::string const &name = "new_game_object") -> game_object *;
+        auto create_game_object(std::string const &name = "new_game_object") -> game_object *;
         void remove(game_object *game_object_ptr);
         void remove_all();
         [[nodiscard]] auto count() const -> int;

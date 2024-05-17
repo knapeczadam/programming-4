@@ -5,23 +5,18 @@
 #include "component/character/direction_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
-#include "state/character/landing_state.h"
 #include "minigin/utility/math.h"
 
 // Standard includes
 #include <iostream>
+
+#include "position_component.h"
 
 namespace qbert
 {
     void jump_component::awake()
     {
         direction_comp_ptr_ = owner()->component<direction_component>();
-    }
-
-    void jump_component::start()
-    {
-        is_jumping_ = false;
-        accu_time_ = 0.0f;
     }
 
     void jump_component::fixed_update()
@@ -31,8 +26,7 @@ namespace qbert
             if (curr_pos_ != end_pos_)
             {
                 accu_time_ += mngn::game_time::instance().fixed_delta_time;
-                float t = accu_time_ / jump_time_;
-                t = glm::clamp(t, 0.0f, 1.0f);
+                float t = glm::clamp(accu_time_ / jump_time_, 0.0f, 1.0f);
                 curr_pos_ = mngn::bezier_curve(start_pos_, pos_1_, pos_2_, end_pos_, t);
                 owner()->set_local_position(curr_pos_);
             }
@@ -40,11 +34,15 @@ namespace qbert
             {
                 is_jumping_ = false;
                 accu_time_ = 0.0f;
-                curr_pos_ = {};
-                
-                owner()->component<state_component>()->change_state<landing_state>(owner());
+                owner()->component<position_component>()->update_position();
             }
         }
+    }
+
+    void jump_component::on_disable()
+    {
+        is_jumping_ = false;
+        accu_time_ = 0.0f;
     }
 
     void jump_component::jump()
@@ -68,7 +66,7 @@ namespace qbert
         end_pos_.x = start_pos_.x + col_dir * offset_x;
         end_pos_.y = start_pos_.y + row_dir * offset_y;
 
-        std::cout << "end_pos_: " << end_pos_.x << ", " << end_pos_.y << std::endl;
+        // std::cout << "end_pos_: " << end_pos_.x << ", " << end_pos_.y << std::endl;
         
         // I-II. quadrants (top right, top left)
         if (row_dir == -1)

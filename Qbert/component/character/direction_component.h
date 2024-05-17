@@ -18,7 +18,7 @@ namespace qbert
 
         [[nodiscard]] auto row() const -> int { return row_; }
         [[nodiscard]] auto col() const -> int { return col_; }
-        void set(int row, int col) { row_ = row; col_ = col; }
+        void set_direction(int row, int col) { row_ = row; col_ = col; }
         void reset() { row_ = 0; col_ = 0; }
 
     private:

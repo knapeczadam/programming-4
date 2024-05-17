@@ -21,6 +21,14 @@ namespace mngn
         }
     }
 
+    void scene_manager::on_enable()
+    {
+        for (auto const &scene : scenes_)
+        {
+            if (scene->active()) scene->on_enable();
+        }
+    }
+
     void scene_manager::start()
     {
         for (auto const &scene : scenes_)
@@ -69,7 +77,15 @@ namespace mngn
         }
     }
 
-    auto scene_manager::create(std::string const &name) -> scene *
+    void scene_manager::on_disable()
+    {
+        for (auto const &scene : scenes_)
+        {
+            if (scene->active()) scene->on_disable();
+        }
+    }
+
+    auto scene_manager::create_scene(std::string const &name) -> scene *
     {
         scenes_.emplace_back(std::unique_ptr<scene>(new scene(name)));
         return scenes_.back().get();

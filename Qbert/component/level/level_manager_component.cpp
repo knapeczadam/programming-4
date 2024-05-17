@@ -1,25 +1,24 @@
 ﻿#include "level_manager_component.h"
 
 // Project includes
+#include "component/character/direction_component.h"
+#include "component/character/jump_component.h"
+#include "component/character/position_component.h"
 #include "component/level/disc_component.h"
 #include "component/player/health_component.h"
-#include "component/character/jump_component.h"
 #include "component/state/state_component.h"
-#include "component/character/position_component.h"
-#include "component/character/direction_component.h"
 #include "minigin/core/game_object.h"
-#include "minigin/core/scene_manager.h"
+#include "state/npc/npc_dead_state.h"
+#include "state/npc/npc_idle_state.h"
+#include "state/player/continue_state.h"
 #include "state/player/dead_state.h"
 #include "state/player/falling_state.h"
 #include "state/player/flying_state.h"
 #include "state/player/idle_state.h"
-#include "state/player/swearing_state.h"
 #include "state/player/waiting_state.h"
-#include "state/game/game_over_state.h"
-#include "state/npc/npc_dead_state.h"
-#include "state/npc/npc_idle_state.h"
-#include "state/player/continue_state.h"
-#include "state/player/start_state.h"
+
+// Standard includes
+#include <iostream>
 
 namespace qbert
 {
@@ -88,6 +87,11 @@ namespace qbert
             auto position_idx_comp_ptr = character_ptr->component<position_component>();
             auto const row_idx = position_idx_comp_ptr->row();
             auto const col_idx = position_idx_comp_ptr->col();
+
+            if (health_comp_ptr->health() < 0)
+            {
+                std::cout << "Health is negative" << std::endl;
+            }
             
             if (character_ptr->has_tag("player"))
             {

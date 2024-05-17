@@ -33,6 +33,14 @@ namespace mngn
         }
     }
 
+    void scene::on_enable()
+    {
+        for (auto const &object : objects_)
+        {
+            if (object->active()) object->on_enable();
+        }
+    }
+
     void scene::start()
     {
         for (auto const &object : objects_)
@@ -100,7 +108,15 @@ namespace mngn
         }
     }
 
-    auto scene::create(std::string const &name) -> game_object *
+    void scene::on_disable()
+    {
+        for (auto const &object : objects_)
+        {
+            if (object->active()) object->on_disable();
+        }
+    }
+
+    auto scene::create_game_object(std::string const &name) -> game_object *
     {
         objects_.emplace_back(std::make_unique<game_object>(name));
         return objects_.back().get();

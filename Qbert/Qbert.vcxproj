@@ -25,7 +25,7 @@
     <ClCompile Include="component\level\disc_component.cpp" />
     <ClCompile Include="component\level\fly_component.cpp" />
     <ClCompile Include="component\level\level_manager_component.cpp" />
-    <ClCompile Include="component\npc\descend_component.cpp" />
+    <ClCompile Include="component\npc\spawn_component.cpp" />
     <ClCompile Include="component\player\face_component.cpp" />
     <ClCompile Include="component\player\fall_component.cpp" />
     <ClCompile Include="component\player\health_component.cpp" />
@@ -48,7 +48,6 @@
     <ClCompile Include="input\generic_commands.cpp" />
     <ClCompile Include="level\levels.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="state\character\landing_state.cpp" />
     <ClCompile Include="state\character\character_state.cpp" />
     <ClCompile Include="state\game\game_state.cpp" />
     <ClCompile Include="state\game\game_over_state.cpp" />
@@ -56,7 +55,7 @@
     <ClCompile Include="state\npc\npc_dead_state.cpp" />
     <ClCompile Include="state\npc\npc_jumping_state.cpp" />
     <ClCompile Include="state\npc\npc_idle_state.cpp" />
-    <ClCompile Include="state\npc\npc_start_state.cpp" />
+    <ClCompile Include="state\npc\npc_spawning_state.cpp" />
     <ClCompile Include="state\player\colliding_state.cpp" />
     <ClCompile Include="state\player\continue_state.cpp" />
     <ClCompile Include="state\player\dead_state.cpp" />
@@ -84,7 +83,7 @@
     <ClInclude Include="component\level\disc_component.h" />
     <ClInclude Include="component\level\fly_component.h" />
     <ClInclude Include="component\level\level_manager_component.h" />
-    <ClInclude Include="component\npc\descend_component.h" />
+    <ClInclude Include="component\npc\spawn_component.h" />
     <ClInclude Include="component\player\face_component.h" />
     <ClInclude Include="component\player\fall_component.h" />
     <ClInclude Include="component\player\health_component.h" />
@@ -106,7 +105,6 @@
     <ClInclude Include="input\game_object_commands.h" />
     <ClInclude Include="input\generic_commands.h" />
     <ClInclude Include="level\levels.h" />
-    <ClInclude Include="state\character\landing_state.h" />
     <ClInclude Include="state\character\character_state.h" />
     <ClInclude Include="state\game\game_state.h" />
     <ClInclude Include="state\game\game_over_state.h" />
@@ -116,7 +114,7 @@
     <ClInclude Include="state\state.h" />
     <ClInclude Include="state\npc\npc_jumping_state.h" />
     <ClInclude Include="state\npc\npc_idle_state.h" />
-    <ClInclude Include="state\npc\npc_start_state.h" />
+    <ClInclude Include="state\npc\npc_spawning_state.h" />
     <ClInclude Include="state\null_state.h" />
     <ClInclude Include="state\player\colliding_state.h" />
     <ClInclude Include="state\player\dead_state.h" />

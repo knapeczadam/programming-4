@@ -26,7 +26,7 @@ namespace qbert
         state_component &operator=(state_component const &other) = delete;
         state_component &operator=(state_component &&other)      = delete;
 
-        void awake() override;
+        void start() override;
         void update() override;
 
         template <class T, typename... Args> requires child_state<T>

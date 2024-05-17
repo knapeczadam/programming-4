@@ -10,11 +10,6 @@ namespace qbert
     public:
         explicit npc_dead_state(mngn::game_object* character_ptr);
 
-        void update() override;
-        void on_exit() override;
-
-    private:
-        float dead_time_ = 2.0f;
-        float accu_time_ = 0.0f;
+        void on_enter() override;
     };
 }

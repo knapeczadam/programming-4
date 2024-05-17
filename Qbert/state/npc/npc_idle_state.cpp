@@ -37,7 +37,7 @@ namespace qbert
             accu_time_ = 0.0f;
             auto direction_comp_ptr = character_ptr_->component<direction_component>();
             int col = mngn::random_int(0, 1);
-            direction_comp_ptr->set(1, col);
+            direction_comp_ptr->set_direction(1, col);
             character_ptr_->component<state_component>()->change_state<npc_jumping_state>(character_ptr_);
         }
 

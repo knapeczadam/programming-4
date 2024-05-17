@@ -42,15 +42,23 @@ namespace mngn
         }
     }
 
+    void game_object::on_enable()
+    {
+        for (auto const &comp : component_map_ | std::views::values)
+        {
+            if (comp->enabled_dirty_)
+            {
+                comp->on_enable();
+                comp->enabled_dirty_ = false;
+            }
+        }
+    }
+
     void game_object::start()
     {
         for (auto const &comp : component_map_ | std::views::values)
         {
-            if (comp->start_dirty_)
-            {
-                comp->start();
-                comp->start_dirty_ = false;
-            }
+            if (comp->enabled_) comp->start();
         }
     }
 
@@ -103,6 +111,31 @@ namespace mngn
             }
         }
         update_world_position();
+    }
+
+    void game_object::on_disable()
+    {
+        for (auto const &comp : component_map_ | std::views::values)
+        {
+            if (comp->disabled_dirty_)
+            {
+                comp->on_disable();
+                comp->disabled_dirty_ = false;
+            }
+        }
+    }
+
+    void game_object::set_active(bool active)
+    {
+        if (active and not active_)
+        {
+            for (auto const &comp : component_map_ | std::views::values)
+            {
+                comp->enabled_dirty_ = true;
+            }
+        }
+        active_ = active;
+        
     }
 
     auto game_object::set_parent(game_object *parent_ptr, bool keep_world_position) -> bool

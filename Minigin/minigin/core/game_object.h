@@ -56,14 +56,16 @@ namespace mngn
         void add_tags(std::set<std::string> const &tags) { tags_.insert(tags.begin(), tags.end()); }
 
         void awake();
+        void on_enable();
         void start();
         void fixed_update();
         void update();
         void update_world_position();
         void late_update();
+        void on_disable();
 
         [[nodiscard]] auto active() const -> bool { return active_; }
-        void set_active(bool active) { active_ = active; }
+        void set_active(bool active);
 
         [[nodiscard]] auto parent() const -> game_object * { return parent_ptr_; }
         auto set_parent(game_object *parent_ptr, bool keep_world_position = true) -> bool;

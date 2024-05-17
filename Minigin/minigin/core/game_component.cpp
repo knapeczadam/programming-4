@@ -10,15 +10,15 @@ namespace mngn
 {
     void game_component::set_enabled(bool enabled)
     {
-        if (enabled)
+        if (enabled and not enabled_)
         {
-            start_dirty_ = not enabled_;
-            enabled_ = true;
+            enabled_dirty_ = true;
         }
-        else
+        else if (not enabled and enabled_)
         {
-            enabled_ = false;
+            disabled_dirty_ = true;
         }
+        enabled_ = enabled;
     }
 
     void game_component::set_owner(game_object *owner_ptr)

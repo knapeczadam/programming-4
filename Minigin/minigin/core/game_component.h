@@ -32,9 +32,11 @@ namespace mngn
         game_component &operator=(game_component const &other) = delete;
         game_component &operator=(game_component &&other)      = delete;
 
-        virtual void awake()  { }
-        virtual void start()  { }
-        virtual void update() { }
+        virtual void awake()      { }
+        virtual void on_enable()  { }
+        virtual void start()      { }
+        virtual void update()     { }
+        virtual void on_disable() { }
 
         [[nodiscard]] virtual auto family() const -> component_family = 0;
         [[nodiscard]] auto owner() const -> game_object * { return owner_ptr_; }
@@ -45,8 +47,9 @@ namespace mngn
         void set_owner(game_object *owner_ptr);
 
     private:
-        game_object *owner_ptr_ = nullptr;
-        bool enabled_ = true;
-        bool start_dirty_ = true;
+        game_object *owner_ptr_     = nullptr;
+        bool        enabled_        = true;
+        bool        enabled_dirty_  = true;
+        bool        disabled_dirty_ = false;
     };
 }

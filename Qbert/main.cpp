@@ -81,12 +81,12 @@ void load()
 	//---------------------------------------------------------------------------------
 	// TEST SCENE
 	//---------------------------------------------------------------------------------
-    auto const scene = scene_manager::instance().create("Demo");
+    auto const scene = scene_manager::instance().create_scene("Demo");
     
 	//---------------------------------------------------------------------------------
 	// ROOT
 	//---------------------------------------------------------------------------------
-	auto root_ptr = scene->create("root");
+	auto root_ptr = scene->create_game_object("root");
 	auto level_manager_comp_ptr = root_ptr->add_component<level_manager_component>();
 	// root_ptr->add_component<state_component>(scene);
 

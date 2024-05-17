@@ -3,6 +3,7 @@
 // Project includes
 #include "component/character/direction_component.h"
 #include "component/character/position_component.h"
+#include "component/player/health_component.h"
 #include "minigin/core/game_object.h"
 
 // Standard includes
@@ -11,9 +12,6 @@
 // GLM includes
 #include <glm/glm.hpp>
 
-#include "component/character/jump_component.h"
-#include "component/state/state_component.h"
-#include "state/player/colliding_state.h"
 
 namespace qbert
 {
@@ -43,24 +41,20 @@ namespace qbert
         glm::ivec2 other_pos = {other_row_pos, other_col_pos};
         glm::ivec2 dir = {row_dir, col_dir};
         glm::ivec2 other_dir = {other_row_dir, other_col_dir};
-        // glm::ivec2 idle_dir = {0, 0};
-
-        // bool this_idle = dir == idle_dir;
-        // bool other_idle = other_dir == idle_dir;
+        
         bool other_moving_to_this = pos == other_pos + other_dir;
         bool this_moving_to_other = other_pos == pos + dir;
         
         if (other_moving_to_this or this_moving_to_other)
         {
-            owner()->component<state_component>()->change_state<colliding_state>(owner());
-        }
-        else
-        {
-            std::cout << "Collision detected" << std::endl;
-            std::cout << "Player position: " << pos.x << ", " << pos.y << std::endl;
-            std::cout << "Player direction: " << dir.x << ", " << dir.y << std::endl;
-            std::cout << "Other player position: " << other_pos.x << ", " << other_pos.y << std::endl;
-            std::cout << "Other player direction: " << other_dir.x << ", " << other_dir.y << std::endl;
+            if (other_ptr->has_tag("friend"))
+            {
+                other_ptr->component<health_component>()->take_damage(1);
+            }
+            else
+            {
+                owner()->component<health_component>()->take_damage(1);
+            }
         }
     }
 }

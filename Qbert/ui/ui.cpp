@@ -15,7 +15,7 @@ namespace qbert
     {
         using namespace mngn;
 
-        auto const scene_ptr = scene_manager::instance().create("test_ui");
+        auto const scene_ptr = scene_manager::instance().create_scene("test_ui");
         
         factory::ui::sprite_config_info sprite_config{};
         sprite_config.scene_ptr      = scene_ptr;
