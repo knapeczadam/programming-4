@@ -144,7 +144,9 @@ namespace qbert
         info.go_ptr->add_component<state_component>();
         info.go_ptr->add_component<direction_component>();
         info.go_ptr->add_component<jump_component>();
+        info.go_ptr->add_component<face_component>();
         info.go_ptr->add_component<spawn_component>();
+        info.go_ptr->add_component<fall_component>();
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         info.go_ptr->add_component<mngn::collider_component>(sprite_comp_ptr->sprite()->collider_width(), sprite_comp_ptr->sprite()->collider_height());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>();

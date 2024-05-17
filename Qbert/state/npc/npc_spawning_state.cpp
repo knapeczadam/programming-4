@@ -28,11 +28,11 @@ namespace qbert
         bool is_right = mngn::random_int(0, 1);
         start_pos_.x = is_right ? 256.0f : 192.0f;
         end_pos_.x = start_pos_.x;
+        character_ptr_->component<direction_component>()->set_direction(1, is_right);
 
-        character_ptr_->component<mngn::sprite_component>()->sprite()->set_current_frame(1);
         if (character_ptr_->has_tag("ball"))
         {
-            character_ptr_->component<direction_component>()->set_direction(1, is_right);
+            character_ptr_->component<mngn::sprite_component>()->sprite()->set_current_frame(1);
         }
         else
         {

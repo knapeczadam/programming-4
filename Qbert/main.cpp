@@ -249,40 +249,49 @@ void load()
 	red_ball_config.name           = "red_ball_1";
 	red_ball_config.sprite_id	   = qb_sp_ball_red;
 	red_ball_config.texture_id     = qb_re_t_sprite_general;
-	auto red_ball_info = factory::character::create_red_ball(red_ball_config);
+	// auto red_ball_info = factory::character::create_red_ball(red_ball_config);
 	// Observers
-	red_ball_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
-	red_ball_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
+	// red_ball_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
+	// red_ball_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
 
 	// Coily
 	factory::character::coily_config_info coily_config{};
 	coily_config.scene_ptr      = scene;
 	coily_config.parent_ptr     = root_ptr;
 	coily_config.name           = "coily_1";
-	coily_config.local_position = {224.0f, 180.0f};
+	// coily_config.local_position = {224.0f, 180.0f};
 	coily_config.sprite_id	   = qb_sp_coily_egg;
 	coily_config.texture_id     = qb_re_t_sprite_general;
-	// factory::character::create_coily(coily_config);
+	// auto coily_info = factory::character::create_coily(coily_config);
+	// Observers
+	// coily_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
+	// coily_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
 
 	// Ugg
 	factory::character::ugg_config_info ugg_config{};
 	ugg_config.scene_ptr      = scene;
 	ugg_config.parent_ptr     = root_ptr;
 	ugg_config.name           = "ugg_1";
-	ugg_config.local_position = {448.0f, 420.0f};
+	// ugg_config.local_position = {448.0f, 420.0f};
 	ugg_config.sprite_id	   = qb_sp_ugg;
 	ugg_config.texture_id     = qb_re_t_sprite_general;
-	// factory::character::create_ugg(ugg_config);
+	auto ugg_info = factory::character::create_ugg(ugg_config);
+	// Observers
+	ugg_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
+	ugg_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
 
 	// Wrong-Way
 	factory::character::wrong_way_config_info wrong_way_config{};
 	wrong_way_config.scene_ptr      = scene;
 	wrong_way_config.parent_ptr     = root_ptr;
 	wrong_way_config.name           = "wrong_way_1";
-	wrong_way_config.local_position = {0.0f, 420.0f};
+	// wrong_way_config.local_position = {0.0f, 420.0f};
 	wrong_way_config.sprite_id	   = qb_sp_wrong_way;
 	wrong_way_config.texture_id     = qb_re_t_sprite_general;
-	// factory::character::create_wrong_way(wrong_way_config);
+	// auto wrong_way_info = factory::character::create_wrong_way(wrong_way_config);
+	// Observers
+	// wrong_way_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
+	// wrong_way_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
 
 	//---------------------------------------------------------------------------------
 	// FRIENDS
