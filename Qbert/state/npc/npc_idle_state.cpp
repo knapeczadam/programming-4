@@ -3,7 +3,7 @@
 #include "npc_jumping_state.h"
 #include "component/character/direction_component.h"
 #include "component/player/face_component.h"
-#include "component/state/state_component.h"
+#include "component/state/character_state_component.h"
 #include "minigin/component/rendering/sprite_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
@@ -71,7 +71,7 @@ namespace qbert
                     direction_comp_ptr->set_direction(0, -1);
                 }
             }
-            character_ptr_->component<state_component>()->change_state<npc_jumping_state>(character_ptr_);
+            character_ptr_->component<character_state_component>()->change_state<npc_jumping_state>(character_ptr_);
         }
     }
 }

@@ -36,6 +36,8 @@ namespace mngn
         void render_ui() const;
         void on_disable();
 
+        [[nodiscard]] auto name() const -> std::string const & { return name_; }
+
         auto create_game_object(std::string const &name = "new_game_object") -> game_object *;
         void remove(game_object *game_object_ptr);
         void remove_all();

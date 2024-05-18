@@ -1,9 +1,9 @@
 ﻿#include "fly_component.h"
 
 // Project includes
-#include "component/state/state_component.h"
-#include "minigin/core/game_time.h"
+#include "component/state/character_state_component.h"
 #include "minigin/core/game_object.h"
+#include "minigin/core/game_time.h"
 #include "state/player/flying_state.h"
 #include "state/player/waiting_state.h"
 
@@ -31,7 +31,7 @@ namespace qbert
                 accu_time_ = 0.0f;
 
                 auto root_ptr = owner()->parent();
-                auto player_states = root_ptr->components_in_children<state_component>();
+                auto player_states = root_ptr->components_in_children<character_state_component>();
                 for (auto player_state : player_states)
                 {
                     if (player_state->is_state<flying_state>())

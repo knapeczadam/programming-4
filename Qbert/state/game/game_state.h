@@ -12,7 +12,6 @@ namespace qbert
     {
     public:
         game_state() = default;
-        explicit game_state(mngn::scene *scene_ptr);
         ~game_state() override = default;
 
         game_state(game_state const &other)            = delete;

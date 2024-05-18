@@ -104,4 +104,13 @@ namespace mngn
         }
         return result;
     }
+
+    auto scene_manager::get_scene_by_name(std::string const &name) -> scene *
+    {
+        auto const it = std::ranges::find_if(scenes_, [&name](auto const &scene)
+        {
+            return scene->name() == name;
+        });
+        return it != scenes_.end() ? it->get() : nullptr;
+    }
 }

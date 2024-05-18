@@ -24,7 +24,6 @@
 #include "core/resources.h"
 #include "core/sprites.h"
 #include "input/generic_commands.h"
-#include "ui/ui.h"
 
 #include "minigin/core/engine.h"
 #include "minigin/core/game_object.h"
@@ -45,6 +44,7 @@
 // SDL includes
 #include <SDL.h>
 
+#include "component/state/game_state_component.h"
 #include "component/ui/flicker_component.h"
 #include "core/level_config_manager.h"
 
@@ -72,12 +72,6 @@ void load()
 	init_sprites();
 
 	//---------------------------------------------------------------------------------
-	//
-	//---------------------------------------------------------------------------------
-	load_test_ui();
-	// load_test_menu();
-
-	//---------------------------------------------------------------------------------
 	// FONTS
 	//---------------------------------------------------------------------------------
     auto const font_small = resource_manager::instance().load_font("fonts/Lingua.otf", 10);
@@ -86,15 +80,20 @@ void load()
 	// TEST SCENE
 	//---------------------------------------------------------------------------------
     auto const scene = scene_manager::instance().create_scene("Demo");
+	scene->set_active(false);
     
 	//---------------------------------------------------------------------------------
 	// ROOT
 	//---------------------------------------------------------------------------------
-	auto root_ptr = scene->create_game_object("root");
+	auto root_ptr = scene->create_game_object("game");
 	auto level_manager_comp_ptr = root_ptr->add_component<level_manager_component>();
+	root_ptr->add_component<game_state_component>();
 
+
+	// ---------------------------------------------------------------------------------
+	// LEVEL
+	//---------------------------------------------------------------------------------
 	level_config_manager::instance().load_level_config("../Data/configs/level_config.json");
-	
 	factory::level::level_config_info level_config{};
 	level_config.scene_ptr = scene;
 	level_config.parent_ptr = root_ptr;

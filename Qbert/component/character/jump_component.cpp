@@ -1,14 +1,10 @@
 ﻿#include "jump_component.h"
 
 // Project includes
-#include "component/state/state_component.h"
 #include "component/character/direction_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
 #include "minigin/utility/math.h"
-
-// Standard includes
-#include <iostream>
 
 #include "position_component.h"
 

@@ -2,7 +2,7 @@
 
 // Project includes
 #include "component/character/direction_component.h"
-#include "component/state/state_component.h"
+#include "component/state/character_state_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/scene.h"
 #include "state/player/idle_state.h"
@@ -13,7 +13,7 @@ namespace qbert
 {
     void jump_command::execute()
     {
-        auto player_state_comp_ptr = game_object()->component<state_component>();
+        auto player_state_comp_ptr = game_object()->component<character_state_component>();
         if (player_state_comp_ptr->owner()->scene()->active() and  (player_state_comp_ptr->is_state<start_state>() or player_state_comp_ptr->is_state<idle_state>()))
         {
             auto direction_comp_ptr = game_object()->component<direction_component>();

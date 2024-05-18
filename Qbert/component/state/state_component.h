@@ -8,7 +8,6 @@
 #include <concepts>
 #include <memory>
 
-
 namespace qbert
 {
     // Concepts
@@ -20,13 +19,12 @@ namespace qbert
     public:
         state_component();
         ~state_component() override = default;
-
+        
         state_component(state_component const &other)            = delete;
         state_component(state_component &&other)                 = delete;
         state_component &operator=(state_component const &other) = delete;
         state_component &operator=(state_component &&other)      = delete;
 
-        void start() override;
         void update() override;
 
         template <class T, typename... Args> requires child_state<T>

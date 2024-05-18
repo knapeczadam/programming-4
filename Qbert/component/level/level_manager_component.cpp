@@ -6,7 +6,7 @@
 #include "component/character/position_component.h"
 #include "component/level/disc_component.h"
 #include "component/player/health_component.h"
-#include "component/state/state_component.h"
+#include "component/state/character_state_component.h"
 #include "minigin/core/game_object.h"
 #include "state/npc/npc_dead_state.h"
 #include "state/npc/npc_idle_state.h"
@@ -37,7 +37,7 @@ namespace qbert
             auto const cold_idx = position_comp_ptr->col();
 
             auto character_ptr = position_comp_ptr->owner();
-            auto state_comp_ptr = character_ptr->component<state_component>();
+            auto state_comp_ptr = character_ptr->component<character_state_component>();
             auto direction_comp_ptr = character_ptr->component<direction_component>();
             auto const row_dir = direction_comp_ptr->row();
             auto const col_dir = direction_comp_ptr->col();
@@ -99,23 +99,23 @@ namespace qbert
                 // player is dead
                 if (health_comp_ptr->health() == 0)
                 {
-                    character_ptr->component<state_component>()->change_state<dead_state>(character_ptr);
+                    character_ptr->component<character_state_component>()->change_state<dead_state>(character_ptr);
                 }
                 // player is falling
                 else if (row_idx < 0 or col_idx < 0 or col_idx > row_idx or row_idx >= 7)
                 {
-                    character_ptr->component<state_component>()->change_state<waiting_state>(character_ptr, 1.0f);
+                    character_ptr->component<character_state_component>()->change_state<waiting_state>(character_ptr, 1.0f);
                 }
                 // player is colliding
                 else if (health_comp_ptr->health() != 3)
                 {
-                    character_ptr->component<state_component>()->change_state<swearing_state>(character_ptr);
+                    character_ptr->component<character_state_component>()->change_state<swearing_state>(character_ptr);
                 }
             }
             // npc is dead
             else if (character_ptr->has_tag("npc") and health_comp_ptr->health() == 0)
             {
-                character_ptr->component<state_component>()->change_state<npc_dead_state>(character_ptr);
+                character_ptr->component<character_state_component>()->change_state<npc_dead_state>(character_ptr);
             }
         }
     }

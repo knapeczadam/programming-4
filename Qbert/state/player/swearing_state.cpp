@@ -6,7 +6,7 @@
 #include "component/character/jump_component.h"
 #include "component/player/player_collider_component.h"
 #include "component/character/position_component.h"
-#include "component/state/state_component.h"
+#include "component/state/character_state_component.h"
 #include "idle_state.h"
 
 namespace qbert
@@ -30,7 +30,7 @@ namespace qbert
         {
             is_swearing_ = false;
             accu_time_  = 0.0f;
-            character_ptr_->component<state_component>()->change_state<idle_state>(character_ptr_);
+            character_ptr_->component<character_state_component>()->change_state<idle_state>(character_ptr_);
         }
     }
 

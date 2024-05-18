@@ -34,6 +34,8 @@
     <ClCompile Include="component\player\round_counter_component.cpp" />
     <ClCompile Include="component\player\score_counter_component.cpp" />
     <ClCompile Include="component\player\swear_component.cpp" />
+    <ClCompile Include="component\state\game_state_component.cpp" />
+    <ClCompile Include="component\state\character_state_component.cpp" />
     <ClCompile Include="component\state\state_component.cpp" />
     <ClCompile Include="component\ui\flicker_component.cpp" />
     <ClCompile Include="component\ui\health_display_component.cpp" />
@@ -49,12 +51,16 @@
     <ClCompile Include="input\game_component_commands.cpp" />
     <ClCompile Include="input\game_object_commands.cpp" />
     <ClCompile Include="input\generic_commands.cpp" />
-    <ClCompile Include="level\levels.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="state\character\character_state.cpp" />
+    <ClCompile Include="state\game\duo_state.cpp" />
     <ClCompile Include="state\game\game_state.cpp" />
     <ClCompile Include="state\game\game_over_state.cpp" />
-    <ClCompile Include="state\game\playing_state.cpp" />
+    <ClCompile Include="state\game\loading_state.cpp" />
+    <ClCompile Include="state\game\menu_state.cpp" />
+    <ClCompile Include="state\game\scoreboard_state.cpp" />
+    <ClCompile Include="state\game\solo_state.cpp" />
+    <ClCompile Include="state\game\versus_state.cpp" />
     <ClCompile Include="state\npc\npc_dead_state.cpp" />
     <ClCompile Include="state\npc\npc_jumping_state.cpp" />
     <ClCompile Include="state\npc\npc_idle_state.cpp" />
@@ -67,14 +73,6 @@
     <ClCompile Include="state\player\start_state.cpp" />
     <ClCompile Include="state\player\swearing_state.cpp" />
     <ClCompile Include="state\player\waiting_state.cpp" />
-    <ClCompile Include="state\ui\duo_state.cpp" />
-    <ClCompile Include="state\ui\loading_state.cpp" />
-    <ClCompile Include="state\ui\menu_state.cpp" />
-    <ClCompile Include="state\ui\scoreboard_state.cpp" />
-    <ClCompile Include="state\ui\solo_state.cpp" />
-    <ClCompile Include="state\ui\ui_state.cpp" />
-    <ClCompile Include="state\ui\versus_state.cpp" />
-    <ClCompile Include="ui\ui.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="component\character\direction_component.h" />
@@ -93,6 +91,8 @@
     <ClInclude Include="component\player\round_counter_component.h" />
     <ClInclude Include="component\player\score_counter_component.h" />
     <ClInclude Include="component\player\swear_component.h" />
+    <ClInclude Include="component\state\game_state_component.h" />
+    <ClInclude Include="component\state\character_state_component.h" />
     <ClInclude Include="component\state\state_component.h" />
     <ClInclude Include="component\ui\flicker_component.h" />
     <ClInclude Include="component\ui\health_display_component.h" />
@@ -108,11 +108,15 @@
     <ClInclude Include="input\game_component_commands.h" />
     <ClInclude Include="input\game_object_commands.h" />
     <ClInclude Include="input\generic_commands.h" />
-    <ClInclude Include="level\levels.h" />
     <ClInclude Include="state\character\character_state.h" />
+    <ClInclude Include="state\game\duo_state.h" />
     <ClInclude Include="state\game\game_state.h" />
     <ClInclude Include="state\game\game_over_state.h" />
-    <ClInclude Include="state\game\playing_state.h" />
+    <ClInclude Include="state\game\loading_state.h" />
+    <ClInclude Include="state\game\menu_state.h" />
+    <ClInclude Include="state\game\scoreboard_state.h" />
+    <ClInclude Include="state\game\solo_state.h" />
+    <ClInclude Include="state\game\versus_state.h" />
     <ClInclude Include="state\npc\npc_dead_state.h" />
     <ClInclude Include="state\state.h" />
     <ClInclude Include="state\npc\npc_jumping_state.h" />
@@ -127,14 +131,6 @@
     <ClInclude Include="state\player\start_state.h" />
     <ClInclude Include="state\player\swearing_state.h" />
     <ClInclude Include="state\player\waiting_state.h" />
-    <ClInclude Include="state\ui\duo_state.h" />
-    <ClInclude Include="state\ui\loading_state.h" />
-    <ClInclude Include="state\ui\menu_state.h" />
-    <ClInclude Include="state\ui\scoreboard_state.h" />
-    <ClInclude Include="state\ui\solo_state.h" />
-    <ClInclude Include="state\ui\ui_state.h" />
-    <ClInclude Include="state\ui\versus_state.h" />
-    <ClInclude Include="ui\ui.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

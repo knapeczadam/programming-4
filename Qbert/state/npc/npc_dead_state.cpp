@@ -5,7 +5,7 @@
 #include "component/character/jump_component.h"
 #include "component/character/position_component.h"
 #include "component/player/health_component.h"
-#include "component/state/state_component.h"
+#include "component/state/character_state_component.h"
 #include "minigin/core/game_object.h"
 
 namespace qbert
@@ -33,6 +33,6 @@ namespace qbert
             character_ptr_->component<position_component>()->reset(6, 6);
         }
         
-        character_ptr_->component<state_component>()->change_state<npc_spawning_state>(character_ptr_);
+        character_ptr_->component<character_state_component>()->change_state<npc_spawning_state>(character_ptr_);
     }
 }

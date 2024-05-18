@@ -2,7 +2,7 @@
 
 // Project includes
 #include "start_state.h"
-#include "component/state/state_component.h"
+#include "component/state/character_state_component.h"
 #include "component/character/position_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
@@ -20,7 +20,7 @@ namespace qbert
         accu_time_ += mngn::game_time::instance().delta_time;
         if (accu_time_ >= waiting_time_)
         {
-            character_ptr_->component<state_component>()->change_state<start_state>(character_ptr_);
+            character_ptr_->component<character_state_component>()->change_state<start_state>(character_ptr_);
             accu_time_ = 0.0f;
         }
     }

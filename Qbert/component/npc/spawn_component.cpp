@@ -2,13 +2,9 @@
 
 // Project includes
 #include "component/character/position_component.h"
-#include "component/state/state_component.h"
-#include "minigin/core/game_time.h"
+#include "component/state/character_state_component.h"
 #include "minigin/core/game_object.h"
-#include "state/npc/npc_idle_state.h"
-
-// Standard includes
-#include <iostream>
+#include "minigin/core/game_time.h"
 
 namespace qbert
 {

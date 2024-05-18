@@ -12,7 +12,7 @@
 #include "component/character/jump_component.h"
 #include "component/player/level_counter_component.h"
 #include "component/player/player_collider_component.h"
-#include "component/state/state_component.h"
+#include "component/state/character_state_component.h"
 #include "component/character/position_component.h"
 #include "component/player/round_counter_component.h"
 #include "component/player/score_counter_component.h"
@@ -46,9 +46,9 @@ namespace qbert
         info.go_ptr->add_tag("player");
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
+        info.go_ptr->add_component<character_state_component>();
         info.go_ptr->add_component<jump_component>();
         info.go_ptr->add_component<face_component>();
-        info.go_ptr->add_component<state_component>();
         info.go_ptr->add_component<fall_component>();
         info.go_ptr->add_component<swear_component>();
         info.go_ptr->add_component<direction_component>();
@@ -106,7 +106,7 @@ namespace qbert
         info.go_ptr->add_tags({"npc", "enemy", "ball", "down"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
-        info.go_ptr->add_component<state_component>();
+        info.go_ptr->add_component<character_state_component>();
         info.go_ptr->add_component<direction_component>();
         info.go_ptr->add_component<jump_component>();
         info.go_ptr->add_component<spawn_component>();
@@ -125,7 +125,7 @@ namespace qbert
         info.go_ptr->add_tags({"npc", "friend", "ball", "down"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
-        info.go_ptr->add_component<state_component>();
+        info.go_ptr->add_component<character_state_component>();
         info.go_ptr->add_component<direction_component>();
         info.go_ptr->add_component<jump_component>();
         info.go_ptr->add_component<spawn_component>();
@@ -144,7 +144,7 @@ namespace qbert
         info.go_ptr->add_tags({"npc", "enemy", "ball", "down"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
-        info.go_ptr->add_component<state_component>();
+        info.go_ptr->add_component<character_state_component>();
         info.go_ptr->add_component<direction_component>();
         info.go_ptr->add_component<jump_component>();
         info.go_ptr->add_component<face_component>();
@@ -164,7 +164,7 @@ namespace qbert
         info.go_ptr->add_tags({"npc", "enemy", "right"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
-        info.go_ptr->add_component<state_component>();
+        info.go_ptr->add_component<character_state_component>();
         info.go_ptr->add_component<direction_component>();
         info.go_ptr->add_component<jump_component>();
         info.go_ptr->add_component<face_component>();
@@ -184,7 +184,7 @@ namespace qbert
         info.go_ptr->add_tags({"npc", "enemy", "left"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
-        info.go_ptr->add_component<state_component>();
+        info.go_ptr->add_component<character_state_component>();
         info.go_ptr->add_component<direction_component>();
         info.go_ptr->add_component<jump_component>();
         info.go_ptr->add_component<face_component>();
@@ -204,7 +204,7 @@ namespace qbert
         info.go_ptr->add_tags({"npc", "friend", "down"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
-        info.go_ptr->add_component<state_component>();
+        info.go_ptr->add_component<character_state_component>();
         info.go_ptr->add_component<direction_component>();
         info.go_ptr->add_component<jump_component>();
         info.go_ptr->add_component<face_component>();
@@ -224,7 +224,7 @@ namespace qbert
         info.go_ptr->add_tags({"npc", "friend", "down"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
-        info.go_ptr->add_component<state_component>();
+        info.go_ptr->add_component<character_state_component>();
         info.go_ptr->add_component<direction_component>();
         info.go_ptr->add_component<jump_component>();
         info.go_ptr->add_component<face_component>();
@@ -314,14 +314,21 @@ namespace qbert
                 cube_config.scene_ptr  = config.scene_ptr;
                 cube_config.parent_ptr = config.parent_ptr;
                 cube_config.texture_id = config.cube_config.texture_id;
-                cube_config.color_1    = level_config["color_1"];
-                cube_config.color_2    = level_config["color_2"];
-                if (level_config.contains("color_3")) cube_config.color_3 = level_config["color_3"];
-                if (level_config.contains("revertible")) cube_config.revertible = level_config["revertible"];
+                cube_config.color_1    = level_config["cube_color_1"];
+                cube_config.color_2    = level_config["cube_color_2"];
+                if (level_config.contains("cube_color_3")) cube_config.color_3 = level_config["cube_color_3"];
+                if (level_config.contains("cube_revertible")) cube_config.revertible = level_config["cube_revertible"];
                 info.cube_info = create_cubes(cube_config);
 
+                ui::sprite_config_info sprite_config{};
+                sprite_config.scene_ptr      = config.scene_ptr;
+                sprite_config.parent_ptr     = config.parent_ptr;
+                sprite_config.name           = "cube_color_small";
+                sprite_config.local_position = {64, 96};
+                sprite_config.sprite_id      = level_config["cube_color_small"];
+                ui::create_sprite(sprite_config);
 
-                int num_of_disks = level_config["number_of_disks"];
+                int num_of_disks = level_config["disk_count"];
                 for (int i = 0; i < num_of_disks; ++i)
                 {
                     disc_config_info disc_config{};
