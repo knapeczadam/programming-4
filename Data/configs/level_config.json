@@ -1,0 +1,40 @@
+{
+  "levels": [
+    {
+      "id": 1,
+      "_comment": "Number of colors: 54. Index starts at 11. Number of disks: 18. Index starts at 1111. Numbering is from top to bottom, left to right, column by column.",
+      "color_1": 11,
+      "color_2": 12,
+      "number_of_disks": 2,
+      "disk_color": 1111,
+      "disk_positions": [
+        6,-1,
+        2,3
+      ]
+    },
+    {
+      "id": 2,
+      "color_1": 21,
+      "color_2": 22,
+      "reversible": true,
+      "number_of_disks": 2,
+      "disk_color": 2221,
+      "disk_positions": [
+        3,-1,
+        3,4
+      ]
+    },
+    {
+      "id": 3,
+      "color_1": 31,
+      "color_2": 32,
+      "color_3": 33,
+      "number_of_disks": 2,
+      "disk_color": 3331,
+      "disk_positions": [
+        3,-1,
+        3,4
+      ]
+    }
+  ]
+}

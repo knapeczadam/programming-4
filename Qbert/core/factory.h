@@ -8,6 +8,9 @@
 #include <optional>
 #include <glm/glm.hpp>
 
+// JSON includes
+#include "json.hpp"
+
 // Forward declarations
 namespace mngn
 {
@@ -35,6 +38,9 @@ namespace qbert
     class round_display_component;
     class cube_component;
     class player_collider_component;
+    
+    // Aliases
+    using json = nlohmann::json;
     
     struct factory
     {
@@ -164,6 +170,22 @@ namespace qbert
             };
 
             static auto create_cubes(cube_config_info const &config) -> cube_info;
+
+            // Level
+            struct level_config_info : config_info
+            {
+                int              level_id;
+                json             level_config;
+                cube_config_info cube_config;
+                disc_config_info disc_config;
+            };
+
+            struct level_info
+            {
+                mngn::scene *scene_ptr;
+                cube_info    cube_info;
+            };
+            static auto create_level(level_config_info const &config) -> level_info;
         };
 
         struct ui

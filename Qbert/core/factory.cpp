@@ -1,6 +1,7 @@
 ﻿#include "factory.h"
 
 // Project includes
+#include "level_config_manager.h"
 #include "sprites.h"
 #include "component/level/cube_component.h"
 #include "component/level/disc_component.h"
@@ -297,6 +298,46 @@ namespace qbert
         }
 
         info.cube_components = cube_components;
+        return info;
+    }
+
+    auto factory::level::create_level(level_config_info const &config) -> level_info
+    {
+        level_info info{};
+        info.scene_ptr = config.scene_ptr;
+        
+        for (auto const &level_config : config.level_config["levels"])
+        {
+            if (level_config["id"] == config.level_id)
+            {
+                cube_config_info cube_config{};
+                cube_config.scene_ptr  = config.scene_ptr;
+                cube_config.parent_ptr = config.parent_ptr;
+                cube_config.texture_id = config.cube_config.texture_id;
+                cube_config.color_1    = level_config["color_1"];
+                cube_config.color_2    = level_config["color_2"];
+                if (level_config.contains("color_3")) cube_config.color_3 = level_config["color_3"];
+                if (level_config.contains("revertible")) cube_config.revertible = level_config["revertible"];
+                info.cube_info = create_cubes(cube_config);
+
+
+                int num_of_disks = level_config["number_of_disks"];
+                for (int i = 0; i < num_of_disks; ++i)
+                {
+                    disc_config_info disc_config{};
+                    disc_config.scene_ptr  = config.scene_ptr;
+                    disc_config.parent_ptr = config.parent_ptr;
+                    disc_config.name       = "disc_" + std::to_string(i);
+                    disc_config.sprite_id  = level_config["disk_color"];
+                    disc_config.texture_id = config.disc_config.texture_id;
+
+                    auto disk_positions = level_config["disk_positions"];
+                    disc_config.row_idx  = disk_positions[i * 2];
+                    disc_config.col_idx  = disk_positions[i * 2 + 1];
+                    create_disc(disc_config);
+                }
+            }
+        }
         return info;
     }
 

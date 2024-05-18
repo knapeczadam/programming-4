@@ -59,7 +59,7 @@ namespace qbert
         
         sprite_config.name           = "small_cube";
         sprite_config.local_position = {64, 96};
-        sprite_config.sprite_id      = qb_sp_level_1_red_cube_small;
+        sprite_config.sprite_id      = qb_sp_level_1_cube_1_small;
         factory::ui::create_sprite(sprite_config);
         
         factory::ui::arrow_config_info arrow_config{};

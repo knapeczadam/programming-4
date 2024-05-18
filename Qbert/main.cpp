@@ -46,6 +46,7 @@
 #include <SDL.h>
 
 #include "component/ui/flicker_component.h"
+#include "core/level_config_manager.h"
 
 
 void register_services()
@@ -85,14 +86,21 @@ void load()
 	// TEST SCENE
 	//---------------------------------------------------------------------------------
     auto const scene = scene_manager::instance().create_scene("Demo");
-	// scene->set_active(false);
     
 	//---------------------------------------------------------------------------------
 	// ROOT
 	//---------------------------------------------------------------------------------
 	auto root_ptr = scene->create_game_object("root");
 	auto level_manager_comp_ptr = root_ptr->add_component<level_manager_component>();
-	// root_ptr->add_component<state_component>(scene);
+
+	level_config_manager::instance().load_level_config("../Data/configs/level_config.json");
+	
+	factory::level::level_config_info level_config{};
+	level_config.scene_ptr = scene;
+	level_config.parent_ptr = root_ptr;
+	level_config.level_id = 1;
+	level_config.level_config = level_config_manager::instance().get_level_config();
+	auto level_info = factory::level::create_level(level_config);
 
 	//---------------------------------------------------------------------------------
     // FPS
@@ -106,19 +114,6 @@ void load()
 	fps_config.text		      = "FPS: ";
 	factory::ui::create_fps(fps_config);
 
-	//---------------------------------------------------------------------------------
-	// CUBES
-	//---------------------------------------------------------------------------------
-	factory::level::cube_config_info cube_config{};
-	cube_config.scene_ptr  = scene;
-	cube_config.parent_ptr = root_ptr;
-	cube_config.texture_id = qb_re_t_sprite_general;
-	cube_config.color_1    = qb_sp_level_1_blue_cube_1;
-	cube_config.color_2    = qb_sp_level_1_red_cube_1;
-	cube_config.color_3    = qb_sp_level_1_yellow_cube_1;
-	cube_config.revertible = false;
-	auto cube_components = factory::level::create_cubes(cube_config);
-	
 	//---------------------------------------------------------------------------------
 	// UI
 	//---------------------------------------------------------------------------------
@@ -177,29 +172,6 @@ void load()
 	text_config.text           = "game over";
 	factory::ui::create_flickering_text(text_config);
 
-	//---------------------------------------------------------------------------------
-	// DISCS
-	//---------------------------------------------------------------------------------
-	factory::level::disc_config_info disc_config{};
-	disc_config.scene_ptr  = scene;
-	disc_config.parent_ptr = root_ptr;
-	disc_config.name       = "disc_1";
-	disc_config.sprite_id  = qb_sp_level_1_disk_1;
-	disc_config.texture_id = qb_re_t_sprite_general;
-	disc_config.row_idx    = 6;
-	disc_config.col_idx    = -1;
-	factory::level::create_disc(disc_config);
-
-	factory::level::disc_config_info disc_config_2{};
-	disc_config_2.scene_ptr  = scene;
-	disc_config_2.parent_ptr = root_ptr;
-	disc_config_2.name       = "disc_2";
-	disc_config_2.sprite_id  = qb_sp_level_1_disk_2;
-	disc_config_2.texture_id = qb_re_t_sprite_general;
-	disc_config_2.row_idx    = 2;
-	disc_config_2.col_idx    = 3;
-	factory::level::create_disc(disc_config_2);
-	
     //---------------------------------------------------------------------------------
     // PLAYER 1
     //---------------------------------------------------------------------------------
@@ -208,7 +180,7 @@ void load()
 	player_1_config.parent_ptr        = root_ptr;
 	player_1_config.name              = "player_1";
 	player_1_config.local_position    = {224.0f, 84.0f};
-	player_1_config.sprite_id         = qb_sp_qbert_1;
+	player_1_config.sprite_id         = qb_sp_qbert_player_1;
 	player_1_config.texture_id        = qb_re_t_sprite_general;
 	player_1_config.row_idx           = 0;
 	player_1_config.col_idx           = 0;
@@ -229,7 +201,7 @@ void load()
 	player_1_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
 	player_1_info.level_counter_comp_ptr->add_observer(level_display_info.level_display_comp_ptr);
 	player_1_info.round_counter_comp_ptr->add_observer(round_display_info.round_display_comp_ptr);
-	std::ranges::for_each(cube_components.cube_components, [player_1_info](auto cube_comp_ptr) { player_1_info.position_comp_ptr->add_observer(cube_comp_ptr); });
+	std::ranges::for_each(level_info.cube_info.cube_components, [player_1_info](auto cube_comp_ptr) { player_1_info.position_comp_ptr->add_observer(cube_comp_ptr); });
 
     //---------------------------------------------------------------------------------
     // PLAYER 2
@@ -239,7 +211,7 @@ void load()
 	player_2_config.parent_ptr  = root_ptr;
 	player_2_config.name           = "player_2";
 	player_2_config.local_position = {32.0f, 372.0f};
-	player_2_config.sprite_id      = qb_sp_qbert_2;
+	player_2_config.sprite_id      = qb_sp_qbert_player_2;
 	player_2_config.texture_id     = qb_re_t_sprite_general;
 	player_2_config.row_idx        = 6;
 	player_2_config.col_idx        = 0;
@@ -253,7 +225,7 @@ void load()
     player_2_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
 	player_2_info.score_counter_comp_ptr->add_observer(score_display_info_2.score_display_comp_ptr);
 	player_2_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
-	std::ranges::for_each(cube_components.cube_components, [player_2_info](auto cube_comp_ptr) { player_2_info.position_comp_ptr->add_observer(cube_comp_ptr); });
+	std::ranges::for_each(level_info.cube_info.cube_components, [player_2_info](auto cube_comp_ptr) { player_2_info.position_comp_ptr->add_observer(cube_comp_ptr); });
 
 	//---------------------------------------------------------------------------------
 	// ENEMY
@@ -332,7 +304,7 @@ void load()
 	// Observers
 	slick_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
 	slick_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
-	std::ranges::for_each(cube_components.cube_components, [slick_info](auto cube_comp_ptr) { slick_info.position_comp_ptr->add_observer(cube_comp_ptr); });
+	std::ranges::for_each(level_info.cube_info.cube_components, [slick_info](auto cube_comp_ptr) { slick_info.position_comp_ptr->add_observer(cube_comp_ptr); });
 
 	// Sam
 	factory::character::sam_config_info sam_config{};
@@ -345,7 +317,7 @@ void load()
 	// Observers
 	sam_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
 	sam_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
-	std::ranges::for_each(cube_components.cube_components, [sam_info](auto cube_comp_ptr) { sam_info.position_comp_ptr->add_observer(cube_comp_ptr); });
+	std::ranges::for_each(level_info.cube_info.cube_components, [sam_info](auto cube_comp_ptr) { sam_info.position_comp_ptr->add_observer(cube_comp_ptr); });
 
 	//---------------------------------------------------------------------------------
 	// DEBUG
