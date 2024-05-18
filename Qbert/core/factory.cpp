@@ -23,6 +23,8 @@
 #include "component/ui/score_display_component.h"
 #include "component/character/direction_component.h"
 #include "component/npc/spawn_component.h"
+#include "component/ui/alphabet_component.h"
+#include "component/ui/number_component.h"
 #include "input/game_object_commands.h"
 #include "minigin/component/debug/fps_component.h"
 #include "minigin/component/rendering/sprite_component.h"
@@ -319,7 +321,8 @@ namespace qbert
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<mngn::multisprite_ui_component>();
-        info.score_display_comp_ptr = info.go_ptr->add_component<score_display_component>(config.sprite_id, config.texture_id);
+        info.go_ptr->add_component<number_component>(0, config.sprite_id, config.texture_id);
+        info.score_display_comp_ptr = info.go_ptr->add_component<score_display_component>();
         return info;
     }
 
@@ -379,6 +382,37 @@ namespace qbert
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<mngn::sprite_ui_component>(config.sprite_id, config.texture_id);
         info.go_ptr->add_component<flicker_component>(config.delay);
+        return info;
+    }
+
+    auto factory::ui::create_text(text_config_info const &config) -> text_info
+    {
+        text_info info{};
+        info.go_ptr = config.scene_ptr->create_game_object(config.name);
+        info.go_ptr->add_tag("ui");
+        info.go_ptr->set_parent(config.parent_ptr);
+        info.go_ptr->set_local_position(config.local_position);
+        info.go_ptr->add_component<mngn::multisprite_ui_component>();
+        info.go_ptr->add_component<alphabet_component>(config.text, config.sprite_id, config.texture_id, config.space_sprite_id, config.space_texture_id);
+        return info;
+    }
+
+    auto factory::ui::create_flickering_text(text_config_info const &config) -> text_info
+    {
+        auto info = create_text(config);
+        info.go_ptr->add_component<flicker_component>();
+        return info;
+    }
+
+    auto factory::ui::create_number(number_config_info const &config) -> number_info
+    {
+        number_info info{};
+        info.go_ptr = config.scene_ptr->create_game_object(config.name);
+        info.go_ptr->add_tag("ui");
+        info.go_ptr->set_parent(config.parent_ptr);
+        info.go_ptr->set_local_position(config.local_position);
+        info.go_ptr->add_component<mngn::multisprite_ui_component>();
+        info.go_ptr->add_component<number_component>(config.number, config.sprite_id, config.texture_id);
         return info;
     }
 }

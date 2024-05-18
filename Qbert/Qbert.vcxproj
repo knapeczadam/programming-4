@@ -38,8 +38,10 @@
     <ClCompile Include="component\ui\flicker_component.cpp" />
     <ClCompile Include="component\ui\health_display_component.cpp" />
     <ClCompile Include="component\ui\level_display_component.cpp" />
+    <ClCompile Include="component\ui\number_component.cpp" />
     <ClCompile Include="component\ui\round_display_component.cpp" />
     <ClCompile Include="component\ui\score_display_component.cpp" />
+    <ClCompile Include="component\ui\alphabet_component.cpp" />
     <ClCompile Include="core\factory.cpp" />
     <ClCompile Include="core\resources.cpp" />
     <ClCompile Include="core\sprites.cpp" />
@@ -94,8 +96,10 @@
     <ClInclude Include="component\ui\flicker_component.h" />
     <ClInclude Include="component\ui\health_display_component.h" />
     <ClInclude Include="component\ui\level_display_component.h" />
+    <ClInclude Include="component\ui\number_component.h" />
     <ClInclude Include="component\ui\round_display_component.h" />
     <ClInclude Include="component\ui\score_display_component.h" />
+    <ClInclude Include="component\ui\alphabet_component.h" />
     <ClInclude Include="core\factory.h" />
     <ClInclude Include="core\resources.h" />
     <ClInclude Include="core\sprites.h" />

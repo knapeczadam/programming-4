@@ -45,6 +45,8 @@
 // SDL includes
 #include <SDL.h>
 
+#include "component/ui/flicker_component.h"
+
 
 void register_services()
 {
@@ -72,6 +74,7 @@ void load()
 	//
 	//---------------------------------------------------------------------------------
 	load_test_ui();
+	// load_test_menu();
 
 	//---------------------------------------------------------------------------------
 	// FONTS
@@ -82,6 +85,7 @@ void load()
 	// TEST SCENE
 	//---------------------------------------------------------------------------------
     auto const scene = scene_manager::instance().create_scene("Demo");
+	// scene->set_active(false);
     
 	//---------------------------------------------------------------------------------
 	// ROOT
@@ -160,6 +164,18 @@ void load()
 	round_display_config.sprite_id      = qb_sp_numbers_regular_orange;
 	round_display_config.texture_id     = qb_re_t_sprite_general;
 	auto round_display_info = factory::ui::create_round_display(round_display_config);
+
+	factory::ui::text_config_info text_config{};
+	text_config.scene_ptr      = scene;
+	text_config.parent_ptr     = root_ptr;
+	text_config.name           = "text_1";
+	text_config.local_position = {176.0f, 288.0f};
+	text_config.sprite_id      = qb_sp_alphabet_regular_purple;
+	text_config.texture_id     = qb_re_t_sprite_general;
+	text_config.space_sprite_id = qb_sp_alphabet_regular_space;
+	text_config.space_texture_id = qb_re_t_sprite_general;
+	text_config.text           = "game over";
+	factory::ui::create_flickering_text(text_config);
 
 	//---------------------------------------------------------------------------------
 	// DISCS

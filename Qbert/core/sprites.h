@@ -26,6 +26,7 @@ namespace qbert
         qb_sp_alphabet_regular_green,
         qb_sp_alphabet_regular_purple,
         qb_sp_alphabet_bold_orange,
+        qb_sp_alphabet_regular_space,
         
         qb_sp_text_orange_player,
         qb_sp_text_purple_player,

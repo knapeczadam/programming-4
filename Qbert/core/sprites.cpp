@@ -32,6 +32,7 @@ namespace qbert
             .add_sprite_pair(qb_sp_numbers_bold_pink, "numbers_bold_pink")
             .add_sprite_pair(qb_sp_alphabet_regular_green, "alphabet_regular_green")
             .add_sprite_pair(qb_sp_alphabet_regular_purple, "alphabet_regular_purple")
+            .add_sprite_pair(qb_sp_alphabet_regular_space, "alphabet_regular_space")
             .add_sprite_pair(qb_sp_alphabet_bold_orange, "alphabet_bold_orange")
             .add_sprite_pair(qb_sp_text_orange_player, "text_orange_player")
             .add_sprite_pair(qb_sp_text_purple_player, "text_purple_player")

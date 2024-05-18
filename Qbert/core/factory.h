@@ -24,10 +24,6 @@ namespace mngn
 namespace qbert
 {
     // Forward declarations
-    enum qbert_resource : int;
-    enum qbert_sprite   : int;
-    
-    
     class position_component;
     class health_component;
     class health_display_component;
@@ -48,8 +44,8 @@ namespace qbert
             mngn::game_object *parent_ptr;
             std::string       name;
             glm::vec2         local_position;
-            qbert_resource    texture_id;
-            qbert_sprite      sprite_id;
+            int               texture_id;
+            int               sprite_id;
         };
 
         struct info
@@ -156,10 +152,10 @@ namespace qbert
             // Cube
             struct cube_config_info : config_info
             {
-                qbert_sprite                color_1;
-                qbert_sprite                color_2;
-                std::optional<qbert_sprite> color_3;
-                bool                        revertible;
+                int                color_1;
+                int                color_2;
+                std::optional<int> color_3;
+                bool               revertible;
             };
 
             struct cube_info : info
@@ -239,6 +235,31 @@ namespace qbert
             struct arrow_info : info { };
 
             static auto create_arrow(arrow_config_info const &config) -> arrow_info;
+
+            // Text
+            struct text_config_info : config_info
+            {
+                std::string text;
+                int         space_sprite_id;
+                int         space_texture_id;
+                
+            };
+
+            struct text_info : info { };
+
+            static auto create_text(text_config_info const &config) -> text_info;
+            static auto create_flickering_text(text_config_info const &config) -> text_info;
+
+            // Number
+            struct number_config_info : config_info
+            {
+                int number;
+            };
+
+            struct number_info : info { };
+
+            static auto create_number(number_config_info const &config) -> number_info;
         };
+
     };
 }

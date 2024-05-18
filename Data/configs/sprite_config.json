@@ -170,6 +170,14 @@
       "scale": 2
     },
     {
+      "id": "alphabet_regular_space",
+      "rows": 48,
+      "columns": 90,
+      "left_offset_columns": 29,
+      "top_offset_rows": 4,
+      "scale": 2
+    },
+    {
       "id": "text_orange_player",
       "rows": 48,
       "columns": 90,
