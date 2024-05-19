@@ -38,8 +38,8 @@ namespace mngn
         void on_disable();
         
         auto create_scene(std::string const &name) -> scene *;
-        [[nodiscard]] auto find_game_objects_with_tag(std::string const &tag) const -> std::vector<game_object*>;
-        [[nodiscard]] auto get_scene_by_name(std::string const &name) -> scene *;
+        [[nodiscard]] auto find(std::string const &name) -> scene *;
+        [[nodiscard]] auto find_with_tag(std::string const &tag) const -> scene *;
 
     private:
         friend class singleton<scene_manager>;

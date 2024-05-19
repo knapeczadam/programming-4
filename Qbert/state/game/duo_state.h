@@ -17,6 +17,5 @@ namespace qbert
         duo_state &operator=(duo_state &&other)      = delete;
 
         void on_enter() override;
-        void on_exit() override;
     };
 }

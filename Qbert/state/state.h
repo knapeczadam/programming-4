@@ -13,8 +13,8 @@ namespace qbert
         state &operator=(state const &other) = delete;
         state &operator=(state &&other)      = delete;
 
-        virtual void on_enter() { }
-        virtual void update()   { }
-        virtual void on_exit()  { }
+        virtual void on_enter() = 0;
+        virtual void update()   = 0;
+        virtual void on_exit()  = 0;
     };
 }

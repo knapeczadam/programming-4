@@ -17,6 +17,11 @@ namespace qbert
         scoreboard_state &operator=(scoreboard_state &&other)      = delete;
 
         void on_enter() override;
+        void update() override;
         void on_exit() override;
+
+    private:
+        float scoreboard_time_ = 5.0f;
+        float accu_time_       = 0.0f;
     };
 }

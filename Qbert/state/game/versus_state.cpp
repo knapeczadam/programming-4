@@ -14,12 +14,8 @@ namespace qbert
 
     void versus_state::on_enter()
     {
-        scene_ptr_ = mngn::scene_manager::instance().get_scene_by_name("versus");
+        scene_ptr_ = mngn::scene_manager::instance().find("versus");
+        scene_ptr_->set_tag("current");
         scene_ptr_->set_active(true);
-    }
-
-    void versus_state::on_exit()
-    {
-        scene_ptr_->set_active(false);
     }
 }

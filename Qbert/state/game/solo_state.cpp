@@ -14,12 +14,8 @@ namespace qbert
 
     void solo_state::on_enter()
     {
-        scene_ptr_ = mngn::scene_manager::instance().get_scene_by_name("solo");
+        scene_ptr_ = mngn::scene_manager::instance().find("solo");
+        scene_ptr_->set_tag("current");
         scene_ptr_->set_active(true);
-    }
-
-    void solo_state::on_exit()
-    {
-        scene_ptr_->set_active(false);
     }
 }

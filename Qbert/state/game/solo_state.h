@@ -17,6 +17,5 @@ namespace qbert
         solo_state &operator=(solo_state &&other)      = delete;
 
         void on_enter() override;
-        void on_exit() override;
     };
 }

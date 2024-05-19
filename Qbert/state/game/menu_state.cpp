@@ -16,7 +16,7 @@ namespace qbert
 
     void menu_state::on_enter()
     {
-        scene_ptr_ = mngn::scene_manager::instance().get_scene_by_name("menu");
+        scene_ptr_ = mngn::scene_manager::instance().find("menu");
         scene_ptr_->set_active(true);
     }
 

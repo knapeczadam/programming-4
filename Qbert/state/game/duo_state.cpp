@@ -14,12 +14,8 @@ namespace qbert
 
     void duo_state::on_enter()
     {
-        scene_ptr_ = mngn::scene_manager::instance().get_scene_by_name("duo");
+        scene_ptr_ = mngn::scene_manager::instance().find("duo");
+        scene_ptr_->set_tag("current");
         scene_ptr_->set_active(true);
-    }
-
-    void duo_state::on_exit()
-    {
-        scene_ptr_->set_active(false);
     }
 }

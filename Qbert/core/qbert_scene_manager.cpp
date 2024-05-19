@@ -65,7 +65,7 @@ namespace qbert
     void qbert_scene_manager::load_game_state_scene()
     {
 		auto const scene_ptr = mngn::scene_manager::instance().create_scene("game_state");
-	    auto go_ptr = scene_ptr->create_game_object();
+	    auto go_ptr = scene_ptr->create_game_object("game_state");
 	    auto game_state_comp_ptr = go_ptr->add_component<game_state_component>();
 
 	    auto solo_command = std::make_unique<game_mode_command>(game_state_comp_ptr, 0);
@@ -286,6 +286,251 @@ namespace qbert
 		score_display_config.texture_id     = qb_re_t_sprite_general;
 		auto score_display_info_1 = factory::ui::create_score_display(score_display_config);
 	
+		factory::ui::health_display_config_info health_display_config{};
+		health_display_config.scene_ptr      = scene_ptr;
+		health_display_config.parent_ptr     = root_ptr;
+		health_display_config.name           = "health_1";
+		health_display_config.local_position = {16.0f, 160.0f};
+		auto heal_display_info_1 = factory::ui::create_health_display(health_display_config);
+	
+		factory::ui::level_display_config_info level_display_config{};
+		level_display_config.scene_ptr      = scene_ptr;
+		level_display_config.parent_ptr     = root_ptr;
+		level_display_config.name           = "numbers_level";
+		level_display_config.local_position = {432.0f, 80.0f};
+		level_display_config.sprite_id      = qb_sp_numbers_regular_orange;
+		level_display_config.texture_id     = qb_re_t_sprite_general;
+		auto level_display_info = factory::ui::create_level_display(level_display_config);
+
+		factory::ui::round_display_config_info round_display_config{};
+		round_display_config.scene_ptr      = scene_ptr;
+		round_display_config.parent_ptr     = root_ptr;
+		round_display_config.name           = "round";
+		round_display_config.local_position = {432.0f, 96.0f};
+		round_display_config.sprite_id      = qb_sp_numbers_regular_orange;
+		round_display_config.texture_id     = qb_re_t_sprite_general;
+		auto round_display_info = factory::ui::create_round_display(round_display_config);
+
+        // ---------------------------------------------------------------------------------
+        // LEVEL
+        //---------------------------------------------------------------------------------
+        factory::level::level_config_info level_config{};
+        level_config.scene_ptr    = scene_ptr;
+        level_config.parent_ptr   = root_ptr;
+        level_config.level_id     = 1;
+        level_config.level_config = level_config_manager::instance().get_level_config();
+        auto level_info = factory::level::create_level(level_config);
+
+		//---------------------------------------------------------------------------------
+		// PLAYER 1
+		//---------------------------------------------------------------------------------
+		factory::character::player_config_info player_1_config{};
+		player_1_config.scene_ptr         = scene_ptr;
+		player_1_config.parent_ptr        = root_ptr;
+		player_1_config.name              = "player_1";
+		player_1_config.local_position    = {224.0f, 84.0f};
+		player_1_config.sprite_id         = qb_sp_qbert_player_1;
+		player_1_config.texture_id        = qb_re_t_sprite_general;
+		player_1_config.row_idx           = 0;
+		player_1_config.col_idx           = 0;
+		player_1_config.left_command      = {mngn::input_type::keyboard, mngn::input_state::down, mngn::k_left};
+		player_1_config.right_command     = {mngn::input_type::keyboard, mngn::input_state::down, mngn::k_right};
+		player_1_config.up_command        = {mngn::input_type::keyboard, mngn::input_state::down, mngn::k_up};
+		player_1_config.down_command      = {mngn::input_type::keyboard, mngn::input_state::down, mngn::k_down};
+		player_1_config.left_command_alt  = {mngn::input_type::controller, mngn::input_state::pressed, mngn::c_left};
+		player_1_config.right_command_alt = {mngn::input_type::controller, mngn::input_state::pressed, mngn::c_right};
+		player_1_config.up_command_alt    = {mngn::input_type::controller, mngn::input_state::pressed, mngn::c_up};
+		player_1_config.down_command_alt  = {mngn::input_type::controller, mngn::input_state::pressed, mngn::c_down};
+		// Observers
+		auto player_1_info = factory::character::create_player(player_1_config);
+		mngn::collision_manager::instance().register_collider(player_1_info.collider_comp_ptr);
+		player_1_info.health_comp_ptr->add_observer(heal_display_info_1.health_display_comp_ptr);
+		player_1_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
+		player_1_info.score_counter_comp_ptr->add_observer(score_display_info_1.score_display_comp_ptr);
+		player_1_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
+		player_1_info.level_counter_comp_ptr->add_observer(level_display_info.level_display_comp_ptr);
+		player_1_info.round_counter_comp_ptr->add_observer(round_display_info.round_display_comp_ptr);
+		std::ranges::for_each(level_info.cube_info.cube_components, [player_1_info](auto cube_comp_ptr) { player_1_info.position_comp_ptr->add_observer(cube_comp_ptr); });
+
+		//---------------------------------------------------------------------------------
+		// ENEMY
+		//---------------------------------------------------------------------------------
+		// Red Ball
+		factory::character::red_ball_config_info red_ball_config{};
+		red_ball_config.scene_ptr      = scene_ptr;
+		red_ball_config.parent_ptr     = root_ptr;
+		red_ball_config.name           = "red_ball_1";
+		red_ball_config.sprite_id	   = qb_sp_ball_red;
+		red_ball_config.texture_id     = qb_re_t_sprite_general;
+		auto red_ball_info = factory::character::create_red_ball(red_ball_config);
+		// Observers
+		red_ball_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
+		red_ball_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
+
+		// Coily
+		factory::character::coily_config_info coily_config{};
+		coily_config.scene_ptr      = scene_ptr;
+		coily_config.parent_ptr     = root_ptr;
+		coily_config.name           = "coily_1";
+		coily_config.sprite_id	   = qb_sp_coily_egg;
+		coily_config.texture_id     = qb_re_t_sprite_general;
+		auto coily_info = factory::character::create_coily(coily_config);
+		// Observers
+		coily_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
+		coily_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
+
+		// Ugg
+		factory::character::ugg_config_info ugg_config{};
+		ugg_config.scene_ptr      = scene_ptr;
+		ugg_config.parent_ptr     = root_ptr;
+		ugg_config.name           = "ugg_1";
+		ugg_config.sprite_id	   = qb_sp_ugg;
+		ugg_config.texture_id     = qb_re_t_sprite_general;
+		auto ugg_info = factory::character::create_ugg(ugg_config);
+		// Observers
+		ugg_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
+		ugg_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
+
+		// Wrong-Way
+		factory::character::wrong_way_config_info wrong_way_config{};
+		wrong_way_config.scene_ptr      = scene_ptr;
+		wrong_way_config.parent_ptr     = root_ptr;
+		wrong_way_config.name           = "wrong_way_1";
+		wrong_way_config.sprite_id	   = qb_sp_wrong_way;
+		wrong_way_config.texture_id     = qb_re_t_sprite_general;
+		auto wrong_way_info = factory::character::create_wrong_way(wrong_way_config);
+		// Observers
+		wrong_way_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
+		wrong_way_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
+
+		//---------------------------------------------------------------------------------
+		// FRIENDS
+		//---------------------------------------------------------------------------------
+		// Green Ball
+		factory::character::green_ball_config_info green_ball_config{};
+		green_ball_config.scene_ptr  = scene_ptr;
+		green_ball_config.parent_ptr = root_ptr;
+		green_ball_config.name       = "green_ball_1";
+		green_ball_config.sprite_id  = qb_sp_ball_green;
+		green_ball_config.texture_id = qb_re_t_sprite_general;
+		auto green_ball_info = factory::character::create_green_ball(green_ball_config);
+		// Observers
+		green_ball_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
+		green_ball_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
+
+		// Slick
+		factory::character::slick_config_info slick_config{};
+		slick_config.scene_ptr  = scene_ptr;
+		slick_config.parent_ptr = root_ptr;
+		slick_config.name       = "slick_1";
+		slick_config.sprite_id  = qb_sp_slick;
+		slick_config.texture_id = qb_re_t_sprite_general;
+		auto slick_info = factory::character::create_slick(slick_config);
+		// Observers
+		slick_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
+		slick_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
+		std::ranges::for_each(level_info.cube_info.cube_components, [slick_info](auto cube_comp_ptr) { slick_info.position_comp_ptr->add_observer(cube_comp_ptr); });
+
+		// Sam
+		factory::character::sam_config_info sam_config{};
+		sam_config.scene_ptr  = scene_ptr;
+		sam_config.parent_ptr = root_ptr;
+		sam_config.name       = "sam_1";
+		sam_config.sprite_id  = qb_sp_sam;
+		sam_config.texture_id = qb_re_t_sprite_general;
+		auto sam_info = factory::character::create_sam(sam_config);
+		// Observers
+		sam_info.position_comp_ptr->add_observer(level_manager_comp_ptr);
+		sam_info.health_comp_ptr->add_observer(level_manager_comp_ptr);
+		std::ranges::for_each(level_info.cube_info.cube_components, [sam_info](auto cube_comp_ptr) { sam_info.position_comp_ptr->add_observer(cube_comp_ptr); });
+    }
+
+    void qbert_scene_manager::load_duo_scene()
+    {
+        auto scene_ptr = mngn::scene_manager::instance().create_scene("duo");
+        scene_ptr->set_active(false);
+    	
+        //---------------------------------------------------------------------------------
+        // ROOT
+        //---------------------------------------------------------------------------------
+        auto root_ptr = scene_ptr->create_game_object("root");
+        auto level_manager_comp_ptr = root_ptr->add_component<level_manager_component>();
+
+    	//---------------------------------------------------------------------------------
+    	// UI
+    	//---------------------------------------------------------------------------------
+        factory::ui::sprite_config_info sprite_config{};
+        sprite_config.scene_ptr      = scene_ptr;
+        sprite_config.name           = "text_player_1";
+        sprite_config.local_position = {32, 32};
+        sprite_config.sprite_id      = qb_sp_text_purple_player;
+        sprite_config.texture_id     = qb_re_t_sprite_general;
+        factory::ui::create_sprite(sprite_config);
+        
+        sprite_config.name           = "text_player_2";
+        sprite_config.local_position = {332, 32};
+        sprite_config.sprite_id      = qb_sp_text_orange_player;
+        sprite_config.texture_id     = qb_re_t_sprite_general;
+        factory::ui::create_sprite(sprite_config);
+        
+        sprite_config.name           = "text_1";
+        sprite_config.local_position = {144, 16};
+        sprite_config.sprite_id      = qb_sp_text_one;
+        factory::ui::create_sprite(sprite_config);
+        
+        sprite_config.name           = "text_2";
+        sprite_config.local_position = {444, 16};
+        sprite_config.sprite_id      = qb_sp_text_two;
+        factory::ui::create_sprite(sprite_config);
+
+        sprite_config.name = "text_change_to";
+        sprite_config.local_position = {32, 80};
+        sprite_config.sprite_id      = qb_sp_text_change_to;
+        factory::ui::create_sprite(sprite_config);
+        
+        sprite_config.name = "text_level";
+        sprite_config.local_position = {368, 80};
+        sprite_config.sprite_id      = qb_sp_text_level;
+        factory::ui::create_sprite(sprite_config);
+        
+        sprite_config.name           = "text_round";
+        sprite_config.local_position = {368, 96};
+        sprite_config.sprite_id      = qb_sp_text_round;
+        factory::ui::create_sprite(sprite_config);
+        
+        factory::ui::arrow_config_info arrow_config{};
+        arrow_config.scene_ptr      = scene_ptr;
+        arrow_config.name           = "left_arrow_1";
+        arrow_config.local_position = {32, 96};
+        arrow_config.sprite_id      = qb_sp_arrow_right;
+        arrow_config.texture_id     = qb_re_t_sprite_general;
+        factory::ui::create_arrow(arrow_config);
+        
+        arrow_config.name           = "left_arrow_2";
+        arrow_config.local_position = {48, 96};
+        arrow_config.delay          = 0.2f;
+        factory::ui::create_arrow(arrow_config);    
+        
+        arrow_config.name           = "right_arrow_1";
+        arrow_config.local_position = {96, 96};
+        arrow_config.sprite_id      = qb_sp_arrow_left;
+        arrow_config.delay          = 0.2f;
+        factory::ui::create_arrow(arrow_config);
+        
+        arrow_config.name           = "right_arrow_2";
+        arrow_config.local_position = {112, 96};
+        arrow_config.delay          = 0.0f;
+        factory::ui::create_arrow(arrow_config);
+    	
+		factory::ui::score_display_config_info score_display_config{};
+		score_display_config.scene_ptr      = scene_ptr;
+		score_display_config.parent_ptr     = root_ptr;
+		score_display_config.name           = "score_1";
+		score_display_config.local_position = {32.0f,    48.0f};
+		score_display_config.sprite_id	  = qb_sp_numbers_regular_orange;
+		score_display_config.texture_id     = qb_re_t_sprite_general;
+		auto score_display_info_1 = factory::ui::create_score_display(score_display_config);
+	
 		score_display_config.name           = "score_2";
 		score_display_config.sprite_id	  = qb_sp_numbers_regular_purple;
 		score_display_config.local_position = {332.0f,    48.0f};
@@ -298,7 +543,7 @@ namespace qbert
 		health_display_config.local_position = {16.0f, 160.0f};
 		auto heal_display_info_1 = factory::ui::create_health_display(health_display_config);
 	
-		health_display_config.name           = "health_1";
+		health_display_config.name           = "health_2";
 		health_display_config.local_position = {448.0f, 160.0f};
 		auto heal_display_info_2 = factory::ui::create_health_display(health_display_config);
 
@@ -314,24 +559,12 @@ namespace qbert
 		factory::ui::round_display_config_info round_display_config{};
 		round_display_config.scene_ptr      = scene_ptr;
 		round_display_config.parent_ptr     = root_ptr;
-		round_display_config.name           = "round_1";
+		round_display_config.name           = "round";
 		round_display_config.local_position = {432.0f, 96.0f};
 		round_display_config.sprite_id      = qb_sp_numbers_regular_orange;
 		round_display_config.texture_id     = qb_re_t_sprite_general;
 		auto round_display_info = factory::ui::create_round_display(round_display_config);
-
-		factory::ui::text_config_info text_config{};
-		text_config.scene_ptr      = scene_ptr;
-		text_config.parent_ptr     = root_ptr;
-		text_config.name           = "text_1";
-		text_config.local_position = {176.0f, 288.0f};
-		text_config.sprite_id      = qb_sp_alphabet_regular_purple;
-		text_config.texture_id     = qb_re_t_sprite_general;
-		text_config.space_sprite_id = qb_sp_alphabet_regular_space;
-		text_config.space_texture_id = qb_re_t_sprite_general;
-		text_config.text           = "game over";
-		factory::ui::create_flickering_text(text_config);
-
+    	
         // ---------------------------------------------------------------------------------
         // LEVEL
         //---------------------------------------------------------------------------------
@@ -490,75 +723,6 @@ namespace qbert
 		std::ranges::for_each(level_info.cube_info.cube_components, [sam_info](auto cube_comp_ptr) { sam_info.position_comp_ptr->add_observer(cube_comp_ptr); });
     }
 
-    void qbert_scene_manager::load_duo_scene()
-    {
-        auto scene_ptr = mngn::scene_manager::instance().create_scene("duo");
-        scene_ptr->set_active(false);
-        
-        factory::ui::sprite_config_info sprite_config{};
-        sprite_config.scene_ptr      = scene_ptr;
-        sprite_config.name           = "text_player_1";
-        sprite_config.local_position = {32, 32};
-        sprite_config.sprite_id      = qb_sp_text_purple_player;
-        sprite_config.texture_id     = qb_re_t_sprite_general;
-        factory::ui::create_sprite(sprite_config);
-        
-        sprite_config.name           = "text_player_2";
-        sprite_config.local_position = {332, 32};
-        sprite_config.sprite_id      = qb_sp_text_orange_player;
-        sprite_config.texture_id     = qb_re_t_sprite_general;
-        factory::ui::create_sprite(sprite_config);
-        
-        sprite_config.name           = "text_1";
-        sprite_config.local_position = {144, 16};
-        sprite_config.sprite_id      = qb_sp_text_one;
-        factory::ui::create_sprite(sprite_config);
-        
-        sprite_config.name           = "text_2";
-        sprite_config.local_position = {444, 16};
-        sprite_config.sprite_id      = qb_sp_text_two;
-        factory::ui::create_sprite(sprite_config);
-
-        sprite_config.name = "text_change_to";
-        sprite_config.local_position = {32, 80};
-        sprite_config.sprite_id      = qb_sp_text_change_to;
-        factory::ui::create_sprite(sprite_config);
-        
-        sprite_config.name = "text_level";
-        sprite_config.local_position = {368, 80};
-        sprite_config.sprite_id      = qb_sp_text_level;
-        factory::ui::create_sprite(sprite_config);
-        
-        sprite_config.name           = "text_round";
-        sprite_config.local_position = {368, 96};
-        sprite_config.sprite_id      = qb_sp_text_round;
-        factory::ui::create_sprite(sprite_config);
-        
-        factory::ui::arrow_config_info arrow_config{};
-        arrow_config.scene_ptr      = scene_ptr;
-        arrow_config.name           = "left_arrow_1";
-        arrow_config.local_position = {32, 96};
-        arrow_config.sprite_id      = qb_sp_arrow_right;
-        arrow_config.texture_id     = qb_re_t_sprite_general;
-        factory::ui::create_arrow(arrow_config);
-        
-        arrow_config.name           = "left_arrow_2";
-        arrow_config.local_position = {48, 96};
-        arrow_config.delay          = 0.2f;
-        factory::ui::create_arrow(arrow_config);    
-        
-        arrow_config.name           = "right_arrow_1";
-        arrow_config.local_position = {96, 96};
-        arrow_config.sprite_id      = qb_sp_arrow_left;
-        arrow_config.delay          = 0.2f;
-        factory::ui::create_arrow(arrow_config);
-        
-        arrow_config.name           = "right_arrow_2";
-        arrow_config.local_position = {112, 96};
-        arrow_config.delay          = 0.0f;
-        factory::ui::create_arrow(arrow_config);
-    }
-
     void qbert_scene_manager::load_versus_scene()
     {
         auto scene_ptr = mngn::scene_manager::instance().create_scene("versus");
@@ -586,5 +750,16 @@ namespace qbert
     {
         auto scene_ptr = mngn::scene_manager::instance().create_scene("scoreboard");
         scene_ptr->set_active(false);
+    	
+		factory::ui::text_config_info text_config{};
+		text_config.scene_ptr      = scene_ptr;
+		text_config.name           = "text_scoreboard";
+		text_config.local_position = {176.0f, 288.0f};
+		text_config.sprite_id      = qb_sp_alphabet_regular_purple;
+		text_config.texture_id     = qb_re_t_sprite_general;
+		text_config.space_sprite_id = qb_sp_alphabet_regular_space;
+		text_config.space_texture_id = qb_re_t_sprite_general;
+		text_config.text           = "scoreboard";
+		factory::ui::create_flickering_text(text_config);
     }
 }

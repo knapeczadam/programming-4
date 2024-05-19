@@ -149,15 +149,4 @@ namespace mngn
 
         return it != objects_.end() ? it->get() : nullptr;
     }
-
-    auto scene::find_with_tag(std::string const &tag) const -> std::vector<game_object *>
-    {
-        std::vector<game_object *> result;
-        for (auto const &object : objects_)
-        {
-            if (object->active() and object->has_tag(tag)) result.push_back(object.get());
-        }
-
-        return result;
-    }
 }

@@ -9,5 +9,7 @@ namespace qbert
     {
     public:
         explicit dead_state(mngn::game_object* character_ptr);
+
+        void on_enter() override;
     };
 }

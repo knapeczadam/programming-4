@@ -17,6 +17,5 @@ namespace qbert
         versus_state &operator=(versus_state &&other)      = delete;
 
         void on_enter() override;
-        void on_exit() override;
     };
 }

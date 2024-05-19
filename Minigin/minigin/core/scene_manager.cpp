@@ -91,26 +91,21 @@ namespace mngn
         return scenes_.back().get();
     }
 
-    auto scene_manager::find_game_objects_with_tag(std::string const &tag) const -> std::vector<game_object*>
-    {
-        std::vector<game_object*> result{};
-        for (auto const &scene : scenes_)
-        {
-            if (scene->active())
-            {
-                auto const objects = scene->find_with_tag(tag);
-                result.insert(result.end(), objects.begin(), objects.end());
-            }
-        }
-        return result;
-    }
-
-    auto scene_manager::get_scene_by_name(std::string const &name) -> scene *
+    auto scene_manager::find(std::string const &name) -> scene *
     {
         auto const it = std::ranges::find_if(scenes_, [&name](auto const &scene)
         {
             return scene->name() == name;
         });
         return it != scenes_.end() ? it->get() : nullptr;
+    }
+
+    auto scene_manager::find_with_tag(std::string const &tag) const -> scene *
+    {
+        for (auto const &scene : scenes_)
+        {
+            if (scene->tag() == tag) return scene.get();
+        }
+        return nullptr;
     }
 }

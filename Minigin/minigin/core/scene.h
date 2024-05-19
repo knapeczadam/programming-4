@@ -43,15 +43,19 @@ namespace mngn
         void remove_all();
         [[nodiscard]] auto count() const -> int;
         [[nodiscard]] auto find(std::string const &name) const -> game_object *;
-        [[nodiscard]] auto find_with_tag(std::string const &tag) const -> std::vector<game_object *>;
 
         [[nodiscard]] auto active() const -> bool { return active_; }
         void set_active(bool active) { active_ = active; }
+
+        [[nodiscard]] auto tag() const -> std::string const & { return tag_; }
+        void set_tag(std::string tag) { tag_ = std::move(tag); }
+        void clear_tag() { tag_.clear(); }
         
     private:
         explicit scene(std::string name);
 
         std::string name_;
+        std::string tag_;
         std::vector<game_object_uptr> objects_{};
         bool active_ = true;
 
