@@ -45,6 +45,12 @@ namespace qbert
         }
     }
 
+    void fly_component::on_disable()
+    {
+        is_flying_ = false;
+        accu_time_ = 0.0f;
+    }
+
     void fly_component::fly()
     {
         is_flying_ = true;

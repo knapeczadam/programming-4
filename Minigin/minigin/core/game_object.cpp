@@ -132,11 +132,21 @@ namespace mngn
         {
             for (auto const &comp : component_map_ | std::views::values)
             {
-                comp->enabled_dirty_ = true;
+                if (comp->enabled_) comp->enabled_dirty_ = true;
             }
         }
+        if (not active and active_)
+        {
+            for (auto const &comp : component_map_ | std::views::values)
+            {
+                if (comp->enabled_) comp->disabled_dirty_ = true;
+            }
+        }
+        for (auto const &child : children_)
+        {
+            child->set_active(active);
+        }
         active_ = active;
-        
     }
 
     auto game_object::set_parent(game_object *parent_ptr, bool keep_world_position) -> bool

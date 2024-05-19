@@ -149,4 +149,15 @@ namespace mngn
 
         return it != objects_.end() ? it->get() : nullptr;
     }
+
+    auto scene::objects() const -> std::vector<game_object*>
+    {
+        std::vector<game_object*> objects;
+        objects.reserve(objects_.size());
+        for (auto const &object : objects_)
+        {
+            objects.push_back(object.get());
+        }
+        return objects;
+    }
 }

@@ -35,8 +35,11 @@ namespace mngn
 
         void set_sprites(std::vector<sprite*> const &sprites) { sprites_ = sprites; }
 
+        void set_animated(bool animated) { animated_ = animated; }
+
     private:
         std::vector<sprite*> sprites_;
         multisprite_orientation orientation_ = multisprite_orientation::horizontal;
+        bool animated_ = true;
     };
 }

@@ -43,14 +43,13 @@ namespace mngn
             dst_rect.w = dst.width;
             dst_rect.h = dst.height;
 
-
             renderer::instance().render_texture(*sprite_ptr_->texture(), src_rect, dst_rect);
         }
     }
 
     void sprite_component::update()
     {
-        if (sprite_ptr_)
+        if (sprite_ptr_ and animated_)
         {
             sprite_ptr_->update(game_time::instance().delta_time());
         }

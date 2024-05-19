@@ -37,14 +37,20 @@ namespace qbert
 
     void jump_component::on_disable()
     {
-        is_jumping_ = false;
-        accu_time_ = 0.0f;
+        reset();
     }
 
     void jump_component::jump()
     {
         is_jumping_ = true;
         calculate_bezier_positions();
+    }
+
+    void jump_component::reset()
+    {
+        is_jumping_ = false;
+        accu_time_ = 0.0f;
+        curr_pos_ = {};
     }
 
     void jump_component::calculate_bezier_positions()

@@ -66,9 +66,12 @@ namespace mngn
 
     void multisprite_ui_component::update()
     {
-        for (auto const &sprite : sprites_)
+        if (animated_)
         {
-            sprite->update(game_time::instance().delta_time());
+            for (auto const &sprite : sprites_)
+            {
+                sprite->update(game_time::instance().delta_time());
+            }
         }
     }
 }

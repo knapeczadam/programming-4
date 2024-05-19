@@ -9,6 +9,16 @@ namespace qbert
 {
     void character_state_component::start()
     {
+        init_state();
+    }
+
+    void character_state_component::on_disable()
+    {
+        init_state();
+    }
+
+    void character_state_component::init_state()
+    {
         if (owner()->has_tag("player"))
         {
             change_state<start_state>(owner());

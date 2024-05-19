@@ -43,6 +43,7 @@ namespace mngn
         void remove_all();
         [[nodiscard]] auto count() const -> int;
         [[nodiscard]] auto find(std::string const &name) const -> game_object *;
+        [[nodiscard]] auto objects() const -> std::vector<game_object*>;
 
         [[nodiscard]] auto active() const -> bool { return active_; }
         void set_active(bool active) { active_ = active; }

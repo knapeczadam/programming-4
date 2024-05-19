@@ -9,9 +9,25 @@
 
 namespace qbert
 {
+    position_component::position_component(int row_idx, int col_idx)
+        : row_idx_{row_idx}
+        , col_idx_{col_idx}
+        , original_row_idx_{row_idx}
+        , original_col_idx_{col_idx}
+    {
+    }
+
     void position_component::awake()
     {
         direction_comp_ptr_ = owner()->component<direction_component>();
+        original_position_ = owner()->local_position();
+    }
+
+    void position_component::on_disable()
+    {
+        row_idx_ = original_row_idx_;
+        col_idx_ = original_col_idx_;
+        owner()->set_local_position(original_position_);
     }
 
     void position_component::update_position()

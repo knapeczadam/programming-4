@@ -11,5 +11,6 @@ namespace qbert
         explicit jumping_state(mngn::game_object* character_ptr);
 
         void on_enter() override;
+        void on_exit() override;
     };
 }

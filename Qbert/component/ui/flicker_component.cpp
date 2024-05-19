@@ -26,13 +26,26 @@ namespace qbert
         }
     }
 
+    void flicker_component::on_enable()
+    {
+        is_flickering_ = true;
+    }
+
     void flicker_component::update()
     {
-        accu_time_ += mngn::game_time::instance().delta_time();
-        if (accu_time_ >= flicker_time_)
+        if (is_flickering_)
         {
-            sprite_comp_ptr_->set_enabled(not sprite_comp_ptr_->enabled());
-            accu_time_ = 0.0f;
+            accu_time_ += mngn::game_time::instance().delta_time();
+            if (accu_time_ >= flicker_time_)
+            {
+                sprite_comp_ptr_->set_enabled(not sprite_comp_ptr_->enabled());
+                accu_time_ = 0.0f;
+            }
         }
+    }
+
+    void flicker_component::on_disable()
+    {
+        is_flickering_ = false;
     }
 }

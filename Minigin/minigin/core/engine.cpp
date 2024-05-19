@@ -125,6 +125,7 @@ namespace mngn
         float lag         = 0.0f;
 
         scene_manager.awake();
+        scene_manager.on_enable();
         scene_manager.start();
         
         while (do_continue)

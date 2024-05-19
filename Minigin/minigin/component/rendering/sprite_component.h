@@ -27,7 +27,10 @@ namespace mngn
         [[nodiscard]] auto sprite() const -> sprite * { return sprite_ptr_; }
         void set_sprite(mngn::sprite *sprite_ptr) { sprite_ptr_ = sprite_ptr; }
 
+        void set_animated(bool animated) { animated_ = animated; }
+
     private:
         mngn::sprite *sprite_ptr_ = nullptr;
+        bool animated_ = true;
     };
 }

@@ -23,7 +23,14 @@ namespace qbert
 
     void cube_component::start()
     {
-        owner()->component<mngn::sprite_component>()->set_sprite(colors_[0]);
+        owner()->component<mngn::sprite_component>()->set_sprite(colors_[current_color_]);
+    }
+
+    void cube_component::on_disable()
+    {
+        current_color_ = 0;
+        score_count_   = static_cast<int>(colors_.size()) - 1;
+        owner()->component<mngn::sprite_component>()->set_sprite(colors_[current_color_]);
     }
 
     void cube_component::notify(std::string const &event, mngn::subject *subject_ptr)
@@ -48,7 +55,7 @@ namespace qbert
                     if (score_count_ > 0)
                     {
                         --score_count_;
-                        position_comp_ptr->owner()->component<score_counter_component>()->add_score(25);
+                        position_comp_ptr->owner()->component<score_counter_component>()->add_score(cube_score_);
                     }
                 }
                 else if (position_comp_ptr->owner()->has_tag("friend"))

@@ -29,6 +29,12 @@ namespace qbert
         }
     }
 
+    void spawn_component::on_disable()
+    {
+        is_spawning_ = false;
+        accu_time_ = 0.0f;
+    }
+
     void spawn_component::spawn(glm::vec2 const &start_pos, glm::vec2 const &end_pos)
     {
         start_pos_   = start_pos;

@@ -19,6 +19,8 @@ namespace qbert
         spawn_component &operator=(spawn_component &&other)      = delete;
 
         void fixed_update() override;
+        void on_disable() override;
+        
         void spawn(glm::vec2 const &start_pos, glm::vec2 const &end_pos);
 
     private:

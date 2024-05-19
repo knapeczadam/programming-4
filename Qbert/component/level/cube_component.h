@@ -28,13 +28,15 @@ namespace qbert
         cube_component &operator=(cube_component &&other)      = delete;
 
         void start() override;
+        void on_disable() override;
         void notify(std::string const &event, mngn::subject *subject_ptr) override;
 
     private:
-        int  row_idx_       = 0;
-        int  col_idx_       = 0;
-        int  current_color_ = 0;
-        int  score_count_   = 0;
+        int  row_idx_         = 0;
+        int  col_idx_         = 0;
+        int  current_color_   = 0;
+        int  score_count_     = 0;
+        int const cube_score_ = 25;
         bool revertible_    = false;
         
         std::vector<mngn::sprite*> colors_;

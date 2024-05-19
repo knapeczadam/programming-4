@@ -2,7 +2,6 @@
 
 // Project includes
 #include "component/player/fall_component.h"
-#include "component/player/health_component.h"
 #include "minigin/core/game_object.h"
 
 namespace qbert

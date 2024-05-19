@@ -21,6 +21,8 @@ namespace qbert
 
         void start() override;
         void fixed_update() override;
+        void on_disable() override;
+        
         void fly();
 
     private:

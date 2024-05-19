@@ -111,7 +111,6 @@ namespace mngn
         float collider_horizontal_offset_ = 0.0f;
         float collider_vertical_offset_   = 0.0f;
         int   iter_count_                 = 0;
-        
-        bool    animated_         = false;
+        bool  animated_                   = false;
     };
 }

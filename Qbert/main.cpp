@@ -8,7 +8,7 @@
 
 // Project includes
 #include "core/level_config_manager.h"
-#include "core/qbert_scene_manager.h"
+#include "core/scene_loader.h"
 #include "core/resources.h"
 #include "core/services.h"
 #include "core/sprites.h"
@@ -27,7 +27,7 @@ void load()
 	qbert::init_sprites();
 	qbert::register_services();
 	qbert::level_config_manager::instance().load_level_config("../Data/configs/level_config.json");
-	qbert::qbert_scene_manager::instance().load_scenes();
+	qbert::scene_loader::instance().load_scenes();
 }
 
 int main(int, char *[])

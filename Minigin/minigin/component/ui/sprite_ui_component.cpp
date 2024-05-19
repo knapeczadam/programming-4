@@ -50,7 +50,7 @@ namespace mngn
 
     void sprite_ui_component::update()
     {
-        if (sprite_ptr_)
+        if (sprite_ptr_ and animated_)
         {
             sprite_ptr_->update(game_time::instance().delta_time());
         }

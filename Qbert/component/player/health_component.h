@@ -10,7 +10,7 @@ namespace qbert
     {
     public:
         health_component()           = default;
-        explicit health_component(int health) : health_{health} {}
+        explicit health_component(int health);
         ~health_component() override = default;
         
         health_component(health_component const &other)            = delete;
@@ -18,7 +18,8 @@ namespace qbert
         health_component &operator=(health_component const &other) = delete;
         health_component &operator=(health_component &&other)      = delete;
 
-        void start() override;
+        void on_enable() override;
+        void on_disable() override;
 
         void take_damage(int damage);
         void heal(int health);
@@ -26,5 +27,6 @@ namespace qbert
 
     private:
         int health_ = 0;
+        int const original_health_ = 0;
     };
 }

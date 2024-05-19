@@ -27,6 +27,7 @@ namespace qbert
         void on_disable() override;
 
         void jump();
+        void reset();
 
     private:
         void calculate_bezier_positions();

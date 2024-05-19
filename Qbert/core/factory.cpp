@@ -60,7 +60,7 @@ namespace qbert
         info.round_counter_comp_ptr = info.go_ptr->add_component<round_counter_component>();
         info.collider_comp_ptr      = info.go_ptr->add_component<player_collider_component>(sprite_comp_ptr->sprite()->collider_width(), sprite_comp_ptr->sprite()->collider_height());
 
-        auto swearing_go_ptr = config.scene_ptr->create_game_object("swearing");
+        auto swearing_go_ptr = config.scene_ptr->create_game_object(config.name + "_swearing");
         swearing_go_ptr->set_parent(info.go_ptr);
         swearing_go_ptr->set_local_position(-24.0f, -50.0f);
         swearing_go_ptr->add_component<mngn::sprite_component>(qb_sp_qbert_swearing, config.texture_id);
