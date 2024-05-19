@@ -27,8 +27,10 @@ namespace qbert
         alphabet_component &operator=(alphabet_component const &other) = delete;
         alphabet_component &operator=(alphabet_component &&other)      = delete;
 
-        void awake() override;
         void start() override;
+
+    private:
+        void set_text();
 
     private:
         std::string text_;

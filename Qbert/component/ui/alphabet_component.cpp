@@ -26,12 +26,13 @@ namespace qbert
     {
     }
 
-    void alphabet_component::awake()
+    void alphabet_component::start()
     {
         multisprite_ui_comp_ptr_ = owner()->component<mngn::multisprite_ui_component>();
+        set_text();
     }
 
-    void alphabet_component::start()
+    void alphabet_component::set_text()
     {
         std::vector<mngn::sprite*> sprites;
         for (auto const c : text_)

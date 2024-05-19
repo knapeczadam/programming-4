@@ -35,14 +35,6 @@ namespace mngn
         return nullptr;
     }
 
-    void game_object::awake()
-    {
-        for (auto const &comp : component_map_ | std::views::values)
-        {
-            if (comp->enabled_) comp->awake();
-        }
-    }
-
     void game_object::on_enable()
     {
         for (auto const &comp : component_map_ | std::views::values)

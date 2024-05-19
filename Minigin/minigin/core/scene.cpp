@@ -25,14 +25,6 @@ namespace mngn
 
     scene::~scene() = default;
 
-    void scene::awake()
-    {
-        for (auto const &object : objects_)
-        {
-            if (object->active()) object->awake();
-        }
-    }
-
     void scene::on_enable()
     {
         for (auto const &object : objects_)

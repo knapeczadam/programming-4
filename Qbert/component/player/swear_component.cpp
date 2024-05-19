@@ -6,7 +6,7 @@
 
 namespace qbert
 {
-    void swear_component::awake()
+    void swear_component::start()
     {
         swearing_go_ptr_ = owner()->find("swearing");
         swearing_go_ptr_->set_active(false);

@@ -21,7 +21,7 @@ namespace qbert
     {
     }
 
-    void cube_component::awake()
+    void cube_component::start()
     {
         owner()->component<mngn::sprite_component>()->set_sprite(colors_[0]);
     }

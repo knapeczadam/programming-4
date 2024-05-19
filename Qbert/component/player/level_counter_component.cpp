@@ -2,7 +2,7 @@
 
 namespace qbert
 {
-    void level_counter_component::awake()
+    void level_counter_component::start()
     {
         notify_observers("level_changed");
     }

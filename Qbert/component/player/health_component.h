@@ -18,7 +18,7 @@ namespace qbert
         health_component &operator=(health_component const &other) = delete;
         health_component &operator=(health_component &&other)      = delete;
 
-        void awake() override;
+        void start() override;
 
         void take_damage(int damage);
         void heal(int health);

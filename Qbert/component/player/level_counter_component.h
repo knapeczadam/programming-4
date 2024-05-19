@@ -17,7 +17,7 @@ namespace qbert
         level_counter_component &operator=(level_counter_component const &other) = delete;
         level_counter_component &operator=(level_counter_component &&other)      = delete;
 
-        void awake() override;
+        void start() override;
         
         [[nodiscard]] auto level() const -> int { return level_; }
         void set_level(int level);

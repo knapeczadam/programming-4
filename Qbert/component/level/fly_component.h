@@ -19,7 +19,7 @@ namespace qbert
         fly_component &operator=(fly_component const &other) = delete;
         fly_component &operator=(fly_component &&other)      = delete;
 
-        void awake() override;
+        void start() override;
         void fixed_update() override;
         void fly();
 

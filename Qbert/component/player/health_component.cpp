@@ -2,7 +2,7 @@
 
 namespace qbert
 {
-    void health_component::awake()
+    void health_component::start()
     {
         notify_observers("health_changed");
     }

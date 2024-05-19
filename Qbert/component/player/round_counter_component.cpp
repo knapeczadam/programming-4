@@ -2,7 +2,7 @@
 
 namespace qbert
 {
-    void round_counter_component::awake()
+    void round_counter_component::start()
     {
         notify_observers("round_changed");
     }

@@ -11,7 +11,7 @@
 
 namespace qbert
 {
-    void health_display_component::awake()
+    void health_display_component::start()
     {
         multisprite_ui_comp_ptr_ = owner()->component<mngn::multisprite_ui_component>();
     }

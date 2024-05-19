@@ -14,7 +14,7 @@ namespace qbert
     {
     }
 
-    void flicker_component::awake()
+    void flicker_component::start()
     {
         if (owner()->has_component<mngn::sprite_ui_component>())
         {

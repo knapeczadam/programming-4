@@ -2,7 +2,7 @@
 
 namespace qbert
 {
-    void score_counter_component::awake()
+    void score_counter_component::start()
     {
         notify_observers("score_changed");
     }

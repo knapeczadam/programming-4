@@ -58,7 +58,6 @@ namespace mngn
 
         [[nodiscard]] auto scene() const -> scene * { return scene_ptr_; }
 
-        void awake();
         void on_enable();
         void start();
         void fixed_update();

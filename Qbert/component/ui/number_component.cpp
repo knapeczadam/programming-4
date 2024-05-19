@@ -18,13 +18,9 @@ namespace qbert
     {
     }
 
-    void number_component::awake()
-    {
-        multisprite_ui_comp_ptr_ = owner()->component<mngn::multisprite_ui_component>();
-    }
-
     void number_component::start()
     {
+        multisprite_ui_comp_ptr_ = owner()->component<mngn::multisprite_ui_component>();
         set_number(number_);
     }
 

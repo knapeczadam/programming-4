@@ -17,7 +17,7 @@ namespace qbert
         round_counter_component &operator=(round_counter_component const &other) = delete;
         round_counter_component &operator=(round_counter_component &&other)      = delete;
 
-        void awake() override;
+        void start() override;
         
         [[nodiscard]] auto round() const -> int { return round_; }
         void set_round(int round);

@@ -14,7 +14,7 @@ namespace qbert
     {
     }
 
-    void disc_component::awake()
+    void disc_component::start()
     {
         glm::vec2 origin{208, 96};
         int offset_x = -32;

@@ -17,7 +17,7 @@ namespace qbert
         score_counter_component &operator=(score_counter_component const &other) = delete;
         score_counter_component &operator=(score_counter_component &&other)      = delete;
 
-        void awake() override;
+        void start() override;
 
         void add_score(int score);
         [[nodiscard]] auto score() const -> int { return score_; }

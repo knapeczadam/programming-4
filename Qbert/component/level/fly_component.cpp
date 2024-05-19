@@ -9,7 +9,7 @@
 
 namespace qbert
 {
-    void fly_component::awake()
+    void fly_component::start()
     {
         start_pos_ = owner()->local_position();
     }

@@ -27,7 +27,7 @@ namespace qbert
         cube_component &operator=(cube_component const &other) = delete;
         cube_component &operator=(cube_component &&other)      = delete;
 
-        void awake() override;
+        void start() override;
         void notify(std::string const &event, mngn::subject *subject_ptr) override;
 
     private:

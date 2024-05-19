@@ -8,7 +8,7 @@
 
 namespace qbert
 {
-    void face_component::awake()
+    void face_component::start()
     {
         sprite_comp_ptr_ = owner()->component<mngn::sprite_component>();
         direction_comp_ptr_ = owner()->component<direction_component>();

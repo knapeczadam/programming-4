@@ -10,7 +10,7 @@
 
 namespace qbert
 {
-    void jump_component::awake()
+    void jump_component::start()
     {
         direction_comp_ptr_ = owner()->component<direction_component>();
     }

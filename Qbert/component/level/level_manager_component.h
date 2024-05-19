@@ -23,7 +23,7 @@ namespace qbert
         level_manager_component &operator=(level_manager_component const &other) = delete;
         level_manager_component &operator=(level_manager_component &&other)      = delete;
 
-        void awake() override;
+        void start() override;
         void notify(std::string const &event, mngn::subject *subject_ptr) override;
 
     private:

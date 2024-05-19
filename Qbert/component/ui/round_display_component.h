@@ -23,7 +23,7 @@ namespace qbert
         round_display_component &operator=(round_display_component const &other) = delete;
         round_display_component &operator=(round_display_component &&other)      = delete;
 
-        void awake() override;
+        void start() override;
         void notify(std::string const &event, mngn::subject *subject_ptr) override;
 
     private:
