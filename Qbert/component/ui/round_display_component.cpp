@@ -9,7 +9,7 @@
 
 namespace qbert
 {
-    void round_display_component::start()
+    void round_display_component::awake()
     {
         sprite_ui_comp_ptr_ = owner()->component<mngn::sprite_ui_component>();
     }

@@ -10,7 +10,7 @@
 
 namespace qbert
 {
-    void jump_component::start()
+    void jump_component::awake()
     {
         direction_comp_ptr_ = owner()->component<direction_component>();
     }
@@ -21,7 +21,7 @@ namespace qbert
         {
             if (curr_pos_ != end_pos_)
             {
-                accu_time_ += mngn::game_time::instance().fixed_delta_time;
+                accu_time_ += mngn::game_time::instance().fixed_delta_time();
                 float t = glm::clamp(accu_time_ / jump_time_, 0.0f, 1.0f);
                 curr_pos_ = mngn::bezier_curve(start_pos_, pos_1_, pos_2_, end_pos_, t);
                 owner()->set_local_position(curr_pos_);

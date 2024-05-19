@@ -52,7 +52,7 @@ namespace mngn
     {
         if (sprite_ptr_)
         {
-            sprite_ptr_->update(game_time::instance().delta_time);
+            sprite_ptr_->update(game_time::instance().delta_time());
         }
     }
 }

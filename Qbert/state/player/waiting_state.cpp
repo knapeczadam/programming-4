@@ -17,7 +17,7 @@ namespace qbert
 
     void waiting_state::update()
     {
-        accu_time_ += mngn::game_time::instance().delta_time;
+        accu_time_ += mngn::game_time::instance().delta_time();
         if (accu_time_ >= waiting_time_)
         {
             character_ptr_->component<character_state_component>()->change_state<start_state>(character_ptr_);

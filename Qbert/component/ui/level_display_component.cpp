@@ -9,7 +9,7 @@
 
 namespace qbert
 {
-    void level_display_component::start()
+    void level_display_component::awake()
     {
         sprite_ui_comp_ptr_ = owner()->component<mngn::sprite_ui_component>();
     }

@@ -47,6 +47,8 @@
     <ClCompile Include="core\level_config_manager.cpp" />
     <ClCompile Include="core\factory.cpp" />
     <ClCompile Include="core\resources.cpp" />
+    <ClCompile Include="core\qbert_scene_manager.cpp" />
+    <ClCompile Include="core\services.cpp" />
     <ClCompile Include="core\sprites.cpp" />
     <ClCompile Include="input\game_component_commands.cpp" />
     <ClCompile Include="input\game_object_commands.cpp" />
@@ -104,6 +106,8 @@
     <ClInclude Include="core\level_config_manager.h" />
     <ClInclude Include="core\factory.h" />
     <ClInclude Include="core\resources.h" />
+    <ClInclude Include="core\qbert_scene_manager.h" />
+    <ClInclude Include="core\services.h" />
     <ClInclude Include="core\sprites.h" />
     <ClInclude Include="input\game_component_commands.h" />
     <ClInclude Include="input\game_object_commands.h" />

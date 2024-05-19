@@ -8,7 +8,7 @@ namespace qbert
     class duo_state final : public game_state
     {
     public:
-        duo_state();
+        explicit duo_state(game_state_component *game_state_comp_ptr);
         ~duo_state() override = default;
 
         duo_state(duo_state const &other)            = delete;

@@ -7,6 +7,6 @@ namespace qbert
 {
     game_state_component::game_state_component()
     {
-        change_state<menu_state>();
+        change_state<menu_state>(this);
     }
 }

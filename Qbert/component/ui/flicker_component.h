@@ -23,7 +23,7 @@ namespace qbert
         flicker_component &operator=(flicker_component const &other) = delete;
         flicker_component &operator=(flicker_component &&other)      = delete;
 
-        void start() override;
+        void awake() override;
         void update() override;
 
     private:

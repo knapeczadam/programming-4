@@ -20,7 +20,7 @@ namespace qbert
     {
     }
 
-    void player_collider_component::start()
+    void player_collider_component::awake()
     {
         direction_comp_ptr_ = owner()->component<direction_component>();
         position_comp_ptr_  = owner()->component<position_component>();

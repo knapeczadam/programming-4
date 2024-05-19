@@ -31,6 +31,10 @@ namespace mngn
 
     enum input
     {
+        k_1    = SDLK_1,
+        k_2    = SDLK_2,
+        k_3    = SDLK_3,
+        
         k_left  = SDLK_LEFT,
         k_right = SDLK_RIGHT,
         k_up    = SDLK_UP,

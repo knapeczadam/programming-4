@@ -26,7 +26,7 @@ namespace qbert
         score_display_component &operator=(score_display_component const &other) = delete;
         score_display_component &operator=(score_display_component &&other)      = delete;
 
-        void start() override;
+        void awake() override;
         void notify(std::string const &event, mngn::subject *subject_ptr) override;
 
     private:

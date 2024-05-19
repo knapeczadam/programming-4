@@ -22,7 +22,7 @@ namespace qbert
         jump_component &operator=(jump_component const &other) = delete;
         jump_component &operator=(jump_component &&other)      = delete;
         
-        void start() override;
+        void awake() override;
         void fixed_update() override;
         void on_disable() override;
 

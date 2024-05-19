@@ -8,11 +8,8 @@ namespace qbert
     class damage_command final : public mngn::game_component_command
     {
     public:
-        damage_command(mngn::game_component *component_ptr, int damage = 1)
-            : game_component_command(component_ptr)
-            , damage_(damage)
-        {
-        }
+        explicit damage_command(mngn::game_component *component_ptr, int damage = 1);
+        
         void execute() override;
 
         [[nodiscard]] auto clone() const -> std::unique_ptr<base_command> override
@@ -22,5 +19,21 @@ namespace qbert
 
     private:
         int damage_ = 1;
+    };
+
+    class game_mode_command final : public mngn::game_component_command
+    {
+    public:
+        explicit game_mode_command(mngn::game_component *component_ptr, int game_mode = 0);
+
+        void execute() override;
+
+        [[nodiscard]] auto clone() const -> std::unique_ptr<base_command> override
+        {
+            return std::make_unique<game_mode_command>(*this);
+        }
+
+    private:
+        int game_mode_ = 0;
     };
 }

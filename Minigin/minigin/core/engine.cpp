@@ -124,25 +124,26 @@ namespace mngn
         auto  last_time   = high_resolution_clock::now();
         float lag         = 0.0f;
 
+        scene_manager.awake();
         scene_manager.start();
         
         while (do_continue)
         {
             auto const current_time = high_resolution_clock::now();
-            game_time::instance().delta_time = duration<float>(current_time - last_time).count(); // dt always has a 1 frame delay
+            game_time::instance().set_delta_time(duration<float>(current_time - last_time).count()); // dt always has a 1 frame delay
             
             last_time = current_time;
-            lag += game_time::instance().delta_time;
+            lag += game_time::instance().delta_time();
             
             do_continue = input.process_input();
 
             scene_manager.on_enable();
 
-            while (lag >= game_time::instance().fixed_delta_time)
+            while (lag >= game_time::instance().fixed_delta_time())
             {
                 scene_manager.fixed_update();
                 collision_manager::instance().detect_collisions();
-                lag -= game_time::instance().fixed_delta_time;
+                lag -= game_time::instance().fixed_delta_time();
             }
             
             scene_manager.update();
@@ -152,7 +153,7 @@ namespace mngn
 
             // SteamAPI_RunCallbacks(); 
 
-            auto const sleep_time = current_time + milliseconds(static_cast<long long>(game_time::instance().ms_per_frame)) - high_resolution_clock::now();
+            auto const sleep_time = current_time + milliseconds(static_cast<long long>(game_time::instance().ms_per_frame())) - high_resolution_clock::now();
 
             std::this_thread::sleep_for(sleep_time);
         }

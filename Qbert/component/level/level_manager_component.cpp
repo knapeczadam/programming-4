@@ -23,7 +23,7 @@
 
 namespace qbert
 {
-    void level_manager_component::start()
+    void level_manager_component::awake()
     {
         discs_ = owner()->components_in_children<disc_component>();
     }

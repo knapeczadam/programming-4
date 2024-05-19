@@ -8,7 +8,7 @@ namespace qbert
     class game_over_state final : public game_state
     {
     public:
-        game_over_state();
+        explicit game_over_state(game_state_component *game_state_comp_ptr);
         ~game_over_state() override = default;
 
         game_over_state(game_over_state const &other)            = delete;

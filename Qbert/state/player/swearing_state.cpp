@@ -25,7 +25,7 @@ namespace qbert
 
     void swearing_state::update()
     {
-        accu_time_ += mngn::game_time::instance().delta_time;
+        accu_time_ += mngn::game_time::instance().delta_time();
         if (accu_time_ >= swear_time_)
         {
             is_swearing_ = false;

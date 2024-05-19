@@ -39,7 +39,7 @@ namespace qbert
 
     void npc_idle_state::update()
     {
-        accu_time_ += mngn::game_time::instance().delta_time;
+        accu_time_ += mngn::game_time::instance().delta_time();
         if (accu_time_ >= idle_time_)
         {
             accu_time_ = 0.0f;

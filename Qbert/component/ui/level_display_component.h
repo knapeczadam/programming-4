@@ -23,7 +23,7 @@ namespace qbert
         level_display_component &operator=(level_display_component const &other) = delete;
         level_display_component &operator=(level_display_component &&other)      = delete;
 
-        void start() override;
+        void awake() override;
         void notify(std::string const &event, mngn::subject *subject_ptr) override;
 
     private:

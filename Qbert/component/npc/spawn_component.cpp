@@ -15,7 +15,7 @@ namespace qbert
             glm::vec2 curr_pos = owner()->local_position();
             if (curr_pos != end_pos_)
             {
-                accu_time_ += mngn::game_time::instance().fixed_delta_time;
+                accu_time_ += mngn::game_time::instance().fixed_delta_time();
                 curr_pos = glm::mix(start_pos_, end_pos_, glm::clamp(accu_time_ / spawn_time_, 0.0f, 1.0f));
                 owner()->set_local_position(curr_pos);
             }

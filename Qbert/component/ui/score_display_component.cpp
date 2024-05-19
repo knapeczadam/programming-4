@@ -7,7 +7,7 @@
 
 namespace qbert
 {
-    void score_display_component::start()
+    void score_display_component::awake()
     {
         number_comp_ptr_ = owner()->component<number_component>();
     }

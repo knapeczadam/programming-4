@@ -47,6 +47,14 @@ namespace mngn
         }
     }
 
+    void game_object::awake()
+    {
+        for (auto const &comp : component_map_ | std::views::values)
+        {
+            if (comp->enabled_) comp->awake();
+        }
+    }
+
     void game_object::start()
     {
         for (auto const &comp : component_map_ | std::views::values)

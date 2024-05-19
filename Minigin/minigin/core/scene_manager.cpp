@@ -13,6 +13,14 @@ namespace mngn
 
     scene_manager::~scene_manager() = default;
 
+    void scene_manager::awake()
+    {
+        for (auto const &scene : scenes_)
+        {
+            scene->awake();
+        }
+    }
+
     void scene_manager::on_enable()
     {
         for (auto const &scene : scenes_)
@@ -25,7 +33,7 @@ namespace mngn
     {
         for (auto const &scene : scenes_)
         {
-            if (scene->active()) scene->start();
+            scene->start();
         }
     }
 

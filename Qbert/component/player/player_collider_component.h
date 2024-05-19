@@ -21,7 +21,7 @@ namespace qbert
         player_collider_component &operator=(player_collider_component const &other) = delete;
         player_collider_component &operator=(player_collider_component &&other)      = delete;
 
-        void start() override;
+        void awake() override;
         void on_collision_stay(mngn::game_object *other_ptr) override;
 
     private:

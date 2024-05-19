@@ -11,7 +11,7 @@ namespace mngn
     class game_component_command : public base_command
     {
     public:
-        explicit game_component_command(game_component *component_ptr) : component_ptr_(component_ptr)
+        explicit game_component_command(game_component *component_ptr) : game_component_ptr_(component_ptr)
         {
         }
 
@@ -23,10 +23,7 @@ namespace mngn
         game_component_command &operator=(game_component_command &&other)      = default;
 
     protected:
-        [[nodiscard]] auto game_component() const -> game_component * { return component_ptr_; }
-
-    private:
-        mngn::game_component *component_ptr_;
+        game_component *game_component_ptr_;
         
     };
 }

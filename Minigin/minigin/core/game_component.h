@@ -32,6 +32,7 @@ namespace mngn
         game_component &operator=(game_component const &other) = delete;
         game_component &operator=(game_component &&other)      = delete;
 
+        virtual void awake()      { }
         virtual void on_enable()  { }
         virtual void start()      { }
         virtual void update()     { }

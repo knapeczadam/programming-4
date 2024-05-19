@@ -25,7 +25,8 @@ namespace mngn
         scene(scene &&other)                 = delete;
         scene &operator=(scene const &other) = delete;
         scene &operator=(scene &&other)      = delete;
-        
+
+        void awake();
         void on_enable();
         void start();
         void fixed_update();

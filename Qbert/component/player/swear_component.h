@@ -22,7 +22,7 @@ namespace qbert
         swear_component &operator=(swear_component const &other) = delete;
         swear_component &operator=(swear_component &&other)      = delete;
 
-        void start() override;
+        void awake() override;
         void swear(bool swear_on);
 
     private:

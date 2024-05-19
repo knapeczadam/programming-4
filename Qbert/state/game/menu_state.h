@@ -8,7 +8,7 @@ namespace qbert
     class menu_state final : public game_state
     {
     public:
-        menu_state();
+        explicit menu_state(game_state_component *game_state_comp_ptr);
         ~menu_state() override = default;
 
         menu_state(menu_state const &other)            = delete;

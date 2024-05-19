@@ -13,12 +13,12 @@ namespace qbert
 {
     void jump_command::execute()
     {
-        auto player_state_comp_ptr = game_object()->component<character_state_component>();
+        auto player_state_comp_ptr = game_object_ptr_->component<character_state_component>();
         if (player_state_comp_ptr->owner()->scene()->active() and  (player_state_comp_ptr->is_state<start_state>() or player_state_comp_ptr->is_state<idle_state>()))
         {
-            auto direction_comp_ptr = game_object()->component<direction_component>();
+            auto direction_comp_ptr = game_object_ptr_->component<direction_component>();
             direction_comp_ptr->set_direction(row_dir_, col_dir_);
-            player_state_comp_ptr->change_state<jumping_state>(game_object());
+            player_state_comp_ptr->change_state<jumping_state>(game_object_ptr_);
         }
     }
 }

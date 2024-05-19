@@ -14,7 +14,7 @@ namespace qbert
         {
             if (curr_pos_ != end_pos_)
             {
-                accu_time_ += mngn::game_time::instance().fixed_delta_time;
+                accu_time_ += mngn::game_time::instance().fixed_delta_time();
                 float t = accu_time_ / fall_time_;
                 t = glm::clamp(t, 0.0f, 1.0f);
 

@@ -68,7 +68,7 @@ namespace mngn
     {
         for (auto const &sprite : sprites_)
         {
-            sprite->update(game_time::instance().delta_time);
+            sprite->update(game_time::instance().delta_time());
         }
     }
 }

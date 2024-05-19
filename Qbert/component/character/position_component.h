@@ -24,7 +24,7 @@ namespace qbert
         [[nodiscard]] auto row() const -> int { return row_idx_; }
         [[nodiscard]] auto col() const -> int { return col_idx_; }
 
-        void start() override;
+        void awake() override;
 
         void update_position();
         void reset(int row_idx = 0, int col_idx = 0);

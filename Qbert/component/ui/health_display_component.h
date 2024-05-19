@@ -23,7 +23,7 @@ namespace qbert
         health_display_component &operator=(health_display_component const &other) = delete;
         health_display_component &operator=(health_display_component &&other)      = delete;
 
-        void start() override;
+        void awake() override;
         void notify(std::string const &event, mngn::subject *subject_ptr) override;
 
     private:

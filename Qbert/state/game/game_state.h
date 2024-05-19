@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "state/state.h"
 
+// Forward declarations
 namespace mngn
 {
     class scene;
@@ -8,10 +9,13 @@ namespace mngn
 
 namespace qbert
 {
+    // Forward declarations
+    class game_state_component;
+    
     class game_state : public state
     {
     public:
-        game_state() = default;
+        explicit game_state(game_state_component *game_state_comp_ptr);
         ~game_state() override = default;
 
         game_state(game_state const &other)            = delete;
@@ -19,11 +23,8 @@ namespace qbert
         game_state &operator=(game_state const &other) = delete;
         game_state &operator=(game_state &&other)      = delete;
 
-        void on_enter() override { }
-        void update()   override { }
-        void on_exit()  override { }
-
     protected:
+        game_state_component *game_state_comp_ptr_ = nullptr;
         mngn::scene *scene_ptr_ = nullptr;
     };
 }

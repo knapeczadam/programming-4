@@ -14,7 +14,7 @@ namespace qbert
     {
     }
 
-    void flicker_component::start()
+    void flicker_component::awake()
     {
         if (owner()->has_component<mngn::sprite_ui_component>())
         {
@@ -28,7 +28,7 @@ namespace qbert
 
     void flicker_component::update()
     {
-        accu_time_ += mngn::game_time::instance().delta_time;
+        accu_time_ += mngn::game_time::instance().delta_time();
         if (accu_time_ >= flicker_time_)
         {
             sprite_comp_ptr_->set_enabled(not sprite_comp_ptr_->enabled());
