@@ -31,6 +31,12 @@ namespace qbert
         multisprite_ui_comp_ptr_ = owner()->component<mngn::multisprite_ui_component>();
     }
 
+    void alphabet_component::on_enable()
+    {
+        multisprite_ui_comp_ptr_ = owner()->component<mngn::multisprite_ui_component>();
+        set_text();
+    }
+
     void alphabet_component::start()
     {
         set_text();

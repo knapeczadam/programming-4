@@ -25,6 +25,7 @@ namespace qbert
         number_component &operator=(number_component &&other)      = delete;
 
         void awake() override;
+        void on_enable() override;
         void start() override;
 
         void set_number(int number);

@@ -47,6 +47,7 @@ namespace qbert
         scene_loader &operator=(scene_loader &&other)      = delete;
 
         void load_scenes();
+        void load_scoreboard();
 
     private:
         void load_debug_scene();
@@ -74,7 +75,6 @@ namespace qbert
         void create_slick(scene_info &scene_info);
         void create_sam(scene_info &scene_info);
         void create_ui(scene_info &scene_info);
-        void create_scoreboard();
         
         void bind_player_observers(scene_info &scene_info);
 

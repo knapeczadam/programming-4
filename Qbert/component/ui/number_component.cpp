@@ -23,6 +23,12 @@ namespace qbert
         multisprite_ui_comp_ptr_ = owner()->component<mngn::multisprite_ui_component>();
     }
 
+    void number_component::on_enable()
+    {
+        multisprite_ui_comp_ptr_ = owner()->component<mngn::multisprite_ui_component>();
+        set_number(number_);
+    }
+
     void number_component::start()
     {
         set_number(number_);

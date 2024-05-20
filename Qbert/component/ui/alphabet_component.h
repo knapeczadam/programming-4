@@ -28,6 +28,7 @@ namespace qbert
         alphabet_component &operator=(alphabet_component &&other)      = delete;
 
         void awake() override;
+        void on_enable() override;
         void start() override;
 
     private:

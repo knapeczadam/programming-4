@@ -3,6 +3,7 @@
 // Project includes
 #include "menu_state.h"
 #include "component/state/game_state_component.h"
+#include "core/scene_loader.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
 #include "minigin/core/scene.h"
@@ -17,6 +18,7 @@ namespace qbert
 
     void scoreboard_state::on_enter()
     {
+        scene_loader::instance().load_scoreboard();
         scene_ptr_ = mngn::scene_manager::instance().find("scoreboard");
         scene_ptr_->set_active(true);
     }

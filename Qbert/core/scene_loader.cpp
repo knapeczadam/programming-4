@@ -405,7 +405,6 @@ namespace qbert
     		factory::ui::create_sprite(sprite_config);
     		factory::ui::create_number(number_config);
     	}
-    	create_scoreboard();
     }
 
     void scene_loader::create_score_display(scene_info &scene_info)
@@ -688,36 +687,39 @@ namespace qbert
         factory::ui::create_arrow(arrow_config);
     }
 
-    void scene_loader::create_scoreboard()
+    void scene_loader::load_scoreboard()
     {
-		auto scores               = score_manager::instance().scores();
+		auto scores = score_manager::instance().scores();
 		auto scoreboard_scene_ptr = mngn::scene_manager::instance().find("scoreboard");
 		auto scores_go_ptrs       = scoreboard_scene_ptr->find_game_objects_with_tag("score");
     	for (auto const &score_go_ptr : scores_go_ptrs)
 		{
 			scoreboard_scene_ptr->remove(score_go_ptr);
 		}
-    	
+
+    	// Top score
     	factory::ui::number_config_info number_config{};
     	number_config.scene_ptr      = scoreboard_scene_ptr;
-    	number_config.name           = "score";
+    	number_config.name           = "score_1";
     	number_config.sprite_id      = qb_sp_numbers_regular_orange;
     	number_config.texture_id     = qb_re_t_sprite_general;
     	number_config.local_position = {256.0f, 98.0f};
     	number_config.number		 = scores.begin()->first;
 		auto score_info = factory::ui::create_number(number_config);
 		score_info.go_ptr->add_tag("score");
-    	
+
+    	// Top initial
     	factory::ui::text_config_info text_config{};
     	text_config.scene_ptr        = scoreboard_scene_ptr;
-    	text_config.name             = "text_high_scores";
+    	text_config.name             = "initial_1";
     	text_config.local_position   = {142.0f, 92.0f};
     	text_config.sprite_id        = qb_sp_alphabet_large_yellow;
     	text_config.texture_id       = qb_re_t_sprite_large_text;
     	text_config.space_sprite_id  = qb_sp_alphabet_large_space;
     	text_config.space_texture_id = qb_re_t_sprite_large_text;
     	text_config.text             = scores.begin()->second;
-    	factory::ui::create_text(text_config);
+    	auto text_info = factory::ui::create_text(text_config);
+    	text_info.go_ptr->add_tag("score");
 
     	text_config.sprite_id = qb_sp_alphabet_regular_purple;
     	text_config.texture_id = qb_re_t_sprite_general;
@@ -731,24 +733,28 @@ namespace qbert
     	auto it = std::next(scores.begin());
     	for (int i = 0; i < 22; ++i, ++it)
 		{
+    		// Scores
     		int score = it->first;
 			number_config.number = score;
 			bool is_even = i % 2 == 0;
   
 			float x = score_start_pos.x + (is_even ? 0 : offset_x);
 			float y = score_start_pos.y + (i / 2) * offset_y;
-			
+
+    		number_config.name = "score_" + std::to_string(i + 2);
 			number_config.local_position = {x, y};
 			score_info = factory::ui::create_number(number_config);
 			score_info.go_ptr->add_tag("score");
 
+    		// Initials
     		x = initial_start_pos.x + (is_even ? 0 : offset_x);
     		y = initial_start_pos.y + (i / 2) * offset_y;
 
+    		text_config.name = "initial_" + std::to_string(i + 2);
     		text_config.local_position = {x, y};
     		text_config.text = it->second;
-    		auto text_into = factory::ui::create_text(text_config);
-    		text_into.go_ptr->add_tag("score");
+    		text_info = factory::ui::create_text(text_config);
+    		text_info.go_ptr->add_tag("score");
 		}
     }
 }
