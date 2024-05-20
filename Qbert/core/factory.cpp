@@ -308,7 +308,7 @@ namespace qbert
         
         for (auto const &level_config : config.level_config["levels"])
         {
-            if (level_config["id"] == config.level_id)
+            if (level_config["level_id"] == config.level_id and level_config["round_id"] == config.round_id)
             {
                 cube_config_info cube_config{};
                 cube_config.scene_ptr  = config.scene_ptr;

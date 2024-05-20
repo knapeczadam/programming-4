@@ -286,14 +286,6 @@ namespace qbert
         sprite_config.local_position = {444, 16};
         sprite_config.sprite_id      = qb_sp_text_two;
         factory::ui::create_sprite(sprite_config);
-    	
-		factory::ui::score_display_config_info score_display_config{};
-		score_display_config.scene_ptr      = scene_ptr;
-		score_display_config.parent_ptr     = root_ptr;
-		score_display_config.name           = "score_2";
-		score_display_config.sprite_id	  = qb_sp_numbers_regular_purple;
-		score_display_config.local_position = {332.0f,    48.0f};
-		scene_info.score_display_info = factory::ui::create_score_display(score_display_config);
 
 		factory::ui::health_display_config_info health_display_config{};
 		health_display_config.scene_ptr      = scene_ptr;
@@ -398,6 +390,7 @@ namespace qbert
         level_config.scene_ptr    = scene_info.scene_ptr;
         level_config.parent_ptr   = scene_info.root_ptr;
         level_config.level_id     = 1;
+    	level_config.round_id     = 1;
         level_config.level_config = level_config_manager::instance().get_level_config();
         scene_info.level_info = factory::level::create_level(level_config);
     }

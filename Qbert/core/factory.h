@@ -175,6 +175,7 @@ namespace qbert
             struct level_config_info : config_info
             {
                 int              level_id;
+                int              round_id;
                 json             level_config;
                 cube_config_info cube_config;
                 disc_config_info disc_config;

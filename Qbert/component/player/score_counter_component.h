@@ -17,10 +17,12 @@ namespace qbert
         score_counter_component &operator=(score_counter_component const &other) = delete;
         score_counter_component &operator=(score_counter_component &&other)      = delete;
 
+        void on_enable() override;
         void start() override;
+        void on_disable() override;
 
         void add_score(int score);
-        [[nodiscard]] auto score() const -> int { return score_; }
+        [[nodiscard]] auto score() const -> int;
 
     private:
         int score_ = 0;

@@ -48,6 +48,7 @@
     <ClCompile Include="core\factory.cpp" />
     <ClCompile Include="core\resources.cpp" />
     <ClCompile Include="core\scene_loader.cpp" />
+    <ClCompile Include="core\progress_manager.cpp" />
     <ClCompile Include="core\services.cpp" />
     <ClCompile Include="core\sprites.cpp" />
     <ClCompile Include="input\game_component_commands.cpp" />
@@ -107,6 +108,7 @@
     <ClInclude Include="core\factory.h" />
     <ClInclude Include="core\resources.h" />
     <ClInclude Include="core\scene_loader.h" />
+    <ClInclude Include="core\progress_manager.h" />
     <ClInclude Include="core\services.h" />
     <ClInclude Include="core\sprites.h" />
     <ClInclude Include="input\game_component_commands.h" />

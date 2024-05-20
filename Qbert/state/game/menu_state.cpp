@@ -3,6 +3,7 @@
 // Project includes
 #include <iostream>
 
+#include "core/progress_manager.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/scene.h"
 #include "minigin/core/scene_manager.h"
@@ -22,6 +23,7 @@ namespace qbert
 
     void menu_state::on_exit()
     {
+        progress_manager::instance().reset();
         scene_ptr_->set_active(false);
     }
 }
