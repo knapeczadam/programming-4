@@ -37,6 +37,7 @@ namespace qbert
             .add_sprite_pair(qb_sp_alphabet_bold_orange, "alphabet_bold_orange")
             .add_sprite_pair(qb_sp_alphabet_large_yellow, "alphabet_large_yellow")
             .add_sprite_pair(qb_sp_alphabet_large_gray, "alphabet_large_gray")
+            .add_sprite_pair(qb_sp_alphabet_large_space, "alphabet_large_space")
         
             .add_sprite_pair(qb_sp_text_orange_player, "text_orange_player")
             .add_sprite_pair(qb_sp_text_purple_player, "text_purple_player")
@@ -55,6 +56,8 @@ namespace qbert
             .add_sprite_pair(qb_sp_qbert_life, "qbert_life")
             .add_sprite_pair(qb_sp_qbert_swearing, "qbert_swearing")
             .add_sprite_pair(qb_sp_qbert_big, "qbert_big")
+            .add_sprite_pair(qb_sp_red_underline, "red_underline")
+            .add_sprite_pair(qb_sp_red_parenthesis, "red_parenthesis")
         
             .add_sprite_pair(qb_sp_level_1_disk_1, "level_1_disk_1")
             .add_sprite_pair(qb_sp_level_1_disk_2, "level_1_disk_2")

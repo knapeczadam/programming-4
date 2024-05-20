@@ -4,9 +4,6 @@
 #include "core/factory.h"
 #include "minigin/utility/singleton.h"
 
-// GLM includes
-#include <glm/glm.hpp>
-
 // Forward declarations
 namespace mngn
 {
@@ -77,6 +74,7 @@ namespace qbert
         void create_slick(scene_info &scene_info);
         void create_sam(scene_info &scene_info);
         void create_ui(scene_info &scene_info);
+        void create_scoreboard();
         
         void bind_player_observers(scene_info &scene_info);
 

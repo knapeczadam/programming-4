@@ -25,9 +25,16 @@
 #include "minigin/core/scene.h"
 #include "minigin/core/scene_manager.h"
 #include "minigin/input/input_manager.h"
+#include "minigin/core/sprite_manager.h"
+#include "core/progress_manager.h"
 
 // Standard includes
 #include <ranges>
+
+// GLM includes
+#include <glm/glm.hpp>
+
+#include "score_manager.h"
 
 namespace qbert
 {
@@ -323,19 +330,82 @@ namespace qbert
 
     void scene_loader::load_scoreboard_scene()
     {
-        auto scene_ptr = mngn::scene_manager::instance().create_scene("scoreboard");
-        scene_ptr->set_active(false);
+	    auto scene_ptr = mngn::scene_manager::instance().create_scene("scoreboard");
+    	scene_ptr->set_active(false);
+
+    	factory::ui::sprite_config_info sprite_config{};
+    	sprite_config.scene_ptr      = scene_ptr;
+    	sprite_config.name           = "qbert_left";
+    	sprite_config.local_position = {108.0f, 42.0f};
+    	sprite_config.sprite_id      = qb_sp_qbert_player_1;
+    	sprite_config.texture_id     = qb_re_t_sprite_general;
+    	sprite_config.curr_frame     = 7;
+    	sprite_config.cached         = false;
+    	factory::ui::create_sprite(sprite_config);
     	
-		factory::ui::text_config_info text_config{};
-		text_config.scene_ptr      = scene_ptr;
-		text_config.name           = "text_scoreboard";
-		text_config.local_position = {176.0f, 288.0f};
-		text_config.sprite_id      = qb_sp_alphabet_regular_purple;
-		text_config.texture_id     = qb_re_t_sprite_general;
-		text_config.space_sprite_id = qb_sp_alphabet_regular_space;
-		text_config.space_texture_id = qb_re_t_sprite_general;
-		text_config.text           = "scoreboard";
-		factory::ui::create_flickering_text(text_config);
+    	sprite_config.name           = "qbert_right";
+    	sprite_config.local_position = {354.0f, 42.0f};
+    	sprite_config.curr_frame     = 5;
+    	factory::ui::create_sprite(sprite_config);
+
+    	factory::ui::text_config_info text_config{};
+    	text_config.scene_ptr        = scene_ptr;
+    	text_config.name             = "text_high_scores";
+    	text_config.local_position   = {160.0f, 48.0f};
+    	text_config.sprite_id        = qb_sp_alphabet_regular_purple;
+    	text_config.texture_id       = qb_re_t_sprite_general;
+    	text_config.space_sprite_id  = qb_sp_alphabet_regular_space;
+    	text_config.space_texture_id = qb_re_t_sprite_general;
+    	text_config.text             = "high scores";
+    	factory::ui::create_text(text_config);
+
+    	std::vector<mngn::sprite*> sprites;
+    	std::generate_n(std::back_inserter(sprites), 4, [] { return mngn::sprite_manager::instance().load_sprite(qb_sp_red_underline, qb_re_t_sprite_general); });
+
+    	factory::ui::multisprite_config_info multisprite_config{};
+    	multisprite_config.scene_ptr      = scene_ptr;
+    	multisprite_config.name           = "underline_1";
+    	multisprite_config.local_position = {160.0f, 64.0f};
+    	multisprite_config.sprites		  = sprites;
+    	factory::ui::create_multisprite(multisprite_config);
+
+    	std::generate_n(std::back_inserter(sprites), 2, [] { return mngn::sprite_manager::instance().load_sprite(qb_sp_red_underline, qb_re_t_sprite_general); });
+    	multisprite_config.scene_ptr      = scene_ptr;
+    	multisprite_config.name           = "underline_2";
+    	multisprite_config.local_position = {240.0f, 64.0f};
+    	multisprite_config.sprites		  = sprites;
+    	factory::ui::create_multisprite(multisprite_config);
+
+    	factory::ui::number_config_info number_config{};
+    	number_config.scene_ptr      = scene_ptr;
+    	number_config.name           = "rank_number";
+    	number_config.sprite_id      = qb_sp_numbers_regular_orange;
+    	number_config.texture_id     = qb_re_t_sprite_general;
+
+		sprite_config.name = "red_parenthesis";
+    	sprite_config.sprite_id = qb_sp_red_parenthesis;
+    	sprite_config.curr_frame = 0;
+
+    	glm::vec2 start_pos{16.0f, 144.0f};
+    	float const offset_x = 224.0f;
+    	float const offset_y = 32.0f;
+
+    	for (int i = 0, j = 2; i < 22; ++i, ++j)
+    	{
+    		number_config.number = j;
+    		bool is_even = i % 2 == 0;
+    		bool is_single_digit = j < 10;
+
+    		float x_base = start_pos.x + (is_even ? 0 : offset_x);
+    		float y_base = start_pos.y + (i / 2) * offset_y;
+    		float x_offset = is_single_digit ? offset_y / 2 : 0;
+			
+    		number_config.local_position = {x_base + x_offset, y_base};
+    		sprite_config.local_position = {number_config.local_position.x + (is_single_digit ? offset_y / 2 : offset_y), y_base};
+    		factory::ui::create_sprite(sprite_config);
+    		factory::ui::create_number(number_config);
+    	}
+    	create_scoreboard();
     }
 
     void scene_loader::create_score_display(scene_info &scene_info)
@@ -616,5 +686,69 @@ namespace qbert
         arrow_config.local_position = {112, 96};
         arrow_config.delay          = 0.0f;
         factory::ui::create_arrow(arrow_config);
+    }
+
+    void scene_loader::create_scoreboard()
+    {
+		auto scores               = score_manager::instance().scores();
+		auto scoreboard_scene_ptr = mngn::scene_manager::instance().find("scoreboard");
+		auto scores_go_ptrs       = scoreboard_scene_ptr->find_game_objects_with_tag("score");
+    	for (auto const &score_go_ptr : scores_go_ptrs)
+		{
+			scoreboard_scene_ptr->remove(score_go_ptr);
+		}
+    	
+    	factory::ui::number_config_info number_config{};
+    	number_config.scene_ptr      = scoreboard_scene_ptr;
+    	number_config.name           = "score";
+    	number_config.sprite_id      = qb_sp_numbers_regular_orange;
+    	number_config.texture_id     = qb_re_t_sprite_general;
+    	number_config.local_position = {256.0f, 98.0f};
+    	number_config.number		 = scores.begin()->first;
+		auto score_info = factory::ui::create_number(number_config);
+		score_info.go_ptr->add_tag("score");
+    	
+    	factory::ui::text_config_info text_config{};
+    	text_config.scene_ptr        = scoreboard_scene_ptr;
+    	text_config.name             = "text_high_scores";
+    	text_config.local_position   = {142.0f, 92.0f};
+    	text_config.sprite_id        = qb_sp_alphabet_large_yellow;
+    	text_config.texture_id       = qb_re_t_sprite_large_text;
+    	text_config.space_sprite_id  = qb_sp_alphabet_large_space;
+    	text_config.space_texture_id = qb_re_t_sprite_large_text;
+    	text_config.text             = scores.begin()->second;
+    	factory::ui::create_text(text_config);
+
+    	text_config.sprite_id = qb_sp_alphabet_regular_purple;
+    	text_config.texture_id = qb_re_t_sprite_general;
+    	text_config.space_sprite_id = qb_sp_alphabet_regular_space;
+    	text_config.space_texture_id = qb_re_t_sprite_general;
+
+    	glm::vec2 initial_start_pos{64.0f, 144.0f};
+    	glm::vec2 score_start_pos{128.0f, 144.0f};
+    	float const offset_x = 224.0f;
+    	float const offset_y = 32.0f;
+    	auto it = std::next(scores.begin());
+    	for (int i = 0; i < 22; ++i, ++it)
+		{
+    		int score = it->first;
+			number_config.number = score;
+			bool is_even = i % 2 == 0;
+  
+			float x = score_start_pos.x + (is_even ? 0 : offset_x);
+			float y = score_start_pos.y + (i / 2) * offset_y;
+			
+			number_config.local_position = {x, y};
+			score_info = factory::ui::create_number(number_config);
+			score_info.go_ptr->add_tag("score");
+
+    		x = initial_start_pos.x + (is_even ? 0 : offset_x);
+    		y = initial_start_pos.y + (i / 2) * offset_y;
+
+    		text_config.local_position = {x, y};
+    		text_config.text = it->second;
+    		auto text_into = factory::ui::create_text(text_config);
+    		text_into.go_ptr->add_tag("score");
+		}
     }
 }

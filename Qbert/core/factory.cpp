@@ -417,7 +417,28 @@ namespace qbert
         info.go_ptr->add_tag("ui");
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
-        info.go_ptr->add_component<mngn::sprite_ui_component>(config.sprite_id, config.texture_id);
+        auto sprite_ui_comp_ptr = info.go_ptr->add_component<mngn::sprite_ui_component>(config.sprite_id, config.texture_id, config.cached);
+        if (config.curr_frame) sprite_ui_comp_ptr->sprite()->set_current_frame(config.curr_frame.value());
+        return info;
+    }
+
+    auto factory::ui::create_multisprite(multisprite_config_info const &config) -> multisprite_info
+    {
+        multisprite_info info{};
+        info.go_ptr = config.scene_ptr->create_game_object(config.name);
+        info.go_ptr->add_tag("ui");
+        info.go_ptr->set_parent(config.parent_ptr);
+        info.go_ptr->set_local_position(config.local_position);
+        if (config.orientation)
+        {
+            auto multisprite_ui_comp_ptr = info.go_ptr->add_component<mngn::multisprite_ui_component>(config.orientation.value());
+            multisprite_ui_comp_ptr->set_sprites(config.sprites);
+        }
+        else
+        {
+            auto multisprite_ui_comp_ptr = info.go_ptr->add_component<mngn::multisprite_ui_component>();
+            multisprite_ui_comp_ptr->set_sprites(config.sprites);
+        }
         return info;
     }
 

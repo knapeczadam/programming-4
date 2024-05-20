@@ -14,10 +14,12 @@
 // Forward declarations
 namespace mngn
 {
+    enum class multisprite_orientation;
     class game_font;
     class game_object;
     class scene;
     class collider_component;
+    class sprite;
 
     enum input : int;
     enum class input_type;
@@ -243,11 +245,27 @@ namespace qbert
             static auto create_round_display(round_display_config_info const &config) -> round_display_info;
 
             // Sprite
-            struct sprite_config_info : config_info { };
+            struct sprite_config_info : config_info
+            {
+                std::optional<int> curr_frame;
+                bool               cached      = true;
+            };
+
 
             struct sprite_info : info { };
 
             static auto create_sprite(sprite_config_info const &config) -> sprite_info;
+
+            // Multisprite
+            struct multisprite_config_info : config_info
+            {
+                std::vector<mngn::sprite*> sprites;
+                std::optional<mngn::multisprite_orientation> orientation;
+            };
+
+            struct multisprite_info : info { };
+            
+            static auto create_multisprite(multisprite_config_info const &config) -> multisprite_info;
 
             // Arrow
             struct arrow_config_info : config_info

@@ -11,7 +11,7 @@ namespace mngn
 {
     sprite_ui_component::sprite_ui_component() = default;
 
-    sprite_ui_component::sprite_ui_component(sprite *sprite_ptr)
+    sprite_ui_component::sprite_ui_component(mngn::sprite *sprite_ptr)
         : sprite_ptr_{sprite_ptr}
     {
     }

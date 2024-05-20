@@ -12,7 +12,7 @@ namespace mngn
     {
     public:
         sprite_ui_component();
-        explicit sprite_ui_component(sprite *sprite_ptr);
+        explicit sprite_ui_component(mngn::sprite *sprite_ptr);
         sprite_ui_component(int sprite_id, int texture_id, bool cache = true);
         ~sprite_ui_component() override;
 
@@ -24,13 +24,13 @@ namespace mngn
         void render_ui() const override;
         void update() override;
 
-        [[nodiscard]] auto get_sprite() const -> sprite * { return sprite_ptr_; }
-        void set_sprite(sprite *sprite_ptr) { sprite_ptr_ = sprite_ptr; }
+        [[nodiscard]] auto sprite() const -> sprite * { return sprite_ptr_; }
+        void set_sprite(mngn::sprite *sprite_ptr) { sprite_ptr_ = sprite_ptr; }
 
         void set_animated(bool animated) { animated_ = animated; }
 
     private:
-        sprite *sprite_ptr_ = nullptr;
+        mngn::sprite *sprite_ptr_ = nullptr;
         bool animated_      = true;
     };
 }

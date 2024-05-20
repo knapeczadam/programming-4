@@ -20,7 +20,7 @@ namespace qbert
         {
             auto const round_counter_comp_ptr = dynamic_cast<round_counter_component*>(subject_ptr);
             auto round = round_counter_comp_ptr->round();
-            sprite_ui_comp_ptr_->get_sprite()->set_current_frame(round);
+            sprite_ui_comp_ptr_->sprite()->set_current_frame(round);
         }
     }
 }

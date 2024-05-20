@@ -216,6 +216,13 @@
       "scale": 2
     },
     {
+      "id": "alphabet_large_space",
+      "rows": 8,
+      "columns": 13,
+      "left_offset_columns": 12,
+      "scale": 2
+    },
+    {
       "_comment": "TEXT",
       "id": "text_orange_player",
       "rows": 48,
@@ -365,6 +372,23 @@
       "scale": 2
     },
     {
+      "id":"red_underline",
+      "rows": 48,
+      "columns": 90,
+      "left_offset_columns": 29,
+      "top_offset_rows": 5,
+      "scale": 2
+    },
+    {
+      "id":"red_parenthesis",
+      "rows": 48,
+      "columns": 90,
+      "left_offset_columns": 39,
+      "top_offset_rows": 5,
+      "scale": 2
+    },
+    {
+      "_comment": "DISKS",
       "id": "level_1_disk_1", 
       "rows": 24,
       "columns": 45,
@@ -561,6 +585,7 @@
       "scale": 2
     },
     {
+      "_comment": "CUBES",
       "id": "level_1_cube_1",
       "rows": 24,
       "columns": 45,

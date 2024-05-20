@@ -130,6 +130,7 @@ namespace qbert
         qb_sp_alphabet_bold_orange,
         qb_sp_alphabet_large_yellow,
         qb_sp_alphabet_large_gray,
+        qb_sp_alphabet_large_space,
         
         qb_sp_text_orange_player,
         qb_sp_text_purple_player,
@@ -148,6 +149,8 @@ namespace qbert
         qb_sp_qbert_life,
         qb_sp_qbert_swearing,
         qb_sp_qbert_big,
+        qb_sp_red_underline,
+        qb_sp_red_parenthesis,
     };
     
     void init_sprites();
