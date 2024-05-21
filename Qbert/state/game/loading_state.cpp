@@ -7,15 +7,14 @@
 #include "minigin/core/renderer.h"
 #include "minigin/core/scene.h"
 #include "minigin/core/scene_manager.h"
-#include "state/game/duo_state.h"
-#include "state/game/solo_state.h"
+#include "state/game/coop_state.h"
+#include "state/game/single_state.h"
 #include "state/game/versus_state.h"
 
 namespace qbert
 {
-    loading_state::loading_state(game_state_component* game_state_comp_ptr, int game_mode)
+    loading_state::loading_state(game_state_component* game_state_comp_ptr)
         : game_state{game_state_comp_ptr}
-        , game_mode_{game_mode}
     {
     }
 
@@ -32,7 +31,7 @@ namespace qbert
         accu_time_ += mngn::game_time::instance().delta_time();
         if (accu_time_ >= loading_time_)
         {
-            load_game_mode();
+            game_state_comp_ptr_->load_game_mode();
             accu_time_ = 0.0f;
         }
     }
@@ -40,21 +39,5 @@ namespace qbert
     void loading_state::on_exit()
     {
         scene_ptr_->set_active(false);
-    }
-
-    void loading_state::load_game_mode()
-    {
-        switch (game_mode_)
-        {
-        case 0:
-            game_state_comp_ptr_->change_state<solo_state>(game_state_comp_ptr_);
-            break;
-        case 1:
-            game_state_comp_ptr_->change_state<duo_state>(game_state_comp_ptr_);
-            break;
-        case 2:
-            game_state_comp_ptr_->change_state<versus_state>(game_state_comp_ptr_);
-            break;
-        }
     }
 }

@@ -29,6 +29,15 @@ namespace qbert
     void flicker_component::on_enable()
     {
         is_flickering_ = true;
+
+        if (owner()->has_component<mngn::sprite_ui_component>())
+        {
+            sprite_comp_ptr_ = owner()->component<mngn::sprite_ui_component>();
+        }
+        else if (owner()->has_component<mngn::multisprite_ui_component>())
+        {
+            sprite_comp_ptr_ = owner()->component<mngn::multisprite_ui_component>();
+        }
     }
 
     void flicker_component::update()
@@ -47,5 +56,6 @@ namespace qbert
     void flicker_component::on_disable()
     {
         is_flickering_ = false;
+        accu_time_     = -delay_;
     }
 }

@@ -37,7 +37,7 @@ namespace mngn
     {
         for (auto const &object : objects_)
         {
-            if (object->active()) object->on_enable();
+            object->on_enable();
         }
     }
 
@@ -93,17 +93,20 @@ namespace mngn
     {
         for (auto const &object : objects_)
         {
-            auto const renderers = object->components(component_family::ui);
-            for (auto const &comp : renderers | std::views::values)
+            if (object->active())
             {
-                ImGui_ImplOpenGL3_NewFrame();
-                ImGui_ImplSDL2_NewFrame();
-                ImGui::NewFrame();
-            
-                if (comp->enabled()) static_cast<ui_component*>(comp)->render_ui();
+                auto const renderers = object->components(component_family::ui);
+                for (auto const &comp : renderers | std::views::values)
+                {
+                    ImGui_ImplOpenGL3_NewFrame();
+                    ImGui_ImplSDL2_NewFrame();
+                    ImGui::NewFrame();
                 
-                ImGui::Render();
-                ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+                    if (comp->enabled()) static_cast<ui_component*>(comp)->render_ui();
+                    
+                    ImGui::Render();
+                    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+                }
             }
         }
     }
@@ -112,7 +115,7 @@ namespace mngn
     {
         for (auto const &object : objects_)
         {
-            if (object->active()) object->on_disable();
+            object->on_disable();
         }
     }
 
@@ -140,22 +143,27 @@ namespace mngn
         return static_cast<int>(objects_.size());
     }
 
-    auto scene::find(std::string const &name) const -> game_object *
+    auto scene::find(std::string const &name, bool include_inactive) const -> game_object *
     {
-        auto const it = std::ranges::find_if(objects_, [&name](auto const &object)
+        auto const it = std::ranges::find_if(objects_, [&name, include_inactive](auto const &object)
         {
+            if (include_inactive) return object->name() == name;
             return object->active() and object->name() == name;
         });
 
         return it != objects_.end() ? it->get() : nullptr;
     }
 
-    auto scene::find_game_objects_with_tag(std::string const &tag) const -> std::vector<game_object *>
+    auto scene::find_game_objects_with_tag(std::string const &tag, bool include_inactive) const -> std::vector<game_object *>
     {
         std::vector<game_object*> objects;
         for (auto const &object : objects_)
         {
-            if (object->active() and object->has_tag(tag))
+            if (include_inactive and object->has_tag(tag))
+            {
+                objects.push_back(object.get());
+            }
+            else if (object->active() and object->has_tag(tag))
             {
                 objects.push_back(object.get());
             }

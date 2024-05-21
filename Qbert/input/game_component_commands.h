@@ -21,19 +21,32 @@ namespace qbert
         int damage_ = 1;
     };
 
-    class game_mode_command final : public mngn::game_component_command
+    class game_mode_select_command final : public mngn::game_component_command
     {
     public:
-        explicit game_mode_command(mngn::game_component *component_ptr, int game_mode = 0);
+        explicit game_mode_select_command(mngn::game_component *component_ptr, int dir);
 
         void execute() override;
 
         [[nodiscard]] auto clone() const -> std::unique_ptr<base_command> override
         {
-            return std::make_unique<game_mode_command>(*this);
+            return std::make_unique<game_mode_select_command>(*this);
         }
 
     private:
-        int game_mode_ = 0;
+        int dir_ = 0;
+    };
+    
+    class game_mode_accept_command final : public mngn::game_component_command
+    {
+    public:
+        explicit game_mode_accept_command(mngn::game_component *component_ptr);
+
+        void execute() override;
+
+        [[nodiscard]] auto clone() const -> std::unique_ptr<base_command> override
+        {
+            return std::make_unique<game_mode_accept_command>(*this);
+        }
     };
 }

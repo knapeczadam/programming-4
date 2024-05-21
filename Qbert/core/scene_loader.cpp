@@ -36,6 +36,7 @@
 #include <glm/glm.hpp>
 
 #include "score_manager.h"
+#include "component/ui/flicker_component.h"
 #include "minigin/utility/random.h"
 
 namespace qbert
@@ -47,8 +48,8 @@ namespace qbert
 #endif
         load_menu_scene();
         load_loading_scene();
-        load_solo_scene();
-        load_duo_scene();
+        load_single_scene();
+        load_coop_scene();
         load_versus_scene();
         load_game_over_scene();
         load_scoreboard_scene();
@@ -78,13 +79,18 @@ namespace qbert
 	    auto go_ptr = scene_ptr->create_game_object("game_state");
 	    auto game_state_comp_ptr = go_ptr->add_component<game_state_component>();
 
-	    auto solo_command = std::make_unique<game_mode_command>(game_state_comp_ptr, 0);
-	    auto duo_command = std::make_unique<game_mode_command>(game_state_comp_ptr, 1);
-	    auto versus_command = std::make_unique<game_mode_command>(game_state_comp_ptr, 2);
+	    auto left_command = std::make_unique<game_mode_select_command>(game_state_comp_ptr, -1);
+	    auto right_command = std::make_unique<game_mode_select_command>(game_state_comp_ptr, 1);
 
-		mngn::input_manager::instance().bind_command(mngn::input_type::keyboard, mngn::input_state::down, mngn::k_1, std::move(solo_command));
-		mngn::input_manager::instance().bind_command(mngn::input_type::keyboard, mngn::input_state::down, mngn::k_2, std::move(duo_command));
-		mngn::input_manager::instance().bind_command(mngn::input_type::keyboard, mngn::input_state::down, mngn::k_3, std::move(versus_command));
+		mngn::input_manager::instance().bind_command(mngn::input_type::keyboard, mngn::input_state::down, mngn::k_left, left_command->clone());
+		mngn::input_manager::instance().bind_command(mngn::input_type::keyboard, mngn::input_state::down, mngn::k_right, right_command->clone());
+    	
+		mngn::input_manager::instance().bind_command(mngn::input_type::controller, mngn::input_state::down, mngn::c_left, std::move(left_command));
+		mngn::input_manager::instance().bind_command(mngn::input_type::controller, mngn::input_state::down, mngn::c_right, std::move(right_command));
+
+    	auto accept_command = std::make_unique<game_mode_accept_command>(game_state_comp_ptr);
+    	mngn::input_manager::instance().bind_command(mngn::input_type::keyboard, mngn::input_state::down, mngn::k_return, accept_command->clone());
+    	mngn::input_manager::instance().bind_command(mngn::input_type::controller, mngn::input_state::pressed, mngn::c_a, std::move(accept_command));
     }
 
     void scene_loader::load_menu_scene()
@@ -210,6 +216,50 @@ namespace qbert
         number_config.local_position = {336, 416};
         number_config.number         = 14000;
         factory::ui::create_number(number_config);
+
+        text_config.name           = "row_18";
+        text_config.local_position = {32, 464};
+        text_config.text           = "single     coop     versus";
+        factory::ui::create_text(text_config);
+
+    	std::vector<mngn::sprite*> sprites;
+    	std::generate_n(std::back_inserter(sprites), 6, []
+		{
+			auto sprite_ptr =  mngn::sprite_manager::instance().load_sprite(qb_sp_alphabet_regular_special, qb_re_t_sprite_general, false);
+			sprite_ptr->set_current_frame(11);
+    		return sprite_ptr;	
+		});
+
+    	factory::ui::multisprite_config_info multisprite_config{};
+    	multisprite_config.scene_ptr      = scene_ptr;
+    	multisprite_config.name           = "underline_single";
+    	multisprite_config.local_position = {32.0f, 480.0f};
+    	multisprite_config.sprites		  = sprites;
+    	auto multisprite_info = factory::ui::create_multisprite(multisprite_config);
+    	multisprite_info.go_ptr->add_component<flicker_component>();
+    	multisprite_info.go_ptr->add_tag("active");
+		
+    	
+    	multisprite_config.name           = "underline_versus";
+    	multisprite_config.local_position = {352.0f, 480.0f};
+    	multisprite_config.sprites		  = sprites;
+    	multisprite_info = factory::ui::create_multisprite(multisprite_config);
+    	multisprite_info.go_ptr->add_component<flicker_component>();
+    	multisprite_info.go_ptr->set_active(false);
+
+		sprites.clear();
+    	std::generate_n(std::back_inserter(sprites), 4, []
+		{
+			auto sprite_ptr = mngn::sprite_manager::instance().load_sprite(qb_sp_alphabet_regular_special, qb_re_t_sprite_general, false);
+			sprite_ptr->set_current_frame(11);
+    		return sprite_ptr;	
+		});
+    	multisprite_config.name           = "underline_coop";
+    	multisprite_config.local_position = {208.0f, 480.0f};
+    	multisprite_config.sprites		  = sprites;
+    	multisprite_info = factory::ui::create_multisprite(multisprite_config);
+    	multisprite_info.go_ptr->add_component<flicker_component>();
+    	multisprite_info.go_ptr->set_active(false);
     }
 
     void scene_loader::load_loading_scene()
@@ -229,9 +279,9 @@ namespace qbert
 		factory::ui::create_flickering_text(text_config);
     }
 
-    void scene_loader::load_solo_scene()
+    void scene_loader::load_single_scene()
     {
-        auto scene_ptr = mngn::scene_manager::instance().create_scene("solo");
+        auto scene_ptr = mngn::scene_manager::instance().create_scene("single");
     	scene_ptr->set_active(false);
     	
         auto root_ptr = scene_ptr->create_game_object("root");
@@ -262,9 +312,9 @@ namespace qbert
 
     }
 
-    void scene_loader::load_duo_scene()
+    void scene_loader::load_coop_scene()
     {
-        auto scene_ptr = mngn::scene_manager::instance().create_scene("duo");
+        auto scene_ptr = mngn::scene_manager::instance().create_scene("coop");
         scene_ptr->set_active(false);
     	
         auto root_ptr = scene_ptr->create_game_object("root");

@@ -56,8 +56,8 @@ namespace qbert
         void load_game_state_scene();
         void load_menu_scene();
         void load_loading_scene();
-        void load_solo_scene();
-        void load_duo_scene();
+        void load_single_scene();
+        void load_coop_scene();
         void load_versus_scene();
         void load_game_over_scene();
         void load_input_scene();
