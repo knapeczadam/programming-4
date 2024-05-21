@@ -95,111 +95,119 @@ namespace qbert
         factory::ui::sprite_config_info sprite_config{};
         sprite_config.scene_ptr      = scene_ptr;
         sprite_config.name           = "text_qbert";
-        sprite_config.local_position = {38, 36};
+        sprite_config.local_position = {38, 32};
         sprite_config.sprite_id      = qb_sp_text_qbert;
         factory::ui::create_sprite(sprite_config);
 
         factory::ui::text_config_info text_config{};
         text_config.scene_ptr       = scene_ptr;
         text_config.name            = "credits";
-        text_config.local_position  = {338, 66};
+        text_config.local_position  = {336, 64};
         text_config.text            = "credits";
         text_config.sprite_id       = qb_sp_alphabet_regular_green;
         text_config.texture_id      = qb_re_t_sprite_general;
         text_config.space_sprite_id = qb_sp_alphabet_regular_space;
         factory::ui::create_text(text_config);
 
-        text_config.name = "row_1";
-        text_config.local_position = {98, 114};
-        text_config.text = "jump on squares to";
+        text_config.name           = "row_1";
+        text_config.local_position = {96, 112};
+        text_config.text           = "jump on squares to";
         factory::ui::create_text(text_config);
         
-        text_config.name = "row_2";
-        text_config.local_position = {98, 130};
-        text_config.text = "change them to";
+        text_config.name           = "row_2";
+        text_config.local_position = {96, 128};
+        text_config.text           = "change them to";
         factory::ui::create_text(text_config);
         
-        text_config.name = "row_3";
-        text_config.local_position = {98, 146};
-        text_config.text = "the target color";
+        text_config.name           = "row_3";
+        text_config.local_position = {96, 144};
+        text_config.text           = "the target color";
         factory::ui::create_text(text_config);
         
-        text_config.name = "row_4";
-        text_config.local_position = {114, 178};
-        text_config.text = "stay on playfield";
+        text_config.name           = "row_4";
+        text_config.local_position = {112, 176};
+        text_config.text           = "stay on playfield";
+        factory::ui::create_text(text_config);
+    	
+		sprite_config.scene_ptr      = scene_ptr;
+		sprite_config.name           = "text_!";
+		sprite_config.local_position = {384.0f, 176.0f};
+		sprite_config.sprite_id      = qb_sp_alphabet_regular_special;
+		sprite_config.curr_frame     = 3;
+    	sprite_config.cached		 = false;
+    	factory::ui::create_sprite(sprite_config);
+        
+        text_config.name           = "row_5";
+        text_config.local_position = {112, 192};
+        text_config.text           = "jumping off results";
         factory::ui::create_text(text_config);
         
-        text_config.name = "row_5";
-        text_config.local_position = {114, 194};
-        text_config.text = "jumping off results";
+        text_config.name           = "row_6";
+        text_config.local_position = {112, 208};
+        text_config.text           = "in a fatal plummet";
+        factory::ui::create_text(text_config);
+
+        text_config.name           = "row_7";
+        text_config.local_position = {112, 224};
+        text_config.text           = "unless a disk is there";
         factory::ui::create_text(text_config);
         
-        text_config.name = "row_6";
-        text_config.local_position = {114, 210};
-        text_config.text = "in a fatal plummet";
+        text_config.name           = "row_8";
+        text_config.local_position = {128, 256};
+        text_config.text           = "avoid all objects";
         factory::ui::create_text(text_config);
         
-        text_config.name = "row_7";
-        text_config.local_position = {114, 226};
-        text_config.text = "unless a disk is there";
+        text_config.name           = "row_9";
+        text_config.local_position = {128, 272};
+        text_config.text           = "and creatures that";
         factory::ui::create_text(text_config);
         
-        text_config.name = "row_8";
-        text_config.local_position = {130, 258};
-        text_config.text = "avoid all objects";
+        text_config.name           = "row_10";
+        text_config.local_position = {128, 288};
+        text_config.text           = "are not green";
         factory::ui::create_text(text_config);
         
-        text_config.name = "row_9";
-        text_config.local_position = {130, 274};
-        text_config.text = "and creatures that";
+        text_config.name           = "row_11";
+        text_config.local_position = {144, 320};
+        text_config.text           = "use spinning disks";
         factory::ui::create_text(text_config);
         
-        text_config.name = "row_10";
-        text_config.local_position = {130, 290};
-        text_config.text = "are not green";
+        text_config.name           = "row_12";
+        text_config.local_position = {144, 336};
+        text_config.text           = "to lure snake to";
         factory::ui::create_text(text_config);
         
-        text_config.name = "row_11";
-        text_config.local_position = {146, 322};
-        text_config.text = "use spinning disks";
+        text_config.name           = "row_14";
+        text_config.local_position = {144, 352};
+        text_config.text           = "his death";
         factory::ui::create_text(text_config);
         
-        text_config.name = "row_12";
-        text_config.local_position = {146, 338};
-        text_config.text = "to lure snake to";
+        text_config.name           = "row_15";
+        text_config.local_position = {160, 384};
+        text_config.text           = "extra life at";
         factory::ui::create_text(text_config);
         
-        text_config.name = "row_14";
-        text_config.local_position = {146, 354};
-        text_config.text = "his death";
+        text_config.name           = "row_16";
+        text_config.local_position = {255, 400};
+        text_config.text           = "and each";
         factory::ui::create_text(text_config);
         
-        text_config.name = "row_15";
-        text_config.local_position = {162, 386};
-        text_config.text = "extra life at";
-        factory::ui::create_text(text_config);
-        
-        text_config.name = "row_16";
-        text_config.local_position = {258, 402};
-        text_config.text = "and each";
-        factory::ui::create_text(text_config);
-        
-        text_config.name = "row_17";
-        text_config.local_position = {162, 418};
-        text_config.text = "additional";
+        text_config.name           = "row_17";
+        text_config.local_position = {160, 416};
+        text_config.text           = "additional";
         factory::ui::create_text(text_config);
 
         factory::ui::number_config_info number_config{};
         number_config.scene_ptr      = scene_ptr;
         number_config.name           = "number_1";
-        number_config.local_position = {176, 402};
+        number_config.local_position = {176, 400};
         number_config.number         = 8000;
         number_config.sprite_id      = qb_sp_numbers_regular_orange;
         number_config.texture_id     = qb_re_t_sprite_general;
         factory::ui::create_number(number_config);
         
         number_config.name           = "number_2";
-        number_config.local_position = {336, 418};
+        number_config.local_position = {336, 416};
         number_config.number         = 14000;
         factory::ui::create_number(number_config);
     }
@@ -210,14 +218,14 @@ namespace qbert
         scene_ptr->set_active(false);
     	
 		factory::ui::text_config_info text_config{};
-		text_config.scene_ptr      = scene_ptr;
-		text_config.name           = "text_loading";
-		text_config.local_position = {176.0f, 288.0f};
-		text_config.sprite_id      = qb_sp_alphabet_regular_purple;
-		text_config.texture_id     = qb_re_t_sprite_general;
-		text_config.space_sprite_id = qb_sp_alphabet_regular_space;
+		text_config.scene_ptr        = scene_ptr;
+		text_config.name             = "text_loading";
+		text_config.local_position   = {176.0f, 288.0f};
+		text_config.sprite_id        = qb_sp_alphabet_regular_purple;
+		text_config.texture_id       = qb_re_t_sprite_general;
+		text_config.space_sprite_id  = qb_sp_alphabet_regular_space;
 		text_config.space_texture_id = qb_re_t_sprite_general;
-		text_config.text           = "loading";
+		text_config.text             = "loading";
 		factory::ui::create_flickering_text(text_config);
     }
 
@@ -231,7 +239,7 @@ namespace qbert
 
     	scene_info scene_info{};
     	scene_info.scene_ptr = scene_ptr;
-    	scene_info.root_ptr = root_ptr;
+    	scene_info.root_ptr  = root_ptr;
     	scene_info.level_manager_comp_ptr = level_manager_comp_ptr;
     	
     	create_ui(scene_info);
@@ -263,8 +271,8 @@ namespace qbert
         auto level_manager_comp_ptr = root_ptr->add_component<level_manager_component>();
     	
     	scene_info scene_info{};
-    	scene_info.scene_ptr = scene_ptr;
-    	scene_info.root_ptr = root_ptr;
+    	scene_info.scene_ptr              = scene_ptr;
+    	scene_info.root_ptr               = root_ptr;
     	scene_info.level_manager_comp_ptr = level_manager_comp_ptr;
     	
     	create_ui(scene_info);
@@ -332,14 +340,14 @@ namespace qbert
     	factory::ui::create_multisprite(multisprite_config);
     	
 		factory::ui::text_config_info text_config{};
-		text_config.scene_ptr      = scene_ptr;
-		text_config.name           = "text_game_over";
-		text_config.local_position = {176.0f, 288.0f};
-		text_config.sprite_id      = qb_sp_alphabet_regular_purple;
-		text_config.texture_id     = qb_re_t_sprite_general;
-		text_config.space_sprite_id = qb_sp_alphabet_regular_space;
+		text_config.scene_ptr        = scene_ptr;
+		text_config.name             = "text_game_over";
+		text_config.local_position   = {176.0f, 288.0f};
+		text_config.sprite_id        = qb_sp_alphabet_regular_purple;
+		text_config.texture_id       = qb_re_t_sprite_general;
+		text_config.space_sprite_id  = qb_sp_alphabet_regular_space;
 		text_config.space_texture_id = qb_re_t_sprite_general;
-		text_config.text           = "game over";
+		text_config.text             = "game over";
 		factory::ui::create_flickering_text(text_config);
     }
 
@@ -357,14 +365,14 @@ namespace qbert
     	glm::vec2 start_pos {64.0f, 288.0f};
     	float offset_x = 64.0f;
     	float offset_y = 32.0f;
-    	bool indented = false;
+    	bool indented  = false;
 
     	for (int i = 1, c = 'a'; i <= 26; ++i, ++c)
     	{
     		text_config.local_position.x = start_pos.x + offset_x * ((i - 1) % 6);
     		text_config.local_position.y = start_pos.y;
-    		text_config.name = std::string{"text_"} + static_cast<char>(c);
-    		text_config.text = static_cast<char>(c);
+    		text_config.name             = std::string{"text_"} + static_cast<char>(c);
+    		text_config.text             = static_cast<char>(c);
     		factory::ui::create_text(text_config);
     		
     		if (i % 6 == 0)
@@ -436,7 +444,7 @@ namespace qbert
     	std::vector<mngn::sprite*> sprites;
     	std::generate_n(std::back_inserter(sprites), 4, []
     	{
-    		auto sprite_ptr  = mngn::sprite_manager::instance().load_sprite(qb_sp_alphabet_regular_special, qb_re_t_sprite_general);
+    		auto sprite_ptr  = mngn::sprite_manager::instance().load_sprite(qb_sp_alphabet_regular_special, qb_re_t_sprite_general, false);
     		sprite_ptr->set_current_frame(11);
     		return sprite_ptr;
     	});
@@ -450,7 +458,7 @@ namespace qbert
 
     	std::generate_n(std::back_inserter(sprites), 2, []
     	{
-    		auto sprite_ptr  = mngn::sprite_manager::instance().load_sprite(qb_sp_alphabet_regular_special, qb_re_t_sprite_general);
+    		auto sprite_ptr  = mngn::sprite_manager::instance().load_sprite(qb_sp_alphabet_regular_special, qb_re_t_sprite_general, false);
     		sprite_ptr->set_current_frame(11);
     		return sprite_ptr;
     	});
@@ -498,7 +506,7 @@ namespace qbert
 		score_display_config.parent_ptr     = scene_info.root_ptr;
 		score_display_config.name           = "score_1";
 		score_display_config.local_position = {32.0f,    48.0f};
-		score_display_config.sprite_id	  = qb_sp_numbers_regular_orange;
+		score_display_config.sprite_id	    = qb_sp_numbers_regular_orange;
 		score_display_config.texture_id     = qb_re_t_sprite_general;
 		scene_info.score_display_info = factory::ui::create_score_display(score_display_config);
     }
@@ -623,7 +631,7 @@ namespace qbert
 		coily_config.parent_ptr     = scene_info.root_ptr;
 		coily_config.name           = "coily_1";
     	coily_config.local_position = {-32.0f, -32.0f};
-		coily_config.sprite_id	   = qb_sp_coily_egg;
+		coily_config.sprite_id	    = qb_sp_coily_egg;
 		coily_config.texture_id     = qb_re_t_sprite_general;
 		scene_info.coily_info = factory::character::create_coily(coily_config);
     	
@@ -639,7 +647,7 @@ namespace qbert
 		ugg_config.parent_ptr     = scene_info.root_ptr;
 		ugg_config.name           = "ugg_1";
     	ugg_config.local_position = {-32.0f, -32.0f};
-		ugg_config.sprite_id	   = qb_sp_ugg;
+		ugg_config.sprite_id	  = qb_sp_ugg;
 		ugg_config.texture_id     = qb_re_t_sprite_general;
 		auto ugg_info = factory::character::create_ugg(ugg_config);
     	
@@ -655,7 +663,7 @@ namespace qbert
 		wrong_way_config.parent_ptr     = scene_info.root_ptr;
 		wrong_way_config.name           = "wrong_way_1";
     	wrong_way_config.local_position = {-32.0f, -32.0f};
-		wrong_way_config.sprite_id	   = qb_sp_wrong_way;
+		wrong_way_config.sprite_id	    = qb_sp_wrong_way;
 		wrong_way_config.texture_id     = qb_re_t_sprite_general;
 		scene_info.wrong_way_info = factory::character::create_wrong_way(wrong_way_config);
     	
@@ -667,12 +675,12 @@ namespace qbert
     void scene_loader::create_green_ball(scene_info &scene_info)
     {
 		factory::character::green_ball_config_info green_ball_config{};
-		green_ball_config.scene_ptr  = scene_info.scene_ptr;
-		green_ball_config.parent_ptr = scene_info.root_ptr;
-		green_ball_config.name       = "green_ball_1";
+		green_ball_config.scene_ptr      = scene_info.scene_ptr;
+		green_ball_config.parent_ptr     = scene_info.root_ptr;
+		green_ball_config.name           = "green_ball_1";
     	green_ball_config.local_position = {-32.0f, -32.0f};
-		green_ball_config.sprite_id  = qb_sp_ball_green;
-		green_ball_config.texture_id = qb_re_t_sprite_general;
+		green_ball_config.sprite_id      = qb_sp_ball_green;
+		green_ball_config.texture_id     = qb_re_t_sprite_general;
 		scene_info.green_ball_info = factory::character::create_green_ball(green_ball_config);
     	
 		// Observers
@@ -683,12 +691,12 @@ namespace qbert
     void scene_loader::create_slick(scene_info &scene_info)
     {
 		factory::character::slick_config_info slick_config{};
-		slick_config.scene_ptr  = scene_info.scene_ptr;
-		slick_config.parent_ptr = scene_info.root_ptr;
-		slick_config.name       = "slick_1";
+		slick_config.scene_ptr      = scene_info.scene_ptr;
+		slick_config.parent_ptr     = scene_info.root_ptr;
+		slick_config.name           = "slick_1";
     	slick_config.local_position = {-32.0f, -32.0f};
-		slick_config.sprite_id  = qb_sp_slick;
-		slick_config.texture_id = qb_re_t_sprite_general;
+		slick_config.sprite_id      = qb_sp_slick;
+		slick_config.texture_id     = qb_re_t_sprite_general;
 		scene_info.slick_info = factory::character::create_slick(slick_config);
     	
 		// Observers
@@ -700,13 +708,13 @@ namespace qbert
     void scene_loader::create_sam(scene_info &scene_info)
     {
 		factory::character::sam_config_info sam_config{};
-		sam_config.scene_ptr  = scene_info.scene_ptr;
-		sam_config.parent_ptr = scene_info.root_ptr;
-		sam_config.name       = "sam_1";
+		sam_config.scene_ptr      = scene_info.scene_ptr;
+		sam_config.parent_ptr     = scene_info.root_ptr;
+		sam_config.name           = "sam_1";
     	sam_config.local_position = {-32.0f, -32.0f};
-		sam_config.sprite_id  = qb_sp_sam;
-		sam_config.texture_id = qb_re_t_sprite_general;
-		scene_info.sam_info = factory::character::create_sam(sam_config);
+		sam_config.sprite_id      = qb_sp_sam;
+		sam_config.texture_id     = qb_re_t_sprite_general;
+		scene_info.sam_info       = factory::character::create_sam(sam_config);
 		// Observers
 		scene_info.sam_info.position_comp_ptr->add_observer(scene_info.level_manager_comp_ptr);
 		scene_info.sam_info.health_comp_ptr->add_observer(scene_info.level_manager_comp_ptr);
@@ -870,7 +878,7 @@ namespace qbert
     	{
     		scene_ptr->remove(countdown_go_ptr);
     	}
-    	
+
     	if (ranking == 1)
     	{
 			factory::ui::text_config_info text_config{};
@@ -907,27 +915,27 @@ namespace qbert
 			text_info = factory::ui::create_text(text_config);
 			text_info.go_ptr->add_tag("text_input");
     		
-			text_config.name             = "row_2";
-			text_config.local_position   = {80.0f, 128.0f};
-			text_config.text             = "others to become the";
+			text_config.name           = "row_2";
+			text_config.local_position = {80.0f, 128.0f};
+			text_config.text           = "others to become the";
 			text_info = factory::ui::create_text(text_config);
 			text_info.go_ptr->add_tag("text_input");
     		
-			text_config.name             = "row_3";
-			text_config.local_position   = {128.0f, 160.0f};
-			text_config.text             = "supreme noser";
+			text_config.name           = "row_3";
+			text_config.local_position = {128.0f, 160.0f};
+			text_config.text           = "supreme noser";
 			text_info = factory::ui::create_text(text_config);
 			text_info.go_ptr->add_tag("text_input");
     		
-			text_config.name             = "row_4";
-			text_config.local_position   = {32.0f, 208.0f};
-			text_config.text             = "kindly enter your initials";
+			text_config.name           = "row_4";
+			text_config.local_position = {32.0f, 208.0f};
+			text_config.text           = "kindly enter your initials";
 			text_info = factory::ui::create_text(text_config);
 			text_info.go_ptr->add_tag("text_input");
     		
-			text_config.name             = "row_5";
-			text_config.local_position   = {128.0f, 224.0f};
-			text_config.text             = "for all to see";
+			text_config.name           = "row_5";
+			text_config.local_position = {128.0f, 224.0f};
+			text_config.text           = "for all to see";
 			text_info = factory::ui::create_text(text_config);
 			text_info.go_ptr->add_tag("text_input");
     		
@@ -1007,117 +1015,184 @@ namespace qbert
 	    	auto number_info = factory::ui::create_number(number_config);
 	    	number_info.go_ptr->add_tag("text_input");
 
-	    	text_config.name             = "row_3";
+	    	text_config.name = "row_3";
 	    	if (ranking == 2)
 	    	{
-				text_config.local_position   = {48.0f, 160.0f};
-				text_config.text             = "you are second only to one";
+				text_config.local_position = {48.0f, 160.0f};
+				text_config.text           = "you are second only to one";
 	    	}
 	    	else if (ranking == 3)
 	    	{
 	    		
-				text_config.local_position   = {48.0f, 160.0f};
-				text_config.text             = "you must know something";
+				text_config.local_position = {48.0f, 160.0f};
+				text_config.text           = "you must know something";
 	    	}
 		    else if (ranking == 4)
 		    {
-				text_config.local_position   = {32.0f, 160.0f};
-				text_config.text             = "you make it look so easy";
+				text_config.local_position = {48.0f, 160.0f};
+				text_config.text           = "you make it look so easy";
+		    	
+				sprite_config.local_position = {432.0f, 160.0f};
+				sprite_info = factory::ui::create_sprite(sprite_config);
+				sprite_info.go_ptr->add_tag("text_input");
 		    }
 	    	else if (ranking == 5)
 	    	{
-				text_config.local_position   = {32.0f, 160.0f};
-				text_config.text             = "and outstanding achievement";
+				text_config.local_position = {32.0f, 160.0f};
+				text_config.text           = "and outstanding achievement";
 	    	}
 	    	else if (ranking == 6)
 	    	{
-				text_config.local_position   = {32.0f, 160.0f};
-				text_config.text             = "quite impressive actually";
+				text_config.local_position = {32.0f, 160.0f};
+				text_config.text           = "quite impressive actually";
 	    	}
 	    	else if (ranking == 7)
 	    	{
-				text_config.local_position   = {32.0f, 160.0f};
-				text_config.text             = "an expert with a joystick"; // !
+				text_config.local_position = {32.0f, 160.0f};
+				text_config.text           = "an expert with a joystick";
+	    		
+				sprite_config.local_position = {432.0f, 160.0f};
+				sprite_info = factory::ui::create_sprite(sprite_config);
+				sprite_info.go_ptr->add_tag("text_input");
 	    	}
 	    	else if (ranking == 8)
 	    	{
-				text_config.local_position   = {96.0f, 160.0f};
-				text_config.text             = "not shabby at all"; // !
+				text_config.local_position = {96.0f, 160.0f};
+				text_config.text           = "not shabby at all";
+	    		
+				sprite_config.local_position = {368.0f, 160.0f};
+				sprite_info = factory::ui::create_sprite(sprite_config);
+				sprite_info.go_ptr->add_tag("text_input");
 	    	}
 	    	else if (ranking == 9)
 	    	{
-				text_config.local_position   = {80.0f, 160.0f};
-				text_config.text             = "a potential champion"; // !
+				text_config.local_position = {80.0f, 160.0f};
+				text_config.text           = "a potential champion";
+	    		
+				sprite_config.local_position = {400.0f, 160.0f};
+				sprite_info = factory::ui::create_sprite(sprite_config);
+				sprite_info.go_ptr->add_tag("text_input");
 	    	}
 	    	else if (ranking == 10)
 	    	{
-				text_config.local_position   = {32.0f, 160.0f};
-				text_config.text             = "you made the top ten club"; // !
+				text_config.local_position = {32.0f, 160.0f};
+				text_config.text           = "you made the top ten club";
+	    		
+				sprite_config.local_position = {432.0f, 160.0f};
+				sprite_info = factory::ui::create_sprite(sprite_config);
+				sprite_info.go_ptr->add_tag("text_input");
 	    	}
 	    	else if (ranking == 11)
 	    	{
-				text_config.local_position   = {48.0f, 160.0f};
-				text_config.text             = "just missed the top ten"; // !
+				text_config.local_position = {48.0f, 160.0f};
+				text_config.text           = "just missed the top ten";
+	    		
+				sprite_config.local_position = {416.0f, 160.0f};
+				sprite_info = factory::ui::create_sprite(sprite_config);
+				sprite_info.go_ptr->add_tag("text_input");
 	    	}
 	    	else if (ranking == 12)
 	    	{
-				text_config.local_position   = {32.0f, 160.0f};
-				text_config.text             = "you could have done worse"; // !
+				text_config.local_position = {32.0f, 160.0f};
+				text_config.text           = "you could have done worse";
+	    		
+				sprite_config.local_position = {432.0f, 160.0f};
+				sprite_info = factory::ui::create_sprite(sprite_config);
+				sprite_info.go_ptr->add_tag("text_input");
 	    	}
 	    	else if (ranking == 13)
 	    	{
-				text_config.local_position   = {48.0f, 160.0f};
-				text_config.text             = "almost out of the teens"; // !
+				text_config.local_position = {48.0f, 160.0f};
+				text_config.text           = "almost out of the teens";
+	    		
+				sprite_config.local_position = {416.0f, 160.0f};
+				sprite_info = factory::ui::create_sprite(sprite_config);
+				sprite_info.go_ptr->add_tag("text_input");
 	    	}
 	    	else if (ranking == 14)
 	    	{
-				text_config.local_position   = {64.0f, 160.0f};
-				text_config.text             = "looking good out there"; // !
+				text_config.local_position = {64.0f, 160.0f};
+				text_config.text           = "looking good out there";
+	    		
+				sprite_config.local_position = {416.0f, 160.0f};
+				sprite_info = factory::ui::create_sprite(sprite_config);
+				sprite_info.go_ptr->add_tag("text_input");
 	    	}
 	    	else if (ranking == 15)
 	    	{
-				text_config.local_position   = {32.0f, 160.0f};
-				text_config.text             = "a truly honorable position";
+				text_config.local_position = {32.0f, 160.0f};
+				text_config.text           = "a truly honorable position";
 	    	}
 	    	else if (ranking == 16)
 	    	{
-				text_config.local_position   = {48.0f, 160.0f};
-				text_config.text             = "now try and get serious"; // !
+				text_config.local_position = {48.0f, 160.0f};
+				text_config.text           = "now try and get serious";
+	    		
+				sprite_config.local_position = {416.0f, 160.0f};
+				sprite_info = factory::ui::create_sprite(sprite_config);
+				sprite_info.go_ptr->add_tag("text_input");
 	    	}
 	    	else if (ranking == 17)
 	    	{
-				text_config.local_position   = {32.0f, 160.0f};
-				text_config.text             = "its a long ways to the top";
+				text_config.local_position = {32.0f, 160.0f};
+				text_config.text           = "its a long ways to the top";
 	    	}
 	    	else if (ranking == 18)
 	    	{
-				text_config.local_position   = {64.0f, 160.0f};
-				text_config.text             = "practice makes perfect"; // !
+				text_config.local_position = {64.0f, 160.0f};
+				text_config.text           = "practice makes perfect";
+	    		
+				sprite_config.local_position = {416.0f, 160.0f};
+				sprite_info = factory::ui::create_sprite(sprite_config);
+				sprite_info.go_ptr->add_tag("text_input");
 	    	}
 	    	else if (ranking == 19)
 	    	{
-				text_config.local_position   = {64.0f, 160.0f};
-				text_config.text             = "nothing to brag about"; // !
+				text_config.local_position = {64.0f, 160.0f};
+				text_config.text           = "nothing to brag about"; // !
 	    	}
 	    	else if (ranking == 20)
 	    	{
-				text_config.local_position   = {32.0f, 160.0f};
-				text_config.text             = "almost got into the teens"; // !
+				text_config.local_position = {32.0f, 160.0f};
+				text_config.text           = "almost got into the teens";
+	    		
+				sprite_config.local_position = {432.0f, 160.0f};
+				sprite_info = factory::ui::create_sprite(sprite_config);
+				sprite_info.go_ptr->add_tag("text_input");
 	    	}
 	    	else if (ranking == 21)
 	    	{
-				text_config.local_position   = {64.0f, 160.0f};
-				text_config.text             = "only    scores to beat"; // ! TODO: 20
+				text_config.local_position = {64.0f, 160.0f};
+				text_config.text           = "only    scores to beat";
+	    		
+				number_config.sprite_id      = qb_sp_numbers_regular_purple;
+				number_config.texture_id     = qb_re_t_sprite_general;
+				number_config.local_position = {144.0f, 160.0f};
+				number_config.number		 = 20;
+				number_info = factory::ui::create_number(number_config);
+				number_info.go_ptr->add_tag("text_input");
+	    		
+				sprite_config.local_position = {416.0f, 160.0f};
+				sprite_info = factory::ui::create_sprite(sprite_config);
+				sprite_info.go_ptr->add_tag("text_input");
 	    	}
 	    	else if (ranking == 22)
 	    	{
-				text_config.local_position   = {64.0f, 160.0f};
-				text_config.text             = "not bad for a beginner"; // !
+				text_config.local_position = {64.0f, 160.0f};
+				text_config.text           = "not bad for a beginner";
+	    		
+				sprite_config.local_position = {416.0f, 160.0f};
+				sprite_info = factory::ui::create_sprite(sprite_config);
+				sprite_info.go_ptr->add_tag("text_input");
 	    	}
 	    	else if (ranking == 23)
 	    	{
-				text_config.local_position   = {48.0f, 160.0f};
-				text_config.text             = "the bottom of the barrel"; // !
+				text_config.local_position = {48.0f, 160.0f};
+				text_config.text           = "the bottom of the barrel";
+	    		
+				sprite_config.local_position = {432.0f, 160.0f};
+				sprite_info = factory::ui::create_sprite(sprite_config);
+				sprite_info.go_ptr->add_tag("text_input");
 	    	}
 			text_info = factory::ui::create_text(text_config);
 			text_info.go_ptr->add_tag("text_input");
@@ -1128,21 +1203,21 @@ namespace qbert
 			text_info = factory::ui::create_text(text_config);
 			text_info.go_ptr->add_tag("text_input");
 	    	
-			text_config.name             = "row_5";
-			text_config.local_position   = {48.0f, 208.0f};
-			text_config.text             = "either button will enter";
+			text_config.name           = "row_5";
+			text_config.local_position = {48.0f, 208.0f};
+			text_config.text           = "either button will enter";
 			text_info = factory::ui::create_text(text_config);
 			text_info.go_ptr->add_tag("text_input");
 	    	
-			text_config.name             = "row_6";
-			text_config.local_position   = {48.0f, 240.0f};
-			text_config.text             = "use   to      use   when";
+			text_config.name           = "row_6";
+			text_config.local_position = {48.0f, 240.0f};
+			text_config.text           = "use   to      use   when";
 			text_info = factory::ui::create_text(text_config);
 			text_info.go_ptr->add_tag("text_input");
 	    	
-			text_config.name             = "row_7";
-			text_config.local_position   = {144.0f, 256.0f};
-			text_config.text             = "erase         done";
+			text_config.name           = "row_7";
+			text_config.local_position = {144.0f, 256.0f};
+			text_config.text           = "erase         done";
 			text_info = factory::ui::create_text(text_config);
 			text_info.go_ptr->add_tag("text_input");
 
