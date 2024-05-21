@@ -4,6 +4,7 @@
 #include "minigin/core/game_object.h"
 #include "component/state/game_state_component.h"
 #include "minigin/core/game_time.h"
+#include "minigin/core/renderer.h"
 #include "minigin/core/scene.h"
 #include "minigin/core/scene_manager.h"
 #include "state/game/duo_state.h"
@@ -22,6 +23,8 @@ namespace qbert
     {
         scene_ptr_ = mngn::scene_manager::instance().find("loading");
         scene_ptr_->set_active(true);
+        
+        mngn::renderer::instance().set_background_color({});
     }
 
     void loading_state::update()

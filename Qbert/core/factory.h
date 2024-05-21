@@ -281,8 +281,9 @@ namespace qbert
             struct text_config_info : config_info
             {
                 std::string text;
-                int         space_sprite_id;
-                int         space_texture_id;
+                int          space_sprite_id;
+                int          space_texture_id;
+                unsigned int spacing;
                 
             };
 

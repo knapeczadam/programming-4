@@ -1,12 +1,15 @@
 ﻿#include "game_over_state.h"
 
 // Project includes
+#include "input_state.h"
 #include "scoreboard_state.h"
 #include "component/character/jump_component.h"
 #include "component/npc/spawn_component.h"
 #include "component/player/fall_component.h"
 #include "component/state/game_state_component.h"
 #include "component/ui/flicker_component.h"
+#include "core/progress_manager.h"
+#include "core/score_manager.h"
 #include "minigin/component/rendering/sprite_component.h"
 #include "minigin/component/ui/sprite_ui_component.h"
 #include "minigin/core/game_object.h"
@@ -50,7 +53,15 @@ namespace qbert
         if (accu_time_ >= game_over_time_)
         {
             accu_time_ = 0.0f;
-            game_state_comp_ptr_->change_state<scoreboard_state>(game_state_comp_ptr_);
+            
+            if (score_manager::instance().is_below_lowest_score(progress_manager::instance().score()))
+            {
+                game_state_comp_ptr_->change_state<scoreboard_state>(game_state_comp_ptr_);
+            }
+            else
+            {
+                game_state_comp_ptr_->change_state<input_state>(game_state_comp_ptr_);
+            }
         }
     }
 
@@ -62,14 +73,18 @@ namespace qbert
         std::ranges::for_each(current_scene_.flicker_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(true); });
         std::ranges::for_each(current_scene_.sprite_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_animated(true); });
         std::ranges::for_each(current_scene_.sprite_ui_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_animated(true); });
-        
+
+        // Trigger on_enable to reset the components
         current_scene_.root_ptr->set_active(false);
         current_scene_.root_ptr->set_active(true);
+        
         current_scene_.root_ptr->find("player_1_swearing")->set_active(false);
         if (current_scene_.root_ptr->find("player_2_swearing")) current_scene_.root_ptr->find("player_2_swearing")->set_active(false);
-        
+
+        // Hide the current scene
         current_scene_.scene_ptr->clear_tag();
         current_scene_.scene_ptr->set_active(false);
+        
         scene_ptr_->set_active(false);
     }
 }

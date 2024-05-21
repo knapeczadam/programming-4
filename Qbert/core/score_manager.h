@@ -26,6 +26,7 @@ namespace qbert
         [[nodiscard]] auto lowest_score() const -> int;
         [[nodiscard]] auto is_top_score(int score) const -> bool;
         [[nodiscard]] auto is_below_lowest_score(int score) const -> bool;
+        [[nodiscard]] auto calculate_ranking(int score) const -> int;
 
         void load_scoreboard(std::string const &file_path);
         void save_scoreboard();

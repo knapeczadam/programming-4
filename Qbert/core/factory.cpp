@@ -461,7 +461,7 @@ namespace qbert
         info.go_ptr->add_tag("ui");
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
-        info.go_ptr->add_component<mngn::multisprite_ui_component>();
+        info.go_ptr->add_component<mngn::multisprite_ui_component>(mngn::multisprite_orientation::horizontal, config.spacing);
         info.go_ptr->add_component<alphabet_component>(config.text, config.sprite_id, config.texture_id, config.space_sprite_id, config.space_texture_id);
         return info;
     }

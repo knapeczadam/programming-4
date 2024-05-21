@@ -126,11 +126,14 @@ namespace qbert
         
         qb_sp_alphabet_regular_green,
         qb_sp_alphabet_regular_purple,
+        qb_sp_alphabet_regular_special,
         qb_sp_alphabet_regular_space,
         qb_sp_alphabet_bold_orange,
         qb_sp_alphabet_large_yellow,
         qb_sp_alphabet_large_gray,
         qb_sp_alphabet_large_space,
+        qb_sp_alphabet_large_special_yellow,
+        qb_sp_alphabet_large_special_gray,
         
         qb_sp_text_orange_player,
         qb_sp_text_purple_player,
@@ -143,14 +146,15 @@ namespace qbert
         qb_sp_text_two,
         qb_sp_text_large_yellow_qbert,
         qb_sp_text_large_gray_qbert,
+        qb_sp_text_rub,
+        qb_sp_text_end,
         
         qb_sp_arrow_left,
         qb_sp_arrow_right,
         qb_sp_qbert_life,
         qb_sp_qbert_swearing,
         qb_sp_qbert_big,
-        qb_sp_red_underline,
-        qb_sp_red_parenthesis,
+        qb_sp_black_square,
     };
     
     void init_sprites();

@@ -33,6 +33,20 @@ namespace qbert
         return score < scores_.rbegin()->first;
     }
 
+    auto score_manager::calculate_ranking(int score) const -> int
+    {
+        int rank = 1;
+        for (auto const &[s, _] : scores_)
+        {
+            if (score > s)
+            {
+                return rank;
+            }
+            ++rank;
+        }
+        return rank;
+    }
+
     void score_manager::load_scoreboard(std::string const &file_path)
     {
         file_path_ = file_path;

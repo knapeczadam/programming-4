@@ -5,6 +5,7 @@
 
 #include "core/progress_manager.h"
 #include "minigin/core/game_object.h"
+#include "minigin/core/renderer.h"
 #include "minigin/core/scene.h"
 #include "minigin/core/scene_manager.h"
 
@@ -19,6 +20,8 @@ namespace qbert
     {
         scene_ptr_ = mngn::scene_manager::instance().find("menu");
         scene_ptr_->set_active(true);
+
+        mngn::renderer::instance().set_background_color({49, 32, 115, 0});
     }
 
     void menu_state::on_exit()

@@ -48,6 +48,8 @@ namespace qbert
 
         void load_scenes();
         void load_scoreboard();
+        void load_countdown(int seconds);
+        void load_input_message(int ranking);
 
     private:
         void load_debug_scene();
@@ -58,6 +60,7 @@ namespace qbert
         void load_duo_scene();
         void load_versus_scene();
         void load_game_over_scene();
+        void load_input_scene();
         void load_scoreboard_scene();
 
         void create_score_display(scene_info &scene_info);

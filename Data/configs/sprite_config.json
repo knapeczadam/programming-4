@@ -183,6 +183,16 @@
       "id": "alphabet_regular_space",
       "rows": 48,
       "columns": 90,
+      "left_offset_columns": 27,
+      "top_offset_rows": 5,
+      "scale": 2
+    },
+    {
+      "id": "alphabet_regular_special",
+      "rows": 48,
+      "columns": 90,
+      "sub_rows": 2,
+      "sub_columns": 11,
       "left_offset_columns": 29,
       "top_offset_rows": 4,
       "scale": 2
@@ -220,6 +230,25 @@
       "rows": 8,
       "columns": 13,
       "left_offset_columns": 12,
+      "scale": 2
+    },
+    {
+      "id": "alphabet_large_special_yellow",
+      "rows": 8,
+      "columns": 13,
+      "sub_rows": 1,
+      "sub_columns": 3,
+      "left_offset_columns": 9,
+      "scale": 2
+    },
+    {
+      "id": "alphabet_large_special_gray",
+      "rows": 8,
+      "columns": 13,
+      "sub_rows": 1,
+      "sub_columns": 3,
+      "top_offset_rows": 4,
+      "left_offset_columns": 9,
       "scale": 2
     },
     {
@@ -324,6 +353,22 @@
       "scale": 2
     },
     {
+      "id": "text_rub",
+      "rows": 24,
+      "columns": 90,
+      "top_offset_rows": 2,
+      "left_offset_columns": 40,
+      "scale": 2
+    },
+    {
+      "id": "text_end",
+      "rows": 24,
+      "columns": 90,
+      "top_offset_rows": 2,
+      "left_offset_columns": 41,
+      "scale": 2
+    },
+    {
       "_comment": "MISC",
       "id": "qbert_life",
       "rows": 24,
@@ -372,19 +417,11 @@
       "scale": 2
     },
     {
-      "id":"red_underline",
+      "id": "black_square",
       "rows": 48,
       "columns": 90,
-      "left_offset_columns": 29,
-      "top_offset_rows": 5,
-      "scale": 2
-    },
-    {
-      "id":"red_parenthesis",
-      "rows": 48,
-      "columns": 90,
-      "left_offset_columns": 39,
-      "top_offset_rows": 5,
+      "top_offset_rows": 20,
+      "left_offset_columns": 84,
       "scale": 2
     },
     {

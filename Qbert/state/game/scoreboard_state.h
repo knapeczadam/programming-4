@@ -21,7 +21,7 @@ namespace qbert
         void on_exit() override;
 
     private:
-        float scoreboard_time_ = 5.0f;
+        float scoreboard_time_ = 10.0f;
         float accu_time_       = 0.0f;
     };
 }
