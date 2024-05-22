@@ -44,6 +44,7 @@
     <ClCompile Include="component\ui\round_display_component.cpp" />
     <ClCompile Include="component\ui\score_display_component.cpp" />
     <ClCompile Include="component\ui\alphabet_component.cpp" />
+    <ClCompile Include="core\initial_manager.cpp" />
     <ClCompile Include="core\level_config_manager.cpp" />
     <ClCompile Include="core\factory.cpp" />
     <ClCompile Include="core\resources.cpp" />
@@ -106,6 +107,7 @@
     <ClInclude Include="component\ui\round_display_component.h" />
     <ClInclude Include="component\ui\score_display_component.h" />
     <ClInclude Include="component\ui\alphabet_component.h" />
+    <ClInclude Include="core\initial_manager.h" />
     <ClInclude Include="core\level_config_manager.h" />
     <ClInclude Include="core\factory.h" />
     <ClInclude Include="core\resources.h" />

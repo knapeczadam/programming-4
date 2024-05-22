@@ -49,4 +49,31 @@ namespace qbert
             return std::make_unique<game_mode_accept_command>(*this);
         }
     };
+
+    class input_select_command final : public mngn::game_component_command
+    {
+    public:
+        explicit input_select_command(mngn::game_component *component_ptr, int dir);
+        void execute() override;
+        
+        [[nodiscard]] auto clone() const -> std::unique_ptr<base_command> override
+        {
+            return std::make_unique<input_select_command>(*this);
+        }
+
+    private:
+        int dir_;
+    };
+
+    class input_accept_command final : public mngn::game_component_command
+    {
+    public:
+        explicit input_accept_command(mngn::game_component *component_ptr);
+        void execute() override;
+
+        [[nodiscard]] auto clone() const -> std::unique_ptr<base_command> override
+        {
+            return std::make_unique<input_accept_command>(*this);
+        }
+    };
 }

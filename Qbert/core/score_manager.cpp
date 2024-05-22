@@ -7,10 +7,10 @@
 
 namespace qbert
 {
-    void score_manager::set_score(int score, std::string const &name)
+    void score_manager::set_score(int score, std::string const &initial)
     {
         scores_.erase(std::prev(scores_.end()));
-        scores_.emplace(score, name);
+        scores_.emplace(score, initial);
     }
 
     auto score_manager::top_score() const -> int

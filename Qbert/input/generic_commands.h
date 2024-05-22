@@ -6,7 +6,7 @@
 
 namespace qbert
 {
-    class debug_command final : public mngn::base_command, public mngn::subject
+    class debug_command final : public mngn::base_command
     {
     public:
         explicit debug_command(void *debug_ptr = nullptr);
@@ -14,7 +14,7 @@ namespace qbert
         
         [[nodiscard]] auto clone() const -> std::unique_ptr<base_command> override
         {
-            return nullptr;
+            return std::make_unique<debug_command>(*this);
         }
     private:
         void *debug_ptr_ = nullptr;

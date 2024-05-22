@@ -80,6 +80,7 @@ namespace qbert
         void create_ui(scene_info &scene_info);
         
         void bind_player_observers(scene_info &scene_info);
+        void bind_generic_commands();
 
     private:
         friend class singleton<scene_loader>;

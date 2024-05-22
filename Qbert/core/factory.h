@@ -283,6 +283,15 @@ namespace qbert
                 std::string text;
                 int          space_sprite_id;
                 int          space_texture_id;
+                int          exclamation_sprite_id;
+                int          exclamation_texture_id;
+                int          exclamation_frame;
+                int          dot_sprite_id;
+                int          dot_texture_id;
+                int          dot_frame;
+                int          at_sprite_id;
+                int          at_texture_id;
+                int          at_frame;
                 unsigned int spacing;
                 
             };

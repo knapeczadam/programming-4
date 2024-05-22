@@ -14,10 +14,12 @@
 
 #include "component/state/game_state_component.h"
 #include "component/ui/flicker_component.h"
+#include "core/initial_manager.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/scene.h"
 #include "minigin/core/scene_manager.h"
 #include "state/game/game_over_state.h"
+#include "state/game/input_state.h"
 #include "state/game/loading_state.h"
 #include "state/game/menu_state.h"
 
@@ -84,5 +86,31 @@ namespace qbert
         auto game_state_comp_ptr = static_cast<game_state_component*>(game_component_ptr_);
         if (not game_state_comp_ptr->is_state<menu_state>()) return;
         game_state_comp_ptr->change_state<loading_state>(game_state_comp_ptr);
+    }
+
+    input_select_command::input_select_command(mngn::game_component *component_ptr, int dir)
+        : game_component_command{component_ptr}
+        , dir_{dir}
+    {
+    }
+
+    void input_select_command::execute()
+    {
+        auto game_state_comp_ptr = static_cast<game_state_component*>(game_component_ptr_);
+        if (not game_state_comp_ptr->is_state<input_state>()) return;
+        initial_manager::instance().move_input(dir_);
+    }
+
+    input_accept_command::input_accept_command(mngn::game_component *component_ptr)
+        : game_component_command{component_ptr}
+    {
+    }
+
+    void input_accept_command::execute()
+    {
+        
+        auto game_state_comp_ptr = static_cast<game_state_component*>(game_component_ptr_);
+        if (not game_state_comp_ptr->is_state<input_state>()) return;
+        initial_manager::instance().accept_input();
     }
 }

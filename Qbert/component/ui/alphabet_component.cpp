@@ -17,12 +17,8 @@
 
 namespace qbert
 {
-    alphabet_component::alphabet_component(std::string text, int sprite_id, int texture_id, int space_sprite_id, int space_texture_id)
-        : text_{std::move(text)}
-        , sprite_id_{sprite_id}
-        , texture_id_{texture_id}
-        , space_sprite_id_{space_sprite_id}
-        , space_texture_id_{space_texture_id}
+    alphabet_component::alphabet_component(alphabet_config_info config_info)
+        : config_info_{config_info}
     {
     }
 
@@ -45,16 +41,34 @@ namespace qbert
     void alphabet_component::set_text()
     {
         std::vector<mngn::sprite*> sprites;
-        for (auto const c : text_)
+        for (auto const c : config_info_.text)
         {
             if (c == ' ')
             {
-                auto sprite_ptr = mngn::sprite_manager::instance().load_sprite(space_sprite_id_, space_texture_id_, false);
+                auto sprite_ptr = mngn::sprite_manager::instance().load_sprite(config_info_.space_sprite_id, config_info_.space_texture_id, false);
+                sprites.push_back(sprite_ptr);
+            }
+            else if (c == '.')
+            {
+                auto sprite_ptr = mngn::sprite_manager::instance().load_sprite(config_info_.dot_sprite_id, config_info_.dot_texture_id, false);
+                sprite_ptr->set_current_frame(config_info_.dot_frame);
+                sprites.push_back(sprite_ptr);
+            }
+            else if (c == '!')
+            {
+                auto sprite_ptr = mngn::sprite_manager::instance().load_sprite(config_info_.exclamation_sprite_id, config_info_.exclamation_texture_id, false);
+                sprite_ptr->set_current_frame(config_info_.exclamation_frame);
+                sprites.push_back(sprite_ptr);
+            }
+            else if (c == '@')
+            {
+                auto sprite_ptr = mngn::sprite_manager::instance().load_sprite(config_info_.at_sprite_id, config_info_.at_texture_id, false);
+                sprite_ptr->set_current_frame(config_info_.at_frame);
                 sprites.push_back(sprite_ptr);
             }
             else
             {
-                auto sprite_ptr = mngn::sprite_manager::instance().load_sprite(sprite_id_, texture_id_, false);
+                auto sprite_ptr = mngn::sprite_manager::instance().load_sprite(config_info_.sprite_id, config_info_.texture_id, false);
                 sprite_ptr->set_current_frame(std::tolower(c) - 'a');
                 sprites.push_back(sprite_ptr);
             }

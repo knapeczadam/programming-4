@@ -21,10 +21,10 @@ namespace qbert
         void on_exit() override;
 
     private:
-        float input_time_ = 30.0f;
+        float input_time_                = 30.0f;
         float const original_input_time_ = 30.0f;
-        int countdown_ = 30;
-        int const original_countdown_ = 30;
-        float accu_time = 1.0f;
+        int countdown_                   = 30;
+        int const original_countdown_    = 30;
+        float accu_time                  = 1.0f;
     };
 }

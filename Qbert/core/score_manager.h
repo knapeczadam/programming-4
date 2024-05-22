@@ -20,7 +20,7 @@ namespace qbert
         score_manager &operator=(score_manager &&other)      = delete;
 
         [[nodiscard]] auto scores() const -> std::multimap<int, std::string, std::greater<>> const & { return scores_; }
-        void set_score(int score, std::string const &name);
+        void set_score(int score, std::string const &initial);
         
         [[nodiscard]] auto top_score() const -> int;
         [[nodiscard]] auto lowest_score() const -> int;

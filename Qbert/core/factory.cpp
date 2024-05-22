@@ -456,13 +456,26 @@ namespace qbert
 
     auto factory::ui::create_text(text_config_info const &config) -> text_info
     {
+        alphabet_config_info alphabet_config{};
+        alphabet_config.text                   = config.text;
+        alphabet_config.sprite_id              = config.sprite_id;
+        alphabet_config.texture_id             = config.texture_id;
+        alphabet_config.space_sprite_id        = config.space_sprite_id;
+        alphabet_config.space_texture_id       = config.space_texture_id;
+        alphabet_config.exclamation_sprite_id  = config.exclamation_sprite_id;
+        alphabet_config.exclamation_texture_id = config.exclamation_texture_id;
+        alphabet_config.exclamation_frame      = config.exclamation_frame;
+        alphabet_config.dot_sprite_id          = config.dot_sprite_id;
+        alphabet_config.dot_texture_id         = config.dot_texture_id;
+        alphabet_config.dot_frame              = config.dot_frame;
+        
         text_info info{};
         info.go_ptr = config.scene_ptr->create_game_object(config.name);
         info.go_ptr->add_tag("ui");
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<mngn::multisprite_ui_component>(mngn::multisprite_orientation::horizontal, config.spacing);
-        info.go_ptr->add_component<alphabet_component>(config.text, config.sprite_id, config.texture_id, config.space_sprite_id, config.space_texture_id);
+        info.go_ptr->add_component<alphabet_component>(alphabet_config);
         return info;
     }
 
