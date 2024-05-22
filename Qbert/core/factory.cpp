@@ -468,6 +468,12 @@ namespace qbert
         alphabet_config.dot_sprite_id          = config.dot_sprite_id;
         alphabet_config.dot_texture_id         = config.dot_texture_id;
         alphabet_config.dot_frame              = config.dot_frame;
+        alphabet_config.at_sprite_id           = config.at_sprite_id;
+        alphabet_config.at_texture_id          = config.at_texture_id;
+        alphabet_config.at_frame               = config.at_frame;
+        alphabet_config.equal_sprite_id        = config.equal_sprite_id;
+        alphabet_config.equal_texture_id       = config.equal_texture_id;
+        alphabet_config.equal_frame            = config.equal_frame;
         
         text_info info{};
         info.go_ptr = config.scene_ptr->create_game_object(config.name);

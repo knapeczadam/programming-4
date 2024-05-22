@@ -3,6 +3,9 @@
 // Project includes
 #include "minigin/input/game_component_command.h"
 
+// Standard includes
+#include <string>
+
 namespace qbert
 {
     class damage_command final : public mngn::game_component_command
@@ -32,6 +35,9 @@ namespace qbert
         {
             return std::make_unique<game_mode_select_command>(*this);
         }
+
+    private:
+        void update_underline(std::string const &scene_name);
 
     private:
         int dir_ = 0;

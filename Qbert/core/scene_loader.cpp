@@ -83,7 +83,13 @@ namespace qbert
 
     void scene_loader::load_menu_scene()
     {
-        auto scene_ptr = mngn::scene_manager::instance().create_scene("menu");
+    	load_menu_scene_1();
+    	load_menu_scene_2();
+    }
+
+    void scene_loader::load_menu_scene_2()
+    {
+        auto scene_ptr = mngn::scene_manager::instance().create_scene("menu_2");
         scene_ptr->set_active(false);
         
         factory::ui::sprite_config_info sprite_config{};
@@ -222,7 +228,133 @@ namespace qbert
     	auto multisprite_info = factory::ui::create_multisprite(multisprite_config);
     	multisprite_info.go_ptr->add_component<flicker_component>();
     	multisprite_info.go_ptr->add_tag("active");
-		
+    	
+    	multisprite_config.name           = "underline_versus";
+    	multisprite_config.local_position = {352.0f, 480.0f};
+    	multisprite_config.sprites		  = sprites;
+    	multisprite_info = factory::ui::create_multisprite(multisprite_config);
+    	multisprite_info.go_ptr->add_component<flicker_component>();
+    	multisprite_info.go_ptr->set_active(false);
+
+		sprites.clear();
+    	std::generate_n(std::back_inserter(sprites), 4, []
+		{
+			auto sprite_ptr = mngn::sprite_manager::instance().load_sprite(qb_sp_alphabet_regular_special, qb_re_t_sprite_general, false);
+			sprite_ptr->set_current_frame(11);
+    		return sprite_ptr;	
+		});
+    	multisprite_config.name           = "underline_coop";
+    	multisprite_config.local_position = {208.0f, 480.0f};
+    	multisprite_config.sprites		  = sprites;
+    	multisprite_info = factory::ui::create_multisprite(multisprite_config);
+    	multisprite_info.go_ptr->add_component<flicker_component>();
+    	multisprite_info.go_ptr->set_active(false);
+    }
+
+    void scene_loader::load_menu_scene_1()
+    {
+        auto scene_ptr = mngn::scene_manager::instance().create_scene("menu_1");
+        scene_ptr->set_active(false);
+        
+        factory::ui::sprite_config_info sprite_config{};
+        sprite_config.scene_ptr      = scene_ptr;
+        sprite_config.name           = "text_qbert";
+        sprite_config.local_position = {158, 192};
+        sprite_config.sprite_id      = qb_sp_text_qbert;
+        factory::ui::create_sprite(sprite_config);
+
+        factory::ui::text_config_info text_config{};
+        text_config.scene_ptr              = scene_ptr;
+        text_config.name                   = "credits";
+        text_config.local_position         = {336, 64};
+    	text_config.text                   = "credits";
+    	text_config.sprite_id              = qb_sp_alphabet_regular_green;
+    	text_config.texture_id             = qb_re_t_sprite_general;
+    	text_config.space_sprite_id        = qb_sp_alphabet_regular_space;
+    	text_config.space_texture_id       = qb_re_t_sprite_general;
+    	text_config.dot_sprite_id		   = qb_sp_alphabet_regular_special;
+    	text_config.dot_texture_id         = qb_re_t_sprite_general;
+    	text_config.dot_frame              = 2;
+    	text_config.at_sprite_id           = qb_sp_alphabet_regular_special;
+    	text_config.at_texture_id          = qb_re_t_sprite_general;
+    	text_config.at_frame               = 5;
+    	text_config.equal_sprite_id		   = qb_sp_alphabet_regular_special;
+    	text_config.equal_texture_id       = qb_re_t_sprite_general;
+    	text_config.equal_frame            = 6;
+        factory::ui::create_text(text_config);
+
+        text_config.name           = "row_1";
+        text_config.local_position = {48, 240};
+        text_config.text           = "@     d. gottlieb and co.";
+        factory::ui::create_text(text_config);
+        
+        text_config.name           = "row_2";
+        text_config.local_position = {80, 256};
+        text_config.text           = "all rights reserved";
+        factory::ui::create_text(text_config);
+        
+        text_config.name           = "row_3";
+        text_config.local_position = {128, 320};
+        text_config.text           = "coin  =   play";
+        factory::ui::create_text(text_config);
+        
+        factory::ui::number_config_info number_config{};
+        number_config.scene_ptr      = scene_ptr;
+        number_config.name           = "number_1";
+        number_config.local_position = {64, 240};
+        number_config.number         = 1982;
+        number_config.sprite_id      = qb_sp_numbers_regular_orange;
+        number_config.texture_id     = qb_re_t_sprite_general;
+        factory::ui::create_number(number_config);
+        
+        number_config.name           = "number_2";
+        number_config.local_position = {96, 320};
+        number_config.number         = 1;
+        factory::ui::create_number(number_config);
+    	
+        number_config.name           = "number_3";
+        number_config.local_position = {256, 320};
+        number_config.number         = 1;
+        factory::ui::create_number(number_config);
+    	
+    	sprite_config.scene_ptr      = scene_ptr;
+    	sprite_config.name           = "disk";
+    	sprite_config.sprite_id      = qb_sp_level_1_disk_1;
+    	sprite_config.texture_id     = qb_re_t_sprite_general;
+        sprite_config.local_position = {-36.0f, 374.0f};
+    	auto sprite_info = factory::ui::create_sprite(sprite_config);
+    	auto disk_ptr = sprite_info.go_ptr;
+        
+    	sprite_config.name           = "qbert_right";
+    	sprite_config.sprite_id      = qb_sp_qbert_player_1;
+    	sprite_config.texture_id     = qb_re_t_sprite_general;
+    	sprite_config.curr_frame     = 5;
+    	sprite_config.cached		 = false;
+    	sprite_info = factory::ui::create_sprite(sprite_config);
+    	sprite_info.go_ptr->set_parent(disk_ptr);
+    	sprite_info.go_ptr->set_local_position(4.0f, -14.0f);
+
+        text_config.name           = "row_4";
+        text_config.local_position = {32, 464};
+        text_config.text           = "single     coop     versus";
+        factory::ui::create_text(text_config);
+
+    	std::vector<mngn::sprite*> sprites;
+    	std::generate_n(std::back_inserter(sprites), 6, []
+		{
+			auto sprite_ptr =  mngn::sprite_manager::instance().load_sprite(qb_sp_alphabet_regular_special, qb_re_t_sprite_general, false);
+			sprite_ptr->set_current_frame(11);
+    		return sprite_ptr;	
+		});
+
+    	factory::ui::multisprite_config_info multisprite_config{};
+    	multisprite_config.scene_ptr      = scene_ptr;
+    	multisprite_config.name           = "underline_single";
+    	multisprite_config.local_position = {32.0f, 480.0f};
+    	multisprite_config.sprites		  = sprites;
+    	auto multisprite_info = factory::ui::create_multisprite(multisprite_config);
+    	multisprite_info.go_ptr->add_component<flicker_component>();
+    	multisprite_info.go_ptr->add_tag("active");
     	
     	multisprite_config.name           = "underline_versus";
     	multisprite_config.local_position = {352.0f, 480.0f};

@@ -56,7 +56,15 @@ namespace qbert
         if (not game_state_comp_ptr->is_state<menu_state>()) return;
         game_state_comp_ptr->set_game_mode(dir_);
 
-        auto scene_ptr = mngn::scene_manager::instance().find("menu");
+        update_underline("menu_1");
+        update_underline("menu_2");
+    }
+
+    void game_mode_select_command::update_underline(std::string const &scene_name)
+    {
+        auto game_state_comp_ptr = static_cast<game_state_component*>(game_component_ptr_);
+        
+        auto scene_ptr = mngn::scene_manager::instance().find(scene_name);
         auto active_ptr = scene_ptr->find_game_objects_with_tag("active").front();
         active_ptr->remove_tag("active");
         active_ptr->set_active(false);

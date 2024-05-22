@@ -66,6 +66,12 @@ namespace qbert
                 sprite_ptr->set_current_frame(config_info_.at_frame);
                 sprites.push_back(sprite_ptr);
             }
+            else if (c == '=')
+            {
+                auto sprite_ptr = mngn::sprite_manager::instance().load_sprite(config_info_.equal_sprite_id, config_info_.equal_texture_id, false);
+                sprite_ptr->set_current_frame(config_info_.equal_frame);
+                sprites.push_back(sprite_ptr);
+            }
             else
             {
                 auto sprite_ptr = mngn::sprite_manager::instance().load_sprite(config_info_.sprite_id, config_info_.texture_id, false);

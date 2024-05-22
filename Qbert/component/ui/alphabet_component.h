@@ -31,6 +31,9 @@ namespace qbert
         int at_sprite_id;
         int at_texture_id;
         int at_frame;
+        int equal_sprite_id;
+        int equal_texture_id;
+        int equal_frame;
     };
     class alphabet_component final : public mngn::custom_component
     {
