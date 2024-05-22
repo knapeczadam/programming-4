@@ -26,6 +26,11 @@ namespace qbert
         owner()->component<mngn::sprite_component>()->set_sprite(colors_[current_color_]);
     }
 
+    void cube_component::on_enable()
+    {
+        owner()->component<mngn::sprite_component>()->set_sprite(colors_[current_color_]);
+    }
+
     void cube_component::on_disable()
     {
         current_color_ = 0;
@@ -55,7 +60,10 @@ namespace qbert
                     if (score_count_ > 0)
                     {
                         --score_count_;
-                        position_comp_ptr->owner()->component<score_counter_component>()->add_score(cube_score_);
+                        if (not position_comp_ptr->owner()->has_tag("ai"))
+                        {
+                            position_comp_ptr->owner()->component<score_counter_component>()->add_score(cube_score_);
+                        }
                     }
                 }
                 else if (position_comp_ptr->owner()->has_tag("friend"))

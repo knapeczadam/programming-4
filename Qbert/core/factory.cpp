@@ -103,7 +103,7 @@ namespace qbert
     {
         player_info info{};
         info.go_ptr = config.scene_ptr->create_game_object(config.name);
-        info.go_ptr->add_tag("player");
+        info.go_ptr->add_tags({"player", "ai"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<character_state_component>();

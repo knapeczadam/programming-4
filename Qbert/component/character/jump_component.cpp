@@ -15,6 +15,11 @@ namespace qbert
         direction_comp_ptr_ = owner()->component<direction_component>();
     }
 
+    void jump_component::on_enable()
+    {
+        direction_comp_ptr_ = owner()->component<direction_component>();
+    }
+
     void jump_component::fixed_update()
     {
         if (is_jumping_)

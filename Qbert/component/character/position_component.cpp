@@ -23,6 +23,12 @@ namespace qbert
         original_position_ = owner()->local_position();
     }
 
+    void position_component::on_enable()
+    {
+        direction_comp_ptr_ = owner()->component<direction_component>();
+        original_position_ = owner()->local_position();
+    }
+
     void position_component::on_disable()
     {
         row_idx_ = original_row_idx_;

@@ -28,6 +28,7 @@ namespace qbert
         [[nodiscard]] auto col() const -> int { return col_idx_; }
 
         void awake() override;
+        void on_enable() override;
         void on_disable() override;
 
         void update_position();

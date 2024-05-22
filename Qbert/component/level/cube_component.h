@@ -28,6 +28,7 @@ namespace qbert
         cube_component &operator=(cube_component &&other)      = delete;
 
         void start() override;
+        void on_enable() override;
         void on_disable() override;
         void notify(std::string const &event, mngn::subject *subject_ptr) override;
 
