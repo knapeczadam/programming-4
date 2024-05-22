@@ -382,17 +382,6 @@ namespace qbert
     {
         auto scene_ptr = mngn::scene_manager::instance().create_scene("loading");
         scene_ptr->set_active(false);
-    	
-		factory::ui::text_config_info text_config{};
-		text_config.scene_ptr        = scene_ptr;
-		text_config.name             = "text_loading";
-		text_config.local_position   = {176.0f, 288.0f};
-		text_config.sprite_id        = qb_sp_alphabet_regular_purple;
-		text_config.texture_id       = qb_re_t_sprite_general;
-		text_config.space_sprite_id  = qb_sp_alphabet_regular_space;
-		text_config.space_texture_id = qb_re_t_sprite_general;
-		text_config.text             = "loading";
-		factory::ui::create_flickering_text(text_config);
     }
 
     void scene_loader::load_single_scene()
@@ -600,8 +589,6 @@ namespace qbert
     	sprite_info = factory::ui::create_sprite(sprite_config);
     	sprite_info.go_ptr->add_component<flicker_component>();
     	sprite_info.go_ptr->add_tag("active");
-
-    	
     }
 
     void scene_loader::load_scoreboard_scene()

@@ -49,7 +49,6 @@
     <ClCompile Include="core\factory.cpp" />
     <ClCompile Include="core\resources.cpp" />
     <ClCompile Include="core\scene_loader.cpp" />
-    <ClCompile Include="core\progress_manager.cpp" />
     <ClCompile Include="core\score_manager.cpp" />
     <ClCompile Include="core\services.cpp" />
     <ClCompile Include="core\sprites.cpp" />

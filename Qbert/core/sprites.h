@@ -106,6 +106,10 @@ namespace qbert
         qb_sp_level_9_disk_1 = 9991,
         qb_sp_level_9_disk_2,
         
+        qb_sp_text_level_1 = 10001,
+        qb_sp_text_level_2,
+        qb_sp_text_level_3,
+        
         qb_sp_qbert_player_1,
         qb_sp_qbert_player_2,
         qb_sp_ball_red,
@@ -155,6 +159,7 @@ namespace qbert
         qb_sp_qbert_swearing,
         qb_sp_qbert_big,
         qb_sp_black_square,
+        qb_sp_green_cirlce,
     };
     
     void init_sprites();

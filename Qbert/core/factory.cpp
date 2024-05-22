@@ -99,6 +99,23 @@ namespace qbert
         return info;
     }
 
+    auto factory::character::create_ai_player(player_config_info const &config) -> player_info
+    {
+        player_info info{};
+        info.go_ptr = config.scene_ptr->create_game_object(config.name);
+        info.go_ptr->add_tag("player");
+        info.go_ptr->set_parent(config.parent_ptr);
+        info.go_ptr->set_local_position(config.local_position);
+        info.go_ptr->add_component<character_state_component>();
+        info.go_ptr->add_component<jump_component>();
+        info.go_ptr->add_component<face_component>();
+        info.go_ptr->add_component<direction_component>();
+        info.go_ptr->add_component<score_counter_component>();
+        info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id, false);
+        info.position_comp_ptr = info.go_ptr->add_component<position_component>(config.row_idx, config.col_idx);
+        return info;
+    }
+
     auto factory::character::create_red_ball(red_ball_config_info const &config) -> red_ball_info
     {
         red_ball_info info{};
@@ -258,16 +275,8 @@ namespace qbert
         int offset_x = -32;
         int offset_y = 48;
 
-        mngn::sprite *color_1 = nullptr;
-        mngn::sprite *color_2 = nullptr;
-        mngn::sprite *color_3 = nullptr;
-
-        color_1 = mngn::sprite_manager::instance().load_sprite(config.color_1, config.texture_id);
-        color_2 = mngn::sprite_manager::instance().load_sprite(config.color_2, config.texture_id);
-        if (config.color_3)
-        {
-            color_3 = mngn::sprite_manager::instance().load_sprite(config.color_3.value(), config.texture_id);
-        }
+        cube_config_info cube_config{};
+        cube_config = config;
 
         std::vector<cube_component*> cube_components;
         for (int i = 0; i < 7; ++i)
@@ -275,29 +284,49 @@ namespace qbert
             glm::vec2 start_position = origin + glm::vec2(i * offset_x, i * offset_y);
             for (int j = 0; j < i + 1; ++j)
             {
-                auto go = config.scene_ptr->create_game_object("cube_" + std::to_string(i) + "_" + std::to_string(j));
-                go->add_tag("level");
-                go->set_parent(config.parent_ptr);
-                
+                cube_config.name = "cube_" + std::to_string(i) + "_" + std::to_string(j);
                 glm::vec2 pos = start_position + glm::vec2(j * 64, 0);
-                go->set_local_position(pos);
-                go->add_component<mngn::sprite_component>();
-
-                cube_component *cube_comp_ptr = nullptr;
-                if (color_3)
-                {
-                    cube_comp_ptr = go->add_component<cube_component>(i, j, std::vector{color_1, color_2, color_3}, config.revertible);
-                }
-                else
-                {
-                    cube_comp_ptr = go->add_component<cube_component>(i, j, std::vector{color_1, color_2}, config.revertible);
-                }
-                
-                cube_components.push_back(cube_comp_ptr);
+                cube_config.local_position = pos;
+                cube_config.row_idx = i;
+                cube_config.col_idx = j;
+                auto cube_info = create_cube(cube_config);
+                cube_components.push_back(cube_info.go_ptr->component<cube_component>());
             }
         }
 
         info.cube_components = cube_components;
+        return info;
+    }
+
+    auto factory::level::create_cube(cube_config_info const &config) -> cube_info
+    {
+        cube_info info{};
+        mngn::sprite *color_1 = nullptr;
+        mngn::sprite *color_2 = nullptr;
+        mngn::sprite *color_3 = nullptr;
+        
+        color_1 = mngn::sprite_manager::instance().load_sprite(config.color_1, config.texture_id);
+        color_2 = mngn::sprite_manager::instance().load_sprite(config.color_2, config.texture_id);
+        if (config.color_3)
+        {
+            color_3 = mngn::sprite_manager::instance().load_sprite(config.color_3.value(), config.texture_id);
+        }
+        
+        info.go_ptr = config.scene_ptr->create_game_object(config.name);
+        info.go_ptr->set_parent(config.parent_ptr);
+        info.go_ptr->set_local_position(config.local_position);
+        info.go_ptr->add_component<mngn::sprite_component>();
+        info.go_ptr->add_tag("level");
+
+        if (color_3)
+        {
+            info.go_ptr->add_component<cube_component>(config.row_idx, config.col_idx, std::vector{color_1, color_2, color_3}, config.revertible);
+        }
+        else
+        {
+            info.go_ptr->add_component<cube_component>(config.row_idx, config.col_idx, std::vector{color_1, color_2}, config.revertible);
+        }
+
         return info;
     }
 

@@ -99,6 +99,7 @@ namespace qbert
             };
 
             static auto create_player(player_config_info const &config) -> player_info;
+            static auto create_ai_player(player_config_info const &config) -> player_info;
 
             struct npc_info : info
             {
@@ -164,6 +165,8 @@ namespace qbert
                 int                color_2;
                 std::optional<int> color_3;
                 bool               revertible;
+                int                row_idx;
+                int                col_idx;
             };
 
             struct cube_info : info
@@ -172,6 +175,7 @@ namespace qbert
             };
 
             static auto create_cubes(cube_config_info const &config) -> cube_info;
+            static auto create_cube(cube_config_info const &config) -> cube_info;
 
             // Level
             struct level_config_info : config_info

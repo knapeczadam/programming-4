@@ -55,6 +55,9 @@ namespace qbert
             .add_sprite_pair(qb_sp_text_large_gray_qbert, "text_large_gray_qbert")
             .add_sprite_pair(qb_sp_text_rub, "text_rub")
             .add_sprite_pair(qb_sp_text_end, "text_end")
+            .add_sprite_pair(qb_sp_text_level_1, "text_level_1")
+            .add_sprite_pair(qb_sp_text_level_2, "text_level_2")
+            .add_sprite_pair(qb_sp_text_level_3, "text_level_3")
         
             .add_sprite_pair(qb_sp_arrow_left, "arrow_left")
             .add_sprite_pair(qb_sp_arrow_right, "arrow_right")
@@ -62,6 +65,7 @@ namespace qbert
             .add_sprite_pair(qb_sp_qbert_swearing, "qbert_swearing")
             .add_sprite_pair(qb_sp_qbert_big, "qbert_big")
             .add_sprite_pair(qb_sp_black_square, "black_square")
+            .add_sprite_pair(qb_sp_green_cirlce, "green_circle")
         
             .add_sprite_pair(qb_sp_level_1_disk_1, "level_1_disk_1")
             .add_sprite_pair(qb_sp_level_1_disk_2, "level_1_disk_2")

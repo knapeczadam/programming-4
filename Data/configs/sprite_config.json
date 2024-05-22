@@ -369,6 +369,29 @@
       "scale": 2
     },
     {
+      "id": "text_level_1",
+      "rows": 8,
+      "columns": 3,
+      "left_offset_columns": 2,
+      "scale": 2
+    },
+    {
+      "id": "text_level_2",
+      "rows": 8,
+      "columns": 3,
+      "top_offset_rows": 1,
+      "left_offset_columns": 2,
+      "scale": 2
+    },
+    {
+      "id": "text_level_3",
+      "rows": 8,
+      "columns": 3,
+      "top_offset_rows": 2,
+      "left_offset_columns": 2,
+      "scale": 2
+    },
+    {
       "_comment": "MISC",
       "id": "qbert_life",
       "rows": 24,
@@ -422,6 +445,18 @@
       "columns": 90,
       "top_offset_rows": 20,
       "left_offset_columns": 84,
+      "scale": 2
+    },
+    {
+      "id": "green_circle",
+      "rows": 24,
+      "columns": 45,
+      "sub_rows": 1,
+      "sub_columns": 6,
+      "left_offset_columns": 12,
+      "top_offset_rows": 5,
+      "clip_width": 32,
+      "clip_height": 32,
       "scale": 2
     },
     {
