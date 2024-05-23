@@ -26,6 +26,7 @@
     <ClCompile Include="component\level\disk_component.cpp" />
     <ClCompile Include="component\level\fly_component.cpp" />
     <ClCompile Include="component\level\level_manager_component.cpp" />
+    <ClCompile Include="component\level\small_cube_component.cpp" />
     <ClCompile Include="component\npc\npc_health_component.cpp" />
     <ClCompile Include="component\npc\spawn_component.cpp" />
     <ClCompile Include="component\player\face_component.cpp" />
@@ -92,6 +93,7 @@
     <ClInclude Include="component\level\disk_component.h" />
     <ClInclude Include="component\level\fly_component.h" />
     <ClInclude Include="component\level\level_manager_component.h" />
+    <ClInclude Include="component\level\small_cube_component.h" />
     <ClInclude Include="component\npc\npc_health_component.h" />
     <ClInclude Include="component\npc\spawn_component.h" />
     <ClInclude Include="component\player\face_component.h" />

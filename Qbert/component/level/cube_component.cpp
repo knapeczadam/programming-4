@@ -12,12 +12,13 @@
 
 namespace qbert
 {
-    cube_component::cube_component(int row_idx, int col_idx, std::vector<mngn::sprite*> colors, bool revertible)
-        : row_idx_{row_idx}
-        , col_idx_{col_idx}
-        , score_count_{static_cast<int>(colors.size()) - 1}
-        , revertible_{revertible}
-        , colors_{std::move(colors)}
+    cube_component::cube_component(cube_component_config_info const &config_info)
+        : row_idx_{config_info.row_idx}
+        , col_idx_{config_info.col_idx}
+        , score_count_{static_cast<int>(config_info.colors.size()) - 1}
+        , revertible_{config_info.revertible}
+        , colors_{config_info.colors}
+        , animated_sprite_ptr_{config_info.animated_sprite_ptr}
     {
     }
 
@@ -36,6 +37,7 @@ namespace qbert
         current_color_ = 0;
         score_count_   = static_cast<int>(colors_.size()) - 1;
         owner()->component<mngn::sprite_component>()->set_sprite(colors_[current_color_]);
+        owner()->component<mngn::sprite_component>()->set_animated(false);
     }
 
     void cube_component::notify(std::string const &event, mngn::subject *subject_ptr)
@@ -83,5 +85,11 @@ namespace qbert
     auto cube_component::has_final_color() const -> bool
     {
         return current_color_ == static_cast<int>(colors_.size()) - 1;
+    }
+
+    void cube_component::enable_animation()
+    {
+        owner()->component<mngn::sprite_component>()->set_sprite(animated_sprite_ptr_);
+        owner()->component<mngn::sprite_component>()->set_animated(true);
     }
 }

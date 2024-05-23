@@ -15,11 +15,19 @@ namespace mngn
 
 namespace qbert
 {
+    struct cube_component_config_info
+    {
+        int row_idx;
+        int col_idx;
+        std::vector<mngn::sprite*> colors;
+        bool revertible = false;
+        mngn::sprite *animated_sprite_ptr;
+    };
     class cube_component : public mngn::custom_component, public mngn::subject, public mngn::i_observer
     {
     public:
         cube_component()           = default;
-        explicit cube_component(int row_idx, int col_idx, std::vector<mngn::sprite*> colors, bool revertible = false);
+        explicit cube_component(cube_component_config_info const &config_info);
         ~cube_component() override = default;
 
         cube_component(cube_component const &other)            = delete;
@@ -32,6 +40,7 @@ namespace qbert
         void on_disable() override;
         void notify(std::string const &event, mngn::subject *subject_ptr) override;
         [[nodiscard]] auto has_final_color() const -> bool;
+        void enable_animation();
 
     private:
         int  row_idx_         = 0;
@@ -42,5 +51,6 @@ namespace qbert
         bool revertible_    = false;
         
         std::vector<mngn::sprite*> colors_;
+        mngn::sprite *animated_sprite_ptr_ = nullptr;
     };
 }

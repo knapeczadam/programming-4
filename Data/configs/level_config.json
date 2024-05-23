@@ -11,6 +11,8 @@
       "cube_color_1": 13,
       "cube_color_2": 12,
       "cube_color_small": 112,
+      "cube_animated": 11111,
+      "cube_animated_small": 11112,
       "disk_color": 1111,
       "disk_count": 2,
       "disk_positions": [
@@ -24,6 +26,8 @@
       "cube_color_1": 22,
       "cube_color_2": 21,
       "cube_color_small": 221,
+      "cube_animated": 22221,
+      "cube_animated_small": 22222,
       "disk_color": 2221,
       "disk_count": 2,
       "disk_positions": [
@@ -37,6 +41,8 @@
       "cube_color_1": 31,
       "cube_color_2": 32,
       "cube_color_small": 332,
+      "cube_animated": 33331,
+      "cube_animated_small": 33332,
       "disk_color": 3331,
       "disk_count": 2,
       "disk_positions": [
@@ -50,6 +56,8 @@
       "cube_color_1": 42,
       "cube_color_2": 41,
       "cube_color_small": 441,
+      "cube_animated": 44441,
+      "cube_animated_small": 44442,
       "disk_color": 4441,
       "disk_count": 2,
       "disk_positions": [
@@ -64,6 +72,8 @@
       "cube_color_2": 22,
       "cube_color_3": 23,
       "cube_color_small": 223,
+      "cube_animated": 22221,
+      "cube_animated_small": 22222,
       "disk_color": 2221,
       "disk_count": 3,
       "disk_positions": [
@@ -79,6 +89,8 @@
       "cube_color_2": 42,
       "cube_color_3": 41,
       "cube_color_small": 441,
+      "cube_animated": 44441,
+      "cube_animated_small": 44442,
       "disk_color": 4441,
       "disk_count": 3,
       "disk_positions": [
@@ -94,6 +106,8 @@
       "cube_color_2": 13,
       "cube_color_3": 12,
       "cube_color_small": 112,
+      "cube_animated": 11111,
+      "cube_animated_small": 11112,
       "disk_color": 1111,
       "disk_count": 2,
       "disk_positions": [
@@ -108,6 +122,8 @@
       "cube_color_2": 51,
       "cube_color_3": 53,
       "cube_color_small": 553,
+      "cube_animated": 55551,
+      "cube_animated_small": 55552,
       "disk_color": 5551,
       "disk_count": 2,
       "disk_positions": [
@@ -122,6 +138,8 @@
       "cube_color_2": 62,
       "cube_color_small": 662,
       "cube_revertible": true,
+      "cube_animated": 66661,
+      "cube_animated_small": 66662,
       "disk_color": 6661,
       "disk_count": 4,
       "disk_positions": [
@@ -138,6 +156,8 @@
       "cube_color_2": 31,
       "cube_color_small": 331,
       "cube_revertible": true,
+      "cube_animated": 33331,
+      "cube_animated_small": 33332,
       "disk_color": 3331,
       "disk_count": 4,
       "disk_positions": [
@@ -154,6 +174,8 @@
       "cube_color_2": 22,
       "cube_color_small": 222,
       "cube_revertible": true,
+      "cube_animated": 22221,
+      "cube_animated_small": 22222,
       "disk_color": 2221,
       "disk_count": 3,
       "disk_positions": [
@@ -169,6 +191,8 @@
       "cube_color_2": 13,
       "cube_color_small": 113,
       "cube_revertible": true,
+      "cube_animated": 11111,
+      "cube_animated_small": 11112,
       "disk_color": 1111,
       "disk_count": 3,
       "disk_positions": [

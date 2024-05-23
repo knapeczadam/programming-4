@@ -24,6 +24,7 @@
 #include "component/ui/round_display_component.h"
 #include "component/ui/score_display_component.h"
 #include "component/character/direction_component.h"
+#include "component/level/small_cube_component.h"
 #include "component/npc/spawn_component.h"
 #include "component/ui/alphabet_component.h"
 #include "component/ui/number_component.h"
@@ -302,30 +303,43 @@ namespace qbert
     auto factory::level::create_cube(cube_config_info const &config) -> cube_info
     {
         cube_info info{};
-        mngn::sprite *color_1 = nullptr;
-        mngn::sprite *color_2 = nullptr;
-        mngn::sprite *color_3 = nullptr;
+        mngn::sprite *color_1_sprite_ptr  = nullptr;
+        mngn::sprite *color_2_sprite_ptr  = nullptr;
+        mngn::sprite *color_3_sprite_ptr  = nullptr;
+        mngn::sprite *animated_sprite_ptr = nullptr;
         
-        color_1 = mngn::sprite_manager::instance().load_sprite(config.color_1, config.texture_id);
-        color_2 = mngn::sprite_manager::instance().load_sprite(config.color_2, config.texture_id);
+        color_1_sprite_ptr = mngn::sprite_manager::instance().load_sprite(config.color_1, config.texture_id);
+        color_2_sprite_ptr = mngn::sprite_manager::instance().load_sprite(config.color_2, config.texture_id);
+        if (config.cube_animated)
+        {
+            animated_sprite_ptr = mngn::sprite_manager::instance().load_sprite(config.cube_animated, config.texture_id, false);
+        }
         if (config.color_3)
         {
-            color_3 = mngn::sprite_manager::instance().load_sprite(config.color_3.value(), config.texture_id);
+            color_3_sprite_ptr = mngn::sprite_manager::instance().load_sprite(config.color_3.value(), config.texture_id);
         }
         
         info.go_ptr = config.scene_ptr->create_game_object(config.name);
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<mngn::sprite_component>();
-        info.go_ptr->add_tag("level");
+        info.go_ptr->add_tags({"level", "cube"});
 
-        if (color_3)
+        cube_component_config_info cube_comp_info{};
+        cube_comp_info.row_idx    = config.row_idx;
+        cube_comp_info.col_idx    = config.col_idx;
+        cube_comp_info.revertible = config.revertible;
+        cube_comp_info.animated_sprite_ptr = animated_sprite_ptr;
+        
+        if (color_3_sprite_ptr)
         {
-            info.go_ptr->add_component<cube_component>(config.row_idx, config.col_idx, std::vector{color_1, color_2, color_3}, config.revertible);
+            cube_comp_info.colors = {color_1_sprite_ptr, color_2_sprite_ptr, color_3_sprite_ptr};
+            info.go_ptr->add_component<cube_component>(cube_comp_info);
         }
         else
         {
-            info.go_ptr->add_component<cube_component>(config.row_idx, config.col_idx, std::vector{color_1, color_2}, config.revertible);
+            cube_comp_info.colors = {color_1_sprite_ptr, color_2_sprite_ptr};
+            info.go_ptr->add_component<cube_component>(cube_comp_info);
         }
 
         return info;
@@ -343,15 +357,18 @@ namespace qbert
         cube_config.color_2    = config.cube_color_2;
         if (config.cube_color_3) cube_config.color_3 = config.cube_color_3.value();
         if (config.cube_revertible) cube_config.revertible = config.cube_revertible.value();
+        cube_config.cube_animated = config.cube_animated;
         info.cube_info = create_cubes(cube_config);
 
-        ui::sprite_config_info sprite_config{};
-        sprite_config.scene_ptr      = config.scene_ptr;
-        sprite_config.parent_ptr     = config.parent_ptr;
-        sprite_config.name           = "cube_color_small";
-        sprite_config.local_position = {64, 96};
-        sprite_config.sprite_id      = config.cube_color_small;
-        ui::create_sprite(sprite_config);
+        ui::small_cube_config_info small_cube_config{};
+        small_cube_config.scene_ptr  = config.scene_ptr;
+        small_cube_config.parent_ptr = config.parent_ptr;
+        small_cube_config.name       = "small_cube";
+        small_cube_config.local_position = {64.0f, 96.0f};
+        small_cube_config.sprite_id = config.cube_color_small;
+        small_cube_config.animated_sprite_id = config.cube_animated_small;
+        small_cube_config.texture_id = config.texture_id;
+        ui::create_small_cube(small_cube_config);
 
         int num_of_disks = config.disk_count;
         for (int i = 0; i < num_of_disks; ++i)
@@ -418,6 +435,18 @@ namespace qbert
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<mngn::sprite_ui_component>(config.sprite_id, config.texture_id, false);
         info.level_display_comp_ptr = info.go_ptr->add_component<level_display_component>();
+        return info;
+    }
+
+    auto factory::ui::create_small_cube(small_cube_config_info const &config) -> small_cube_info
+    {
+        small_cube_info info{};
+        info.go_ptr = config.scene_ptr->create_game_object(config.name);
+        info.go_ptr->add_tag("ui");
+        info.go_ptr->set_parent(config.parent_ptr);
+        info.go_ptr->set_local_position(config.local_position);
+        info.go_ptr->add_component<mngn::sprite_ui_component>(config.sprite_id, config.texture_id);
+        info.go_ptr->add_component<small_cube_component>(config.animated_sprite_id, config.texture_id);
         return info;
     }
 

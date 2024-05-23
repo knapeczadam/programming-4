@@ -271,4 +271,9 @@ namespace mngn
     {
         return curr_frame_ == curr_rows_ * curr_cols_ - 1;
     }
+
+    auto sprite::animated() const -> bool
+    {
+        return animated_;
+    }
 }

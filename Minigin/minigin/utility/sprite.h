@@ -77,6 +77,7 @@ namespace mngn
         [[nodiscard]] auto iter_count() const -> int;
         
         [[nodiscard]] auto is_last_frame() const -> bool;
+        [[nodiscard]] auto animated() const -> bool;
 
     private:
         // SPRITE PROPERTIES

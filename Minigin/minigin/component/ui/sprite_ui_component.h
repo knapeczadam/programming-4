@@ -31,6 +31,6 @@ namespace mngn
 
     private:
         mngn::sprite *sprite_ptr_ = nullptr;
-        bool animated_      = true;
+        bool animated_      = false;
     };
 }

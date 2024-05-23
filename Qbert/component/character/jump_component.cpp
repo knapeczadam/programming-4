@@ -5,7 +5,6 @@
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
 #include "minigin/utility/math.h"
-
 #include "position_component.h"
 
 namespace qbert

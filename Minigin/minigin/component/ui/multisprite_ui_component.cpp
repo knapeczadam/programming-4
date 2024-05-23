@@ -70,9 +70,9 @@ namespace mngn
     {
         if (animated_)
         {
-            for (auto const &sprite : sprites_)
+            for (auto const &sprite_ptr : sprites_)
             {
-                sprite->update(game_time::instance().delta_time());
+                if (sprite_ptr->animated()) sprite_ptr->update(game_time::instance().delta_time());
             }
         }
     }

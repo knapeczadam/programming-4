@@ -164,6 +164,7 @@ namespace qbert
                 int                color_1;
                 int                color_2;
                 std::optional<int> color_3;
+                int                cube_animated;
                 bool               revertible;
                 int                row_idx;
                 int                col_idx;
@@ -187,6 +188,8 @@ namespace qbert
                 std::optional<int>  cube_color_3;
                 std::optional<bool> cube_revertible;
                 int                 cube_color_small;
+                int                 cube_animated;
+                int                 cube_animated_small;
                 int                 disk_count;
                 int                 disk_color;
                 json                disk_positions;
@@ -252,6 +255,16 @@ namespace qbert
             {
                 round_display_component *round_display_comp_ptr;
             };
+
+            // Small cube
+            struct small_cube_config_info : config_info
+            {
+                int animated_sprite_id;
+            };
+
+            struct small_cube_info : info { };
+
+            static auto create_small_cube(small_cube_config_info const &config) -> small_cube_info;
 
             static auto create_round_display(round_display_config_info const &config) -> round_display_info;
 

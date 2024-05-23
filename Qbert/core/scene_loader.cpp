@@ -764,10 +764,12 @@ namespace qbert
     	config.cube_color_2 = scene_info.level_config["cube_color_2"];
     	if (scene_info.level_config.contains("cube_color_3")) config.cube_color_3 = scene_info.level_config["cube_color_3"];
     	if (scene_info.level_config.contains("cube_revertible")) config.cube_revertible = scene_info.level_config["cube_revertible"];
-    	config.cube_color_small = scene_info.level_config["cube_color_small"];
-    	config.disk_count     = scene_info.level_config["disk_count"];
-    	config.disk_color     = scene_info.level_config["disk_color"];
-    	config.disk_positions = scene_info.level_config["disk_positions"];
+    	config.cube_color_small    = scene_info.level_config["cube_color_small"];
+    	config.cube_animated	   = scene_info.level_config["cube_animated"];
+    	config.cube_animated_small = scene_info.level_config["cube_animated_small"];
+    	config.disk_count          = scene_info.level_config["disk_count"];
+    	config.disk_color          = scene_info.level_config["disk_color"];
+    	config.disk_positions      = scene_info.level_config["disk_positions"];
         scene_info.level_info = factory::level::create_level(config);
     }
 

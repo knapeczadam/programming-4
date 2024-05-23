@@ -14,11 +14,13 @@ namespace mngn
     sprite_ui_component::sprite_ui_component(mngn::sprite *sprite_ptr)
         : sprite_ptr_{sprite_ptr}
     {
+        if (sprite_ptr_) animated_ = sprite_ptr_->animated();
     }
 
     sprite_ui_component::sprite_ui_component(int sprite_id, int texture_id, bool cache)
     {
         sprite_ptr_ = sprite_manager::instance().load_sprite(sprite_id, texture_id, cache);
+        if (sprite_ptr_) animated_ = sprite_ptr_->animated();
     }
 
     sprite_ui_component::~sprite_ui_component() = default;

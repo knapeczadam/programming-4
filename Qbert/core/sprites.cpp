@@ -167,6 +167,26 @@ namespace qbert
             .add_sprite_pair(qb_sp_level_8_cube_3_small, "level_8_cube_3_small")
             .add_sprite_pair(qb_sp_level_9_cube_1_small, "level_9_cube_1_small")
             .add_sprite_pair(qb_sp_level_9_cube_2_small, "level_9_cube_2_small")
-            .add_sprite_pair(qb_sp_level_9_cube_3_small, "level_9_cube_3_small");
+            .add_sprite_pair(qb_sp_level_9_cube_3_small, "level_9_cube_3_small")
+
+            .add_sprite_pair(qb_sp_level_1_cube_animated, "level_1_cube_animated")
+            .add_sprite_pair(qb_sp_level_1_cube_animated_small, "level_1_cube_animated_small")
+            .add_sprite_pair(qb_sp_level_2_cube_animated, "level_2_cube_animated")
+            .add_sprite_pair(qb_sp_level_2_cube_animated_small, "level_2_cube_animated_small")
+            .add_sprite_pair(qb_sp_level_3_cube_animated, "level_3_cube_animated")
+            .add_sprite_pair(qb_sp_level_3_cube_animated_small, "level_3_cube_animated_small")
+            .add_sprite_pair(qb_sp_level_4_cube_animated, "level_4_cube_animated")
+            .add_sprite_pair(qb_sp_level_4_cube_animated_small, "level_4_cube_animated_small")
+            .add_sprite_pair(qb_sp_level_5_cube_animated, "level_5_cube_animated")
+            .add_sprite_pair(qb_sp_level_5_cube_animated_small, "level_5_cube_animated_small")
+            .add_sprite_pair(qb_sp_level_6_cube_animated, "level_6_cube_animated")
+            .add_sprite_pair(qb_sp_level_6_cube_animated_small, "level_6_cube_animated_small")
+            .add_sprite_pair(qb_sp_level_7_cube_animated, "level_7_cube_animated")
+            .add_sprite_pair(qb_sp_level_7_cube_animated_small, "level_7_cube_animated_small")
+            .add_sprite_pair(qb_sp_level_8_cube_animated, "level_8_cube_animated")
+            .add_sprite_pair(qb_sp_level_8_cube_animated_small, "level_8_cube_animated_small")
+            .add_sprite_pair(qb_sp_level_9_cube_animated, "level_9_cube_animated")
+            .add_sprite_pair(qb_sp_level_9_cube_animated_small, "level_9_cube_animated_small");
+            
     }
 }
