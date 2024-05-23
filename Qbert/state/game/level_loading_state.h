@@ -11,20 +11,21 @@
 namespace mngn
 {
     class game_object;
+    class scene;
 }
 
 namespace qbert
 {
-    class loading_state final : public game_state
+    class level_loading_state final : public game_state
     {
     public:
-        loading_state(game_state_component *game_state_comp_ptr);
-        ~loading_state() override = default;
+        explicit level_loading_state(game_state_component *game_state_comp_ptr);
+        ~level_loading_state() override = default;
 
-        loading_state(loading_state const &other)            = delete;
-        loading_state(loading_state &&other)                 = delete;
-        loading_state &operator=(loading_state const &other) = delete;
-        loading_state &operator=(loading_state &&other)      = delete;
+        level_loading_state(level_loading_state const &other)            = delete;
+        level_loading_state(level_loading_state &&other)                 = delete;
+        level_loading_state &operator=(level_loading_state const &other) = delete;
+        level_loading_state &operator=(level_loading_state &&other)      = delete;
 
         void on_enter() override;
         void update() override;

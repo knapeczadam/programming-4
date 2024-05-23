@@ -3,7 +3,7 @@
 // Project includes
 #include "component/character/direction_component.h"
 #include "component/character/position_component.h"
-#include "component/player/health_component.h"
+#include "component/character/health_component.h"
 #include "minigin/core/game_object.h"
 
 // Standard includes

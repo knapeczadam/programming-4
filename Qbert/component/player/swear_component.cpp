@@ -12,6 +12,12 @@ namespace qbert
         swearing_go_ptr_->set_active(false);
     }
 
+    void swear_component::on_enable()
+    {
+        swearing_go_ptr_ = owner()->find(owner()->name() + "_swearing");
+        swearing_go_ptr_->set_active(false);
+    }
+
     void swear_component::swear(bool swear_on)
     {
         if (swear_on)

@@ -22,7 +22,6 @@
 // SDL includes
 #include <SDL.h>
 
-
 void load()
 {
 	qbert::init_resources();

@@ -6,12 +6,12 @@ namespace qbert
 {
     void score_counter_component::on_enable()
     {
-        notify_observers("score_changed");
+        notify_observers("update_score_display");
     }
 
     void score_counter_component::start()
     {
-        notify_observers("score_changed");
+        notify_observers("update_score_display");
     }
 
     void score_counter_component::on_disable()
@@ -23,7 +23,7 @@ namespace qbert
     {
         score_ += score;
         progress_manager::instance().add_score(score);
-        notify_observers("score_changed");
+        notify_observers("update_score_display");
     }
 
     auto score_counter_component::score() const -> int

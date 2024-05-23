@@ -41,7 +41,7 @@ namespace qbert
         float accu_time_   = 0.0f;
         bool  menu_switched_      = false;
         mngn::game_object *disk_ptr_ = nullptr;
-        glm::vec2 start_pos_;
-        glm::vec2 end_pos_ = {480, 374.0f};
+        glm::vec2 const start_pos_ = {-36.0f, 374.0f};
+        glm::vec2 const end_pos_ = {480, 374.0f};
     };
 }

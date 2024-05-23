@@ -30,7 +30,7 @@ namespace qbert
         mngn::renderer::instance().set_background_color({49, 32, 115, 0});
 
         disk_ptr_ = scene_ptr_->find("disk");
-        start_pos_ = disk_ptr_->local_position();
+        disk_ptr_->set_local_position(start_pos_);
     }
 
     void menu_state::update()

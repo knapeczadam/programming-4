@@ -15,9 +15,12 @@ namespace mngn
     template <class T> requires child_component<T>
     auto game_object::component() const -> T *
     {
-        if (has_component<T>())
+        for (auto const &comp : component_map_ | std::views::values)
         {
-            return static_cast<T*>(component_map_.at(typeid(T)).get());
+            if (auto comp_ptr = dynamic_cast<T*>(comp.get()))
+            {
+                return comp_ptr;
+            }
         }
         return nullptr;
     }
@@ -160,7 +163,7 @@ namespace mngn
     /// \brief Adds a component class of type componentType to the GameObject. 
     /// \tparam T 
     /// \return 
-    template <class T, typename... Args> requires child_component<T>
+    template <class T, typename... Args> requires implementation_component<T>
     auto game_object::add_component(Args &&... args) -> T *
     {
         auto component = std::make_unique<T>(std::forward<Args>(args)...);
@@ -203,21 +206,4 @@ namespace mngn
         }
         return count;
     }
-
-    template <class T> requires child_component<T>
-    auto game_object::has_component() const -> bool
-    {
-        return component_map_.contains(typeid(T));
-    }
-
-    template <class T> requires family_component<T>
-    auto game_object::has_component() const -> bool
-    {
-        return std::ranges::any_of(component_map_, [](auto const &pair)
-        {
-            return dynamic_cast<T*>(pair.second.get());
-        });
-    }
-
-    
 }

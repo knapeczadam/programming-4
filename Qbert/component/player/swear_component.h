@@ -23,6 +23,7 @@ namespace qbert
         swear_component &operator=(swear_component &&other)      = delete;
 
         void awake() override;
+        void on_enable() override;
         void swear(bool swear_on);
 
     private:

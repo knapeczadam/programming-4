@@ -1,5 +1,8 @@
 ﻿#include "start_state.h"
 
+#include "state/player/waiting_state.h"
+#include "component/state/character_state_component.h"
+#include "component/character/position_component.h"
 #include "minigin/component/rendering/sprite_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/utility/sprite.h"

@@ -40,7 +40,7 @@ namespace qbert
 
     void cube_component::notify(std::string const &event, mngn::subject *subject_ptr)
     {
-        if (event == "position_changed")
+        if (event == "update_cube")
         {
             auto position_comp_ptr = dynamic_cast<position_component*>(subject_ptr);
             if (position_comp_ptr->row() == row_idx_ and position_comp_ptr->col() == col_idx_)
@@ -74,7 +74,14 @@ namespace qbert
                     }
                 }
                 owner()->component<mngn::sprite_component>()->set_sprite(colors_[current_color_]);
+                
+                notify_observers("color_changed");
             }
         }
+    }
+
+    auto cube_component::has_final_color() const -> bool
+    {
+        return current_color_ == static_cast<int>(colors_.size()) - 1;
     }
 }

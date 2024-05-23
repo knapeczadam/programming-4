@@ -8,7 +8,8 @@
 #include "component/level/fly_component.h"
 #include "component/player/face_component.h"
 #include "component/player/fall_component.h"
-#include "component/player/health_component.h"
+#include "component/player/player_health_component.h"
+#include "component/npc/npc_health_component.h"
 #include "component/character/jump_component.h"
 #include "component/player/level_counter_component.h"
 #include "component/player/player_collider_component.h"
@@ -54,7 +55,7 @@ namespace qbert
         info.go_ptr->add_component<direction_component>();
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         info.position_comp_ptr      = info.go_ptr->add_component<position_component>(config.row_idx, config.col_idx);
-        info.health_comp_ptr        = info.go_ptr->add_component<health_component>(3);
+        info.health_comp_ptr        = info.go_ptr->add_component<player_health_component>(3);
         info.score_counter_comp_ptr = info.go_ptr->add_component<score_counter_component>();
         info.level_counter_comp_ptr = info.go_ptr->add_component<level_counter_component>();
         info.round_counter_comp_ptr = info.go_ptr->add_component<round_counter_component>();
@@ -131,7 +132,7 @@ namespace qbert
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         info.go_ptr->add_component<mngn::collider_component>(sprite_comp_ptr->sprite()->collider_width(), sprite_comp_ptr->sprite()->collider_height());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>();
-        info.health_comp_ptr   = info.go_ptr->add_component<health_component>(1);
+        info.health_comp_ptr   = info.go_ptr->add_component<npc_health_component>(1);
         return info;
     }
 
@@ -150,7 +151,7 @@ namespace qbert
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         info.go_ptr->add_component<mngn::collider_component>(sprite_comp_ptr->sprite()->collider_width(), sprite_comp_ptr->sprite()->collider_height());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>();
-        info.health_comp_ptr   = info.go_ptr->add_component<health_component>(1);
+        info.health_comp_ptr   = info.go_ptr->add_component<npc_health_component>(1);
         return info;
     }
 
@@ -170,7 +171,7 @@ namespace qbert
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         info.go_ptr->add_component<mngn::collider_component>(sprite_comp_ptr->sprite()->collider_width(), sprite_comp_ptr->sprite()->collider_height());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>();
-        info.health_comp_ptr   = info.go_ptr->add_component<health_component>(1);
+        info.health_comp_ptr   = info.go_ptr->add_component<npc_health_component>(1);
         return info;
     }
 
@@ -190,7 +191,7 @@ namespace qbert
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         info.go_ptr->add_component<mngn::collider_component>(sprite_comp_ptr->sprite()->collider_width(), sprite_comp_ptr->sprite()->collider_height());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>(6, 6);
-        info.health_comp_ptr   = info.go_ptr->add_component<health_component>(1);
+        info.health_comp_ptr   = info.go_ptr->add_component<npc_health_component>(1);
         return info;
     }
 
@@ -210,7 +211,7 @@ namespace qbert
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         info.go_ptr->add_component<mngn::collider_component>(sprite_comp_ptr->sprite()->collider_width(), sprite_comp_ptr->sprite()->collider_height());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>(6, 0);
-        info.health_comp_ptr   = info.go_ptr->add_component<health_component>(1);
+        info.health_comp_ptr   = info.go_ptr->add_component<npc_health_component>(1);
         return info;
     }
 
@@ -230,7 +231,7 @@ namespace qbert
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         info.go_ptr->add_component<mngn::collider_component>(sprite_comp_ptr->sprite()->collider_width(), sprite_comp_ptr->sprite()->collider_height());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>();
-        info.health_comp_ptr   = info.go_ptr->add_component<health_component>(1);
+        info.health_comp_ptr   = info.go_ptr->add_component<npc_health_component>(1);
         return info;
     }
 
@@ -334,45 +335,38 @@ namespace qbert
     {
         level_info info{};
         info.scene_ptr = config.scene_ptr;
-        
-        for (auto const &level_config : config.level_config["levels"])
+        cube_config_info cube_config{};
+        cube_config.scene_ptr  = config.scene_ptr;
+        cube_config.parent_ptr = config.parent_ptr;
+        cube_config.texture_id = config.cube_config.texture_id;
+        cube_config.color_1    = config.cube_color_1;
+        cube_config.color_2    = config.cube_color_2;
+        if (config.cube_color_3) cube_config.color_3 = config.cube_color_3.value();
+        if (config.cube_revertible) cube_config.revertible = config.cube_revertible.value();
+        info.cube_info = create_cubes(cube_config);
+
+        ui::sprite_config_info sprite_config{};
+        sprite_config.scene_ptr      = config.scene_ptr;
+        sprite_config.parent_ptr     = config.parent_ptr;
+        sprite_config.name           = "cube_color_small";
+        sprite_config.local_position = {64, 96};
+        sprite_config.sprite_id      = config.cube_color_small;
+        ui::create_sprite(sprite_config);
+
+        int num_of_disks = config.disk_count;
+        for (int i = 0; i < num_of_disks; ++i)
         {
-            if (level_config["level_id"] == config.level_id and level_config["round_id"] == config.round_id)
-            {
-                cube_config_info cube_config{};
-                cube_config.scene_ptr  = config.scene_ptr;
-                cube_config.parent_ptr = config.parent_ptr;
-                cube_config.texture_id = config.cube_config.texture_id;
-                cube_config.color_1    = level_config["cube_color_1"];
-                cube_config.color_2    = level_config["cube_color_2"];
-                if (level_config.contains("cube_color_3")) cube_config.color_3 = level_config["cube_color_3"];
-                if (level_config.contains("cube_revertible")) cube_config.revertible = level_config["cube_revertible"];
-                info.cube_info = create_cubes(cube_config);
+            disc_config_info disc_config{};
+            disc_config.scene_ptr  = config.scene_ptr;
+            disc_config.parent_ptr = config.parent_ptr;
+            disc_config.name       = "disc_" + std::to_string(i);
+            disc_config.sprite_id  = config.disk_color;
+            disc_config.texture_id = config.disc_config.texture_id;
 
-                ui::sprite_config_info sprite_config{};
-                sprite_config.scene_ptr      = config.scene_ptr;
-                sprite_config.parent_ptr     = config.parent_ptr;
-                sprite_config.name           = "cube_color_small";
-                sprite_config.local_position = {64, 96};
-                sprite_config.sprite_id      = level_config["cube_color_small"];
-                ui::create_sprite(sprite_config);
-
-                int num_of_disks = level_config["disk_count"];
-                for (int i = 0; i < num_of_disks; ++i)
-                {
-                    disc_config_info disc_config{};
-                    disc_config.scene_ptr  = config.scene_ptr;
-                    disc_config.parent_ptr = config.parent_ptr;
-                    disc_config.name       = "disc_" + std::to_string(i);
-                    disc_config.sprite_id  = level_config["disk_color"];
-                    disc_config.texture_id = config.disc_config.texture_id;
-
-                    auto disk_positions = level_config["disk_positions"];
-                    disc_config.row_idx  = disk_positions[i * 2];
-                    disc_config.col_idx  = disk_positions[i * 2 + 1];
-                    create_disc(disc_config);
-                }
-            }
+            auto disk_positions = config.disk_positions;
+            disc_config.row_idx  = disk_positions[i * 2];
+            disc_config.col_idx  = disk_positions[i * 2 + 1];
+            create_disc(disc_config);
         }
         return info;
     }
@@ -422,7 +416,7 @@ namespace qbert
         info.go_ptr->add_tag("ui");
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
-        info.go_ptr->add_component<mngn::sprite_ui_component>(config.sprite_id, config.texture_id);
+        info.go_ptr->add_component<mngn::sprite_ui_component>(config.sprite_id, config.texture_id, false);
         info.level_display_comp_ptr = info.go_ptr->add_component<level_display_component>();
         return info;
     }
@@ -434,7 +428,7 @@ namespace qbert
         info.go_ptr->add_tag("ui");
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
-        info.go_ptr->add_component<mngn::sprite_ui_component>(config.sprite_id, config.texture_id);
+        info.go_ptr->add_component<mngn::sprite_ui_component>(config.sprite_id, config.texture_id, false);
         info.round_display_comp_ptr = info.go_ptr->add_component<round_display_component>();
         return info;
     }

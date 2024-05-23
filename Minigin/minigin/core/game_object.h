@@ -25,7 +25,10 @@ namespace mngn
     concept family_component = std::is_base_of_v<game_component, T> and std::is_abstract_v<T>;
 
     template <class T>
-    concept child_component = std::is_base_of_v<game_component, T> and std::is_constructible_v<T>;
+    concept implementation_component = std::is_base_of_v<game_component, T> and std::is_constructible_v<T>;
+
+    template <class T>
+    concept child_component = std::is_base_of_v<game_component, T> and not std::is_same_v<T, game_component>;
 
     // Type aliases
     using component_map = std::unordered_map<std::type_index, game_component*>;
@@ -92,7 +95,7 @@ namespace mngn
         [[nodiscard]] auto components_in_parent(component_family family_type) const -> component_multimap;
         [[nodiscard]] auto components_in_parent() const -> component_multimap;
 
-        template <class T, typename... Args> requires child_component<T>
+        template <class T, typename... Args> requires implementation_component<T>
         auto add_component(Args &&... args) -> T *;
 
         template <class T> requires child_component<T>
@@ -124,12 +127,6 @@ namespace mngn
 
         template <class T> requires family_component<T>
         auto remove_components() -> int;
-
-        template <class T> requires child_component<T>
-        [[nodiscard]] auto has_component() const -> bool;
-
-        template <class T> requires family_component<T>
-        [[nodiscard]] auto has_component() const -> bool;
 
         auto world_position() -> const glm::vec3 &;
         [[nodiscard]] auto local_position() const -> const glm::vec3 &;

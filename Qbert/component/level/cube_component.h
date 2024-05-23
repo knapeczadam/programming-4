@@ -15,7 +15,7 @@ namespace mngn
 
 namespace qbert
 {
-    class cube_component : public mngn::custom_component, public mngn::i_observer
+    class cube_component : public mngn::custom_component, public mngn::subject, public mngn::i_observer
     {
     public:
         cube_component()           = default;
@@ -31,6 +31,7 @@ namespace qbert
         void on_enable() override;
         void on_disable() override;
         void notify(std::string const &event, mngn::subject *subject_ptr) override;
+        [[nodiscard]] auto has_final_color() const -> bool;
 
     private:
         int  row_idx_         = 0;

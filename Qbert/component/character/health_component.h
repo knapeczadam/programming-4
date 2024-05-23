@@ -6,11 +6,11 @@
 
 namespace qbert
 {
-    class health_component final : public mngn::custom_component, public mngn::subject
+    class health_component : public mngn::custom_component, public mngn::subject
     {
     public:
         health_component()           = default;
-        explicit health_component(int health);
+        explicit health_component(int health) : health_{health}, original_health_{health} {}
         ~health_component() override = default;
         
         health_component(health_component const &other)            = delete;
@@ -18,14 +18,11 @@ namespace qbert
         health_component &operator=(health_component const &other) = delete;
         health_component &operator=(health_component &&other)      = delete;
 
-        void on_enable() override;
-        void on_disable() override;
-
-        void take_damage(int damage);
-        void heal(int health);
-        [[nodiscard]] auto health() const -> int { return health_; }
-
-    private:
+        virtual void take_damage(int damage);
+        virtual void heal(int health);
+        [[nodiscard]] virtual auto health() const -> int { return health_;}
+        
+    protected:
         int health_ = 0;
         int const original_health_ = 0;
     };

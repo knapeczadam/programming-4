@@ -50,9 +50,7 @@ namespace qbert
             break;
         case end:
             {
-                auto score = progress_manager::instance().score();
-                score_manager::instance().set_score(score, initial_);
-                score_manager::instance().save_scoreboard();
+               save_initial();
                 
                 auto scene_ptr           = mngn::scene_manager::instance().find("game_state");
                 auto game_state_go_ptr   = scene_ptr->find("game_state");
@@ -72,6 +70,13 @@ namespace qbert
         }
         
         render_initials();
+    }
+
+    void initial_manager::save_initial()
+    {
+        auto score = progress_manager::instance().score();
+        score_manager::instance().set_score(score, initial_);
+        score_manager::instance().save_scoreboard();
     }
 
     void initial_manager::move_underline()

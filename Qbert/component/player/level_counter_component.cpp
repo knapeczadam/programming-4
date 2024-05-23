@@ -7,23 +7,22 @@ namespace qbert
 {
     void level_counter_component::on_enable()
     {
-        notify_observers("level_changed");
+        notify_observers("update_level_display");
     }
 
     void level_counter_component::start()
     {
-        notify_observers("level_changed");
+        notify_observers("update_level_display");
     }
 
-    void level_counter_component::on_disable()
+    auto level_counter_component::level() const -> int
     {
-        level_ = 1;
+        return progress_manager::instance().level();
     }
 
     void level_counter_component::increase_level()
     {
-        ++level_;
-        progress_manager::instance().set_level(level_);
-        notify_observers("level_changed");
+        progress_manager::instance().increase_level();
+        notify_observers("update_level_display");
     }
 }

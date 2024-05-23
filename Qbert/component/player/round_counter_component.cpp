@@ -7,27 +7,27 @@ namespace qbert
 {
     void round_counter_component::on_enable()
     {
-        notify_observers("round_changed");
+        notify_observers("update_round_display");
     }
 
     void round_counter_component::start()
     {
-        notify_observers("round_changed");
+        notify_observers("update_round_display");
     }
 
-    void round_counter_component::on_disable()
+    auto round_counter_component::round() const -> int
     {
-        round_ = 1;
+        return progress_manager::instance().round();
     }
 
     void round_counter_component::increase_round()
     {
-        ++round_;
-        if (round_ == 5)
-        {
-            round_ = 1;
-        }
-        progress_manager::instance().set_level(round_);
-        notify_observers("round_changed");
+        progress_manager::instance().increase_round();
+        notify_observers("update_round_display");
+    }
+
+    void round_counter_component::set_round(int round)
+    {
+        progress_manager::instance().set_round(round);
     }
 }

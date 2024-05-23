@@ -19,12 +19,8 @@ namespace qbert
 
         void on_enable() override;
         void start() override;
-        void on_disable() override;
         
-        [[nodiscard]] auto level() const -> int { return level_; }
+        [[nodiscard]] auto level() const -> int;
         void increase_level();
-
-    private:
-        int level_ = 1;
     };
 }

@@ -29,6 +29,7 @@ namespace qbert
         void move_input(int dir);
         void accept_input();
         [[nodiscard]] auto initial() const -> std::string const& { return initial_; }
+        void save_initial();
 
     private:
         friend class singleton<initial_manager>;

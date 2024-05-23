@@ -1,4 +1,4 @@
-﻿#include "loading_state.h"
+﻿#include "level_loading_state.h"
 
 // Project includes
 #include "component/character/position_component.h"
@@ -6,9 +6,7 @@
 #include "component/level/cube_component.h"
 #include "minigin/core/game_object.h"
 #include "component/character/direction_component.h"
-#include "component/state/game_state_component.h"
 #include "component/state/character_state_component.h"
-#include "component/state/game_state_component.h"
 #include "component/ui/flicker_component.h"
 #include "core/factory.h"
 #include "core/level_config_manager.h"
@@ -21,18 +19,16 @@
 #include "minigin/core/scene_manager.h"
 #include "minigin/input/input_manager.h"
 #include "state/game/coop_state.h"
-#include "state/game/single_state.h"
-#include "state/game/versus_state.h"
 #include "state/player/jumping_state.h"
 
 namespace qbert
 {
-    loading_state::loading_state(game_state_component* game_state_comp_ptr)
+    level_loading_state::level_loading_state(game_state_component* game_state_comp_ptr)
         : game_state{game_state_comp_ptr}
     {
     }
 
-    void loading_state::on_enter()
+    void level_loading_state::on_enter()
     {
         scene_ptr_ = mngn::scene_manager::instance().find("loading");
         scene_ptr_->set_active(true);
@@ -46,7 +42,7 @@ namespace qbert
     	total_time_ = events_.size() * jump_time_ + intro_time_ + outro_time_;
     }
 
-    void loading_state::update()
+    void level_loading_state::update()
     {
     	accu_time_intro_ += mngn::game_time::instance().delta_time();
     	if (accu_time_intro_ < intro_time_)
@@ -72,13 +68,13 @@ namespace qbert
     	}
     }
 
-    void loading_state::on_exit()
+    void level_loading_state::on_exit()
     {
         clean_up();
         scene_ptr_->set_active(false);
     }
 
-    void loading_state::load_sprites()
+    void level_loading_state::load_sprites()
     {
     	auto level = progress_manager::instance().level();
     	
@@ -106,7 +102,7 @@ namespace qbert
         number_info.go_ptr->add_component<flicker_component>();
     }
 
-    void loading_state::load_cubes()
+    void level_loading_state::load_cubes()
     {
     	auto level = progress_manager::instance().level();
         auto config = level_config_manager::instance().get_level_config();
@@ -156,7 +152,7 @@ namespace qbert
         }
     }
 
-    void loading_state::load_qbert()
+    void level_loading_state::load_qbert()
     {
 		factory::character::player_config_info player_config{};
 		player_config.scene_ptr         = scene_ptr_;
@@ -181,7 +177,7 @@ namespace qbert
     	}
     }
 
-    void loading_state::clean_up()
+    void level_loading_state::clean_up()
     {
         auto cube_go_ptrs = scene_ptr_->find_game_objects_with_tag("cube");
         for (auto const &cube_ptr : cube_go_ptrs)
@@ -197,7 +193,7 @@ namespace qbert
     	if (qbert_go_ptr) scene_ptr_->remove(qbert_go_ptr);
     }
 
-	void loading_state::init_events()
+	void level_loading_state::init_events()
 	{
     	auto level = progress_manager::instance().level();
 	    switch (level)
@@ -246,7 +242,7 @@ namespace qbert
 	    }
 	}
 
-    void loading_state::push_left_event()
+    void level_loading_state::push_left_event()
     {
     	auto f = [this]()
     	{
@@ -259,7 +255,7 @@ namespace qbert
     	events_.emplace(f);
     }
 
-    void loading_state::push_right_event()
+    void level_loading_state::push_right_event()
     {
     	auto f = [this]()
     	{
@@ -272,7 +268,7 @@ namespace qbert
     	events_.emplace(f);
     }
 
-    void loading_state::push_up_event()
+    void level_loading_state::push_up_event()
     {
     	auto f = [this]()
     	{
@@ -285,7 +281,7 @@ namespace qbert
     	events_.emplace(f);
     }
 
-    void loading_state::push_down_event()
+    void level_loading_state::push_down_event()
     {
     	auto f = [this]()
     	{

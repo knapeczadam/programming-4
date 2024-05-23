@@ -1,7 +1,7 @@
 ﻿#include "fall_component.h"
 
 // Project includes
-#include "component/player/health_component.h"
+#include "component/character/health_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
 #include "minigin/utility/math.h"

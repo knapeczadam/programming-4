@@ -2,7 +2,9 @@
 
 // Project includes
 #include "component/character/direction_component.h"
+#include "component/state/character_state_component.h"
 #include "minigin/core/game_object.h"
+#include "state/player/waiting_state.h"
 
 // GLM includes
 #include <glm/glm.hpp>
@@ -38,9 +40,15 @@ namespace qbert
 
     void position_component::update_position()
     {
+        if (owner()->component<character_state_component>()->is_state<waiting_state>())
+        {
+            notify_observers("update_cube");
+            return;
+        }
         row_idx_ += direction_comp_ptr_->row();
         col_idx_ += direction_comp_ptr_->col();
         notify_observers("position_changed");
+        notify_observers("update_cube");
     }
 
     void position_component::reset(int row_idx, int col_idx)

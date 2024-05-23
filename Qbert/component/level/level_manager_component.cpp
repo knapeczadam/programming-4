@@ -1,25 +1,34 @@
 ﻿#include "level_manager_component.h"
 
 // Project includes
+#include "cube_component.h"
 #include "component/character/direction_component.h"
 #include "component/character/jump_component.h"
 #include "component/character/position_component.h"
 #include "component/level/disc_component.h"
-#include "component/player/health_component.h"
+#include "component/character/health_component.h"
 #include "component/state/character_state_component.h"
+#include "component/state/game_state_component.h"
+#include "core/progress_manager.h"
 #include "minigin/core/game_object.h"
+#include "minigin/core/scene.h"
+#include "minigin/core/scene_manager.h"
+#include "state/game/level_loading_state.h"
+#include "state/game/round_loading_state.h"
 #include "state/npc/npc_dead_state.h"
 #include "state/npc/npc_idle_state.h"
 #include "state/player/dead_state.h"
 #include "state/player/falling_state.h"
 #include "state/player/flying_state.h"
 #include "state/player/idle_state.h"
+#include "state/player/swearing_state.h"
 #include "state/player/waiting_state.h"
 
 // Standard includes
 #include <iostream>
+#include <string>
 
-#include "state/player/swearing_state.h"
+#include "component/character/health_component.h"
 
 namespace qbert
 {
@@ -83,7 +92,7 @@ namespace qbert
 
         if (event == "health_changed")
         {
-            auto health_comp_ptr = static_cast<health_component*>(subject_ptr);
+            auto health_comp_ptr = dynamic_cast<health_component*>(subject_ptr);
             auto character_ptr = health_comp_ptr->owner();
             auto position_idx_comp_ptr = character_ptr->component<position_component>();
             auto const row_idx = position_idx_comp_ptr->row();
@@ -116,6 +125,21 @@ namespace qbert
             else if (character_ptr->has_tag("npc") and health_comp_ptr->health() == 0)
             {
                 character_ptr->component<character_state_component>()->change_state<npc_dead_state>(character_ptr);
+            }
+        }
+
+        if (event == "color_changed")
+        {
+            auto cube_comp_ptr = static_cast<cube_component*>(subject_ptr);
+            auto &progress_manager = progress_manager::instance();
+            progress_manager.set_cube(cube_comp_ptr->owner()->name(), cube_comp_ptr->has_final_color());
+            if (progress_manager.round_completed())
+            {
+                auto scene_ptr = mngn::scene_manager::instance().find("game_state");
+                auto game_state_go_ptr = scene_ptr->find("game_state");
+                auto game_state_comp_ptr = game_state_go_ptr->component<game_state_component>();
+                
+                game_state_comp_ptr->change_state<round_loading_state>(game_state_comp_ptr);
             }
         }
     }

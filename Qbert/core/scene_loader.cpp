@@ -5,7 +5,7 @@
 #include "component/character/position_component.h"
 #include "component/level/cube_component.h"
 #include "component/level/level_manager_component.h"
-#include "component/player/health_component.h"
+#include "component/character/health_component.h"
 #include "component/player/level_counter_component.h"
 #include "component/player/player_collider_component.h"
 #include "component/player/round_counter_component.h"
@@ -48,15 +48,38 @@ namespace qbert
 #endif
         load_menu_scene();
         load_loading_scene();
-        load_single_scene();
-        load_coop_scene();
-        load_versus_scene();
+        load_single_scenes();
+        load_coop_scenes();
+        load_versus_scenes();
         load_game_over_scene();
         load_scoreboard_scene();
     	load_input_scene();
     	load_game_state_scene();
     	bind_generic_commands();
     }
+
+	void scene_loader::load_scenes(const std::string &scene_name, std::function<void(scene_info)> &&load_scene_func)
+	{
+    	auto config_file = level_config_manager::instance().get_level_config();
+        for (auto const &level_config : config_file["levels"])
+        {
+        	auto level_id = to_string(level_config["level_id"]);
+        	auto round_id = to_string(level_config["round_id"]);
+        	
+			auto scene_ptr = mngn::scene_manager::instance().create_scene(scene_name + "_" + level_id + "_" + round_id);
+			scene_ptr->set_active(false);
+        	
+			auto root_ptr = scene_ptr->create_game_object("root");
+			auto level_manager_comp_ptr = root_ptr->add_component<level_manager_component>();
+        	
+			scene_info scene_info{};
+			scene_info.scene_ptr = scene_ptr;
+			scene_info.root_ptr  = root_ptr;
+			scene_info.level_manager_comp_ptr = level_manager_comp_ptr;
+        	scene_info.level_config = level_config;
+        	load_scene_func(scene_info);
+        }
+	}
 
     void scene_loader::load_debug_scene()
     {
@@ -321,7 +344,6 @@ namespace qbert
     	sprite_config.name           = "disk";
     	sprite_config.sprite_id      = qb_sp_level_1_disk_1;
     	sprite_config.texture_id     = qb_re_t_sprite_general;
-        sprite_config.local_position = {-36.0f, 374.0f};
     	auto sprite_info = factory::ui::create_sprite(sprite_config);
     	auto disk_ptr = sprite_info.go_ptr;
         
@@ -384,97 +406,28 @@ namespace qbert
         scene_ptr->set_active(false);
     }
 
-    void scene_loader::load_single_scene()
+    void scene_loader::load_single_scenes()
     {
-        auto scene_ptr = mngn::scene_manager::instance().create_scene("single");
-    	scene_ptr->set_active(false);
-    	
-        auto root_ptr = scene_ptr->create_game_object("root");
-        auto level_manager_comp_ptr = root_ptr->add_component<level_manager_component>();
-
-    	scene_info scene_info{};
-    	scene_info.scene_ptr = scene_ptr;
-    	scene_info.root_ptr  = root_ptr;
-    	scene_info.level_manager_comp_ptr = level_manager_comp_ptr;
-    	
-    	create_ui(scene_info);
-    	create_score_display(scene_info);
-    	create_health_display(scene_info);
-    	create_level_display(scene_info);
-    	create_round_display(scene_info);
-    	create_level(scene_info);
-    	
-    	create_player_1(scene_info);
-    	bind_player_observers(scene_info);
-    	
-    	// create_red_ball(scene_info);
-    	// create_coily(scene_info);
-    	// create_ugg(scene_info);
-    	// create_wrong_way(scene_info);
-    	// create_green_ball(scene_info);
-    	// create_slick(scene_info);
-    	// create_sam(scene_info);
-
+    	load_scenes("single", [this](scene_info scene_info)
+		{
+			create_single_scene(scene_info);
+		});
     }
 
-    void scene_loader::load_coop_scene()
+    void scene_loader::load_coop_scenes()
     {
-        auto scene_ptr = mngn::scene_manager::instance().create_scene("coop");
-        scene_ptr->set_active(false);
-    	
-        auto root_ptr = scene_ptr->create_game_object("root");
-        auto level_manager_comp_ptr = root_ptr->add_component<level_manager_component>();
-    	
-    	scene_info scene_info{};
-    	scene_info.scene_ptr              = scene_ptr;
-    	scene_info.root_ptr               = root_ptr;
-    	scene_info.level_manager_comp_ptr = level_manager_comp_ptr;
-    	
-    	create_ui(scene_info);
-    	create_score_display(scene_info);
-    	create_health_display(scene_info);
-    	create_level_display(scene_info);
-    	create_round_display(scene_info);
-    	create_level(scene_info);
-    	create_player_1(scene_info);
-    	bind_player_observers(scene_info);
-    	create_red_ball(scene_info);
-    	create_coily(scene_info);
-    	create_ugg(scene_info);
-    	create_wrong_way(scene_info);
-    	create_green_ball(scene_info);
-    	create_slick(scene_info);
-    	create_sam(scene_info);
-
-        factory::ui::sprite_config_info sprite_config{};
-        sprite_config.scene_ptr      = scene_ptr;
-    	sprite_config.parent_ptr     = root_ptr;
-        sprite_config.name           = "text_player_2";
-        sprite_config.local_position = {332, 32};
-        sprite_config.sprite_id      = qb_sp_text_orange_player;
-        sprite_config.texture_id     = qb_re_t_sprite_general;
-        factory::ui::create_sprite(sprite_config);
-        
-        sprite_config.name           = "text_2";
-        sprite_config.local_position = {444, 16};
-        sprite_config.sprite_id      = qb_sp_text_two;
-        factory::ui::create_sprite(sprite_config);
-
-		factory::ui::health_display_config_info health_display_config{};
-		health_display_config.scene_ptr      = scene_ptr;
-		health_display_config.parent_ptr     = root_ptr;
-		health_display_config.name           = "health_2";
-		health_display_config.local_position = {448.0f, 160.0f};
-		scene_info.health_display_info = factory::ui::create_health_display(health_display_config);
-    	
-    	create_player_2(scene_info);
-    	bind_player_observers(scene_info);
+    	load_scenes("coop", [this](scene_info scene_info)
+		{
+			create_coop_scene(scene_info);
+		});
     }
 
-    void scene_loader::load_versus_scene()
+    void scene_loader::load_versus_scenes()
     {
-        auto scene_ptr = mngn::scene_manager::instance().create_scene("versus");
-        scene_ptr->set_active(false);
+    	load_scenes("versus", [this](scene_info scene_info)
+		{
+			create_versus_scene(scene_info);
+		});
     }
 
     void scene_loader::load_game_over_scene()
@@ -680,6 +633,82 @@ namespace qbert
     	}
     }
 
+    void scene_loader::create_single_scene(scene_info &scene_info)
+    {
+    	create_ui(scene_info);
+    	create_score_display(scene_info);
+    	create_health_display(scene_info);
+    	create_level_display(scene_info);
+    	create_round_display(scene_info);
+    	create_level(scene_info);
+    	create_player_1(scene_info);
+    	bind_player_observers(scene_info);
+    	
+    	// create_red_ball(scene_info);
+    	// create_coily(scene_info);
+    	// create_ugg(scene_info);
+    	// create_wrong_way(scene_info);
+    	// create_green_ball(scene_info);
+    	// create_slick(scene_info);
+    	// create_sam(scene_info);
+    }
+
+    void scene_loader::create_coop_scene(scene_info &scene_info)
+    {
+    	create_ui(scene_info);
+    	create_score_display(scene_info);
+    	create_health_display(scene_info);
+    	create_level_display(scene_info);
+    	create_round_display(scene_info);
+    	create_level(scene_info);
+    	create_player_1(scene_info);
+    	bind_player_observers(scene_info);
+    	
+    	create_red_ball(scene_info);
+    	create_coily(scene_info);
+    	create_ugg(scene_info);
+    	create_wrong_way(scene_info);
+    	create_green_ball(scene_info);
+    	create_slick(scene_info);
+    	create_sam(scene_info);
+
+        factory::ui::sprite_config_info sprite_config{};
+        sprite_config.scene_ptr      = scene_info.scene_ptr;
+    	sprite_config.parent_ptr     = scene_info.root_ptr;
+        sprite_config.name           = "text_player_2";
+        sprite_config.local_position = {332, 32};
+        sprite_config.sprite_id      = qb_sp_text_orange_player;
+        sprite_config.texture_id     = qb_re_t_sprite_general;
+        factory::ui::create_sprite(sprite_config);
+        
+        sprite_config.name           = "text_2";
+        sprite_config.local_position = {444, 16};
+        sprite_config.sprite_id      = qb_sp_text_two;
+        factory::ui::create_sprite(sprite_config);
+
+		factory::ui::health_display_config_info health_display_config{};
+		health_display_config.scene_ptr      = scene_info.scene_ptr;
+		health_display_config.parent_ptr     = scene_info.root_ptr;
+		health_display_config.name           = "health_2";
+		health_display_config.local_position = {448.0f, 160.0f};
+		scene_info.health_display_info = factory::ui::create_health_display(health_display_config);
+    	
+    	create_player_2(scene_info);
+    	bind_player_observers(scene_info);
+    }
+
+    void scene_loader::create_versus_scene(scene_info &scene_info)
+    {
+    	create_ui(scene_info);
+    	create_score_display(scene_info);
+    	create_health_display(scene_info);
+    	create_level_display(scene_info);
+    	create_round_display(scene_info);
+    	create_level(scene_info);
+    	create_player_1(scene_info);
+    	bind_player_observers(scene_info);
+    }
+
     void scene_loader::create_score_display(scene_info &scene_info)
     {
 		factory::ui::score_display_config_info score_display_config{};
@@ -728,13 +757,18 @@ namespace qbert
 
     void scene_loader::create_level(scene_info &scene_info)
     {
-        factory::level::level_config_info level_config{};
-        level_config.scene_ptr    = scene_info.scene_ptr;
-        level_config.parent_ptr   = scene_info.root_ptr;
-        level_config.level_id     = 1;
-    	level_config.round_id     = 1;
-        level_config.level_config = level_config_manager::instance().get_level_config();
-        scene_info.level_info = factory::level::create_level(level_config);
+	    factory::level::level_config_info config{};
+    	config.scene_ptr    = scene_info.scene_ptr;
+    	config.parent_ptr   = scene_info.root_ptr;
+    	config.cube_color_1 = scene_info.level_config["cube_color_1"];
+    	config.cube_color_2 = scene_info.level_config["cube_color_2"];
+    	if (scene_info.level_config.contains("cube_color_3")) config.cube_color_3 = scene_info.level_config["cube_color_3"];
+    	if (scene_info.level_config.contains("cube_revertible")) config.cube_revertible = scene_info.level_config["cube_revertible"];
+    	config.cube_color_small = scene_info.level_config["cube_color_small"];
+    	config.disk_count = scene_info.level_config["disk_count"];
+    	config.disk_color = scene_info.level_config["disk_color"];
+    	config.disk_positions = scene_info.level_config["disk_positions"];
+        scene_info.level_info = factory::level::create_level(config);
     }
 
     void scene_loader::create_player_1(scene_info &scene_info)
@@ -787,6 +821,7 @@ namespace qbert
 		scene_info.player_info.level_counter_comp_ptr->add_observer(scene_info.level_display_info.level_display_comp_ptr);
 		scene_info.player_info.round_counter_comp_ptr->add_observer(scene_info.round_display_info.round_display_comp_ptr);
 		std::ranges::for_each(scene_info.level_info.cube_info.cube_components, [scene_info](auto cube_comp_ptr) { scene_info.player_info.position_comp_ptr->add_observer(cube_comp_ptr); });
+		std::ranges::for_each(scene_info.level_info.cube_info.cube_components, [scene_info](auto cube_comp_ptr) { cube_comp_ptr->add_observer(scene_info.level_manager_comp_ptr); });
     }
 
     void scene_loader::bind_generic_commands()

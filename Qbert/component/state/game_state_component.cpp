@@ -3,6 +3,7 @@
 // Project includes
 #include "state/game/coop_state.h"
 #include "state/game/input_state.h"
+#include "state/game/level_loading_state.h"
 #include "state/game/menu_state.h"
 #include "state/game/scoreboard_state.h"
 #include "state/game/single_state.h"

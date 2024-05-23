@@ -180,11 +180,18 @@ namespace qbert
             // Level
             struct level_config_info : config_info
             {
-                int              level_id;
-                int              round_id;
-                json             level_config;
-                cube_config_info cube_config;
-                disc_config_info disc_config;
+                int                 level_id;
+                int                 round_id;
+                int                 cube_color_1;
+                int                 cube_color_2;
+                std::optional<int>  cube_color_3;
+                std::optional<bool> cube_revertible;
+                int                 cube_color_small;
+                int                 disk_count;
+                int                 disk_color;
+                json                disk_positions;
+                cube_config_info    cube_config;
+                disc_config_info    disc_config;
             };
 
             struct level_info

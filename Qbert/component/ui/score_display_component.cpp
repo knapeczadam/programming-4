@@ -12,9 +12,14 @@ namespace qbert
         number_comp_ptr_ = owner()->component<number_component>();
     }
 
+    void score_display_component::on_enable()
+    {
+        number_comp_ptr_ = owner()->component<number_component>();
+    }
+
     void score_display_component::notify(std::string const &event, mngn::subject *subject_ptr)
     {
-        if (event == "score_changed")
+        if (event == "update_score_display")
         {
             auto const score_comp_ptr = dynamic_cast<score_counter_component*>(subject_ptr);
             auto score = score_comp_ptr->score();

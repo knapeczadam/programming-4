@@ -19,12 +19,9 @@ namespace qbert
 
         void on_enable() override;
         void start() override;
-        void on_disable() override;
         
-        [[nodiscard]] auto round() const -> int { return round_; }
+        [[nodiscard]] auto round() const -> int;
         void increase_round();
-
-    private:
-        int round_ = 1;
+        void set_round(int round);
     };
 }

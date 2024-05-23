@@ -4,12 +4,18 @@
 #include "core/factory.h"
 #include "minigin/utility/singleton.h"
 
+// JSON includes
+#include "json.hpp"
+
 // Forward declarations
 namespace mngn
 {
     class game_object;
     class scene;
 }
+
+// Aliases
+using json = nlohmann::json;
 
 namespace qbert
 {
@@ -23,6 +29,7 @@ namespace qbert
             mngn::scene                         *scene_ptr;
             mngn::game_object                   *root_ptr;
             level_manager_component             *level_manager_comp_ptr;
+            json                                level_config;
             factory::ui::score_display_info     score_display_info;
             factory::ui::health_display_info    health_display_info;
             factory::ui::level_display_info     level_display_info;
@@ -52,19 +59,23 @@ namespace qbert
         void load_input_message(int ranking);
 
     private:
+        void load_scenes(const std::string &scene_name, std::function<void(scene_info)> &&load_scene_func);
         void load_debug_scene();
         void load_game_state_scene();
         void load_menu_scene();
         void load_menu_scene_1();
         void load_menu_scene_2();
         void load_loading_scene();
-        void load_single_scene();
-        void load_coop_scene();
-        void load_versus_scene();
+        void load_single_scenes();
+        void load_coop_scenes();
+        void load_versus_scenes();
         void load_game_over_scene();
         void load_input_scene();
         void load_scoreboard_scene();
 
+        void create_single_scene(scene_info &scene_info);
+        void create_coop_scene(scene_info &scene_info);
+        void create_versus_scene(scene_info &scene_info);
         void create_score_display(scene_info &scene_info);
         void create_health_display(scene_info &scene_info);
         void create_level_display(scene_info &scene_info);

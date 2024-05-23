@@ -26,11 +26,9 @@ namespace mngn
         {
             // Test Description: Add a component (Test1) to a game object.
             // Assert 1: The game object has the component family.
-            // Assert 2: The game object has the component type.
             game_object go;
             go.add_component<test1_component>();
             assert(go.has_component(component_family::test));
-            assert(go.has_component<test1_component>());
         }
         {
             // Test Description: Add a component (Test1) to a game object.

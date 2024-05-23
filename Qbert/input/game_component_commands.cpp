@@ -1,6 +1,6 @@
 ﻿#include "game_component_commands.h"
 
-#include "component/player/health_component.h"
+#include "component/character/health_component.h"
 #include "component/player/score_counter_component.h"
 #include "core/resources.h"
 #include "minigin/core/resource_manager.h"
@@ -20,7 +20,7 @@
 #include "minigin/core/scene_manager.h"
 #include "state/game/game_over_state.h"
 #include "state/game/input_state.h"
-#include "state/game/loading_state.h"
+#include "state/game/level_loading_state.h"
 #include "state/game/menu_state.h"
 
 
@@ -34,7 +34,7 @@ namespace qbert
 
     void damage_command::execute()
     {
-        static_cast<health_component*>(game_component_ptr_)->take_damage(damage_);
+        dynamic_cast<health_component*>(game_component_ptr_)->take_damage(damage_);
 
         // Play test sound - temporary
         auto event = std::make_unique<mngn::sound_event>();
@@ -93,7 +93,7 @@ namespace qbert
     {
         auto game_state_comp_ptr = static_cast<game_state_component*>(game_component_ptr_);
         if (not game_state_comp_ptr->is_state<menu_state>()) return;
-        game_state_comp_ptr->change_state<loading_state>(game_state_comp_ptr);
+        game_state_comp_ptr->change_state<level_loading_state>(game_state_comp_ptr);
     }
 
     input_select_command::input_select_command(mngn::game_component *component_ptr, int dir)
@@ -116,7 +116,6 @@ namespace qbert
 
     void input_accept_command::execute()
     {
-        
         auto game_state_comp_ptr = static_cast<game_state_component*>(game_component_ptr_);
         if (not game_state_comp_ptr->is_state<input_state>()) return;
         initial_manager::instance().accept_input();

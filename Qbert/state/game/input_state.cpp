@@ -3,6 +3,7 @@
 // Project includes
 #include "scoreboard_state.h"
 #include "component/state/game_state_component.h"
+#include "core/initial_manager.h"
 #include "core/progress_manager.h"
 #include "core/scene_loader.h"
 #include "core/score_manager.h"
@@ -40,6 +41,7 @@ namespace qbert
         {
             input_time_ = original_input_time_;
             countdown_ = original_countdown_;
+            initial_manager::instance().save_initial();
             game_state_comp_ptr_->change_state<scoreboard_state>(game_state_comp_ptr_);
         }
     }

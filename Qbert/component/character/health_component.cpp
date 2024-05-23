@@ -2,22 +2,6 @@
 
 namespace qbert
 {
-    health_component::health_component(int health)
-        : health_{health}
-        , original_health_{health}
-    {
-    }
-
-    void health_component::on_enable()
-    {
-        notify_observers("health_changed");
-    }
-
-    void health_component::on_disable()
-    {
-        health_ = original_health_;
-    }
-
     void health_component::take_damage(int damage)
     {
         if (damage <= 0)
@@ -31,5 +15,6 @@ namespace qbert
         if (health <= 0)
             return;
         health_ += health;
+        notify_observers("health_changed");
     }
 }

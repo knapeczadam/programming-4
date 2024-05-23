@@ -1,9 +1,11 @@
 ﻿#include "waiting_state.h"
 
 // Project includes
+#include "flying_state.h"
 #include "start_state.h"
 #include "component/state/character_state_component.h"
 #include "component/character/position_component.h"
+#include "component/character/direction_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
 
@@ -29,5 +31,7 @@ namespace qbert
     {
         character_ptr_->set_local_position(224.0f, 84.0f);
         character_ptr_->component<position_component>()->reset();
+        character_ptr_->component<direction_component>()->reset();
+        character_ptr_->component<position_component>()->update_position();
     }
 }

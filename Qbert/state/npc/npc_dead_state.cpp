@@ -4,7 +4,7 @@
 #include "component/character/direction_component.h"
 #include "component/character/jump_component.h"
 #include "component/character/position_component.h"
-#include "component/player/health_component.h"
+#include "component/character/health_component.h"
 #include "component/state/character_state_component.h"
 #include "minigin/core/game_object.h"
 
