@@ -10,7 +10,7 @@
 namespace qbert
 {
     // Forward declaration
-    class disc_component;
+    class disk_component;
     
     class level_manager_component final : public mngn::custom_component, public mngn::subject,  public mngn::i_observer
     {
@@ -27,6 +27,6 @@ namespace qbert
         void notify(std::string const &event, mngn::subject *subject_ptr) override;
 
     private:
-        std::vector<disc_component*> discs_;
+        std::vector<disk_component*> disks_;
     };
 }

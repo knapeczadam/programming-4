@@ -5,7 +5,7 @@
 #include "component/character/direction_component.h"
 #include "component/character/jump_component.h"
 #include "component/character/position_component.h"
-#include "component/level/disc_component.h"
+#include "component/level/disk_component.h"
 #include "component/character/health_component.h"
 #include "component/state/character_state_component.h"
 #include "component/state/game_state_component.h"
@@ -28,13 +28,11 @@
 #include <iostream>
 #include <string>
 
-#include "component/character/health_component.h"
-
 namespace qbert
 {
     void level_manager_component::awake()
     {
-        discs_ = owner()->components_in_children<disc_component>();
+        disks_ = owner()->components_in_children<disk_component>();
     }
 
     void level_manager_component::notify(std::string const &event, mngn::subject *subject_ptr)
@@ -53,20 +51,28 @@ namespace qbert
 
             if (character_ptr->has_tag("player"))
             {
-                for (auto const &disc_ptr : discs_)
+                for (auto const &disk_ptr : disks_)
                 {
-                    // player is on a disc
-                    if (disc_ptr->col() == -1) // left side
+                    // player is on a disk
+                    // left side
+                    if (disk_ptr->col() == -1)
                     {
-                        if (row_idx + 1 == disc_ptr->row() and cold_idx == disc_ptr->col())
+                        if (row_idx + 1 == disk_ptr->row() and cold_idx == disk_ptr->col())
                         {
-                            state_comp_ptr->change_state<flying_state>(character_ptr, disc_ptr);
+                            auto pos = disk_ptr->owner()->local_position();
+                            auto new_pos = glm::vec2{pos} + glm::vec2{4.0f, -14.0f};
+                            disk_ptr->owner()->set_local_position(new_pos);
+                            state_comp_ptr->change_state<flying_state>(character_ptr, disk_ptr);
                             return;
                         }
                     }
-                    else if (row_idx + 1 == disc_ptr->row() and cold_idx + 1 == disc_ptr->col()) // right side
+                    // right side
+                    else if (row_idx + 1 == disk_ptr->row() and cold_idx + 1 == disk_ptr->col())
                     {
-                        state_comp_ptr->change_state<flying_state>(character_ptr, disc_ptr);
+                        auto pos = disk_ptr->owner()->local_position();
+                        auto new_pos = glm::vec2{pos} + glm::vec2{-2.0f, -14.0f};
+                        disk_ptr->owner()->set_local_position(new_pos);
+                        state_comp_ptr->change_state<flying_state>(character_ptr, disk_ptr);
                         return;
                     }
                 }

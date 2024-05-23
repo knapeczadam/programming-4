@@ -5,17 +5,17 @@
 
 namespace qbert
 {
-    class disc_component final : public mngn::custom_component
+    class disk_component final : public mngn::custom_component
     {
     public:
-        disc_component()           = default;
-        disc_component(int row_idx, int col_idx);
-        ~disc_component() override = default;
+        disk_component()           = default;
+        disk_component(int row_idx, int col_idx);
+        ~disk_component() override = default;
 
-        disc_component(disc_component const &other)            = delete;
-        disc_component(disc_component &&other)                 = delete;
-        disc_component &operator=(disc_component const &other) = delete;
-        disc_component &operator=(disc_component &&other)      = delete;
+        disk_component(disk_component const &other)            = delete;
+        disk_component(disk_component &&other)                 = delete;
+        disk_component &operator=(disk_component const &other) = delete;
+        disk_component &operator=(disk_component &&other)      = delete;
 
         void start() override;
         void on_disable() override;

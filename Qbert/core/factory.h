@@ -147,16 +147,16 @@ namespace qbert
         
         struct level
         {
-            // Disc
-            struct disc_config_info : config_info
+            // Disk
+            struct disk_config_info : config_info
             {
                 int row_idx;
                 int col_idx;
             };
 
-            struct disc_info : info { };
+            struct disk_info : info { };
 
-            static auto create_disc(disc_config_info const &config) -> disc_info;
+            static auto create_disk(disk_config_info const &config) -> disk_info;
 
             // Cube
             struct cube_config_info : config_info
@@ -191,7 +191,7 @@ namespace qbert
                 int                 disk_color;
                 json                disk_positions;
                 cube_config_info    cube_config;
-                disc_config_info    disc_config;
+                disk_config_info    disk_config;
             };
 
             struct level_info

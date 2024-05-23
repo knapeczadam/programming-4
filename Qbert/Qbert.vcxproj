@@ -23,7 +23,7 @@
     <ClCompile Include="component\character\jump_component.cpp" />
     <ClCompile Include="component\character\position_component.cpp" />
     <ClCompile Include="component\level\cube_component.cpp" />
-    <ClCompile Include="component\level\disc_component.cpp" />
+    <ClCompile Include="component\level\disk_component.cpp" />
     <ClCompile Include="component\level\fly_component.cpp" />
     <ClCompile Include="component\level\level_manager_component.cpp" />
     <ClCompile Include="component\npc\npc_health_component.cpp" />
@@ -89,7 +89,7 @@
     <ClInclude Include="component\character\jump_component.h" />
     <ClInclude Include="component\character\position_component.h" />
     <ClInclude Include="component\level\cube_component.h" />
-    <ClInclude Include="component\level\disc_component.h" />
+    <ClInclude Include="component\level\disk_component.h" />
     <ClInclude Include="component\level\fly_component.h" />
     <ClInclude Include="component\level\level_manager_component.h" />
     <ClInclude Include="component\npc\npc_health_component.h" />

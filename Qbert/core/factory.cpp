@@ -4,7 +4,7 @@
 #include "level_config_manager.h"
 #include "sprites.h"
 #include "component/level/cube_component.h"
-#include "component/level/disc_component.h"
+#include "component/level/disk_component.h"
 #include "component/level/fly_component.h"
 #include "component/player/face_component.h"
 #include "component/player/fall_component.h"
@@ -255,14 +255,14 @@ namespace qbert
         return info;
     }
 
-    auto factory::level::create_disc(disc_config_info const &config) -> disc_info
+    auto factory::level::create_disk(disk_config_info const &config) -> disk_info
     {
-        disc_info info{};
+        disk_info info{};
         info.go_ptr = config.scene_ptr->create_game_object(config.name);
         info.go_ptr->add_tag("level");
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
-        info.go_ptr->add_component<disc_component>(config.row_idx, config.col_idx);
+        info.go_ptr->add_component<disk_component>(config.row_idx, config.col_idx);
         info.go_ptr->add_component<fly_component>();
 
         return info;
@@ -356,17 +356,17 @@ namespace qbert
         int num_of_disks = config.disk_count;
         for (int i = 0; i < num_of_disks; ++i)
         {
-            disc_config_info disc_config{};
-            disc_config.scene_ptr  = config.scene_ptr;
-            disc_config.parent_ptr = config.parent_ptr;
-            disc_config.name       = "disc_" + std::to_string(i);
-            disc_config.sprite_id  = config.disk_color;
-            disc_config.texture_id = config.disc_config.texture_id;
+            disk_config_info disk_config{};
+            disk_config.scene_ptr  = config.scene_ptr;
+            disk_config.parent_ptr = config.parent_ptr;
+            disk_config.name       = "disk_" + std::to_string(i);
+            disk_config.sprite_id  = config.disk_color;
+            disk_config.texture_id = config.disk_config.texture_id;
 
             auto disk_positions = config.disk_positions;
-            disc_config.row_idx  = disk_positions[i * 2];
-            disc_config.col_idx  = disk_positions[i * 2 + 1];
-            create_disc(disc_config);
+            disk_config.row_idx  = disk_positions[i * 2];
+            disk_config.col_idx  = disk_positions[i * 2 + 1];
+            create_disk(disk_config);
         }
         return info;
     }

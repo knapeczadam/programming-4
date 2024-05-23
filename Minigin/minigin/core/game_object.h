@@ -59,6 +59,7 @@ namespace mngn
         void add_tag(std::string const &tag) { tags_.insert(tag); }
         void add_tags(std::set<std::string> const &tags) { tags_.insert(tags.begin(), tags.end()); }
         void remove_tag(std::string const &tag) { tags_.erase(tag); }
+        void clear_tags() { tags_.clear(); }
 
         [[nodiscard]] auto scene() const -> scene * { return scene_ptr_; }
 
