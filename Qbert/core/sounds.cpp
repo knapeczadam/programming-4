@@ -23,7 +23,12 @@ namespace qbert
             .register_effect(qb_re_e_qbert_swearing_2)
             .register_effect(qb_re_e_ugg)
         
-            .register_stream(qb_re_s_level_start)
+            .register_stream(qb_re_s_bye)
+            .register_stream(qb_re_s_extra_time)
+            .register_stream(qb_re_s_hello)
+            .register_stream(qb_re_s_level_1)
+            .register_stream(qb_re_s_level_2)
+            .register_stream(qb_re_s_level_2)
             .register_stream(qb_re_s_round_complete);
     }
 }

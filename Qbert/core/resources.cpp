@@ -30,7 +30,12 @@ namespace qbert
     		.register_resource(qb_re_e_qbert_swearing_2, "e_qbert_swearing_2") 
     		.register_resource(qb_re_e_ugg, "e_ugg")
     	
-    		.register_resource(qb_re_s_level_start, "s_level_start") 
+    		.register_resource(qb_re_s_bye, "s_bye") 
+    		.register_resource(qb_re_s_extra_time, "s_extra_time") 
+    		.register_resource(qb_re_s_hello, "s_hello") 
+    		.register_resource(qb_re_s_level_1, "s_level_1") 
+    		.register_resource(qb_re_s_level_2, "s_level_2") 
+    		.register_resource(qb_re_s_level_3, "s_level_3") 
     		.register_resource(qb_re_s_round_complete, "s_round_complete"); 
     }
 }

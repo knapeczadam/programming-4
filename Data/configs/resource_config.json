@@ -76,8 +76,28 @@
     },
     {
       "_comment" : "STREAMS",
-      "id"   : "s_level_start",
-      "path" : "sounds/streams/level_start.mp3"
+      "id"   : "s_bye",
+      "path" : "sounds/streams/bye.mp3"
+    },
+    {
+      "id"   : "s_extra_time",
+      "path" : "sounds/streams/extra_time.mp3"
+    },
+    {
+      "id"   : "s_hello",
+      "path" : "sounds/streams/hello.mp3"
+    },
+    {
+      "id"   : "s_level_1",
+      "path" : "sounds/streams/level_1.mp3"
+    },
+    {
+      "id"   : "s_level_2",
+      "path" : "sounds/streams/level_2.mp3"
+    },
+    {
+      "id"   : "s_level_3",
+      "path" : "sounds/streams/level_3.mp3"
     },
     {
       "id"   : "s_victory",

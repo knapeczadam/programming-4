@@ -24,7 +24,12 @@ namespace qbert
         qb_re_e_ugg,
 
         // --- Streams ---
-        qb_re_s_level_start,
+        qb_re_s_bye,
+        qb_re_s_extra_time,
+        qb_re_s_hello,
+        qb_re_s_level_1,
+        qb_re_s_level_2,
+        qb_re_s_level_3,
         qb_re_s_round_complete
     };
     
