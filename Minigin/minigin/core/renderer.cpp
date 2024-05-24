@@ -1,7 +1,8 @@
 #include "renderer.h"
 
 // Project includes
-#include "scene_manager.h"
+#include "minigin/core/collision_manager.h"
+#include "minigin/core/scene_manager.h"
 #include "minigin/utility/texture.h"
 
 // Standard includes
@@ -81,7 +82,8 @@ namespace mngn
         SDL_RenderDrawRect(sdl_renderer(), &dst_rect);
         
 #ifndef NDEBUG
-        darw_debug_rect(dst_rect);
+        render_rect(dst_rect);
+        collision_manager::instance().render_colliders();
 #endif
     }
 
@@ -95,7 +97,8 @@ namespace mngn
         SDL_RenderCopy(sdl_renderer(), texture.sdl_texture(), nullptr, &dst_rect);
 
 #ifndef NDEBUG
-        darw_debug_rect(dst_rect);
+        render_rect(dst_rect);
+        collision_manager::instance().render_colliders();
 #endif
     }
 
@@ -104,15 +107,15 @@ namespace mngn
         SDL_RenderCopy(sdl_renderer(), texture.sdl_texture(), &src_rect, &dst_rect);
         
 #ifndef NDEBUG
-        darw_debug_rect(dst_rect);
+        render_rect(dst_rect);
 #endif
     }
 
     auto renderer::sdl_renderer() const -> SDL_Renderer * { return renderer_ptr_; }
 
-    void renderer::darw_debug_rect(SDL_Rect const &dst_rect) const
+    void renderer::render_rect(SDL_Rect const &dst_rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a) const
     {
-        SDL_SetRenderDrawColor(sdl_renderer(), 255, 0, 255, 255);
+        SDL_SetRenderDrawColor(sdl_renderer(), r, g, b, a);
         SDL_RenderDrawRect(sdl_renderer(), &dst_rect);
     }
 }

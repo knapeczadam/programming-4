@@ -12,7 +12,7 @@ namespace qbert
         init_state();
     }
 
-    void character_state_component::on_disable()
+    void character_state_component::on_enable()
     {
         init_state();
     }

@@ -1,6 +1,7 @@
 ﻿#include "dead_state.h"
 
 #include "component/state/game_state_component.h"
+#include "core/scene_utility.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/scene.h"
 #include "minigin/core/scene_manager.h"
@@ -18,5 +19,12 @@ namespace qbert
         auto scene_ptr = mngn::scene_manager::instance().find("game_state");
         auto go_ptr = scene_ptr->find("game_state");
         go_ptr->component<game_state_component>()->change_state<game_over_state>(go_ptr->component<game_state_component>());
+
+        scene_utility::instance().freeze_all();
+    }
+
+    void dead_state::on_exit()
+    {
+        scene_utility::instance().unfreeze_all();
     }
 }

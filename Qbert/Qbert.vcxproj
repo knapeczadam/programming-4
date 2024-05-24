@@ -53,6 +53,7 @@
     <ClCompile Include="core\progress_manager.cpp" />
     <ClCompile Include="core\resources.cpp" />
     <ClCompile Include="core\scene_loader.cpp" />
+    <ClCompile Include="core\scene_utility.cpp" />
     <ClCompile Include="core\score_manager.cpp" />
     <ClCompile Include="core\services.cpp" />
     <ClCompile Include="core\sprites.cpp" />
@@ -120,6 +121,7 @@
     <ClInclude Include="core\resources.h" />
     <ClInclude Include="core\scene_loader.h" />
     <ClInclude Include="core\progress_manager.h" />
+    <ClInclude Include="core\scene_utility.h" />
     <ClInclude Include="core\score_manager.h" />
     <ClInclude Include="core\services.h" />
     <ClInclude Include="core\sprites.h" />

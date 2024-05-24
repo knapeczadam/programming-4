@@ -12,7 +12,7 @@ namespace mngn
     {
     public:
         collider_component() = default;
-        collider_component(float width, float height) : width_{width}, height_{height} {}
+        collider_component(float width, float height, float offset_x, float offset_y) : width_{width}, height_{height}, offset_x_{offset_x}, offset_y_{offset_y} {}
         ~collider_component() override = default;
 
         collider_component(collider_component const &other)            = delete;
@@ -24,11 +24,15 @@ namespace mngn
 
         [[nodiscard]] auto width() const -> float { return width_; }
         [[nodiscard]] auto height() const -> float { return height_; }
+        [[nodiscard]] auto offset_x() const -> float { return offset_x_; }
+        [[nodiscard]] auto offset_y() const -> float { return offset_y_; }
 
         [[nodiscard]] auto family() const -> component_family override { return component_family::collision; }
 
     protected:
         float width_  = 0.0f;
         float height_ = 0.0f;
+        float offset_x_ = 0.0f;
+        float offset_y_ = 0.0f;
     };
 }

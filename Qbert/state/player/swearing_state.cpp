@@ -1,13 +1,16 @@
 ﻿#include "swearing_state.h"
 
+#include "state/player/dead_state.h"
+#include "component/character/health_component.h"
+#include "component/character/position_component.h"
 #include "component/player/swear_component.h"
+#include "component/state/character_state_component.h"
+#include "component/state/game_state_component.h"
+#include "core/scene_utility.h"
+#include "core/score_manager.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
-#include "component/character/jump_component.h"
-#include "component/player/player_collider_component.h"
-#include "component/character/position_component.h"
-#include "component/state/character_state_component.h"
-#include "idle_state.h"
+#include "state/player/idle_state.h"
 
 namespace qbert
 {
@@ -19,8 +22,7 @@ namespace qbert
     void swearing_state::on_enter()
     {
         character_ptr_->component<swear_component>()->swear(true);
-        character_ptr_->component<player_collider_component>()->set_enabled(false);
-        character_ptr_->component<jump_component>()->set_enabled(false);
+        scene_utility::instance().freeze_all();
     }
 
     void swearing_state::update()
@@ -30,15 +32,25 @@ namespace qbert
         {
             is_swearing_ = false;
             accu_time_  = 0.0f;
-            character_ptr_->component<character_state_component>()->change_state<idle_state>(character_ptr_);
+            
+            // player is dead
+            if (character_ptr_->component<health_component>()->health() == 0)
+            {
+                character_ptr_->component<character_state_component>()->change_state<dead_state>(character_ptr_);
+            }
+            else
+            {
+                character_ptr_->component<character_state_component>()->change_state<idle_state>(character_ptr_);
+            }
         }
     }
 
     void swearing_state::on_exit()
     {
+        scene_utility::instance().unfreeze_all();
+        scene_utility::instance().trigger_npcs();
+        
         character_ptr_->component<swear_component>()->swear(false);
-        character_ptr_->component<player_collider_component>()->set_enabled(true);
-        character_ptr_->component<jump_component>()->set_enabled(true);
         character_ptr_->component<position_component>()->move_to_previous();
     }
 }

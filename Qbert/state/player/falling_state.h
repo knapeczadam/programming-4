@@ -11,6 +11,7 @@ namespace qbert
         explicit falling_state(mngn::game_object* character_ptr, int row_dir, int col_dir, int row_idx, int col_idx);
 
         void on_enter() override;
+        void on_exit() override;
 
     private:
         int row_dir_ = 0;

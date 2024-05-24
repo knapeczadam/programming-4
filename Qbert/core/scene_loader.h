@@ -4,6 +4,9 @@
 #include "core/factory.h"
 #include "minigin/utility/singleton.h"
 
+// Standard includes
+#include <string>
+
 // JSON includes
 #include "json.hpp"
 
@@ -30,6 +33,7 @@ namespace qbert
             mngn::game_object                   *root_ptr;
             level_manager_component             *level_manager_comp_ptr;
             json                                level_config;
+            std::string                         scene_id;
             factory::ui::score_display_info     score_display_info;
             factory::ui::health_display_info    health_display_info;
             factory::ui::level_display_info     level_display_info;

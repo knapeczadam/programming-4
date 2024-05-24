@@ -7,6 +7,7 @@
 #include "component/character/position_component.h"
 #include "component/character/direction_component.h"
 #include "component/level/disk_component.h"
+#include "core/scene_utility.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
 #include "minigin/core/scene.h"
@@ -37,7 +38,7 @@ namespace qbert
         character_ptr_->component<direction_component>()->reset();
         character_ptr_->component<position_component>()->update_position();
 
-        auto scene_ptr = mngn::scene_manager::instance().find_with_tag("current");
+        auto scene_ptr = scene_utility::instance().current_scene();
         auto flying_disk_go_ptrs = scene_ptr->find_game_objects_with_tag("flying_disk");
         if (not flying_disk_go_ptrs.empty())
         {

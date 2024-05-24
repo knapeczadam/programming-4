@@ -28,6 +28,9 @@
 #include <iostream>
 #include <string>
 
+#include "state/player/jumping_state.h"
+#include "state/player/start_state.h"
+
 namespace qbert
 {
     void level_manager_component::awake()
@@ -106,20 +109,20 @@ namespace qbert
 
             if (health_comp_ptr->health() < 0)
             {
-                std::cout << "Health is negative" << std::endl;
+                std::cout << "Health is negative" << '\n';
             }
             
             if (character_ptr->has_tag("player"))
             {
                 // player is dead
-                if (health_comp_ptr->health() == 0)
+                if (character_ptr->component<character_state_component>()->is_state<falling_state>() and health_comp_ptr->health() == 0)
                 {
                     character_ptr->component<character_state_component>()->change_state<dead_state>(character_ptr);
                 }
                 // player is falling
                 else if (row_idx < 0 or col_idx < 0 or col_idx > row_idx or row_idx >= 7)
                 {
-                    character_ptr->component<character_state_component>()->change_state<waiting_state>(character_ptr, 1.0f);
+                    character_ptr->component<character_state_component>()->change_state<start_state>(character_ptr);
                 }
                 // player is colliding
                 else if (health_comp_ptr->health() != 3)

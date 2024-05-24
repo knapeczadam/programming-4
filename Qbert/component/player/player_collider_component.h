@@ -13,7 +13,7 @@ namespace qbert
     {
     public:
         player_collider_component() = default;
-        player_collider_component(float width, float height);
+        player_collider_component(float width, float height, float offset_x, float offset_y);
         ~player_collider_component() override = default;
 
         player_collider_component(player_collider_component const &other)            = delete;
@@ -22,6 +22,7 @@ namespace qbert
         player_collider_component &operator=(player_collider_component &&other)      = delete;
 
         void awake() override;
+        void on_enable() override;
         void on_collision_stay(mngn::game_object *other_ptr) override;
 
     private:

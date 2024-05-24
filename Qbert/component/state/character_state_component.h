@@ -18,7 +18,7 @@ namespace qbert
         character_state_component &operator=(character_state_component &&other)      = delete;
 
         void start() override;
-        void on_disable() override;
+        void on_enable() override;
 
     private:
         void init_state();

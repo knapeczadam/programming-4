@@ -48,7 +48,11 @@ namespace qbert
         row_idx_ += direction_comp_ptr_->row();
         col_idx_ += direction_comp_ptr_->col();
         notify_observers("position_changed");
-        notify_observers("update_cube");
+
+        if (owner()->has_tag("player") or owner()->has_tag("friend"))
+        {
+            notify_observers("update_cube");
+        }
     }
 
     void position_component::reset(int row_idx, int col_idx)

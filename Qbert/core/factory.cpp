@@ -55,17 +55,19 @@ namespace qbert
         info.go_ptr->add_component<swear_component>();
         info.go_ptr->add_component<direction_component>();
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
+        auto sprite_ptr = sprite_comp_ptr->sprite();
         info.position_comp_ptr      = info.go_ptr->add_component<position_component>(config.row_idx, config.col_idx);
         info.health_comp_ptr        = info.go_ptr->add_component<player_health_component>(3);
         info.score_counter_comp_ptr = info.go_ptr->add_component<score_counter_component>();
         info.level_counter_comp_ptr = info.go_ptr->add_component<level_counter_component>();
         info.round_counter_comp_ptr = info.go_ptr->add_component<round_counter_component>();
-        info.collider_comp_ptr      = info.go_ptr->add_component<player_collider_component>(sprite_comp_ptr->sprite()->collider_width(), sprite_comp_ptr->sprite()->collider_height());
+        info.collider_comp_ptr      = info.go_ptr->add_component<player_collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_horizontal_offset(), sprite_ptr->collider_vertical_offset());
 
         auto swearing_go_ptr = config.scene_ptr->create_game_object(config.name + "_swearing");
         swearing_go_ptr->set_parent(info.go_ptr);
         swearing_go_ptr->set_local_position(-24.0f, -50.0f);
         swearing_go_ptr->add_component<mngn::sprite_component>(qb_sp_qbert_swearing, config.texture_id);
+        swearing_go_ptr->add_tag("swearing");
 
         auto left_command = std::make_unique<jump_command>(info.go_ptr, -1, -1);
         auto right_command = std::make_unique<jump_command>(info.go_ptr, 1, 1);
@@ -131,7 +133,8 @@ namespace qbert
         info.go_ptr->add_component<spawn_component>();
         info.go_ptr->add_component<fall_component>();
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
-        info.go_ptr->add_component<mngn::collider_component>(sprite_comp_ptr->sprite()->collider_width(), sprite_comp_ptr->sprite()->collider_height());
+        auto sprite_ptr = sprite_comp_ptr->sprite();
+        info.go_ptr->add_component<mngn::collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_horizontal_offset(), sprite_ptr->collider_vertical_offset());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>();
         info.health_comp_ptr   = info.go_ptr->add_component<npc_health_component>(1);
         return info;
@@ -150,7 +153,8 @@ namespace qbert
         info.go_ptr->add_component<spawn_component>();
         info.go_ptr->add_component<fall_component>();
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
-        info.go_ptr->add_component<mngn::collider_component>(sprite_comp_ptr->sprite()->collider_width(), sprite_comp_ptr->sprite()->collider_height());
+        auto sprite_ptr = sprite_comp_ptr->sprite();
+        info.go_ptr->add_component<mngn::collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_horizontal_offset(), sprite_ptr->collider_vertical_offset());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>();
         info.health_comp_ptr   = info.go_ptr->add_component<npc_health_component>(1);
         return info;
@@ -170,7 +174,8 @@ namespace qbert
         info.go_ptr->add_component<spawn_component>();
         info.go_ptr->add_component<fall_component>();
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
-        info.go_ptr->add_component<mngn::collider_component>(sprite_comp_ptr->sprite()->collider_width(), sprite_comp_ptr->sprite()->collider_height());
+        auto sprite_ptr = sprite_comp_ptr->sprite();
+        info.go_ptr->add_component<mngn::collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_horizontal_offset(), sprite_ptr->collider_vertical_offset());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>();
         info.health_comp_ptr   = info.go_ptr->add_component<npc_health_component>(1);
         return info;
@@ -180,7 +185,7 @@ namespace qbert
     {
         ugg_info info{};
         info.go_ptr = config.scene_ptr->create_game_object(config.name);
-        info.go_ptr->add_tags({"npc", "enemy", "right"});
+        info.go_ptr->add_tags({"npc", "enemy", "right", "position_offset"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<character_state_component>();
@@ -190,7 +195,8 @@ namespace qbert
         info.go_ptr->add_component<spawn_component>();
         info.go_ptr->add_component<fall_component>();
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
-        info.go_ptr->add_component<mngn::collider_component>(sprite_comp_ptr->sprite()->collider_width(), sprite_comp_ptr->sprite()->collider_height());
+        auto sprite_ptr = sprite_comp_ptr->sprite();
+        info.go_ptr->add_component<mngn::collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_horizontal_offset(), sprite_ptr->collider_vertical_offset());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>(6, 6);
         info.health_comp_ptr   = info.go_ptr->add_component<npc_health_component>(1);
         return info;
@@ -200,7 +206,7 @@ namespace qbert
     {
         wrong_way_info info{};
         info.go_ptr = config.scene_ptr->create_game_object(config.name);
-        info.go_ptr->add_tags({"npc", "enemy", "left"});
+        info.go_ptr->add_tags({"npc", "enemy", "left", "position_offset"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<character_state_component>();
@@ -210,7 +216,8 @@ namespace qbert
         info.go_ptr->add_component<spawn_component>();
         info.go_ptr->add_component<fall_component>();
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
-        info.go_ptr->add_component<mngn::collider_component>(sprite_comp_ptr->sprite()->collider_width(), sprite_comp_ptr->sprite()->collider_height());
+        auto sprite_ptr = sprite_comp_ptr->sprite();
+        info.go_ptr->add_component<mngn::collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_horizontal_offset(), sprite_ptr->collider_vertical_offset());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>(6, 0);
         info.health_comp_ptr   = info.go_ptr->add_component<npc_health_component>(1);
         return info;
@@ -230,7 +237,8 @@ namespace qbert
         info.go_ptr->add_component<spawn_component>();
         info.go_ptr->add_component<fall_component>();
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
-        info.go_ptr->add_component<mngn::collider_component>(sprite_comp_ptr->sprite()->collider_width(), sprite_comp_ptr->sprite()->collider_height());
+        auto sprite_ptr = sprite_comp_ptr->sprite();
+        info.go_ptr->add_component<mngn::collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_horizontal_offset(), sprite_ptr->collider_vertical_offset());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>();
         info.health_comp_ptr   = info.go_ptr->add_component<npc_health_component>(1);
         return info;
@@ -250,7 +258,8 @@ namespace qbert
         info.go_ptr->add_component<spawn_component>();
         info.go_ptr->add_component<fall_component>();
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
-        info.go_ptr->add_component<mngn::collider_component>(sprite_comp_ptr->sprite()->collider_width(), sprite_comp_ptr->sprite()->collider_height());
+        auto sprite_ptr = sprite_comp_ptr->sprite();
+        info.go_ptr->add_component<mngn::collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_horizontal_offset(), sprite_ptr->collider_vertical_offset());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>();
         info.health_comp_ptr   = info.go_ptr->add_component<health_component>(1);
         return info;
@@ -286,7 +295,7 @@ namespace qbert
             glm::vec2 start_position = origin + glm::vec2(i * offset_x, i * offset_y);
             for (int j = 0; j < i + 1; ++j)
             {
-                cube_config.name = "cube_" + std::to_string(i) + "_" + std::to_string(j);
+                cube_config.name = config.scene_id + "cube_" + std::to_string(i) + "_" + std::to_string(j);
                 glm::vec2 pos = start_position + glm::vec2(j * 64, 0);
                 cube_config.local_position = pos;
                 cube_config.row_idx = i;
@@ -352,6 +361,7 @@ namespace qbert
         cube_config_info cube_config{};
         cube_config.scene_ptr  = config.scene_ptr;
         cube_config.parent_ptr = config.parent_ptr;
+        cube_config.scene_id   = config.scene_id;
         cube_config.texture_id = config.cube_config.texture_id;
         cube_config.color_1    = config.cube_color_1;
         cube_config.color_2    = config.cube_color_2;
@@ -363,7 +373,7 @@ namespace qbert
         ui::small_cube_config_info small_cube_config{};
         small_cube_config.scene_ptr  = config.scene_ptr;
         small_cube_config.parent_ptr = config.parent_ptr;
-        small_cube_config.name       = "small_cube";
+        small_cube_config.name       = config.scene_id + "small_cube";
         small_cube_config.local_position = {64.0f, 96.0f};
         small_cube_config.sprite_id = config.cube_color_small;
         small_cube_config.animated_sprite_id = config.cube_animated_small;
@@ -376,7 +386,7 @@ namespace qbert
             disk_config_info disk_config{};
             disk_config.scene_ptr  = config.scene_ptr;
             disk_config.parent_ptr = config.parent_ptr;
-            disk_config.name       = "disk_" + std::to_string(i);
+            disk_config.name       = config.scene_id + "disk_" + std::to_string(i);
             disk_config.sprite_id  = config.disk_color;
             disk_config.texture_id = config.disk_config.texture_id;
 

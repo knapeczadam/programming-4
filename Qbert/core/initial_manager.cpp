@@ -75,7 +75,8 @@ namespace qbert
     void initial_manager::save_initial()
     {
         auto score = progress_manager::instance().score();
-        score_manager::instance().set_score(score, initial_);
+        auto initial = initial_.empty() ? "   " : initial_;
+        score_manager::instance().set_score(score, initial);
         score_manager::instance().save_scoreboard();
     }
 

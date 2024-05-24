@@ -161,6 +161,7 @@ namespace qbert
             // Cube
             struct cube_config_info : config_info
             {
+                std::string        scene_id;
                 int                color_1;
                 int                color_2;
                 std::optional<int> color_3;
@@ -181,6 +182,7 @@ namespace qbert
             // Level
             struct level_config_info : config_info
             {
+                std::string         scene_id;
                 int                 level_id;
                 int                 round_id;
                 int                 cube_color_1;

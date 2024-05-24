@@ -25,8 +25,11 @@ namespace mngn
         void register_collider(collider_component *collider_ptr);
         void detect_collisions();
 
+        void render_colliders() const;
+
     private:
-        [[nodiscard]] auto check_collision(collider_component *collider1_ptr, collider_component *collider2_ptr) const -> bool;
+        void render_collider(collider_component *collider_ptr) const;
+        [[nodiscard]] auto check_collision(collider_component *collider_1_ptr, collider_component *collider_2_ptr) const -> bool;
 
     private:
         friend class singleton<collision_manager>;
@@ -34,6 +37,6 @@ namespace mngn
 
     private:
         std::vector<collider_component*> colliders_;
-        std::vector<collider_component*> colliders_to_register_;
+        std::vector<collider_component*> registered_colliders_;
     };
 }

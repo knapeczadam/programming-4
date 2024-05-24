@@ -56,11 +56,15 @@ namespace qbert
             std::string line;
             while (std::getline(file, line))
             {
-                std::string name;
                 int score;
                 std::istringstream iss(line);
-                iss >> name >> score;
-                scores_.emplace(score, name);
+                
+                char initial[4]{};
+                iss.read(initial, 3);
+                iss.ignore(1);
+                iss >> score;
+                
+                scores_.emplace(score, initial);
             }
         }
         else

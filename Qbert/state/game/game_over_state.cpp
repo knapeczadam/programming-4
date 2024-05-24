@@ -1,21 +1,16 @@
 ﻿#include "game_over_state.h"
 
 // Project includes
-#include "input_state.h"
-#include "scoreboard_state.h"
-#include "component/character/jump_component.h"
-#include "component/npc/spawn_component.h"
-#include "component/player/fall_component.h"
 #include "component/state/game_state_component.h"
-#include "component/ui/flicker_component.h"
 #include "core/progress_manager.h"
+#include "core/scene_utility.h"
 #include "core/score_manager.h"
-#include "minigin/component/rendering/sprite_component.h"
-#include "minigin/component/ui/sprite_ui_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
 #include "minigin/core/scene.h"
 #include "minigin/core/scene_manager.h"
+#include "state/game/input_state.h"
+#include "state/game/scoreboard_state.h"
 
 namespace qbert
 {
@@ -29,22 +24,8 @@ namespace qbert
         scene_ptr_ = mngn::scene_manager::instance().find("game_over");
 	    scene_ptr_->set_active(true);
 
-        current_scene_.scene_ptr = mngn::scene_manager::instance().find_with_tag("current");
-        current_scene_.root_ptr = current_scene_.scene_ptr->find("root");
-        
-        current_scene_.jump_comp_ptrs      = current_scene_.root_ptr->components_in_children<jump_component>();
-        current_scene_.spawn_comp_ptrs     = current_scene_.root_ptr->components_in_children<spawn_component>();
-        current_scene_.fall_comp_ptrs      = current_scene_.root_ptr->components_in_children<fall_component>();
-        current_scene_.flicker_comp_ptrs   = current_scene_.root_ptr->components_in_children<flicker_component>();
-        current_scene_.sprite_comp_ptrs    = current_scene_.root_ptr->components_in_children<mngn::sprite_component>();
-        current_scene_.sprite_ui_comp_ptrs = current_scene_.root_ptr->components_in_children<mngn::sprite_ui_component>();
-
-        std::ranges::for_each(current_scene_.jump_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(false); });
-        std::ranges::for_each(current_scene_.spawn_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(false); });
-        std::ranges::for_each(current_scene_.fall_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(false); });
-        std::ranges::for_each(current_scene_.flicker_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(false); });
-        std::ranges::for_each(current_scene_.sprite_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_animated(false); });
-        std::ranges::for_each(current_scene_.sprite_ui_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_animated(false); });
+        scene_utility::instance().freeze_animation();
+        scene_utility::instance().hide_all();
     }
 
     void game_over_state::update()
@@ -67,23 +48,12 @@ namespace qbert
 
     void game_over_state::on_exit()
     {
-        std::ranges::for_each(current_scene_.jump_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(true); });
-        std::ranges::for_each(current_scene_.spawn_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(true); });
-        std::ranges::for_each(current_scene_.fall_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(true); });
-        std::ranges::for_each(current_scene_.flicker_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(true); });
-        std::ranges::for_each(current_scene_.sprite_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_animated(true); });
-        std::ranges::for_each(current_scene_.sprite_ui_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_animated(true); });
+        scene_utility::instance().unfreeze_animation();
+        scene_utility::instance().trigger_root();
 
-        // Trigger on_enable to reset the components
-        current_scene_.root_ptr->set_active(false);
-        current_scene_.root_ptr->set_active(true);
-        
-        current_scene_.root_ptr->find("player_1_swearing")->set_active(false);
-        if (current_scene_.root_ptr->find("player_2_swearing")) current_scene_.root_ptr->find("player_2_swearing")->set_active(false);
-
-        // Hide the current scene
-        current_scene_.scene_ptr->clear_tag();
-        current_scene_.scene_ptr->set_active(false);
+        auto scene_ptr = scene_utility::instance().current_scene();
+        scene_ptr->set_active(false);
+        scene_ptr->clear_tag();
         
         scene_ptr_->set_active(false);
     }

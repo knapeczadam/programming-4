@@ -35,6 +35,7 @@ namespace qbert
         {
             character_ptr_->component<face_component>()->set_sprite_orientation(0, 4, 0, 0);
         }
+        character_ptr_->component<direction_component>()->reset();
     }
 
     void npc_idle_state::update()
