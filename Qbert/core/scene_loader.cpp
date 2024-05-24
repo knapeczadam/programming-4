@@ -844,7 +844,7 @@ namespace qbert
 
     	auto game_state_cmd = std::make_unique<game_mode_accept_command>(game_state_comp_ptr);
     	mngn::input_manager::instance().bind_command(mngn::input_type::keyboard, mngn::input_state::down, mngn::k_return, game_state_cmd->clone());
-    	mngn::input_manager::instance().bind_command(mngn::input_type::controller, mngn::input_state::pressed, mngn::c_a, std::move(game_state_cmd));
+    	mngn::input_manager::instance().bind_command(mngn::input_type::controller, mngn::input_state::down, mngn::c_a, std::move(game_state_cmd));
 
     	auto left_input_cmd = std::make_unique<input_select_command>(game_state_comp_ptr, -1);
     	auto right_input_cmd = std::make_unique<input_select_command>(game_state_comp_ptr, 1);
@@ -852,12 +852,20 @@ namespace qbert
     	mngn::input_manager::instance().bind_command(mngn::input_type::keyboard, mngn::input_state::down, mngn::k_left, left_input_cmd->clone());
     	mngn::input_manager::instance().bind_command(mngn::input_type::keyboard, mngn::input_state::down, mngn::k_right, right_input_cmd->clone());
 
-    	mngn::input_manager::instance().bind_command(mngn::input_type::controller, mngn::input_state::pressed, mngn::c_left, std::move(left_input_cmd));
-    	mngn::input_manager::instance().bind_command(mngn::input_type::controller, mngn::input_state::pressed, mngn::c_right, std::move(right_input_cmd));
+    	mngn::input_manager::instance().bind_command(mngn::input_type::controller, mngn::input_state::down, mngn::c_left, std::move(left_input_cmd));
+    	mngn::input_manager::instance().bind_command(mngn::input_type::controller, mngn::input_state::down, mngn::c_right, std::move(right_input_cmd));
 
     	auto input_accept_cmd = std::make_unique<input_accept_command>(game_state_comp_ptr);
     	mngn::input_manager::instance().bind_command(mngn::input_type::keyboard, mngn::input_state::down, mngn::k_return, input_accept_cmd->clone());
-		mngn::input_manager::instance().bind_command(mngn::input_type::controller, mngn::input_state::pressed, mngn::c_a, std::move(input_accept_cmd));
+		mngn::input_manager::instance().bind_command(mngn::input_type::controller, mngn::input_state::down, mngn::c_a, std::move(input_accept_cmd));
+
+    	auto toggle_mute_cmd = std::make_unique<toggle_mute_command>();
+    	mngn::input_manager::instance().bind_command(mngn::input_type::keyboard, mngn::input_state::down, mngn::k_m, toggle_mute_cmd->clone());
+    	mngn::input_manager::instance().bind_command(mngn::input_type::controller, mngn::input_state::down, mngn::c_b, std::move(toggle_mute_cmd));
+
+    	auto skip_level_cmd = std::make_unique<skip_round_command>();
+    	mngn::input_manager::instance().bind_command(mngn::input_type::keyboard, mngn::input_state::down, mngn::k_f1, skip_level_cmd->clone());
+    	mngn::input_manager::instance().bind_command(mngn::input_type::controller, mngn::input_state::down, mngn::c_y, std::move(skip_level_cmd));
     }
 
     void scene_loader::create_red_ball(scene_info &scene_info)

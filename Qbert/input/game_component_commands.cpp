@@ -7,11 +7,6 @@
 #include "minigin/events/event.h"
 #include "minigin/events/event_manager.h"
 #include "minigin/events/sound_handler.h"
-
-// Standard includes
-#include <iostream>
-#include <thread>
-
 #include "component/state/game_state_component.h"
 #include "component/ui/flicker_component.h"
 #include "core/initial_manager.h"
@@ -23,27 +18,12 @@
 #include "state/game/level_loading_state.h"
 #include "state/game/menu_state.h"
 
+// Standard includes
+#include <iostream>
+#include <thread>
 
 namespace qbert
 {
-    damage_command::damage_command(mngn::game_component *component_ptr, int dir)
-        : game_component_command{component_ptr}
-        , damage_{dir}
-    {
-    }
-
-    void damage_command::execute()
-    {
-        dynamic_cast<health_component*>(game_component_ptr_)->take_damage(damage_);
-
-        // Play test sound - temporary
-        auto event = std::make_unique<mngn::sound_event>();
-        event->sound_id = qb_re_e_qbert_fall;
-        event->volume = 100;
-        std::cout << "# Thread " << std::this_thread::get_id() << " : calling sound handler" << '\n';
-        mngn::event_manager::instance().handler<mngn::sound_handler>()->add_event(std::move(event));
-    }
-
     game_mode_select_command::game_mode_select_command(mngn::game_component *component_ptr, int game_mode)
         : game_component_command{component_ptr}
         , dir_{game_mode}

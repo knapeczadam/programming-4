@@ -27,17 +27,61 @@
     },
     {
       "_comment" : "EFFECTS",
+      "id"       : "e_ball_jump",
+      "path"     : "sounds/effects/ball_jump.mp3"
+    },
+    {
+      "id"       : "e_coily_egg_jump",
+      "path"     : "sounds/effects/coily_egg_jump.mp3"
+    },
+    {
+      "id"       : "e_coily_fall",
+      "path"     : "sounds/effects/coily_fall.mp3"
+    },
+    {
+      "id"       : "e_coily_jump",
+      "path"     : "sounds/effects/coily_jump.mp3"
+    },
+    {
+      "id"       : "e_coin",
+      "path"     : "sounds/effects/coin.mp3"
+    },
+    {
+      "id"       : "e_disk_lift",
+      "path"     : "sounds/effects/disk_lift.mp3"
+    },
+    {
+      "id"       : "e_prize",
+      "path"     : "sounds/effects/prize.mp3"
+    },
+    {
       "id"       : "e_qbert_fall",
-      "path"     : "sounds/effects/qbert_fall.wav"
+      "path"     : "sounds/effects/qbert_fall.mp3"
+    },
+    {
+      "id"       : "e_qbert_jump",
+      "path"     : "sounds/effects/qbert_jump.mp3"
+    },
+    {
+      "id"       : "e_qbert_swearing_1",
+      "path"     : "sounds/effects/qbert_swearing_1.mp3"
+    },
+    {
+      "id"       : "e_qbert_swearing_2",
+      "path"     : "sounds/effects/qbert_swearing_2.mp3"
+    },
+    {
+      "id"       : "e_ugg",
+      "path"     : "sounds/effects/ugg.mp3"
     },
     {
       "_comment" : "STREAMS",
-      "id"       : "e_qbert_jump",
-      "path"     : "sounds/effects/qbert_jump.wav"
+      "id"   : "s_level_start",
+      "path" : "sounds/streams/level_start.mp3"
     },
     {
-      "id"   : "s_level_screen",
-      "path" : "sounds/streams/level_screen.wav"
+      "id"   : "s_victory",
+      "path" : "sounds/streams/round_complete.mp3"
     }
   ]
 }

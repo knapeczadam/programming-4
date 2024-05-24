@@ -44,7 +44,7 @@ namespace mngn
         [[nodiscard]] auto get_sound_effect(int id) -> sound_effect *;
         [[nodiscard]] auto get_sound_stream(int id) -> sound_stream *;
 
-        auto add_resource_pair(int enum_id, std::string const &json_id) -> resource_manager &;
+        auto register_resource(int enum_id, std::string const &json_id) -> resource_manager &;
         auto set_resource_config_path(std::string const &file_path) -> resource_manager &;
 
     private:

@@ -30,12 +30,14 @@ namespace mngn
         virtual void run_impl(event *event_ptr) = 0;
         
     private:
-        void run(std::stop_token st);
+        void run();
         
     protected:
         std::queue<std::unique_ptr<event>> event_queue_;
         std::mutex mutex_;
         std::jthread thread_;
         std::condition_variable event_condition_;
+
+        bool running_ = true;
     };
 }

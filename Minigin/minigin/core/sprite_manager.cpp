@@ -95,7 +95,7 @@ namespace mngn
         return nullptr;
     }
 
-    auto sprite_manager::add_sprite_pair(int enum_id, std::string const &json_id) -> sprite_manager &
+    auto sprite_manager::register_sprite(int enum_id, std::string const &json_id) -> sprite_manager &
     {
         sprite_map_[enum_id] = json_id;
         return *this;

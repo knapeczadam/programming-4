@@ -53,6 +53,9 @@ namespace mngn
         k_x     = SDLK_x,
 
         k_j    = SDLK_j,
+        k_m    = SDLK_m,
+
+        k_f1   = SDLK_F1,
 
         c_left  = XINPUT_GAMEPAD_DPAD_LEFT,
         c_right = XINPUT_GAMEPAD_DPAD_RIGHT,

@@ -1,9 +1,10 @@
 ﻿#include "event_manager.h"
 
 // Project includes
-#include <ranges>
-
 #include "event_handler.h"
+
+// Standard includes
+#include <ranges>
 
 namespace mngn
 {

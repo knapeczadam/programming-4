@@ -131,7 +131,7 @@ namespace mngn
         return nullptr;
     }
 
-    auto resource_manager::add_resource_pair(int enum_id, std::string const &json_id) -> resource_manager &
+    auto resource_manager::register_resource(int enum_id, std::string const &json_id) -> resource_manager &
     {
         resource_map_[enum_id] = json_id;
         return *this;

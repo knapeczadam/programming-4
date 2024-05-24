@@ -181,5 +181,5 @@ namespace qbert
         qb_sp_green_cirlce,
     };
     
-    void init_sprites();
+    void register_sprites();
 }

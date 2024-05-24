@@ -35,7 +35,7 @@ namespace mngn
         void load_sprite_config();
         auto load_sprite(int sprite_id, int texture_id, bool cache = true) -> sprite *;
         
-        auto add_sprite_pair(int enum_id, std::string const &json_id) -> sprite_manager &;
+        auto register_sprite(int enum_id, std::string const &json_id) -> sprite_manager &;
 
     private:
         auto create_sprite(int id, texture* texture_ptr, bool cache) -> sprite *;

@@ -7,7 +7,7 @@ namespace mngn
 {
     event_handler::event_handler()
     {
-        thread_ = std::jthread([this](std::stop_token st) { run(st); });
+        thread_ = std::jthread([this]() { run(); });
     }
 
     void event_handler::add_event(std::unique_ptr<event> event)
@@ -19,15 +19,16 @@ namespace mngn
 
     void event_handler::stop_thread()
     {
-        thread_.request_stop();
+        running_ = false;
+        event_condition_.notify_one();
     }
 
-    void event_handler::run(std::stop_token st)
+    void event_handler::run()
     {
-        while (not st.stop_requested())
+        while (running_)
         {
             std::unique_lock<std::mutex> lock{mutex_};
-            event_condition_.wait(lock, [this] { return not event_queue_.empty(); });
+            event_condition_.wait(lock, [this] { return not event_queue_.empty() or not running_; });
             while (not event_queue_.empty())
             {
                 auto event = std::move(event_queue_.front());

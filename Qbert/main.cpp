@@ -8,10 +8,11 @@
 
 // Project includes
 #include "core/level_config_manager.h"
-#include "core/scene_loader.h"
 #include "core/resources.h"
+#include "core/scene_loader.h"
 #include "core/score_manager.h"
 #include "core/services.h"
+#include "core/sounds.h"
 #include "core/sprites.h"
 #include "minigin/core/engine.h"
 #include "minigin/test/test_manager.h"
@@ -24,8 +25,9 @@
 
 void load()
 {
-	qbert::init_resources();
-	qbert::init_sprites();
+	qbert::register_resources();
+	qbert::register_sprites();
+	qbert::register_sounds();
 	qbert::register_services();
 	qbert::level_config_manager::instance().load_level_config("../Data/configs/level_config.json");
 	qbert::score_manager::instance().load_scoreboard("../Data/scoreboard.txt");
