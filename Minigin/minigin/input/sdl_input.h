@@ -8,6 +8,6 @@ namespace mngn
     class sdl_input final : public i_input
     {
     public:
-        auto do_process_input(std::vector<game_input_command> commands) -> bool override;
+        auto do_process_input(std::vector<input_config_info> commands) -> bool override;
     };
 }

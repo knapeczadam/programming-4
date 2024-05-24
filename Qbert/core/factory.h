@@ -72,6 +72,7 @@ namespace qbert
                     mngn::input_type  input_type;
                     mngn::input_state input_state;
                     mngn::input       input;
+                    int               controller_idx;
                 };
                 
             public:

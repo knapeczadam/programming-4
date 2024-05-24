@@ -85,7 +85,7 @@ namespace qbert
         void create_level_display(scene_info &scene_info);
         void create_round_display(scene_info &scene_info);
         void create_level(scene_info &scene_info);
-        void create_player_1(scene_info &scene_info);
+        void create_player_1(scene_info &scene_info, bool coop = false);
         void create_player_2(scene_info &scene_info);
         void create_red_ball(scene_info &scene_info);
         void create_coily(scene_info &scene_info);

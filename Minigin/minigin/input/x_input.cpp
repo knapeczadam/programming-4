@@ -15,7 +15,7 @@
 
 namespace mngn
 {
-    auto x_input::do_process_input(std::vector<game_input_command> commands) -> bool
+    auto x_input::do_process_input(std::vector<input_config_info> commands) -> bool
     {
         CopyMemory(&previous_state_, &current_state_, sizeof(XINPUT_STATE));
         ZeroMemory(&current_state_, sizeof(XINPUT_STATE));
@@ -25,32 +25,35 @@ namespace mngn
         buttons_pressed_this_frame_ = button_changes & current_state_.Gamepad.wButtons;
         buttons_released_this_frame_ = button_changes & (~current_state_.Gamepad.wButtons);
 
-        auto controller_commands = commands | std::views::filter([](game_input_command const &command) { return command.input_type == input_type::controller; });
+        auto controller_commands = commands | std::views::filter([](input_config_info const &command) { return command.input_type == input_type::controller; });
         for (auto const &game_command : controller_commands)
         {
-            auto const input_state = game_command.input_state;
-            if (input_state == input_state::down)
+            if (game_command.controller_idx == controller_index_)
             {
-                auto const input = game_command.input;
-                if (is_down_this_frame(input))
+                auto const input_state = game_command.input_state;
+                if (input_state == input_state::down)
                 {
-                    game_command.command_ptr->execute();
+                    auto const input = game_command.input;
+                    if (is_down_this_frame(input))
+                    {
+                        game_command.command_ptr->execute();
+                    }
                 }
-            }
-            if (input_state == input_state::up)
-            {
-                auto const input = game_command.input;
-                if (is_up_this_frame(input))
+                if (input_state == input_state::up)
                 {
-                    game_command.command_ptr->execute();
+                    auto const input = game_command.input;
+                    if (is_up_this_frame(input))
+                    {
+                        game_command.command_ptr->execute();
+                    }
                 }
-            }
-            if (input_state == input_state::pressed)
-            {
-                auto const input = game_command.input;
-                if (is_pressed(input))
+                if (input_state == input_state::pressed)
                 {
-                    game_command.command_ptr->execute();
+                    auto const input = game_command.input;
+                    if (is_pressed(input))
+                    {
+                        game_command.command_ptr->execute();
+                    }
                 }
             }
         }

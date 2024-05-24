@@ -21,7 +21,7 @@ namespace mngn
             input_impls.push_back(std::make_unique<x_input>());
         }
 
-        [[nodiscard]] auto do_process_input(std::vector<game_input_command> commands) const -> bool
+        [[nodiscard]] auto do_process_input(std::vector<input_config_info> commands) const -> bool
         {
             return std::ranges::all_of(input_impls, [&commands](auto const &input_impl) { return input_impl->do_process_input(commands); });
         }
@@ -29,7 +29,7 @@ namespace mngn
     public:
         std::vector<std::unique_ptr<i_input>> input_impls;
         
-        std::vector<game_input_command> commands_;
+        std::vector<input_config_info> commands_;
         std::vector<std::unique_ptr<base_command>> game_actor_commands;
     };
 
@@ -45,10 +45,10 @@ namespace mngn
         return impl_->do_process_input(impl_->commands_);
     }
 
-    void input_manager::bind_command(input_type input_type, input_state input_state, int input, std::unique_ptr<base_command> command) const
+    void input_manager::bind_command(input_config_info const &config, std::unique_ptr<base_command> command) const
     {
         impl_->game_actor_commands.emplace_back(std::move(command));
-        impl_->commands_.push_back({input_type, input_state, input, impl_->game_actor_commands.back().get()});   
+        impl_->commands_.push_back({config.input_type, config.input_state, config.input, config.controller_idx, impl_->game_actor_commands.back().get()});   
     }
 
     auto input_manager::unbind_command(input_type input_type, input_state input_state, int input) const -> bool

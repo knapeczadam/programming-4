@@ -18,7 +18,7 @@
 
 namespace mngn
 {
-    auto sdl_input::do_process_input(std::vector<game_input_command> commands) -> bool
+    auto sdl_input::do_process_input(std::vector<input_config_info> commands) -> bool
     {
         auto key_commands = commands | std::views::filter([](auto const &command) { return command.input_type == input_type::keyboard; });
         

@@ -73,31 +73,67 @@ namespace qbert
         auto right_command = std::make_unique<jump_command>(info.go_ptr, 1, 1);
         auto up_command = std::make_unique<jump_command>(info.go_ptr, -1, 0);
         auto down_command = std::make_unique<jump_command>(info.go_ptr, 1, 0);
+        
+    	mngn::input_config_info command_config{};
+    	command_config.input_type     = config.left_command.input_type;
+    	command_config.input_state    = config.left_command.input_state;
+    	command_config.input          = config.left_command.input;
+    	command_config.controller_idx = config.left_command.controller_idx;
+        mngn::input_manager::instance().bind_command(command_config, std::move(left_command));
 
-        mngn::input_manager::instance().bind_command(config.left_command.input_type, config.left_command.input_state, config.left_command.input, std::move(left_command));
-        mngn::input_manager::instance().bind_command(config.right_command.input_type, config.right_command.input_state, config.right_command.input, std::move(right_command));
-        mngn::input_manager::instance().bind_command(config.up_command.input_type, config.up_command.input_state, config.up_command.input, std::move(up_command));
-        mngn::input_manager::instance().bind_command(config.down_command.input_type, config.down_command.input_state, config.down_command.input, std::move(down_command));
+        command_config.input_type     = config.right_command.input_type;
+        command_config.input_state    = config.right_command.input_state;
+        command_config.input          = config.right_command.input;
+        command_config.controller_idx = config.right_command.controller_idx;
+        mngn::input_manager::instance().bind_command(command_config, std::move(right_command));
+
+        command_config.input_type     = config.up_command.input_type;
+        command_config.input_state    = config.up_command.input_state;
+        command_config.input          = config.up_command.input;
+        command_config.controller_idx = config.up_command.controller_idx;
+        mngn::input_manager::instance().bind_command(command_config, std::move(up_command));
+
+        command_config.input_type     = config.down_command.input_type;
+        command_config.input_state    = config.down_command.input_state;
+        command_config.input          = config.down_command.input;
+        command_config.controller_idx = config.down_command.controller_idx;
+        mngn::input_manager::instance().bind_command(command_config, std::move(down_command));
 
         if (config.left_command_alt)
         {
             auto left_command_alt = std::make_unique<jump_command>(info.go_ptr, -1, -1);
-            mngn::input_manager::instance().bind_command(config.left_command_alt.value().input_type, config.left_command_alt.value().input_state, config.left_command_alt.value().input, std::move(left_command_alt));
+            command_config.input_type     = config.left_command_alt.value().input_type;
+            command_config.input_state    = config.left_command_alt.value().input_state;
+            command_config.input          = config.left_command_alt.value().input;
+            command_config.controller_idx = config.left_command_alt.value().controller_idx;
+            mngn::input_manager::instance().bind_command(command_config, std::move(left_command_alt));
         }
         if (config.right_command_alt)
         {
             auto right_command_alt = std::make_unique<jump_command>(info.go_ptr, 1, 1);
-            mngn::input_manager::instance().bind_command(config.right_command_alt.value().input_type, config.right_command_alt.value().input_state, config.right_command_alt.value().input, std::move(right_command_alt));
+            command_config.input_type     = config.right_command_alt.value().input_type;
+            command_config.input_state    = config.right_command_alt.value().input_state;
+            command_config.input          = config.right_command_alt.value().input;
+            command_config.controller_idx = config.right_command_alt.value().controller_idx;
+            mngn::input_manager::instance().bind_command(command_config, std::move(right_command_alt));
         }
         if (config.up_command_alt)
         {
             auto up_command_alt = std::make_unique<jump_command>(info.go_ptr, -1, 0);
-            mngn::input_manager::instance().bind_command(config.up_command_alt.value().input_type, config.up_command_alt.value().input_state, config.up_command_alt.value().input, std::move(up_command_alt));
+            command_config.input_type     = config.up_command_alt.value().input_type;
+            command_config.input_state    = config.up_command_alt.value().input_state;
+            command_config.input          = config.up_command_alt.value().input;
+            command_config.controller_idx = config.up_command_alt.value().controller_idx;
+            mngn::input_manager::instance().bind_command(command_config, std::move(up_command_alt));
         }
         if (config.down_command_alt)
         {
             auto down_command_alt = std::make_unique<jump_command>(info.go_ptr, 1, 0);
-            mngn::input_manager::instance().bind_command(config.down_command_alt.value().input_type, config.down_command_alt.value().input_state, config.down_command_alt.value().input, std::move(down_command_alt));
+            command_config.input_type     = config.down_command_alt.value().input_type;
+            command_config.input_state    = config.down_command_alt.value().input_state;
+            command_config.input          = config.down_command_alt.value().input;
+            command_config.controller_idx = config.down_command_alt.value().controller_idx;
+            mngn::input_manager::instance().bind_command(command_config, std::move(down_command_alt));
         }
 
         return info;

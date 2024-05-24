@@ -94,8 +94,13 @@ namespace qbert
 		fps_config.text		      = "FPS: ";
 		factory::ui::create_fps(fps_config);
     	
+    	mngn::input_config_info key_config{};
+    	key_config.input_type  = mngn::input_type::keyboard;
+    	key_config.input_state = mngn::input_state::down;
+    	key_config.input       = mngn::k_j;
+    	
 		auto debug_command_ptr = std::make_unique<debug_command>();
-		mngn::input_manager::instance().bind_command(mngn::input_type::keyboard, mngn::input_state::down, mngn::k_j, std::move(debug_command_ptr));
+		mngn::input_manager::instance().bind_command(key_config, std::move(debug_command_ptr));
     }
 
     void scene_loader::load_game_state_scene()
@@ -647,7 +652,7 @@ namespace qbert
     	
     	// create_red_ball(scene_info);
     	// create_coily(scene_info);
-    	create_ugg(scene_info);
+    	// create_ugg(scene_info);
     	// create_wrong_way(scene_info);
     	// create_green_ball(scene_info);
     	// create_slick(scene_info);
@@ -662,7 +667,7 @@ namespace qbert
     	create_level_display(scene_info);
     	create_round_display(scene_info);
     	create_level(scene_info);
-    	create_player_1(scene_info);
+    	create_player_1(scene_info, true);
     	bind_player_observers(scene_info);
     	
     	create_red_ball(scene_info);
@@ -775,25 +780,25 @@ namespace qbert
         scene_info.level_info = factory::level::create_level(config);
     }
 
-    void scene_loader::create_player_1(scene_info &scene_info)
+    void scene_loader::create_player_1(scene_info &scene_info, bool coop)
     {
 		factory::character::player_config_info player_config{};
 		player_config.scene_ptr         = scene_info.scene_ptr;
 		player_config.parent_ptr        = scene_info.root_ptr;
 		player_config.name              = scene_info.scene_id + "player_1";
-		player_config.local_position    = {224.0f, 84.0f};
+		player_config.local_position    = coop ? glm::vec2{416.0f, 372.0f} : glm::vec2{224.0f, 84.0f};
 		player_config.sprite_id         = qb_sp_qbert_player_1;
 		player_config.texture_id        = qb_re_t_sprite_general;
-		player_config.row_idx           = 0;
-		player_config.col_idx           = 0;
+		player_config.row_idx           = coop ? 6 : 0;
+		player_config.col_idx           = coop ? 6 : 0;
 		player_config.left_command      = {mngn::input_type::keyboard, mngn::input_state::down, mngn::k_left};
 		player_config.right_command     = {mngn::input_type::keyboard, mngn::input_state::down, mngn::k_right};
 		player_config.up_command        = {mngn::input_type::keyboard, mngn::input_state::down, mngn::k_up};
 		player_config.down_command      = {mngn::input_type::keyboard, mngn::input_state::down, mngn::k_down};
-		player_config.left_command_alt  = {mngn::input_type::controller, mngn::input_state::pressed, mngn::c_left};
-		player_config.right_command_alt = {mngn::input_type::controller, mngn::input_state::pressed, mngn::c_right};
-		player_config.up_command_alt    = {mngn::input_type::controller, mngn::input_state::pressed, mngn::c_up};
-		player_config.down_command_alt  = {mngn::input_type::controller, mngn::input_state::pressed, mngn::c_down};
+		player_config.left_command_alt  = {mngn::input_type::controller, mngn::input_state::down, mngn::c_left, 0};
+		player_config.right_command_alt = {mngn::input_type::controller, mngn::input_state::down, mngn::c_right, 0};
+		player_config.up_command_alt    = {mngn::input_type::controller, mngn::input_state::down, mngn::c_up, 0};
+		player_config.down_command_alt  = {mngn::input_type::controller, mngn::input_state::down, mngn::c_down, 0};
 		scene_info.player_info = factory::character::create_player(player_config);
     }
 
@@ -812,6 +817,10 @@ namespace qbert
 		player_config.right_command  = {mngn::input_type::keyboard, mngn::input_state::down, mngn::k_d};
 		player_config.up_command     = {mngn::input_type::keyboard, mngn::input_state::down, mngn::k_w};
 		player_config.down_command   = {mngn::input_type::keyboard, mngn::input_state::down, mngn::k_s};
+		player_config.left_command_alt  = {mngn::input_type::controller, mngn::input_state::down, mngn::c_left, 1};
+		player_config.right_command_alt = {mngn::input_type::controller, mngn::input_state::down, mngn::c_right, 1};
+		player_config.up_command_alt    = {mngn::input_type::controller, mngn::input_state::down, mngn::c_up, 1};
+		player_config.down_command_alt  = {mngn::input_type::controller, mngn::input_state::down, mngn::c_down, 1};
 		scene_info.player_info = factory::character::create_player(player_config);
     }
 
@@ -836,36 +845,59 @@ namespace qbert
 	    auto left_game_state_cmd = std::make_unique<game_mode_select_command>(game_state_comp_ptr, -1);
 	    auto right_game_state_cmd = std::make_unique<game_mode_select_command>(game_state_comp_ptr, 1);
 
-		mngn::input_manager::instance().bind_command(mngn::input_type::keyboard, mngn::input_state::down, mngn::k_left, left_game_state_cmd->clone());
-		mngn::input_manager::instance().bind_command(mngn::input_type::keyboard, mngn::input_state::down, mngn::k_right, right_game_state_cmd->clone());
-    	
-		mngn::input_manager::instance().bind_command(mngn::input_type::controller, mngn::input_state::down, mngn::c_left, std::move(left_game_state_cmd));
-		mngn::input_manager::instance().bind_command(mngn::input_type::controller, mngn::input_state::down, mngn::c_right, std::move(right_game_state_cmd));
+    	mngn::input_config_info key_config{};
+    	key_config.input_type  = mngn::input_type::keyboard;
+    	key_config.input_state = mngn::input_state::down;
+
+    	mngn::input_config_info controller_config{};
+    	controller_config.input_type = mngn::input_type::controller;
+    	controller_config.input_state = mngn::input_state::down;
+
+    	key_config.input = mngn::k_left;
+		mngn::input_manager::instance().bind_command(key_config, left_game_state_cmd->clone());
+    	key_config.input = mngn::k_right;
+		mngn::input_manager::instance().bind_command(key_config, right_game_state_cmd->clone());
+    	controller_config.input = mngn::c_left;
+		mngn::input_manager::instance().bind_command(controller_config, std::move(left_game_state_cmd));
+    	controller_config.input = mngn::c_right;
+		mngn::input_manager::instance().bind_command(controller_config, std::move(right_game_state_cmd));
 
     	auto game_state_cmd = std::make_unique<game_mode_accept_command>(game_state_comp_ptr);
-    	mngn::input_manager::instance().bind_command(mngn::input_type::keyboard, mngn::input_state::down, mngn::k_return, game_state_cmd->clone());
-    	mngn::input_manager::instance().bind_command(mngn::input_type::controller, mngn::input_state::down, mngn::c_a, std::move(game_state_cmd));
+    	key_config.input = mngn::k_return;
+    	mngn::input_manager::instance().bind_command(key_config, game_state_cmd->clone());
+    	controller_config.input = mngn::c_a;
+    	mngn::input_manager::instance().bind_command(controller_config, std::move(game_state_cmd));
 
     	auto left_input_cmd = std::make_unique<input_select_command>(game_state_comp_ptr, -1);
     	auto right_input_cmd = std::make_unique<input_select_command>(game_state_comp_ptr, 1);
 
-    	mngn::input_manager::instance().bind_command(mngn::input_type::keyboard, mngn::input_state::down, mngn::k_left, left_input_cmd->clone());
-    	mngn::input_manager::instance().bind_command(mngn::input_type::keyboard, mngn::input_state::down, mngn::k_right, right_input_cmd->clone());
+    	key_config.input = mngn::k_left;
+    	mngn::input_manager::instance().bind_command(key_config, left_input_cmd->clone());
+    	key_config.input = mngn::k_right;
+    	mngn::input_manager::instance().bind_command(key_config, right_input_cmd->clone());
 
-    	mngn::input_manager::instance().bind_command(mngn::input_type::controller, mngn::input_state::down, mngn::c_left, std::move(left_input_cmd));
-    	mngn::input_manager::instance().bind_command(mngn::input_type::controller, mngn::input_state::down, mngn::c_right, std::move(right_input_cmd));
+    	controller_config.input = mngn::c_left;
+    	mngn::input_manager::instance().bind_command(controller_config, std::move(left_input_cmd));
+    	controller_config.input = mngn::c_right;
+    	mngn::input_manager::instance().bind_command(controller_config, std::move(right_input_cmd));
 
     	auto input_accept_cmd = std::make_unique<input_accept_command>(game_state_comp_ptr);
-    	mngn::input_manager::instance().bind_command(mngn::input_type::keyboard, mngn::input_state::down, mngn::k_return, input_accept_cmd->clone());
-		mngn::input_manager::instance().bind_command(mngn::input_type::controller, mngn::input_state::down, mngn::c_a, std::move(input_accept_cmd));
+    	key_config.input = mngn::k_return;
+    	mngn::input_manager::instance().bind_command(key_config, input_accept_cmd->clone());
+    	controller_config.input = mngn::c_a;
+		mngn::input_manager::instance().bind_command(controller_config, std::move(input_accept_cmd));
 
     	auto toggle_mute_cmd = std::make_unique<toggle_mute_command>();
-    	mngn::input_manager::instance().bind_command(mngn::input_type::keyboard, mngn::input_state::down, mngn::k_m, toggle_mute_cmd->clone());
-    	mngn::input_manager::instance().bind_command(mngn::input_type::controller, mngn::input_state::down, mngn::c_b, std::move(toggle_mute_cmd));
+    	key_config.input = mngn::k_m;
+    	mngn::input_manager::instance().bind_command(key_config, toggle_mute_cmd->clone());
+    	controller_config.input = mngn::c_b;
+    	mngn::input_manager::instance().bind_command(controller_config, std::move(toggle_mute_cmd));
 
     	auto skip_level_cmd = std::make_unique<skip_round_command>();
-    	mngn::input_manager::instance().bind_command(mngn::input_type::keyboard, mngn::input_state::down, mngn::k_f1, skip_level_cmd->clone());
-    	mngn::input_manager::instance().bind_command(mngn::input_type::controller, mngn::input_state::down, mngn::c_y, std::move(skip_level_cmd));
+    	key_config.input = mngn::k_f1;
+    	mngn::input_manager::instance().bind_command(key_config, skip_level_cmd->clone());
+    	controller_config.input = mngn::c_y;
+    	mngn::input_manager::instance().bind_command(controller_config, std::move(skip_level_cmd));
     }
 
     void scene_loader::create_red_ball(scene_info &scene_info)

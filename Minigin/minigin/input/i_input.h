@@ -11,7 +11,7 @@ namespace mngn
     enum class input_type;
     
     // Forward declarations
-    struct game_input_command;
+    struct input_config_info;
     
     class i_input
     {
@@ -24,6 +24,6 @@ namespace mngn
         i_input &operator=(i_input const &other) = delete;
         i_input &operator=(i_input &&other)      = delete;
         
-        virtual auto do_process_input(std::vector<game_input_command> commands) -> bool = 0;
+        virtual auto do_process_input(std::vector<input_config_info> commands) -> bool = 0;
     };
 }

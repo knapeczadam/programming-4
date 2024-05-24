@@ -12,7 +12,7 @@ namespace mngn
     class x_input final : public i_input
     {
     public:
-        auto do_process_input(std::vector<game_input_command> commands) -> bool override;
+        auto do_process_input(std::vector<input_config_info> commands) -> bool override;
 
     private:
         [[nodiscard]] auto is_down_this_frame(int button) const -> bool;
