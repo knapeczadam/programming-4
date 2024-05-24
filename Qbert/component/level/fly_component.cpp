@@ -5,7 +5,6 @@
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
 #include "state/player/flying_state.h"
-#include "state/player/waiting_state.h"
 
 namespace qbert
 {
@@ -38,7 +37,6 @@ namespace qbert
                     {
                         auto player_ptr = player_state->owner();
                         player_ptr->set_parent(root_ptr);
-                        player_state->change_state<waiting_state>(player_ptr, 0.5f);
                     }
                 }
             }

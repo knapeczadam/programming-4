@@ -83,7 +83,6 @@
     <ClCompile Include="state\player\jumping_state.cpp" />
     <ClCompile Include="state\player\start_state.cpp" />
     <ClCompile Include="state\player\swearing_state.cpp" />
-    <ClCompile Include="state\player\waiting_state.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="component\character\direction_component.h" />
@@ -152,7 +151,6 @@
     <ClInclude Include="state\player\jumping_state.h" />
     <ClInclude Include="state\player\start_state.h" />
     <ClInclude Include="state\player\swearing_state.h" />
-    <ClInclude Include="state\player\waiting_state.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

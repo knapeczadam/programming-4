@@ -21,5 +21,6 @@ namespace qbert
         disk_component *disk_comp_ptr_ = nullptr;
         float accu_time_ = 0.0f;
         float flash_time = 0.3f;
+        float fly_time_  = 3.0f;
     };
 }

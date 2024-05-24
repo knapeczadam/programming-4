@@ -3,17 +3,16 @@
 // Project includes
 #include "cube_component.h"
 #include "component/character/direction_component.h"
+#include "component/character/health_component.h"
 #include "component/character/jump_component.h"
 #include "component/character/position_component.h"
 #include "component/level/disk_component.h"
-#include "component/character/health_component.h"
 #include "component/state/character_state_component.h"
 #include "component/state/game_state_component.h"
 #include "core/progress_manager.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/scene.h"
 #include "minigin/core/scene_manager.h"
-#include "state/game/level_loading_state.h"
 #include "state/game/round_loading_state.h"
 #include "state/npc/npc_dead_state.h"
 #include "state/npc/npc_idle_state.h"
@@ -21,15 +20,12 @@
 #include "state/player/falling_state.h"
 #include "state/player/flying_state.h"
 #include "state/player/idle_state.h"
+#include "state/player/start_state.h"
 #include "state/player/swearing_state.h"
-#include "state/player/waiting_state.h"
 
 // Standard includes
 #include <iostream>
 #include <string>
-
-#include "state/player/jumping_state.h"
-#include "state/player/start_state.h"
 
 namespace qbert
 {
