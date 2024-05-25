@@ -55,22 +55,22 @@ namespace mngn
             {
                 new_sprite = std::make_unique<sprite>(texture_ptr);
 
-                if (sprite_config.contains("rows"))                       new_sprite->set_rows(sprite_config["rows"]);
-                if (sprite_config.contains("columns"))                    new_sprite->set_cols(sprite_config["columns"]);
-                if (sprite_config.contains("sub_rows"))                   new_sprite->set_sub_rows(sprite_config["sub_rows"]);
-                if (sprite_config.contains("sub_columns"))                new_sprite->set_sub_cols(sprite_config["sub_columns"]);
-                if (sprite_config.contains("left_offset_pixel"))          new_sprite->set_left_offset_px(sprite_config["left_offset_pixel"]);
-                if (sprite_config.contains("left_offset_columns"))        new_sprite->set_left_offset_cols(sprite_config["left_offset_columns"]);
-                if (sprite_config.contains("top_offset_pixel"))           new_sprite->set_top_offset_px(sprite_config["top_offset_pixel"]);
-                if (sprite_config.contains("top_offset_rows"))            new_sprite->set_top_offset_rows(sprite_config["top_offset_rows"]);
-                if (sprite_config.contains("collider_width"))             new_sprite->set_collider_width(sprite_config["collider_width"]);
-                if (sprite_config.contains("collider_height"))            new_sprite->set_collider_height(sprite_config["collider_height"]);
-                if (sprite_config.contains("collider_horizontal_offset")) new_sprite->set_collider_horizontal_offset(sprite_config["collider_horizontal_offset"]);
-                if (sprite_config.contains("collider_vertical_offset"))   new_sprite->set_collider_vertical_offset(sprite_config["collider_vertical_offset"]);
-                if (sprite_config.contains("frames_per_second"))          new_sprite->set_frames_per_sec(sprite_config["frames_per_second"]);
-                if (sprite_config.contains("scale"))                      new_sprite->set_scale(sprite_config["scale"]);
-                if (sprite_config.contains("clip_width"))                 new_sprite->set_clip_width(sprite_config["clip_width"]);
-                if (sprite_config.contains("clip_height"))                new_sprite->set_clip_height(sprite_config["clip_height"]);
+                if (sprite_config.contains("rows"))                new_sprite->set_rows(sprite_config["rows"]);
+                if (sprite_config.contains("columns"))             new_sprite->set_cols(sprite_config["columns"]);
+                if (sprite_config.contains("sub_rows"))            new_sprite->set_sub_rows(sprite_config["sub_rows"]);
+                if (sprite_config.contains("sub_columns"))         new_sprite->set_sub_cols(sprite_config["sub_columns"]);
+                if (sprite_config.contains("left_offset_pixel"))   new_sprite->set_left_offset_px(sprite_config["left_offset_pixel"]);
+                if (sprite_config.contains("left_offset_columns")) new_sprite->set_left_offset_cols(sprite_config["left_offset_columns"]);
+                if (sprite_config.contains("top_offset_pixel"))    new_sprite->set_top_offset_px(sprite_config["top_offset_pixel"]);
+                if (sprite_config.contains("top_offset_rows"))     new_sprite->set_top_offset_rows(sprite_config["top_offset_rows"]);
+                if (sprite_config.contains("collider_width"))      new_sprite->set_collider_width(sprite_config["collider_width"]);
+                if (sprite_config.contains("collider_height"))     new_sprite->set_collider_height(sprite_config["collider_height"]);
+                if (sprite_config.contains("collider_offset_x"))   new_sprite->set_collider_offset_x(sprite_config["collider_offset_x"]);
+                if (sprite_config.contains("collider_offset_y"))   new_sprite->set_collider_offset_y(sprite_config["collider_offset_y"]);
+                if (sprite_config.contains("frames_per_second"))   new_sprite->set_frames_per_sec(sprite_config["frames_per_second"]);
+                if (sprite_config.contains("scale"))               new_sprite->set_scale(sprite_config["scale"]);
+                if (sprite_config.contains("clip_width"))          new_sprite->set_clip_width(sprite_config["clip_width"]);
+                if (sprite_config.contains("clip_height"))         new_sprite->set_clip_height(sprite_config["clip_height"]);
 
                 new_sprite->init();
                 

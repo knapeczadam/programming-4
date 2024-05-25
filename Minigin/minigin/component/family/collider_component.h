@@ -27,6 +27,14 @@ namespace mngn
         [[nodiscard]] auto offset_x() const -> float { return offset_x_; }
         [[nodiscard]] auto offset_y() const -> float { return offset_y_; }
 
+        void set_collider(float width, float height, float offset_x = 0.0f, float offset_y = 0.0f)
+        {
+            width_ = width;
+            height_ = height;
+            offset_x_ = offset_x;
+            offset_y_ = offset_y;
+        }
+
         [[nodiscard]] auto family() const -> component_family override { return component_family::collision; }
 
     protected:

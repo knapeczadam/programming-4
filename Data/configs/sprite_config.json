@@ -9,8 +9,8 @@
       "sub_columns": 8,
       "collider_width": 10,
       "collider_height": 10,
-      "collider_horizontal_offset": 3,
-      "collider_vertical_offset": 3,
+      "collider_offset_x": 3,
+      "collider_offset_y": 3,
       "scale": 2
     },
     {
@@ -22,8 +22,8 @@
       "left_offset_columns": 21,
       "collider_width": 10,
       "collider_height": 10,
-      "collider_horizontal_offset": 3,
-      "collider_vertical_offset": 3,
+      "collider_offset_x": 3,
+      "collider_offset_y": 3,
       "scale": 2
     },
     {
@@ -35,8 +35,8 @@
       "top_offset_rows": 1,
       "collider_width": 13,
       "collider_height": 8,
-      "collider_horizontal_offset": 2,
-      "collider_vertical_offset": 8,
+      "collider_offset_x": 2,
+      "collider_offset_y": 8,
       "scale": 2
     },
     {
@@ -49,8 +49,8 @@
       "top_offset_rows": 1,
       "collider_width": 10,
       "collider_height": 7,
-      "collider_horizontal_offset": 3,
-      "collider_vertical_offset": 8,
+      "collider_offset_x": 3,
+      "collider_offset_y": 8,
       "scale": 2
     },
     {
@@ -61,6 +61,9 @@
       "sub_columns": 2,
       "left_offset_columns": 4,
       "top_offset_rows": 1,
+      "collider_width": 16,
+      "collider_height": 10,
+      "collider_offset_y": 6,
       "scale": 2
     },
     {
@@ -70,6 +73,9 @@
       "sub_rows": 1,
       "sub_columns": 8,
       "top_offset_rows": 1,
+      "collider_width": 16,
+      "collider_height": 16,
+      "collider_offset_y": 16,
       "scale": 2
     },
     {
@@ -81,8 +87,8 @@
       "top_offset_rows": 6,
       "collider_width": 10,
       "collider_height": 10,
-      "collider_horizontal_offset": 3,
-      "collider_vertical_offset": 3,
+      "collider_offset_x": 3,
+      "collider_offset_y": 3,
       "scale": 2
     },
     {
@@ -94,8 +100,8 @@
       "top_offset_rows": 7,
       "collider_width": 10,
       "collider_height": 10,
-      "collider_horizontal_offset": 3,
-      "collider_vertical_offset": 3,
+      "collider_offset_x": 3,
+      "collider_offset_y": 3,
       "scale": 2
     },
     {
@@ -107,8 +113,8 @@
       "top_offset_rows": 8,
       "collider_width": 10,
       "collider_height": 10,
-      "collider_horizontal_offset": 3,
-      "collider_vertical_offset": 3,
+      "collider_offset_x": 3,
+      "collider_offset_y": 3,
       "scale": 2
     },
     {
@@ -118,6 +124,10 @@
       "sub_rows": 1,
       "sub_columns": 8,
       "top_offset_rows": 9,
+      "collider_width": 10,
+      "collider_height": 10,
+      "collider_offset_x": 3,
+      "collider_offset_y": 3,
       "scale": 2
     },
     {

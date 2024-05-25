@@ -25,6 +25,7 @@
 #include "component/ui/score_display_component.h"
 #include "component/character/direction_component.h"
 #include "component/level/small_cube_component.h"
+#include "component/npc/coily_component.h"
 #include "component/npc/spawn_component.h"
 #include "component/ui/alphabet_component.h"
 #include "component/ui/number_component.h"
@@ -61,7 +62,7 @@ namespace qbert
         info.score_counter_comp_ptr = info.go_ptr->add_component<score_counter_component>();
         info.level_counter_comp_ptr = info.go_ptr->add_component<level_counter_component>();
         info.round_counter_comp_ptr = info.go_ptr->add_component<round_counter_component>();
-        info.collider_comp_ptr      = info.go_ptr->add_component<player_collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_horizontal_offset(), sprite_ptr->collider_vertical_offset());
+        info.collider_comp_ptr      = info.go_ptr->add_component<player_collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_offset_x(), sprite_ptr->collider_offset_y());
 
         auto swearing_go_ptr = config.scene_ptr->create_game_object(config.name + "_swearing");
         swearing_go_ptr->set_parent(info.go_ptr);
@@ -170,7 +171,7 @@ namespace qbert
         info.go_ptr->add_component<fall_component>();
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         auto sprite_ptr = sprite_comp_ptr->sprite();
-        info.go_ptr->add_component<mngn::collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_horizontal_offset(), sprite_ptr->collider_vertical_offset());
+        info.go_ptr->add_component<mngn::collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_offset_x(), sprite_ptr->collider_offset_y());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>();
         info.health_comp_ptr   = info.go_ptr->add_component<npc_health_component>(1);
         return info;
@@ -190,7 +191,7 @@ namespace qbert
         info.go_ptr->add_component<fall_component>();
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         auto sprite_ptr = sprite_comp_ptr->sprite();
-        info.go_ptr->add_component<mngn::collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_horizontal_offset(), sprite_ptr->collider_vertical_offset());
+        info.go_ptr->add_component<mngn::collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_offset_x(), sprite_ptr->collider_offset_y());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>();
         info.health_comp_ptr   = info.go_ptr->add_component<npc_health_component>(1);
         return info;
@@ -200,7 +201,7 @@ namespace qbert
     {
         coily_info info{};
         info.go_ptr = config.scene_ptr->create_game_object(config.name);
-        info.go_ptr->add_tags({"npc", "enemy", "ball", "down"});
+        info.go_ptr->add_tags({"npc", "enemy", "ball", "down", "coily_egg"});
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
         info.go_ptr->add_component<character_state_component>();
@@ -209,11 +210,81 @@ namespace qbert
         info.go_ptr->add_component<face_component>();
         info.go_ptr->add_component<spawn_component>();
         info.go_ptr->add_component<fall_component>();
+        auto coily_sprite_ptr = mngn::sprite_manager::instance().load_sprite(qb_sp_coily, config.texture_id);
+        info.go_ptr->add_component<coily_component>(coily_sprite_ptr);
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         auto sprite_ptr = sprite_comp_ptr->sprite();
-        info.go_ptr->add_component<mngn::collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_horizontal_offset(), sprite_ptr->collider_vertical_offset());
+        info.go_ptr->add_component<mngn::collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_offset_x(), sprite_ptr->collider_offset_y());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>();
         info.health_comp_ptr   = info.go_ptr->add_component<npc_health_component>(1);
+        
+        auto left_command = std::make_unique<jump_command>(info.go_ptr, -1, -1);
+        auto right_command = std::make_unique<jump_command>(info.go_ptr, 1, 1);
+        auto up_command = std::make_unique<jump_command>(info.go_ptr, -1, 0);
+        auto down_command = std::make_unique<jump_command>(info.go_ptr, 1, 0);
+        
+    	mngn::input_config_info command_config{};
+    	command_config.input_type     = config.left_command.input_type;
+    	command_config.input_state    = config.left_command.input_state;
+    	command_config.input          = config.left_command.input;
+    	command_config.controller_idx = config.left_command.controller_idx;
+        mngn::input_manager::instance().bind_command(command_config, std::move(left_command));
+
+        command_config.input_type     = config.right_command.input_type;
+        command_config.input_state    = config.right_command.input_state;
+        command_config.input          = config.right_command.input;
+        command_config.controller_idx = config.right_command.controller_idx;
+        mngn::input_manager::instance().bind_command(command_config, std::move(right_command));
+
+        command_config.input_type     = config.up_command.input_type;
+        command_config.input_state    = config.up_command.input_state;
+        command_config.input          = config.up_command.input;
+        command_config.controller_idx = config.up_command.controller_idx;
+        mngn::input_manager::instance().bind_command(command_config, std::move(up_command));
+
+        command_config.input_type     = config.down_command.input_type;
+        command_config.input_state    = config.down_command.input_state;
+        command_config.input          = config.down_command.input;
+        command_config.controller_idx = config.down_command.controller_idx;
+        mngn::input_manager::instance().bind_command(command_config, std::move(down_command));
+
+        if (config.left_command_alt)
+        {
+            auto left_command_alt = std::make_unique<jump_command>(info.go_ptr, -1, -1);
+            command_config.input_type     = config.left_command_alt.value().input_type;
+            command_config.input_state    = config.left_command_alt.value().input_state;
+            command_config.input          = config.left_command_alt.value().input;
+            command_config.controller_idx = config.left_command_alt.value().controller_idx;
+            mngn::input_manager::instance().bind_command(command_config, std::move(left_command_alt));
+        }
+        if (config.right_command_alt)
+        {
+            auto right_command_alt = std::make_unique<jump_command>(info.go_ptr, 1, 1);
+            command_config.input_type     = config.right_command_alt.value().input_type;
+            command_config.input_state    = config.right_command_alt.value().input_state;
+            command_config.input          = config.right_command_alt.value().input;
+            command_config.controller_idx = config.right_command_alt.value().controller_idx;
+            mngn::input_manager::instance().bind_command(command_config, std::move(right_command_alt));
+        }
+        if (config.up_command_alt)
+        {
+            auto up_command_alt = std::make_unique<jump_command>(info.go_ptr, -1, 0);
+            command_config.input_type     = config.up_command_alt.value().input_type;
+            command_config.input_state    = config.up_command_alt.value().input_state;
+            command_config.input          = config.up_command_alt.value().input;
+            command_config.controller_idx = config.up_command_alt.value().controller_idx;
+            mngn::input_manager::instance().bind_command(command_config, std::move(up_command_alt));
+        }
+        if (config.down_command_alt)
+        {
+            auto down_command_alt = std::make_unique<jump_command>(info.go_ptr, 1, 0);
+            command_config.input_type     = config.down_command_alt.value().input_type;
+            command_config.input_state    = config.down_command_alt.value().input_state;
+            command_config.input          = config.down_command_alt.value().input;
+            command_config.controller_idx = config.down_command_alt.value().controller_idx;
+            mngn::input_manager::instance().bind_command(command_config, std::move(down_command_alt));
+        }
+        
         return info;
     }
 
@@ -232,7 +303,7 @@ namespace qbert
         info.go_ptr->add_component<fall_component>();
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         auto sprite_ptr = sprite_comp_ptr->sprite();
-        info.go_ptr->add_component<mngn::collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_horizontal_offset(), sprite_ptr->collider_vertical_offset());
+        info.go_ptr->add_component<mngn::collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_offset_x(), sprite_ptr->collider_offset_y());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>(6, 6);
         info.health_comp_ptr   = info.go_ptr->add_component<npc_health_component>(1);
         return info;
@@ -253,7 +324,7 @@ namespace qbert
         info.go_ptr->add_component<fall_component>();
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         auto sprite_ptr = sprite_comp_ptr->sprite();
-        info.go_ptr->add_component<mngn::collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_horizontal_offset(), sprite_ptr->collider_vertical_offset());
+        info.go_ptr->add_component<mngn::collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_offset_x(), sprite_ptr->collider_offset_y());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>(6, 0);
         info.health_comp_ptr   = info.go_ptr->add_component<npc_health_component>(1);
         return info;
@@ -274,7 +345,7 @@ namespace qbert
         info.go_ptr->add_component<fall_component>();
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         auto sprite_ptr = sprite_comp_ptr->sprite();
-        info.go_ptr->add_component<mngn::collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_horizontal_offset(), sprite_ptr->collider_vertical_offset());
+        info.go_ptr->add_component<mngn::collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_offset_x(), sprite_ptr->collider_offset_y());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>();
         info.health_comp_ptr   = info.go_ptr->add_component<npc_health_component>(1);
         return info;
@@ -295,7 +366,7 @@ namespace qbert
         info.go_ptr->add_component<fall_component>();
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         auto sprite_ptr = sprite_comp_ptr->sprite();
-        info.go_ptr->add_component<mngn::collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_horizontal_offset(), sprite_ptr->collider_vertical_offset());
+        info.go_ptr->add_component<mngn::collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_offset_x(), sprite_ptr->collider_offset_y());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>();
         info.health_comp_ptr   = info.go_ptr->add_component<health_component>(1);
         return info;

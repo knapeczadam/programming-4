@@ -29,12 +29,8 @@ namespace qbert
 
     void debug_command::execute()
     {
-        // Play test sound - temporary
-        auto event = std::make_unique<mngn::sound_event>();
-        event->sound_id = qb_re_e_disk_lift;
-        event->volume = mngn::sound_manager::instance().volume();
         std::cout << "# Thread " << std::this_thread::get_id() << " : calling sound handler" << '\n';
-        mngn::event_manager::instance().handler<mngn::sound_handler>()->add_event(std::move(event));
+        mngn::event_manager::instance().handler<mngn::sound_handler>()->add_event(mngn::event::create_event<mngn::sound_event>(qb_re_e_disk_lift));
     }
 
     void toggle_mute_command::execute()

@@ -5,6 +5,7 @@
 #include "component/character/jump_component.h"
 #include "component/character/position_component.h"
 #include "component/character/health_component.h"
+#include "component/npc/coily_component.h"
 #include "component/state/character_state_component.h"
 #include "minigin/core/game_object.h"
 
@@ -31,6 +32,11 @@ namespace qbert
         else if (character_ptr_->has_tag("right"))
         {
             character_ptr_->component<position_component>()->reset(6, 6);
+        }
+
+        if (character_ptr_->has_tag("coily"))
+        {
+            character_ptr_->component<coily_component>()->transform_back();
         }
         
         character_ptr_->component<character_state_component>()->change_state<npc_spawning_state>(character_ptr_);

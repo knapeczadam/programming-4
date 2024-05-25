@@ -651,7 +651,7 @@ namespace qbert
     	bind_player_observers(scene_info);
     	
     	// create_red_ball(scene_info);
-    	// create_coily(scene_info);
+    	create_coily(scene_info);
     	// create_ugg(scene_info);
     	// create_wrong_way(scene_info);
     	// create_green_ball(scene_info);
@@ -925,6 +925,14 @@ namespace qbert
     	coily_config.local_position = {-32.0f, -32.0f};
 		coily_config.sprite_id	    = qb_sp_coily_egg;
 		coily_config.texture_id     = qb_re_t_sprite_general;
+		coily_config.left_command   = {mngn::input_type::keyboard, mngn::input_state::down, mngn::k_a};
+		coily_config.right_command  = {mngn::input_type::keyboard, mngn::input_state::down, mngn::k_d};
+		coily_config.up_command     = {mngn::input_type::keyboard, mngn::input_state::down, mngn::k_w};
+		coily_config.down_command   = {mngn::input_type::keyboard, mngn::input_state::down, mngn::k_s};
+		coily_config.left_command_alt  = {mngn::input_type::controller, mngn::input_state::down, mngn::c_left, 1};
+		coily_config.right_command_alt = {mngn::input_type::controller, mngn::input_state::down, mngn::c_right, 1};
+		coily_config.up_command_alt    = {mngn::input_type::controller, mngn::input_state::down, mngn::c_up, 1};
+		coily_config.down_command_alt  = {mngn::input_type::controller, mngn::input_state::down, mngn::c_down, 1};
 		scene_info.coily_info = factory::character::create_coily(coily_config);
     	
 		// Observers

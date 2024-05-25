@@ -16,6 +16,7 @@
 #include "minigin/core/scene.h"
 #include "state/player/idle_state.h"
 #include "state/player/jumping_state.h"
+#include "state/player/start_state.h"
 
 
 namespace qbert
@@ -40,7 +41,7 @@ namespace qbert
     void player_collider_component::on_collision_stay(mngn::game_object *other_ptr)
     {
         auto state_comp_ptr = owner()->component<character_state_component>();
-        if (state_comp_ptr->is_state<idle_state>() or state_comp_ptr->is_state<jumping_state>())
+        if (state_comp_ptr->is_state<start_state>() or state_comp_ptr->is_state<idle_state>() or state_comp_ptr->is_state<jumping_state>())
         {
             auto row_pos       = position_comp_ptr_->row();
             auto col_pos       = position_comp_ptr_->col();

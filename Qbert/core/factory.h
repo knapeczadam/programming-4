@@ -121,7 +121,7 @@ namespace qbert
             static auto create_green_ball(green_ball_config_info const &config) -> green_ball_info;
 
             // Coily
-            struct coily_config_info : config_info { };
+            struct coily_config_info : player_config_info { };
             struct coily_info : npc_info { };
             static auto create_coily(coily_config_info const &config) -> coily_info;
 

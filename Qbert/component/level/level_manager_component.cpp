@@ -27,6 +27,9 @@
 #include <iostream>
 #include <string>
 
+#include "component/npc/coily_component.h"
+#include "state/npc/coily_transforming_state.h"
+
 namespace qbert
 {
     void level_manager_component::awake()
@@ -43,7 +46,7 @@ namespace qbert
             auto const cold_idx = position_comp_ptr->col();
 
             auto character_ptr = position_comp_ptr->owner();
-            auto state_comp_ptr = character_ptr->component<character_state_component>();
+            auto character_state_comp_ptr = character_ptr->component<character_state_component>();
             auto direction_comp_ptr = character_ptr->component<direction_component>();
             auto const row_dir = direction_comp_ptr->row();
             auto const col_dir = direction_comp_ptr->col();
@@ -61,7 +64,7 @@ namespace qbert
                             auto pos = disk_ptr->owner()->local_position();
                             auto new_pos = glm::vec2{pos} + glm::vec2{4.0f, -14.0f};
                             disk_ptr->owner()->set_local_position(new_pos);
-                            state_comp_ptr->change_state<flying_state>(character_ptr, disk_ptr);
+                            character_state_comp_ptr->change_state<flying_state>(character_ptr, disk_ptr);
                             return;
                         }
                     }
@@ -71,27 +74,37 @@ namespace qbert
                         auto pos = disk_ptr->owner()->local_position();
                         auto new_pos = glm::vec2{pos} + glm::vec2{-2.0f, -14.0f};
                         disk_ptr->owner()->set_local_position(new_pos);
-                        state_comp_ptr->change_state<flying_state>(character_ptr, disk_ptr);
+                        character_state_comp_ptr->change_state<flying_state>(character_ptr, disk_ptr);
                         return;
                     }
+                }
+            }
+
+            // coily is transforming
+            if (character_ptr->has_tag("coily_egg"))
+            {
+                if (row_idx == 6)
+                {
+                    character_state_comp_ptr->change_state<coily_transforming_state>(character_ptr);
+                    return;
                 }
             }
 
             // character is falling
             if (row_idx < 0 or cold_idx < 0 or cold_idx > row_idx or row_idx >= 7)
             {
-                state_comp_ptr->change_state<falling_state>(character_ptr, row_dir, col_dir, row_idx, cold_idx);
+                character_state_comp_ptr->change_state<falling_state>(character_ptr, row_dir, col_dir, row_idx, cold_idx);
                 return;
             }
 
             // character is idle
             if (character_ptr->has_tag("player"))
             {
-                state_comp_ptr->change_state<idle_state>(character_ptr);
+                character_state_comp_ptr->change_state<idle_state>(character_ptr);
             }
             else if (character_ptr->has_tag("npc"))
             {
-                state_comp_ptr->change_state<npc_idle_state>(character_ptr);
+                character_state_comp_ptr->change_state<npc_idle_state>(character_ptr);
             }
         }
 

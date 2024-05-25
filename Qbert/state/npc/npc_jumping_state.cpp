@@ -27,6 +27,10 @@ namespace qbert
         {
             character_ptr_->component<face_component>()->set_sprite_orientation(1, 0, 0, 0, 5);
         }
+        else if (character_ptr_->has_tag("coily"))
+        {
+            character_ptr_->component<face_component>()->set_sprite_orientation(3, 5, 1, 7);
+        }
         else
         {
             character_ptr_->component<face_component>()->set_sprite_orientation(0, 5, 0, 1);

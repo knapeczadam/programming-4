@@ -52,8 +52,8 @@ namespace mngn
         void set_top_offset_rows(int top);
         void set_collider_width(float collider_width);
         void set_collider_height(float collider_height);
-        void set_collider_horizontal_offset(float collider_horizontal_offset);
-        void set_collider_vertical_offset(float collider_vertical_offset);
+        void set_collider_offset_x(float collider_offset_x);
+        void set_collider_offset_y(float collider_offset_y);
         void set_frames_per_sec(float frames_per_sec);
         void set_scale(float scale);
         void set_clip_width(int clip_width);
@@ -69,8 +69,8 @@ namespace mngn
         [[nodiscard]] auto texture_height() const -> int;
         [[nodiscard]] auto collider_width() const -> float;
         [[nodiscard]] auto collider_height() const -> float;
-        [[nodiscard]] auto collider_horizontal_offset() const -> float;
-        [[nodiscard]] auto collider_vertical_offset() const -> float;
+        [[nodiscard]] auto collider_offset_x() const -> float;
+        [[nodiscard]] auto collider_offset_y() const -> float;
         [[nodiscard]] auto scaled_clip_width() const -> float;
         [[nodiscard]] auto scaled_clip_height() const -> float;
         [[nodiscard]] auto position() const -> glm::ivec2;
@@ -99,19 +99,19 @@ namespace mngn
         float   scale_            = 1.0f;
 
         // SPRITE RELATED DATA MEMBERS
-        float accu_time_                  = 0.0f;
-        int   curr_frame_                 = 0;
-        rect  src_rect_                   = {};
-        rect  dst_rect_                   = {};
-        int   clip_width_                 = 0;
-        int   clip_height_                = 0;
-        int   grid_width_                 = 0;
-        int   grid_height_                = 0;
-        float collider_width_             = 0.0f;
-        float collider_height_            = 0.0f;
-        float collider_horizontal_offset_ = 0.0f;
-        float collider_vertical_offset_   = 0.0f;
-        int   iter_count_                 = 0;
-        bool  animated_                   = false;
+        float accu_time_         = 0.0f;
+        int   curr_frame_        = 0;
+        rect  src_rect_          = {};
+        rect  dst_rect_          = {};
+        int   clip_width_        = 0;
+        int   clip_height_       = 0;
+        int   grid_width_        = 0;
+        int   grid_height_       = 0;
+        float collider_width_    = 0.0f;
+        float collider_height_   = 0.0f;
+        float collider_offset_x_ = 0.0f;
+        float collider_offset_y_ = 0.0f;
+        int   iter_count_        = 0;
+        bool  animated_          = false;
     };
 }

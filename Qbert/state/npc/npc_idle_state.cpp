@@ -2,6 +2,7 @@
 
 #include "npc_jumping_state.h"
 #include "component/character/direction_component.h"
+#include "component/npc/coily_component.h"
 #include "component/player/face_component.h"
 #include "component/state/character_state_component.h"
 #include "minigin/component/rendering/sprite_component.h"
@@ -31,6 +32,10 @@ namespace qbert
         {
             character_ptr_->component<face_component>()->set_sprite_orientation(0, 0, 0, 0, 4);
         }
+        else if (character_ptr_->has_tag("coily"))
+        {
+            character_ptr_->component<face_component>()->set_sprite_orientation(2, 4, 0, 6);
+        }
         else
         {
             character_ptr_->component<face_component>()->set_sprite_orientation(0, 4, 0, 0);
@@ -45,7 +50,11 @@ namespace qbert
         {
             accu_time_ = 0.0f;
             auto direction_comp_ptr = character_ptr_->component<direction_component>();
-            if (character_ptr_->has_tag("down"))
+            if (character_ptr_->has_tag("coily"))
+            {
+                character_ptr_->component<coily_component>()->calculate_next_move();
+            }
+            else if (character_ptr_->has_tag("down"))
             {
                 int col = mngn::random_int(0, 1);
                 direction_comp_ptr->set_direction(1, col);

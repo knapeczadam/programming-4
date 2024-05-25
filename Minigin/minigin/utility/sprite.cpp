@@ -148,14 +148,14 @@ namespace mngn
         collider_height_ = collider_height;
     }
 
-    void sprite::set_collider_horizontal_offset(float collider_horizontal_offset)
+    void sprite::set_collider_offset_x(float collider_offset_x)
     {
-        collider_horizontal_offset_ = collider_horizontal_offset;
+        collider_offset_x_ = collider_offset_x;
     }
 
-    void sprite::set_collider_vertical_offset(float collider_vertical_offset)
+    void sprite::set_collider_offset_y(float collider_offset_y)
     {
-        collider_vertical_offset_ = collider_vertical_offset;
+        collider_offset_y_ = collider_offset_y;
     }
 
     void sprite::set_frames_per_sec(float frames_per_sec)
@@ -234,14 +234,14 @@ namespace mngn
         return collider_height_ * scale_;
     }
 
-    auto sprite::collider_horizontal_offset() const -> float
+    auto sprite::collider_offset_x() const -> float
     {
-        return collider_horizontal_offset_ * scale_;
+        return collider_offset_x_ * scale_;
     }
 
-    auto sprite::collider_vertical_offset() const -> float
+    auto sprite::collider_offset_y() const -> float
     {
-        return collider_vertical_offset_ * scale_;
+        return collider_offset_y_ * scale_;
     }
 
     auto sprite::scaled_clip_width() const -> float
