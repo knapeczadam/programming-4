@@ -61,6 +61,8 @@ namespace qbert
 
 	void scene_loader::load_scenes(const std::string &scene_name, std::function<void(scene_info)> &&load_scene_func)
 	{
+    	int bonus_start = 1000;
+	    int constexpr bonus_increment = 250;
     	auto config_file = level_config_manager::instance().get_level_config();
         for (auto const &level_config : config_file["levels"])
         {
@@ -79,7 +81,10 @@ namespace qbert
 			scene_info.level_manager_comp_ptr = level_manager_comp_ptr;
         	scene_info.level_config = level_config;
         	scene_info.scene_id = scene_name + "_" + level_id + "_" + round_id + "_";
+        	scene_info.bonus = bonus_start ;
         	load_scene_func(scene_info);
+
+        	bonus_start += bonus_increment;
         }
 	}
 
@@ -643,6 +648,7 @@ namespace qbert
     void scene_loader::create_single_scene(scene_info &scene_info)
     {
     	create_ui(scene_info);
+    	create_bonus(scene_info);
     	create_score_display(scene_info);
     	create_health_display(scene_info);
     	create_level_display(scene_info);
@@ -656,13 +662,14 @@ namespace qbert
     	// create_ugg(scene_info);
     	// create_wrong_way(scene_info);
     	// create_green_ball(scene_info);
-    	create_slick(scene_info);
+    	// create_slick(scene_info);
     	//create_sam(scene_info);
     }
 
     void scene_loader::create_coop_scene(scene_info &scene_info)
     {
     	create_ui(scene_info);
+    	create_bonus(scene_info);
     	create_score_display(scene_info);
     	create_health_display(scene_info);
     	create_level_display(scene_info);
@@ -707,6 +714,7 @@ namespace qbert
     void scene_loader::create_versus_scene(scene_info &scene_info)
     {
     	create_ui(scene_info);
+    	create_bonus(scene_info);
     	create_score_display(scene_info);
     	create_health_display(scene_info);
     	create_level_display(scene_info);
@@ -1031,7 +1039,6 @@ namespace qbert
 
     void scene_loader::create_ui(scene_info &scene_info)
     {
-    	
         factory::ui::sprite_config_info sprite_config{};
         sprite_config.scene_ptr      = scene_info.scene_ptr;
     	sprite_config.parent_ptr     = scene_info.root_ptr;
@@ -1085,6 +1092,33 @@ namespace qbert
         arrow_config.local_position = {112, 96};
         arrow_config.delay          = 0.0f;
         factory::ui::create_arrow(arrow_config);
+    }
+
+    void scene_loader::create_bonus(scene_info &scene_info)
+    {
+	    factory::ui::text_config_info text_config{};
+    	text_config.scene_ptr        = scene_info.scene_ptr;
+    	text_config.parent_ptr       = scene_info.root_ptr;
+    	text_config.name             = scene_info.scene_id + "text_bonus";
+    	text_config.local_position   = {144.0f, 464.0f};
+    	text_config.sprite_id        = qb_sp_alphabet_regular_purple;
+    	text_config.texture_id       = qb_re_t_sprite_general;
+    	text_config.text			 = "bonus";
+    	auto text_info = factory::ui::create_text(text_config);
+    	text_info.go_ptr->set_active(false);
+    	text_info.go_ptr->add_tags({"ui", "bonus"});
+
+    	factory::ui::number_config_info number_config{};
+    	number_config.scene_ptr      = scene_info.scene_ptr;
+    	number_config.parent_ptr     = scene_info.root_ptr;
+    	number_config.name           = scene_info.scene_id + "number_bonus";
+    	number_config.local_position = {256.0f, 464.0f};
+    	number_config.sprite_id      = qb_sp_numbers_regular_orange;
+    	number_config.texture_id     = qb_re_t_sprite_general;
+    	number_config.number		 = scene_info.bonus;
+    	auto number_info = factory::ui::create_number(number_config);
+    	number_info.go_ptr->set_active(false);
+    	number_info.go_ptr->add_tags({"ui", "bonus", "bonus_number"});
     }
 
     void scene_loader::load_scoreboard()

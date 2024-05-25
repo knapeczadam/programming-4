@@ -28,6 +28,7 @@ namespace qbert
         void on_enable() override;
         void start() override;
 
+        [[nodiscard]] auto number() const -> int { return number_; }
         void set_number(int number);
 
     private:

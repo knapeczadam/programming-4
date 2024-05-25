@@ -7,7 +7,9 @@
 #include "component/level/small_cube_component.h"
 #include "component/player/level_counter_component.h"
 #include "component/player/round_counter_component.h"
+#include "component/player/score_counter_component.h"
 #include "component/state/game_state_component.h"
+#include "component/ui/number_component.h"
 #include "core/progress_manager.h"
 #include "core/scene_utility.h"
 #include "minigin/core/game_object.h"
@@ -39,6 +41,19 @@ namespace qbert
     void round_loading_state::update()
     {
         accu_time_ += mngn::game_time::instance().delta_time();
+        if (accu_time_ >= bonus_time_ and not bonus_given_)
+        {
+            auto bonus_go_ptrs = scene_utility::instance().current_scene()->find_game_objects_with_tag("bonus", true);
+            for (auto bonus_ptr : bonus_go_ptrs)
+            {
+                bonus_ptr->set_active(true);
+            }
+            auto bonus_go_ptr = scene_utility::instance().current_scene()->find_game_objects_with_tag("bonus_number").front();
+            auto bonus = bonus_go_ptr->component<number_component>()->number();
+            scene_utility::instance().current_scene()->find_game_objects_with_tag("player").front()->component<score_counter_component>()->add_score(bonus);
+            bonus_given_ = true;
+        }
+        
         if (accu_time_ >= loading_time_)
         {
             accu_time_ = 0.0f;
@@ -66,6 +81,13 @@ namespace qbert
     {
         scene_utility::instance().unfreeze_all();
         scene_utility::instance().trigger_root();
+        
+        auto bonus_go_ptr = scene_utility::instance().current_scene()->find_game_objects_with_tag("bonus");
+        for (auto bonus_ptr : bonus_go_ptr)
+        {
+            bonus_ptr->set_active(true);
+        }
+        bonus_given_ = false;
         
         // Hide the current scene
         auto scene_ptr = scene_utility::instance().current_scene();

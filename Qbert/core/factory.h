@@ -278,7 +278,6 @@ namespace qbert
                 bool               cached      = true;
             };
 
-
             struct sprite_info : info { };
 
             static auto create_sprite(sprite_config_info const &config) -> sprite_info;

@@ -22,6 +22,8 @@ namespace qbert
 
     private:
         float loading_time_ = 5.0f;
+        float bonus_time_   = 3.5f;
         float accu_time_    = 0.0f;
+        bool bonus_given_   = false;
     };
 }
