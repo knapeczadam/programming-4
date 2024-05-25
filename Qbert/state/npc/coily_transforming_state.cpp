@@ -1,7 +1,6 @@
 ﻿#include "coily_transforming_state.h"
 
 // Project includes
-#include "coily_idle_state.h"
 #include "npc_jumping_state.h"
 #include "component/npc/coily_component.h"
 #include "component/state/character_state_component.h"
