@@ -44,9 +44,7 @@ namespace qbert
             accu_time_ = 0.0f;
             
             auto &progress_manager = progress_manager::instance();
-            auto scene_ptr = mngn::scene_manager::instance().find("game_state");
-            auto game_state_go_ptr = scene_ptr->find("game_state");
-            auto game_state_comp_ptr = game_state_go_ptr->component<game_state_component>();
+            auto game_state_comp_ptr = scene_utility::instance().game_state();
 
             auto root_ptr = scene_utility::instance().current_root();
             if (progress_manager.round() == 4)

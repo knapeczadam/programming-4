@@ -16,6 +16,7 @@
 #include <thread>
 
 #include "core/resources.h"
+#include "core/scene_utility.h"
 #include "minigin/events/event.h"
 #include "minigin/events/event_manager.h"
 #include "minigin/events/sound_handler.h"
@@ -41,9 +42,7 @@ namespace qbert
 
     void skip_round_command::execute()
     {
-        auto scene_ptr = mngn::scene_manager::instance().find("game_state");
-        auto game_state_go_ptr = scene_ptr->find("game_state");
-        auto game_state_comp_ptr = game_state_go_ptr->component<game_state_component>();
+        auto game_state_comp_ptr = scene_utility::instance().game_state();
         if (game_state_comp_ptr->is_state<single_state>() or game_state_comp_ptr->is_state<coop_state>() or game_state_comp_ptr->is_state<versus_state>())
         {
             game_state_comp_ptr->change_state<round_loading_state>(game_state_comp_ptr);

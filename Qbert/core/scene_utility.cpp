@@ -156,4 +156,11 @@ namespace qbert
     {
         return current_scene()->name() + '_';
     }
+
+    auto scene_utility::game_state() const -> game_state_component *
+    {
+        auto scene_ptr = mngn::scene_manager::instance().find("game_state");
+        auto game_state_go_ptr = scene_ptr->find("game_state");
+        return game_state_go_ptr->component<game_state_component>();
+    }
 }

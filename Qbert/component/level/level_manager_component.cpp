@@ -28,6 +28,8 @@
 #include <string>
 
 #include "component/npc/coily_component.h"
+#include "component/player/score_counter_component.h"
+#include "core/scene_utility.h"
 #include "state/npc/coily_transforming_state.h"
 
 namespace qbert
@@ -94,6 +96,10 @@ namespace qbert
             if (row_idx < 0 or cold_idx < 0 or cold_idx > row_idx or row_idx >= 7)
             {
                 character_state_comp_ptr->change_state<falling_state>(character_ptr, row_dir, col_dir, row_idx, cold_idx);
+                if (character_ptr->has_tag("coily"))
+                {
+                    scene_utility::instance().current_scene()->find_game_objects_with_tag("player").front()->component<score_counter_component>()->add_score(500);
+                }
                 return;
             }
 
@@ -153,10 +159,7 @@ namespace qbert
             progress_manager.set_cube(cube_comp_ptr->owner()->name(), cube_comp_ptr->has_final_color());
             if (progress_manager.round_completed())
             {
-                auto scene_ptr = mngn::scene_manager::instance().find("game_state");
-                auto game_state_go_ptr = scene_ptr->find("game_state");
-                auto game_state_comp_ptr = game_state_go_ptr->component<game_state_component>();
-                
+                auto game_state_comp_ptr = scene_utility::instance().game_state();
                 game_state_comp_ptr->change_state<round_loading_state>(game_state_comp_ptr);
             }
         }

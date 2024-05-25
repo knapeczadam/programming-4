@@ -13,6 +13,7 @@
 
 #include "factory.h"
 #include "resources.h"
+#include "scene_utility.h"
 #include "sprites.h"
 #include "component/state/game_state_component.h"
 #include "minigin/core/sprite_manager.h"
@@ -52,9 +53,7 @@ namespace qbert
             {
                save_initial();
                 
-                auto scene_ptr           = mngn::scene_manager::instance().find("game_state");
-                auto game_state_go_ptr   = scene_ptr->find("game_state");
-                auto game_state_comp_ptr = game_state_go_ptr->component<game_state_component>();
+                auto game_state_comp_ptr = scene_utility::instance().game_state();
                 game_state_comp_ptr->change_state<scoreboard_state>(game_state_comp_ptr);
             }
             break;

@@ -16,9 +16,8 @@ namespace qbert
 
     void dead_state::on_enter()
     {
-        auto scene_ptr = mngn::scene_manager::instance().find("game_state");
-        auto go_ptr = scene_ptr->find("game_state");
-        go_ptr->component<game_state_component>()->change_state<game_over_state>(go_ptr->component<game_state_component>());
+        auto game_state_comp_ptr = scene_utility::instance().game_state();
+        game_state_comp_ptr->change_state<game_over_state>(game_state_comp_ptr);
 
         scene_utility::instance().freeze_all();
     }

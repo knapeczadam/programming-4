@@ -12,6 +12,7 @@
 // GLM includes
 #include <glm/glm.hpp>
 
+#include "score_counter_component.h"
 #include "component/state/character_state_component.h"
 #include "minigin/core/scene.h"
 #include "state/player/idle_state.h"
@@ -75,6 +76,14 @@ namespace qbert
                 if (other_ptr->has_tag("friend"))
                 {
                     other_ptr->component<health_component>()->take_damage(1);
+                    if (other_ptr->has_tag("ball"))
+                    {
+                        owner()->component<score_counter_component>()->add_score(100);
+                    }
+                    else // slick or sam
+                    {
+                        owner()->component<score_counter_component>()->add_score(300);
+                    }
                 }
                 else
                 {

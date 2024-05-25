@@ -5,11 +5,17 @@
 #include "component/npc/coily_component.h"
 #include "component/player/face_component.h"
 #include "component/state/character_state_component.h"
+#include "component/state/game_state_component.h"
+#include "core/scene_utility.h"
 #include "minigin/component/rendering/sprite_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
+#include "minigin/core/scene.h"
+#include "minigin/core/scene_manager.h"
 #include "minigin/utility/random.h"
 #include "minigin/utility/sprite.h"
+#include "state/game/single_state.h"
+#include "state/game/versus_state.h"
 
 namespace qbert
 {
@@ -52,6 +58,10 @@ namespace qbert
             auto direction_comp_ptr = character_ptr_->component<direction_component>();
             if (character_ptr_->has_tag("coily"))
             {
+                if (scene_utility::instance().game_state()->is_state<versus_state>())
+                {
+                    return;
+                }
                 character_ptr_->component<coily_component>()->calculate_next_move();
             }
             else if (character_ptr_->has_tag("down"))

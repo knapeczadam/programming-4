@@ -24,6 +24,7 @@ namespace qbert
     class fall_component;
     class flicker_component;
     class player_collider_component;
+    class game_state_component;
     
     class scene_utility final : public mngn::singleton<scene_utility> 
     {
@@ -51,6 +52,8 @@ namespace qbert
         [[nodiscard]] auto current_scene() const -> mngn::scene *;
         [[nodiscard]] auto current_root() const -> mngn::game_object *;
         [[nodiscard]] auto scene_id() const -> std::string;
+
+        [[nodiscard]] auto game_state() const -> game_state_component *;
 
     private:
         friend class mngn::singleton<scene_utility>;

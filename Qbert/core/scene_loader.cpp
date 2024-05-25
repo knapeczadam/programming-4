@@ -35,6 +35,7 @@
 // GLM includes
 #include <glm/glm.hpp>
 
+#include "scene_utility.h"
 #include "score_manager.h"
 #include "component/ui/flicker_component.h"
 #include "minigin/utility/random.h"
@@ -651,11 +652,11 @@ namespace qbert
     	bind_player_observers(scene_info);
     	
     	// create_red_ball(scene_info);
-    	create_coily(scene_info);
+    	// create_coily(scene_info);
     	// create_ugg(scene_info);
     	// create_wrong_way(scene_info);
     	// create_green_ball(scene_info);
-    	// create_slick(scene_info);
+    	create_slick(scene_info);
     	//create_sam(scene_info);
     }
 
@@ -713,6 +714,14 @@ namespace qbert
     	create_level(scene_info);
     	create_player_1(scene_info);
     	bind_player_observers(scene_info);
+    	
+    	// create_red_ball(scene_info);
+    	create_coily(scene_info);
+    	// create_ugg(scene_info);
+    	// create_wrong_way(scene_info);
+    	// create_green_ball(scene_info);
+    	// create_slick(scene_info);
+    	//create_sam(scene_info);
     }
 
     void scene_loader::create_score_display(scene_info &scene_info)
@@ -839,8 +848,7 @@ namespace qbert
 
     void scene_loader::bind_generic_commands()
     {
-    	auto scene_ptr = mngn::scene_manager::instance().find("game_state");
-    	auto game_state_comp_ptr = scene_ptr->find("game_state")->component<game_state_component>();
+    	auto game_state_comp_ptr = scene_utility::instance().game_state();
     	
 	    auto left_game_state_cmd = std::make_unique<game_mode_select_command>(game_state_comp_ptr, -1);
 	    auto right_game_state_cmd = std::make_unique<game_mode_select_command>(game_state_comp_ptr, 1);
