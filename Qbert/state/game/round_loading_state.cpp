@@ -85,7 +85,7 @@ namespace qbert
         auto bonus_go_ptr = scene_utility::instance().current_scene()->find_game_objects_with_tag("bonus");
         for (auto bonus_ptr : bonus_go_ptr)
         {
-            bonus_ptr->set_active(true);
+            bonus_ptr->set_active(false);
         }
         bonus_given_ = false;
         

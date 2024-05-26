@@ -61,8 +61,10 @@ namespace qbert
         auto number_comp_ptr = scene_utility::instance().current_scene()->find_game_objects_with_tag("coin").front()->component<number_component>();
         number_comp_ptr->set_number(progress_manager::instance().coins());
         
-        scene_utility::instance().current_scene()->set_active(false);
-        scene_utility::instance().current_scene()->clear_tag();
+        auto scene_ptr = scene_utility::instance().current_scene();
+        scene_ptr->clear_tag();
+        scene_ptr->set_active(false);
+        
         scene_ptr_->set_active(false);
     }
 

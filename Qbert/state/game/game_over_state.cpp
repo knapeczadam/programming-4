@@ -50,6 +50,12 @@ namespace qbert
     {
         scene_utility::instance().unfreeze_animation();
         scene_utility::instance().trigger_root();
+        
+        auto bonus_go_ptr = scene_utility::instance().current_scene()->find_game_objects_with_tag("bonus");
+        for (auto bonus_ptr : bonus_go_ptr)
+        {
+            bonus_ptr->set_active(false);
+        }
 
         auto scene_ptr = scene_utility::instance().current_scene();
         scene_ptr->set_active(false);
