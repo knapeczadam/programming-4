@@ -24,6 +24,8 @@ namespace qbert
 
         void load_level_config(std::string const &file_path);
         [[nodiscard]] auto get_level_config() const -> json const & { return level_config_; }
+
+        [[nodiscard]] auto level_count() const -> int { return level_count_; }
         
     private:
         friend class mngn::singleton<level_config_manager>;
@@ -31,5 +33,6 @@ namespace qbert
 
     private:
         json level_config_;
+        int level_count_ = 0;
     };
 }

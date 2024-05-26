@@ -12,6 +12,7 @@ namespace qbert
         if (file)
         {
             level_config_ = json::parse(file);
+            level_count_ = level_config_["level_count"];
         }
     }
 }

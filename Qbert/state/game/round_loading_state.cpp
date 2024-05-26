@@ -3,6 +3,7 @@
 // Project includes
 #include "input_state.h"
 #include "level_loading_state.h"
+#include "scoreboard_state.h"
 #include "component/level/cube_component.h"
 #include "component/level/small_cube_component.h"
 #include "component/player/level_counter_component.h"
@@ -11,8 +12,10 @@
 #include "component/state/game_state_component.h"
 #include "component/ui/number_component.h"
 #include "core/audio_player.h"
+#include "core/level_config_manager.h"
 #include "core/progress_manager.h"
 #include "core/scene_utility.h"
+#include "core/score_manager.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
 #include "minigin/core/scene.h"
@@ -107,6 +110,18 @@ namespace qbert
             if (progress_manager.round() == 4)
             {
                 root_ptr->component_in_children<level_counter_component>()->increase_level();
+                if (progress_manager::instance().level() > level_config_manager::instance().level_count())
+                {
+                    if (score_manager::instance().is_below_lowest_score(progress_manager::instance().score()))
+                    {
+                        game_state_comp_ptr_->change_state<scoreboard_state>(game_state_comp_ptr_);
+                    }
+                    else
+                    {
+                        game_state_comp_ptr_->change_state<input_state>(game_state_comp_ptr_);
+                    }
+                    return;
+                }
                 root_ptr->component_in_children<round_counter_component>()->set_round(1);
                 
                 game_state_comp_ptr->change_state<level_loading_state>(game_state_comp_ptr);

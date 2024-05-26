@@ -546,7 +546,7 @@ namespace qbert
 
     void scene_loader::load_loading_scene()
     {
-    	for (int i = 1; i <= 3; ++i)
+    	for (int i = 1; i <= level_config_manager::instance().level_count(); ++i)
     	{
     		scene_info scene_info{};
 			auto scene_ptr = mngn::scene_manager::instance().create_scene(std::to_string(i) + "_loading");
