@@ -33,13 +33,12 @@ namespace qbert
         void on_exit() override;
 
     private:
-        void switch_menu(const std::string &from_menu, const std::string &to_menu);
         void animate_qbert();
 
     private:
         float switch_time_ = 10.0f;
         float accu_time_   = 0.0f;
-        bool  menu_switched_      = false;
+        int menu_idx_ = 0;
         mngn::game_object *disk_ptr_ = nullptr;
         glm::vec2 const start_pos_ = {-36.0f, 374.0f};
         glm::vec2 const end_pos_ = {480, 374.0f};

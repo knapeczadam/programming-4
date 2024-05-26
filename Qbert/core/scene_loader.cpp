@@ -121,6 +121,7 @@ namespace qbert
     	load_menu_scene();
     	load_menu_scene_1();
     	load_menu_scene_2();
+    	load_menu_scene_3();
     }
 
     void scene_loader::load_menu_scene()
@@ -155,6 +156,7 @@ namespace qbert
         text_config.name           = "game_modes";
         text_config.local_position = {32, 464};
         text_config.text           = "single     coop     versus";
+        text_config.sprite_id      = qb_sp_alphabet_bold_orange;
         factory::ui::create_text(text_config);
 
     	std::vector<mngn::sprite*> sprites;
@@ -388,6 +390,156 @@ namespace qbert
         number_config.name           = "number_2";
         number_config.local_position = {336, 416};
         number_config.number         = 14000;
+        factory::ui::create_number(number_config);
+    }
+
+    void scene_loader::load_menu_scene_3()
+    {
+        auto scene_ptr = mngn::scene_manager::instance().create_scene("menu_3");
+        scene_ptr->set_active(false);
+    	
+        factory::ui::sprite_config_info sprite_config{};
+        sprite_config.scene_ptr      = scene_ptr;
+        sprite_config.name           = "qbert";
+        sprite_config.local_position = {208, 24};
+        sprite_config.sprite_id      = qb_sp_qbert_big;
+        factory::ui::create_sprite(sprite_config);
+    	
+        factory::ui::text_config_info text_config{};
+        text_config.scene_ptr              = scene_ptr;
+        text_config.name                   = "row_1";
+        text_config.local_position         = {48, 112};
+        text_config.text                   = "keyboard";
+    	text_config.sprite_id              = qb_sp_alphabet_regular_purple;
+    	text_config.texture_id             = qb_re_t_sprite_general;
+    	text_config.space_sprite_id        = qb_sp_alphabet_regular_space;
+    	text_config.space_texture_id       = qb_re_t_sprite_general;
+    	text_config.exclamation_sprite_id  = qb_sp_alphabet_regular_special;
+    	text_config.exclamation_texture_id = qb_re_t_sprite_general;
+    	text_config.exclamation_frame      = 3;
+    	text_config.equal_sprite_id		   = qb_sp_alphabet_regular_special;
+    	text_config.equal_texture_id       = qb_re_t_sprite_general;
+    	text_config.equal_frame            = 6;
+    	text_config.hyphen_sprite_id	   = qb_sp_alphabet_regular_special;
+    	text_config.hyphen_texture_id      = qb_re_t_sprite_general;
+    	text_config.hyphen_frame           = 7;
+        factory::ui::create_text(text_config);
+        
+        text_config.name           = "row_2";
+    	text_config.sprite_id              = qb_sp_alphabet_regular_green;
+        text_config.local_position = {48, 128};
+        text_config.text           = "player      = arrows"; // 1
+        factory::ui::create_text(text_config);
+        
+        text_config.name           = "row_3";
+        text_config.local_position = {48, 144};
+        text_config.text           = "player      = wasd"; // 2
+        factory::ui::create_text(text_config);
+        
+        text_config.name           = "row_4";
+        text_config.local_position = {48, 160};
+        text_config.text           = "accept      = return";
+        factory::ui::create_text(text_config);
+        
+        text_config.name           = "row_5";
+        text_config.local_position = {48, 176};
+        text_config.text           = "insert coin = right shift";
+        factory::ui::create_text(text_config);
+        
+        text_config.name           = "row_6";
+        text_config.local_position = {48, 192};
+        text_config.text           = "mute        = m";
+        factory::ui::create_text(text_config);
+    	
+        text_config.name           = "row_6";
+        text_config.local_position = {48, 208};
+        text_config.text           = "skip level  = f";
+        factory::ui::create_text(text_config);
+
+        text_config.name           = "row_7";
+        text_config.local_position = {48, 240};
+        text_config.text           = "controller";
+    	text_config.sprite_id      = qb_sp_alphabet_regular_purple;
+        factory::ui::create_text(text_config);
+        
+        text_config.name           = "row_8";
+        text_config.local_position = {48, 256};
+        text_config.text           = "player      = d-pad"; // 1
+    	text_config.sprite_id      = qb_sp_alphabet_regular_green;
+        factory::ui::create_text(text_config);
+        
+        text_config.name           = "row_9";
+        text_config.local_position = {48, 272};
+        text_config.text           = "player      = d-pad"; // 2
+        factory::ui::create_text(text_config);
+        
+        text_config.name           = "row_10";
+        text_config.local_position = {48, 288};
+        text_config.text           = "insert coin = x";
+        factory::ui::create_text(text_config);
+        
+        text_config.name           = "row_11";
+        text_config.local_position = {48, 304};
+        text_config.text           = "accept      = a";
+        factory::ui::create_text(text_config);
+        
+        text_config.name           = "row_12";
+        text_config.local_position = {48, 320};
+        text_config.text           = "mute        = b";
+        factory::ui::create_text(text_config);
+    	
+        text_config.name           = "row_12";
+        text_config.local_position = {48, 336};
+        text_config.text           = "skip level  = y";
+        factory::ui::create_text(text_config);
+
+        factory::ui::number_config_info number_config{};
+        number_config.scene_ptr      = scene_ptr;
+        number_config.name           = "keyboard_player_1";
+        number_config.local_position = {160, 128};
+        number_config.number         = 1;
+        number_config.sprite_id      = qb_sp_numbers_regular_orange;
+        number_config.texture_id     = qb_re_t_sprite_general;
+        factory::ui::create_number(number_config);
+    	
+        number_config.name           = "controller_player_1";
+        number_config.local_position = {160, 256};
+        factory::ui::create_number(number_config);
+    	
+        number_config.name           = "f1";
+        number_config.local_position = {288, 208};
+        factory::ui::create_number(number_config);
+        
+        number_config.sprite_id      = qb_sp_numbers_regular_purple;
+        number_config.name           = "keyboard_player_2";
+        number_config.local_position = {160, 144};
+        number_config.number         = 2;
+        factory::ui::create_number(number_config);
+    	
+        number_config.name           = "controller_player_2";
+        number_config.local_position = {160, 272};
+        factory::ui::create_number(number_config);
+        
+        text_config.name           = "row_14";
+        text_config.local_position = {160, 384};
+        text_config.text           = "adam knapecz";
+        factory::ui::create_text(text_config);
+    	
+        text_config.name           = "row_14";
+        text_config.local_position = {144, 416};
+        text_config.text           = "kortrijk -";
+        factory::ui::create_text(text_config);
+    	
+        text_config.name           = "row_14";
+        text_config.local_position = {240, 400};
+        text_config.text           = "dae";
+    	text_config.sprite_id      = qb_sp_alphabet_regular_purple;
+        factory::ui::create_text(text_config);
+    	
+        number_config.name           = "number_2";
+        number_config.local_position = {320, 416};
+    	number_config.sprite_id	     = qb_sp_numbers_bold_pink;
+        number_config.number         = 2024;
         factory::ui::create_number(number_config);
     }
 

@@ -321,6 +321,9 @@ namespace qbert
                 int          equal_sprite_id;
                 int          equal_texture_id;
                 int          equal_frame;
+                int          hyphen_sprite_id;
+                int          hyphen_texture_id;
+                int          hyphen_frame;
                 unsigned int spacing;
                 
             };

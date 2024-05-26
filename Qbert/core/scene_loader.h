@@ -71,6 +71,7 @@ namespace qbert
         void load_menu_scene();
         void load_menu_scene_1();
         void load_menu_scene_2();
+        void load_menu_scene_3();
         void load_loading_scene();
         void load_single_scenes();
         void load_coop_scenes();

@@ -38,18 +38,39 @@ namespace qbert
         if (accu_time_ >= switch_time_)
         {
             accu_time_ = 0.0f;
-            if (menu_switched_)
+            menu_idx_ = (menu_idx_ + 1) % 3;
+            switch (menu_idx_)
             {
-                switch_menu("menu_2", "menu_1");
-            }
-            else
-            {
-                switch_menu("menu_1", "menu_2");
+            case 0:
+                scene_ptr_ = mngn::scene_manager::instance().find("menu_2");
+                scene_ptr_->set_active(false);
+                scene_ptr_ = mngn::scene_manager::instance().find("menu_3");
+                scene_ptr_->set_active(false);
+                scene_ptr_ = mngn::scene_manager::instance().find("menu_1");
+                scene_ptr_->set_active(true);
+                break;
+            case 1:
+                scene_ptr_ = mngn::scene_manager::instance().find("menu_1");
+                scene_ptr_->set_active(false);
+                scene_ptr_ = mngn::scene_manager::instance().find("menu_3");
+                scene_ptr_->set_active(false);
+                scene_ptr_ = mngn::scene_manager::instance().find("menu_2");
+                scene_ptr_->set_active(true);
+                break;
+            case 2:
+                scene_ptr_ = mngn::scene_manager::instance().find("menu_1");
+                scene_ptr_->set_active(false);
+                scene_ptr_ = mngn::scene_manager::instance().find("menu_2");
+                scene_ptr_->set_active(false);
+                scene_ptr_ = mngn::scene_manager::instance().find("menu_3");
+                scene_ptr_->set_active(true);
+                break;
             }
         }
-        if (not menu_switched_)
+
+        if (menu_idx_ == 0)
         {
-            animate_qbert();   
+            animate_qbert();
         }
     }
 
@@ -66,15 +87,6 @@ namespace qbert
         scene_ptr->set_active(false);
         
         scene_ptr_->set_active(false);
-    }
-
-    void menu_state::switch_menu(const std::string &from_menu, const std::string &to_menu)
-    {
-        scene_ptr_ = mngn::scene_manager::instance().find(from_menu);
-        scene_ptr_->set_active(false);
-        scene_ptr_ = mngn::scene_manager::instance().find(to_menu);
-        scene_ptr_->set_active(true);
-        menu_switched_ = not menu_switched_;
     }
 
     void menu_state::animate_qbert()

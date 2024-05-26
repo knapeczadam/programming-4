@@ -643,6 +643,9 @@ namespace qbert
         alphabet_config.equal_sprite_id        = config.equal_sprite_id;
         alphabet_config.equal_texture_id       = config.equal_texture_id;
         alphabet_config.equal_frame            = config.equal_frame;
+        alphabet_config.hyphen_sprite_id       = config.hyphen_sprite_id;
+        alphabet_config.hyphen_texture_id      = config.hyphen_texture_id;
+        alphabet_config.hyphen_frame           = config.hyphen_frame;
         
         text_info info{};
         info.go_ptr = config.scene_ptr->create_game_object(config.name);
