@@ -933,7 +933,7 @@ namespace qbert
 		factory::character::player_config_info player_config{};
 		player_config.scene_ptr         = scene_info.scene_ptr;
 		player_config.parent_ptr        = scene_info.root_ptr;
-		player_config.name              = scene_info.scene_id + "player_1";
+		player_config.name              = "player_1";
 		player_config.local_position    = coop ? glm::vec2{416.0f, 372.0f} : glm::vec2{224.0f, 84.0f};
 		player_config.sprite_id         = qb_sp_qbert_player_1;
 		player_config.texture_id        = qb_re_t_sprite_general;
@@ -955,7 +955,7 @@ namespace qbert
 		factory::character::player_config_info player_config{};
 		player_config.scene_ptr      = scene_info.scene_ptr;
 		player_config.parent_ptr     = scene_info.root_ptr;
-		player_config.name           = scene_info.scene_id + "player_2";
+		player_config.name           = "player_2";
 		player_config.local_position = {32.0f, 372.0f};
 		player_config.sprite_id      = qb_sp_qbert_player_2;
 		player_config.texture_id     = qb_re_t_sprite_general;

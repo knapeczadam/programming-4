@@ -2,9 +2,41 @@
 
 namespace qbert
 {
+    auto progress_manager::health(std::string const &name) const -> int
+    {
+        if (healths_.contains(name))
+        {
+            return healths_.at(name);
+        }
+        return 0;
+    }
+
+    void progress_manager::set_health(std::string const &name, int health)
+    {
+        if (not healths_.contains(name))
+        {
+            healths_.emplace(name, health);
+        }
+    }
+
+    void progress_manager::take_damage(std::string const &name, int damage)
+    {
+        if (healths_.contains(name))
+        {
+            healths_[name] -= damage;
+        }
+    }
+
+    void progress_manager::heal(std::string const &name, int health)
+    {
+        if (healths_.contains(name))
+        {
+            healths_[name] += health;
+        }
+    }
+
     void progress_manager::set_cube(std::string const &name, bool has_final_color)
     {
-        // cubes_[std::to_string(level_) + '_' + std::to_string(round_)].emplace(name, has_final_color);
         auto scene_key = std::to_string(level_) + '_' + std::to_string(round_);
         auto it = cubes_.find(scene_key);
         if (it != cubes_.end())
@@ -49,7 +81,7 @@ namespace qbert
         level_  = 1;
         round_  = 1;
         score_  = 0;
-        health_ = 3;
         cubes_.clear();
+        healths_.clear();
     }
 }

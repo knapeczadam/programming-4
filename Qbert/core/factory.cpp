@@ -58,7 +58,7 @@ namespace qbert
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         auto sprite_ptr = sprite_comp_ptr->sprite();
         info.position_comp_ptr      = info.go_ptr->add_component<position_component>(config.row_idx, config.col_idx);
-        info.health_comp_ptr        = info.go_ptr->add_component<player_health_component>(3);
+        info.health_comp_ptr        = info.go_ptr->add_component<player_health_component>(4);
         info.score_counter_comp_ptr = info.go_ptr->add_component<score_counter_component>();
         info.level_counter_comp_ptr = info.go_ptr->add_component<level_counter_component>();
         info.round_counter_comp_ptr = info.go_ptr->add_component<round_counter_component>();

@@ -30,9 +30,10 @@ namespace qbert
         void add_score(int score) { score_ += score; }
         [[nodiscard]] auto score() const -> int { return score_; }
 
-        [[nodiscard]] auto health() const -> int { return health_; }
-        void take_damage(int damage) { health_ -= damage; }
-        void heal(int health) { health_ += health; }
+        [[nodiscard]] auto health(std::string const &name) const -> int;
+        void set_health(std::string const &name, int health);
+        void take_damage(std::string const &name, int damage);
+        void heal(std::string const &name, int health);
 
         void set_cube(std::string const& name, bool has_final_color);
         [[nodiscard]] auto round_completed() const -> bool;
@@ -51,9 +52,9 @@ namespace qbert
         int level_           = 1;
         int round_           = 1;
         int score_           = 0;
-        int health_          = 3;
         int coins_           = 0;
         std::unordered_map<std::string, std::unordered_map<std::string, bool>> cubes_;
+        std::unordered_map<std::string, int> healths_;
         size_t const num_of_cubes_ = 28;
     };
 }
