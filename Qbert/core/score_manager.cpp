@@ -11,6 +11,8 @@ namespace qbert
     {
         scores_.erase(std::prev(scores_.end()));
         scores_.emplace(score, initial);
+
+        saved_score_ = {score, initial};
     }
 
     auto score_manager::top_score() const -> int

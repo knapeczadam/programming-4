@@ -27,9 +27,12 @@ namespace qbert
         [[nodiscard]] auto is_top_score(int score) const -> bool;
         [[nodiscard]] auto is_below_lowest_score(int score) const -> bool;
         [[nodiscard]] auto calculate_ranking(int score) const -> int;
+        [[nodiscard]] auto saved_score() const -> std::pair<int, std::string> const & { return saved_score_; }
 
         void load_scoreboard(std::string const &file_path);
         void save_scoreboard();
+
+        void reset() { saved_score_ = {}; }
 
     private:
         friend class mngn::singleton<score_manager>;
@@ -38,5 +41,7 @@ namespace qbert
     private:
         std::multimap<int, std::string, std::greater<>> scores_;
         std::string file_path_;
+        
+        std::pair<int, std::string> saved_score_;
     };
 }

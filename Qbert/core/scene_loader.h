@@ -60,7 +60,7 @@ namespace qbert
         scene_loader &operator=(scene_loader &&other)      = delete;
 
         void load_scenes();
-        void load_scoreboard();
+        void create_scoreboard(mngn::scene *scene_ptr);
         void load_countdown(int seconds);
         void load_input_message(int ranking);
 

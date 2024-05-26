@@ -1376,19 +1376,15 @@ namespace qbert
     	}
     }
 
-    void scene_loader::load_scoreboard()
+    void scene_loader::create_scoreboard(mngn::scene *scene_ptr)
     {
 		auto scores = score_manager::instance().scores();
-		auto scoreboard_scene_ptr = mngn::scene_manager::instance().find("scoreboard");
-		auto scores_go_ptrs       = scoreboard_scene_ptr->find_game_objects_with_tag("score");
-    	for (auto const &score_go_ptr : scores_go_ptrs)
-		{
-			scoreboard_scene_ptr->remove(score_go_ptr);
-		}
-
+    	auto saved_score = score_manager::instance().saved_score();
+    	bool is_first = scores.begin()->first == saved_score.first and scores.begin()->second == saved_score.second;
+    	
     	// Top score
     	factory::ui::number_config_info number_config{};
-    	number_config.scene_ptr      = scoreboard_scene_ptr;
+    	number_config.scene_ptr      = scene_ptr;
     	number_config.name           = "score_1";
     	number_config.sprite_id      = qb_sp_numbers_regular_orange;
     	number_config.texture_id     = qb_re_t_sprite_general;
@@ -1396,10 +1392,11 @@ namespace qbert
     	number_config.number		 = scores.begin()->first;
 		auto score_info = factory::ui::create_number(number_config);
 		score_info.go_ptr->add_tag("score");
+    	if (is_first) score_info.go_ptr->add_component<flicker_component>();
 
     	// Top initial
     	factory::ui::text_config_info text_config{};
-    	text_config.scene_ptr        = scoreboard_scene_ptr;
+    	text_config.scene_ptr        = scene_ptr;
     	text_config.name             = "initial_1";
     	text_config.local_position   = {142.0f, 92.0f};
     	text_config.sprite_id        = qb_sp_alphabet_large_yellow;
@@ -1428,6 +1425,8 @@ namespace qbert
     	auto it = std::next(scores.begin());
     	for (int i = 0; i < 22; ++i, ++it)
 		{
+    		bool is_saved = it->first == saved_score.first and it->second == saved_score.second;
+    		
     		// Scores
     		int score = it->first;
 			number_config.number = score;
@@ -1440,6 +1439,7 @@ namespace qbert
 			number_config.local_position = {x, y};
 			score_info                   = factory::ui::create_number(number_config);
 			score_info.go_ptr->add_tag("score");
+    		if (is_saved) score_info.go_ptr->add_component<flicker_component>();
 
     		// Initials
     		x = initial_start_pos.x + (is_even ? 0 : offset_x);
@@ -1450,6 +1450,7 @@ namespace qbert
     		text_config.text           = it->second;
     		text_info                  = factory::ui::create_text(text_config);
     		text_info.go_ptr->add_tag("score");
+    		if (is_saved) text_info.go_ptr->add_component<flicker_component>();
 		}
     }
 

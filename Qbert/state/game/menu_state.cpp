@@ -6,6 +6,7 @@
 #include "core/factory.h"
 #include "core/progress_manager.h"
 #include "core/scene_utility.h"
+#include "core/score_manager.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
 #include "minigin/core/renderer.h"
@@ -80,6 +81,7 @@ namespace qbert
     void menu_state::on_exit()
     {
         progress_manager::instance().reset();
+        score_manager::instance().reset();
         
         progress_manager::instance().use_coin();
         auto number_comp_ptr = scene_utility::instance().current_scene()->find_game_objects_with_tag("coin").front()->component<number_component>();
