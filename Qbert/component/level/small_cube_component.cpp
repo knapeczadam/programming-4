@@ -26,13 +26,18 @@ namespace qbert
 
     void small_cube_component::on_disable()
     {
-        sprite_ui_comp_ptr_->set_sprite(original_sprite_ptr_);
-        sprite_ui_comp_ptr_->set_animated(false);
+        disable_animation();
     }
     
     void small_cube_component::enable_animation()
     {
         sprite_ui_comp_ptr_->set_sprite(animated_sprite_ptr_);
         sprite_ui_comp_ptr_->set_animated(true);
+    }
+
+    void small_cube_component::disable_animation()
+    {
+        sprite_ui_comp_ptr_->set_sprite(original_sprite_ptr_);
+        sprite_ui_comp_ptr_->set_animated(false);
     }
 }

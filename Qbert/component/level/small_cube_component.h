@@ -28,6 +28,7 @@ namespace qbert
         void on_disable() override;
 
         void enable_animation();
+        void disable_animation();
 
     private:
         mngn::sprite_ui_component *sprite_ui_comp_ptr_ = nullptr;

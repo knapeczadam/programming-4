@@ -36,8 +36,7 @@ namespace qbert
     {
         current_color_ = 0;
         score_count_   = static_cast<int>(colors_.size()) - 1;
-        owner()->component<mngn::sprite_component>()->set_sprite(colors_[current_color_]);
-        owner()->component<mngn::sprite_component>()->set_animated(false);
+        disable_animation();
     }
 
     void cube_component::notify(std::string const &event, mngn::subject *subject_ptr)
@@ -91,5 +90,11 @@ namespace qbert
     {
         owner()->component<mngn::sprite_component>()->set_sprite(animated_sprite_ptr_);
         owner()->component<mngn::sprite_component>()->set_animated(true);
+    }
+
+    void cube_component::disable_animation()
+    {
+        owner()->component<mngn::sprite_component>()->set_sprite(colors_[current_color_]);
+        owner()->component<mngn::sprite_component>()->set_animated(false);
     }
 }

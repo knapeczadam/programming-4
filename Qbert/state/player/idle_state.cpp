@@ -3,6 +3,7 @@
 // Project includes
 #include "component/player/face_component.h"
 #include "component/character/direction_component.h"
+#include "core/audio_player.h"
 #include "minigin/core/game_object.h"
 
 namespace qbert
@@ -16,5 +17,7 @@ namespace qbert
     {
         character_ptr_->component<face_component>()->set_sprite_orientation(2, 4, 0, 6);
         character_ptr_->component<direction_component>()->reset();
+
+        audio_player::instance().play(audio::qbert_jump);
     }
 }

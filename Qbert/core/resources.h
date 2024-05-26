@@ -11,12 +11,16 @@ namespace qbert
 
         // --- Effects ---
         qb_re_e_ball_jump,
+        qb_re_e_bonus,
         qb_re_e_coily_egg_jump,
         qb_re_e_coily_fall,
         qb_re_e_coily_jump,
         qb_re_e_coin,
+        qb_re_e_disk_1_bonus,
+        qb_re_e_disk_2_bonus,
+        qb_re_e_disk_3_bonus,
+        qb_re_e_disk_4_bonus,
         qb_re_e_disk_lift,
-        qb_re_e_prize,
         qb_re_e_qbert_fall,
         qb_re_e_qbert_jump,
         qb_re_e_qbert_swearing_1,

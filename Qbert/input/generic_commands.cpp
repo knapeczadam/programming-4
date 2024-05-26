@@ -29,7 +29,7 @@ namespace qbert
     void debug_command::execute()
     {
         std::cout << '#' << std::this_thread::get_id() << " thread: calling sound handler" << '\n';
-        audio_player::instance().play(music::ball_jump);
+        audio_player::instance().play(audio::disk_4_bonus);
     }
 
     void toggle_mute_command::execute()
@@ -56,6 +56,8 @@ namespace qbert
             auto number_comp_ptr = number_comp_ptrs.front()->component<number_component>();
             progress_manager::instance().add_coin();
             number_comp_ptr->set_number(progress_manager::instance().coins());
+
+            audio_player::instance().play(audio::coin);
         }
     }
 }

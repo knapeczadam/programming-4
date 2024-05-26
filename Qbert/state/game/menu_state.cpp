@@ -2,6 +2,7 @@
 
 // Project includes
 #include "component/ui/number_component.h"
+#include "core/audio_player.h"
 #include "core/factory.h"
 #include "core/progress_manager.h"
 #include "core/scene_utility.h"
@@ -30,6 +31,8 @@ namespace qbert
 
         disk_ptr_ = scene_ptr_->find("disk");
         disk_ptr_->set_local_position(start_pos_);
+
+        audio_player::instance().play(audio::hello);
     }
 
     void menu_state::update()

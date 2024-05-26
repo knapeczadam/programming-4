@@ -5,15 +5,19 @@
 
 namespace qbert
 {
-    enum class music
+    enum class audio
     {
         ball_jump,
+        bonus,
         coily_egg_jump,
         coily_fall,
         coily_jump,
         coin,
+        disk_1_bonus,
+        disk_2_bonus,
+        disk_3_bonus,
+        disk_4_bonus,
         disk_lift,
-        prize,
         qbert_fall,
         qbert_jump,
         qbert_swearing_1,
@@ -38,7 +42,7 @@ namespace qbert
         audio_player &operator=(audio_player const &other) = delete;
         audio_player &operator=(audio_player &&other)      = delete;
 
-        void play(music id);
+        void play(audio id);
 
     private:
         friend class mngn::singleton<audio_player>;

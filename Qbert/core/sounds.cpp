@@ -11,12 +11,16 @@ namespace qbert
         using namespace mngn;
         sound_manager::instance()
             .register_effect(qb_re_e_ball_jump)
+            .register_effect(qb_re_e_bonus)
             .register_effect(qb_re_e_coily_egg_jump)
             .register_effect(qb_re_e_coily_fall)
             .register_effect(qb_re_e_coily_jump)
             .register_effect(qb_re_e_coin)
+            .register_effect(qb_re_e_disk_1_bonus)
+            .register_effect(qb_re_e_disk_2_bonus)
+            .register_effect(qb_re_e_disk_3_bonus)
+            .register_effect(qb_re_e_disk_4_bonus)
             .register_effect(qb_re_e_disk_lift)
-            .register_effect(qb_re_e_prize)
             .register_effect(qb_re_e_qbert_fall)
             .register_effect(qb_re_e_qbert_jump)
             .register_effect(qb_re_e_qbert_swearing_1)
@@ -28,7 +32,7 @@ namespace qbert
             .register_stream(qb_re_s_hello)
             .register_stream(qb_re_s_level_1)
             .register_stream(qb_re_s_level_2)
-            .register_stream(qb_re_s_level_2)
+            .register_stream(qb_re_s_level_3)
             .register_stream(qb_re_s_round_complete);
     }
 }

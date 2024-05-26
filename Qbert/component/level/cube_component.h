@@ -40,7 +40,9 @@ namespace qbert
         void on_disable() override;
         void notify(std::string const &event, mngn::subject *subject_ptr) override;
         [[nodiscard]] auto has_final_color() const -> bool;
+        
         void enable_animation();
+        void disable_animation();
 
     private:
         int  row_idx_         = 0;

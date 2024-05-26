@@ -33,7 +33,6 @@ namespace mngn
             {
                 auto event = std::move(event_queue_.front());
                 event_queue_.pop();
-                lock.unlock(); // TODO
                 run_impl(event.get());
             }
         }

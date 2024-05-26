@@ -505,7 +505,7 @@
       "sub_rows": 1,
       "sub_columns": 4,
       "top_offset_rows": 22,
-      "frames_per_second": 5,
+      "frames_per_second": 8,
       "scale": 2
     },
     {
@@ -515,7 +515,7 @@
       "sub_rows": 1,
       "sub_columns": 4,
       "top_offset_rows": 23,
-      "frames_per_second": 5,
+      "frames_per_second": 8,
       "scale": 2
     },
     {
@@ -526,7 +526,7 @@
       "sub_columns": 4,
       "left_offset_columns": 5,
       "top_offset_rows": 22,
-      "frames_per_second": 5,
+      "frames_per_second": 8,
       "scale": 2
     },
     {
@@ -537,7 +537,7 @@
       "sub_columns": 4,
       "left_offset_columns": 5,
       "top_offset_rows": 23,
-      "frames_per_second": 5,
+      "frames_per_second": 8,
       "scale": 2
     },
     {
@@ -548,7 +548,7 @@
       "sub_columns": 4,
       "left_offset_columns": 10,
       "top_offset_rows": 22,
-      "frames_per_second": 5,
+      "frames_per_second": 8,
       "scale": 2
     },
     {
@@ -559,7 +559,7 @@
       "sub_columns": 4,
       "left_offset_columns": 10,
       "top_offset_rows": 23,
-      "frames_per_second": 5,
+      "frames_per_second": 8,
       "scale": 2
     },
     {
@@ -570,7 +570,7 @@
       "sub_columns": 4,
       "left_offset_columns": 15,
       "top_offset_rows": 22,
-      "frames_per_second": 5,
+      "frames_per_second": 8,
       "scale": 2
     },
     {
@@ -581,7 +581,7 @@
       "sub_columns": 4,
       "left_offset_columns": 15,
       "top_offset_rows": 23,
-      "frames_per_second": 5,
+      "frames_per_second": 8,
       "scale": 2
     },
     {
@@ -592,7 +592,7 @@
       "sub_columns": 4,
       "left_offset_columns": 20,
       "top_offset_rows": 22,
-      "frames_per_second": 5,
+      "frames_per_second": 8,
       "scale": 2
     },
     {
@@ -603,7 +603,7 @@
       "sub_columns": 4,
       "left_offset_columns": 20,
       "top_offset_rows": 23,
-      "frames_per_second": 5,
+      "frames_per_second": 8,
       "scale": 2
     },
     {
@@ -614,7 +614,7 @@
       "sub_columns": 4,
       "left_offset_columns": 25,
       "top_offset_rows": 22,
-      "frames_per_second": 5,
+      "frames_per_second": 8,
       "scale": 2
     },
     {
@@ -625,7 +625,7 @@
       "sub_columns": 4,
       "left_offset_columns": 25,
       "top_offset_rows": 23,
-      "frames_per_second": 5,
+      "frames_per_second": 8,
       "scale": 2
     },
     {
@@ -636,7 +636,7 @@
       "sub_columns": 4,
       "left_offset_columns": 30,
       "top_offset_rows": 22,
-      "frames_per_second": 5,
+      "frames_per_second": 8,
       "scale": 2
     },
     {
@@ -647,7 +647,7 @@
       "sub_columns": 4,
       "left_offset_columns": 30,
       "top_offset_rows": 23,
-      "frames_per_second": 5,
+      "frames_per_second": 8,
       "scale": 2
     },
     {
@@ -658,7 +658,7 @@
       "sub_columns": 4,
       "left_offset_columns": 35,
       "top_offset_rows": 22,
-      "frames_per_second": 5,
+      "frames_per_second": 8,
       "scale": 2
     },
     {
@@ -669,7 +669,7 @@
       "sub_columns": 4,
       "left_offset_columns": 35,
       "top_offset_rows": 23,
-      "frames_per_second": 5,
+      "frames_per_second": 8,
       "scale": 2
     },
     {
@@ -680,7 +680,7 @@
       "sub_columns": 4,
       "left_offset_columns": 40,
       "top_offset_rows": 22,
-      "frames_per_second": 5,
+      "frames_per_second": 8,
       "scale": 2
     },
     {
@@ -691,7 +691,7 @@
       "sub_columns": 4,
       "left_offset_columns": 40,
       "top_offset_rows": 23,
-      "frames_per_second": 5,
+      "frames_per_second": 8,
       "scale": 2
     },
     {

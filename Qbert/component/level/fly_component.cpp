@@ -2,6 +2,7 @@
 
 // Project includes
 #include "component/state/character_state_component.h"
+#include "core/audio_player.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
 #include "state/player/flying_state.h"
@@ -52,5 +53,6 @@ namespace qbert
     void fly_component::fly()
     {
         is_flying_ = true;
+        audio_player::instance().play(audio::disk_lift);
     }
 }

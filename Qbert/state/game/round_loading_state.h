@@ -20,10 +20,19 @@ namespace qbert
         void update() override;
         void on_exit() override;
 
+        void enable_cube_animations();
+        void disable_cube_animations();
+
     private:
-        float loading_time_ = 5.0f;
-        float bonus_time_   = 3.5f;
-        float accu_time_    = 0.0f;
+        float accu_time_      = 0.0f;
+        float loading_time_   = 3.0f;
+        float disk_time_      = 0.0f;
+        float disappear_time_ = 0.5f;
+        
+        float const bonus_time_   = 2.08f;
+        float const time_per_disk_ = 0.5f;
+        
+        int disk_count_     = 1;
         bool bonus_given_   = false;
     };
 }

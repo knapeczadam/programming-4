@@ -27,7 +27,8 @@ namespace qbert
         void calculate_bezier_positions(int row_dir, int col_dir, int row_idx, int col_idx);
 
     private:
-        float fall_time_  = 1.0f;
+        float const fall_time_  = 1.52f;
+        float const total_time_ = 2.5f;
         float accu_time_  = 0.0f;
         bool  is_falling_ = false;
         

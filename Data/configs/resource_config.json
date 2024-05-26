@@ -6,29 +6,33 @@
       "path"     : "textures/background.tga"
     },
     {
-      "id"   : "t_pacman",
-      "path" : "textures/pacman.png"
+      "id"       : "t_pacman",
+      "path"     : "textures/pacman.png"
     },
     {
-      "id" : "t_ghost",
-      "path" : "textures/ghost.png"
+      "id"       : "t_ghost",
+      "path"     : "textures/ghost.png"
     },
     {
-      "id" : "t_sprite_general",
-      "path" : "textures/sprite_general.png"
+      "id"       : "t_sprite_general",
+      "path"     : "textures/sprite_general.png"
     },
     {
-      "id" : "t_sprite_large_text",
-      "path" : "textures/sprite_large_text.png"
+      "id"       : "t_sprite_large_text",
+      "path"     : "textures/sprite_large_text.png"
     },
     {
-      "id" : "t_debug",
-      "path" : "textures/debug.png"
+      "id"       : "t_debug",
+      "path"     : "textures/debug.png"
     },
     {
       "_comment" : "EFFECTS",
       "id"       : "e_ball_jump",
       "path"     : "sounds/effects/ball_jump.mp3"
+    },
+    {
+      "id"       : "e_bonus",
+      "path"     : "sounds/effects/bonus.mp3"
     },
     {
       "id"       : "e_coily_egg_jump",
@@ -47,12 +51,24 @@
       "path"     : "sounds/effects/coin.mp3"
     },
     {
-      "id"       : "e_disk_lift",
-      "path"     : "sounds/effects/disk_lift.mp3"
+      "id"       : "e_disk_1_bonus",
+      "path"     : "sounds/effects/disk_1_bonus.mp3"
     },
     {
-      "id"       : "e_prize",
-      "path"     : "sounds/effects/prize.mp3"
+      "id"       : "e_disk_2_bonus",
+      "path"     : "sounds/effects/disk_2_bonus.mp3"
+    },
+    {
+      "id"       : "e_disk_3_bonus",
+      "path"     : "sounds/effects/disk_3_bonus.mp3"
+    },
+    {
+      "id"       : "e_disk_4_bonus",
+      "path"     : "sounds/effects/disk_4_bonus.mp3"
+    },
+    {
+      "id"       : "e_disk_lift",
+      "path"     : "sounds/effects/disk_lift.mp3"
     },
     {
       "id"       : "e_qbert_fall",
@@ -76,32 +92,32 @@
     },
     {
       "_comment" : "STREAMS",
-      "id"   : "s_bye",
-      "path" : "sounds/streams/bye.mp3"
+      "id"       : "s_bye",
+      "path"     : "sounds/streams/bye.mp3"
     },
     {
-      "id"   : "s_extra_time",
-      "path" : "sounds/streams/extra_time.mp3"
+      "id"       : "s_extra_time",
+      "path"     : "sounds/streams/extra_time.mp3"
     },
     {
-      "id"   : "s_hello",
-      "path" : "sounds/streams/hello.mp3"
+      "id"       : "s_hello",
+      "path"     : "sounds/streams/hello.mp3"
     },
     {
-      "id"   : "s_level_1",
-      "path" : "sounds/streams/level_1.mp3"
+      "id"       : "s_level_1",
+      "path"     : "sounds/streams/level_1.mp3"
     },
     {
-      "id"   : "s_level_2",
-      "path" : "sounds/streams/level_2.mp3"
+      "id"       : "s_level_2",
+      "path"     : "sounds/streams/level_2.mp3"
     },
     {
-      "id"   : "s_level_3",
-      "path" : "sounds/streams/level_3.mp3"
+      "id"       : "s_level_3",
+      "path"     : "sounds/streams/level_3.mp3"
     },
     {
-      "id"   : "s_victory",
-      "path" : "sounds/streams/round_complete.mp3"
+      "id"       : "s_round_complete",
+      "path"     : "sounds/streams/round_complete.mp3"
     }
   ]
 }

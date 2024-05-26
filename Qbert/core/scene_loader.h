@@ -34,6 +34,7 @@ namespace qbert
             level_manager_component             *level_manager_comp_ptr;
             json                                level_config;
             std::string                         scene_id;
+            int                                 level_id;
             int                                 bonus;
             factory::ui::score_display_info     score_display_info;
             factory::ui::health_display_info    health_display_info;
@@ -99,6 +100,9 @@ namespace qbert
         void create_sam(scene_info &scene_info);
         void create_ui(scene_info &scene_info);
         void create_bonus(scene_info &scene_info);
+        void create_loading_cubes(scene_info &scene_info);
+        void create_loading_sprite(scene_info &scene_info);
+        void create_loading_qbert(scene_info &scene_info);
         
         void bind_player_observers(scene_info &scene_info);
         void bind_generic_commands();

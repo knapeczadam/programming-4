@@ -10,6 +10,7 @@
 #include "component/player/score_counter_component.h"
 #include "component/state/game_state_component.h"
 #include "component/ui/number_component.h"
+#include "core/audio_player.h"
 #include "core/progress_manager.h"
 #include "core/scene_utility.h"
 #include "minigin/core/game_object.h"
@@ -28,35 +29,76 @@ namespace qbert
     {
         scene_utility::instance().freeze_all();
 
-        auto scene_ptr = scene_utility::instance().current_scene();
-        auto cube_go_ptrs = scene_ptr->find_game_objects_with_tag("cube");
-        for (auto cube_go_ptr : cube_go_ptrs)
-        {
-            auto cube_comp_ptr = cube_go_ptr->component<cube_component>();
-            cube_comp_ptr->enable_animation();
-        }
-        scene_ptr->find(scene_utility::instance().scene_id() + "small_cube")->component<small_cube_component>()->enable_animation();
+        scene_ptr_ = scene_utility::instance().current_scene();
+
+        enable_cube_animations();
+
+        // remaining disks
+        auto disks = scene_ptr_->find_game_objects_with_tag("disk");
+        auto disk_time = disks.size() * time_per_disk_;
+        loading_time_ += disk_time;
+        disk_time_ = loading_time_ - disk_time;
+
+        audio_player::instance().play(audio::round_complete);
     }
 
     void round_loading_state::update()
     {
         accu_time_ += mngn::game_time::instance().delta_time();
+        disappear_time_ += mngn::game_time::instance().delta_time();
+        
         if (accu_time_ >= bonus_time_ and not bonus_given_)
         {
+            disable_cube_animations();
+            
             auto bonus_go_ptrs = scene_utility::instance().current_scene()->find_game_objects_with_tag("bonus", true);
             for (auto bonus_ptr : bonus_go_ptrs)
             {
                 bonus_ptr->set_active(true);
             }
+            
             auto bonus_go_ptr = scene_utility::instance().current_scene()->find_game_objects_with_tag("bonus_number").front();
             auto bonus = bonus_go_ptr->component<number_component>()->number();
             scene_utility::instance().current_scene()->find_game_objects_with_tag("player").front()->component<score_counter_component>()->add_score(bonus);
             bonus_given_ = true;
         }
+
+        if (accu_time_ >= disk_time_)
+        {
+            if (disappear_time_ >= time_per_disk_)
+            {
+                auto disks = scene_ptr_->find_game_objects_with_tag("disk");
+                if (not disks.empty()) disks.front()->set_active(false);
+                disappear_time_ = 0.0f;
+
+                switch (disk_count_)
+                {
+                case 1:
+                    audio_player::instance().play(audio::disk_1_bonus);
+                    break;
+                case 2:
+                    audio_player::instance().play(audio::disk_2_bonus);
+                    break;
+                case 3:
+                    audio_player::instance().play(audio::disk_3_bonus);
+                    break;
+                case 4:
+                    audio_player::instance().play(audio::disk_4_bonus);
+                    break;
+                }
+                disk_count_++;
+
+                scene_ptr_->find_game_objects_with_tag("player", true).front()->component<score_counter_component>()->add_score(50);
+            }
+        }
         
         if (accu_time_ >= loading_time_)
         {
             accu_time_ = 0.0f;
+            loading_time_ = 3.0f;
+            disk_time_ = 0.0f;
+            disappear_time_ = 0.5f;
+            disk_count_ = 1;
             
             auto &progress_manager = progress_manager::instance();
             auto game_state_comp_ptr = scene_utility::instance().game_state();
@@ -93,5 +135,29 @@ namespace qbert
         auto scene_ptr = scene_utility::instance().current_scene();
         scene_ptr->clear_tag();
         scene_ptr->set_active(false);
+    }
+
+    void round_loading_state::enable_cube_animations()
+    {
+        auto cube_go_ptrs = scene_ptr_->find_game_objects_with_tag("cube");
+        for (auto cube_go_ptr : cube_go_ptrs)
+        {
+            auto cube_comp_ptr = cube_go_ptr->component<cube_component>();
+            cube_comp_ptr->enable_animation();
+        }
+        
+        scene_ptr_->find(scene_utility::instance().scene_id() + "small_cube")->component<small_cube_component>()->enable_animation();
+    }
+
+    void round_loading_state::disable_cube_animations()
+    {
+        auto cube_go_ptrs = scene_ptr_->find_game_objects_with_tag("cube");
+        for (auto cube_go_ptr : cube_go_ptrs)
+        {
+            auto cube_comp_ptr = cube_go_ptr->component<cube_component>();
+            cube_comp_ptr->disable_animation();
+        }
+
+        scene_ptr_->find(scene_utility::instance().scene_id() + "small_cube")->component<small_cube_component>()->disable_animation();
     }
 }

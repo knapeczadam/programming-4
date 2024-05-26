@@ -32,11 +32,6 @@ namespace qbert
         void on_exit() override;
 
     private:
-        void load_sprites();
-        void load_cubes();
-        void load_qbert();
-        void clean_up();
-
         void init_events();
         void push_left_event();
         void push_right_event();
@@ -44,10 +39,10 @@ namespace qbert
         void push_down_event();
         
     private:
-        float const intro_time_ = 1.0f;
+        float const intro_time_ = 2.45f;
         float const outro_time_ = 1.0f;
-        float total_time_    = 0.0f;
-        float const jump_time_ = 0.6f;
+        float total_time_       = 0.0f;
+        float const jump_time_  = 0.6f;
         
         float accu_time_intro_ = 0.0f;
         float accu_time_total_ = 0.0f;

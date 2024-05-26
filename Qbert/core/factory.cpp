@@ -378,9 +378,10 @@ namespace qbert
         info.go_ptr = config.scene_ptr->create_game_object(config.name);
         info.go_ptr->add_tag("level");
         info.go_ptr->set_parent(config.parent_ptr);
-        info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
+        info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id, false);
         info.go_ptr->add_component<disk_component>(config.row_idx, config.col_idx);
         info.go_ptr->add_component<fly_component>();
+        info.go_ptr->add_tag("disk");
 
         return info;
     }

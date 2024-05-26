@@ -6,6 +6,7 @@
 #include "component/player/face_component.h"
 #include "component/state/character_state_component.h"
 #include "component/state/game_state_component.h"
+#include "core/audio_player.h"
 #include "core/scene_utility.h"
 #include "minigin/component/rendering/sprite_component.h"
 #include "minigin/core/game_object.h"
@@ -47,6 +48,10 @@ namespace qbert
             character_ptr_->component<face_component>()->set_sprite_orientation(0, 4, 0, 0);
         }
         character_ptr_->component<direction_component>()->reset();
+        
+        if (character_ptr_->has_tag("coily_egg")) audio_player::instance().play(audio::coily_egg_jump);
+        else if (character_ptr_->has_tag("coily")) audio_player::instance().play(audio::coily_jump);
+        else if (character_ptr_->has_tag("ball")) audio_player::instance().play(audio::ball_jump);
     }
 
     void npc_idle_state::update()

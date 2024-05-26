@@ -3,6 +3,7 @@
 // Project includes
 #include "component/character/position_component.h"
 #include "component/state/character_state_component.h"
+#include "core/audio_player.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
 
@@ -23,8 +24,10 @@ namespace qbert
             {
                 is_spawning_ = false;
                 accu_time_ = 0.0f;
-
+                
                 owner()->component<position_component>()->update_position();
+                
+                if (owner()->has_tag("position_offset")) audio_player::instance().play(audio::ugg);
             }
         }
     }

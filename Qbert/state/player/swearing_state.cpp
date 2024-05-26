@@ -6,10 +6,12 @@
 #include "component/player/swear_component.h"
 #include "component/state/character_state_component.h"
 #include "component/state/game_state_component.h"
+#include "core/audio_player.h"
 #include "core/scene_utility.h"
 #include "core/score_manager.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
+#include "minigin/utility/random.h"
 #include "state/player/idle_state.h"
 
 namespace qbert
@@ -23,6 +25,9 @@ namespace qbert
     {
         character_ptr_->component<swear_component>()->swear(true);
         scene_utility::instance().freeze_all();
+        
+        if (mngn::random_int(0, 1)) audio_player::instance().play(audio::qbert_swearing_1);
+        else audio_player::instance().play(audio::qbert_swearing_2);
     }
 
     void swearing_state::update()

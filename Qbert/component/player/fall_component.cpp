@@ -2,6 +2,7 @@
 
 // Project includes
 #include "component/character/health_component.h"
+#include "core/audio_player.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
 #include "minigin/utility/math.h"
@@ -12,16 +13,16 @@ namespace qbert
     {
         if (is_falling_)
         {
+            accu_time_ += mngn::game_time::instance().fixed_delta_time();
             if (curr_pos_ != end_pos_)
             {
-                accu_time_ += mngn::game_time::instance().fixed_delta_time();
                 float t = accu_time_ / fall_time_;
                 t = glm::clamp(t, 0.0f, 1.0f);
 
                 curr_pos_ = mngn::bezier_curve(start_pos_, pos_1_, pos_2_, end_pos_, t);
                 owner()->set_local_position(curr_pos_);
             }
-            else
+            if (accu_time_ >= total_time_)
             {
                 is_falling_ = false;
                 accu_time_ = 0.0f;
@@ -36,6 +37,8 @@ namespace qbert
     {
         is_falling_ = true;
         calculate_bezier_positions(row_dir, col_dir, row_idx, col_idx);
+        if (owner()->has_tag("player")) audio_player::instance().play(audio::qbert_fall);
+        else if (owner()->has_tag("coily")) audio_player::instance().play(audio::coily_fall);
     }
 
     void fall_component::calculate_bezier_positions([[maybe_unused]] int row_dir, [[maybe_unused]] int col_dir, [[maybe_unused]] int row_idx, int col_idx)
