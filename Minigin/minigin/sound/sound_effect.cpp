@@ -31,7 +31,7 @@ namespace mngn
 
     auto sound_effect::play(int const loops) const -> bool
     {
-        std::cout << "# Thread " << std::this_thread::get_id() << " : calling sound_effect::play" << '\n';
+        std::cout << '#' << std::this_thread::get_id() << " thread: calling sound_effect::play" << '\n';
         // Don't save the channel as a data member,
         // because when it stops playing the channel becomes free
         // and available for usage by other effects

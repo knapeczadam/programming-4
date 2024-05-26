@@ -543,7 +543,6 @@ namespace qbert
         factory::ui::create_number(number_config);
     }
 
-
     void scene_loader::load_loading_scene()
     {
         auto scene_ptr = mngn::scene_manager::instance().create_scene("loading");

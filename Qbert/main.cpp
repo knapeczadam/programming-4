@@ -19,9 +19,11 @@
 
 // Standard includes
 #include <cassert>
+#include <iostream>
 
 // SDL includes
 #include <SDL.h>
+#include <thread>
 
 void load()
 {
@@ -36,6 +38,7 @@ void load()
 
 int main(int, char *[])
 {
+	std::cout << '#' << std::this_thread::get_id() << " thread: main thread" << '\n';
     mngn::engine engine("../Data/");
 	
 #ifndef NDEBUG

@@ -2,11 +2,15 @@
 
 // Project includes
 #include "component/state/game_state_component.h"
+#include "component/ui/number_component.h"
+#include "core/audio_player.h"
+#include "core/progress_manager.h"
+#include "core/scene_utility.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/scene.h"
-#include "minigin/core/scene_manager.h"
 #include "minigin/sound/sound_manager.h"
 #include "state/game/coop_state.h"
+#include "state/game/menu_state.h"
 #include "state/game/round_loading_state.h"
 #include "state/game/single_state.h"
 #include "state/game/versus_state.h"
@@ -14,15 +18,6 @@
 // Standard includes
 #include <iostream>
 #include <thread>
-
-#include "component/ui/number_component.h"
-#include "core/progress_manager.h"
-#include "core/resources.h"
-#include "core/scene_utility.h"
-#include "minigin/events/event.h"
-#include "minigin/events/event_manager.h"
-#include "minigin/events/sound_handler.h"
-#include "state/game/menu_state.h"
 
 namespace qbert
 {
@@ -33,8 +28,8 @@ namespace qbert
 
     void debug_command::execute()
     {
-        std::cout << "# Thread " << std::this_thread::get_id() << " : calling sound handler" << '\n';
-        mngn::event_manager::instance().handler<mngn::sound_handler>()->add_event(mngn::event::create_event<mngn::sound_event>(qb_re_e_disk_lift));
+        std::cout << '#' << std::this_thread::get_id() << " thread: calling sound handler" << '\n';
+        audio_player::instance().play(music::ball_jump);
     }
 
     void toggle_mute_command::execute()

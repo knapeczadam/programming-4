@@ -1,5 +1,10 @@
 ﻿#pragma once
+
+// Project includes
 #include "minigin/sound/sound_manager.h"
+
+// Standard includes
+#include <memory>
 
 namespace mngn
 {
@@ -15,7 +20,7 @@ namespace mngn
         event &operator=(event &&other)      = delete;
 
         template <class T, class... Args>
-        [[nodiscard]] static auto create_event(Args &&...args)
+        [[nodiscard]] static auto create_event(Args &&...args) -> std::unique_ptr<T>
         {
             return std::make_unique<T>(std::forward<Args>(args)...);
         }
