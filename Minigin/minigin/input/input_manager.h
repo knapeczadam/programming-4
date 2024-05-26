@@ -41,6 +41,7 @@ namespace mngn
         k_down  = SDLK_DOWN,
 
         k_return = SDLK_RETURN,
+        k_right_shift = SDLK_RSHIFT,
 
         k_a     = SDLK_a,
         k_d     = SDLK_d,

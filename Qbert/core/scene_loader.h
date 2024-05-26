@@ -67,6 +67,7 @@ namespace qbert
         void load_scenes(const std::string &scene_name, std::function<void(scene_info)> &&load_scene_func);
         void load_debug_scene();
         void load_game_state_scene();
+        void load_menu_scenes();
         void load_menu_scene();
         void load_menu_scene_1();
         void load_menu_scene_2();

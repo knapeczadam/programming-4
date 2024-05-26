@@ -15,11 +15,14 @@
 #include <iostream>
 #include <thread>
 
+#include "component/ui/number_component.h"
+#include "core/progress_manager.h"
 #include "core/resources.h"
 #include "core/scene_utility.h"
 #include "minigin/events/event.h"
 #include "minigin/events/event_manager.h"
 #include "minigin/events/sound_handler.h"
+#include "state/game/menu_state.h"
 
 namespace qbert
 {
@@ -47,6 +50,17 @@ namespace qbert
         {
             game_state_comp_ptr->change_state<round_loading_state>(game_state_comp_ptr);
         }
-        
+    }
+
+    void insert_coin_command::execute()
+    {
+        auto game_state_comp_ptr = scene_utility::instance().game_state();
+        if (game_state_comp_ptr->is_state<menu_state>())
+        {
+            auto number_comp_ptrs = scene_utility::instance().current_scene()->find_game_objects_with_tag("coin");
+            auto number_comp_ptr = number_comp_ptrs.front()->component<number_component>();
+            progress_manager::instance().add_coin();
+            number_comp_ptr->set_number(progress_manager::instance().coins());
+        }
     }
 }

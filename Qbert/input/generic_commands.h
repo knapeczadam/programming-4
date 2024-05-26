@@ -40,4 +40,15 @@ namespace qbert
             return std::make_unique<skip_round_command>(*this);
         }
     };
+
+    class insert_coin_command final : public mngn::base_command
+    {
+    public:
+        void execute() override;
+        
+        [[nodiscard]] auto clone() const -> std::unique_ptr<base_command> override
+        {
+            return std::make_unique<insert_coin_command>(*this);
+        }
+    };
 }

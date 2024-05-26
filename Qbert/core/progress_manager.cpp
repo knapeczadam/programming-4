@@ -28,11 +28,27 @@ namespace qbert
         return false;
     }
 
+    void progress_manager::add_coin()
+    {
+        if (coins_ < 9)
+        {
+            ++coins_;
+        }
+    }
+
+    void progress_manager::use_coin()
+    {
+        if (coins_ > 0)
+        {
+            --coins_;
+        }
+    }
+
     void progress_manager::reset()
     {
-        level_ = 1;
-        round_ = 1;
-        score_ = 0;
+        level_  = 1;
+        round_  = 1;
+        score_  = 0;
         health_ = 3;
         cubes_.clear();
     }

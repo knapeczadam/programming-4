@@ -36,8 +36,7 @@ namespace qbert
         if (not game_state_comp_ptr->is_state<menu_state>()) return;
         game_state_comp_ptr->set_game_mode(dir_);
 
-        update_underline("menu_1");
-        update_underline("menu_2");
+        update_underline("menu");
     }
 
     void game_mode_select_command::update_underline(std::string const &scene_name)

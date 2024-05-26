@@ -37,6 +37,10 @@ namespace qbert
         void set_cube(std::string const& name, bool has_final_color);
         [[nodiscard]] auto round_completed() const -> bool;
 
+        [[nodiscard]] auto coins() const -> int { return coins_; }
+        void add_coin();
+        void use_coin();
+
         void reset();
 
     private:
@@ -48,6 +52,7 @@ namespace qbert
         int round_           = 1;
         int score_           = 0;
         int health_          = 3;
+        int coins_           = 0;
         std::unordered_map<std::string, std::unordered_map<std::string, bool>> cubes_;
         size_t const num_of_cubes_ = 28;
     };

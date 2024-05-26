@@ -1,19 +1,15 @@
 ﻿#include "menu_state.h"
 
 // Project includes
-#include <iostream>
-
-#include "component/state/game_state_component.h"
+#include "component/ui/number_component.h"
+#include "core/factory.h"
 #include "core/progress_manager.h"
+#include "core/scene_utility.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
 #include "minigin/core/renderer.h"
 #include "minigin/core/scene.h"
 #include "minigin/core/scene_manager.h"
-
-#include "core/factory.h"
-#include "core/resources.h"
-#include "core/sprites.h"
 
 namespace qbert
 {
@@ -24,6 +20,9 @@ namespace qbert
 
     void menu_state::on_enter()
     {
+        scene_ptr_ = mngn::scene_manager::instance().find("menu");
+        scene_ptr_->set_active(true);
+        scene_ptr_->set_tag("current");
         scene_ptr_ = mngn::scene_manager::instance().find("menu_1");
         scene_ptr_->set_active(true);
 
@@ -57,6 +56,13 @@ namespace qbert
     void menu_state::on_exit()
     {
         progress_manager::instance().reset();
+        
+        progress_manager::instance().use_coin();
+        auto number_comp_ptr = scene_utility::instance().current_scene()->find_game_objects_with_tag("coin").front()->component<number_component>();
+        number_comp_ptr->set_number(progress_manager::instance().coins());
+        
+        scene_utility::instance().current_scene()->set_active(false);
+        scene_utility::instance().current_scene()->clear_tag();
         scene_ptr_->set_active(false);
     }
 
