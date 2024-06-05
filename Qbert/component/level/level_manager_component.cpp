@@ -96,10 +96,6 @@ namespace qbert
             if (row_idx < 0 or cold_idx < 0 or cold_idx > row_idx or row_idx >= 7)
             {
                 character_state_comp_ptr->change_state<falling_state>(character_ptr, row_dir, col_dir, row_idx, cold_idx);
-                if (character_ptr->has_tag("coily"))
-                {
-                    scene_utility::instance().current_scene()->find_game_objects_with_tag("player").front()->component<score_counter_component>()->add_score(500);
-                }
                 return;
             }
 
