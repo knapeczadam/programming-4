@@ -21,7 +21,7 @@ namespace mngn
     class collider_component;
     class sprite;
 
-    enum input : int;
+    enum class input;
     enum class input_type;
     enum class input_state;
 }

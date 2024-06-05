@@ -1,9 +1,7 @@
 ﻿#pragma once
 
 // Standard includes
-#include <condition_variable>
-#include <mutex>
-#include <queue>
+#include <memory>
 
 namespace mngn
 {
@@ -28,17 +26,9 @@ namespace mngn
 
     protected:
         virtual void play_sound_impl(int id, int volume) = 0;
-        void run();
-        
-    private:
-        void add_event(sound_event event);
 
     private:
-        std::jthread thread_;
-        std::queue<sound_event> event_queue_;
-        std::mutex mutex_;
-        std::condition_variable event_condition_;
-
-        bool running_ = true;
+        class sound_system_impl;
+        std::unique_ptr<sound_system_impl> impl_;
     };
 }

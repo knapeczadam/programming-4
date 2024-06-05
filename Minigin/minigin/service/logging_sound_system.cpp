@@ -2,6 +2,7 @@
 
 // Standard includes
 #include <iostream>
+#include <thread>
 
 namespace mngn
 {

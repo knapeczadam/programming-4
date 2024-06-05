@@ -5,14 +5,6 @@
 
 // Standard includes
 #include <memory>
-#include <vector>
-
-// SDL includes
-#include <SDL.h>
-
-// Windows includes
-#include <windows.h>
-#include <XInput.h>
 
 namespace mngn
 {
@@ -28,56 +20,56 @@ namespace mngn
         up,
         pressed
     };
-
-    enum input
+    
+    enum class input
     {
-        k_1    = SDLK_1,
-        k_2    = SDLK_2,
-        k_3    = SDLK_3,
         
-        k_left  = SDLK_LEFT,
-        k_right = SDLK_RIGHT,
-        k_up    = SDLK_UP,
-        k_down  = SDLK_DOWN,
+        k_1,
+        k_2,
+        k_3,
+        
+        k_left,
+        k_right,
+        k_up,
+        k_down,
 
-        k_return = SDLK_RETURN,
-        k_right_shift = SDLK_RSHIFT,
+        k_return,
+        k_right_shift,
 
-        k_a     = SDLK_a,
-        k_d     = SDLK_d,
-        k_w     = SDLK_w,
-        k_s     = SDLK_s,
+        k_a,
+        k_d,
+        k_w,
+        k_s,
 
-        k_r     = SDLK_r,
-        k_c     = SDLK_c,
-        k_z     = SDLK_z,
-        k_x     = SDLK_x,
+        k_r,
+        k_c,
+        k_z,
+        k_x,
 
-        k_j    = SDLK_j,
-        k_m    = SDLK_m,
+        k_j,
+        k_m,
 
-        k_f1   = SDLK_F1,
+        k_f1,
 
-        c_left  = XINPUT_GAMEPAD_DPAD_LEFT,
-        c_right = XINPUT_GAMEPAD_DPAD_RIGHT,
-        c_up    = XINPUT_GAMEPAD_DPAD_UP,
-        c_down  = XINPUT_GAMEPAD_DPAD_DOWN,
+        c_left,
+        c_right,
+        c_up,
+        c_down,
 
-        c_a     = XINPUT_GAMEPAD_A,
-        c_b     = XINPUT_GAMEPAD_B,
-        c_x     = XINPUT_GAMEPAD_X,
-        c_y     = XINPUT_GAMEPAD_Y
+        c_a,
+        c_b,
+        c_x,
+        c_y
     };
 
     // Forward declarations
     class base_command;
-    class game_object_command;
 
     struct input_config_info
     {
         input_type input_type;
         input_state input_state;
-        int input;
+        input input;
         int controller_idx;
         base_command *command_ptr = nullptr;
     };
@@ -95,13 +87,14 @@ namespace mngn
         [[nodiscard]] auto process_input() const -> bool;
 
         void bind_command(input_config_info const &config, std::unique_ptr<base_command> command) const;
-        [[nodiscard]] auto unbind_command(input_type input_type, input_state input_state, int input) const -> bool;
+        [[nodiscard]] auto unbind_command(input_type input_type, input_state input_state, input input) const -> bool;
 
     private:
         friend class singleton<input_manager>;
         input_manager();
 
-        class input_manager_impl;
+    private:
+        struct input_manager_impl;
         std::unique_ptr<input_manager_impl> impl_;
     };
 }

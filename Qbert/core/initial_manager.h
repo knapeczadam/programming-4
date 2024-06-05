@@ -16,7 +16,6 @@ namespace qbert
             dot       = 27,
             backspace = 28,
             end       = 29
-            
         };
     public:
         ~initial_manager() override = default;

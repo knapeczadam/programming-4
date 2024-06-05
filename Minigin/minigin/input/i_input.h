@@ -6,9 +6,7 @@
 namespace mngn
 {
     // Forward declarations
-    class game_object_command;
-    enum class input_state;
-    enum class input_type;
+    enum class input;
     
     // Forward declarations
     struct input_config_info;
@@ -24,6 +22,9 @@ namespace mngn
         i_input &operator=(i_input const &other) = delete;
         i_input &operator=(i_input &&other)      = delete;
         
-        virtual auto do_process_input(std::vector<input_config_info> commands) -> bool = 0;
+        virtual auto do_process_input(std::vector<input_config_info> input_configs) -> bool = 0;
+
+    protected:
+        virtual int remap(input input) = 0;
     };
 }
