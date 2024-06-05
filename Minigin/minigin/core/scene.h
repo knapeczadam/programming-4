@@ -60,7 +60,5 @@ namespace mngn
         std::string tag_;
         std::vector<game_object_uptr> objects_{};
         bool active_ = true;
-
-        static unsigned int id_counter_;
     };
 }

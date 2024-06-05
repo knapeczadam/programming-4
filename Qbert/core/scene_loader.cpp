@@ -64,7 +64,7 @@ namespace qbert
 	{
     	int bonus_start = 1000;
 	    int constexpr bonus_increment = 250;
-    	auto config_file = level_config_manager::instance().get_level_config();
+    	auto config_file = level_config_manager::instance().level_config();
         for (auto const &level_config : config_file["levels"])
         {
         	auto level_id = to_string(level_config["level_id"]);
@@ -556,7 +556,7 @@ namespace qbert
     		scene_info.scene_ptr = scene_ptr;
     		scene_info.root_ptr  = root_ptr;
     		scene_info.level_id = i;
-    		scene_info.level_config = level_config_manager::instance().get_level_config();
+    		scene_info.level_config = level_config_manager::instance().level_config();
     		
     		create_loading_sprite(scene_info);
     		create_loading_cubes(scene_info);

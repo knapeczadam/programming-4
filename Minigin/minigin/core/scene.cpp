@@ -17,8 +17,6 @@
 
 namespace mngn
 {
-    unsigned int scene::id_counter_ = 0;
-
     scene::scene(std::string name) : name_{std::move(name)}
     {
     }

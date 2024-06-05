@@ -1,8 +1,8 @@
 ﻿#pragma once
 
 // Project includes
-#include "minigin/utility/singleton.h"
 #include "core/factory.h"
+#include "minigin/utility/singleton.h"
 
 // JSON includes
 #include "json.hpp"
@@ -23,7 +23,7 @@ namespace qbert
         level_config_manager &operator=(level_config_manager &&other)      = delete;
 
         void load_level_config(std::string const &file_path);
-        [[nodiscard]] auto get_level_config() const -> json const & { return level_config_; }
+        [[nodiscard]] auto level_config() const -> json const & { return level_config_; }
 
         [[nodiscard]] auto level_count() const -> int { return level_count_; }
         
