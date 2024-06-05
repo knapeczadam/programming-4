@@ -1,7 +1,7 @@
 ﻿#include "service_locator.h"
 
 // Project includes
-#include "minigin/services/null_sound_system.h"
+#include "minigin/service/null_sound_system.h"
 
 namespace mngn
 {

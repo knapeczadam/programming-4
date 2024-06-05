@@ -2,8 +2,8 @@
 
 // Project includes
 #include "resources.h"
-#include "minigin/services/service_locator.h"
-#include "minigin/services/sound_system.h"
+#include "minigin/service/service_locator.h"
+#include "minigin/service/sound_system.h"
 
 namespace qbert
 {

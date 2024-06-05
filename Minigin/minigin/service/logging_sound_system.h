@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 // Project includes
-#include "minigin/services/sound_system.h"
+#include "minigin/service/sound_system.h"
 
 // Standard includes
 #include <memory>

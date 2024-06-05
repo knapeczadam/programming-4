@@ -1,9 +1,9 @@
 ﻿#include "services.h"
 
 // Project includes
-#include "minigin/services/logging_sound_system.h"
-#include "minigin/services/sdl_sound_system.h"
-#include "minigin/services/service_locator.h"
+#include "minigin/service/logging_sound_system.h"
+#include "minigin/service/sdl_sound_system.h"
+#include "minigin/service/service_locator.h"
 
 namespace qbert
 {
