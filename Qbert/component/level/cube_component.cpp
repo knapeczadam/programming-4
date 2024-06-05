@@ -63,7 +63,21 @@ namespace qbert
                         --score_count_;
                         if (not position_comp_ptr->owner()->has_tag("ai"))
                         {
-                            position_comp_ptr->owner()->component<score_counter_component>()->add_score(cube_score_);
+                            if (colors_.size() == 3)
+                            {
+                                if (score_count_ == 1)
+                                {
+                                    position_comp_ptr->owner()->component<score_counter_component>()->add_score(score_1_);
+                                }
+                                else if (score_count_ == 0)
+                                {
+                                    position_comp_ptr->owner()->component<score_counter_component>()->add_score(score_2_);
+                                }
+                            }
+                            else if (colors_.size() == 2)
+                            {
+                                position_comp_ptr->owner()->component<score_counter_component>()->add_score(score_2_);
+                            }
                         }
                     }
                 }

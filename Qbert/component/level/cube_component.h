@@ -45,11 +45,12 @@ namespace qbert
         void disable_animation();
 
     private:
-        int  row_idx_         = 0;
-        int  col_idx_         = 0;
-        int  current_color_   = 0;
-        int  score_count_     = 0;
-        int const cube_score_ = 25;
+        int  row_idx_       = 0;
+        int  col_idx_       = 0;
+        int  current_color_ = 0;
+        int  score_count_   = 0;
+        int const score_1_  = 15;
+        int const score_2_  = 25;
         bool revertible_    = false;
         
         std::vector<mngn::sprite*> colors_;

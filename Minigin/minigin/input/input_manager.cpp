@@ -20,9 +20,9 @@ namespace mngn
             input_impls.push_back(std::make_unique<x_input>(1));
         }
 
-        [[nodiscard]] auto do_process_input(std::vector<input_config_info> input_configs) const -> bool
+        [[nodiscard]] auto do_process_input(std::vector<input_config_info> configs) const -> bool
         {
-            return std::ranges::all_of(input_impls, [&input_configs](auto const &input_impl) { return input_impl->do_process_input(input_configs); });
+            return std::ranges::all_of(input_impls, [&configs](auto const &input_impl) { return input_impl->do_process_input(configs); });
         }
         
         std::vector<std::unique_ptr<i_input>> input_impls;
