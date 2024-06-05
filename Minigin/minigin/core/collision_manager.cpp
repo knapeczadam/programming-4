@@ -11,12 +11,14 @@ namespace mngn
 {
     void collision_manager::add_collider(collider_component *collider_ptr)
     {
-        colliders_.push_back(collider_ptr);
+        colliders_[collider_ptr->owner()->scene()->name()].push_back(collider_ptr);
     }
 
     void collision_manager::register_collider(collider_component *collider_ptr)
     {
-        std::erase(colliders_, collider_ptr);
+        auto &colliders = colliders_[collider_ptr->owner()->scene()->name()];
+        std::erase(colliders, collider_ptr);
+             
         registered_colliders_.push_back(collider_ptr);
     }
 
@@ -26,11 +28,12 @@ namespace mngn
         {
             if (collider_ptr->owner()->scene()->active() and collider_ptr->owner()->active() and collider_ptr->enabled())
             {
-                for (auto *other_collider_ptr : colliders_)
+                auto colliders = colliders_[collider_ptr->owner()->scene()->name()];
+                for (auto const &other_collider_ptr : colliders)
                 {
-                    if (check_collision(collider_ptr, other_collider_ptr))
+                    if (other_collider_ptr->owner()->active() and other_collider_ptr->enabled())
                     {
-                        if (other_collider_ptr->owner()->active() and other_collider_ptr->enabled())
+                        if (check_collision(collider_ptr, other_collider_ptr))
                         {
                             collider_ptr->on_collision_stay(other_collider_ptr->owner());
                         }
@@ -42,7 +45,7 @@ namespace mngn
 
     void collision_manager::render_colliders() const
     {
-        for (auto const &collider_ptr : colliders_)
+        for (auto const &collider_ptr : colliders_ | std::views::values | std::views::join)
         {
             if (collider_ptr->owner()->scene()->active())
                 render_collider(collider_ptr);

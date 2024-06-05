@@ -4,6 +4,8 @@
 #include "minigin/utility/singleton.h"
 
 // Standard includes
+#include <string>
+#include <unordered_map>
 #include <vector>
 
 namespace mngn
@@ -36,7 +38,7 @@ namespace mngn
         collision_manager() = default;
 
     private:
-        std::vector<collider_component*> colliders_;
+        std::unordered_map<std::string, std::vector<collider_component*>> colliders_;
         std::vector<collider_component*> registered_colliders_;
     };
 }
