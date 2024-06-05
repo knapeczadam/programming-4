@@ -1,23 +1,22 @@
 ﻿#pragma once
 
 // Project includes
-#include "i_sound_system.h"
+#include "minigin/services/sound_system.h"
 
 // Standard includes
 #include <memory>
 
 namespace mngn
 {
-    class logging_sound_system final : public i_sound_system
+    class logging_sound_system final : public sound_system
     {
     public:
-        ~logging_sound_system() override = default;
-        
-        explicit logging_sound_system(std::unique_ptr<i_sound_system> &&sound_system) : sound_system_{std::move(sound_system)} {}
-        
-        void play_sound(int id, int volume) override;
+        explicit logging_sound_system(std::unique_ptr<sound_system> &&sound_system) : sound_system_{std::move(sound_system)} {}
+
+    protected:
+        void play_sound_impl(int id, int volume) override;
 
     private:
-        std::unique_ptr<i_sound_system> sound_system_;
+        std::unique_ptr<sound_system> sound_system_;
     };
 }

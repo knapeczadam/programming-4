@@ -22,7 +22,7 @@ namespace mngn
         }
     }
 
-    void sdl_sound_system::play_sound(int id, int volume)
+    void sdl_sound_system::play_sound_impl(int id, int volume)
     {
         std::cout << '#' << std::this_thread::get_id() << " thread: calling sdl_sound_system::play_sound" << '\n';
         sound_manager::instance().play_sound(id, volume);

@@ -222,15 +222,13 @@
     <ClCompile Include="minigin\core\scene.cpp" />
     <ClCompile Include="minigin\core\scene_manager.cpp" />
     <ClCompile Include="minigin\core\sprite_manager.cpp" />
-    <ClCompile Include="minigin\events\event_handler.cpp" />
-    <ClCompile Include="minigin\events\event_manager.cpp" />
-    <ClCompile Include="minigin\events\sound_handler.cpp" />
     <ClCompile Include="minigin\input\input_manager.cpp" />
     <ClCompile Include="minigin\input\sdl_input.cpp" />
     <ClCompile Include="minigin\input\x_input.cpp" />
     <ClCompile Include="minigin\services\logging_sound_system.cpp" />
     <ClCompile Include="minigin\services\sdl_sound_system.cpp" />
     <ClCompile Include="minigin\services\service_locator.cpp" />
+    <ClCompile Include="minigin\services\sound_system.cpp" />
     <ClCompile Include="minigin\sound\sound_effect.cpp" />
     <ClCompile Include="minigin\sound\sound_manager.cpp" />
     <ClCompile Include="minigin\sound\sound_stream.cpp" />
@@ -271,11 +269,6 @@
     <ClInclude Include="minigin\core\scene.h" />
     <ClInclude Include="minigin\core\scene_manager.h" />
     <ClInclude Include="minigin\core\sprite_manager.h" />
-    <ClInclude Include="minigin\events\event.h" />
-    <ClInclude Include="minigin\events\event_handler.h" />
-    <ClInclude Include="minigin\events\event_manager.h" />
-    <ClInclude Include="minigin\events\event_manager.hpp" />
-    <ClInclude Include="minigin\events\sound_handler.h" />
     <ClInclude Include="minigin\input\base_command.h" />
     <ClInclude Include="minigin\input\game_component_command.h" />
     <ClInclude Include="minigin\input\game_object_command.h" />
@@ -283,7 +276,7 @@
     <ClInclude Include="minigin\input\i_input.h" />
     <ClInclude Include="minigin\input\sdl_input.h" />
     <ClInclude Include="minigin\input\x_input.h" />
-    <ClInclude Include="minigin\services\i_sound_system.h" />
+    <ClInclude Include="minigin\services\sound_system.h" />
     <ClInclude Include="minigin\services\logging_sound_system.h" />
     <ClInclude Include="minigin\services\null_sound_system.h" />
     <ClInclude Include="minigin\services\sdl_sound_system.h" />

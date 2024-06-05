@@ -1,15 +1,13 @@
 ﻿#pragma once
 
 // Project includes
-#include "i_sound_system.h"
+#include "minigin/services/sound_system.h"
 
 namespace mngn
 {
-    class null_sound_system final : public i_sound_system
+    class null_sound_system final : public sound_system
     {
-    public:
-        ~null_sound_system() override = default;
-        
-        void play_sound([[maybe_unused]] int id, [[maybe_unused]] int volume) override { }
+    protected:
+        void play_sound_impl(int id, int volume) override { (void) id; (void) volume; }
     };
 }

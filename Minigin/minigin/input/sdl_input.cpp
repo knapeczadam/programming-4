@@ -14,8 +14,6 @@
 // ImGui includes
 #include <backends/imgui_impl_sdl2.h>
 
-#include "minigin/events/event_manager.h"
-
 namespace mngn
 {
     auto sdl_input::do_process_input(std::vector<input_config_info> commands) -> bool
@@ -28,7 +26,6 @@ namespace mngn
             ImGui_ImplSDL2_ProcessEvent(&e);
             if (e.type == SDL_QUIT)
             {
-                event_manager::instance().stop_all();
                 return false;
             }
             if (e.type == SDL_KEYDOWN)
