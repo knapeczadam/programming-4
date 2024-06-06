@@ -39,7 +39,7 @@ namespace qbert
                 accu_time_ = 0.0f;
                 owner()->component<position_component>()->update_position();
 
-                if (owner()->has_tag("loading")) audio_player::instance().play(audio::qbert_jump);
+                if (owner()->has_tag("loading") or owner()->has_tag("menu_2")) audio_player::instance().play(audio::qbert_jump);
             }
         }
     }
@@ -68,15 +68,13 @@ namespace qbert
         int row_dir = direction_comp_ptr_->row();
         int col_dir = direction_comp_ptr_->col();
         
-        int offset_x = 32;
-        int offset_y = 48;
         int offset_x_diagonal = 64;
 
         if (row_dir == 1 and col_dir == 0) col_dir = -1;
         else if (row_dir == -1 and col_dir == 0) col_dir = 1;
 
-        end_pos_.x = start_pos_.x + col_dir * offset_x;
-        end_pos_.y = start_pos_.y + row_dir * offset_y;
+        end_pos_.x = start_pos_.x + col_dir * offset_x_;
+        end_pos_.y = start_pos_.y + row_dir * offset_y_;
         
         if (row_dir == 0)
         {
@@ -97,7 +95,7 @@ namespace qbert
         else if (row_dir == 0)
         {
             corner_pos_.x = (start_pos_.x + end_pos_.x) / 2.0f;
-            corner_pos_.y = end_pos_.y + offset_y;
+            corner_pos_.y = end_pos_.y + offset_y_;
         }
         
         pos_1_ = (start_pos_ + corner_pos_) / 2.0f;

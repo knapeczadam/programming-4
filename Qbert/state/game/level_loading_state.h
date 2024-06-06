@@ -4,8 +4,8 @@
 #include "state/game/game_state.h"
 
 // Standard includes
-#include <queue>
 #include <functional>
+#include <queue>
 
 // Forward declarations
 namespace mngn

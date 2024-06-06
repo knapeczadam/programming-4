@@ -14,5 +14,8 @@ namespace qbert
     void start_state::on_enter()
     {
         character_ptr_->component<mngn::sprite_component>()->sprite()->set_current_frame(7);
+        
+        if (character_ptr_->has_tag("menu_2"))
+            character_ptr_->component<mngn::sprite_component>()->sprite()->set_current_frame(5);
     }
 }

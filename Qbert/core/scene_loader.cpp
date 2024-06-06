@@ -3,10 +3,12 @@
 // Project includes
 #include "level_config_manager.h"
 #include "component/character/position_component.h"
+#include "component/character/direction_component.h"
 #include "component/level/cube_component.h"
 #include "component/level/level_manager_component.h"
 #include "component/character/health_component.h"
 #include "component/player/level_counter_component.h"
+#include "component/character/jump_component.h"
 #include "component/player/player_collider_component.h"
 #include "component/player/round_counter_component.h"
 #include "component/player/score_counter_component.h"
@@ -21,6 +23,8 @@
 #include "core/sprites.h"
 #include "input/game_component_commands.h"
 #include "input/generic_commands.h"
+#include "minigin/component/rendering/sprite_component.h"
+#include "minigin/component/ui/sprite_ui_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/resource_manager.h"
 #include "minigin/core/scene.h"
@@ -37,9 +41,12 @@
 
 #include "scene_utility.h"
 #include "score_manager.h"
+#include "component/state/character_state_component.h"
 #include "component/state/game_state_component.h"
 #include "component/ui/flicker_component.h"
 #include "minigin/utility/random.h"
+#include "state/null_state.h"
+#include "state/player/idle_state.h"
 
 namespace qbert
 {
@@ -302,82 +309,114 @@ namespace qbert
     	text_config.exclamation_sprite_id  = qb_sp_alphabet_regular_special;
     	text_config.exclamation_texture_id = qb_re_t_sprite_general;
     	text_config.exclamation_frame      = 3;
-        factory::ui::create_text(text_config);
+        auto text_info = factory::ui::create_text(text_config);
+    	text_info.go_ptr->add_tags({"instruction", "1"});
+    	text_info.go_ptr->set_active(false);
         
         text_config.name           = "row_2";
         text_config.local_position = {96, 128};
         text_config.text           = "change them to";
-        factory::ui::create_text(text_config);
+        text_info = factory::ui::create_text(text_config);
+    	text_info.go_ptr->add_tags({"instruction", "1"});
+    	text_info.go_ptr->set_active(false);
         
         text_config.name           = "row_3";
         text_config.local_position = {96, 144};
         text_config.text           = "the target color";
-        factory::ui::create_text(text_config);
+        text_info = factory::ui::create_text(text_config);
+    	text_info.go_ptr->add_tags({"instruction", "1"});
+    	text_info.go_ptr->set_active(false);
         
         text_config.name           = "row_4";
         text_config.local_position = {112, 176};
         text_config.text           = "stay on playfield!";
-        factory::ui::create_text(text_config);
+        text_info = factory::ui::create_text(text_config);
+    	text_info.go_ptr->add_tags({"instruction", "2"});
+    	text_info.go_ptr->set_active(false);
         
         text_config.name           = "row_5";
         text_config.local_position = {112, 192};
         text_config.text           = "jumping off results";
-        factory::ui::create_text(text_config);
+        text_info = factory::ui::create_text(text_config);
+    	text_info.go_ptr->add_tags({"instruction", "2"});
+    	text_info.go_ptr->set_active(false);
         
         text_config.name           = "row_6";
         text_config.local_position = {112, 208};
         text_config.text           = "in a fatal plummet";
-        factory::ui::create_text(text_config);
+        text_info = factory::ui::create_text(text_config);
+    	text_info.go_ptr->add_tags({"instruction", "2"});
+    	text_info.go_ptr->set_active(false);
 
         text_config.name           = "row_7";
         text_config.local_position = {112, 224};
         text_config.text           = "unless a disk is there";
-        factory::ui::create_text(text_config);
+        text_info = factory::ui::create_text(text_config);
+    	text_info.go_ptr->add_tags({"instruction", "2"});
+    	text_info.go_ptr->set_active(false);
         
         text_config.name           = "row_8";
         text_config.local_position = {128, 256};
         text_config.text           = "avoid all objects";
-        factory::ui::create_text(text_config);
+        text_info = factory::ui::create_text(text_config);
+    	text_info.go_ptr->add_tags({"instruction", "3"});
+    	text_info.go_ptr->set_active(false);
         
         text_config.name           = "row_9";
         text_config.local_position = {128, 272};
         text_config.text           = "and creatures that";
-        factory::ui::create_text(text_config);
+        text_info = factory::ui::create_text(text_config);
+    	text_info.go_ptr->add_tags({"instruction", "3"});
+    	text_info.go_ptr->set_active(false);
         
         text_config.name           = "row_10";
         text_config.local_position = {128, 288};
         text_config.text           = "are not green";
-        factory::ui::create_text(text_config);
+        text_info = factory::ui::create_text(text_config);
+    	text_info.go_ptr->add_tags({"instruction", "3"});
+    	text_info.go_ptr->set_active(false);
         
         text_config.name           = "row_11";
         text_config.local_position = {144, 320};
         text_config.text           = "use spinning disks";
-        factory::ui::create_text(text_config);
+        text_info = factory::ui::create_text(text_config);
+    	text_info.go_ptr->add_tags({"instruction", "4"});
+    	text_info.go_ptr->set_active(false);
         
         text_config.name           = "row_12";
         text_config.local_position = {144, 336};
         text_config.text           = "to lure snake to";
-        factory::ui::create_text(text_config);
+        text_info = factory::ui::create_text(text_config);
+    	text_info.go_ptr->add_tags({"instruction", "4"});
+    	text_info.go_ptr->set_active(false);
         
         text_config.name           = "row_14";
         text_config.local_position = {144, 352};
         text_config.text           = "his death";
-        factory::ui::create_text(text_config);
+        text_info = factory::ui::create_text(text_config);
+    	text_info.go_ptr->add_tags({"instruction", "4"});
+    	text_info.go_ptr->set_active(false);
         
         text_config.name           = "row_15";
         text_config.local_position = {160, 384};
         text_config.text           = "extra life at";
-        factory::ui::create_text(text_config);
+        text_info = factory::ui::create_text(text_config);
+    	text_info.go_ptr->add_tags({"instruction", "5"});
+    	text_info.go_ptr->set_active(false);
         
         text_config.name           = "row_16";
         text_config.local_position = {255, 400};
         text_config.text           = "and each";
-        factory::ui::create_text(text_config);
+        text_info = factory::ui::create_text(text_config);
+    	text_info.go_ptr->add_tags({"instruction", "5"});
+    	text_info.go_ptr->set_active(false);
         
         text_config.name           = "row_17";
         text_config.local_position = {160, 416};
         text_config.text           = "additional";
-        factory::ui::create_text(text_config);
+        text_info = factory::ui::create_text(text_config);
+    	text_info.go_ptr->add_tags({"instruction", "5"});
+    	text_info.go_ptr->set_active(false);
 
         factory::ui::number_config_info number_config{};
         number_config.scene_ptr      = scene_ptr;
@@ -386,12 +425,43 @@ namespace qbert
         number_config.number         = 8000;
         number_config.sprite_id      = qb_sp_numbers_regular_orange;
         number_config.texture_id     = qb_re_t_sprite_general;
-        factory::ui::create_number(number_config);
+        auto number_info = factory::ui::create_number(number_config);
+    	number_info.go_ptr->add_tags({"instruction", "5"});
+    	number_info.go_ptr->set_active(false);
         
         number_config.name           = "number_2";
         number_config.local_position = {336, 416};
         number_config.number         = 14000;
-        factory::ui::create_number(number_config);
+        number_info = factory::ui::create_number(number_config);
+    	number_info.go_ptr->add_tags({"instruction", "5"});
+    	number_info.go_ptr->set_active(false);
+    	
+		factory::character::player_config_info player_config{};
+		player_config.scene_ptr         = scene_ptr;
+		player_config.name              = "qbert";
+		player_config.sprite_id         = qb_sp_qbert_player_1;
+		player_config.texture_id        = qb_re_t_sprite_general;
+		player_config.left_command      = {mngn::input_type::keyboard, mngn::input_state::down, mngn::input::k_left};
+		player_config.right_command     = {mngn::input_type::keyboard, mngn::input_state::down, mngn::input::k_right};
+		player_config.up_command        = {mngn::input_type::keyboard, mngn::input_state::down, mngn::input::k_up};
+		player_config.down_command      = {mngn::input_type::keyboard, mngn::input_state::down, mngn::input::k_down};
+		auto player_info = factory::character::create_ai_player(player_config);
+    	player_info.go_ptr->component<jump_component>()->set_jump_offset(18.0f, 62.0f);
+    	player_info.go_ptr->add_tag("menu_2");
+
+    	auto swearing_go_ptr = scene_ptr->create_game_object("swearing");
+    	swearing_go_ptr->set_parent(player_info.go_ptr);
+    	swearing_go_ptr->set_local_position(-24.0f, -50.0f);
+        swearing_go_ptr->add_component<mngn::sprite_ui_component>(qb_sp_qbert_swearing, sprite_config.texture_id);
+    	swearing_go_ptr->set_active(false);
+
+    	sprite_config.scene_ptr      = scene_ptr;
+    	sprite_config.name           = "red_ball";
+    	sprite_config.sprite_id      = qb_sp_ball_red;
+    	sprite_config.texture_id     = qb_re_t_sprite_general;
+		auto sprite_info = factory::ui::create_sprite(sprite_config);
+    	sprite_info.go_ptr->add_tag("menu_2");
+    	sprite_info.go_ptr->set_active(false);
     }
 
     void scene_loader::load_menu_scene_3()

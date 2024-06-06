@@ -31,6 +31,8 @@ namespace qbert
         void jump();
         void reset();
 
+        void set_jump_offset(float offset_x, float offset_y) { offset_x_ = offset_x; offset_y_ = offset_y; }
+
     private:
         void calculate_bezier_positions();
 
@@ -39,6 +41,9 @@ namespace qbert
         float jump_time_  = 0.5f;
         float accu_time_  = 0.0f;
         bool  is_jumping_ = false;
+
+        float offset_x_ = 32.0f;
+        float offset_y_ = 48.0f;
         
         glm::vec2 start_pos_  = {};
         glm::vec2 corner_pos_ = {};
