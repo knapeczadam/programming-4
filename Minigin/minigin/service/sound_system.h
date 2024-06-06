@@ -22,7 +22,7 @@ namespace mngn
         sound_system &operator=(sound_system const &other) = delete;
         sound_system &operator=(sound_system &&other)      = delete;
 
-        void play_sound(int id, int volume = 100);
+        void play_sound(int id, int volume);
 
     protected:
         virtual void play_sound_impl(int id, int volume) = 0;

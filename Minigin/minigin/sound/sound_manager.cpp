@@ -49,6 +49,8 @@ namespace mngn
 
     void sound_manager::play_sound(int id, int volume)
     {
+        if (muted_) return;
+        
         if (registered_effects_.contains(id))
         {
             auto effect_ptr = resource_manager::instance().get_sound_effect(id);

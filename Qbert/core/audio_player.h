@@ -42,7 +42,7 @@ namespace qbert
         audio_player &operator=(audio_player const &other) = delete;
         audio_player &operator=(audio_player &&other)      = delete;
 
-        void play(audio id);
+        void play(audio id, int volume = 100);
 
     private:
         friend class mngn::singleton<audio_player>;
