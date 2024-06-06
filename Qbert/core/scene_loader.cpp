@@ -1005,6 +1005,7 @@ namespace qbert
     {
     	auto game_state_comp_ptr = scene_utility::instance().game_state();
     	
+    	// Game mode selection (single, coop, versus)
 	    auto left_game_state_cmd = std::make_unique<game_mode_select_command>(game_state_comp_ptr, -1);
 	    auto right_game_state_cmd = std::make_unique<game_mode_select_command>(game_state_comp_ptr, 1);
 
@@ -1013,59 +1014,101 @@ namespace qbert
     	key_config.input_state = mngn::input_state::down;
 
     	mngn::input_config_info controller_config{};
-    	controller_config.input_type = mngn::input_type::controller;
+    	controller_config.input_type  = mngn::input_type::controller;
     	controller_config.input_state = mngn::input_state::down;
 
     	key_config.input = mngn::input::k_left;
 		mngn::input_manager::instance().bind_command(key_config, left_game_state_cmd->clone());
+    	key_config.input = mngn::input::k_a;
+		mngn::input_manager::instance().bind_command(key_config, left_game_state_cmd->clone());
     	key_config.input = mngn::input::k_right;
 		mngn::input_manager::instance().bind_command(key_config, right_game_state_cmd->clone());
+    	key_config.input = mngn::input::k_d;
+		mngn::input_manager::instance().bind_command(key_config, right_game_state_cmd->clone());
+    	
     	controller_config.input = mngn::input::c_left;
+    	controller_config.controller_idx = 0;
+		mngn::input_manager::instance().bind_command(controller_config, left_game_state_cmd->clone());
+    	controller_config.controller_idx = 1;
 		mngn::input_manager::instance().bind_command(controller_config, std::move(left_game_state_cmd));
     	controller_config.input = mngn::input::c_right;
+    	controller_config.controller_idx = 0;
+		mngn::input_manager::instance().bind_command(controller_config, right_game_state_cmd->clone());
+    	controller_config.controller_idx = 1;
 		mngn::input_manager::instance().bind_command(controller_config, std::move(right_game_state_cmd));
 
+    	// Game mode accept
     	auto game_state_cmd = std::make_unique<game_mode_accept_command>(game_state_comp_ptr);
     	key_config.input = mngn::input::k_return;
     	mngn::input_manager::instance().bind_command(key_config, game_state_cmd->clone());
     	controller_config.input = mngn::input::c_a;
+    	controller_config.controller_idx = 0;
+    	mngn::input_manager::instance().bind_command(controller_config, game_state_cmd->clone());
+    	controller_config.controller_idx = 1;
     	mngn::input_manager::instance().bind_command(controller_config, std::move(game_state_cmd));
 
+    	// Select characters for the initials
     	auto left_input_cmd = std::make_unique<input_select_command>(game_state_comp_ptr, -1);
     	auto right_input_cmd = std::make_unique<input_select_command>(game_state_comp_ptr, 1);
 
     	key_config.input = mngn::input::k_left;
     	mngn::input_manager::instance().bind_command(key_config, left_input_cmd->clone());
+    	key_config.input = mngn::input::k_a;
+    	mngn::input_manager::instance().bind_command(key_config, left_input_cmd->clone());
     	key_config.input = mngn::input::k_right;
+    	mngn::input_manager::instance().bind_command(key_config, right_input_cmd->clone());
+    	key_config.input = mngn::input::k_d;
     	mngn::input_manager::instance().bind_command(key_config, right_input_cmd->clone());
 
     	controller_config.input = mngn::input::c_left;
+    	controller_config.controller_idx = 0;
+    	mngn::input_manager::instance().bind_command(controller_config, left_input_cmd->clone());
+    	controller_config.controller_idx = 1;
     	mngn::input_manager::instance().bind_command(controller_config, std::move(left_input_cmd));
     	controller_config.input = mngn::input::c_right;
+    	controller_config.controller_idx = 0;
+    	mngn::input_manager::instance().bind_command(controller_config, right_input_cmd->clone());
+    	controller_config.controller_idx = 1;
     	mngn::input_manager::instance().bind_command(controller_config, std::move(right_input_cmd));
 
+    	// Accept characters for the initials
     	auto input_accept_cmd = std::make_unique<input_accept_command>(game_state_comp_ptr);
     	key_config.input = mngn::input::k_return;
     	mngn::input_manager::instance().bind_command(key_config, input_accept_cmd->clone());
     	controller_config.input = mngn::input::c_a;
+    	controller_config.controller_idx = 0;
+		mngn::input_manager::instance().bind_command(controller_config, input_accept_cmd->clone());
+    	controller_config.controller_idx = 1;
 		mngn::input_manager::instance().bind_command(controller_config, std::move(input_accept_cmd));
 
+    	// Mute
     	auto toggle_mute_cmd = std::make_unique<toggle_mute_command>();
     	key_config.input = mngn::input::k_m;
     	mngn::input_manager::instance().bind_command(key_config, toggle_mute_cmd->clone());
     	controller_config.input = mngn::input::c_b;
+    	controller_config.controller_idx = 0;
+    	mngn::input_manager::instance().bind_command(controller_config, toggle_mute_cmd->clone());
+    	controller_config.controller_idx = 1;
     	mngn::input_manager::instance().bind_command(controller_config, std::move(toggle_mute_cmd));
 
+    	// Skip level
     	auto skip_level_cmd = std::make_unique<skip_round_command>();
     	key_config.input = mngn::input::k_f1;
     	mngn::input_manager::instance().bind_command(key_config, skip_level_cmd->clone());
     	controller_config.input = mngn::input::c_y;
+    	controller_config.controller_idx = 0;
+    	mngn::input_manager::instance().bind_command(controller_config, skip_level_cmd->clone());
+    	controller_config.controller_idx = 1;
     	mngn::input_manager::instance().bind_command(controller_config, std::move(skip_level_cmd));
 
+    	// Insert coin
     	auto insert_coind_cmd = std::make_unique<insert_coin_command>();
     	key_config.input = mngn::input::k_right_shift;
     	mngn::input_manager::instance().bind_command(key_config, insert_coind_cmd->clone());
 		controller_config.input = mngn::input::c_x;
+    	controller_config.controller_idx = 0;
+		mngn::input_manager::instance().bind_command(controller_config, insert_coind_cmd->clone());
+    	controller_config.controller_idx = 1;
 		mngn::input_manager::instance().bind_command(controller_config, std::move(insert_coind_cmd));
     }
 
