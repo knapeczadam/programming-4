@@ -7,7 +7,7 @@ namespace qbert
         if (damage <= 0)
             return;
         health_ -= damage;
-        notify_observers("health_changed");
+        notify_observers("health_decreased");
     }
 
     void health_component::heal(int health)
@@ -15,6 +15,5 @@ namespace qbert
         if (health <= 0)
             return;
         health_ += health;
-        notify_observers("health_changed");
     }
 }

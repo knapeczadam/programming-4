@@ -143,7 +143,7 @@ namespace qbert
             }
         }
 
-        if (event == "health_changed")
+        if (event == "health_decreased")
         {
             auto health_comp_ptr = dynamic_cast<health_component*>(subject_ptr);
             auto character_ptr = health_comp_ptr->owner();

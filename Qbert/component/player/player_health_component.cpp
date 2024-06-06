@@ -20,14 +20,13 @@ namespace qbert
     void player_health_component::take_damage(int damage)
     {
         progress_manager::instance().take_damage(owner()->name(), damage);
-        notify_observers("health_changed");
+        notify_observers("health_decreased");
         notify_observers("update_health_display");
     }
 
     void player_health_component::heal(int health)
     {
         progress_manager::instance().heal(owner()->name(), health);
-        notify_observers("health_changed");
         notify_observers("update_health_display");
     }
 
