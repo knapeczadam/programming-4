@@ -1639,9 +1639,12 @@ namespace qbert
 			text_info = factory::ui::create_text(text_config);
 			text_info.go_ptr->add_tag("text_input");
     		
-			text_config.name           = "row_3";
-			text_config.local_position = {128.0f, 160.0f};
-			text_config.text           = "supreme noser!";
+			text_config.name                   = "row_3";
+			text_config.local_position         = {128.0f, 160.0f};
+			text_config.text                   = "supreme noser!";
+			text_config.exclamation_sprite_id  = qb_sp_alphabet_regular_special;
+			text_config.exclamation_texture_id = qb_re_t_sprite_general;
+			text_config.exclamation_frame      = 0;
 			text_info = factory::ui::create_text(text_config);
 			text_info.go_ptr->add_tag("text_input");
     		
