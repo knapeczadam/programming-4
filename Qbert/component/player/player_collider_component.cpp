@@ -79,6 +79,7 @@ namespace qbert
                     if (other_ptr->has_tag("ball"))
                     {
                         owner()->component<score_counter_component>()->add_score(100);
+                        notify_observers("extra_time");
                     }
                     else // slick or sam
                     {

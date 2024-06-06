@@ -56,6 +56,8 @@ namespace qbert
 
     void npc_idle_state::update()
     {
+        if (frozen_) return;
+        
         accu_time_ += mngn::game_time::instance().delta_time();
         if (accu_time_ >= idle_time_)
         {

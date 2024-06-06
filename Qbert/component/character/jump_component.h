@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 // Project includes
+#include "core/freezer.h"
 #include "minigin/component/family/physics_component.h"
 
 // GLM includes
@@ -11,7 +12,7 @@ namespace qbert
     // Forward declarations
     class direction_component;
     
-    class jump_component final : public mngn::physics_component
+    class jump_component final : public mngn::physics_component, public freezer
     {
     public:
         jump_component()          = default;

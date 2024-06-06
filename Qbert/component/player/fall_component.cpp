@@ -11,6 +11,8 @@ namespace qbert
 {
     void fall_component::fixed_update()
     {
+        if (frozen_) return;
+        
         if (is_falling_)
         {
             accu_time_ += mngn::game_time::instance().fixed_delta_time();

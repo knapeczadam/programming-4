@@ -996,6 +996,7 @@ namespace qbert
 		scene_info.player_info.position_comp_ptr->add_observer(scene_info.level_manager_comp_ptr);
 		scene_info.player_info.level_counter_comp_ptr->add_observer(scene_info.level_display_info.level_display_comp_ptr);
 		scene_info.player_info.round_counter_comp_ptr->add_observer(scene_info.round_display_info.round_display_comp_ptr);
+    	scene_info.player_info.collider_comp_ptr->add_observer(scene_info.level_manager_comp_ptr);
 		std::ranges::for_each(scene_info.level_info.cube_info.cube_components, [scene_info](auto cube_comp_ptr) { scene_info.player_info.position_comp_ptr->add_observer(cube_comp_ptr); });
 		std::ranges::for_each(scene_info.level_info.cube_info.cube_components, [scene_info](auto cube_comp_ptr) { cube_comp_ptr->add_observer(scene_info.level_manager_comp_ptr); });
     }

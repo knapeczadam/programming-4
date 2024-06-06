@@ -5,6 +5,7 @@
 #include "component/npc/spawn_component.h"
 #include "component/player/fall_component.h"
 #include "component/player/player_collider_component.h"
+#include "component/state/character_state_component.h"
 #include "component/state/game_state_component.h"
 #include "component/ui/flicker_component.h"
 #include "core/progress_manager.h"
@@ -13,6 +14,7 @@
 #include "minigin/core/game_object.h"
 #include "minigin/core/scene.h"
 #include "minigin/core/scene_manager.h"
+#include "state/character/character_state.h"
 
 // Standard includes
 #include <algorithm>
@@ -42,6 +44,17 @@ namespace qbert
         std::ranges::for_each(current_scene_.player_collider_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(false); });
     }
     
+    void scene_utility::unfreeze_all()
+    {
+        std::ranges::for_each(current_scene_.jump_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(true); });
+        std::ranges::for_each(current_scene_.spawn_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(true); });
+        std::ranges::for_each(current_scene_.fall_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(true); });
+        std::ranges::for_each(current_scene_.flicker_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(true); });
+        std::ranges::for_each(current_scene_.sprite_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_animated(true); });
+        std::ranges::for_each(current_scene_.sprite_ui_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_animated(true); });
+        std::ranges::for_each(current_scene_.player_collider_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(true); });
+    }
+    
     void scene_utility::freeze_animation()
     {
         current_scene_.scene_ptr = current_scene();
@@ -56,22 +69,41 @@ namespace qbert
         std::ranges::for_each(current_scene_.sprite_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_animated(false); });
     }
     
-    void scene_utility::unfreeze_all()
-    {
-        std::ranges::for_each(current_scene_.jump_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(true); });
-        std::ranges::for_each(current_scene_.spawn_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(true); });
-        std::ranges::for_each(current_scene_.fall_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(true); });
-        std::ranges::for_each(current_scene_.flicker_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(true); });
-        std::ranges::for_each(current_scene_.sprite_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_animated(true); });
-        std::ranges::for_each(current_scene_.sprite_ui_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_animated(true); });
-        std::ranges::for_each(current_scene_.player_collider_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(true); });
-    }
-    
     void scene_utility::unfreeze_animation()
     {
         std::ranges::for_each(current_scene_.sprite_ui_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_animated(true); });
         std::ranges::for_each(current_scene_.flicker_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(true); });
         std::ranges::for_each(current_scene_.sprite_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_animated(true); });
+    }
+
+    void scene_utility::freeze_npcs()
+    {
+        current_scene_.scene_ptr = current_scene();
+        auto npc_ptrs = current_scene()->find_game_objects_with_tag("npc");
+
+        for (auto npc_ptr : npc_ptrs)
+        {
+            npc_ptr->component<jump_component>()->freeze();
+            npc_ptr->component<spawn_component>()->freeze();
+            npc_ptr->component<fall_component>()->freeze();
+            npc_ptr->component<character_state_component>()->state<character_state>()->freeze();
+            npc_ptr->component<mngn::collider_component>()->set_enabled(false);
+        }
+    }
+
+    void scene_utility::unfreeze_npcs()
+    {
+        current_scene_.scene_ptr = current_scene();
+        auto npc_ptrs = current_scene()->find_game_objects_with_tag("npc");
+
+        for (auto npc_ptr : npc_ptrs)
+        {
+            npc_ptr->component<jump_component>()->unfreeze();
+            npc_ptr->component<spawn_component>()->unfreeze();
+            npc_ptr->component<fall_component>()->unfreeze();
+            npc_ptr->component<character_state_component>()->state<character_state>()->unfreeze();
+            npc_ptr->component<mngn::collider_component>()->set_enabled(true);
+        }
     }
 
     void scene_utility::hide_all()

@@ -11,6 +11,8 @@ namespace qbert
 {
     void spawn_component::fixed_update()
     {
+        if (frozen_) return;
+        
         if (is_spawning_)
         {
             glm::vec2 curr_pos = owner()->local_position();

@@ -20,6 +20,8 @@ namespace qbert
 
     void coily_transforming_state::update()
     {
+        if (frozen_) return;
+        
         accu_time_ += mngn::game_time::instance().delta_time();
         if (accu_time_ >= transform_time_)
         {

@@ -24,9 +24,15 @@ namespace qbert
         level_manager_component &operator=(level_manager_component &&other)      = delete;
 
         void awake() override;
+        void update() override;
+        void on_disable() override;
+        
         void notify(std::string const &event, mngn::subject *subject_ptr) override;
 
     private:
         std::vector<disk_component*> disks_;
+        float accu_time_        = 0.0f;
+        float const extra_time_ = 5.29f;
+        bool extra_time_active_ = false;
     };
 }

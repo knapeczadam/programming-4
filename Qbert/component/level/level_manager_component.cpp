@@ -7,13 +7,20 @@
 #include "component/character/jump_component.h"
 #include "component/character/position_component.h"
 #include "component/level/disk_component.h"
+#include "component/npc/coily_component.h"
+#include "component/player/score_counter_component.h"
 #include "component/state/character_state_component.h"
 #include "component/state/game_state_component.h"
+#include "core/audio_player.h"
 #include "core/progress_manager.h"
+#include "core/scene_utility.h"
 #include "minigin/core/game_object.h"
+#include "minigin/core/game_time.h"
+#include "minigin/core/renderer.h"
 #include "minigin/core/scene.h"
 #include "minigin/core/scene_manager.h"
 #include "state/game/round_loading_state.h"
+#include "state/npc/coily_transforming_state.h"
 #include "state/npc/npc_dead_state.h"
 #include "state/npc/npc_idle_state.h"
 #include "state/player/dead_state.h"
@@ -25,18 +32,44 @@
 
 // Standard includes
 #include <iostream>
+#include <SDL_stdinc.h>
 #include <string>
-
-#include "component/npc/coily_component.h"
-#include "component/player/score_counter_component.h"
-#include "core/scene_utility.h"
-#include "state/npc/coily_transforming_state.h"
 
 namespace qbert
 {
     void level_manager_component::awake()
     {
         disks_ = owner()->components_in_children<disk_component>();
+    }
+
+    void level_manager_component::on_disable()
+    {
+        extra_time_active_ = false;
+        accu_time_ = 0.0f;
+        mngn::renderer::instance().set_background_color({0, 0, 0, 1});
+    }
+
+    void level_manager_component::update()
+    {
+        if (extra_time_active_)
+        {
+            accu_time_ += mngn::game_time::instance().delta_time();
+            
+            float color = accu_time_;
+            if (color > 1.0f) color -= 1.0f;
+            Uint8 r = static_cast<Uint8>(color * 145);
+            Uint8 g = static_cast<Uint8>(185 - color * 185);
+            Uint8 b = static_cast<Uint8>(color * 165);
+            mngn::renderer::instance().set_background_color({r, g, b, 1});
+            
+            if (accu_time_ >= extra_time_)
+            {
+                extra_time_active_ = false;
+                accu_time_ = 0.0f;
+                scene_utility::instance().unfreeze_npcs();
+            mngn::renderer::instance().set_background_color({0, 0, 0, 1});
+            }
+        }
     }
 
     void level_manager_component::notify(std::string const &event, mngn::subject *subject_ptr)
@@ -158,6 +191,13 @@ namespace qbert
                 auto game_state_comp_ptr = scene_utility::instance().game_state();
                 game_state_comp_ptr->change_state<round_loading_state>(game_state_comp_ptr);
             }
+        }
+
+        if (event == "extra_time")
+        {
+            scene_utility::instance().freeze_npcs();
+            audio_player::instance().play(audio::extra_time);
+            extra_time_active_ = true;
         }
     }
 }

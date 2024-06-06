@@ -1,14 +1,16 @@
 ﻿#pragma once
 
 // Project includes
+#include "core/freezer.h"
 #include "minigin/component/family/physics_component.h"
 
 // GLM includes
 #include <glm/glm.hpp>
 
+
 namespace qbert
 {
-    class fall_component final : public mngn::physics_component
+    class fall_component final : public mngn::physics_component, public freezer
     {
     public:
         fall_component()           = default;

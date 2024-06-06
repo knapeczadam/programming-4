@@ -22,6 +22,8 @@ namespace qbert
 
     void jump_component::fixed_update()
     {
+        if (frozen_) return;
+        
         if (is_jumping_)
         {
             if (curr_pos_ != end_pos_)

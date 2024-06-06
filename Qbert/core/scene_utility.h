@@ -10,6 +10,7 @@
 // Forward declarations
 namespace mngn
 {
+    class collider_component;
     class scene;
     class game_object;
     class sprite_component;
@@ -37,9 +38,11 @@ namespace qbert
         scene_utility &operator=(scene_utility &&other)      = delete;
 
         void freeze_all();
-        void freeze_animation();
         void unfreeze_all();
+        void freeze_animation();
         void unfreeze_animation();
+        void freeze_npcs();
+        void unfreeze_npcs();
 
         void hide_all();
         void show_all();
@@ -71,6 +74,7 @@ namespace qbert
             std::vector<mngn::sprite_component*>    sprite_comp_ptrs;
             std::vector<mngn::sprite_ui_component*> sprite_ui_comp_ptrs;
             std::vector<player_collider_component*> player_collider_comp_ptrs;
+            std::vector<mngn::collider_component*>  collider_comp_ptrs;
         } current_scene_{};
     };
 }

@@ -2,6 +2,7 @@
 
 // Project includes
 #include "minigin/component/family/collider_component.h"
+#include "minigin/core/i_observer.h"
 
 namespace qbert
 {
@@ -9,7 +10,7 @@ namespace qbert
     class direction_component;
     class position_component;
     
-    class player_collider_component final : public mngn::collider_component
+    class player_collider_component final : public mngn::collider_component, public mngn::subject
     {
     public:
         player_collider_component() = default;

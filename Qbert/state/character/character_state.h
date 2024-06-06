@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 // Project includes
+#include "core/freezer.h"
 #include "state/state.h"
 
 // Forward declarations
@@ -11,7 +12,7 @@ namespace mngn
 
 namespace qbert
 {
-    class character_state : public state
+    class character_state : public state, public freezer
     {
     public:
         explicit character_state(mngn::game_object* player_ptr);
