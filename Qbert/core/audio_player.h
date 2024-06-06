@@ -7,6 +7,7 @@ namespace qbert
 {
     enum class audio
     {
+        ball_bump,
         ball_jump,
         bonus,
         coily_egg_jump,
@@ -22,6 +23,7 @@ namespace qbert
         qbert_jump,
         qbert_swearing_1,
         qbert_swearing_2,
+        qbert_swearing_3,
         ugg,
         bye,
         extra_time,

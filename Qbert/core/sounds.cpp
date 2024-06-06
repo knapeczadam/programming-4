@@ -10,6 +10,7 @@ namespace qbert
     {
         using namespace mngn;
         sound_manager::instance()
+            .register_effect(qb_re_e_ball_bump)
             .register_effect(qb_re_e_ball_jump)
             .register_effect(qb_re_e_bonus)
             .register_effect(qb_re_e_coily_egg_jump)
@@ -25,6 +26,7 @@ namespace qbert
             .register_effect(qb_re_e_qbert_jump)
             .register_effect(qb_re_e_qbert_swearing_1)
             .register_effect(qb_re_e_qbert_swearing_2)
+            .register_effect(qb_re_e_qbert_swearing_3)
             .register_effect(qb_re_e_ugg)
         
             .register_stream(qb_re_s_bye)

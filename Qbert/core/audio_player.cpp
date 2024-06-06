@@ -11,6 +11,9 @@ namespace qbert
     {
         switch (id)
         {
+        case audio::ball_bump:
+            mngn::service_locator::sound_system().play_sound(qb_re_e_ball_bump, volume);
+            break;
         case audio::ball_jump:
             mngn::service_locator::sound_system().play_sound(qb_re_e_ball_jump, volume);
             break;
@@ -55,6 +58,9 @@ namespace qbert
             break;
         case audio::qbert_swearing_2:
             mngn::service_locator::sound_system().play_sound(qb_re_e_qbert_swearing_2, volume);
+            break;
+        case audio::qbert_swearing_3:
+            mngn::service_locator::sound_system().play_sound(qb_re_e_qbert_swearing_3, volume);
             break;
         case audio::ugg:
             mngn::service_locator::sound_system().play_sound(qb_re_e_ugg, volume);

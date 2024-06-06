@@ -27,6 +27,10 @@
     },
     {
       "_comment" : "EFFECTS",
+      "id"       : "e_ball_bump",
+      "path"     : "sounds/effects/ball_bump.mp3"
+    },
+    {
       "id"       : "e_ball_jump",
       "path"     : "sounds/effects/ball_jump.mp3"
     },
@@ -85,6 +89,10 @@
     {
       "id"       : "e_qbert_swearing_2",
       "path"     : "sounds/effects/qbert_swearing_2.mp3"
+    },
+    {
+      "id"       : "e_qbert_swearing_3",
+      "path"     : "sounds/effects/qbert_swearing_3.mp3"
     },
     {
       "id"       : "e_ugg",

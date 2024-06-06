@@ -10,6 +10,7 @@ namespace qbert
         qb_re_t_debug,
 
         // --- Effects ---
+        qb_re_e_ball_bump,
         qb_re_e_ball_jump,
         qb_re_e_bonus,
         qb_re_e_coily_egg_jump,
@@ -25,6 +26,7 @@ namespace qbert
         qb_re_e_qbert_jump,
         qb_re_e_qbert_swearing_1,
         qb_re_e_qbert_swearing_2,
+        qb_re_e_qbert_swearing_3,
         qb_re_e_ugg,
 
         // --- Streams ---

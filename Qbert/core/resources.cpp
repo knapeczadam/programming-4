@@ -17,6 +17,7 @@ namespace qbert
     		.register_resource(qb_re_t_sprite_large_text, "t_sprite_large_text")
     		.register_resource(qb_re_t_debug, "t_debug")
     	
+    		.register_resource(qb_re_e_ball_bump, "e_ball_bump")
     		.register_resource(qb_re_e_ball_jump, "e_ball_jump")
     		.register_resource(qb_re_e_bonus, "e_bonus") 
     		.register_resource(qb_re_e_coily_egg_jump, "e_coily_egg_jump") 
@@ -32,6 +33,7 @@ namespace qbert
     		.register_resource(qb_re_e_qbert_jump, "e_qbert_jump") 
     		.register_resource(qb_re_e_qbert_swearing_1, "e_qbert_swearing_1") 
     		.register_resource(qb_re_e_qbert_swearing_2, "e_qbert_swearing_2") 
+    		.register_resource(qb_re_e_qbert_swearing_3, "e_qbert_swearing_3") 
     		.register_resource(qb_re_e_ugg, "e_ugg")
     	
     		.register_resource(qb_re_s_bye, "s_bye") 
