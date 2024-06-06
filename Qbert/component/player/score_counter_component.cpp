@@ -1,6 +1,11 @@
 ﻿#include "score_counter_component.h"
 
+// Project includes
+#include "player_health_component.h"
+#include "component/character/health_component.h"
+#include "core/audio_player.h"
 #include "core/progress_manager.h"
+#include "minigin/core/game_object.h"
 
 namespace qbert
 {
@@ -23,6 +28,13 @@ namespace qbert
     {
         score_ += score;
         progress_manager::instance().add_score(score);
+        if (progress_manager::instance().bonus_activated())
+        {
+            owner()->component<player_health_component>()->heal(1);
+            progress_manager::instance().deactivate_bonus();
+            audio_player::instance().play(audio::bonus);
+            
+        }
         notify_observers("update_score_display");
     }
 

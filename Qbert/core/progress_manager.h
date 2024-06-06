@@ -27,7 +27,7 @@ namespace qbert
         [[nodiscard]] auto round() const -> int { return round_; }
         void set_round(int round) { round_ = round; }
 
-        void add_score(int score) { score_ += score; }
+        void add_score(int score);
         [[nodiscard]] auto score() const -> int { return score_; }
 
         [[nodiscard]] auto health(std::string const &name) const -> int;
@@ -42,6 +42,9 @@ namespace qbert
         void add_coin();
         void use_coin();
 
+        void deactivate_bonus() { bonus_activated_ = false; }
+        [[nodiscard]] auto bonus_activated() const -> bool { return bonus_activated_; }
+
         void reset();
 
     private:
@@ -53,6 +56,11 @@ namespace qbert
         int round_           = 1;
         int score_           = 0;
         int coins_           = 0;
+        int const first_bonus_score_ = 8000;
+        int second_bonus_score_      = 14000;
+        int const bonus_step_        = 14000;
+        bool first_bonus_activated_  = false;
+        bool bonus_activated_        = false;
         std::unordered_map<std::string, std::unordered_map<std::string, bool>> cubes_;
         std::unordered_map<std::string, int> healths_;
         size_t const num_of_cubes_ = 28;

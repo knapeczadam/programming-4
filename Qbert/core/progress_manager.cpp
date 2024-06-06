@@ -2,6 +2,21 @@
 
 namespace qbert
 {
+    void progress_manager::add_score(int score)
+    {
+        score_ += score;
+        if (not first_bonus_activated_ and score_ >= first_bonus_score_)
+        {
+            first_bonus_activated_ = true;
+            bonus_activated_ = true;
+        }
+        else if (score_ >= second_bonus_score_)
+        {
+            second_bonus_score_ += bonus_step_;
+            bonus_activated_ = true;
+        }
+    }
+
     auto progress_manager::health(std::string const &name) const -> int
     {
         if (healths_.contains(name))
@@ -83,5 +98,9 @@ namespace qbert
         score_  = 0;
         cubes_.clear();
         healths_.clear();
+
+        first_bonus_activated_ = false;
+        bonus_activated_       = false;
+        second_bonus_score_    = bonus_step_;
     }
 }
