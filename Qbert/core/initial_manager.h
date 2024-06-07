@@ -36,6 +36,7 @@ namespace qbert
 
         void move_underline();
         void render_initials();
+        void reset();
 
     private:
         std::string initial_;

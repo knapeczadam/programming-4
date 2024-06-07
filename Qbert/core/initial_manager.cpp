@@ -77,6 +77,7 @@ namespace qbert
         auto initial = initial_.empty() ? "   " : initial_;
         score_manager::instance().set_score(score, initial);
         score_manager::instance().save_scoreboard();
+        reset();
     }
 
     void initial_manager::move_underline()
@@ -133,5 +134,12 @@ namespace qbert
     	multisprite_config.local_position = {272.0f, 480.0f};
     	multisprite_config.sprites		  = sprites;
         factory::ui::create_multisprite(multisprite_config);
+    }
+
+    void initial_manager::reset()
+    {
+        initial_ = "";
+        curr_input_ = 0;
+        move_underline();
     }
 }
