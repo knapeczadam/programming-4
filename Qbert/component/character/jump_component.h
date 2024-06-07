@@ -38,7 +38,7 @@ namespace qbert
 
     protected:
         direction_component *direction_comp_ptr_ = nullptr;
-        float jump_time_  = 0.5f;
+        float jump_time_  = 0.4f;
         float accu_time_  = 0.0f;
         bool  is_jumping_ = false;
 

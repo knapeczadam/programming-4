@@ -14,7 +14,7 @@ namespace qbert
         void update() override;
 
     private:
-        float idle_time_ = 1.0f;
+        float idle_time_ = 0.5f;
         float accu_time_ = 0.0f;
     };
 
