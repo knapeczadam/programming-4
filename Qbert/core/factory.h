@@ -102,6 +102,12 @@ namespace qbert
             static auto create_player(player_config_info const &config) -> player_info;
             static auto create_ai_player(player_config_info const &config) -> player_info;
 
+            struct npc_config_info : config_info
+            {
+                float spawn_time_min;
+                float spawn_time_max;
+            };
+
             struct npc_info : info
             {
                 position_component *position_comp_ptr;
@@ -109,39 +115,44 @@ namespace qbert
             };
 
             // Red ball
-            struct red_ball_config_info : config_info { };
+            struct red_ball_config_info : npc_config_info { };
             struct red_ball_info : npc_info
             {
             };
             static auto create_red_ball(red_ball_config_info const &config) -> red_ball_info;
 
             // Green ball
-            struct green_ball_config_info : config_info { };
+            struct green_ball_config_info : npc_config_info { };
             struct green_ball_info : npc_info { };
             static auto create_green_ball(green_ball_config_info const &config) -> green_ball_info;
 
             // Coily
-            struct coily_config_info : player_config_info { };
+            struct coily_config_info : player_config_info
+            {
+                float spawn_time_min;
+                float spawn_time_max;
+            };
+            
             struct coily_info : npc_info { };
             static auto create_coily(coily_config_info const &config) -> coily_info;
 
             // Ugg
-            struct ugg_config_info : config_info { };
+            struct ugg_config_info : npc_config_info { };
             struct ugg_info : npc_info { };
             static auto create_ugg(ugg_config_info const &config) -> ugg_info;
 
             // Wrong-way
-            struct wrong_way_config_info : config_info { };
+            struct wrong_way_config_info : npc_config_info { };
             struct wrong_way_info : npc_info { };
             static auto create_wrong_way(wrong_way_config_info const &config) -> wrong_way_info;
 
             // Slick
-            struct slick_config_info : config_info { };
+            struct slick_config_info : npc_config_info { };
             struct slick_info : npc_info { };
             static auto create_slick(slick_config_info const &config) -> slick_info;
 
             // Sam
-            struct sam_config_info : config_info { };
+            struct sam_config_info : npc_config_info { };
             struct sam_info : npc_info { };
             static auto create_sam(sam_config_info const &config) -> sam_info;
         };

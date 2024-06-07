@@ -9,6 +9,8 @@
       "_comment_disk_color": "First three digits are the same. Third digit indicates the column, fourth digit indicates the row",
       "_comment_disk_count": "Its value is always equal to the number of disk_positions' values divided by 2",
       "_comment_disk_positions": "By line: First digit indicate the row, second digit indicates the column",
+      "_comment_spawn_time_min": "Minimum time to spawn the NPC",
+      "_comment_spawn_time_max": "Maximum time to spawn the NPC",
       "cube_color_1": 13,
       "cube_color_2": 12,
       "cube_color_small": 112,
@@ -19,6 +21,20 @@
       "disk_positions": [
         4,-1,
         4,5
+      ],
+      "npcs": [
+        {
+          "name": "red_ball",
+          "spawn_time_min": 2.0,
+          "spawn_time_max": 8.0,
+          "count": 2
+        },
+        {
+          "name": "coily",
+          "spawn_time_min": 2.0,
+          "spawn_time_max": 4.0,
+          "count": 1
+        }
       ]
     },
     {
@@ -34,6 +50,20 @@
       "disk_positions": [
         5,-1,
         6,7
+      ],
+      "npcs": [
+        {
+          "name": "red_ball",
+          "spawn_time_min": 2.0,
+          "spawn_time_max": 8.0,
+          "count": 3
+        },
+        {
+          "name": "coily",
+          "spawn_time_min": 2.0,
+          "spawn_time_max": 4.0,
+          "count": 1
+        }
       ]
     },
     {
@@ -49,6 +79,32 @@
       "disk_positions": [
         3,-1,
         5,6
+      ],
+      "npcs": [
+        {
+          "name": "coily",
+          "spawn_time_min": 2.0,
+          "spawn_time_max": 4.0,
+          "count": 1
+        },
+        {
+          "name": "ugg",
+          "spawn_time_min": 2.0,
+          "spawn_time_max": 8.0,
+          "count": 2
+        },
+        {
+          "name": "wrong_way",
+          "spawn_time_min": 2.0,
+          "spawn_time_max": 8.0,
+          "count": 2
+        },
+        {
+          "name": "green_ball",
+          "spawn_time_min": 20.0,
+          "spawn_time_max": 30.0,
+          "count": 1
+        }
       ]
     },
     {
@@ -64,6 +120,26 @@
       "disk_positions": [
         3,-1,
         5,6
+      ],
+      "npcs": [
+        {
+          "name": "red_ball",
+          "spawn_time_min": 2.0,
+          "spawn_time_max": 8.0,
+          "count": 3
+        },
+        {
+          "name": "coily",
+          "spawn_time_min": 2.0,
+          "spawn_time_max": 4.0,
+          "count": 1
+        },
+        {
+          "name": "green_ball",
+          "spawn_time_min": 15.0,
+          "spawn_time_max": 20.0,
+          "count": 1
+        }
       ]
     },
     {
@@ -81,6 +157,38 @@
         3,-1,
         0, 1,
         4,5
+      ],
+      "npcs": [
+        {
+          "name": "coily",
+          "spawn_time_min": 8.0,
+          "spawn_time_max": 12.0,
+          "count": 1
+        },
+        {
+          "name": "ugg",
+          "spawn_time_min": 2.0,
+          "spawn_time_max": 15.0,
+          "count": 2
+        },
+        {
+          "name": "wrong_way",
+          "spawn_time_min": 2.0,
+          "spawn_time_max": 15.0,
+          "count": 2
+        },
+        {
+          "name": "slick",
+          "spawn_time_min": 25.0,
+          "spawn_time_max": 30.0,
+          "count": 1
+        },
+        {
+          "name": "sam",
+          "spawn_time_min": 10.0,
+          "spawn_time_max": 15.0,
+          "count": 1
+        }
       ]
     },
     {
@@ -98,6 +206,44 @@
         5,-1,
         0, 1,
         5,6
+      ],
+      "npcs": [
+        {
+          "name": "coily",
+          "spawn_time_min": 8.0,
+          "spawn_time_max": 12.0,
+          "count": 1
+        },
+        {
+          "name": "ugg",
+          "spawn_time_min": 2.0,
+          "spawn_time_max": 15.0,
+          "count": 2
+        },
+        {
+          "name": "wrong_way",
+          "spawn_time_min": 2.0,
+          "spawn_time_max": 15.0,
+          "count": 3
+        },
+        {
+          "name": "green_ball",
+          "spawn_time_min": 2.0,
+          "spawn_time_max": 15.0,
+          "count": 1
+        },
+        {
+          "name": "slick",
+          "spawn_time_min": 15.0,
+          "spawn_time_max": 20.0,
+          "count": 1
+        },
+        {
+          "name": "sam",
+          "spawn_time_min": 10.0,
+          "spawn_time_max": 15.0,
+          "count": 1
+        }
       ]
     },
     {
@@ -114,6 +260,38 @@
       "disk_positions": [
         2,-1,
         5, 6
+      ],
+      "npcs": [
+        {
+          "name": "red_ball",
+          "spawn_time_min": 2.0,
+          "spawn_time_max": 12.0,
+          "count": 3
+        },
+        {
+          "name": "coily",
+          "spawn_time_min": 8.0,
+          "spawn_time_max": 12.0,
+          "count": 1
+        },
+        {
+          "name": "green_ball",
+          "spawn_time_min": 10.0,
+          "spawn_time_max": 20.0,
+          "count": 1
+        },
+        {
+          "name": "slick",
+          "spawn_time_min": 20.0,
+          "spawn_time_max": 25.0,
+          "count": 1
+        },
+        {
+          "name": "sam",
+          "spawn_time_min": 15.0,
+          "spawn_time_max": 20.0,
+          "count": 1
+        }
       ]
     },
     {
@@ -130,6 +308,50 @@
       "disk_positions": [
         1,-1,
         3, 4
+      ],
+      "npcs": [
+        {
+          "name": "red_ball",
+          "spawn_time_min": 2.0,
+          "spawn_time_max": 12.0,
+          "count": 1
+        },
+        {
+          "name": "coily",
+          "spawn_time_min": 8.0,
+          "spawn_time_max": 12.0,
+          "count": 1
+        },
+        {
+          "name": "ugg",
+          "spawn_time_min": 8.0,
+          "spawn_time_max": 12.0,
+          "count": 2
+        },
+        {
+          "name": "wrong_way",
+          "spawn_time_min": 8.0,
+          "spawn_time_max": 12.0,
+          "count": 1
+        },
+        {
+          "name": "green_ball",
+          "spawn_time_min": 25.0,
+          "spawn_time_max": 30.0,
+          "count": 1
+        },
+        {
+          "name": "slick",
+          "spawn_time_min": 5.0,
+          "spawn_time_max": 10.0,
+          "count": 1
+        },
+        {
+          "name": "sam",
+          "spawn_time_min": 20.0,
+          "spawn_time_max": 25.0,
+          "count": 1
+        }
       ]
     },
     {
@@ -148,6 +370,26 @@
         4,-1,
         2, 3,
         3, 4
+      ],
+      "npcs": [
+        {
+          "name": "red_ball",
+          "spawn_time_min": 2.0,
+          "spawn_time_max": 12.0,
+          "count": 2
+        },
+        {
+          "name": "coily",
+          "spawn_time_min": 2.0,
+          "spawn_time_max": 12.0,
+          "count": 1
+        },
+        {
+          "name": "green_ball",
+          "spawn_time_min": 8.0,
+          "spawn_time_max": 12.0,
+          "count": 1
+        }
       ]
     },
     {
@@ -166,6 +408,38 @@
         3,-1,
         3, 4,
         5, 6
+      ],
+      "npcs": [
+        {
+          "name": "coily",
+          "spawn_time_min": 20.0,
+          "spawn_time_max": 25.0,
+          "count": 1
+        },
+        {
+          "name": "ugg",
+          "spawn_time_min": 2.0,
+          "spawn_time_max": 12.0,
+          "count": 2
+        },
+        {
+          "name": "wrong_way",
+          "spawn_time_min": 8.0,
+          "spawn_time_max": 12.0,
+          "count": 2
+        },
+        {
+          "name": "green_ball",
+          "spawn_time_min": 8.0,
+          "spawn_time_max": 20.0,
+          "count": 1
+        },
+        {
+          "name": "sam",
+          "spawn_time_min": 15.0,
+          "spawn_time_max": 20.0,
+          "count": 1
+        }
       ]
     },
     {
@@ -183,6 +457,32 @@
         0,-1,
         2,-1,
         4, 5
+      ],
+      "npcs": [
+        {
+          "name": "red_ball",
+          "spawn_time_min": 4.0,
+          "spawn_time_max": 12.0,
+          "count": 3
+        },
+        {
+          "name": "coily",
+          "spawn_time_min": 2.0,
+          "spawn_time_max": 12.0,
+          "count": 1
+        },
+        {
+          "name": "green_ball",
+          "spawn_time_min": 15.0,
+          "spawn_time_max": 18.0,
+          "count": 1
+        },
+        {
+          "name": "sam",
+          "spawn_time_min": 12.0,
+          "spawn_time_max": 15.0,
+          "count": 1
+        }
       ]
     },
     {
@@ -200,6 +500,50 @@
         1, 2,
         4, 5,
         6, 7
+      ],
+      "npcs": [
+        {
+          "name": "red_ball",
+          "spawn_time_min": 2.0,
+          "spawn_time_max": 12.0,
+          "count": 2
+        },
+        {
+          "name": "coily",
+          "spawn_time_min": 5.0,
+          "spawn_time_max": 10.0,
+          "count": 1
+        },
+        {
+          "name": "ugg",
+          "spawn_time_min": 7.0,
+          "spawn_time_max": 10.0,
+          "count": 2
+        },
+        {
+          "name": "wrong_way",
+          "spawn_time_min": 9.0,
+          "spawn_time_max": 13.0,
+          "count": 1
+        },
+        {
+          "name": "green_ball",
+          "spawn_time_min": 20.0,
+          "spawn_time_max": 25.0,
+          "count": 1
+        },
+        {
+          "name": "slick",
+          "spawn_time_min": 4.0,
+          "spawn_time_max": 12.0,
+          "count": 1
+        },
+        {
+          "name": "sam",
+          "spawn_time_min": 15.0,
+          "spawn_time_max": 20.0,
+          "count": 1
+        }
       ]
     }
   ]

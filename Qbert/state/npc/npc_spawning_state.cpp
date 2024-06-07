@@ -26,6 +26,10 @@ namespace qbert
         character_ptr_->component<mngn::collider_component>()->set_enabled(false);
         set_positions();
         set_sprite();
+
+        auto const spawn_time_min = character_ptr_->component<spawn_component>()->spawn_time_min();
+        auto const spawn_time_max   = character_ptr_->component<spawn_component>()->spawn_time_max();
+        spawn_time_ = mngn::random_float(spawn_time_min, spawn_time_max);
     }
 
     void npc_spawning_state::update()

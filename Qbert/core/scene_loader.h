@@ -36,6 +36,7 @@ namespace qbert
             std::string                         scene_id;
             int                                 level_id;
             int                                 bonus;
+            factory::character::npc_config_info npc_config_info;
             factory::ui::score_display_info     score_display_info;
             factory::ui::health_display_info    health_display_info;
             factory::ui::level_display_info     level_display_info;
@@ -92,6 +93,7 @@ namespace qbert
         void create_player_1(scene_info &scene_info, bool coop = false);
         void create_player_2(scene_info &scene_info);
         void create_red_ball(scene_info &scene_info);
+        void create_npcs(scene_info &scene_info);
         void create_coily(scene_info &scene_info);
         void create_ugg(scene_info &scene_info);
         void create_wrong_way(scene_info &scene_info);

@@ -9,6 +9,12 @@
 
 namespace qbert
 {
+    spawn_component::spawn_component(float spawn_time_min, float spawn_time_max)
+        : spawn_time_min_{spawn_time_min}
+        , spawn_time_max_{spawn_time_max}
+    {
+    }
+
     void spawn_component::fixed_update()
     {
         if (frozen_) return;

@@ -167,7 +167,7 @@ namespace qbert
         info.go_ptr->add_component<character_state_component>();
         info.go_ptr->add_component<direction_component>();
         info.go_ptr->add_component<jump_component>();
-        info.go_ptr->add_component<spawn_component>();
+        info.go_ptr->add_component<spawn_component>(config.spawn_time_min, config.spawn_time_max);
         info.go_ptr->add_component<fall_component>();
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         auto sprite_ptr = sprite_comp_ptr->sprite();
@@ -187,7 +187,7 @@ namespace qbert
         info.go_ptr->add_component<character_state_component>();
         info.go_ptr->add_component<direction_component>();
         info.go_ptr->add_component<jump_component>();
-        info.go_ptr->add_component<spawn_component>();
+        info.go_ptr->add_component<spawn_component>(config.spawn_time_min, config.spawn_time_max);
         info.go_ptr->add_component<fall_component>();
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         auto sprite_ptr = sprite_comp_ptr->sprite();
@@ -208,7 +208,7 @@ namespace qbert
         info.go_ptr->add_component<direction_component>();
         info.go_ptr->add_component<jump_component>();
         info.go_ptr->add_component<face_component>();
-        info.go_ptr->add_component<spawn_component>();
+        info.go_ptr->add_component<spawn_component>(config.spawn_time_min, config.spawn_time_max);
         info.go_ptr->add_component<fall_component>();
         auto coily_sprite_ptr = mngn::sprite_manager::instance().load_sprite(qb_sp_coily, config.texture_id);
         info.go_ptr->add_component<coily_component>(coily_sprite_ptr);
@@ -299,7 +299,7 @@ namespace qbert
         info.go_ptr->add_component<direction_component>();
         info.go_ptr->add_component<jump_component>();
         info.go_ptr->add_component<face_component>();
-        info.go_ptr->add_component<spawn_component>();
+        info.go_ptr->add_component<spawn_component>(config.spawn_time_min, config.spawn_time_max);
         info.go_ptr->add_component<fall_component>();
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         auto sprite_ptr = sprite_comp_ptr->sprite();
@@ -320,7 +320,7 @@ namespace qbert
         info.go_ptr->add_component<direction_component>();
         info.go_ptr->add_component<jump_component>();
         info.go_ptr->add_component<face_component>();
-        info.go_ptr->add_component<spawn_component>();
+        info.go_ptr->add_component<spawn_component>(config.spawn_time_min, config.spawn_time_max);
         info.go_ptr->add_component<fall_component>();
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         auto sprite_ptr = sprite_comp_ptr->sprite();
@@ -341,7 +341,7 @@ namespace qbert
         info.go_ptr->add_component<direction_component>();
         info.go_ptr->add_component<jump_component>();
         info.go_ptr->add_component<face_component>();
-        info.go_ptr->add_component<spawn_component>();
+        info.go_ptr->add_component<spawn_component>(config.spawn_time_min, config.spawn_time_max);
         info.go_ptr->add_component<fall_component>();
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         auto sprite_ptr = sprite_comp_ptr->sprite();
@@ -362,7 +362,7 @@ namespace qbert
         info.go_ptr->add_component<direction_component>();
         info.go_ptr->add_component<jump_component>();
         info.go_ptr->add_component<face_component>();
-        info.go_ptr->add_component<spawn_component>();
+        info.go_ptr->add_component<spawn_component>(config.spawn_time_min, config.spawn_time_max);
         info.go_ptr->add_component<fall_component>();
         auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
         auto sprite_ptr = sprite_comp_ptr->sprite();

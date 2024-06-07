@@ -872,14 +872,8 @@ namespace qbert
     	create_level(scene_info);
     	create_player_1(scene_info);
     	bind_player_observers(scene_info);
-    	
-    	create_red_ball(scene_info);
-    	// create_coily(scene_info);
-    	// create_ugg(scene_info);
-    	// create_wrong_way(scene_info);
-    	// create_green_ball(scene_info);
-    	// create_slick(scene_info);
-    	//create_sam(scene_info);
+
+    	create_npcs(scene_info);
     }
 
     void scene_loader::create_coop_scene(scene_info &scene_info)
@@ -894,13 +888,7 @@ namespace qbert
     	create_player_1(scene_info, true);
     	bind_player_observers(scene_info);
     	
-    	create_red_ball(scene_info);
-    	create_coily(scene_info);
-    	create_ugg(scene_info);
-    	create_wrong_way(scene_info);
-    	create_green_ball(scene_info);
-    	create_slick(scene_info);
-    	create_sam(scene_info);
+    	create_npcs(scene_info);
 
         factory::ui::sprite_config_info sprite_config{};
         sprite_config.scene_ptr      = scene_info.scene_ptr;
@@ -939,13 +927,7 @@ namespace qbert
     	create_player_1(scene_info);
     	bind_player_observers(scene_info);
     	
-    	// create_red_ball(scene_info);
-    	create_coily(scene_info);
-    	// create_ugg(scene_info);
-    	// create_wrong_way(scene_info);
-    	// create_green_ball(scene_info);
-    	// create_slick(scene_info);
-    	//create_sam(scene_info);
+    	create_npcs(scene_info);
     }
 
     void scene_loader::create_score_display(scene_info &scene_info)
@@ -1187,10 +1169,12 @@ namespace qbert
 		factory::character::red_ball_config_info red_ball_config{};
 		red_ball_config.scene_ptr      = scene_info.scene_ptr;
 		red_ball_config.parent_ptr     = scene_info.root_ptr;
-		red_ball_config.name           = scene_info.scene_id + "red_ball";
+		red_ball_config.name           = scene_info.scene_id + "red_ball_" + scene_info.npc_config_info.name;
     	red_ball_config.local_position = {-32.0f, -32.0f};
 		red_ball_config.sprite_id	   = qb_sp_ball_red;
 		red_ball_config.texture_id     = qb_re_t_sprite_general;
+    	red_ball_config.spawn_time_min = scene_info.npc_config_info.spawn_time_min;
+    	red_ball_config.spawn_time_max   = scene_info.npc_config_info.spawn_time_max;
 		scene_info.red_ball_info = factory::character::create_red_ball(red_ball_config);
     	
 		// Observers
@@ -1198,12 +1182,82 @@ namespace qbert
 		scene_info.red_ball_info.health_comp_ptr->add_observer(scene_info.level_manager_comp_ptr);
     }
 
+    void scene_loader::create_npcs(scene_info &scene_info)
+    {
+    	auto npcs = scene_info.level_config["npcs"];
+
+    	for (auto const &npc : npcs)
+    	{
+		    std::string const name = npc["name"];
+    		scene_info.npc_config_info.spawn_time_min = npc["spawn_time_min"];
+    		scene_info.npc_config_info.spawn_time_max   = npc["spawn_time_max"];
+    		int const count = npc["count"];
+
+    		if (name == "red_ball")
+    		{
+    			for (int i = 0; i < count; ++i)
+				{
+    				scene_info.npc_config_info.name = std::to_string(i);
+					create_red_ball(scene_info);
+				}
+    		}
+    		else if (name == "coily")
+    		{
+    			for (int i = 0; i < count; ++i)
+    			{
+    				scene_info.npc_config_info.name = std::to_string(i);
+    				create_coily(scene_info);
+    			}
+    		}
+    		else if (name == "ugg")
+			{
+				for (int i = 0; i < count; ++i)
+				{
+					scene_info.npc_config_info.name = std::to_string(i);
+					create_ugg(scene_info);
+				}
+			}
+			else if (name == "wrong_way")
+			{
+				for (int i = 0; i < count; ++i)
+				{
+					scene_info.npc_config_info.name = std::to_string(i);
+					create_wrong_way(scene_info);
+				}
+			}
+			else if (name == "green_ball")
+			{
+				for (int i = 0; i < count; ++i)
+				{
+					scene_info.npc_config_info.name = std::to_string(i);
+					create_green_ball(scene_info);
+				}
+			}
+			else if (name == "slick")
+			{
+				for (int i = 0; i < count; ++i)
+				{
+					scene_info.npc_config_info.name = std::to_string(i);
+					create_slick(scene_info);
+				}
+			}
+			else if (name == "sam")
+			{
+				for (int i = 0; i < count; ++i)
+				{
+					scene_info.npc_config_info.name = std::to_string(i);
+					create_sam(scene_info);
+				}
+			}
+	    }
+    }
+
     void scene_loader::create_coily(scene_info &scene_info)
     {
 		factory::character::coily_config_info coily_config{};
 		coily_config.scene_ptr      = scene_info.scene_ptr;
 		coily_config.parent_ptr     = scene_info.root_ptr;
-		coily_config.name           = scene_info.scene_id + "coily";
+		coily_config.name           = scene_info.scene_id + "coily_" + scene_info.npc_config_info.name;
     	coily_config.local_position = {-32.0f, -32.0f};
 		coily_config.sprite_id	    = qb_sp_coily_egg;
 		coily_config.texture_id     = qb_re_t_sprite_general;
@@ -1227,7 +1281,7 @@ namespace qbert
 		factory::character::ugg_config_info ugg_config{};
 		ugg_config.scene_ptr      = scene_info.scene_ptr;
 		ugg_config.parent_ptr     = scene_info.root_ptr;
-		ugg_config.name           = scene_info.scene_id + "ugg";
+		ugg_config.name           = scene_info.scene_id + "ugg_" + scene_info.npc_config_info.name;
     	ugg_config.local_position = {-32.0f, -32.0f};
 		ugg_config.sprite_id	  = qb_sp_ugg;
 		ugg_config.texture_id     = qb_re_t_sprite_general;
@@ -1243,7 +1297,7 @@ namespace qbert
 		factory::character::wrong_way_config_info wrong_way_config{};
 		wrong_way_config.scene_ptr      = scene_info.scene_ptr;
 		wrong_way_config.parent_ptr     = scene_info.root_ptr;
-		wrong_way_config.name           = scene_info.scene_id + "wrong_way";
+		wrong_way_config.name           = scene_info.scene_id + "wrong_way_" + scene_info.npc_config_info.name;
     	wrong_way_config.local_position = {-32.0f, -32.0f};
 		wrong_way_config.sprite_id	    = qb_sp_wrong_way;
 		wrong_way_config.texture_id     = qb_re_t_sprite_general;
@@ -1259,7 +1313,7 @@ namespace qbert
 		factory::character::green_ball_config_info green_ball_config{};
 		green_ball_config.scene_ptr      = scene_info.scene_ptr;
 		green_ball_config.parent_ptr     = scene_info.root_ptr;
-		green_ball_config.name           = scene_info.scene_id + "green_ball";
+		green_ball_config.name           = scene_info.scene_id + "green_ball_" + scene_info.npc_config_info.name;
     	green_ball_config.local_position = {-32.0f, -32.0f};
 		green_ball_config.sprite_id      = qb_sp_ball_green;
 		green_ball_config.texture_id     = qb_re_t_sprite_general;
@@ -1275,7 +1329,7 @@ namespace qbert
 		factory::character::slick_config_info slick_config{};
 		slick_config.scene_ptr      = scene_info.scene_ptr;
 		slick_config.parent_ptr     = scene_info.root_ptr;
-		slick_config.name           = scene_info.scene_id + "slick";
+		slick_config.name           = scene_info.scene_id + "slick_" + scene_info.npc_config_info.name;
     	slick_config.local_position = {-32.0f, -32.0f};
 		slick_config.sprite_id      = qb_sp_slick;
 		slick_config.texture_id     = qb_re_t_sprite_general;
@@ -1292,7 +1346,7 @@ namespace qbert
 		factory::character::sam_config_info sam_config{};
 		sam_config.scene_ptr      = scene_info.scene_ptr;
 		sam_config.parent_ptr     = scene_info.root_ptr;
-		sam_config.name           = scene_info.scene_id + "sam";
+		sam_config.name           = scene_info.scene_id + "sam_" + scene_info.npc_config_info.name;
     	sam_config.local_position = {-32.0f, -32.0f};
 		sam_config.sprite_id      = qb_sp_sam;
 		sam_config.texture_id     = qb_re_t_sprite_general;
