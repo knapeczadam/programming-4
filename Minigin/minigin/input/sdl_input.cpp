@@ -36,7 +36,7 @@ namespace mngn
                 });
                 for (auto const &game_command : key_down_commands)
                 {
-                    if (remap(game_command.input) == e.key.keysym.sym)
+                    if (remap(game_command.input) == e.key.keysym.sym and e.key.repeat == 0)
                     {
                         game_command.command_ptr->execute();
                     }
@@ -50,7 +50,7 @@ namespace mngn
                 });
                 for (auto const &game_command : key_up_commands)
                 {
-                    if (remap(game_command.input) == e.key.keysym.sym)
+                    if (remap(game_command.input) == e.key.keysym.sym and e.key.repeat == 0)
                     {
                         game_command.command_ptr->execute();
                     }

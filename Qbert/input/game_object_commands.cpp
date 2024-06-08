@@ -27,11 +27,15 @@ namespace qbert
             if (game_state_comp_ptr->is_state<single_state>() or game_state_comp_ptr->is_state<coop_state>() or game_state_comp_ptr->is_state<versus_state>())
             {
                 auto character_state_comp_ = game_object_ptr_->component<character_state_component>();
-                if (character_state_comp_->owner()->scene()->active() and (character_state_comp_->is_state<start_state>() or character_state_comp_->is_state<idle_state>()))
+                auto const scene_ptr = scene_utility::instance().current_scene();\
+                if (scene_ptr->name() == game_object_ptr_->scene()->name())
                 {
-                    auto direction_comp_ptr = game_object_ptr_->component<direction_component>();
-                    direction_comp_ptr->set_direction(row_dir_, col_dir_);
-                    character_state_comp_->change_state<jumping_state>(game_object_ptr_);
+                    if (character_state_comp_->owner()->scene()->active() and (character_state_comp_->is_state<start_state>() or character_state_comp_->is_state<idle_state>()))
+                    {
+                        auto direction_comp_ptr = game_object_ptr_->component<direction_component>();
+                        direction_comp_ptr->set_direction(row_dir_, col_dir_);
+                        character_state_comp_->change_state<jumping_state>(game_object_ptr_);
+                    }
                 }
             }
         }
@@ -40,11 +44,15 @@ namespace qbert
             if (game_state_comp_ptr->is_state<versus_state>())
             {
                 auto character_state_comp_ = game_object_ptr_->component<character_state_component>();
-                if (character_state_comp_->owner()->scene()->active() and character_state_comp_->is_state<npc_idle_state>())
+                auto const scene_ptr = scene_utility::instance().current_scene();
+                if (scene_ptr->name() == game_object_ptr_->scene()->name())
                 {
-                    auto direction_comp_ptr = game_object_ptr_->component<direction_component>();
-                    direction_comp_ptr->set_direction(row_dir_, col_dir_);
-                    character_state_comp_->change_state<jumping_state>(game_object_ptr_);
+                    if (character_state_comp_->owner()->scene()->active() and character_state_comp_->is_state<npc_idle_state>())
+                    {
+                        auto direction_comp_ptr = game_object_ptr_->component<direction_component>();
+                        direction_comp_ptr->set_direction(row_dir_, col_dir_);
+                        character_state_comp_->change_state<jumping_state>(game_object_ptr_);
+                    }
                 }
             }
         }
