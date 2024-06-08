@@ -3,7 +3,7 @@
 // Project includes
 #include "component/character/position_component.h"
 #include "component/character/direction_component.h"
-#include "component/player/fall_component.h"
+#include "component/character/fall_component.h"
 #include "core/scene_utility.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/scene.h"

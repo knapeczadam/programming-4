@@ -1,7 +1,7 @@
 ﻿#include "idle_state.h"
 
 // Project includes
-#include "component/player/face_component.h"
+#include "component/character/face_component.h"
 #include "component/character/direction_component.h"
 #include "core/audio_player.h"
 #include "minigin/core/game_object.h"

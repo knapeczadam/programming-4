@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="component\character\face_component.cpp" />
+    <ClCompile Include="component\character\fall_component.cpp" />
     <ClCompile Include="component\character\health_component.cpp" />
     <ClCompile Include="component\character\jump_component.cpp" />
     <ClCompile Include="component\character\position_component.cpp" />
@@ -30,8 +32,6 @@
     <ClCompile Include="component\npc\coily_component.cpp" />
     <ClCompile Include="component\npc\npc_health_component.cpp" />
     <ClCompile Include="component\npc\spawn_component.cpp" />
-    <ClCompile Include="component\player\face_component.cpp" />
-    <ClCompile Include="component\player\fall_component.cpp" />
     <ClCompile Include="component\player\level_counter_component.cpp" />
     <ClCompile Include="component\player\player_collider_component.cpp" />
     <ClCompile Include="component\player\player_health_component.cpp" />
@@ -91,6 +91,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="component\character\direction_component.h" />
+    <ClInclude Include="component\character\face_component.h" />
+    <ClInclude Include="component\character\fall_component.h" />
     <ClInclude Include="component\character\health_component.h" />
     <ClInclude Include="component\character\jump_component.h" />
     <ClInclude Include="component\character\position_component.h" />
@@ -102,8 +104,6 @@
     <ClInclude Include="component\npc\coily_component.h" />
     <ClInclude Include="component\npc\npc_health_component.h" />
     <ClInclude Include="component\npc\spawn_component.h" />
-    <ClInclude Include="component\player\face_component.h" />
-    <ClInclude Include="component\player\fall_component.h" />
     <ClInclude Include="component\player\level_counter_component.h" />
     <ClInclude Include="component\player\player_collider_component.h" />
     <ClInclude Include="component\player\player_health_component.h" />

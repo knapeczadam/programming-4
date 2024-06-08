@@ -1,7 +1,7 @@
 ﻿#include "jumping_state.h"
 
 // Project includes
-#include "component/player/face_component.h"
+#include "component/character/face_component.h"
 #include "component/character/jump_component.h"
 #include "minigin/core/game_object.h"
 

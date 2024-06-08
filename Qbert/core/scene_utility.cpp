@@ -4,7 +4,7 @@
 #include "component/character/jump_component.h"
 #include "component/npc/spawn_component.h"
 #include "component/npc/npc_health_component.h"
-#include "component/player/fall_component.h"
+#include "component/character/fall_component.h"
 #include "component/player/player_collider_component.h"
 #include "component/state/character_state_component.h"
 #include "component/state/game_state_component.h"

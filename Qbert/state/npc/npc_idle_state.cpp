@@ -3,7 +3,7 @@
 #include "npc_jumping_state.h"
 #include "component/character/direction_component.h"
 #include "component/npc/coily_component.h"
-#include "component/player/face_component.h"
+#include "component/character/face_component.h"
 #include "component/state/character_state_component.h"
 #include "component/state/game_state_component.h"
 #include "core/audio_player.h"
