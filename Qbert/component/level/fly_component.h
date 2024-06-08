@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 // Project includes
+#include "core/freezer.h"
 #include "minigin/component/family/physics_component.h"
 
 // GLM includes
@@ -8,7 +9,7 @@
 
 namespace qbert
 {
-    class fly_component final : public mngn::physics_component
+    class fly_component final : public mngn::physics_component, public freezer
     {
     public:
         fly_component()           = default;

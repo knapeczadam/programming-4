@@ -30,6 +30,8 @@ namespace qbert
 
     void flying_state::update()
     {
+        if (frozen_) return;
+        
         accu_time_ += mngn::game_time::instance().delta_time();
         if (accu_time_ <= flash_time)
         {

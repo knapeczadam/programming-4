@@ -26,6 +26,8 @@ namespace qbert
     class flicker_component;
     class player_collider_component;
     class game_state_component;
+    class fly_component;
+    class character_state_component;
     
     class scene_utility final : public mngn::singleton<scene_utility> 
     {
@@ -77,6 +79,8 @@ namespace qbert
             std::vector<mngn::sprite_ui_component*> sprite_ui_comp_ptrs;
             std::vector<player_collider_component*> player_collider_comp_ptrs;
             std::vector<mngn::collider_component*>  collider_comp_ptrs;
+            std::vector<fly_component*>             fly_comp_ptrs;
+            std::vector<character_state_component*> character_state_comp_ptrs;
         } current_scene_{};
     };
 }

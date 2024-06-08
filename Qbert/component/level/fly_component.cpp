@@ -16,6 +16,8 @@ namespace qbert
 
     void fly_component::fixed_update()
     {
+        if (frozen_) return;
+        
         if (is_flying_)
         {
             glm::vec2 curr_pos = owner()->local_position();
