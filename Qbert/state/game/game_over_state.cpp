@@ -26,6 +26,7 @@ namespace qbert
 
         scene_utility::instance().freeze_animation();
         scene_utility::instance().hide_all();
+        scene_utility::instance().kill_npcs();
     }
 
     void game_over_state::update()

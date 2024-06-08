@@ -3,6 +3,7 @@
 // Project includes
 #include "component/character/jump_component.h"
 #include "component/npc/spawn_component.h"
+#include "component/npc/npc_health_component.h"
 #include "component/player/fall_component.h"
 #include "component/player/player_collider_component.h"
 #include "component/state/character_state_component.h"
@@ -24,7 +25,7 @@ namespace qbert
 {
     void scene_utility::freeze_all()
     {
-        current_scene_.scene_ptr = mngn::scene_manager::instance().find_with_tag("current");
+        current_scene_.scene_ptr = current_scene();
         current_scene_.root_ptr = current_scene_.scene_ptr->find("root");
         
         current_scene_.jump_comp_ptrs      = current_scene_.root_ptr->components_in_children<jump_component>();
@@ -152,11 +153,25 @@ namespace qbert
 
     void scene_utility::show_npcs()
     {
-        auto scene_ptr = mngn::scene_manager::instance().find_with_tag("current");
+        auto scene_ptr = current_scene();
         auto npc_ptrs = scene_ptr->find_game_objects_with_tag("npc", true);
         for (auto npc_ptr : npc_ptrs)
         {
             npc_ptr->set_active(true);
+        }
+    }
+
+    void scene_utility::kill_npcs(bool ignore_coily)
+    {
+        auto scene_ptr = current_scene();
+        auto npc_ptrs = scene_ptr->find_game_objects_with_tag("npc", true);
+        for (auto npc_ptr : npc_ptrs)
+        {
+            if (ignore_coily and npc_ptr->has_tag("coily"))
+            {
+                continue;
+            }
+            npc_ptr->component<npc_health_component>()->take_damage(1);
         }
     }
 

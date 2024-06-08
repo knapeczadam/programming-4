@@ -49,6 +49,8 @@ namespace qbert
         void hide_npcs(bool ignore_coily = false);
         void show_npcs();
 
+        void kill_npcs(bool ignore_coily = false);
+
         void trigger_root();
         void trigger_npcs();
 

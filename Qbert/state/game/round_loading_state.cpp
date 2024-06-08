@@ -53,6 +53,7 @@ namespace qbert
         if (accu_time_ >= bonus_time_ and not bonus_given_)
         {
             disable_cube_animations();
+            scene_utility::instance().hide_all();
             
             auto bonus_go_ptrs = scene_utility::instance().current_scene()->find_game_objects_with_tag("bonus", true);
             for (auto bonus_ptr : bonus_go_ptrs)
@@ -62,7 +63,7 @@ namespace qbert
             
             auto bonus_go_ptr = scene_utility::instance().current_scene()->find_game_objects_with_tag("bonus_number").front();
             auto bonus = bonus_go_ptr->component<number_component>()->number();
-            scene_utility::instance().current_scene()->find_game_objects_with_tag("player").front()->component<score_counter_component>()->add_score(bonus);
+            scene_utility::instance().current_scene()->find_game_objects_with_tag("player", true).front()->component<score_counter_component>()->add_score(bonus);
             bonus_given_ = true;
         }
 

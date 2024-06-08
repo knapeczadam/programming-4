@@ -49,6 +49,7 @@ namespace qbert
         else if (character_ptr_->has_tag("coily"))
         {
             scene_utility::instance().show_npcs();
+            scene_utility::instance().kill_npcs(true);
         }
     }
 }
