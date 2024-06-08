@@ -1,24 +1,23 @@
 ﻿#include "initial_manager.h"
 
 // Project includes
-#include "progress_manager.h"
-#include "score_manager.h"
-
+#include "component/state/game_state_component.h"
+#include "core/audio_player.h"
+#include "core/factory.h"
+#include "core/progress_manager.h"
+#include "core/resources.h"
+#include "core/scene_utility.h"
+#include "core/score_manager.h"
+#include "core/sprites.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/scene.h"
 #include "minigin/core/scene_manager.h"
-
-// GLM includes
-#include <glm/glm.hpp>
-
-#include "factory.h"
-#include "resources.h"
-#include "scene_utility.h"
-#include "sprites.h"
-#include "component/state/game_state_component.h"
 #include "minigin/core/sprite_manager.h"
 #include "minigin/utility/sprite.h"
 #include "state/game/scoreboard_state.h"
+
+// GLM includes
+#include <glm/glm.hpp>
 
 namespace qbert
 {
@@ -52,7 +51,7 @@ namespace qbert
         case end:
             {
                save_initial();
-                
+                audio_player::instance().play(audio::initial_end);
                 auto game_state_comp_ptr = scene_utility::instance().game_state();
                 game_state_comp_ptr->change_state<scoreboard_state>(game_state_comp_ptr);
             }

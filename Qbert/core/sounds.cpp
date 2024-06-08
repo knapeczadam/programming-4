@@ -22,6 +22,7 @@ namespace qbert
             .register_effect(qb_re_e_disk_3_bonus)
             .register_effect(qb_re_e_disk_4_bonus)
             .register_effect(qb_re_e_disk_lift)
+            .register_effect(qb_re_e_initial_end)
             .register_effect(qb_re_e_qbert_fall)
             .register_effect(qb_re_e_qbert_jump)
             .register_effect(qb_re_e_qbert_swearing_1)

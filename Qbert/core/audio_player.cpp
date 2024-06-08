@@ -47,6 +47,9 @@ namespace qbert
         case audio::disk_lift:
             mngn::service_locator::sound_system().play_sound(qb_re_e_disk_lift, volume);
             break;
+        case audio::initial_end:
+            mngn::service_locator::sound_system().play_sound(qb_re_e_initial_end, volume);
+            break;
         case audio::qbert_fall:
             mngn::service_locator::sound_system().play_sound(qb_re_e_qbert_fall, volume);
             break;

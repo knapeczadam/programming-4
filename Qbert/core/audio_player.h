@@ -19,6 +19,7 @@ namespace qbert
         disk_3_bonus,
         disk_4_bonus,
         disk_lift,
+        initial_end,
         qbert_fall,
         qbert_jump,
         qbert_swearing_1,

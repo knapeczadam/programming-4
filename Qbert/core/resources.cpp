@@ -29,6 +29,7 @@ namespace qbert
     		.register_resource(qb_re_e_disk_3_bonus, "e_disk_3_bonus") 
     		.register_resource(qb_re_e_disk_4_bonus, "e_disk_4_bonus") 
     		.register_resource(qb_re_e_disk_lift, "e_disk_lift") 
+    		.register_resource(qb_re_e_initial_end, "e_initial_end") 
     		.register_resource(qb_re_e_qbert_fall, "e_qbert_fall") 
     		.register_resource(qb_re_e_qbert_jump, "e_qbert_jump") 
     		.register_resource(qb_re_e_qbert_swearing_1, "e_qbert_swearing_1") 

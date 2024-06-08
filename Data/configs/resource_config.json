@@ -75,6 +75,10 @@
       "path"     : "sounds/effects/disk_lift.mp3"
     },
     {
+      "id"       : "e_initial_end",
+      "path"     : "sounds/effects/initial_end.mp3"
+    },
+    {
       "id"       : "e_qbert_fall",
       "path"     : "sounds/effects/qbert_fall.mp3"
     },

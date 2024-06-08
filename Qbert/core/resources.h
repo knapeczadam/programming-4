@@ -22,6 +22,7 @@ namespace qbert
         qb_re_e_disk_3_bonus,
         qb_re_e_disk_4_bonus,
         qb_re_e_disk_lift,
+        qb_re_e_initial_end,
         qb_re_e_qbert_fall,
         qb_re_e_qbert_jump,
         qb_re_e_qbert_swearing_1,
