@@ -142,8 +142,7 @@ namespace qbert
                 character_state_comp_ptr->change_state<npc_idle_state>(character_ptr);
             }
         }
-
-        if (event == "health_decreased")
+        else if (event == "health_decreased")
         {
             auto health_comp_ptr = dynamic_cast<health_component*>(subject_ptr);
             auto character_ptr = health_comp_ptr->owner();
@@ -180,8 +179,7 @@ namespace qbert
                 character_ptr->component<character_state_component>()->change_state<npc_dead_state>(character_ptr);
             }
         }
-
-        if (event == "color_changed")
+        else if (event == "color_changed")
         {
             auto cube_comp_ptr = static_cast<cube_component*>(subject_ptr);
             auto &progress_manager = progress_manager::instance();
@@ -192,8 +190,7 @@ namespace qbert
                 game_state_comp_ptr->change_state<round_loading_state>(game_state_comp_ptr);
             }
         }
-
-        if (event == "extra_time")
+        else if (event == "extra_time")
         {
             scene_utility::instance().freeze_npcs();
             audio_player::instance().play(audio::extra_time);

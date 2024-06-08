@@ -39,7 +39,7 @@ namespace qbert
         
     public:
         coily_component()          = default;
-        coily_component(mngn::sprite *coily_sprite_ptr);
+        explicit coily_component(mngn::sprite *coily_sprite_ptr);
         ~coily_component() override = default;
 
         coily_component(coily_component const &other)            = delete;
