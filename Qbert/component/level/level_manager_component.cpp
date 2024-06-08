@@ -187,7 +187,10 @@ namespace qbert
             if (progress_manager.round_completed())
             {
                 auto game_state_comp_ptr = scene_utility::instance().game_state();
-                game_state_comp_ptr->change_state<round_loading_state>(game_state_comp_ptr);
+                if (not game_state_comp_ptr->is_state<round_loading_state>())
+                {
+                    game_state_comp_ptr->change_state<round_loading_state>(game_state_comp_ptr);
+                }
             }
         }
         else if (event == "extra_time")
