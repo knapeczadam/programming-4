@@ -1197,7 +1197,7 @@ namespace qbert
     		{
     			for (int i = 0; i < count; ++i)
 				{
-    				scene_info.npc_config_info.name = std::to_string(i);
+    				scene_info.npc_config_info.name = std::to_string(i + 1);
 					create_red_ball(scene_info);
 				}
     		}
@@ -1205,7 +1205,7 @@ namespace qbert
     		{
     			for (int i = 0; i < count; ++i)
     			{
-    				scene_info.npc_config_info.name = std::to_string(i);
+    				scene_info.npc_config_info.name = std::to_string(i + 1);
     				create_coily(scene_info);
     			}
     		}
@@ -1213,7 +1213,7 @@ namespace qbert
 			{
 				for (int i = 0; i < count; ++i)
 				{
-					scene_info.npc_config_info.name = std::to_string(i);
+					scene_info.npc_config_info.name = std::to_string(i + 1);
 					create_ugg(scene_info);
 				}
 			}
@@ -1221,7 +1221,7 @@ namespace qbert
 			{
 				for (int i = 0; i < count; ++i)
 				{
-					scene_info.npc_config_info.name = std::to_string(i);
+					scene_info.npc_config_info.name = std::to_string(i + 1);
 					create_wrong_way(scene_info);
 				}
 			}
@@ -1229,7 +1229,7 @@ namespace qbert
 			{
 				for (int i = 0; i < count; ++i)
 				{
-					scene_info.npc_config_info.name = std::to_string(i);
+					scene_info.npc_config_info.name = std::to_string(i + 1);
 					create_green_ball(scene_info);
 				}
 			}
@@ -1237,7 +1237,7 @@ namespace qbert
 			{
 				for (int i = 0; i < count; ++i)
 				{
-					scene_info.npc_config_info.name = std::to_string(i);
+					scene_info.npc_config_info.name = std::to_string(i + 1);
 					create_slick(scene_info);
 				}
 			}
@@ -1245,7 +1245,7 @@ namespace qbert
 			{
 				for (int i = 0; i < count; ++i)
 				{
-					scene_info.npc_config_info.name = std::to_string(i);
+					scene_info.npc_config_info.name = std::to_string(i + 1);
 					create_sam(scene_info);
 				}
 			}
