@@ -29,6 +29,10 @@ namespace qbert
             scene_utility::instance().freeze_animation();
             scene_utility::instance().hide_npcs();
         }
+        else if (character_ptr_->has_tag("coily"))
+        {
+            scene_utility::instance().hide_npcs(true);
+        }
     }
 
     void falling_state::on_exit()
@@ -41,6 +45,10 @@ namespace qbert
             character_ptr_->set_local_position(224.0f, 84.0f);
             character_ptr_->component<position_component>()->reset();
             character_ptr_->component<direction_component>()->reset();
+        }
+        else if (character_ptr_->has_tag("coily"))
+        {
+            scene_utility::instance().show_npcs();
         }
     }
 }

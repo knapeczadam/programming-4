@@ -136,12 +136,16 @@ namespace qbert
         }
     }
 
-    void scene_utility::hide_npcs()
+    void scene_utility::hide_npcs(bool ignore_coily)
     {
         auto scene_ptr = current_scene();
         auto npc_ptrs = scene_ptr->find_game_objects_with_tag("npc");
         for (auto npc_ptr : npc_ptrs)
         {
+            if (ignore_coily and npc_ptr->has_tag("coily"))
+            {
+                continue;
+            }
             npc_ptr->set_active(false);
         }
     }
