@@ -25,18 +25,24 @@ namespace qbert
     {
         character_ptr_->component<swear_component>()->swear(true);
         scene_utility::instance().freeze_all();
-        
-        if (mngn::random_int(0, 1)) audio_player::instance().play(audio::qbert_swearing_1);
-        else audio_player::instance().play(audio::qbert_swearing_2);
     }
 
     void swearing_state::update()
     {
-        accu_time_ += mngn::game_time::instance().delta_time();
-        if (accu_time_ >= swear_time_)
+        accu_time_swearing_ += mngn::game_time::instance().delta_time();
+        accu_time_audio_    += mngn::game_time::instance().delta_time();
+        if (not is_audio_played_ and accu_time_audio_ >= swear_audio_time_)
+        {
+            is_audio_played_ = true;
+            if (mngn::random_int(0, 1)) audio_player::instance().play(audio::qbert_swearing_1);
+            else audio_player::instance().play(audio::qbert_swearing_2);
+        }
+        if (accu_time_swearing_ >= swear_time_)
         {
             is_swearing_ = false;
-            accu_time_  = 0.0f;
+            is_audio_played_ = false;
+            accu_time_swearing_  = 0.0f;
+            accu_time_audio_     = 0.0f;
             
             // player is dead
             if (character_ptr_->component<health_component>()->health() == 0)

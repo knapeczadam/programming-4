@@ -2,23 +2,22 @@
 
 // Project includes
 #include "component/character/direction_component.h"
-#include "component/character/position_component.h"
 #include "component/character/health_component.h"
+#include "component/character/position_component.h"
+#include "component/player/score_counter_component.h"
+#include "component/state/character_state_component.h"
+#include "core/audio_player.h"
 #include "minigin/core/game_object.h"
+#include "minigin/core/scene.h"
+#include "state/player/idle_state.h"
+#include "state/player/jumping_state.h"
+#include "state/player/start_state.h"
 
 // Standard includes
 #include <iostream>
 
 // GLM includes
 #include <glm/glm.hpp>
-
-#include "score_counter_component.h"
-#include "component/state/character_state_component.h"
-#include "minigin/core/scene.h"
-#include "state/player/idle_state.h"
-#include "state/player/jumping_state.h"
-#include "state/player/start_state.h"
-
 
 namespace qbert
 {
@@ -88,6 +87,14 @@ namespace qbert
                 }
                 else
                 {
+                    if (other_ptr->has_tag("ball"))
+                    {
+                        audio_player::instance().play(audio::ball_bump);
+                    }
+                    else if (other_ptr->has_tag("coily"))
+                    {
+                        audio_player::instance().play(audio::coily_bump);
+                    }
                     owner()->component<health_component>()->take_damage(1);
                 }
             }

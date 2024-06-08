@@ -13,6 +13,7 @@ namespace qbert
         qb_re_e_ball_bump,
         qb_re_e_ball_jump,
         qb_re_e_bonus,
+        qb_re_e_coily_bump,
         qb_re_e_coily_egg_jump,
         qb_re_e_coily_fall,
         qb_re_e_coily_jump,

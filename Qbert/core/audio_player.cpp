@@ -20,6 +20,9 @@ namespace qbert
         case audio::bonus:
             mngn::service_locator::sound_system().play_sound(qb_re_e_bonus, volume);
             break;
+        case audio::coily_bump:
+            mngn::service_locator::sound_system().play_sound(qb_re_e_coily_bump, volume);
+            break;
         case audio::coily_egg_jump:
             mngn::service_locator::sound_system().play_sound(qb_re_e_coily_egg_jump, volume);
             break;

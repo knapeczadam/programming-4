@@ -13,6 +13,7 @@ namespace qbert
             .register_effect(qb_re_e_ball_bump)
             .register_effect(qb_re_e_ball_jump)
             .register_effect(qb_re_e_bonus)
+            .register_effect(qb_re_e_coily_bump)
             .register_effect(qb_re_e_coily_egg_jump)
             .register_effect(qb_re_e_coily_fall)
             .register_effect(qb_re_e_coily_jump)

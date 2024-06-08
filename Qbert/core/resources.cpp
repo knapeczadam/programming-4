@@ -20,6 +20,7 @@ namespace qbert
     		.register_resource(qb_re_e_ball_bump, "e_ball_bump")
     		.register_resource(qb_re_e_ball_jump, "e_ball_jump")
     		.register_resource(qb_re_e_bonus, "e_bonus") 
+    		.register_resource(qb_re_e_coily_bump, "e_coily_bump") 
     		.register_resource(qb_re_e_coily_egg_jump, "e_coily_egg_jump") 
     		.register_resource(qb_re_e_coily_fall, "e_coily_fall") 
     		.register_resource(qb_re_e_coily_jump, "e_coily_jump") 

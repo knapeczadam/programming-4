@@ -39,6 +39,10 @@
       "path"     : "sounds/effects/bonus.mp3"
     },
     {
+      "id"       : "e_coily_bump",
+      "path"     : "sounds/effects/coily_bump.mp3"
+    },
+    {
       "id"       : "e_coily_egg_jump",
       "path"     : "sounds/effects/coily_egg_jump.mp3"
     },

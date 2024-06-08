@@ -10,6 +10,7 @@ namespace qbert
         ball_bump,
         ball_jump,
         bonus,
+        coily_bump,
         coily_egg_jump,
         coily_fall,
         coily_jump,
