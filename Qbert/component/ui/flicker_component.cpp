@@ -16,11 +16,11 @@ namespace qbert
 
     void flicker_component::awake()
     {
-        if (auto sprite_ui_comp_ptr = owner()->component<mngn::sprite_ui_component>())
+        if (auto const sprite_ui_comp_ptr = owner()->component<mngn::sprite_ui_component>())
         {
             sprite_comp_ptr_ = sprite_ui_comp_ptr;
         }
-        else if (auto multisprite_ui_comp_ptr = owner()->component<mngn::multisprite_ui_component>())
+        else if (auto const multisprite_ui_comp_ptr = owner()->component<mngn::multisprite_ui_component>())
         {
             sprite_comp_ptr_ = multisprite_ui_comp_ptr;
         }
@@ -30,11 +30,11 @@ namespace qbert
     {
         is_flickering_ = true;
 
-        if (auto sprite_ui_comp_ptr = owner()->component<mngn::sprite_ui_component>())
+        if (auto const sprite_ui_comp_ptr = owner()->component<mngn::sprite_ui_component>())
         {
             sprite_comp_ptr_ = sprite_ui_comp_ptr;
         }
-        else if (auto multisprite_ui_comp_ptr = owner()->component<mngn::multisprite_ui_component>())
+        else if (auto const multisprite_ui_comp_ptr = owner()->component<mngn::multisprite_ui_component>())
         {
             sprite_comp_ptr_ = multisprite_ui_comp_ptr;
         }

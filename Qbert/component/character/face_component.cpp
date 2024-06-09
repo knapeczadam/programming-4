@@ -22,8 +22,8 @@ namespace qbert
 
     void face_component::set_sprite_orientation(int left_dir_frame, int right_dir_frame, int up_dir_frame, int down_dir_frame, int diagonal_dir_frame)
     {
-        int row_dir = direction_comp_ptr_->row();
-        int col_dir = direction_comp_ptr_->col();
+        int const row_dir = direction_comp_ptr_->row();
+        int const col_dir = direction_comp_ptr_->col();
         
         if (row_dir == -1 and col_dir == -1)
         {

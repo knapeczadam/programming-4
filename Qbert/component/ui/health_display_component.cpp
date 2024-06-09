@@ -28,7 +28,7 @@ namespace qbert
             if (auto const health_comp = dynamic_cast<health_component*>(subject_ptr))
             {
                 std::vector<mngn::sprite*> sprites;
-                auto health = health_comp->health();
+                auto const health = health_comp->health();
                 for (auto i = 0; i < health; ++i)
                 {
                     auto sprite_ptr = mngn::sprite_manager::instance().load_sprite(qb_sp_qbert_life, qb_re_t_sprite_general);

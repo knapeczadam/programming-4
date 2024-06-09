@@ -64,9 +64,9 @@ namespace qbert
 
     void jump_component::calculate_bezier_positions()
     {
-        start_pos_ = owner()->local_position();
-        int row_dir = direction_comp_ptr_->row();
-        int col_dir = direction_comp_ptr_->col();
+        start_pos_        = owner()->local_position();
+        int const row_dir = direction_comp_ptr_->row();
+        int col_dir       = direction_comp_ptr_->col();
         
         int offset_x_diagonal = 64;
 

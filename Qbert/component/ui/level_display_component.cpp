@@ -24,7 +24,7 @@ namespace qbert
         if (event == "update_level_display")
         {
             auto const level_comp_ptr = static_cast<level_counter_component*>(subject_ptr);
-            auto level = level_comp_ptr->level();
+            auto const level = level_comp_ptr->level();
             sprite_ui_comp_ptr_->sprite()->set_current_frame(level);
         }
     }

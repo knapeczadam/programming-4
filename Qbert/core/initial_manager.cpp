@@ -72,8 +72,8 @@ namespace qbert
 
     void initial_manager::save_initial()
     {
-        auto score = progress_manager::instance().score();
-        auto initial = initial_.empty() ? "   " : initial_;
+        auto const score = progress_manager::instance().score();
+        auto const initial = initial_.empty() ? "   " : initial_;
         score_manager::instance().set_score(score, initial);
         score_manager::instance().save_scoreboard();
         reset();
@@ -81,9 +81,9 @@ namespace qbert
 
     void initial_manager::move_underline()
     {
-        auto scene_ptr    = mngn::scene_manager::instance().find("input");
-        auto unerline_ptr = scene_ptr->find_game_objects_with_tag("active").front();
-        auto input_ptr    = scene_ptr->find_game_objects_with_tag(std::to_string(curr_input_)).front();
+        auto const scene_ptr    = mngn::scene_manager::instance().find("input");
+        auto const unerline_ptr = scene_ptr->find_game_objects_with_tag("active").front();
+        auto const input_ptr    = scene_ptr->find_game_objects_with_tag(std::to_string(curr_input_)).front();
         
         auto new_pos = input_ptr->local_position();
         float constexpr offset = 16.0f;
@@ -122,7 +122,7 @@ namespace qbert
     	std::vector<mngn::sprite*> sprites;
     	std::generate_n(std::back_inserter(sprites), initial_.length(), []
 		{
-			auto sprite_ptr =  mngn::sprite_manager::instance().load_sprite(qb_sp_alphabet_regular_special, qb_re_t_sprite_general, false);
+			auto const sprite_ptr =  mngn::sprite_manager::instance().load_sprite(qb_sp_alphabet_regular_special, qb_re_t_sprite_general, false);
 			sprite_ptr->set_current_frame(11);
     		return sprite_ptr;	
 		});

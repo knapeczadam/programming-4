@@ -45,8 +45,8 @@ namespace qbert
 
     void fall_component::calculate_bezier_positions([[maybe_unused]] int row_dir, [[maybe_unused]] int col_dir, [[maybe_unused]] int row_idx, int col_idx)
     {
-        float offset_x = 96.0f;
-        float offset_y = 96.0f;
+        float const offset_x = 96.0f;
+        float const offset_y = 96.0f;
         start_pos_ = owner()->local_position();
 
         if (col_idx == -1)

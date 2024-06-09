@@ -29,8 +29,8 @@ namespace mngn
     {
         if (sprite_ptr_)
         {
-            auto src = sprite_ptr_->src_rect();
-            auto dst = sprite_ptr_->dst_rect();
+            auto const src = sprite_ptr_->src_rect();
+            auto const dst = sprite_ptr_->dst_rect();
             auto const &pos = owner()->world_position();
             
             SDL_Rect src_rect;

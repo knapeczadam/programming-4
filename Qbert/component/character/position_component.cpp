@@ -63,8 +63,8 @@ namespace qbert
 
     void position_component::move_to_previous()
     {
-        float offset_x = 32.0f;
-        float offset_y = 48.0f;
+        float const offset_x = 32.0f;
+        float const offset_y = 48.0f;
 
         glm::vec2 start_pos = {224.0f, 84.0f};
         glm::vec2 end_pos;

@@ -53,7 +53,7 @@ namespace qbert
         {
             start_pos_.y = -32.0f;
             end_pos_.y = 132.0f;
-            bool is_right = mngn::random_int(0, 1);
+            bool const is_right = mngn::random_int(0, 1);
             start_pos_.x = is_right ? 256.0f : 192.0f;
             end_pos_.x = start_pos_.x;
             character_ptr_->component<direction_component>()->set_direction(1, is_right);

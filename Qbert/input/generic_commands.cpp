@@ -49,7 +49,7 @@ namespace qbert
 
     void insert_coin_command::execute()
     {
-        auto game_state_comp_ptr = scene_utility::instance().game_state();
+        auto const game_state_comp_ptr = scene_utility::instance().game_state();
         if (game_state_comp_ptr->is_state<menu_state>())
         {
             auto number_comp_ptrs = scene_utility::instance().current_scene()->find_game_objects_with_tag("coin");

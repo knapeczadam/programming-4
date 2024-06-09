@@ -53,9 +53,9 @@ namespace qbert
             
             float color = accu_time_;
             if (color > 1.0f) color -= 1.0f;
-            Uint8 r = static_cast<Uint8>(color * 145);
-            Uint8 g = static_cast<Uint8>(185 - color * 185);
-            Uint8 b = static_cast<Uint8>(color * 165);
+            Uint8 const r = static_cast<Uint8>(color * 145);
+            Uint8 const g = static_cast<Uint8>(185 - color * 185);
+            Uint8 const b = static_cast<Uint8>(color * 165);
             mngn::renderer::instance().set_background_color({r, g, b, 1});
             
             if (accu_time_ >= extra_time_)
@@ -72,13 +72,13 @@ namespace qbert
     {
         if (event == "position_changed")
         {
-            auto position_comp_ptr = static_cast<position_component*>(subject_ptr);
+            auto const position_comp_ptr = static_cast<position_component*>(subject_ptr);
             auto const row_idx = position_comp_ptr->row();
             auto const cold_idx = position_comp_ptr->col();
 
             auto character_ptr = position_comp_ptr->owner();
-            auto character_state_comp_ptr = character_ptr->component<character_state_component>();
-            auto direction_comp_ptr = character_ptr->component<direction_component>();
+            auto const character_state_comp_ptr = character_ptr->component<character_state_component>();
+            auto const direction_comp_ptr = character_ptr->component<direction_component>();
             auto const row_dir = direction_comp_ptr->row();
             auto const col_dir = direction_comp_ptr->col();
 
@@ -102,8 +102,8 @@ namespace qbert
                     // right side
                     else if (row_idx + 1 == disk_ptr->row() and cold_idx + 1 == disk_ptr->col())
                     {
-                        auto pos = disk_ptr->owner()->local_position();
-                        auto new_pos = glm::vec2{pos} + glm::vec2{-2.0f, -14.0f};
+                        auto const pos = disk_ptr->owner()->local_position();
+                        auto const new_pos = glm::vec2{pos} + glm::vec2{-2.0f, -14.0f};
                         disk_ptr->owner()->set_local_position(new_pos);
                         character_state_comp_ptr->change_state<flying_state>(character_ptr, disk_ptr);
                         return;
@@ -140,9 +140,9 @@ namespace qbert
         }
         else if (event == "health_decreased")
         {
-            auto health_comp_ptr = dynamic_cast<health_component*>(subject_ptr);
+            auto const health_comp_ptr = dynamic_cast<health_component*>(subject_ptr);
             auto character_ptr = health_comp_ptr->owner();
-            auto position_idx_comp_ptr = character_ptr->component<position_component>();
+            auto const position_idx_comp_ptr = character_ptr->component<position_component>();
             auto const row_idx = position_idx_comp_ptr->row();
             auto const col_idx = position_idx_comp_ptr->col();
 
@@ -177,7 +177,7 @@ namespace qbert
         }
         else if (event == "color_changed")
         {
-            auto cube_comp_ptr = static_cast<cube_component*>(subject_ptr);
+            auto const cube_comp_ptr = static_cast<cube_component*>(subject_ptr);
             auto &progress_manager = progress_manager::instance();
             progress_manager.set_cube(cube_comp_ptr->owner()->name(), cube_comp_ptr->has_final_color());
             if (progress_manager.round_completed())

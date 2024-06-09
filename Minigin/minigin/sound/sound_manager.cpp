@@ -14,7 +14,7 @@ namespace mngn
             muted_ = false;
             volume_ = previous_volume_;
 
-            for (auto const effect_ptr : sound_effects_)
+            for (auto const &effect_ptr : sound_effects_)
             {
                 effect_ptr->set_volume(volume_);
             }
@@ -27,7 +27,7 @@ namespace mngn
             previous_volume_ = volume_;
             volume_ = 0;
 
-            for (auto const effect_ptr : sound_effects_)
+            for (auto const &effect_ptr : sound_effects_)
             {
                 effect_ptr->set_volume(0);
             }
@@ -53,14 +53,14 @@ namespace mngn
         
         if (registered_effects_.contains(id))
         {
-            auto effect_ptr = resource_manager::instance().get_sound_effect(id);
+            auto const effect_ptr = resource_manager::instance().get_sound_effect(id);
             sound_effects_.insert(effect_ptr);
             effect_ptr->set_volume(volume);
             effect_ptr->play(0);
         }
         else if (registered_streams_.contains(id))
         {
-            auto stream_ptr = resource_manager::instance().get_sound_stream(id);
+            auto const stream_ptr = resource_manager::instance().get_sound_stream(id);
             sound_streams_.insert(stream_ptr);
             sound_stream::set_volume(volume);
             stream_ptr->play(0);

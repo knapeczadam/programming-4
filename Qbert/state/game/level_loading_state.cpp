@@ -61,7 +61,7 @@ namespace qbert
         accu_time_jump_ += mngn::game_time::instance().delta_time();
         if (accu_time_jump_ > jump_time_ and not events_.empty())
         {
-        	auto event = events_.front();
+        	auto const event = events_.front();
         	events_.pop();
         	event();
         	accu_time_jump_ = 0.0f;
@@ -85,7 +85,7 @@ namespace qbert
 
 	void level_loading_state::init_events()
 	{
-    	auto level = progress_manager::instance().level();
+    	auto const level = progress_manager::instance().level();
 	    switch (level)
 	    {
 	    case 1:
@@ -136,9 +136,9 @@ namespace qbert
     {
     	auto f = [this]()
     	{
-    		auto direction_comp_ptr = qbert_ptr_->component<direction_component>();
+    		auto const direction_comp_ptr = qbert_ptr_->component<direction_component>();
     		direction_comp_ptr->set_direction(-1, -1);
-    		auto player_state_comp_ptr = qbert_ptr_->component<character_state_component>();
+    		auto const player_state_comp_ptr = qbert_ptr_->component<character_state_component>();
     		player_state_comp_ptr->change_state<jumping_state>(qbert_ptr_);
     	};
     	events_.emplace(f);
@@ -148,9 +148,9 @@ namespace qbert
     {
     	auto f = [this]()
     	{
-    		auto direction_comp_ptr = qbert_ptr_->component<direction_component>();
+    		auto const direction_comp_ptr = qbert_ptr_->component<direction_component>();
     		direction_comp_ptr->set_direction(1, 1);
-    		auto player_state_comp_ptr = qbert_ptr_->component<character_state_component>();
+    		auto const player_state_comp_ptr = qbert_ptr_->component<character_state_component>();
     		player_state_comp_ptr->change_state<jumping_state>(qbert_ptr_);
     	};
     	events_.emplace(f);
@@ -160,9 +160,9 @@ namespace qbert
     {
     	auto f = [this]()
     	{
-    		auto direction_comp_ptr = qbert_ptr_->component<direction_component>();
+    		auto const direction_comp_ptr = qbert_ptr_->component<direction_component>();
     		direction_comp_ptr->set_direction(-1, 0);
-    		auto player_state_comp_ptr = qbert_ptr_->component<character_state_component>();
+    		auto const player_state_comp_ptr = qbert_ptr_->component<character_state_component>();
     		player_state_comp_ptr->change_state<jumping_state>(qbert_ptr_);
     	};
     	events_.emplace(f);
@@ -172,9 +172,9 @@ namespace qbert
     {
     	auto f = [this]()
     	{
-    		auto direction_comp_ptr = qbert_ptr_->component<direction_component>();
+    		auto const direction_comp_ptr = qbert_ptr_->component<direction_component>();
     		direction_comp_ptr->set_direction(1, 0);
-    		auto player_state_comp_ptr = qbert_ptr_->component<character_state_component>();
+    		auto const player_state_comp_ptr = qbert_ptr_->component<character_state_component>();
     		player_state_comp_ptr->change_state<jumping_state>(qbert_ptr_);
     	};
     	events_.emplace(f);

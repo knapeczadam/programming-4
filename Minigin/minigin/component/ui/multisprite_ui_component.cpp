@@ -31,9 +31,9 @@ namespace mngn
         SDL_Rect dst_rect{};
         for (int i = 0; i < std::ssize(sprites_); ++i)
         {
-            sprite *sprite = sprites_[i];
-            auto src = sprite->src_rect();
-            auto dst = sprite->dst_rect();
+            sprite const *sprite = sprites_[i];
+            auto const src = sprite->src_rect();
+            auto const dst = sprite->dst_rect();
             auto const &pos = owner()->world_position();
             
             SDL_Rect src_rect;

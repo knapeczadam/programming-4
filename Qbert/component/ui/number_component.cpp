@@ -39,7 +39,7 @@ namespace qbert
         std::deque<mngn::sprite*> sprites;
         if (number == 0)
         {
-            auto sprite_ptr = mngn::sprite_manager::instance().load_sprite(sprite_id_,  texture_id_, false);
+            auto const sprite_ptr = mngn::sprite_manager::instance().load_sprite(sprite_id_,  texture_id_, false);
             sprites.push_front(sprite_ptr);
         }
         for (; number > 0; number /= 10)

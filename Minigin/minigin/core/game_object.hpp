@@ -169,7 +169,7 @@ namespace mngn
         auto component = std::make_unique<T>(std::forward<Args>(args)...);
         component->set_owner(this);
         auto comp_ptr = component.get();
-        if (auto collider_comp_ptr = dynamic_cast<collider_component*>(comp_ptr))
+        if (auto const collider_comp_ptr = dynamic_cast<collider_component*>(comp_ptr))
         {
             collision_manager::instance().add_collider(collider_comp_ptr);
         }

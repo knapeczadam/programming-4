@@ -55,8 +55,8 @@ namespace qbert
 
     void progress_manager::set_cube(std::string const &name, bool has_final_color)
     {
-        auto scene_key = std::to_string(level_) + '_' + std::to_string(round_);
-        auto it = cubes_.find(scene_key);
+        auto const scene_key = std::to_string(level_) + '_' + std::to_string(round_);
+        auto const it = cubes_.find(scene_key);
         if (it != cubes_.end())
         {
             it->second[name] = has_final_color;
@@ -69,7 +69,7 @@ namespace qbert
 
     auto progress_manager::round_completed() const -> bool
     {
-        auto it = cubes_.find(std::to_string(level_) + '_' + std::to_string(round_));
+        auto const it = cubes_.find(std::to_string(level_) + '_' + std::to_string(round_));
         if (it != cubes_.end())
         {
             auto current_map = it->second;

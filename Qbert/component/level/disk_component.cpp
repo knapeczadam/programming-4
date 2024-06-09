@@ -38,9 +38,9 @@ namespace qbert
     void disk_component::init()
     {
         
-        glm::vec2 origin{208, 96};
-        int offset_x = -32;
-        int offset_y = 48;
+        glm::vec2 const origin{208, 96};
+        int const offset_x = -32;
+        int const offset_y = 48;
 
         glm::vec2 pos = origin + glm::vec2{row_idx_ * offset_x, row_idx_ * offset_y};
         if (col_idx_ == -1)

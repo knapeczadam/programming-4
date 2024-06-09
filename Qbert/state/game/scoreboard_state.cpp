@@ -36,7 +36,7 @@ namespace qbert
 
     void scoreboard_state::on_exit()
     {
-		auto scores_go_ptrs = scene_ptr_->find_game_objects_with_tag("score");
+		auto const scores_go_ptrs = scene_ptr_->find_game_objects_with_tag("score");
     	for (auto const &score_go_ptr : scores_go_ptrs)
 		{
 			scene_ptr_->remove(score_go_ptr);

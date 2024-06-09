@@ -64,7 +64,7 @@ namespace qbert
         info.round_counter_comp_ptr = info.go_ptr->add_component<round_counter_component>();
         info.collider_comp_ptr      = info.go_ptr->add_component<player_collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_offset_x(), sprite_ptr->collider_offset_y());
 
-        auto swearing_go_ptr = config.scene_ptr->create_game_object(config.name + "_swearing");
+        auto const swearing_go_ptr = config.scene_ptr->create_game_object(config.name + "_swearing");
         swearing_go_ptr->set_parent(info.go_ptr);
         swearing_go_ptr->set_local_position(-24.0f, -50.0f);
         swearing_go_ptr->add_component<mngn::sprite_component>(qb_sp_qbert_swearing, config.texture_id);
@@ -169,8 +169,8 @@ namespace qbert
         info.go_ptr->add_component<jump_component>();
         info.go_ptr->add_component<spawn_component>(config.spawn_time_min, config.spawn_time_max);
         info.go_ptr->add_component<fall_component>();
-        auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
-        auto sprite_ptr = sprite_comp_ptr->sprite();
+        auto const sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
+        auto const sprite_ptr = sprite_comp_ptr->sprite();
         info.go_ptr->add_component<mngn::collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_offset_x(), sprite_ptr->collider_offset_y());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>();
         info.health_comp_ptr   = info.go_ptr->add_component<npc_health_component>(1);
@@ -189,8 +189,8 @@ namespace qbert
         info.go_ptr->add_component<jump_component>();
         info.go_ptr->add_component<spawn_component>(config.spawn_time_min, config.spawn_time_max);
         info.go_ptr->add_component<fall_component>();
-        auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
-        auto sprite_ptr = sprite_comp_ptr->sprite();
+        auto const sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
+        auto const sprite_ptr = sprite_comp_ptr->sprite();
         info.go_ptr->add_component<mngn::collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_offset_x(), sprite_ptr->collider_offset_y());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>();
         info.health_comp_ptr   = info.go_ptr->add_component<npc_health_component>(1);
@@ -212,8 +212,8 @@ namespace qbert
         info.go_ptr->add_component<fall_component>();
         auto coily_sprite_ptr = mngn::sprite_manager::instance().load_sprite(qb_sp_coily, config.texture_id);
         info.go_ptr->add_component<coily_component>(coily_sprite_ptr);
-        auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
-        auto sprite_ptr = sprite_comp_ptr->sprite();
+        auto const sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
+        auto const sprite_ptr = sprite_comp_ptr->sprite();
         info.go_ptr->add_component<mngn::collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_offset_x(), sprite_ptr->collider_offset_y());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>();
         info.health_comp_ptr   = info.go_ptr->add_component<npc_health_component>(1);
@@ -301,8 +301,8 @@ namespace qbert
         info.go_ptr->add_component<face_component>();
         info.go_ptr->add_component<spawn_component>(config.spawn_time_min, config.spawn_time_max);
         info.go_ptr->add_component<fall_component>();
-        auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
-        auto sprite_ptr = sprite_comp_ptr->sprite();
+        auto const sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
+        auto const sprite_ptr = sprite_comp_ptr->sprite();
         info.go_ptr->add_component<mngn::collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_offset_x(), sprite_ptr->collider_offset_y());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>(6, 6);
         info.health_comp_ptr   = info.go_ptr->add_component<npc_health_component>(1);
@@ -322,8 +322,8 @@ namespace qbert
         info.go_ptr->add_component<face_component>();
         info.go_ptr->add_component<spawn_component>(config.spawn_time_min, config.spawn_time_max);
         info.go_ptr->add_component<fall_component>();
-        auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
-        auto sprite_ptr = sprite_comp_ptr->sprite();
+        auto const sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
+        auto const sprite_ptr = sprite_comp_ptr->sprite();
         info.go_ptr->add_component<mngn::collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_offset_x(), sprite_ptr->collider_offset_y());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>(6, 0);
         info.health_comp_ptr   = info.go_ptr->add_component<npc_health_component>(1);
@@ -343,8 +343,8 @@ namespace qbert
         info.go_ptr->add_component<face_component>();
         info.go_ptr->add_component<spawn_component>(config.spawn_time_min, config.spawn_time_max);
         info.go_ptr->add_component<fall_component>();
-        auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
-        auto sprite_ptr = sprite_comp_ptr->sprite();
+        auto const sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
+        auto const sprite_ptr = sprite_comp_ptr->sprite();
         info.go_ptr->add_component<mngn::collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_offset_x(), sprite_ptr->collider_offset_y());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>();
         info.health_comp_ptr   = info.go_ptr->add_component<npc_health_component>(1);
@@ -364,8 +364,8 @@ namespace qbert
         info.go_ptr->add_component<face_component>();
         info.go_ptr->add_component<spawn_component>(config.spawn_time_min, config.spawn_time_max);
         info.go_ptr->add_component<fall_component>();
-        auto sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
-        auto sprite_ptr = sprite_comp_ptr->sprite();
+        auto const sprite_comp_ptr = info.go_ptr->add_component<mngn::sprite_component>(config.sprite_id, config.texture_id);
+        auto const sprite_ptr = sprite_comp_ptr->sprite();
         info.go_ptr->add_component<mngn::collider_component>(sprite_ptr->collider_width(), sprite_ptr->collider_height(), sprite_ptr->collider_offset_x(), sprite_ptr->collider_offset_y());
         info.position_comp_ptr = info.go_ptr->add_component<position_component>();
         info.health_comp_ptr   = info.go_ptr->add_component<health_component>(1);
@@ -390,9 +390,9 @@ namespace qbert
     {
         cube_info info{};
 
-        glm::vec2 origin{208, 96};
-        int offset_x = -32;
-        int offset_y = 48;
+        constexpr glm::vec2 origin{208, 96};
+        constexpr int offset_x = -32;
+        constexpr int offset_y = 48;
 
         cube_config_info cube_config{};
         cube_config = config;
@@ -513,7 +513,7 @@ namespace qbert
         info.go_ptr->add_tag("ui");
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
-        auto fps_comp_ptr = info.go_ptr->add_component<mngn::fps_component>();
+        auto const fps_comp_ptr = info.go_ptr->add_component<mngn::fps_component>();
         fps_comp_ptr->set_font(config.font_ptr);
         fps_comp_ptr->set_text(config.text);
         return info;
@@ -587,7 +587,7 @@ namespace qbert
         info.go_ptr->add_tag("ui");
         info.go_ptr->set_parent(config.parent_ptr);
         info.go_ptr->set_local_position(config.local_position);
-        auto sprite_ui_comp_ptr = info.go_ptr->add_component<mngn::sprite_ui_component>(config.sprite_id, config.texture_id, config.cached);
+        auto const sprite_ui_comp_ptr = info.go_ptr->add_component<mngn::sprite_ui_component>(config.sprite_id, config.texture_id, config.cached);
         if (config.curr_frame) sprite_ui_comp_ptr->sprite()->set_current_frame(config.curr_frame.value());
         return info;
     }
@@ -601,12 +601,12 @@ namespace qbert
         info.go_ptr->set_local_position(config.local_position);
         if (config.orientation)
         {
-            auto multisprite_ui_comp_ptr = info.go_ptr->add_component<mngn::multisprite_ui_component>(config.orientation.value());
+            auto const multisprite_ui_comp_ptr = info.go_ptr->add_component<mngn::multisprite_ui_component>(config.orientation.value());
             multisprite_ui_comp_ptr->set_sprites(config.sprites);
         }
         else
         {
-            auto multisprite_ui_comp_ptr = info.go_ptr->add_component<mngn::multisprite_ui_component>();
+            auto const multisprite_ui_comp_ptr = info.go_ptr->add_component<mngn::multisprite_ui_component>();
             multisprite_ui_comp_ptr->set_sprites(config.sprites);
         }
         return info;

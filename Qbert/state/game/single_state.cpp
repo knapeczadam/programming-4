@@ -15,8 +15,8 @@ namespace qbert
 
     void single_state::on_enter()
     {
-        auto level = std::to_string(progress_manager::instance().level());
-        auto round = std::to_string(progress_manager::instance().round());
+        auto const level = std::to_string(progress_manager::instance().level());
+        auto const round = std::to_string(progress_manager::instance().round());
         scene_ptr_ = mngn::scene_manager::instance().find("single_" + level + "_" + round);
         scene_ptr_->set_tag("current");
         scene_ptr_->set_active(true);

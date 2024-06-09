@@ -55,7 +55,7 @@ namespace qbert
         while (!q.empty())
         {
             // Pop the node at the front of the queue
-            int node = q.front();
+            int const node = q.front();
             q.pop();
 
             // Explore all the neighbours of the current node
@@ -101,24 +101,24 @@ namespace qbert
 
         // vector path stores the shortest path
         std::vector<int> path;
-        int currentNode = D;
+        int current_node = D;
         path.push_back(D);
-        while (par[currentNode] != -1)
+        while (par[current_node] != -1)
         {
-            path.push_back(par[currentNode]);
-            currentNode = par[currentNode];
+            path.push_back(par[current_node]);
+            current_node = par[current_node];
         }
 
 #ifndef NDEBUG
         // printing path from source to destination
-        for (int i = (int) path.size() - 1; i >= 0; i--)
+        for (int i = static_cast<int>(path.size()) - 1; i >= 0; i--)
             std::cout << path[i] << " ";
         std::cout << '\n';
 #endif
 
         if (path.size() > 1)
         {
-            auto second_node = path[path.size() - 2];
+            auto const second_node = path[path.size() - 2];
             return to_pyramid_index(second_node);
         }
         return {};
@@ -176,8 +176,8 @@ namespace qbert
         owner()->remove_tag("ball");
         owner()->add_tag("coily");
         sprite_comp_ptr_->set_sprite(coily_sprite_ptr_);
-        auto pos = owner()->local_position();
-        auto new_pos = glm::vec2{pos} + glm::vec2{0.0f, -32.0f};
+        auto const pos = owner()->local_position();
+        auto const new_pos = glm::vec2{pos} + glm::vec2{0.0f, -32.0f};
         owner()->set_local_position(new_pos);
 
         owner()->component<mngn::collider_component>()->set_collider(
@@ -193,8 +193,8 @@ namespace qbert
         owner()->add_tag("coily_egg");
         owner()->add_tag("ball");
         sprite_comp_ptr_->set_sprite(egg_sprite_ptr_);
-        auto pos = owner()->local_position();
-        auto new_pos = glm::vec2{pos} + glm::vec2{0.0f, 32.0f};
+        auto const pos = owner()->local_position();
+        auto const new_pos = glm::vec2{pos} + glm::vec2{0.0f, 32.0f};
         owner()->set_local_position(new_pos);
 
         owner()->component<mngn::collider_component>()->set_collider(
@@ -206,13 +206,13 @@ namespace qbert
 
     void coily_component::calculate_next_move()
     {
-        auto scene_ptr = scene_utility::instance().current_scene();
-        auto player_go_ptrs = scene_ptr->find_game_objects_with_tag("player");
-        mngn::game_object *player_go_ptr = nullptr;
+        auto const scene_ptr = scene_utility::instance().current_scene();
+        auto const player_go_ptrs = scene_ptr->find_game_objects_with_tag("player");
+        mngn::game_object const *player_go_ptr = nullptr;
         float min_distance = std::numeric_limits<float>::max();
-        for (auto go_ptr : player_go_ptrs)
+        for (auto const &go_ptr : player_go_ptrs)
         {
-            auto distance = glm::distance(go_ptr->local_position(), owner()->local_position());
+            auto const distance = glm::distance(go_ptr->local_position(), owner()->local_position());
             if (distance < min_distance)
             {
                 player_go_ptr = go_ptr;
@@ -220,15 +220,15 @@ namespace qbert
             }
         }
 
-        auto player_row_idx = player_go_ptr->component<position_component>()->row();
-        auto player_col_idx = player_go_ptr->component<position_component>()->col();
-        auto coily_row_idx  = owner()->component<position_component>()->row();
-        auto coily_col_idx  = owner()->component<position_component>()->col();
+        auto const player_row_idx = player_go_ptr->component<position_component>()->row();
+        auto const player_col_idx = player_go_ptr->component<position_component>()->col();
+        auto const coily_row_idx  = owner()->component<position_component>()->row();
+        auto const coily_col_idx  = owner()->component<position_component>()->col();
 
-        auto start_idx = path_finder_.to_graph_index(coily_row_idx, coily_col_idx);
-        auto end_idx   = path_finder_.to_graph_index(player_row_idx, player_col_idx);
-        auto next_pos  = path_finder_.get_next_position(start_idx, end_idx);
-        auto next_dir  = next_pos - glm::ivec2{coily_row_idx, coily_col_idx};
+        auto const start_idx = path_finder_.to_graph_index(coily_row_idx, coily_col_idx);
+        auto const end_idx   = path_finder_.to_graph_index(player_row_idx, player_col_idx);
+        auto const next_pos  = path_finder_.get_next_position(start_idx, end_idx);
+        auto const next_dir  = next_pos - glm::ivec2{coily_row_idx, coily_col_idx};
 
         owner()->component<direction_component>()->set_direction(next_dir.x, next_dir.y);
     }

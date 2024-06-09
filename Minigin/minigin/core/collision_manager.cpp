@@ -73,8 +73,8 @@ namespace mngn
     {
         auto const &pos_1 = collider_1_ptr->owner()->world_position() + glm::vec3{collider_1_ptr->offset_x(), collider_1_ptr->offset_y(), 0};
         auto const &pos_2 = collider_2_ptr->owner()->world_position() + glm::vec3{collider_2_ptr->offset_x(), collider_2_ptr->offset_y(), 0};
-        bool collision_x = pos_1.x + collider_1_ptr->width() >= pos_2.x and pos_1.x <= pos_2.x + collider_2_ptr->width();
-        bool collision_y = pos_1.y + collider_1_ptr->height() >= pos_2.y and pos_1.y <= pos_2.y + collider_2_ptr->height();
+        bool const collision_x = pos_1.x + collider_1_ptr->width() >= pos_2.x and pos_1.x <= pos_2.x + collider_2_ptr->width();
+        bool const collision_y = pos_1.y + collider_1_ptr->height() >= pos_2.y and pos_1.y <= pos_2.y + collider_2_ptr->height();
         return collision_x and collision_y;
     }
 }

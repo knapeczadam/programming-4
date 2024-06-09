@@ -35,8 +35,8 @@ namespace qbert
         accu_time_ += mngn::game_time::instance().delta_time();
         if (accu_time_ <= flash_time)
         {
-            float t = glm::clamp(accu_time_ / flash_time, 0.0f, 1.0f);
-            auto gradient_green = static_cast<Uint8>(glm::mix(185, 0, t));
+            float const t = glm::clamp(accu_time_ / flash_time, 0.0f, 1.0f);
+            auto const gradient_green = static_cast<Uint8>(glm::mix(185, 0, t));
             mngn::renderer::instance().set_background_color({0, gradient_green, 0, 1});
         }
         if (accu_time_ >= fly_time_)
@@ -53,11 +53,11 @@ namespace qbert
         character_ptr_->component<direction_component>()->reset();
         character_ptr_->component<position_component>()->update_position();
 
-        auto scene_ptr = scene_utility::instance().current_scene();
-        auto flying_disk_go_ptrs = scene_ptr->find_game_objects_with_tag("flying_disk");
+        auto const scene_ptr = scene_utility::instance().current_scene();
+        auto const flying_disk_go_ptrs = scene_ptr->find_game_objects_with_tag("flying_disk");
         if (not flying_disk_go_ptrs.empty())
         {
-            auto flying_disk_go_ptr = flying_disk_go_ptrs.front();
+            auto const flying_disk_go_ptr = flying_disk_go_ptrs.front();
             flying_disk_go_ptr->component<disk_component>()->disable();
             flying_disk_go_ptr->clear_tags();
         }

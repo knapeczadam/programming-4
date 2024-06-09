@@ -43,7 +43,7 @@ namespace qbert
 
         if (game_state()->is_state<coop_state>())
         {
-            for (auto comp_ptr : current_scene_.jump_comp_ptrs)
+            for (auto const &comp_ptr : current_scene_.jump_comp_ptrs)
             {
                 if (comp_ptr->owner()->has_tag("player"))
                 {
@@ -55,7 +55,7 @@ namespace qbert
                 }
             }
 
-            for (auto comp_ptr : current_scene_.fall_comp_ptrs)
+            for (auto const &comp_ptr : current_scene_.fall_comp_ptrs)
             {
                 if (comp_ptr->owner()->has_tag("player"))
                 {
@@ -67,7 +67,7 @@ namespace qbert
                 }
             }
 
-            for (auto comp_ptr : current_scene_.character_state_comp_ptrs)
+            for (auto const &comp_ptr : current_scene_.character_state_comp_ptrs)
             {
                 if (comp_ptr->owner()->has_tag("player") and not comp_ptr->is_state<swearing_state>())
                 {
@@ -94,7 +94,7 @@ namespace qbert
     {
         if (game_state()->is_state<coop_state>())
         {
-            for (auto comp_ptr : current_scene_.jump_comp_ptrs)
+            for (auto const &comp_ptr : current_scene_.jump_comp_ptrs)
             {
                 if (comp_ptr->owner()->has_tag("player"))
                 {
@@ -106,7 +106,7 @@ namespace qbert
                 }
             }
 
-            for (auto comp_ptr : current_scene_.fall_comp_ptrs)
+            for (auto const &comp_ptr : current_scene_.fall_comp_ptrs)
             {
                 if (comp_ptr->owner()->has_tag("player"))
                 {
@@ -118,7 +118,7 @@ namespace qbert
                 }
             }
             
-            for (auto comp_ptr : current_scene_.character_state_comp_ptrs)
+            for (auto const &comp_ptr : current_scene_.character_state_comp_ptrs)
             {
                 if (comp_ptr->owner()->has_tag("player") and  not comp_ptr->is_state<swearing_state>())
                 {
@@ -165,9 +165,9 @@ namespace qbert
     void scene_utility::freeze_npcs()
     {
         current_scene_.scene_ptr = current_scene();
-        auto npc_ptrs = current_scene()->find_game_objects_with_tag("npc");
+        auto const npc_ptrs = current_scene()->find_game_objects_with_tag("npc");
 
-        for (auto npc_ptr : npc_ptrs)
+        for (auto const &npc_ptr : npc_ptrs)
         {
             npc_ptr->component<jump_component>()->freeze();
             npc_ptr->component<spawn_component>()->freeze();
@@ -180,9 +180,9 @@ namespace qbert
     void scene_utility::unfreeze_npcs()
     {
         current_scene_.scene_ptr = current_scene();
-        auto npc_ptrs = current_scene()->find_game_objects_with_tag("npc");
+        auto const npc_ptrs = current_scene()->find_game_objects_with_tag("npc");
 
-        for (auto npc_ptr : npc_ptrs)
+        for (auto const &npc_ptr : npc_ptrs)
         {
             npc_ptr->component<jump_component>()->unfreeze();
             npc_ptr->component<spawn_component>()->unfreeze();
@@ -195,13 +195,13 @@ namespace qbert
     void scene_utility::hide_all()
     {
         auto scene_ptr = current_scene();
-        auto npc_ptrs = scene_ptr->find_game_objects_with_tag("npc");
-        for (auto npc_ptr : npc_ptrs)
+        auto const npc_ptrs = scene_ptr->find_game_objects_with_tag("npc");
+        for (auto const &npc_ptr : npc_ptrs)
         {
             npc_ptr->set_active(false);
         }
-        auto player_ptrs = scene_ptr->find_game_objects_with_tag("player");
-        for (auto player_ptr : player_ptrs)
+        auto const player_ptrs = scene_ptr->find_game_objects_with_tag("player");
+        for (auto const &player_ptr : player_ptrs)
         {
             player_ptr->set_active(false);
         }
@@ -209,14 +209,14 @@ namespace qbert
 
     void scene_utility::show_all()
     {
-        auto scene_ptr = current_scene();
-        auto npc_ptrs = scene_ptr->find_game_objects_with_tag("npc", true);
-        for (auto npc_ptr : npc_ptrs)
+        auto const scene_ptr = current_scene();
+        auto const npc_ptrs = scene_ptr->find_game_objects_with_tag("npc", true);
+        for (auto const &npc_ptr : npc_ptrs)
         {
             npc_ptr->set_active(true);
         }
-        auto player_ptrs = scene_ptr->find_game_objects_with_tag("player", true);
-        for (auto player_ptr : player_ptrs)
+        auto const player_ptrs = scene_ptr->find_game_objects_with_tag("player", true);
+        for (auto const &player_ptr : player_ptrs)
         {
             player_ptr->set_active(true);
         }
@@ -224,9 +224,9 @@ namespace qbert
 
     void scene_utility::hide_npcs(bool ignore_coily)
     {
-        auto scene_ptr = current_scene();
-        auto npc_ptrs = scene_ptr->find_game_objects_with_tag("npc");
-        for (auto npc_ptr : npc_ptrs)
+        auto const scene_ptr = current_scene();
+        auto const npc_ptrs = scene_ptr->find_game_objects_with_tag("npc");
+        for (auto const &npc_ptr : npc_ptrs)
         {
             if (ignore_coily and npc_ptr->has_tag("coily"))
             {
@@ -238,9 +238,9 @@ namespace qbert
 
     void scene_utility::show_npcs()
     {
-        auto scene_ptr = current_scene();
-        auto npc_ptrs = scene_ptr->find_game_objects_with_tag("npc", true);
-        for (auto npc_ptr : npc_ptrs)
+        auto const scene_ptr = current_scene();
+        auto const npc_ptrs = scene_ptr->find_game_objects_with_tag("npc", true);
+        for (auto const &npc_ptr : npc_ptrs)
         {
             npc_ptr->set_active(true);
         }
@@ -248,9 +248,9 @@ namespace qbert
 
     void scene_utility::kill_npcs(bool ignore_coily)
     {
-        auto scene_ptr = current_scene();
-        auto npc_ptrs = scene_ptr->find_game_objects_with_tag("npc", true);
-        for (auto npc_ptr : npc_ptrs)
+        auto const scene_ptr = current_scene();
+        auto const npc_ptrs = scene_ptr->find_game_objects_with_tag("npc", true);
+        for (auto const &npc_ptr : npc_ptrs)
         {
             if (ignore_coily and npc_ptr->has_tag("coily"))
             {
@@ -262,16 +262,16 @@ namespace qbert
 
     void scene_utility::trigger_root()
     {
-        auto root_ptr = current_root();
+        auto const root_ptr = current_root();
         root_ptr->set_active(false);
         root_ptr->set_active(true);
     }
 
     void scene_utility::trigger_npcs()
     {
-        auto scene_ptr = current_scene();
-        auto npc_ptrs = scene_ptr->find_game_objects_with_tag("npc");
-        for (auto npc_ptr : npc_ptrs)
+        auto const scene_ptr = current_scene();
+        auto const npc_ptrs = scene_ptr->find_game_objects_with_tag("npc");
+        for (auto const &npc_ptr : npc_ptrs)
         {
             npc_ptr->set_active(false);
             npc_ptr->set_active(true);
@@ -295,8 +295,8 @@ namespace qbert
 
     auto scene_utility::game_state() const -> game_state_component *
     {
-        auto scene_ptr = mngn::scene_manager::instance().find("game_state");
-        auto game_state_go_ptr = scene_ptr->find("game_state");
+        auto const scene_ptr = mngn::scene_manager::instance().find("game_state");
+        auto const game_state_go_ptr = scene_ptr->find("game_state");
         return game_state_go_ptr->component<game_state_component>();
     }
 }

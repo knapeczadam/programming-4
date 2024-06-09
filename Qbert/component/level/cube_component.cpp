@@ -40,7 +40,7 @@ namespace qbert
     {
         if (event == "update_cube")
         {
-            auto position_comp_ptr = dynamic_cast<position_component*>(subject_ptr);
+            auto const position_comp_ptr = dynamic_cast<position_component*>(subject_ptr);
             if (position_comp_ptr->row() == row_idx_ and position_comp_ptr->col() == col_idx_)
             {
                 if (position_comp_ptr->owner()->has_tag("player"))

@@ -69,19 +69,19 @@ namespace qbert
         	auto level_id = to_string(level_config["level_id"]);
         	auto round_id = to_string(level_config["round_id"]);
         	
-			auto scene_ptr = mngn::scene_manager::instance().create_scene(scene_name + "_" + level_id + "_" + round_id);
+			auto const scene_ptr = mngn::scene_manager::instance().create_scene(scene_name + "_" + level_id + "_" + round_id);
 			scene_ptr->set_active(false);
         	
-			auto root_ptr = scene_ptr->create_game_object("root");
-			auto level_manager_comp_ptr = root_ptr->add_component<level_manager_component>();
+			auto const root_ptr = scene_ptr->create_game_object("root");
+			auto const level_manager_comp_ptr = root_ptr->add_component<level_manager_component>();
         	
 			scene_info scene_info{};
-			scene_info.scene_ptr = scene_ptr;
-			scene_info.root_ptr  = root_ptr;
+			scene_info.scene_ptr              = scene_ptr;
+			scene_info.root_ptr               = root_ptr;
 			scene_info.level_manager_comp_ptr = level_manager_comp_ptr;
-        	scene_info.level_config = level_config;
-        	scene_info.scene_id = scene_name + "_" + level_id + "_" + round_id + "_";
-        	scene_info.bonus = bonus_start ;
+			scene_info.level_config           = level_config;
+			scene_info.scene_id               = scene_name + "_" + level_id + "_" + round_id + "_";
+			scene_info.bonus                  = bonus_start;
         	load_scene_func(scene_info);
 
         	bonus_start += bonus_increment;
@@ -112,7 +112,7 @@ namespace qbert
     void scene_loader::load_game_state_scene()
     {
 		auto const scene_ptr = mngn::scene_manager::instance().create_scene("game_state");
-	    auto go_ptr = scene_ptr->create_game_object("game_state");
+	    auto const go_ptr = scene_ptr->create_game_object("game_state");
 	    go_ptr->add_component<game_state_component>();
     }
 
@@ -162,7 +162,7 @@ namespace qbert
     	std::vector<mngn::sprite*> sprites;
     	std::generate_n(std::back_inserter(sprites), 6, []
 		{
-			auto sprite_ptr =  mngn::sprite_manager::instance().load_sprite(qb_sp_alphabet_regular_special, qb_re_t_sprite_general, false);
+			auto const sprite_ptr =  mngn::sprite_manager::instance().load_sprite(qb_sp_alphabet_regular_special, qb_re_t_sprite_general, false);
 			sprite_ptr->set_current_frame(11);
     		return sprite_ptr;	
 		});
@@ -611,8 +611,8 @@ namespace qbert
     	for (int i = 1; i <= level_config_manager::instance().level_count(); ++i)
     	{
     		scene_info scene_info{};
-			auto scene_ptr = mngn::scene_manager::instance().create_scene(std::to_string(i) + "_loading");
-			auto root_ptr = scene_ptr->create_game_object("root");
+			auto const scene_ptr = mngn::scene_manager::instance().create_scene(std::to_string(i) + "_loading");
+			auto const root_ptr = scene_ptr->create_game_object("root");
 			scene_ptr->set_active(false);
 
     		scene_info.scene_ptr = scene_ptr;
@@ -691,8 +691,8 @@ namespace qbert
     	text_config.texture_id       = qb_re_t_sprite_general;
 
     	glm::vec2 start_pos {64.0f, 288.0f};
-    	float offset_x = 64.0f;
-    	float offset_y = 32.0f;
+        constexpr float offset_x = 64.0f;
+        constexpr float offset_y = 32.0f;
     	bool indented  = false;
 
     	for (int i = 1, c = 'a'; i <= 26; ++i, ++c)
@@ -798,7 +798,7 @@ namespace qbert
     	std::vector<mngn::sprite*> sprites;
     	std::generate_n(std::back_inserter(sprites), 4, []
     	{
-    		auto sprite_ptr  = mngn::sprite_manager::instance().load_sprite(qb_sp_alphabet_regular_special, qb_re_t_sprite_general, false);
+    		auto const sprite_ptr  = mngn::sprite_manager::instance().load_sprite(qb_sp_alphabet_regular_special, qb_re_t_sprite_general, false);
     		sprite_ptr->set_current_frame(11);
     		return sprite_ptr;
     	});
@@ -812,7 +812,7 @@ namespace qbert
 
     	std::generate_n(std::back_inserter(sprites), 2, []
     	{
-    		auto sprite_ptr  = mngn::sprite_manager::instance().load_sprite(qb_sp_alphabet_regular_special, qb_re_t_sprite_general, false);
+    		auto const sprite_ptr  = mngn::sprite_manager::instance().load_sprite(qb_sp_alphabet_regular_special, qb_re_t_sprite_general, false);
     		sprite_ptr->set_current_frame(11);
     		return sprite_ptr;
     	});
@@ -832,19 +832,19 @@ namespace qbert
     	sprite_config.sprite_id = qb_sp_alphabet_regular_special;
     	sprite_config.curr_frame = 21;
 
-    	glm::vec2 start_pos{16.0f, 144.0f};
-    	float const offset_x = 224.0f;
-    	float const offset_y = 32.0f;
+	    constexpr glm::vec2 start_pos{16.0f, 144.0f};
+	    constexpr float offset_x = 224.0f;
+	    constexpr float offset_y = 32.0f;
 
     	for (int i = 0, j = 2; i < 22; ++i, ++j)
     	{
     		number_config.number = j;
-    		bool is_even = i % 2 == 0;
-    		bool is_single_digit = j < 10;
+    		bool const is_even = i % 2 == 0;
+    		bool const is_single_digit = j < 10;
 
-    		float x_base = start_pos.x + (is_even ? 0 : offset_x);
-    		float y_base = start_pos.y + (i / 2) * offset_y;
-    		float x_offset = is_single_digit ? offset_y / 2 : 0;
+    		float const x_base = start_pos.x + (is_even ? 0 : offset_x);
+    		float const y_base = start_pos.y + (i / 2) * offset_y;
+    		float const x_offset = is_single_digit ? offset_y / 2 : 0;
 			
     		number_config.local_position = {x_base + x_offset, y_base};
     		sprite_config.local_position = {number_config.local_position.x + (is_single_digit ? offset_y / 2 : offset_y), y_base};
@@ -1526,10 +1526,10 @@ namespace qbert
 		player_config.right_command     = {mngn::input_type::keyboard, mngn::input_state::down, mngn::input::k_right};
 		player_config.up_command        = {mngn::input_type::keyboard, mngn::input_state::down, mngn::input::k_up};
 		player_config.down_command      = {mngn::input_type::keyboard, mngn::input_state::down, mngn::input::k_down};
-		auto player_info = factory::character::create_ai_player(player_config);
+		auto const player_info = factory::character::create_ai_player(player_config);
     	player_info.go_ptr->add_tag("loading");
 
-    	auto cube_component_ptrs = scene_info.level_info.cube_info.cube_components;
+    	auto const cube_component_ptrs = scene_info.level_info.cube_info.cube_components;
     	for (auto const &cube_comp_ptr : cube_component_ptrs)
     	{
     		player_info.position_comp_ptr->add_observer(cube_comp_ptr);
@@ -1540,7 +1540,7 @@ namespace qbert
     {
 		auto scores = score_manager::instance().scores();
     	auto saved_score = score_manager::instance().saved_score();
-    	bool is_first = scores.begin()->first == saved_score.first and scores.begin()->second == saved_score.second;
+    	bool const is_first = scores.begin()->first == saved_score.first and scores.begin()->second == saved_score.second;
     	
     	// Top score
     	factory::ui::number_config_info number_config{};
@@ -1578,10 +1578,10 @@ namespace qbert
     	text_config.dot_texture_id   = qb_re_t_sprite_general;
     	text_config.dot_frame        = 16;
 
-    	glm::vec2 initial_start_pos{64.0f, 144.0f};
-    	glm::vec2 score_start_pos{128.0f, 144.0f};
-    	float const offset_x = 224.0f;
-    	float const offset_y = 32.0f;
+		constexpr glm::vec2 initial_start_pos{64.0f, 144.0f};
+		constexpr glm::vec2 score_start_pos{128.0f, 144.0f};
+		constexpr float offset_x = 224.0f;
+		constexpr float offset_y = 32.0f;
     	auto it = std::next(scores.begin());
     	for (int i = 0; i < 22; ++i, ++it)
 		{
@@ -1590,7 +1590,7 @@ namespace qbert
     		// Scores
     		int score = it->first;
 			number_config.number = score;
-			bool is_even = i % 2 == 0;
+			bool const is_even = i % 2 == 0;
   
 			float x = score_start_pos.x + (is_even ? 0 : offset_x);
 			float y = score_start_pos.y + (i / 2) * offset_y;
@@ -1616,8 +1616,8 @@ namespace qbert
 
     void scene_loader::load_countdown(int seconds)
     {
-        auto scene_ptr = mngn::scene_manager::instance().find("input");
-    	auto countdown_go_ptrs = scene_ptr->find_game_objects_with_tag("countdown");
+        auto const scene_ptr = mngn::scene_manager::instance().find("input");
+    	auto const countdown_go_ptrs = scene_ptr->find_game_objects_with_tag("countdown");
     	for (auto const &countdown_go_ptr : countdown_go_ptrs)
     	{
     		scene_ptr->remove(countdown_go_ptr);
@@ -1630,7 +1630,7 @@ namespace qbert
     	number_config.texture_id     = qb_re_t_sprite_general;
     	number_config.local_position = {160.0f, 464.0f};
     	number_config.number		 = seconds;
-		auto number_info = factory::ui::create_number(number_config);
+		auto const number_info = factory::ui::create_number(number_config);
 		number_info.go_ptr->add_tag("countdown");
     }
 
@@ -1709,7 +1709,7 @@ namespace qbert
 			std::vector<mngn::sprite*> sprites;
 			std::generate_n(std::back_inserter(sprites), 14, []
 			{
-				auto sprite_ptr  = mngn::sprite_manager::instance().load_sprite(qb_sp_alphabet_regular_special, qb_re_t_sprite_general);
+				auto const sprite_ptr  = mngn::sprite_manager::instance().load_sprite(qb_sp_alphabet_regular_special, qb_re_t_sprite_general);
 				sprite_ptr->set_current_frame(11);
 				return sprite_ptr;
 			});

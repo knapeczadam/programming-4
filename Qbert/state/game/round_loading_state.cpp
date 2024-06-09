@@ -36,8 +36,8 @@ namespace qbert
         enable_cube_animations();
 
         // remaining disks
-        auto disks = scene_ptr_->find_game_objects_with_tag("disk");
-        auto disk_time = disks.size() * time_per_disk_;
+        auto const disks = scene_ptr_->find_game_objects_with_tag("disk");
+        auto const disk_time = disks.size() * time_per_disk_;
         loading_time_ += disk_time;
         disk_time_ = loading_time_ - disk_time;
 
@@ -54,14 +54,14 @@ namespace qbert
             disable_cube_animations();
             scene_utility::instance().hide_all();
             
-            auto bonus_go_ptrs = scene_utility::instance().current_scene()->find_game_objects_with_tag("bonus", true);
-            for (auto bonus_ptr : bonus_go_ptrs)
+            auto const bonus_go_ptrs = scene_utility::instance().current_scene()->find_game_objects_with_tag("bonus", true);
+            for (auto const &bonus_ptr : bonus_go_ptrs)
             {
                 bonus_ptr->set_active(true);
             }
             
-            auto bonus_go_ptr = scene_utility::instance().current_scene()->find_game_objects_with_tag("bonus_number").front();
-            auto bonus = bonus_go_ptr->component<number_component>()->number();
+            auto const bonus_go_ptr = scene_utility::instance().current_scene()->find_game_objects_with_tag("bonus_number").front();
+            auto const bonus = bonus_go_ptr->component<number_component>()->number();
             scene_utility::instance().current_scene()->find_game_objects_with_tag("player", true).front()->component<score_counter_component>()->add_score(bonus);
             bonus_given_ = true;
         }
@@ -70,7 +70,7 @@ namespace qbert
         {
             if (disappear_time_ >= time_per_disk_)
             {
-                auto disks = scene_ptr_->find_game_objects_with_tag("disk");
+                auto const disks = scene_ptr_->find_game_objects_with_tag("disk");
                 if (not disks.empty()) disks.front()->set_active(false);
                 disappear_time_ = 0.0f;
 
@@ -106,7 +106,7 @@ namespace qbert
             auto &progress_manager = progress_manager::instance();
             auto game_state_comp_ptr = scene_utility::instance().game_state();
 
-            auto root_ptr = scene_utility::instance().current_root();
+            auto const root_ptr = scene_utility::instance().current_root();
             if (progress_manager.round() == 4)
             {
                 root_ptr->component_in_children<level_counter_component>()->increase_level();
@@ -139,25 +139,25 @@ namespace qbert
         scene_utility::instance().unfreeze_all();
         scene_utility::instance().trigger_root();
         
-        auto bonus_go_ptr = scene_utility::instance().current_scene()->find_game_objects_with_tag("bonus");
-        for (auto bonus_ptr : bonus_go_ptr)
+        auto const bonus_go_ptr = scene_utility::instance().current_scene()->find_game_objects_with_tag("bonus");
+        for (auto const &bonus_ptr : bonus_go_ptr)
         {
             bonus_ptr->set_active(false);
         }
         bonus_given_ = false;
         
         // Hide the current scene
-        auto scene_ptr = scene_utility::instance().current_scene();
+        auto const scene_ptr = scene_utility::instance().current_scene();
         scene_ptr->clear_tag();
         scene_ptr->set_active(false);
     }
 
     void round_loading_state::enable_cube_animations()
     {
-        auto cube_go_ptrs = scene_ptr_->find_game_objects_with_tag("cube");
-        for (auto cube_go_ptr : cube_go_ptrs)
+        auto const cube_go_ptrs = scene_ptr_->find_game_objects_with_tag("cube");
+        for (auto const &cube_go_ptr : cube_go_ptrs)
         {
-            auto cube_comp_ptr = cube_go_ptr->component<cube_component>();
+            auto const cube_comp_ptr = cube_go_ptr->component<cube_component>();
             cube_comp_ptr->enable_animation();
         }
         
@@ -166,10 +166,10 @@ namespace qbert
 
     void round_loading_state::disable_cube_animations()
     {
-        auto cube_go_ptrs = scene_ptr_->find_game_objects_with_tag("cube");
-        for (auto cube_go_ptr : cube_go_ptrs)
+        auto const cube_go_ptrs = scene_ptr_->find_game_objects_with_tag("cube");
+        for (auto const &cube_go_ptr : cube_go_ptrs)
         {
-            auto cube_comp_ptr = cube_go_ptr->component<cube_component>();
+            auto const cube_comp_ptr = cube_go_ptr->component<cube_component>();
             cube_comp_ptr->disable_animation();
         }
 

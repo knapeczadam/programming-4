@@ -71,7 +71,7 @@ namespace qbert
             }
             else if (character_ptr_->has_tag("down"))
             {
-                int col = mngn::random_int(0, 1);
+                int const col = mngn::random_int(0, 1);
                 direction_comp_ptr->set_direction(1, col);
             }
             else if (character_ptr_->has_tag("left"))

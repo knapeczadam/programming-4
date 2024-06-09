@@ -73,10 +73,10 @@ namespace qbert
         score_manager::instance().reset();
         
         progress_manager::instance().use_coin();
-        auto number_comp_ptr = scene_utility::instance().current_scene()->find_game_objects_with_tag("coin").front()->component<number_component>();
+        auto const number_comp_ptr = scene_utility::instance().current_scene()->find_game_objects_with_tag("coin").front()->component<number_component>();
         number_comp_ptr->set_number(progress_manager::instance().coins());
         
-        auto scene_ptr = scene_utility::instance().current_scene();
+        auto const scene_ptr = scene_utility::instance().current_scene();
         scene_ptr->clear_tag();
         scene_ptr->set_active(false);
         
@@ -140,7 +140,7 @@ namespace qbert
         
         if (accu_time_jump_ > jump_time_ and not events_.empty())
         {
-            auto event = events_.front();
+            auto const event = events_.front();
             events_.pop();
             event();
             accu_time_jump_ = 0.0f;
@@ -219,8 +219,8 @@ namespace qbert
         push_right_event();
         push_right_event();
         
-        auto instructions = scene_ptr_->find_game_objects_with_tag("instruction", true);
-        for (auto instruction_ptr : instructions)
+        auto const instructions = scene_ptr_->find_game_objects_with_tag("instruction", true);
+        for (auto const &instruction_ptr : instructions)
         {
             instruction_ptr->set_active(false);
         }
@@ -230,14 +230,14 @@ namespace qbert
     {
     	auto f = [this]()
     	{
-    		auto direction_comp_ptr = qbert_ptr_->component<direction_component>();
+    		auto const direction_comp_ptr = qbert_ptr_->component<direction_component>();
     		direction_comp_ptr->set_direction(1, 1);
-    		auto player_state_comp_ptr = qbert_ptr_->component<character_state_component>();
+    		auto const player_state_comp_ptr = qbert_ptr_->component<character_state_component>();
     		player_state_comp_ptr->change_state<jumping_state>(qbert_ptr_);
     	    ++jump_count_;
 
-    	    auto instructions = scene_ptr_->find_game_objects_with_tag(std::to_string(jump_count_), true);
-    	    for (auto instruction_ptr : instructions)
+    	    auto const instructions = scene_ptr_->find_game_objects_with_tag(std::to_string(jump_count_), true);
+    	    for (auto const &instruction_ptr : instructions)
     	    {
     	        instruction_ptr->set_active(true);
     	    }
