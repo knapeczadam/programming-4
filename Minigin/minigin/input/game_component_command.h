@@ -23,7 +23,7 @@ namespace mngn
         game_component_command &operator=(game_component_command &&other)      = default;
 
     protected:
-        game_component *game_component_ptr_;
+        game_component *game_component_ptr_ = nullptr;
         
     };
 }

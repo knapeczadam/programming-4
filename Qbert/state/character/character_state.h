@@ -24,8 +24,8 @@ namespace qbert
         character_state &operator=(character_state &&other)      = delete;
 
         void on_enter() override { }
-        void update() override   { }
-        void on_exit() override  { }
+        void update()   override { }
+        void on_exit()  override { }
 
     protected:
         mngn::game_object *character_ptr_ = nullptr;

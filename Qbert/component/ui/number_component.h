@@ -24,16 +24,16 @@ namespace qbert
         number_component &operator=(number_component const &other) = delete;
         number_component &operator=(number_component &&other)      = delete;
 
-        void awake() override;
+        void awake()     override;
         void on_enable() override;
-        void start() override;
+        void start()     override;
 
         [[nodiscard]] auto number() const -> int { return number_; }
         void set_number(int number);
 
     private:
-        int number_ = 0;
-        int sprite_id_ = 0;
+        int number_     = 0;
+        int sprite_id_  = 0;
         int texture_id_ = 0;
         mngn::multisprite_ui_component *multisprite_ui_comp_ptr_ = nullptr;
     };

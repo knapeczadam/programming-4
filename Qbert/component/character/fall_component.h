@@ -30,8 +30,8 @@ namespace qbert
     private:
         float const fall_time_  = 1.52f;
         float const total_time_ = 2.5f;
-        float accu_time_  = 0.0f;
-        bool  is_falling_ = false;
+        float accu_time_        = 0.0f;
+        bool  is_falling_       = false;
         
         glm::vec2 start_pos_  = {};
         glm::vec2 corner_pos_ = {};

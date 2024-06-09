@@ -23,9 +23,9 @@ namespace qbert
         flicker_component &operator=(flicker_component const &other) = delete;
         flicker_component &operator=(flicker_component &&other)      = delete;
 
-        void awake() override;
-        void on_enable() override;
-        void update() override;
+        void awake()      override;
+        void on_enable()  override;
+        void update()     override;
         void on_disable() override;
 
     private:

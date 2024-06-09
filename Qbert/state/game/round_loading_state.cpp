@@ -97,11 +97,11 @@ namespace qbert
         
         if (accu_time_ >= loading_time_)
         {
-            accu_time_ = 0.0f;
-            loading_time_ = 3.0f;
-            disk_time_ = 0.0f;
+            accu_time_      = 0.0f;
+            loading_time_   = 3.0f;
+            disk_time_      = 0.0f;
             disappear_time_ = 0.5f;
-            disk_count_ = 1;
+            disk_count_     = 1;
             
             auto &progress_manager = progress_manager::instance();
             auto game_state_comp_ptr = scene_utility::instance().game_state();

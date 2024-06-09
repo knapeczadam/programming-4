@@ -17,8 +17,8 @@ namespace qbert
         round_loading_state &operator=(round_loading_state &&other)      = delete;
 
         void on_enter() override;
-        void update() override;
-        void on_exit() override;
+        void update()   override;
+        void on_exit()  override;
 
         void enable_cube_animations();
         void disable_cube_animations();

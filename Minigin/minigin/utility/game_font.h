@@ -25,6 +25,6 @@ namespace mngn
         [[nodiscard]] auto font() const -> _TTF_Font *;
 
     private:
-        _TTF_Font *font_ptr_;
+        _TTF_Font *font_ptr_ = nullptr;
     };
 }

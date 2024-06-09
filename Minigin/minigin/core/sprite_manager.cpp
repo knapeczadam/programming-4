@@ -8,7 +8,6 @@
 #include <fstream>
 #include <iostream>
 
-
 namespace mngn
 {
     sprite_manager::sprite_manager() = default;

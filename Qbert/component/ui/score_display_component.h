@@ -32,6 +32,5 @@ namespace qbert
 
     private:
         number_component *number_comp_ptr_ = nullptr;
-        
     };
 }

@@ -29,6 +29,6 @@ namespace mngn
         static void resume_all();
 
     private:
-        Mix_Chunk *mix_chunk_ptr_;
+        Mix_Chunk *mix_chunk_ptr_ = nullptr;
     };
 }

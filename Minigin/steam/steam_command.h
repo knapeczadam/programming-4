@@ -22,6 +22,6 @@ namespace steam
         }
         
     private:
-        void *achievement_ptr_;
+        void *achievement_ptr_ = nullptr;
     };
 }

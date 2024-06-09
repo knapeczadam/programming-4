@@ -29,8 +29,8 @@ namespace mngn
 
         void set_collider(float width, float height, float offset_x = 0.0f, float offset_y = 0.0f)
         {
-            width_ = width;
-            height_ = height;
+            width_    = width;
+            height_   = height;
             offset_x_ = offset_x;
             offset_y_ = offset_y;
         }
@@ -38,8 +38,8 @@ namespace mngn
         [[nodiscard]] auto family() const -> component_family override { return component_family::collision; }
 
     protected:
-        float width_  = 0.0f;
-        float height_ = 0.0f;
+        float width_    = 0.0f;
+        float height_   = 0.0f;
         float offset_x_ = 0.0f;
         float offset_y_ = 0.0f;
     };

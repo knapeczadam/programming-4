@@ -41,7 +41,6 @@ namespace mngn
         auto create_sprite(int id, texture* texture_ptr, bool cache) -> sprite *;
         auto to_string(int id) -> std::string const &;
 
-    private:
         friend class singleton<sprite_manager>;
         sprite_manager();
 
@@ -49,7 +48,6 @@ namespace mngn
         std::string data_path_;
         std::string sprite_config_path_;
         json sprite_config_;
-        // std::vector<std::unique_ptr<sprite>> sprites_;
         std::unordered_map<int, std::unique_ptr<sprite>> cached_sprites_;
         std::unordered_multimap<int, std::unique_ptr<sprite>> sprites_;
         

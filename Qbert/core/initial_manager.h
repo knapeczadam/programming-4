@@ -40,7 +40,7 @@ namespace qbert
 
     private:
         std::string initial_;
-        int curr_input_ = 0;
+        int curr_input_      = 0;
         int const max_input_ = 30;
     };
 }

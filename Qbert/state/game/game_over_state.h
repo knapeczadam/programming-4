@@ -17,8 +17,8 @@ namespace qbert
         game_over_state &operator=(game_over_state &&other)      = delete;
 
         void on_enter() override;
-        void update() override;
-        void on_exit() override;
+        void update()   override;
+        void on_exit()  override;
 
     private:
         float game_over_time_ = 5.0f;

@@ -48,23 +48,23 @@ namespace qbert
             auto other_row_dir = other_ptr->component<direction_component>()->row();
             auto other_col_dir = other_ptr->component<direction_component>()->col();
 
-            glm::ivec2 pos = {row_pos, col_pos};
+            glm::ivec2 pos       = {row_pos, col_pos};
             glm::ivec2 other_pos = {other_row_pos, other_col_pos};
             if (other_ptr->has_tag("position_offset")) other_pos += 1;
-            glm::ivec2 dir = {row_dir, col_dir};
+            glm::ivec2 dir       = {row_dir, col_dir};
             glm::ivec2 other_dir = {other_row_dir, other_col_dir};
-            glm::ivec2 idle_dir = {0, 0};
+            glm::ivec2 idle_dir  = {0, 0};
 
-            bool idle = dir == idle_dir;
-            bool other_idle = other_dir == idle_dir;
-            bool moving_to_other = pos + dir == other_pos;
+            bool idle                 = dir == idle_dir;
+            bool other_idle           = other_dir == idle_dir;
+            bool moving_to_other      = pos + dir == other_pos;
             bool other_moving_to_this = other_pos + other_dir == pos;
         
-            bool crossing_each_other = moving_to_other and other_moving_to_this;
-            bool moving_to_the_same_pos = pos + dir == other_pos + other_dir;
-            bool idle_and_other_moving_to_this = idle and other_moving_to_this;
+            bool crossing_each_other                 = moving_to_other and other_moving_to_this;
+            bool moving_to_the_same_pos              = pos + dir == other_pos + other_dir;
+            bool idle_and_other_moving_to_this       = idle and other_moving_to_this;
             bool other_idle_and_this_moving_to_other = other_idle and moving_to_other;
-            bool both_idle_and_same_pos = idle and other_idle and pos == other_pos;
+            bool both_idle_and_same_pos              = idle and other_idle and pos == other_pos;
 
             if (crossing_each_other or idle_and_other_moving_to_this or other_idle_and_this_moving_to_other or both_idle_and_same_pos or moving_to_the_same_pos)
             {

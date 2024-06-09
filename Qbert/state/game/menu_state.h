@@ -30,8 +30,8 @@ namespace qbert
         menu_state &operator=(menu_state &&other)      = delete;
 
         void on_enter() override;
-        void update() override;
-        void on_exit() override;
+        void update()   override;
+        void on_exit()  override;
 
     private:
         void switch_menu();

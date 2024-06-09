@@ -63,7 +63,7 @@ namespace mngn
         std::string resource_config_path_;
         json        resource_config_;
 
-        std::unordered_map<std::string, std::unique_ptr<texture>>                              textures_;
+        std::unordered_map<std::string, std::unique_ptr<texture>>                                 textures_;
         std::unordered_map<std::string, std::unique_ptr<sound_effect>>                            sound_effects_;
         std::unordered_map<std::string, std::unique_ptr<sound_stream>>                            sound_streams_;
         std::unordered_multimap<std::string, std::pair<unsigned int, std::unique_ptr<game_font>>> fonts_;

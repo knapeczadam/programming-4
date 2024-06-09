@@ -17,8 +17,8 @@ namespace qbert
         input_state &operator=(input_state &&other)      = delete;
 
         void on_enter() override;
-        void update() override;
-        void on_exit() override;
+        void update()   override;
+        void on_exit()  override;
 
     private:
         float input_time_                = 30.0f;

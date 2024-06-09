@@ -50,9 +50,9 @@ namespace qbert
         alphabet_component &operator=(alphabet_component const &other) = delete;
         alphabet_component &operator=(alphabet_component &&other)      = delete;
 
-        void awake() override;
+        void awake()     override;
         void on_enable() override;
-        void start() override;
+        void start()     override;
 
     private:
         void set_text();

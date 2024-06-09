@@ -9,7 +9,7 @@ namespace qbert
     {
     public:
         void on_enter() override { } 
-        void update() override   { }
-        void on_exit() override  { }
+        void update()   override { }
+        void on_exit()  override { }
     };
 }

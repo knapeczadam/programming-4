@@ -37,9 +37,9 @@ namespace mngn
         sound_manager() : volume_{ 100 }, previous_volume_{ 100 } {}
 
     private:
-        int volume_;
-        int previous_volume_;
-        bool muted_{ false };
+        int  volume_          = 100;
+        int  previous_volume_ = 100;
+        bool muted_           = false;
 
         std::set<int> registered_effects_;
         std::set<int> registered_streams_;

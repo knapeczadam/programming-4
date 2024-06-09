@@ -15,7 +15,6 @@ namespace mngn
 {
     sdl_sound_system::sdl_sound_system()
     {
-        std::cout << '#' << std::this_thread::get_id() << " thread: calling sdl_sound_system::sdl_sound_system" << '\n';
         if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
         {
             std::cerr << "minigin: error when calling Mix_OpenAudio: " << Mix_GetError() << '\n';
@@ -24,7 +23,6 @@ namespace mngn
 
     void sdl_sound_system::play_sound_impl(int id, int volume)
     {
-        std::cout << '#' << std::this_thread::get_id() << " thread: calling sdl_sound_system::play_sound" << '\n';
         sound_manager::instance().play_sound(id, volume);
     }
 }

@@ -55,9 +55,8 @@ namespace qbert
         void calculate_next_move();
 
     private:
-        mngn::sprite_component *sprite_comp_ptr_ = nullptr;
-        mngn::sprite *egg_sprite_ptr_ = nullptr;
-        mngn::sprite *coily_sprite_ptr_ = nullptr;
-        
+        mngn::sprite_component *sprite_comp_ptr_  = nullptr;
+        mngn::sprite           *egg_sprite_ptr_   = nullptr;
+        mngn::sprite           *coily_sprite_ptr_ = nullptr;
     };
 }

@@ -23,7 +23,7 @@ namespace qbert
         [[nodiscard]] virtual auto health() const -> int { return health_;}
         
     protected:
-        int health_ = 0;
+        int health_                = 0;
         int const original_health_ = 0;
     };
 }

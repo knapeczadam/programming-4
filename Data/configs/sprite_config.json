@@ -499,7 +499,7 @@
     },
     {
       "_comment": "DISKS",
-      "id": "level_1_disk_1", 
+      "id": "level_1_disk_1",
       "rows": 24,
       "columns": 45,
       "sub_rows": 1,

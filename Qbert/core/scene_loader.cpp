@@ -95,7 +95,7 @@ namespace qbert
 		factory::ui::fps_config_info fps_config{};
 		fps_config.scene_ptr      = scene_ptr;
 		fps_config.name           = "fps";
-		fps_config.local_position = {10.0f,      500.0f};
+		fps_config.local_position = {10.0f, 500.0f};
 		fps_config.font_ptr       = font_ptr;
 		fps_config.text		      = "FPS: ";
 		factory::ui::create_fps(fps_config);

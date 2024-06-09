@@ -14,12 +14,11 @@ namespace qbert
         explicit npc_spawning_state(mngn::game_object* character_ptr);
 
         void on_enter() override;
-        void update() override;
-        void on_exit() override;
+        void update()   override;
+        void on_exit()  override;
 
         void set_positions();
         void set_sprite();
-        
 
     private:
         float     spawn_time_ = 2.0f;

@@ -7,8 +7,6 @@ namespace mngn
 {
     // Forward declarations
     enum class input;
-    
-    // Forward declarations
     struct input_config_info;
     
     class i_input

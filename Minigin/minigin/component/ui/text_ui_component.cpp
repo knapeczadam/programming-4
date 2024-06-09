@@ -55,19 +55,19 @@ namespace mngn
     // This implementation uses the "dirty flag" pattern
     void text_ui_component::set_text(std::string const &text)
     {
-        text_ = text;
+        text_         = text;
         needs_update_ = true;
     }
 
     void text_ui_component::set_font(game_font *font_ptr)
     {
-        font_ptr_ = font_ptr;
+        font_ptr_     = font_ptr;
         needs_update_ = true;
     }
 
     void text_ui_component::set_font(std::string const &font, unsigned size)
     {
-        font_ptr_ = resource_manager::instance().load_font(font, size);
+        font_ptr_     = resource_manager::instance().load_font(font, size);
         needs_update_ = true;
     }
 }

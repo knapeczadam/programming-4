@@ -108,11 +108,13 @@ namespace qbert
             path.push_back(par[currentNode]);
             currentNode = par[currentNode];
         }
-        
+
+#ifndef NDEBUG
         // printing path from source to destination
         for (int i = (int) path.size() - 1; i >= 0; i--)
             std::cout << path[i] << " ";
         std::cout << '\n';
+#endif
 
         if (path.size() > 1)
         {
@@ -220,14 +222,13 @@ namespace qbert
 
         auto player_row_idx = player_go_ptr->component<position_component>()->row();
         auto player_col_idx = player_go_ptr->component<position_component>()->col();
-        auto coily_row_idx = owner()->component<position_component>()->row();
-        auto coily_col_idx = owner()->component<position_component>()->col();
+        auto coily_row_idx  = owner()->component<position_component>()->row();
+        auto coily_col_idx  = owner()->component<position_component>()->col();
 
         auto start_idx = path_finder_.to_graph_index(coily_row_idx, coily_col_idx);
-        auto end_idx = path_finder_.to_graph_index(player_row_idx, player_col_idx);
-        auto next_pos = path_finder_.get_next_position(start_idx, end_idx);
-        auto next_dir = next_pos - glm::ivec2{coily_row_idx, coily_col_idx};
-
+        auto end_idx   = path_finder_.to_graph_index(player_row_idx, player_col_idx);
+        auto next_pos  = path_finder_.get_next_position(start_idx, end_idx);
+        auto next_dir  = next_pos - glm::ivec2{coily_row_idx, coily_col_idx};
 
         owner()->component<direction_component>()->set_direction(next_dir.x, next_dir.y);
     }

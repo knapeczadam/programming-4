@@ -27,10 +27,10 @@ namespace qbert
         void fly();
 
     private:
-        float fly_time_  = 2.0f;
-        float accu_time_ = 0.0f;
-        bool  is_flying_ = false;
-        glm::vec2 start_pos_;
-        glm::vec2 end_pos_ = {224.0f, 36.0f};
+        float fly_time_      = 2.0f;
+        float accu_time_     = 0.0f;
+        bool  is_flying_     = false;
+        glm::vec2 start_pos_ = {};
+        glm::vec2 end_pos_   = {224.0f, 36.0f};
     };
 }

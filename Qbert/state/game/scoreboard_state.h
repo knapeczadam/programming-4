@@ -17,8 +17,8 @@ namespace qbert
         scoreboard_state &operator=(scoreboard_state &&other)      = delete;
 
         void on_enter() override;
-        void update() override;
-        void on_exit() override;
+        void update()   override;
+        void on_exit()  override;
 
     private:
         float scoreboard_time_ = 10.0f;

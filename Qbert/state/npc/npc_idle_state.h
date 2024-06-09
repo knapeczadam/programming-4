@@ -11,7 +11,7 @@ namespace qbert
         explicit npc_idle_state(mngn::game_object* character_ptr);
 
         void on_enter() override;
-        void update() override;
+        void update()   override;
 
     private:
         float idle_time_ = 0.5f;

@@ -24,11 +24,11 @@ namespace qbert
         game_state &operator=(game_state &&other)      = delete;
         
         void on_enter() override { }
-        void update() override   { }
-        void on_exit() override  { }
+        void update()   override { }
+        void on_exit()  override { }
 
     protected:
         game_state_component *game_state_comp_ptr_ = nullptr;
-        mngn::scene *scene_ptr_ = nullptr;
+        mngn::scene          *scene_ptr_           = nullptr;
     };
 }

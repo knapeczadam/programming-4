@@ -31,8 +31,8 @@ namespace qbert
         void disable_animation();
 
     private:
-        mngn::sprite_ui_component *sprite_ui_comp_ptr_ = nullptr;
-        mngn::sprite *original_sprite_ptr_ = nullptr;
-        mngn::sprite *animated_sprite_ptr_ = nullptr;
+        mngn::sprite_ui_component *sprite_ui_comp_ptr_  = nullptr;
+        mngn::sprite              *original_sprite_ptr_ = nullptr;
+        mngn::sprite              *animated_sprite_ptr_ = nullptr;
     };
 }

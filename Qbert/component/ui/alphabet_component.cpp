@@ -10,7 +10,6 @@
 #include <cctype>
 #include <vector>
 
-
 namespace qbert
 {
     alphabet_component::alphabet_component(alphabet_config_info config_info)

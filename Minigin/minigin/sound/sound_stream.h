@@ -30,6 +30,6 @@ namespace mngn
         static auto is_playing() -> bool;
 
     private:
-        Mix_Music *mix_music_ptr_;
+        Mix_Music *mix_music_ptr_ = nullptr;
     };
 }

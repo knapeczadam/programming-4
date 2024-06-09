@@ -18,6 +18,5 @@ namespace mngn
         void test_parent_child_relationship();
         void test_scene();
         void test_position();
-        
     };
 }

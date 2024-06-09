@@ -83,11 +83,11 @@ namespace qbert
             std::ranges::for_each(current_scene_.fall_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(false); });
         }
         
-        std::ranges::for_each(current_scene_.spawn_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(false); });
-        std::ranges::for_each(current_scene_.flicker_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(false); });
-        std::ranges::for_each(current_scene_.sprite_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_animated(false); });
-        std::ranges::for_each(current_scene_.sprite_ui_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_animated(false); });
-        std::ranges::for_each(current_scene_.player_collider_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(false); });
+        std::ranges::for_each(current_scene_.spawn_comp_ptrs,           [](auto comp_ptr) { comp_ptr->set_enabled(false);  });
+        std::ranges::for_each(current_scene_.flicker_comp_ptrs,         [](auto comp_ptr) { comp_ptr->set_enabled(false);  });
+        std::ranges::for_each(current_scene_.sprite_comp_ptrs,          [](auto comp_ptr) { comp_ptr->set_animated(false); });
+        std::ranges::for_each(current_scene_.sprite_ui_comp_ptrs,       [](auto comp_ptr) { comp_ptr->set_animated(false); });
+        std::ranges::for_each(current_scene_.player_collider_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(false);  });
     }
     
     void scene_utility::unfreeze_all()
@@ -134,11 +134,11 @@ namespace qbert
             std::ranges::for_each(current_scene_.fall_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(true); });
         }
         
-        std::ranges::for_each(current_scene_.spawn_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(true); });
-        std::ranges::for_each(current_scene_.flicker_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(true); });
-        std::ranges::for_each(current_scene_.sprite_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_animated(true); });
-        std::ranges::for_each(current_scene_.sprite_ui_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_animated(true); });
-        std::ranges::for_each(current_scene_.player_collider_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(true); });
+        std::ranges::for_each(current_scene_.spawn_comp_ptrs,           [](auto comp_ptr) { comp_ptr->set_enabled(true);  });
+        std::ranges::for_each(current_scene_.flicker_comp_ptrs,         [](auto comp_ptr) { comp_ptr->set_enabled(true);  });
+        std::ranges::for_each(current_scene_.sprite_comp_ptrs,          [](auto comp_ptr) { comp_ptr->set_animated(true); });
+        std::ranges::for_each(current_scene_.sprite_ui_comp_ptrs,       [](auto comp_ptr) { comp_ptr->set_animated(true); });
+        std::ranges::for_each(current_scene_.player_collider_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(true);  });
     }
     
     void scene_utility::freeze_animation()
@@ -151,15 +151,15 @@ namespace qbert
         current_scene_.sprite_comp_ptrs    = current_scene_.root_ptr->components_in_children<mngn::sprite_component>();
         
         std::ranges::for_each(current_scene_.sprite_ui_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_animated(false); });
-        std::ranges::for_each(current_scene_.flicker_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(false); });
-        std::ranges::for_each(current_scene_.sprite_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_animated(false); });
+        std::ranges::for_each(current_scene_.flicker_comp_ptrs,   [](auto comp_ptr) { comp_ptr->set_enabled(false);  });
+        std::ranges::for_each(current_scene_.sprite_comp_ptrs,    [](auto comp_ptr) { comp_ptr->set_animated(false); });
     }
     
     void scene_utility::unfreeze_animation()
     {
         std::ranges::for_each(current_scene_.sprite_ui_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_animated(true); });
-        std::ranges::for_each(current_scene_.flicker_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_enabled(true); });
-        std::ranges::for_each(current_scene_.sprite_comp_ptrs, [](auto comp_ptr) { comp_ptr->set_animated(true); });
+        std::ranges::for_each(current_scene_.flicker_comp_ptrs,   [](auto comp_ptr) { comp_ptr->set_enabled(true);  });
+        std::ranges::for_each(current_scene_.sprite_comp_ptrs,    [](auto comp_ptr) { comp_ptr->set_animated(true); });
     }
 
     void scene_utility::freeze_npcs()

@@ -28,6 +28,6 @@ namespace mngn
         [[nodiscard]] auto height() const -> int { return size().y; }
 
     private:
-        SDL_Texture *texture_ptr_;
+        SDL_Texture *texture_ptr_ = nullptr;
     };
 }

@@ -1,9 +1,11 @@
-﻿#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#include <XInput.h>
+﻿// Standard includes
 #include <iostream>
 #include <thread>
 
+// Windows includes
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+#include <XInput.h>
 #pragma comment(lib, "xinput.lib")
 
 int xmain()

@@ -26,7 +26,6 @@ namespace qbert
         void set_direction(int row, int col) { row_ = row; col_ = col; }
         void reset() { row_ = 0; col_ = 0; }
 
-
     private:
         int row_ = 0;
         int col_ = 0;

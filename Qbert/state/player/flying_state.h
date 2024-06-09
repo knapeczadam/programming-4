@@ -14,8 +14,8 @@ namespace qbert
         explicit flying_state(mngn::game_object* character_ptr, disk_component* disk_comp_ptr);
 
         void on_enter() override;
-        void update() override;
-        void on_exit() override;
+        void update()   override;
+        void on_exit()  override;
 
     private:
         disk_component *disk_comp_ptr_ = nullptr;
