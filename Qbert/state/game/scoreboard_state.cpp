@@ -1,14 +1,13 @@
 ﻿#include "scoreboard_state.h"
 
 // Project includes
-#include "menu_state.h"
-#include "component/state/game_state_component.h"
 #include "component/state/game_state_component.h"
 #include "core/scene_loader.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
 #include "minigin/core/scene.h"
 #include "minigin/core/scene_manager.h"
+#include "state/game/menu_state.h"
 
 namespace qbert
 {

@@ -6,7 +6,6 @@
 // Standard includes
 #include <functional>
 #include <queue>
-#include <string>
 
 // GLM includes
 #include <glm/glm.hpp>

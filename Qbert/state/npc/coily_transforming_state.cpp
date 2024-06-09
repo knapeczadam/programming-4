@@ -1,8 +1,6 @@
 ﻿#include "coily_transforming_state.h"
 
 // Project includes
-#include "npc_idle_state.h"
-#include "npc_jumping_state.h"
 #include "component/npc/coily_component.h"
 #include "component/state/character_state_component.h"
 #include "component/state/game_state_component.h"
@@ -10,6 +8,8 @@
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
 #include "state/game/versus_state.h"
+#include "state/npc/npc_idle_state.h"
+#include "state/npc/npc_jumping_state.h"
 
 namespace qbert
 {

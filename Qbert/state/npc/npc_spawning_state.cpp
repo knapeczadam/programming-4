@@ -2,17 +2,14 @@
 
 // Project includes
 #include "component/character/direction_component.h"
+#include "component/character/face_component.h"
 #include "component/character/jump_component.h"
 #include "component/npc/spawn_component.h"
-#include "component/character/face_component.h"
 #include "minigin/component/rendering/sprite_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
 #include "minigin/utility/random.h"
 #include "minigin/utility/sprite.h"
-
-// Standard includes
-#include <cstdlib>
 
 namespace qbert
 {

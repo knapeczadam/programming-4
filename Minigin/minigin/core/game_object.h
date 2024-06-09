@@ -10,8 +10,8 @@
 #include <set>
 #include <string>
 #include <typeindex>
-#include <vector>
 #include <unordered_map>
+#include <vector>
 
 namespace mngn
 {
@@ -146,8 +146,8 @@ namespace mngn
         transform transform_  = {};
         bool position_dirty_  = false;
         bool active_          = true;
-        std::set<std::string>   tags_;
-        mngn::scene *scene_ptr_     = nullptr;
+        std::set<std::string> tags_;
+        mngn::scene *scene_ptr_ = nullptr;
 
         // TODO: switch to map?
         std::unordered_map<std::type_index, std::unique_ptr<game_component>> component_map_ = {};

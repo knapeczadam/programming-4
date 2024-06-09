@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 // Project includes
-#include "base_command.h"
+#include "minigin/input/base_command.h"
 
 // GLM includes
 #include <glm/glm.hpp>

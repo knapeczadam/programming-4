@@ -1,7 +1,7 @@
 ﻿#include "sprite.h"
 
 // Project includes
-#include "texture.h"
+#include "minigin/utility/texture.h"
 
 namespace mngn
 {

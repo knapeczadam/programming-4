@@ -1,8 +1,8 @@
 ﻿#include "flicker_component.h"
 
 // Project includes
-#include "minigin/component/ui/sprite_ui_component.h"
 #include "minigin/component/ui/multisprite_ui_component.h"
+#include "minigin/component/ui/sprite_ui_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
 

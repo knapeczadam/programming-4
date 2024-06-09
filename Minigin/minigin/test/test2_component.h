@@ -1,7 +1,7 @@
 #pragma once
 
 // Project includes
-#include "test_component.h"
+#include "minigin/test/test_component.h"
 
 namespace mngn
 {

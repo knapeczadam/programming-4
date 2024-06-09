@@ -7,7 +7,6 @@
 #include <memory>
 #include <string>
 
-
 namespace mngn
 {
     // Forward declarations

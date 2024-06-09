@@ -7,7 +7,6 @@
 // SDL includes
 #pragma comment(lib, "SDL2_mixer.lib")
 
-
 namespace mngn
 {
     sound_effect::sound_effect(std::string const &path)

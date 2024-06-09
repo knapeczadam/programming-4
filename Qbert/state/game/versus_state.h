@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 // Project includes
-#include "game_state.h"
+#include "state/game/game_state.h"
 
 namespace qbert
 {

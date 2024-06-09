@@ -1,12 +1,11 @@
 ﻿#include "falling_state.h"
 
 // Project includes
-#include "component/character/position_component.h"
 #include "component/character/direction_component.h"
 #include "component/character/fall_component.h"
+#include "component/character/position_component.h"
 #include "core/scene_utility.h"
 #include "minigin/core/game_object.h"
-#include "minigin/core/scene.h"
 #include "minigin/core/scene_manager.h"
 
 namespace qbert

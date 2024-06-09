@@ -1,9 +1,11 @@
 #include "resource_manager.h"
 
 // Project includes
-#include "renderer.h"
-#include "minigin/utility/texture.h"
+#include "minigin/core/renderer.h"
+#include "minigin/sound/sound_effect.h"
+#include "minigin/sound/sound_stream.h"
 #include "minigin/utility/game_font.h"
+#include "minigin/utility/texture.h"
 
 // Standard includes
 #include <fstream>
@@ -12,9 +14,6 @@
 // SDL includes
 #include <SDL_image.h>
 #include <SDL_ttf.h>
-
-#include "minigin/sound/sound_effect.h"
-#include "minigin/sound/sound_stream.h"
 
 namespace mngn
 {

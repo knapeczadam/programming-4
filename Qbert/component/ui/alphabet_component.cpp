@@ -1,17 +1,13 @@
 ﻿#include "alphabet_component.h"
 
 // Project includes
+#include "minigin/component/ui/multisprite_ui_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/sprite_manager.h"
-#include "minigin/component/ui/multisprite_ui_component.h"
 #include "minigin/utility/sprite.h"
-#include "core/resources.h"
-#include "core/sprites.h"
 
 // Standard includes
-#include <algorithm>
 #include <cctype>
-#include <ranges>
 #include <vector>
 
 

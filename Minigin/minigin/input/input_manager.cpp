@@ -1,10 +1,10 @@
 #include "input_manager.h"
 
 // Project includes
-#include "base_command.h"
-#include "i_input.h"
-#include "sdl_input.h"
-#include "x_input.h"
+#include "minigin/input/base_command.h"
+#include "minigin/input/i_input.h"
+#include "minigin/input/sdl_input.h"
+#include "minigin/input/x_input.h"
 
 // Standard includes
 #include <algorithm>

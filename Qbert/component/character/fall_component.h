@@ -7,7 +7,6 @@
 // GLM includes
 #include <glm/glm.hpp>
 
-
 namespace qbert
 {
     class fall_component final : public mngn::physics_component, public freezer

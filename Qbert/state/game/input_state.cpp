@@ -1,7 +1,6 @@
 ﻿#include "input_state.h"
 
 // Project includes
-#include "scoreboard_state.h"
 #include "component/state/game_state_component.h"
 #include "core/audio_player.h"
 #include "core/initial_manager.h"
@@ -12,6 +11,7 @@
 #include "minigin/core/game_time.h"
 #include "minigin/core/scene.h"
 #include "minigin/core/scene_manager.h"
+#include "state/game/scoreboard_state.h"
 
 namespace qbert
 {

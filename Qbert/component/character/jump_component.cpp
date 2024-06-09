@@ -1,12 +1,12 @@
 ﻿#include "jump_component.h"
 
 // Project includes
+#include "position_component.h"
 #include "component/character/direction_component.h"
+#include "core/audio_player.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
 #include "minigin/utility/math.h"
-#include "position_component.h"
-#include "core/audio_player.h"
 
 namespace qbert
 {

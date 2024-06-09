@@ -1,9 +1,9 @@
 ﻿#include "npc_idle_state.h"
 
-#include "npc_jumping_state.h"
+// Project includes
 #include "component/character/direction_component.h"
-#include "component/npc/coily_component.h"
 #include "component/character/face_component.h"
+#include "component/npc/coily_component.h"
 #include "component/state/character_state_component.h"
 #include "component/state/game_state_component.h"
 #include "core/audio_player.h"
@@ -11,12 +11,10 @@
 #include "minigin/component/rendering/sprite_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
-#include "minigin/core/scene.h"
-#include "minigin/core/scene_manager.h"
 #include "minigin/utility/random.h"
 #include "minigin/utility/sprite.h"
-#include "state/game/single_state.h"
 #include "state/game/versus_state.h"
+#include "state/npc/npc_jumping_state.h"
 
 namespace qbert
 {

@@ -1,29 +1,29 @@
 ﻿#include "scene_loader.h"
 
 // Project includes
-#include "level_config_manager.h"
+#include "component/character/jump_component.h"
+#include "component/character/health_component.h"
 #include "component/character/position_component.h"
-#include "component/character/direction_component.h"
 #include "component/level/cube_component.h"
 #include "component/level/level_manager_component.h"
-#include "component/character/health_component.h"
 #include "component/player/level_counter_component.h"
-#include "component/character/jump_component.h"
 #include "component/player/player_collider_component.h"
 #include "component/player/round_counter_component.h"
 #include "component/player/score_counter_component.h"
 #include "component/state/game_state_component.h"
+#include "component/ui/flicker_component.h"
 #include "component/ui/health_display_component.h"
 #include "component/ui/level_display_component.h"
 #include "component/ui/round_display_component.h"
 #include "component/ui/score_display_component.h"
 #include "core/factory.h"
-#include "core/progress_manager.h"
+#include "core/level_config_manager.h"
 #include "core/resources.h"
+#include "core/scene_utility.h"
+#include "core/score_manager.h"
 #include "core/sprites.h"
 #include "input/game_component_commands.h"
 #include "input/generic_commands.h"
-#include "minigin/component/rendering/sprite_component.h"
 #include "minigin/component/ui/sprite_ui_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/resource_manager.h"
@@ -31,6 +31,7 @@
 #include "minigin/core/scene_manager.h"
 #include "minigin/core/sprite_manager.h"
 #include "minigin/input/input_manager.h"
+#include "minigin/utility/random.h"
 #include "minigin/utility/sprite.h"
 
 // Standard includes
@@ -38,15 +39,6 @@
 
 // GLM includes
 #include <glm/glm.hpp>
-
-#include "scene_utility.h"
-#include "score_manager.h"
-#include "component/state/character_state_component.h"
-#include "component/state/game_state_component.h"
-#include "component/ui/flicker_component.h"
-#include "minigin/utility/random.h"
-#include "state/null_state.h"
-#include "state/player/idle_state.h"
 
 namespace qbert
 {

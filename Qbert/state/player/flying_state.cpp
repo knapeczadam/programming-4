@@ -1,17 +1,17 @@
 ﻿#include "flying_state.h"
 
 // Project includes
-#include "start_state.h"
+#include "component/character/direction_component.h"
 #include "component/character/position_component.h"
 #include "component/level/disk_component.h"
 #include "component/level/fly_component.h"
-#include "component/character/direction_component.h"
 #include "component/state/character_state_component.h"
 #include "core/scene_utility.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
 #include "minigin/core/renderer.h"
 #include "minigin/core/scene.h"
+#include "state/player/start_state.h"
 
 namespace qbert
 {

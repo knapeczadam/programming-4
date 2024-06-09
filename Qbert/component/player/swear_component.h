@@ -1,13 +1,13 @@
 ﻿#pragma once
 
+// Project includes
+#include "minigin/component/family/custom_component.h"
+
 // Forward declarations
 namespace mngn
 {
     class game_object;
 }
-
-// Project includes
-#include "minigin/component/family/custom_component.h"
 
 namespace qbert
 {

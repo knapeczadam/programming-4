@@ -9,7 +9,6 @@
 
 // Standard includes
 #include <stdexcept>
-#include <utility>
 
 // SDL includes
 #include <SDL_ttf.h>

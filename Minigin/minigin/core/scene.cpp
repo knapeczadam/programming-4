@@ -1,10 +1,10 @@
 #include "scene.h"
 
 // Project includes
-#include "minigin/core/game_component.h"
-#include "minigin/core/game_object.h"
 #include "minigin/component/family/rendering_component.h"
 #include "minigin/component/family/ui_component.h"
+#include "minigin/core/game_component.h"
+#include "minigin/core/game_object.h"
 
 // Standard includes
 #include <algorithm>

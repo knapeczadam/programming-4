@@ -1,11 +1,11 @@
 ﻿#pragma once
+
 // Project includes
 #include "core/freezer.h"
 #include "minigin/component/family/physics_component.h"
 
 // GLM includes
 #include <glm/glm.hpp>
-
 
 namespace qbert
 {

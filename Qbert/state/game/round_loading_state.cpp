@@ -1,9 +1,6 @@
 ﻿#include "round_loading_state.h"
 
 // Project includes
-#include "input_state.h"
-#include "level_loading_state.h"
-#include "scoreboard_state.h"
 #include "component/level/cube_component.h"
 #include "component/level/small_cube_component.h"
 #include "component/player/level_counter_component.h"
@@ -19,7 +16,9 @@
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
 #include "minigin/core/scene.h"
-#include "minigin/core/scene_manager.h"
+#include "state/game/input_state.h"
+#include "state/game/level_loading_state.h"
+#include "state/game/scoreboard_state.h"
 
 namespace qbert
 {

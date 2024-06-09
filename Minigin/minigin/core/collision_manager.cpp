@@ -1,11 +1,13 @@
 ﻿#include "collision_manager.h"
 
-#include <SDL_rect.h>
-
-#include "renderer.h"
-#include "scene.h"
+// Project includes
 #include "minigin/component/family/collider_component.h"
 #include "minigin/core/game_object.h"
+#include "minigin/core/renderer.h"
+#include "minigin/core/scene.h"
+
+// SDL includes
+#include <SDL_rect.h>
 
 namespace mngn
 {

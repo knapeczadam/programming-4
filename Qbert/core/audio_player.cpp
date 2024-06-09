@@ -1,7 +1,7 @@
 ﻿#include "audio_player.h"
 
 // Project includes
-#include "resources.h"
+#include "core/resources.h"
 #include "minigin/service/service_locator.h"
 #include "minigin/service/sound_system.h"
 

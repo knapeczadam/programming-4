@@ -17,7 +17,6 @@
 #include "minigin/core/scene_manager.h"
 #include "minigin/utility/math.h"
 #include "minigin/utility/sprite.h"
-#include "state/player/idle_state.h"
 #include "state/player/jumping_state.h"
 
 namespace qbert

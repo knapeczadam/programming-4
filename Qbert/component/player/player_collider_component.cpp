@@ -8,13 +8,9 @@
 #include "component/state/character_state_component.h"
 #include "core/audio_player.h"
 #include "minigin/core/game_object.h"
-#include "minigin/core/scene.h"
 #include "state/player/idle_state.h"
 #include "state/player/jumping_state.h"
 #include "state/player/start_state.h"
-
-// Standard includes
-#include <iostream>
 
 // GLM includes
 #include <glm/glm.hpp>

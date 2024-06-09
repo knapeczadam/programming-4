@@ -1,6 +1,6 @@
 ﻿#include "swearing_state.h"
 
-#include "state/player/dead_state.h"
+// Project includes
 #include "component/character/health_component.h"
 #include "component/character/position_component.h"
 #include "component/player/swear_component.h"
@@ -8,10 +8,10 @@
 #include "component/state/game_state_component.h"
 #include "core/audio_player.h"
 #include "core/scene_utility.h"
-#include "core/score_manager.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/game_time.h"
 #include "minigin/utility/random.h"
+#include "state/player/dead_state.h"
 #include "state/player/idle_state.h"
 
 namespace qbert

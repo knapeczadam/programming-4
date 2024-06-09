@@ -1,11 +1,11 @@
 ﻿#include "scene_utility.h"
 
 // Project includes
-#include "component/character/jump_component.h"
-#include "component/npc/spawn_component.h"
-#include "component/npc/npc_health_component.h"
-#include "component/level/fly_component.h"
 #include "component/character/fall_component.h"
+#include "component/character/jump_component.h"
+#include "component/level/fly_component.h"
+#include "component/npc/npc_health_component.h"
+#include "component/npc/spawn_component.h"
 #include "component/player/player_collider_component.h"
 #include "component/state/character_state_component.h"
 #include "component/state/game_state_component.h"

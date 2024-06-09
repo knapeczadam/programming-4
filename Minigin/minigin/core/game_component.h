@@ -1,8 +1,5 @@
 ﻿#pragma once
 
-// Standard includes
-#include <string>
-
 namespace mngn
 {
     // Forward declarations

@@ -4,7 +4,6 @@
 #include "minigin/utility/singleton.h"
 
 // Standard includes
-#include <algorithm>
 # include <string>
 #include <unordered_map>
 

@@ -3,15 +3,15 @@
 // Project includes
 #include "minigin/component/family/custom_component.h"
 
+// Standard includes
+#include <string>
+
 // Forward declarations
 namespace mngn
 {
     class sprite;
     class multisprite_ui_component;
 }
-
-// Standard includes
-#include <string>
 
 namespace qbert
 {

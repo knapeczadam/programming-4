@@ -3,7 +3,6 @@
 // Project includes
 #include "component/state/state_component.h"
 
-
 namespace qbert
 {
     class character_state_component final : public state_component

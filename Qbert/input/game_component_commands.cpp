@@ -1,23 +1,15 @@
 ﻿#include "game_component_commands.h"
 
-#include "component/character/health_component.h"
-#include "component/player/score_counter_component.h"
+// Project includes
 #include "component/state/game_state_component.h"
-#include "component/ui/flicker_component.h"
 #include "core/initial_manager.h"
-#include "core/resources.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/resource_manager.h"
 #include "minigin/core/scene.h"
 #include "minigin/core/scene_manager.h"
-#include "state/game/game_over_state.h"
 #include "state/game/input_state.h"
 #include "state/game/level_loading_state.h"
 #include "state/game/menu_state.h"
-
-// Standard includes
-#include <iostream>
-#include <thread>
 
 namespace qbert
 {

@@ -1,9 +1,9 @@
 ﻿#include "sound_manager.h"
 
 // Project includes
+#include "minigin/core/resource_manager.h"
 #include "minigin/sound/sound_effect.h"
 #include "minigin/sound/sound_stream.h"
-#include "minigin/core/resource_manager.h"
 
 namespace mngn
 {

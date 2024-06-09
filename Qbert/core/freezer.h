@@ -5,7 +5,7 @@ namespace qbert
     class freezer
     {
     public:
-        void freeze() { frozen_ = true; }
+        void freeze()   { frozen_ = true;  }
         void unfreeze() { frozen_ = false; }
         
     protected:

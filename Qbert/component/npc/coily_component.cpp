@@ -1,8 +1,8 @@
 ﻿#include "coily_component.h"
 
 // Project includes
-#include "component/character/position_component.h"
 #include "component/character/direction_component.h"
+#include "component/character/position_component.h"
 #include "core/scene_utility.h"
 #include "minigin/component/rendering/sprite_component.h"
 #include "minigin/core/game_object.h"
@@ -11,9 +11,9 @@
 #include "minigin/utility/sprite.h"
 
 // Standard includes
+#include <iostream>
 #include <limits>
 #include <queue>
-#include <iostream>
 
 namespace qbert
 {

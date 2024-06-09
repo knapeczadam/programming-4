@@ -1,5 +1,6 @@
 ﻿#include "start_state.h"
 
+// Project includes
 #include "minigin/component/rendering/sprite_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/utility/sprite.h"

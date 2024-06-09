@@ -1,13 +1,12 @@
 #include "game_object.h"
 
 // Project includes
+#include "minigin/component/family/physics_component.h"
 #include "minigin/core/game_component.h"
 
 // Standard includes
 #include <algorithm>
 #include <ranges>
-
-#include "minigin/component/family/physics_component.h"
 
 namespace mngn
 {

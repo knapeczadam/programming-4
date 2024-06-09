@@ -1,8 +1,8 @@
 #include "scene_manager.h"
 
 // Project includes
-#include "scene.h"
 #include "minigin/core/game_object.h"
+#include "minigin/core/scene.h"
 
 // Standard includes
 #include <algorithm>

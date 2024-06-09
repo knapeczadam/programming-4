@@ -1,8 +1,8 @@
 ﻿#include "sdl_input.h"
 
 // Project includes
-#include "game_object_command.h"
-#include "input_manager.h"
+#include "minigin/input/game_object_command.h"
+#include "minigin/input/input_manager.h"
 
 // Standard includes
 #include <algorithm>

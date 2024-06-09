@@ -1,5 +1,8 @@
 ﻿#include "progress_manager.h"
 
+// Standard includes
+#include <algorithm>
+
 namespace qbert
 {
     void progress_manager::add_score(int score)

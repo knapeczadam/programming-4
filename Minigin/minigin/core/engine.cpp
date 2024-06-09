@@ -1,15 +1,16 @@
 #include "engine.h"
 
 // Project includes
-#include "game_time.h"
+#include "minigin/core/collision_manager.h"
+#include "minigin/core/game_time.h"
+#include "minigin/core/renderer.h"
+#include "minigin/core/resource_manager.h"
+#include "minigin/core/scene_manager.h"
+#include "minigin/core/sprite_manager.h"
 #include "minigin/input/input_manager.h"
-#include "renderer.h"
-#include "resource_manager.h"
-#include "scene_manager.h"
 
 // Standard includes
 #include <chrono>
-#include <iostream>
 #include <stdexcept>
 #include <thread>
 
@@ -25,9 +26,6 @@
 
 // Steam includes
 #include <steam_api_common.h>
-
-#include "collision_manager.h"
-#include "sprite_manager.h"
 
 SDL_Window *g_window_ptr = nullptr;
 

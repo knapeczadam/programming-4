@@ -1,8 +1,8 @@
 ﻿#pragma once
 
 // Project includes
-#include "state/state.h"
 #include "minigin/component/family/custom_component.h"
+#include "state/state.h"
 
 // Standard includes
 #include <concepts>

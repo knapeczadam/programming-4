@@ -4,8 +4,8 @@
 #include "component/character/health_component.h"
 #include "core/resources.h"
 #include "core/sprites.h"
-#include "minigin/core/game_object.h"
 #include "minigin/component/ui/multisprite_ui_component.h"
+#include "minigin/core/game_object.h"
 #include "minigin/core/sprite_manager.h"
 #include "minigin/utility/sprite.h"
 

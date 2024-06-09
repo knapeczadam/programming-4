@@ -5,8 +5,8 @@
 
 // Standard includes
 #include <memory>
-#include <unordered_map>
 #include <string>
+#include <unordered_map>
 
 // JSON includes
 #include "json.hpp"

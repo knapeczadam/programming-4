@@ -1,9 +1,9 @@
 ﻿#include "number_component.h"
 
 // Project includes
+#include "minigin/component/ui/multisprite_ui_component.h"
 #include "minigin/core/game_object.h"
 #include "minigin/core/sprite_manager.h"
-#include "minigin/component/ui/multisprite_ui_component.h"
 #include "minigin/utility/sprite.h"
 
 // Standard includes
