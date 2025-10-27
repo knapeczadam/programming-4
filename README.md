@@ -1,4 +1,4 @@
-# 🧩 Programming 4 – Howest DAE (2024)
+# 🧩 Programming 4  
 
 Hey there, fellow DAE developer, future engine programmer, or just a curious explorer 👋  
 Welcome to my **Programming 4** repository — the final chapter in the DAE programming series.  
@@ -8,7 +8,7 @@ This semester focused on **software architecture**, **design patterns**, and **e
 
 ## 🗄️ About this repository
 
-This repo contains all **lab exercises** and **weekly projects** from the **Programming 4** course at **Digital Arts & Entertainment**, **Howest University**, **Kortrijk, Belgium**.  
+This repo contains all **lab exercises** and **weekly projects** from the **Programming 4** course at **DAE**.  
 Like earlier semesters, each week’s work is preserved for **archival and learning purposes** — showing progression in problem-solving, software design, and engine-level thinking.
 
 > ⚠️ These projects were made in an academic setting.  
@@ -20,9 +20,9 @@ Like earlier semesters, each week’s work is preserved for **archival and learn
 ## 🔎 Course Information
 
 **📚 Course:** Programming 4  
-**🏫 University:** Howest DAE – Digital Arts & Entertainment  
+**🏫 University:** Howest University of Applied Sciences - Digital Arts and Entertainment  
 **📍 Location:** Kortrijk, Belgium  
-**🗓️ Semester:** 2024 – Fourth semester  
+**🗓️ Acamedic year:** 2023–24 | Fourth semester  
 **🎓 Study load:** 6 credits  
 **⏱️ Total study time:** 180 hours  
 
@@ -37,29 +37,20 @@ Like earlier semesters, each week’s work is preserved for **archival and learn
 
 ## 🎯 Learning Goals
 
-### LR03 — Project Organization & Feedback  
-- Manages project structure and workflow under deadlines.  
-- Requests and incorporates feedback when facing challenges.  
-
-### LR04 — Research & Design Principles  
-- Studies international sources and software patterns.  
-- Applies recognized software architecture practices in design decisions.  
-
-### LR05 — Critical & Professional Evaluation  
-- Reviews own and peers’ work critically, aligned with industry standards.  
-- Identifies and resolves software issues effectively.  
-
-### LR06 — Planning & Feasibility  
-- Organizes project planning and checks technical viability.  
-
-### LR08 — Graphical Content Integration  
-- Efficiently integrates or extends visual/game content in real-time applications.  
-
-### LR09 — Technical Programming & Engine Use  
-- Writes hardware-efficient software.  
-- Applies modern programming techniques within a game engine.  
-- Structures clean, maintainable, and readable code.  
-- Uses frameworks and engines effectively for problem-solving.  
+- Manage stress and workload under tight deadlines  
+- Organize and maintain a clean game project file structure  
+- Monitor project progress and request feedback when needed  
+- Research and apply relevant technical and theoretical sources  
+- Select and use appropriate software patterns for project structure  
+- Justify design and implementation choices using established principles  
+- Review and evaluate own and peers’ work critically  
+- Identify and fix errors within the game project  
+- Plan and assess the technical feasibility of concepts  
+- Develop and integrate graphical content considering technical limits  
+- Work independently and efficiently on real-time applications  
+- Write optimized, structured, and maintainable code  
+- Solve problems using proper programming languages and techniques  
+- Utilize game engines, frameworks, and tools effectively  
 
 ---
 
@@ -110,4 +101,5 @@ This repository is licensed under the **MIT License** — explore, adapt, and le
 ---
 
 *Built with templates, patterns, and the eternal struggle against circular dependencies 🔁  
-— Adam*
+— Ádám*
+
