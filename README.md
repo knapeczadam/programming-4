@@ -30,8 +30,8 @@ Like earlier semesters, each week’s work is preserved for **archival and learn
 
 ## 👨‍🏫 Teaching Staff
 
-- **Co-ordinator:** Vanden Abeele Alex  
-- **Other teaching staff:** Tesch Tom  
+- **Co-ordinator:** Alex Vanden Abeele
+- **Other teaching staff:** Tom Tesch
 
 ---
 
@@ -111,4 +111,5 @@ This repository is licensed under the **MIT License** — explore, adapt, and le
 
 *Built with templates, patterns, and the eternal struggle against circular dependencies 🔁  
 — Adam*
+
 
