@@ -6,7 +6,7 @@ This semester focused on **software architecture**, **design patterns**, and **e
 
 ---
 
-## 🗂️ About this repository
+## 🗄️ About this repository
 
 This repo contains all **lab exercises** and **weekly projects** from the **Programming 4** course at **Digital Arts & Entertainment**, **Howest University**, **Kortrijk, Belgium**.  
 Like earlier semesters, each week’s work is preserved for **archival and learning purposes** — showing progression in problem-solving, software design, and engine-level thinking.
@@ -17,9 +17,9 @@ Like earlier semesters, each week’s work is preserved for **archival and learn
 
 ---
 
-## 🧱 Course Information
+## 🔎 Course Information
 
-**📘 Course:** Programming 4  
+**📚 Course:** Programming 4  
 **🏫 University:** Howest DAE – Digital Arts & Entertainment  
 **📍 Location:** Kortrijk, Belgium  
 **🗓️ Semester:** 2024 – Fourth semester  
@@ -75,7 +75,7 @@ Like earlier semesters, each week’s work is preserved for **archival and learn
 
 ---
 
-## 🔖 Repository Structure
+## 📂 Repository Structure
 
 - Each **week** has its own **branch**, e.g.  
   - `03` → Week 3  
@@ -104,12 +104,10 @@ If you’re currently at this point in DAE: learn the patterns, experiment with 
 
 ---
 
-### 🪪 License
+### ⚖️ License
 This repository is licensed under the **MIT License** — explore, adapt, and learn freely.
 
 ---
 
 *Built with templates, patterns, and the eternal struggle against circular dependencies 🔁  
 — Adam*
-
-
