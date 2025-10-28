@@ -1,4 +1,4 @@
-# 🧩 Programming 4  
+# 🦖 Programming 4  
 
 Hey there, fellow DAE developer, future engine programmer, or just a curious explorer 👋  
 Welcome to my **Programming 4** repository — the final chapter in the DAE programming series.  
@@ -102,4 +102,5 @@ This repository is licensed under the **MIT License** — explore, adapt, and le
 
 *Built with templates, patterns, and the eternal struggle against circular dependencies 🔁  
 — Ádám*
+
 
